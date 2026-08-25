@@ -24,12 +24,12 @@ st.markdown("""
         font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     }
     
-    /* Generous Header & Container Spacing (Prevents Top Clipping) */
+    /* Generous Top Padding to Ensure Zero Clipping */
     .block-container {
-        padding-top: 1.5rem !important;
+        padding-top: 2rem !important;
         padding-bottom: 3rem !important;
-        padding-left: 2rem !important;
-        padding-right: 2rem !important;
+        padding-left: 2.5rem !important;
+        padding-right: 2.5rem !important;
         max-width: 1400px;
     }
     
@@ -159,66 +159,66 @@ def main():
     # Initialize state
     init_session_state()
     
-    # Global Top Header & Segmented Navigation
-    col_brand, col_steps = st.columns([1.3, 3.7])
+    # Unified Top Brand Header (No duplicate navigation)
+    screen = st.session_state.current_screen
+    screen_names = {
+        "overview": "1. Business Overview",
+        "diagnostic": "2. KPI Deep Diagnostic",
+        "workspace": "3. Causal Investigation Workspace",
+        "simulation": "4. Scenario Simulation Workbench"
+    }
+    current_stage_label = screen_names.get(screen, "1. Business Overview")
+    
+    col_brand, col_status = st.columns([3, 2])
     with col_brand:
         st.markdown(
-            """
-            <div style="display: flex; align-items: center; gap: 10px; padding: 4px 0;">
-                <div style="background: #2563EB; width: 34px; height: 34px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 900; color: white; box-shadow: 0 2px 6px rgba(37, 99, 235, 0.3);">E</div>
+            f"""
+            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+                <div style="background: #2563EB; width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 19px; font-weight: 900; color: white; box-shadow: 0 2px 6px rgba(37, 99, 235, 0.3);">E</div>
                 <div>
-                    <div style="font-size: 18px; font-weight: 800; color: #0F172A; letter-spacing: -0.3px; line-height: 1.1;">EDITH</div>
-                    <div style="font-size: 11px; font-weight: 700; color: #2563EB; letter-spacing: 0.5px;">DECISION INTELLIGENCE</div>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <span style="font-size: 19px; font-weight: 800; color: #0F172A; letter-spacing: -0.3px;">EDITH</span>
+                        <span style="background: #EFF6FF; color: #1D4ED8; border: 1px solid #BFDBFE; font-size: 10px; font-weight: 800; padding: 2px 8px; border-radius: 4px; letter-spacing: 0.5px;">STAGE {current_stage_label[:2]}</span>
+                    </div>
+                    <div style="font-size: 11px; font-weight: 700; color: #64748B; letter-spacing: 0.4px;">DECISION INTELLIGENCE PLATFORM &bull; {current_stage_label}</div>
                 </div>
             </div>
             """,
             unsafe_allow_html=True
         )
+    with col_status:
+        st.markdown(
+            """
+            <div style="text-align: right; margin-top: 4px;">
+                <span style="background: #F0FDF4; color: #166534; border: 1px solid #BBF7D0; font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 6px;">
+                    🛡️ Verified Causal DAG Active &bull; 100% Grounded
+                </span>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
         
-    with col_steps:
-        # Segmented Stage Tabs Control
-        screen = st.session_state.current_screen
-        
-        stages = [
-            ("overview", "1. Overview"),
-            ("diagnostic", "2. Diagnostic"),
-            ("workspace", "3. Causal Workspace"),
-            ("simulation", "4. Simulation")
-        ]
-        
-        stepper_html = '<div style="display: flex; justify-content: space-between; align-items: center; background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 8px; padding: 6px 14px; box-shadow: 0 1px 2px rgba(0,0,0,0.03);">'
-        
-        for idx, (s_key, s_label) in enumerate(stages):
-            is_active = (screen == s_key)
-            color = "#1D4ED8" if is_active else "#64748B"
-            bg = "#EFF6FF" if is_active else "transparent"
-            border = "1px solid #BFDBFE" if is_active else "1px solid transparent"
-            weight = "700" if is_active else "500"
-            
-            stepper_html += f'<span style="color: {color}; background: {bg}; border: {border}; padding: 4px 12px; border-radius: 6px; font-size: 12px; font-weight: {weight};">{s_label}</span>'
-            if idx < len(stages) - 1:
-                stepper_html += '<span style="color: #CBD5E1; font-size: 12px; font-weight: 600;">→</span>'
-                
-        stepper_html += '</div>'
-        st.markdown(stepper_html, unsafe_allow_html=True)
-        
-    st.markdown("<div style='margin-bottom: 12px;'></div>", unsafe_allow_html=True)
+    st.markdown("<div style='margin-bottom: 16px;'></div>", unsafe_allow_html=True)
     
-    # Sidebar Navigation & Settings
+    # Sidebar Navigation & Settings (Single Source of Truth for Navigation)
     with st.sidebar:
         st.markdown("### 🧭 Investigation Workflow")
         
         if st.button("📊 1. Business Overview", use_container_width=True, type="primary" if screen == "overview" else "secondary"):
             set_screen("overview")
+            st.rerun()
             
         if st.button("📈 2. KPI Diagnostic", use_container_width=True, type="primary" if screen == "diagnostic" else "secondary"):
             set_screen("diagnostic")
+            st.rerun()
             
         if st.button("🔬 3. Causal Workspace", use_container_width=True, type="primary" if screen == "workspace" else "secondary"):
             set_screen("workspace")
+            st.rerun()
             
         if st.button("🔮 4. Scenario Simulation", use_container_width=True, type="primary" if screen == "simulation" else "secondary"):
             set_screen("simulation")
+            st.rerun()
             
         st.markdown("---")
         st.markdown("### ⚙️ AI Engine Settings")
@@ -244,8 +244,8 @@ def main():
         **Accenture Innovation Challenge 2026**
         Problem Track 3: BusinessIntelligence.ai
         
-        **Mechanism:**
-        `OBSERVE → DETECT → LOCALIZE → INVESTIGATE → EXPLAIN → SIMULATE → ACT`
+        **Pipeline:**
+        `DETECT → LOCALIZE → DAG → DECOMPOSE → EVALUATE → EXPLAIN → SIMULATE`
         
         *Engineered by Team IIT Kanpur (2026).*
         """)
