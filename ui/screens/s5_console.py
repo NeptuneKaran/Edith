@@ -50,8 +50,9 @@ def render_screen_5():
     selected_hypothesis = next((h for h in hypotheses if h["id"] == selected_hypo_id), hypotheses[0] if hypotheses else {})
     sim_levers = st.session_state.get("simulation_levers", {})
     
-    user_key = st.session_state.get("api_key_input", "")
+    user_key = (st.session_state.get("api_key_input") or os.getenv("GEMINI_API_KEY", "")).strip()
     client = EdithLLMClient(api_key=user_key)
+
     
     # Response Style Control in Session State
     if "response_style" not in st.session_state:
@@ -140,9 +141,19 @@ def render_screen_5():
             else:
                 with st.chat_message("assistant", avatar="🤖"):
                     st.markdown(msg["content"])
-                    tools_used = msg.get("metadata", {}).get("tools_called", [])
+                    msg_meta = msg.get("metadata", {})
+                    provider = msg_meta.get("provider", "Deterministic Engine")
+                    mode = msg_meta.get("mode", "Offline Mode")
+                    tools_used = msg_meta.get("tools_called", [])
+                    
+                    if "Gemini" in provider:
+                        st.caption(f"🟢 **{provider}** ({msg_meta.get('model', 'gemini-2.0-flash')}) &bull; Latency: {msg_meta.get('latency_sec', 0.1)}s")
+                    else:
+                        st.caption(f"🛡️ **{provider}** &bull; {mode}")
+                        
                     if tools_used and tools_used != ["offline_deterministic_lookup"]:
                         st.caption(f"🔧 Tools executed: `{', '.join(tools_used)}`")
+
                 
     st.markdown("<div style='margin-bottom: 24px;'></div>", unsafe_allow_html=True)
     

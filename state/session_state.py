@@ -24,7 +24,8 @@ def init_session_state():
             "marketing_boost_usd": 15000.0,
             "competitor_matching": True
         }
-        st.session_state.api_key_input = ""
+        st.session_state.api_key_input = os.getenv("GEMINI_API_KEY", "").strip()
+
         
         # Load and cache initial analytics
         repo = DataRepository.get_instance()

@@ -240,19 +240,22 @@ def main():
         st.markdown("### ⚙️ Investigation Engine Settings")
         
         # API Key input (optional)
-        current_key = os.getenv("GEMINI_API_KEY", "")
+        current_key = os.getenv("GEMINI_API_KEY", "").strip()
+        session_val = st.session_state.get("api_key_input", "") or current_key
         key_input = st.text_input(
             "Gemini API Key (Optional)",
-            value=st.session_state.api_key_input or current_key,
+            value=session_val,
             type="password",
-            help="If left blank, EDITH operates in 100% deterministic offline fallback mode using pre-computed verified evidence."
+            help="If left blank, EDITH uses the GEMINI_API_KEY environment variable (e.g. on Render) or operates in offline mode."
         )
-        st.session_state.api_key_input = key_input
+        effective_key = key_input.strip() if key_input else current_key
+        st.session_state.api_key_input = effective_key
         
-        if key_input:
+        if effective_key:
             st.success("🟢 Live Gemini Agent Configured")
         else:
             st.info("🛡️ Offline Evidence Mode (Zero-Key Guaranteed)")
+
             
         st.markdown("---")
         st.markdown("### 🧭 Quick Switcher")

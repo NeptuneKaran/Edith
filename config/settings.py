@@ -98,7 +98,8 @@ def get_confidence_band(score: float, is_testable: bool = True, role: str = "UPS
         return "Refuted by Data"
 
 # LLM Configuration
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "")
-DEFAULT_GEMINI_MODEL = "gemini-2.5-flash"
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "").strip()
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "").strip()
+DEFAULT_GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-2.0-flash").strip()
 FALLBACK_GEMINI_MODEL = "gemini-1.5-flash"
+

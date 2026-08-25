@@ -181,7 +181,62 @@ Ask me any specific question about the active investigation, evidence ledgers, o
 | **Customer CRM Signal** | Pricing complaints: 38/wk | Competitor mentions: 18/wk |
 | **Analytical Role** | **Primary Upstream Driver** | **Compounding Secondary Factor** |"""
 
+        # 3.5 DYNAMIC COUNTERFACTUAL SCENARIOS & WHAT-IF SIMULATIONS
+        is_scenario = (
+            any(k in q_lower for k in ["price adjustment", "price rollback", "price cut", "price change", "what if", "scenario", "simulate", "simulation", "lever"]) or
+            (("percent" in q_lower or "%" in q_lower) and any(w in q_lower for w in ["price", "adjustment", "rollback", "discount", "effect", "instead of", "impact", "margin"]))
+        )
+        if is_scenario:
+            from core.simulation_engine import SimulationEngine
+            pct_matches = re.findall(r'([+-]?\d+(?:\.\d+)?)\s*(?:%|percent)', q_lower)
+            extracted_price = -6.0
+            if pct_matches:
+                vals = [float(p) for p in pct_matches]
+                target_val = vals[0]
+                if len(vals) > 1 and abs(vals[1] - (-6.0)) < 0.1:
+                    target_val = vals[0]
+                elif len(vals) > 1 and abs(vals[0] - (-6.0)) < 0.1:
+                    target_val = vals[1]
+                if target_val > 0 and any(w in q_lower for w in ["rollback", "cut", "discount", "reduction", "drop", "lower", "decrease", "adjustment"]):
+                    target_val = -target_val
+                extracted_price = target_val
+            
+            extracted_mkt = 15000.0
+            mkt_match = re.search(r'\$?(\d+(?:,\d{3})*|\d+)\s*(?:k|thousand|usd|\$)\s*(?:marketing|promo|spend|budget)?', q_lower)
+            if mkt_match:
+                m_str = mkt_match.group(1).replace(",", "")
+                try:
+                    m_val = float(m_str)
+                    if m_val < 1000 and ("k" in q_lower or "thousand" in q_lower):
+                        m_val *= 1000
+                    if m_val > 100:
+                        extracted_mkt = m_val
+                except ValueError:
+                    pass
+
+            sim = SimulationEngine.simulate_lever_impact(
+                price_rollback_pct=extracted_price,
+                marketing_boost_usd=extracted_mkt,
+                competitor_retaliation=True
+            )
+            
+            sim_rev = sim.get("simulated_revenue", 0.0)
+            net_delta = sim.get("net_revenue_delta", 0.0)
+            margin_pct = sim.get("simulated_margin_pct", 0.0)
+            rec_pct = sim.get("recovery_pct", 0.0)
+            new_price = sim.get("new_unit_price", 10000.0)
+            
+            return rf"""**Scenario Simulation Results ({extracted_price:+.1f}% Price Adjustment, ${extracted_mkt:,.0f} Marketing Boost):**
+
+- **Simulated Weekly Revenue:** **${sim_rev:,.0f}** ({net_delta:+,.0f}/wk vs current $1,253,600).
+- **Volume Recovery Rate:** **{rec_pct:.1f}%** of lost commercial volume recovered.
+- **Projected Gross Margin:** **{margin_pct:.1f}%** (Operating target is 72.0%).
+- **Effective Enterprise Unit Price:** **${new_price:,.0f}** (Pre-rollback: $11,200).
+
+*Policy Trade-off:* An adjustment of {extracted_price:+.1f}% results in weekly net revenue of **${sim_rev:,.0f}**, directly modeling the empirical price elasticity ($\varepsilon_p = -1.65$) on Region B Enterprise contracts."""
+
         # 4. MATHEMATICAL REVENUE & VOLUME DECOMPOSITION
+
         if any(k in q_clean for k in ["decomposition", "math", "volume effect", "price effect", "formula", "identity", "equation"]):
             decomp = price_h.get("mathematical_decomposition", {})
             return rf"""**Mathematical Revenue Decomposition ($\Delta\text{{Revenue}} = \Delta\text{{Units}} \times P_{{\text{{pre}}}} + \text{{Units}}_{{\text{{post}}}} \times \Delta P$):**
