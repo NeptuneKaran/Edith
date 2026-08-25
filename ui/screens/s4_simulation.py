@@ -1,30 +1,31 @@
 """
 ui/screens/s4_simulation.py
-Screen 4: Scenario Simulation Workbench & Structured Decision Summary
+Screen 4: Scenario Simulation Workbench & Structured Decision Summary (Clean Light Theme)
 """
 import streamlit as st
 from state.session_state import set_screen
 from ui.components.charts import plot_simulation_trajectory
-from ui.components.cards import render_data_tag
+from ui.components.cards import render_epistemology_chip
 from core.simulation_engine import SimulationEngine
 
 def render_screen_4():
     """Renders the what-if simulation workbench and final decision export package."""
-    col_nav, col_title, col_tags = st.columns([1.2, 3.8, 1.2])
+    col_nav, col_title, col_tags = st.columns([1.2, 3.8, 1.4])
     with col_nav:
         if st.button("← Back to Investigation", use_container_width=True):
             set_screen("workspace")
+            st.rerun()
             
     with col_title:
-        st.markdown("<h2 style='margin:0; padding:0; font-size: 20px; font-weight: 800; color: #FFFFFF;'>🔮 Scenario Simulation & Decision Workbench</h2>", unsafe_allow_html=True)
+        st.markdown("<h2 style='margin:0; padding:0; font-size: 20px; font-weight: 800; color: #0F172A;'>🔮 Scenario Simulation & Decision Workbench</h2>", unsafe_allow_html=True)
         st.caption("Simulate counterfactual recovery curves, evaluate economic trade-offs, and finalize action plans.")
     with col_tags:
         st.markdown("<div style='text-align: right; margin-top: 4px; display: flex; gap: 4px; justify-content: flex-end;'>", unsafe_allow_html=True)
-        render_data_tag("MODEL ASSUMPTION")
-        render_data_tag("SIMULATED")
+        render_epistemology_chip("MODEL ASSUMPTION")
+        render_epistemology_chip("SIMULATED")
         st.markdown("</div>", unsafe_allow_html=True)
         
-    st.markdown("<div style='margin-bottom: 8px;'></div>", unsafe_allow_html=True)
+    st.markdown("<div style='margin-bottom: 12px;'></div>", unsafe_allow_html=True)
     
     col_levers, col_results = st.columns([1.0, 1.2], gap="large")
     
@@ -32,8 +33,14 @@ def render_screen_4():
     # LEFT COLUMN: CONTROLLABLE LEVER SLIDERS & ASSUMPTIONS
     # =========================================================================
     with col_levers:
-        st.markdown("<h3 style='margin:0; padding:0; font-size: 16px; font-weight: 700; color: #FFFFFF;'>🎛️ Controllable Business Levers</h3>", unsafe_allow_html=True)
-        st.caption("Adjust policy levers to simulate counterfactual recovery paths:")
+        st.markdown(
+            """
+            <div style="background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 10px; padding: 18px 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.03); margin-bottom: 16px;">
+                <h3 style='margin:0; padding:0; font-size: 16px; font-weight: 700; color: #0F172A;'>🎛️ Controllable Business Levers</h3>
+                <div style='font-size: 12px; color: #64748B; margin-top: 2px; margin-bottom: 14px;'>Adjust policy levers to simulate counterfactual recovery paths:</div>
+            """,
+            unsafe_allow_html=True
+        )
         
         price_rollback = st.slider(
             "Price Adjustment on Enterprise Tier (%)",
@@ -66,14 +73,15 @@ def render_screen_4():
         st.markdown("---")
         
         # Transparent Model Assumptions Box
-        st.markdown("<h4 style='font-size: 14px; font-weight: 700; color: #F59E0B;'>⚙️ Explicit Model Assumptions:</h4>", unsafe_allow_html=True)
+        st.markdown("<h4 style='font-size: 13px; font-weight: 700; color: #B45309; text-transform: uppercase; letter-spacing: 0.4px;'>⚙️ Explicit Model Assumptions:</h4>", unsafe_allow_html=True)
         st.markdown(
             """
-            <div style="background: rgba(245, 158, 11, 0.04); border: 1px solid rgba(245, 158, 11, 0.2); border-radius: 6px; padding: 12px; font-size: 12px; color: #D1D5DB;">
-                <div>• <b>Price Elasticity (Enterprise):</b> ε<sub>p</sub> = -1.65 <span style="color:#9CA3AF;">(Model parameter)</span></div>
-                <div>• <b>Marketing Response Coeff:</b> β<sub>m</sub> = 0.25 <span style="color:#9CA3AF;">(Model parameter)</span></div>
-                <div>• <b>Adoption Lead Time:</b> τ = 2 weeks <span style="color:#9CA3AF;">(Sigmoid S-curve adoption lag)</span></div>
-                <div style="margin-top: 6px; font-size: 11px; color: #9CA3AF;"><i>*Distinguished from data-derived empirical baseline measurements.</i></div>
+            <div style="background: #FFFBEB; border: 1px solid #FDE68A; border-radius: 6px; padding: 12px; font-size: 12px; color: #451A03;">
+                <div>• <b>Price Elasticity (Enterprise):</b> ε<sub>p</sub> = -1.65 <span style="color:#64748B;">(Model parameter)</span></div>
+                <div>• <b>Marketing Response Coeff:</b> β<sub>m</sub> = 0.25 <span style="color:#64748B;">(Model parameter)</span></div>
+                <div>• <b>Adoption Lead Time:</b> τ = 2 weeks <span style="color:#64748B;">(Sigmoid S-curve adoption lag)</span></div>
+                <div style="margin-top: 6px; font-size: 11px; color: #64748B;"><i>*Distinguished from data-derived empirical baseline measurements.</i></div>
+            </div>
             </div>
             """,
             unsafe_allow_html=True
@@ -114,10 +122,16 @@ def render_screen_4():
     # RIGHT COLUMN: QUANTITATIVE RECOVERY TRAJECTORY & ADVISORY
     # =========================================================================
     with col_results:
-        st.markdown("<h3 style='margin:0; padding:0; font-size: 16px; font-weight: 700; color: #FFFFFF;'>📈 Counterfactual Recovery Projection</h3>", unsafe_allow_html=True)
-        st.caption("Projected counterfactual trajectory over an 8-week horizon under selected policy:")
+        st.markdown(
+            """
+            <div style="background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 10px; padding: 18px 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.03); margin-bottom: 16px;">
+                <h3 style='margin:0; padding:0; font-size: 16px; font-weight: 700; color: #0F172A;'>📈 Counterfactual Recovery Projection</h3>
+                <div style='font-size: 12px; color: #64748B; margin-top: 2px; margin-bottom: 14px;'>Projected trajectory over an 8-week horizon under selected policy:</div>
+            """,
+            unsafe_allow_html=True
+        )
         
-        # Metric Cards
+        # Metric Cards Strip
         margin_delta = sim_out['simulated_margin_pct'] - 72.0
         col_m1, col_m2, col_m3 = st.columns(3)
         with col_m1:
@@ -149,13 +163,14 @@ def render_screen_4():
         # Edith Trade-Off Advisory
         st.markdown(
             f"""
-            <div style="background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.25); border-radius: 6px; padding: 12px 14px; margin-top: 6px;">
-                <div style="font-size: 11px; font-weight: 700; color: #34D399; text-transform: uppercase;">🤖 EDITH Economic Trade-Off Advisory:</div>
-                <div style="font-size: 12px; color: #E5E7EB; margin-top: 4px; line-height: 1.4;">
+            <div style="background: #F0FDF4; border: 1px solid #BBF7D0; border-left: 4px solid #16A34A; border-radius: 6px; padding: 12px 14px; margin-top: 6px;">
+                <div style="font-size: 11px; font-weight: 700; color: #166534; text-transform: uppercase;">🤖 EDITH Economic Trade-Off Advisory:</div>
+                <div style="font-size: 13px; color: #1E293B; margin-top: 4px; line-height: 1.5;">
                     Applying a <b>{price_rollback:.1f}% price adjustment</b> alongside a <b>${mkt_spend:,.0f} co-op promotional boost</b> recovers approximately <b>{sim_out['recovery_pct']:.1f}% of lost sales volume</b> over the 8-week horizon.
                     <br><br>
                     <b>Trade-off:</b> Gross margin settles at <b>{sim_out['simulated_margin_pct']:.1f}%</b>, balancing volume recapture against per-unit margin realization.
                 </div>
+            </div>
             </div>
             """,
             unsafe_allow_html=True
@@ -166,7 +181,7 @@ def render_screen_4():
     # =========================================================================
     # DECISION SUMMARY & ACTION PACKAGE
     # =========================================================================
-    st.markdown("<h3 style='margin:0; padding:0; font-size: 16px; font-weight: 700; color: #FFFFFF;'>📋 Final Decision Summary & Governance Package</h3>", unsafe_allow_html=True)
+    st.markdown("<h3 style='margin:0; padding:0; font-size: 16px; font-weight: 700; color: #0F172A;'>📋 Final Decision Summary & Governance Package</h3>", unsafe_allow_html=True)
     st.caption("Auditable export package ready for executive sign-off and operational handoff:")
     
     top_h = hypotheses[0] if hypotheses else {"name": "Pricing Elasticity", "evidence_score": 0.90}

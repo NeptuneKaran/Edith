@@ -1,6 +1,6 @@
 """
 ui/screens/s3_workspace.py
-Screen 3: Dual-Pane Investigation Workspace
+Screen 3: Dual-Pane Causal Investigation Workspace (Clean Light Theme)
 Left: Deterministic Analytical Canvas | Right: Edith Conversational Console
 """
 import streamlit as st
@@ -20,21 +20,22 @@ from ui.components.chat_pane import render_edith_console
 from data.repository import DataRepository
 
 def render_screen_3():
-    """Renders the dual-pane investigation workspace."""
-    col_nav, col_title, col_tag = st.columns([1.2, 3.8, 1])
+    """Renders the dual-pane causal investigation workspace."""
+    col_nav, col_title, col_tag = st.columns([1.2, 3.8, 1.2])
     with col_nav:
         if st.button("← Back to Diagnostic", use_container_width=True):
             set_screen("diagnostic")
+            st.rerun()
             
     with col_title:
-        st.markdown("<h2 style='margin:0; padding:0; font-size: 20px; font-weight: 800; color: #FFFFFF;'>🔬 Investigation Workspace: Multi-Hypothesis & Causal Engine</h2>", unsafe_allow_html=True)
+        st.markdown("<h2 style='margin:0; padding:0; font-size: 20px; font-weight: 800; color: #0F172A;'>🔬 Causal Investigation Workspace</h2>", unsafe_allow_html=True)
     with col_tag:
         st.markdown("<div style='text-align: right; margin-top: 4px;'>", unsafe_allow_html=True)
         render_epistemology_chip("DATA-DERIVED")
         st.markdown("</div>", unsafe_allow_html=True)
         
     st.caption("Transparent auditability between deterministic empirical evidence (Left Canvas) and cognitive AI synthesis (Right Console).")
-    st.markdown("<div style='margin-bottom: 8px;'></div>", unsafe_allow_html=True)
+    st.markdown("<div style='margin-bottom: 12px;'></div>", unsafe_allow_html=True)
     
     hypotheses = st.session_state.get("hypotheses", [])
     anomaly_ctx = st.session_state.get("anomaly_context", {})
@@ -43,14 +44,20 @@ def render_screen_3():
     # Get active hypothesis object
     active_h = next((h for h in hypotheses if h["id"] == selected_hypo_id), hypotheses[0] if hypotheses else {})
     
-    col_left, col_right = st.columns([1.2, 1.0], gap="large")
+    col_left, col_right = st.columns([1.25, 1.0], gap="large")
     
     # =========================================================================
     # LEFT PANE: DETERMINISTIC ANALYTICAL EVIDENCE CANVAS
     # =========================================================================
     with col_left:
-        st.markdown("<h3 style='margin:0; padding:0; font-size: 17px; font-weight: 700; color: #FFFFFF;'>📊 Deterministic Root-Cause Evidence Canvas</h3>", unsafe_allow_html=True)
-        st.caption("Candidate drivers ranked by multi-dimensional cause evidence (temporal, magnitude, directional, lag, dependency, decomposition):")
+        st.markdown(
+            """
+            <div style="background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 10px; padding: 18px 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.03); margin-bottom: 16px;">
+                <h3 style='margin:0; padding:0; font-size: 16px; font-weight: 700; color: #0F172A;'>📊 Deterministic Root-Cause Evidence Canvas</h3>
+                <div style='font-size: 12px; color: #64748B; margin-top: 2px; margin-bottom: 14px;'>Candidate drivers ranked by multi-dimensional cause evidence (temporal, magnitude, directional, lag, dependency, decomposition):</div>
+            """,
+            unsafe_allow_html=True
+        )
         
         # 1. Hypothesis Selection Cards
         for h in hypotheses:
@@ -90,7 +97,7 @@ def render_screen_3():
         st.markdown("---")
         
         # 2. Selected Hypothesis Deep-Dive
-        st.markdown(f"<h4 style='font-size: 15px; font-weight: 700; color: #FFFFFF;'>🔍 Deep-Dive: #{active_h.get('rank', 1)} {active_h.get('name', 'Hypothesis')}</h4>", unsafe_allow_html=True)
+        st.markdown(f"<h4 style='font-size: 15px; font-weight: 700; color: #0F172A; margin-bottom: 8px;'>🔍 Deep-Dive: #{active_h.get('rank', 1)} {active_h.get('name', 'Hypothesis')}</h4>", unsafe_allow_html=True)
         
         # Cause Score & Component Card
         render_cause_score_card(active_h)
@@ -117,9 +124,9 @@ def render_screen_3():
             if dir_cons:
                 st.markdown(
                     f"""
-                    <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 6px; padding: 8px 12px; margin-top: 8px;">
-                        <span style="font-size: 11px; font-weight: 700; color: #34D399;">📐 Directional Consistency:</span>
-                        <span style="font-size: 11px; color: #D1D5DB;"> {dir_cons.get('status')}</span>
+                    <div style="background: #F0FDF4; border: 1px solid #BBF7D0; border-left: 4px solid #16A34A; border-radius: 6px; padding: 10px 14px; margin-top: 8px;">
+                        <span style="font-size: 12px; font-weight: 700; color: #166534;">📐 Directional Consistency:</span>
+                        <span style="font-size: 12px; color: #1E293B;"> {dir_cons.get('status')}</span>
                     </div>
                     """,
                     unsafe_allow_html=True
@@ -147,10 +154,10 @@ def render_screen_3():
             temp = active_h.get("temporal_alignment", {})
             st.markdown(
                 f"""
-                <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 6px; padding: 10px 14px; margin-bottom: 10px;">
-                    <div style="font-size: 11px; font-weight: 700; color: #818CF8; text-transform: uppercase;">⏱️ Temporal Precedence Signal (τ Lead-Time)</div>
-                    <div style="font-size: 13px; font-weight: 600; color: #FFFFFF; margin-top: 2px;">Shock Event: {temp.get('shock_event')} ({temp.get('shock_date')})</div>
-                    <div style="font-size: 12px; color: #9CA3AF; margin-top: 2px;">{temp.get('assessment')}</div>
+                <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-left: 4px solid #4F46E5; border-radius: 6px; padding: 12px 14px; margin-bottom: 12px;">
+                    <div style="font-size: 11px; font-weight: 700; color: #4F46E5; text-transform: uppercase;">⏱️ Temporal Precedence Signal (τ Lead-Time)</div>
+                    <div style="font-size: 13px; font-weight: 700; color: #0F172A; margin-top: 2px;">Shock Event: {temp.get('shock_event')} ({temp.get('shock_date')})</div>
+                    <div style="font-size: 12px; color: #475569; margin-top: 2px;">{temp.get('assessment')}</div>
                 </div>
                 """,
                 unsafe_allow_html=True
@@ -161,12 +168,12 @@ def render_screen_3():
             if lag:
                 st.markdown(
                     f"""
-                    <div style="background: rgba(129, 140, 248, 0.04); border: 1px solid rgba(129, 140, 248, 0.2); border-radius: 6px; padding: 10px 12px; margin-bottom: 10px;">
-                        <div style="font-size: 11px; font-weight: 700; color: #A5B4FC; text-transform: uppercase;">📈 Historical Lagged Cross-Correlation (Weeks 1-48)</div>
-                        <div style="font-size: 12px; color: #D1D5DB; margin-top: 4px;">
+                    <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-left: 4px solid #6366F1; border-radius: 6px; padding: 12px 14px; margin-bottom: 12px;">
+                        <div style="font-size: 11px; font-weight: 700; color: #4F46E5; text-transform: uppercase;">📈 Historical Lagged Cross-Correlation (Weeks 1-48)</div>
+                        <div style="font-size: 13px; color: #1E293B; margin-top: 4px;">
                             • <b>Best Lead-Lag:</b> Lag {lag.get('best_lag', 0)} weeks (Strength |r| = <b>{lag.get('lag_strength', 0.0):.3f}</b>, Direction: <code>{lag.get('lag_direction')}</code>)
                         </div>
-                        <div style="font-size: 11px; color: #9CA3AF; margin-top: 2px;">
+                        <div style="font-size: 11px; color: #64748B; margin-top: 2px;">
                             • Profile (L0..L4): <code>{lag.get('lag_correlations')}</code>
                         </div>
                     </div>
@@ -185,37 +192,37 @@ def render_screen_3():
 
         with tab_ledgers:
             # Supporting Evidence Ledger
-            st.markdown("<div style='font-size: 12px; font-weight: 700; color: #10B981; text-transform: uppercase; margin-bottom: 4px;'>✅ Supporting Evidence Ledger</div>", unsafe_allow_html=True)
+            st.markdown("<div style='font-size: 12px; font-weight: 700; color: #166534; text-transform: uppercase; margin-bottom: 4px;'>✅ Supporting Evidence Ledger</div>", unsafe_allow_html=True)
             for supp in active_h.get("supporting_evidence", []):
-                st.markdown(f"<div style='font-size: 12px; color: #D1D5DB; margin-bottom: 4px; padding-left: 6px; border-left: 2px solid #10B981;'>{supp}</div>", unsafe_allow_html=True)
+                st.markdown(f"<div style='background: #F0FDF4; font-size: 12px; color: #1E293B; margin-bottom: 4px; padding: 6px 10px; border-left: 3px solid #16A34A; border-radius: 0 4px 4px 0;'>{supp}</div>", unsafe_allow_html=True)
                 
             # Contradictory Evidence Ledger
-            st.markdown("<div style='font-size: 12px; font-weight: 700; color: #EF4444; text-transform: uppercase; margin: 10px 0 4px 0;'>⚠️ Contradictory Facts / Negative Penalties</div>", unsafe_allow_html=True)
+            st.markdown("<div style='font-size: 12px; font-weight: 700; color: #991B1B; text-transform: uppercase; margin: 12px 0 4px 0;'>⚠️ Contradictory Facts / Negative Penalties</div>", unsafe_allow_html=True)
             for contra in active_h.get("contradictory_evidence", []):
-                st.markdown(f"<div style='font-size: 12px; color: #D1D5DB; margin-bottom: 4px; padding-left: 6px; border-left: 2px solid #EF4444;'>{contra}</div>", unsafe_allow_html=True)
+                st.markdown(f"<div style='background: #FEF2F2; font-size: 12px; color: #1E293B; margin-bottom: 4px; padding: 6px 10px; border-left: 3px solid #DC2626; border-radius: 0 4px 4px 0;'>{contra}</div>", unsafe_allow_html=True)
                 
             # Missing Signals Ledger
             missing = active_h.get("missing_expected_evidence", [])
             if missing:
-                st.markdown("<div style='font-size: 12px; font-weight: 700; color: #9CA3AF; text-transform: uppercase; margin: 10px 0 4px 0;'>🔍 Missing Expected Signals</div>", unsafe_allow_html=True)
+                st.markdown("<div style='font-size: 12px; font-weight: 700; color: #475569; text-transform: uppercase; margin: 12px 0 4px 0;'>🔍 Missing Expected Signals</div>", unsafe_allow_html=True)
                 for m in missing:
-                    st.markdown(f"<div style='font-size: 12px; color: #9CA3AF; margin-bottom: 4px; padding-left: 6px; border-left: 2px solid #6B7280;'>{m}</div>", unsafe_allow_html=True)
+                    st.markdown(f"<div style='background: #F8FAFC; font-size: 12px; color: #475569; margin-bottom: 4px; padding: 6px 10px; border-left: 3px solid #94A3B8; border-radius: 0 4px 4px 0;'>{m}</div>", unsafe_allow_html=True)
 
         with tab_reason:
             # Confounders
-            st.markdown("<div style='font-size: 12px; font-weight: 700; color: #F59E0B; text-transform: uppercase; margin-bottom: 6px;'>🌪️ Confounding Factor Analysis</div>", unsafe_allow_html=True)
+            st.markdown("<div style='font-size: 12px; font-weight: 700; color: #92400E; text-transform: uppercase; margin-bottom: 6px;'>🌪️ Confounding Factor Analysis</div>", unsafe_allow_html=True)
             render_confounders_summary(active_h.get("confounders", []))
             
             # Winner reasoning chain (if available)
             reasoning_chain = active_h.get("reasoning_chain", [])
             if reasoning_chain:
-                st.markdown("<div style='font-size: 12px; font-weight: 700; color: #818CF8; text-transform: uppercase; margin: 12px 0 6px 0;'>🏆 Why This Hypothesis Ranked #1 (Structured Proof)</div>", unsafe_allow_html=True)
+                st.markdown("<div style='font-size: 12px; font-weight: 700; color: #4338CA; text-transform: uppercase; margin: 14px 0 6px 0;'>🏆 Why This Hypothesis Ranked #1 (Structured Proof)</div>", unsafe_allow_html=True)
                 for step in reasoning_chain:
                     st.markdown(
                         f"""
-                        <div style="background: rgba(255,255,255,0.02); border-left: 2px solid #818CF8; padding: 4px 8px; margin-bottom: 4px; border-radius: 0 4px 4px 0;">
-                            <span style="font-size: 11px; font-weight: 700; color: #A5B4FC;">{step.get('step')}</span>: 
-                            <span style="font-size: 11px; color: #D1D5DB;">{step.get('finding')}</span>
+                        <div style="background: #EEF2FF; border-left: 3px solid #4F46E5; padding: 8px 12px; margin-bottom: 6px; border-radius: 0 6px 6px 0;">
+                            <span style="font-size: 12px; font-weight: 700; color: #3730A3;">{step.get('step')}</span>: 
+                            <span style="font-size: 12px; color: #1E293B;">{step.get('finding')}</span>
                         </div>
                         """,
                         unsafe_allow_html=True
@@ -224,7 +231,7 @@ def render_screen_3():
         # Data Lineage
         st.markdown(
             f"""
-            <div style="font-size: 11px; color: #6B7280; margin: 12px 0 8px 0;">
+            <div style="font-size: 11px; color: #64748B; margin: 14px 0 8px 0;">
                 📦 <b>Data Lineage:</b> {active_h.get('data_lineage', 'ERP Sales Ledger')}
             </div>
             """,
@@ -234,6 +241,9 @@ def render_screen_3():
         st.markdown("---")
         if st.button("🛠️ Simulate Action Impact (Screen 4) →", type="primary", use_container_width=True):
             set_screen("simulation")
+            st.rerun()
+            
+        st.markdown("</div>", unsafe_allow_html=True)
 
     # =========================================================================
     # RIGHT PANE: EDITH CONVERSATIONAL REASONING CONSOLE
