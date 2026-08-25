@@ -1,6 +1,6 @@
 """
 app.py
-Main Streamlit Application Entrypoint for EDITH (Clean Light Theme).
+Main Streamlit Application Entrypoint for EDITH (Executive Decision Intelligence Platform).
 AI-Assisted Business Intelligence Investigation System for Accenture Innovation Challenge 2026.
 """
 import streamlit as st
@@ -26,7 +26,7 @@ st.markdown("""
     
     /* Generous Top Padding to Ensure Zero Clipping */
     .block-container {
-        padding-top: 2rem !important;
+        padding-top: 1.8rem !important;
         padding-bottom: 3rem !important;
         padding-left: 2.5rem !important;
         padding-right: 2.5rem !important;
@@ -70,6 +70,19 @@ st.markdown("""
     .stButton>button[kind="primary"]:hover {
         background-color: #1D4ED8 !important;
         box-shadow: 0 2px 6px rgba(37, 99, 235, 0.35);
+    }
+    
+    /* Top Workflow Progress Stepper */
+    .workflow-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: #FFFFFF;
+        border: 1px solid #E2E8F0;
+        border-radius: 10px;
+        padding: 8px 16px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+        margin-bottom: 20px;
     }
     
     /* Metrics */
@@ -154,74 +167,75 @@ from ui.screens.s1_overview import render_screen_1
 from ui.screens.s2_diagnostic import render_screen_2
 from ui.screens.s3_workspace import render_screen_3
 from ui.screens.s4_simulation import render_screen_4
+from ui.screens.s5_console import render_screen_5
 
 def main():
     # Initialize state
     init_session_state()
     
-    # Unified Top Brand Header (No duplicate navigation)
     screen = st.session_state.current_screen
-    screen_names = {
-        "overview": "1. Business Overview",
-        "diagnostic": "2. KPI Deep Diagnostic",
-        "workspace": "3. Causal Investigation Workspace",
-        "simulation": "4. Scenario Simulation Workbench"
-    }
-    current_stage_label = screen_names.get(screen, "1. Business Overview")
     
-    col_brand, col_status = st.columns([3, 2])
+    # 1. TOP HEADER (Brand, Live Status, Persistent "Ask EDITH" CTA)
+    col_brand, col_cta = st.columns([3.2, 1.8])
     with col_brand:
         st.markdown(
-            f"""
-            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+            """
+            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
                 <div style="background: #2563EB; width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 19px; font-weight: 900; color: white; box-shadow: 0 2px 6px rgba(37, 99, 235, 0.3);">E</div>
                 <div>
-                    <div style="display: flex; align-items: center; gap: 8px;">
-                        <span style="font-size: 19px; font-weight: 800; color: #0F172A; letter-spacing: -0.3px;">EDITH</span>
-                        <span style="background: #EFF6FF; color: #1D4ED8; border: 1px solid #BFDBFE; font-size: 10px; font-weight: 800; padding: 2px 8px; border-radius: 4px; letter-spacing: 0.5px;">STAGE {current_stage_label[:2]}</span>
-                    </div>
-                    <div style="font-size: 11px; font-weight: 700; color: #64748B; letter-spacing: 0.4px;">DECISION INTELLIGENCE PLATFORM &bull; {current_stage_label}</div>
+                    <div style="font-size: 19px; font-weight: 800; color: #0F172A; letter-spacing: -0.3px; line-height: 1.1;">EDITH</div>
+                    <div style="font-size: 11px; font-weight: 700; color: #2563EB; letter-spacing: 0.5px;">EXECUTIVE DECISION INTELLIGENCE PLATFORM</div>
                 </div>
             </div>
             """,
             unsafe_allow_html=True
         )
-    with col_status:
-        st.markdown(
-            """
-            <div style="text-align: right; margin-top: 4px;">
-                <span style="background: #F0FDF4; color: #166534; border: 1px solid #BBF7D0; font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 6px;">
-                    🛡️ Verified Causal DAG Active &bull; 100% Grounded
-                </span>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
+    with col_cta:
+        # Check API key status for indicator
+        has_key = bool(os.getenv("GEMINI_API_KEY") or st.session_state.get("api_key_input"))
+        status_text = "Live Gemini API" if has_key else "Offline Grounded Mode"
+        status_icon = "🟢" if has_key else "🛡️"
         
-    st.markdown("<div style='margin-bottom: 16px;'></div>", unsafe_allow_html=True)
-    
-    # Sidebar Navigation & Settings (Single Source of Truth for Navigation)
-    with st.sidebar:
-        st.markdown("### 🧭 Investigation Workflow")
-        
-        if st.button("📊 1. Business Overview", use_container_width=True, type="primary" if screen == "overview" else "secondary"):
+        c_status, c_ask = st.columns([1.1, 1.4])
+        with c_status:
+            st.markdown(
+                f"""
+                <div style="text-align: right; padding-top: 6px; font-size: 11px; font-weight: 700; color: #64748B;">
+                    {status_icon} {status_text}
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
+        with c_ask:
+            # Persistent "Ask EDITH" button opens the dedicated full-page console
+            if screen == "console":
+                prev_screen = st.session_state.get("previous_screen", "overview")
+                if st.button("← Back to Investigation", key="btn_hdr_back", type="primary", use_container_width=True):
+                    set_screen(prev_screen)
+            else:
+                if st.button("💬 Ask EDITH Console", key="btn_hdr_ask_edith", type="primary", use_container_width=True):
+                    set_screen("console")
+
+    # 2. TOP WORKFLOW PROGRESS STEPPER (Detect → Diagnose → Explain → Simulate)
+    col_w1, col_w2, col_w3, col_w4 = st.columns(4)
+    with col_w1:
+        if st.button("1. Detect (Overview)", key="nav_s1", use_container_width=True, type="primary" if screen == "overview" else "secondary"):
             set_screen("overview")
-            st.rerun()
-            
-        if st.button("📈 2. KPI Diagnostic", use_container_width=True, type="primary" if screen == "diagnostic" else "secondary"):
+    with col_w2:
+        if st.button("2. Diagnose (Diagnostic)", key="nav_s2", use_container_width=True, type="primary" if screen == "diagnostic" else "secondary"):
             set_screen("diagnostic")
-            st.rerun()
-            
-        if st.button("🔬 3. Causal Workspace", use_container_width=True, type="primary" if screen == "workspace" else "secondary"):
+    with col_w3:
+        if st.button("3. Explain (Causal DAG)", key="nav_s3", use_container_width=True, type="primary" if screen == "workspace" else "secondary"):
             set_screen("workspace")
-            st.rerun()
-            
-        if st.button("🔮 4. Scenario Simulation", use_container_width=True, type="primary" if screen == "simulation" else "secondary"):
+    with col_w4:
+        if st.button("4. Simulate (Action Plan)", key="nav_s4", use_container_width=True, type="primary" if screen == "simulation" else "secondary"):
             set_screen("simulation")
-            st.rerun()
             
-        st.markdown("---")
-        st.markdown("### ⚙️ AI Engine Settings")
+    st.markdown("<div style='margin-bottom: 18px;'></div>", unsafe_allow_html=True)
+    
+    # 3. AUXILIARY SIDEBAR SETTINGS & INFO
+    with st.sidebar:
+        st.markdown("### ⚙️ Investigation Engine Settings")
         
         # API Key input (optional)
         current_key = os.getenv("GEMINI_API_KEY", "")
@@ -239,18 +253,23 @@ def main():
             st.info("🛡️ Offline Fallback Active (Zero-Key Guaranteed Reliability)")
             
         st.markdown("---")
+        st.markdown("### 🧭 Quick Navigation")
+        if st.button("💬 Open EDITH Console", key="sb_console_btn", use_container_width=True, type="primary" if screen == "console" else "secondary"):
+            set_screen("console")
+            
+        st.markdown("---")
         st.markdown("### ℹ️ About EDITH")
         st.caption("""
         **Accenture Innovation Challenge 2026**
         Problem Track 3: BusinessIntelligence.ai
         
-        **Pipeline:**
-        `DETECT → LOCALIZE → DAG → DECOMPOSE → EVALUATE → EXPLAIN → SIMULATE`
+        **Workflow:**
+        `DETECT → DIAGNOSE → EXPLAIN → SIMULATE`
         
         *Engineered by Team IIT Kanpur (2026).*
         """)
 
-    # Screen Routing
+    # 4. SCREEN ROUTING
     if screen == "overview":
         render_screen_1()
     elif screen == "diagnostic":
@@ -259,6 +278,8 @@ def main():
         render_screen_3()
     elif screen == "simulation":
         render_screen_4()
+    elif screen == "console":
+        render_screen_5()
     else:
         render_screen_1()
 

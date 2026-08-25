@@ -14,7 +14,8 @@ def init_session_state():
     """Initializes all necessary session state keys on first load."""
     if "initialized" not in st.session_state:
         st.session_state.initialized = True
-        st.session_state.current_screen = "overview" # "overview" | "diagnostic" | "workspace" | "simulation"
+        st.session_state.current_screen = "overview" # "overview" | "diagnostic" | "workspace" | "simulation" | "console"
+        st.session_state.previous_screen = "overview"
         st.session_state.selected_kpi_id = "kpi_b2b_sales"
         st.session_state.selected_hypothesis_id = "H1_PRICING_PRESSURE"
         st.session_state.chat_history = []
@@ -43,7 +44,13 @@ def init_session_state():
         st.session_state.llm_metadata = {}
 
 def set_screen(screen_name: str):
-    """Sets the active workflow screen and triggers re-render."""
+    """Sets the active workflow screen and triggers re-render, tracking prior screen."""
+    current = st.session_state.get("current_screen", "overview")
+    if screen_name == "console" and current != "console":
+        st.session_state.previous_screen = current
+    elif current != "console" and screen_name != current:
+        st.session_state.previous_screen = current
+        
     st.session_state.current_screen = screen_name
     st.rerun()
 

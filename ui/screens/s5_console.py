@@ -1,0 +1,156 @@
+"""
+ui/screens/s5_console.py
+Screen 5: Dedicated Full-Page EDITH Cognitive Reasoning Console.
+Provides a first-class, distraction-free conversational workspace strictly grounded in verified analytical evidence.
+"""
+import streamlit as st
+from state.session_state import set_screen
+from ai.llm_client import EdithLLMClient
+from ui.components.cards import render_epistemology_chip
+
+def render_screen_5():
+    """Renders the dedicated full-page EDITH Console screen."""
+    prev_screen = st.session_state.get("previous_screen", "overview")
+    screen_names = {
+        "overview": "Overview (Detect)",
+        "diagnostic": "Diagnostic (Diagnose)",
+        "workspace": "Investigation Workspace (Explain)",
+        "simulation": "Simulation Workbench (Simulate)"
+    }
+    prev_label = screen_names.get(prev_screen, "Investigation")
+    
+    # Top Action Bar: Return & Reset
+    col_back, col_title, col_actions = st.columns([1.5, 3.2, 1.3])
+    with col_back:
+        if st.button(f"← Back to {prev_label}", key="btn_console_back", type="secondary", use_container_width=True):
+            set_screen(prev_screen)
+            st.rerun()
+            
+    with col_title:
+        st.markdown("<h2 style='margin:0; padding:0; font-size: 22px; font-weight: 800; color: #0F172A;'>🤖 EDITH Cognitive Reasoning Console</h2>", unsafe_allow_html=True)
+        st.markdown("<div style='font-size: 13px; color: #64748B; margin-top: 2px;'>Natural-language AI synthesis strictly grounded in pre-computed deterministic evidence ledgers.</div>", unsafe_allow_html=True)
+        
+    with col_actions:
+        st.markdown("<div style='text-align: right; display: flex; gap: 8px; justify-content: flex-end;'>", unsafe_allow_html=True)
+        if st.button("🔄 Reset Conversation", key="btn_console_reset", use_container_width=True):
+            st.session_state.chat_history = []
+            st.session_state.edith_briefing = ""
+            st.rerun()
+        st.markdown("</div>", unsafe_allow_html=True)
+        
+    st.markdown("<div style='margin-bottom: 14px;'></div>", unsafe_allow_html=True)
+    
+    # Analytical Context & Client Initialization
+    anomaly_context = st.session_state.get("anomaly_context", {})
+    hypotheses = st.session_state.get("hypotheses", [])
+    selected_hypo_id = st.session_state.get("selected_hypothesis_id", "H1_PRICING_PRESSURE")
+    selected_hypothesis = next((h for h in hypotheses if h["id"] == selected_hypo_id), hypotheses[0] if hypotheses else {})
+    
+    user_key = st.session_state.get("api_key_input", "")
+    client = EdithLLMClient(api_key=user_key)
+    
+    # Generate initial briefing if not already generated
+    if not st.session_state.get("edith_briefing"):
+        with st.spinner("EDITH is synthesizing verified analytical evidence..."):
+            briefing_text, metadata = client.generate_briefing(anomaly_context, hypotheses)
+            st.session_state.edith_briefing = briefing_text
+            st.session_state.llm_metadata = metadata
+
+    meta = st.session_state.get("llm_metadata", {})
+    mode = meta.get("mode", "Deterministic Grounded Fallback")
+    latency = meta.get("latency_sec", 0.01)
+    provider = meta.get("provider", "Deterministic Engine")
+    
+    # Telemetry & Grounding Status Bar
+    st.markdown(
+        f"""
+        <div style="background: #EFF6FF; border: 1px solid #BFDBFE; border-radius: 8px; padding: 8px 16px; font-size: 12px; color: #1D4ED8; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="font-weight: 800;">🛡️ Strict Analytical Grounding:</span>
+                <span>Downstream of Deterministic Causal DAG & Decomposition</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 12px;">
+                <span style="background: #DBEAFE; color: #1E40AF; padding: 2px 8px; border-radius: 4px; font-weight: 700; font-size: 11px;">{provider}</span>
+                <span>⚡ <b>{mode}</b> ({latency}s)</span>
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+    
+    # Executive Diagnostic Briefing Container
+    st.markdown(
+        f"""
+        <div style="background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 10px; padding: 18px 22px; margin-bottom: 18px; box-shadow: 0 1px 3px rgba(0,0,0,0.03);">
+            <div style="font-size: 12px; font-weight: 700; color: #64748B; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">
+                📋 Executive Diagnostic Briefing (Generated from Verified Ledger)
+            </div>
+            <div style="font-size: 14px; color: #1E293B; line-height: 1.6;">
+                {st.session_state.edith_briefing}
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+    
+    # Suggested Prompt Chips
+    st.markdown("<h4 style='font-size: 13px; font-weight: 700; color: #475569; text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 8px;'>💡 Suggested Investigation Probes</h4>", unsafe_allow_html=True)
+    
+    col_p1, col_p2, col_p3 = st.columns(3)
+    with col_p1:
+        if st.button("❓ Why is inventory ruled out?", key="chip_inv", use_container_width=True):
+            _handle_console_query(client, "Why is inventory unlikely to be the cause?", anomaly_context, selected_hypothesis, hypotheses)
+        if st.button("❓ Explain volume vs price math", key="chip_math", use_container_width=True):
+            _handle_console_query(client, "Explain the exact mathematical revenue and volume decomposition.", anomaly_context, selected_hypothesis, hypotheses)
+    with col_p2:
+        if st.button("❓ Why is competitor action secondary?", key="chip_comp", use_container_width=True):
+            _handle_console_query(client, "Why is competitor promotion secondary to pricing?", anomaly_context, selected_hypothesis, hypotheses)
+        if st.button("❓ What uncertainty exists?", key="chip_uncert", use_container_width=True):
+            _handle_console_query(client, "What uncertainty or caveats exist in the data?", anomaly_context, selected_hypothesis, hypotheses)
+    with col_p3:
+        if st.button("❓ Explain pricing evidence & lag", key="chip_price", use_container_width=True):
+            _handle_console_query(client, "What core evidence and lead-time lag support pricing pressure?", anomaly_context, selected_hypothesis, hypotheses)
+        if st.button("❓ What is the recommended recovery action?", key="chip_action", use_container_width=True):
+            _handle_console_query(client, "What is the recommended recovery action and expected economic trade-off?", anomaly_context, selected_hypothesis, hypotheses)
+
+    st.markdown("<div style='margin-bottom: 16px;'></div>", unsafe_allow_html=True)
+    
+    # Render Conversation History
+    if st.session_state.get("chat_history"):
+        st.markdown("<h4 style='font-size: 13px; font-weight: 700; color: #475569; text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 10px;'>💬 Investigation Dialogue History</h4>", unsafe_allow_html=True)
+        for msg in st.session_state.chat_history:
+            if msg["role"] == "user":
+                st.markdown(
+                    f"""
+                    <div style="background: #EFF6FF; border-left: 4px solid #2563EB; border-radius: 6px; padding: 12px 16px; margin-bottom: 10px; font-size: 13px; color: #0F172A; box-shadow: 0 1px 2px rgba(0,0,0,0.02);">
+                        <div style="font-weight: 700; color: #1D4ED8; margin-bottom: 4px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.4px;">👤 You</div>
+                        <div style="line-height: 1.5;">{msg['content']}</div>
+                    </div>
+                    """,
+                    unsafe_allow_html=True
+                )
+            else:
+                st.markdown(
+                    f"""
+                    <div style="background: #F0FDF4; border-left: 4px solid #16A34A; border-radius: 6px; padding: 14px 16px; margin-bottom: 14px; font-size: 13px; color: #1E293B; box-shadow: 0 1px 2px rgba(0,0,0,0.02); line-height: 1.6;">
+                        <div style="font-weight: 700; color: #166534; margin-bottom: 4px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.4px;">🤖 EDITH</div>
+                        <div>{msg['content']}</div>
+                    </div>
+                    """,
+                    unsafe_allow_html=True
+                )
+                
+    st.markdown("<div style='margin-bottom: 24px;'></div>", unsafe_allow_html=True)
+    
+    # Fixed Bottom Chat Input
+    user_query = st.chat_input("Ask EDITH about causal proof, confounders, data lineage, or trade-offs...")
+    if user_query:
+        _handle_console_query(client, user_query, anomaly_context, selected_hypothesis, hypotheses)
+
+def _handle_console_query(client, query: str, anomaly_ctx: dict, selected_h: dict, all_h: list):
+    """Executes a grounded Q&A turn with the LLM or deterministic reasoner."""
+    with st.spinner("EDITH is reviewing the verified analytical evidence..."):
+        ans_text, metadata = client.answer_question(query, anomaly_ctx, selected_h, all_h)
+        st.session_state.chat_history.append({"role": "user", "content": query})
+        st.session_state.chat_history.append({"role": "edith", "content": ans_text, "metadata": metadata})
+        st.rerun()

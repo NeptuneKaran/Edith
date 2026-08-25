@@ -1,6 +1,7 @@
 """
 ui/screens/s4_simulation.py
-Screen 4: Scenario Simulation Workbench & Structured Decision Summary (Clean Light Theme)
+Screen 4: Scenario Simulation Workbench & Structured Decision Summary (Simulate Stage)
+Clean, editorial Light Theme design with interactive levers, recovery trajectories, and exportable governance package.
 """
 import streamlit as st
 from state.session_state import set_screen
@@ -10,14 +11,14 @@ from core.simulation_engine import SimulationEngine
 
 def render_screen_4():
     """Renders the what-if simulation workbench and final decision export package."""
-    col_nav, col_title, col_tags = st.columns([1.2, 3.8, 1.4])
+    col_nav, col_title, col_tags = st.columns([1.3, 3.7, 1.4])
     with col_nav:
-        if st.button("← Back to Investigation", use_container_width=True):
+        if st.button("← Back to Explain (Workspace)", key="btn_sim_back_s4", use_container_width=True):
             set_screen("workspace")
             st.rerun()
             
     with col_title:
-        st.markdown("<h2 style='margin:0; padding:0; font-size: 20px; font-weight: 800; color: #0F172A;'>🔮 Scenario Simulation & Decision Workbench</h2>", unsafe_allow_html=True)
+        st.markdown("<h2 style='margin:0; padding:0; font-size: 20px; font-weight: 800; color: #0F172A;'>🔮 Stage 4: Scenario Simulation Workbench</h2>", unsafe_allow_html=True)
         st.caption("Simulate counterfactual recovery curves, evaluate economic trade-offs, and finalize action plans.")
     with col_tags:
         st.markdown("<div style='text-align: right; margin-top: 4px; display: flex; gap: 4px; justify-content: flex-end;'>", unsafe_allow_html=True)
@@ -36,7 +37,7 @@ def render_screen_4():
         st.markdown(
             """
             <div style="background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 10px; padding: 18px 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.03); margin-bottom: 16px;">
-                <h3 style='margin:0; padding:0; font-size: 16px; font-weight: 700; color: #0F172A;'>🎛️ Controllable Business Levers</h3>
+                <h3 style='margin:0; padding:0; font-size: 16px; font-weight: 700; color: #0F172A;'>🎛️ Controllable Policy Levers</h3>
                 <div style='font-size: 12px; color: #64748B; margin-top: 2px; margin-bottom: 14px;'>Adjust policy levers to simulate counterfactual recovery paths:</div>
             """,
             unsafe_allow_html=True
@@ -232,10 +233,16 @@ EDITH DECISION AUDIT PACKAGE — ACCENTURE INNOVATION CHALLENGE 2026
 
     st.code(decision_summary_text, language="text")
     
-    st.download_button(
-        label="📥 Export Decision Package (.txt)",
-        data=decision_summary_text,
-        file_name="EDITH_Decision_Package_B2B_Sales.txt",
-        mime="text/plain",
-        use_container_width=True
-    )
+    col_exp, col_ask = st.columns([1.5, 1.0])
+    with col_exp:
+        st.download_button(
+            label="📥 Export Decision Package (.txt)",
+            data=decision_summary_text,
+            file_name="EDITH_Decision_Package_B2B_Sales.txt",
+            mime="text/plain",
+            use_container_width=True
+        )
+    with col_ask:
+        if st.button("💬 Ask EDITH Console →", key="btn_console_from_sim", use_container_width=True):
+            set_screen("console")
+            st.rerun()

@@ -1,6 +1,7 @@
 """
 ui/screens/s2_diagnostic.py
-Screen 2: KPI Deep Diagnostic & Dimensional Variance Decomposition (Clean Light Theme)
+Screen 2: KPI Deep Diagnostic & Dimensional Variance Decomposition (Diagnose Stage)
+Clean, editorial Light Theme design with high-contrast charts and localization takeaways.
 """
 import streamlit as st
 from state.session_state import set_screen
@@ -11,9 +12,9 @@ from data.repository import DataRepository
 
 def render_screen_2():
     """Renders the deep diagnostic and dimensional breakdown screen."""
-    col_nav, col_title, col_tag = st.columns([1.2, 3.8, 1.2])
+    col_nav, col_title, col_tag = st.columns([1.3, 3.7, 1.2])
     with col_nav:
-        if st.button("← Back to Overview", use_container_width=True):
+        if st.button("← Back to Detect (Overview)", key="btn_diag_back_s2", use_container_width=True):
             set_screen("overview")
             st.rerun()
             
@@ -22,14 +23,14 @@ def render_screen_2():
     kpi_name = kpi_meta["name"]
     
     with col_title:
-        st.markdown(f"<h2 style='margin:0; padding:0; font-size: 20px; font-weight: 800; color: #0F172A;'>📈 KPI Deep Diagnostic: {kpi_name}</h2>", unsafe_allow_html=True)
+        st.markdown(f"<h2 style='margin:0; padding:0; font-size: 20px; font-weight: 800; color: #0F172A;'>📈 Stage 2: Diagnose KPI & Localize Variance</h2>", unsafe_allow_html=True)
     with col_tag:
         st.markdown("<div style='text-align: right; margin-top: 4px;'>", unsafe_allow_html=True)
         render_epistemology_chip("DATA-DERIVED")
         st.markdown("</div>", unsafe_allow_html=True)
         
-    st.caption(f"{kpi_meta.get('description', '')} &bull; Source: {', '.join(kpi_meta.get('source_systems', []))} ({kpi_meta.get('refresh_cadence', 'Weekly')})")
-    st.markdown("<div style='margin-bottom: 12px;'></div>", unsafe_allow_html=True)
+    st.caption(f"Analyzing historical trajectory against dynamic ±2.0σ expected corridor &bull; <b>{kpi_name}</b> ({kpi_meta.get('refresh_cadence', 'Weekly')})")
+    st.markdown("<div style='margin-bottom: 14px;'></div>", unsafe_allow_html=True)
     
     repo = DataRepository.get_instance()
     
@@ -43,7 +44,7 @@ def render_screen_2():
         if df_ts is not None:
             st.markdown(
                 """
-                <div style="background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 10px; padding: 14px 18px; margin-bottom: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.03);">
+                <div style="background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 10px; padding: 16px 20px; margin-bottom: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.03);">
                 """,
                 unsafe_allow_html=True
             )
@@ -133,10 +134,10 @@ def render_screen_2():
         st.markdown("<div style='margin-bottom: 20px;'></div>", unsafe_allow_html=True)
         st.markdown("---")
         
-        # Primary Action to Workspace
-        col_cta, col_space = st.columns([2, 3])
+        # Primary Action to Stage 3: Explain (Workspace)
+        col_cta, col_space = st.columns([2.2, 2.8])
         with col_cta:
-            if st.button("🔬 Proceed to Causal Investigation Workspace (Screen 3) →", key="btn_to_workspace", type="primary", use_container_width=True):
+            if st.button("🔬 Proceed to Causal Investigation (Explain) →", key="btn_to_workspace_s2", type="primary", use_container_width=True):
                 set_screen("workspace")
                 st.rerun()
                 
@@ -157,6 +158,6 @@ def render_screen_2():
             )
             
         st.markdown("---")
-        if st.button("← Return to Executive Overview", key="btn_ret_overview", use_container_width=True):
+        if st.button("← Return to Executive Overview", key="btn_ret_overview_s2", use_container_width=True):
             set_screen("overview")
             st.rerun()

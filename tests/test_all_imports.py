@@ -17,6 +17,7 @@ def test_imports():
         "core.baseline_engine",
         "core.contribution_engine",
         "core.evidence_engine",
+        "core.dependency_graph",
         "core.simulation_engine",
         "ai.prompts",
         "ai.offline_reasoner",
@@ -29,6 +30,7 @@ def test_imports():
         "ui.screens.s2_diagnostic",
         "ui.screens.s3_workspace",
         "ui.screens.s4_simulation",
+        "ui.screens.s5_console",
     ]
     
     passed = 0
