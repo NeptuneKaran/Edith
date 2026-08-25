@@ -96,8 +96,9 @@ Edith_New/
 
 ```bash
 # 1. Clone repository
-git clone https://github.com/NeptuneKaran/NewEdith.git
-cd NewEdith
+git clone https://github.com/NeptuneKaran/Edith.git
+cd Edith
+
 
 # 2. Install dependencies
 pip install -r requirements.txt
