@@ -3,8 +3,10 @@ ui/screens/s5_console.py
 Screen 5: Dedicated Full-Page EDITH Conversational AI Console.
 Natural-language decision intelligence assistant powered by Gemini tool-calling and safe native Markdown rendering.
 """
+import os
 import streamlit as st
 from state.session_state import set_screen
+
 from ai.llm_client import EdithLLMClient
 from data.repository import DataRepository
 
