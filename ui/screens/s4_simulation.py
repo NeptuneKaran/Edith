@@ -171,7 +171,7 @@ def render_screen_4():
     
     top_h = hypotheses[0] if hypotheses else {"name": "Pricing Elasticity", "evidence_score": 0.90}
     second_h = hypotheses[1] if len(hypotheses) > 1 else {"name": "Competitor Campaign", "evidence_score": 0.55}
-    refuted_h = next((h for h in hypotheses if h["id"] == "H3_INVENTORY_CONSTRAINT"), {"name": "Inventory Bottleneck", "evidence_score": 0.00})
+    refuted_h = next((h for h in hypotheses if h["id"] in ["H8_SUPPLY_CONSTRAINT", "H3_INVENTORY_CONSTRAINT"]), {"name": "Supply Bottleneck", "evidence_score": 0.00})
     
     wk_lbl = anom_ctx.get("current_week_label", "2026-W08")
     kpi_nm = anom_ctx.get("kpi_name", "Monthly B2B Sales")

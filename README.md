@@ -9,9 +9,9 @@ Developed by **Team IIT Kanpur** (Chhavi Tanwar & Karan Kosta)
 Conventional Business Intelligence dashboards show **what happened** (e.g., *Monthly B2B Sales dropped 10.5% in Region B*), but leave the critical questions—**why did it happen?**, **what evidence supports that?**, and **what should we do next?**—to days of manual analyst drill-downs.
 
 **EDITH** is an evidence-grounded KPI intelligence and investigation system that enforces an explicit analytical chain:
-$$\text{OBSERVE} \longrightarrow \text{DETECT} \longrightarrow \text{INVESTIGATE} \longrightarrow \text{EVIDENCE} \longrightarrow \text{EXPLAIN} \longrightarrow \text{SIMULATE} \longrightarrow \text{ACT}$$
+$$\text{OBSERVE} \longrightarrow \text{DETECT} \longrightarrow \text{LOCALIZE} \longrightarrow \text{INVESTIGATE} \longrightarrow \text{EXPLAIN} \longrightarrow \text{SIMULATE} \longrightarrow \text{ACT}$$
 
-Unlike generic chatbot copilots that hallucinate numbers, EDITH strictly decouples **deterministic analytical algorithms** (anomaly detection, dimensional variance decomposition, Difference-in-Differences, and composite Evidence Scoring) from **downstream natural language AI synthesis**.
+Unlike generic chatbot copilots that hallucinate numbers, EDITH strictly decouples **deterministic analytical algorithms** (anomaly detection, dimensional variance localization, metric dependency DAG traversal, exact mathematical decomposition, lagged cross-correlations, control group selection, pre-trend validation, and composite 0–100 Cause Evidence Scoring) from **downstream natural language AI synthesis**.
 
 ---
 
@@ -19,19 +19,31 @@ Unlike generic chatbot copilots that hallucinate numbers, EDITH strictly decoupl
 
 1. **Progressive Disclosure Workflow**:
    - **Screen 1 (Business Overview)**: Portfolio health scan across 4 enterprise KPIs with automatic P1 Anomaly detection.
-   - **Screen 2 (KPI Deep Diagnostic)**: 52-week historical trend vs. dynamic $\pm 2.0\sigma$ expected corridor and dimensional variance decomposition (Region $\rightarrow$ Tier $\rightarrow$ Product $\rightarrow$ Channel).
-   - **Screen 3 (Dual-Pane Investigation Workspace)**: Side-by-side transparent analytical canvas with deterministic Evidence Scores ($[0.0, 1.0]$), temporal lead-time checks, supporting/contradictory evidence ledgers, and interactive Edith reasoning console.
+   - **Screen 2 (KPI Deep Diagnostic)**: 52-week historical trend vs. dynamic $\pm 2.0\sigma$ expected corridor and dimensional variance localization (Region $\rightarrow$ Tier $\rightarrow$ Product $\rightarrow$ Channel).
+   - **Screen 3 (Dual-Pane Investigation Workspace)**: Side-by-side transparent analytical canvas with 8 structured competing hypotheses ($H_1 \dots H_8$), deterministic prediction testing, metric DAG dependency roles, mathematical revenue decomposition, data-driven control group selection, pre-trend validation, confounder analysis, and interactive Edith reasoning console.
    - **Screen 4 (Scenario Simulation Workbench)**: Interactive what-if sandbox allowing business leaders to adjust price and marketing levers, simulate counterfactual recovery curves, and export an auditable Decision Summary package.
 
-2. **Interpretable Composite Evidence Score**:
-   $$S(H_k) = \text{clamp}_{[0.0, 1.0]} \left( w_T \cdot T_k + w_E \cdot E_k + w_C \cdot C_k - w_D \cdot D_k \right) \times Q_k$$
-   - $T_k$: Temporal precedence ($+12\%$ price hike preceded drop by $\tau = 2$ weeks).
-   - $E_k$: Difference-in-Differences effect size vs unaffected control cohort.
-   - $C_k$: Corroborating signals (CRM pricing complaints surge to $38/\text{wk}$).
-   - $D_k$: Contradictory penalty (Warehouse fill rate was $99.4\% \rightarrow$ refuting inventory stockouts).
-   - $Q_k$: Data freshness and sample size factor.
+2. **How EDITH Determines Root Cause**:
+   $$\text{Base Score} = w_{\text{temp}} S_{\text{temp}} + w_{\text{mag}} S_{\text{mag}} + w_{\text{dir}} S_{\text{dir}} + w_{\text{hist}} S_{\text{hist}} + w_{\text{dep}} S_{\text{dep}} + w_{\text{contrib}} S_{\text{contrib}}$$
+   $$\text{Final Cause Score} = \text{clamp}_{[0, 100]} \Big( \text{Base Score} - w_{\text{counter}} P_{\text{counter}} - w_{\text{conf}} P_{\text{conf}} - w_{\text{pre}} P_{\text{pre}} \Big) \times Q$$
+   - **Temporal Precedence**: Candidate movement lead-time ($\tau \in [1, 3]$ weeks vs post-anomaly penalty).
+   - **Magnitude / Effect Size**: Normalized deviation and $Z$-score.
+   - **Directional Consistency**: Verification against economic domain theory (e.g. Price $\uparrow \implies$ Volume $\downarrow$).
+   - **Historical Lag Analysis**: Lag cross-correlations ($r_k$ for lags $0..4$) to identify `best_lag` and `lag_strength`.
+   - **Metric Dependency Graph**: Distinguishes direct upstream drivers from downstream effects (e.g. Gross Margin compression).
+   - **Mathematical Decomposition**: Exact identity breakdown ($\Delta \text{Revenue} = \text{Volume Effect} + \text{Price Effect}$; volume explains $111.5\%$ of gross decline).
+   - **Control-Group Selection & Pre-Trends**: Evaluates candidate cohorts and validates parallel pre-trends across Weeks 1–48 ($\Delta\beta = 0.00027$).
+   - **Counter-Evidence & Confounders**: Quantifies negative evidence (warehouse fill rates $99.4\%$) and concurrent shocks (ApexTech discount).
 
-3. **Guaranteed 100% Demo Reliability (Zero-Key Offline Mode)**:
+3. **Intellectually Honest Confidence Classification**:
+   - `HIGH-CONFIDENCE DRIVER` ($\ge 75$)
+   - `POSSIBLE DRIVER` ($50 - 74$)
+   - `CORRELATED SIGNAL` ($25 - 49$)
+   - `DOWNSTREAM EFFECT` (e.g. Gross Margin / Profit)
+   - `REFUTED BY DATA` (e.g. Inventory)
+   - `NOT TESTABLE (MISSING TELEMETRY)` (e.g. Channel Commissions)
+
+4. **Guaranteed 100% Demo Reliability (Zero-Key Offline Mode)**:
    - Connects live to **Google Gemini** (`gemini-2.5-flash` / `gemini-1.5-flash`) via `google-genai` SDK when `GEMINI_API_KEY` is provided.
    - Seamlessly falls back to an integrated **Deterministic Offline Reasoner** (`OfflineEdithReasoner`) when offline or without an API key.
 
@@ -51,14 +63,15 @@ Edith_New/
 │   └── config.toml                # Cloud-optimized Streamlit server configuration
 ├── config/
 │   ├── settings.py                # Configurable weights, thresholds, API keys, assumptions
-│   └── semantic_contracts.py      # KPI definitions, dimensions, driver metadata catalog
+│   └── semantic_contracts.py      # KPI definitions, metric definitions, driver catalog
 ├── data/
 │   ├── generator.py               # Coherent 52-week relational synthetic data generator
 │   └── repository.py              # In-memory query repository & aggregation layer
 ├── core/
 │   ├── baseline_engine.py         # Rolling baseline, expected corridor (±2σ), anomaly detection
-│   ├── contribution_engine.py     # Multi-dimensional variance decomposition
-│   ├── evidence_engine.py         # Multi-hypothesis tester & deterministic Evidence Scorer
+│   ├── contribution_engine.py     # Multi-dimensional variance localization
+│   ├── dependency_graph.py        # Metric dependency DAG & mathematical decomposition
+│   ├── evidence_engine.py         # Multi-hypothesis causal scorer, lag analysis & control selector
 │   └── simulation_engine.py       # Parametric what-if counterfactual elasticity model
 ├── ai/
 │   ├── llm_client.py              # Google GenAI SDK client with automatic offline fallback
@@ -68,7 +81,7 @@ Edith_New/
 │   └── session_state.py           # Centralized typed session state manager
 ├── ui/
 │   ├── components/
-│   │   ├── cards.py               # Metric cards, anomaly badges, metadata chips
+│   │   ├── cards.py               # Metric cards, cause score cards, math decomposition cards
 │   │   ├── charts.py              # Interactive Plotly charts (corridor, waterfall, DiD, simulation)
 │   │   └── chat_pane.py           # Split-pane interactive dialogue console
 │   └── screens/
@@ -77,8 +90,12 @@ Edith_New/
 │       ├── s3_workspace.py        # Screen 3: Dual-Pane Investigation Workspace
 │       └── s4_simulation.py       # Screen 4: Scenario Simulation Workbench
 ├── tests/
+│   ├── test_causal_reasoning.py   # 6 comprehensive tests for causal engine, math & lag analysis
 │   ├── test_analytics.py          # Automated tests for baseline, contribution, scoring, simulation
 │   ├── test_llm_fallback.py       # Verification tests for offline reasoner & grounding
+│   ├── test_all_screens.py        # 4-screen data contract tests
+│   ├── test_all_imports.py        # All-module packaging and import tests
+│   ├── test_live_server_startup.py# Live Streamlit server boot test on 0.0.0.0:10000
 │   ├── audit_numbers.py           # Rigorous end-to-end numerical verification script
 │   └── red_team_audit.py          # Hostile input, boundary & denominator test suite
 ├── README.md                      # Project overview & running instructions
@@ -87,71 +104,13 @@ Edith_New/
 
 ---
 
-## 🌐 Deploying EDITH to Render (Step-by-Step Guide)
+## 🌐 Quick Start (Local & Render)
 
-EDITH is fully configured for zero-friction cloud deployment on [Render](https://render.com) as a Python Web Service.
-
-### Step 1: Push Code to GitHub
-1. Initialize git and commit the project files:
-   ```bash
-   git init
-   git add .
-   git commit -m "Prepare EDITH for Render deployment"
-   git branch -M main
-   ```
-2. Create a new repository on your GitHub account (e.g. `edith-bi-investigation`).
-3. Push to your GitHub repository:
-   ```bash
-   git remote add origin https://github.com/<YOUR_GITHUB_USERNAME>/<YOUR_REPO_NAME>.git
-   git push -u origin main
-   ```
-
-### Step 2: Deploy on Render
-1. Log in to your [Render Dashboard](https://dashboard.render.com/).
-2. Click **New +** and select **Web Service**.
-3. Connect your GitHub repository.
-4. Render will automatically detect `render.yaml` or you can configure manually:
-   - **Name**: `edith-bi-investigation`
-   - **Runtime**: `Python`
-   - **Build Command**: `pip install -r requirements.txt`
-   - **Start Command**: `streamlit run app.py --server.port $PORT --server.address 0.0.0.0 --server.headless true`
-   - **Plan**: `Free`
-
-### Step 3: Configure Environment Variables (Optional)
-In your Render Service Dashboard, navigate to **Environment**:
-- Add `GEMINI_API_KEY`: Paste your key from [Google AI Studio](https://aistudio.google.com/).
-- *(Note: If `GEMINI_API_KEY` is omitted, EDITH automatically and seamlessly operates in 100% deterministic offline fallback mode with zero downtime).*
-
-### Step 4: Access Your Live Application
-Click **Create Web Service**. Within 2–3 minutes, Render will build and deploy EDITH. Open the generated public URL (e.g. `https://edith-bi-investigation.onrender.com`).
-
----
-
-## ⚡ Local Quick Start
-
-### 1. Requirements
-- Python 3.10+
-- Packages: `pip install -r requirements.txt`
-
-### 2. Run Automated Verification Tests
+### Quick Start (Local)
 ```bash
-python tests/test_analytics.py
-python tests/test_llm_fallback.py
-python tests/audit_numbers.py
-python tests/red_team_audit.py
-```
-
-### 3. Launch Local Streamlit Server
-```bash
+python -m venv venv
+venv\Scripts\activate
+pip install -r requirements.txt
 streamlit run app.py
 ```
-Open your browser at `http://localhost:8501`.
-
----
-
-## 🎬 Presentation Demo Script (4 Minutes)
-1. **Screen 1 (Overview)**: Show the 4 enterprise KPIs; point out the **P1 Material Anomaly** on *Monthly B2B Sales* (-10.5% drop from $1.40M to $1.25M). Click **`🔍 Investigate Anomaly →`**.
-2. **Screen 2 (Diagnostic)**: Show the 52-week time series breaching below the shaded $\pm 2.0\sigma$ corridor ($Z = -2.30$). Show the dimensional waterfall proving **Region B Enterprise** accounts for $97.3\%$ of the drop. Click **`🚀 Analyze Root Causes →`**.
-3. **Screen 3 (Workspace - Left)**: Show ranked candidate causes: **Pricing Pressure** ($0.90$) vs **Competitor Action** ($0.55$) vs **Inventory Bottleneck** ($0.00$). Highlight the contradictory evidence refuting inventory (Warehouse stock was $99.4\%$).
-4. **Screen 3 (Workspace - Right)**: Show Edith’s executive diagnosis. Click **`❓ Why is inventory ruled out?`** and **`❓ Why is competitor action secondary?`** to demonstrate evidence grounding. Click **`🛠️ Simulate Action Impact →`**.
-5. **Screen 4 (Simulation)**: Adjust the price rollback slider to $-6\%$ and add $\$15\text{k}$ promo budget. Watch the projected recovery curve rebound. Review the structured Decision Summary and click **`📥 Export Decision Package`**.
+Open `http://localhost:8501` to use EDITH.

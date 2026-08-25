@@ -3,6 +3,7 @@ config/settings.py
 Global configurations, weights, thresholds, and model assumptions for EDITH.
 """
 from dataclasses import dataclass
+from typing import Dict, Any
 import os
 
 try:
@@ -13,11 +14,30 @@ except ImportError:
 
 @dataclass(frozen=True)
 class EvidenceWeights:
-    """Configurable weights for the deterministic composite Evidence Score formula."""
-    temporal_weight: float = 0.25       # w_T: Temporal precedence & lag consistency
-    effect_weight: float = 0.35         # w_E: Effect size / Difference-in-Differences vs control
-    corroboration_weight: float = 0.40  # w_C: Independent supporting data signals
-    contradiction_weight: float = 0.45  # w_D: Penalty weight for conflicting data observations
+    """
+    Configurable weights for the deterministic composite Root-Cause & Evidence Score formula (0-100 & 0-1 scales).
+    Base Score = w_temp * S_temp + w_mag * S_mag + w_dir * S_dir + w_hist * S_hist + w_dep * S_dep + w_contrib * S_contrib
+    Final Score = clamp(Base Score - w_counter * P_counter - w_conf * P_conf) * Q
+    """
+    temporal_weight: float = 0.20             # w_T: Temporal precedence & lead-time window
+    magnitude_weight: float = 0.15            # w_M: Normalized deviation & effect size
+    directional_weight: float = 0.15          # w_D: Domain directional compatibility
+    historical_lag_weight: float = 0.20       # w_H: Lagged cross-correlation over historical window
+    dependency_weight: float = 0.15           # w_G: Upstream vs Downstream metric DAG structure
+    contribution_weight: float = 0.15         # w_C: Mathematical decomposition share
+    
+    # Penalties
+    counter_evidence_penalty_weight: float = 0.50 # w_K: Direct counter-evidence / falsification penalty
+    confounder_penalty_weight: float = 0.20       # w_CF: Confounding / overlapping event penalty
+    pre_trend_penalty_weight: float = 0.20        # w_PT: Control group pre-trend violation penalty
+    
+    # Backward compatibility aliases
+    prediction_weight: float = 0.30
+    did_effect_weight: float = 0.25
+    corroboration_weight: float = 0.25
+    contradiction_penalty_weight: float = 0.50
+    effect_weight: float = 0.25
+    contradiction_weight: float = 0.50
 
 @dataclass(frozen=True)
 class AnomalyThresholds:
@@ -40,6 +60,42 @@ class SimulationAssumptions:
 EVIDENCE_WEIGHTS = EvidenceWeights()
 ANOMALY_THRESHOLDS = AnomalyThresholds()
 SIMULATION_ASSUMPTIONS = SimulationAssumptions()
+
+# Confidence Classification
+def classify_cause_confidence(score_100: float, role: str = "UPSTREAM_DIRECT", is_testable: bool = True) -> str:
+    """Classifies candidate drivers into calibrated, intellectually honest confidence tiers."""
+    if not is_testable:
+        return "NOT TESTABLE (MISSING TELEMETRY)"
+    if role == "DOWNSTREAM_EFFECT":
+        return "DOWNSTREAM EFFECT"
+    if score_100 >= 75.0:
+        return "HIGH-CONFIDENCE DRIVER"
+    elif score_100 >= 50.0:
+        return "POSSIBLE DRIVER"
+    elif score_100 >= 25.0:
+        return "CORRELATED SIGNAL"
+    elif score_100 > 0.0:
+        return "WEAK / INSUFFICIENT EVIDENCE"
+    else:
+        return "REFUTED BY DATA"
+
+# Standard Evidence Strength Bands (0.0 to 1.0 scale)
+def get_confidence_band(score: float, is_testable: bool = True, role: str = "UPSTREAM_DIRECT") -> str:
+    """Returns the standardized, explainable evidence strength band."""
+    if not is_testable:
+        return "Not Testable (Missing Telemetry)"
+    if role == "DOWNSTREAM_EFFECT":
+        return "Downstream Effect"
+    if score >= 0.80:
+        return "Strong Evidence"
+    elif score >= 0.50:
+        return "Moderate Evidence"
+    elif score >= 0.25:
+        return "Weak Evidence"
+    elif score > 0.0:
+        return "Insufficient Evidence"
+    else:
+        return "Refuted by Data"
 
 # LLM Configuration
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")

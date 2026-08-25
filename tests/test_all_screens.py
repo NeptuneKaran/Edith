@@ -41,13 +41,15 @@ def test_screen_data_contracts():
     # Screen 3 Data Contract
     evidence = EvidenceEngine(repo)
     hypos = evidence.evaluate_all_hypotheses("kpi_b2b_sales")
-    assert len(hypos) == 4
+    assert len(hypos) == 8
     for h in hypos:
         assert "id" in h
         assert "evidence_score" in h
         assert "confidence_band" in h
         assert "supporting_evidence" in h
         assert "contradictory_evidence" in h
+        assert "predictions" in h
+        assert "control_group_analysis" in h
     cohort = repo.get_cohort_comparison()
     assert "Enterprise" in cohort.columns
     assert "Mid-Market" in cohort.columns

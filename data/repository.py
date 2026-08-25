@@ -1,10 +1,10 @@
 """
 data/repository.py
 In-memory data access and query repository for EDITH.
-Provides clean query functions for KPI time series, dimensional slices, and driver signals.
+Provides clean query functions for KPI time series, dimensional slices, driver signals, and control cohort evaluation.
 """
 import pandas as pd
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Tuple, Any
 from data.generator import generate_enterprise_dataset
 
 class DataRepository:
@@ -91,6 +91,15 @@ class DataRepository:
         cohort = df[(df["region"] == region) & (df["product_line"] == product)]
         pivoted = cohort.groupby(["week_idx", "week_label", "customer_tier"])["gross_revenue"].sum().unstack().reset_index()
         return pivoted
+
+    def get_all_segment_time_series(self) -> pd.DataFrame:
+        """Returns 52-week weekly revenue aggregated by (region, customer_tier, product_line, week_idx)."""
+        df_sales = self.tables["sales"]
+        return df_sales.groupby(["region", "customer_tier", "product_line", "week_idx", "week_label", "week_date"]).agg(
+            gross_revenue=("gross_revenue", "sum"),
+            units_sold=("units_sold", "sum"),
+            avg_unit_price=("unit_price", "mean")
+        ).reset_index()
 
     def get_feedback_signals(self, region: str = "Region B") -> pd.DataFrame:
         """Returns customer complaint time series."""

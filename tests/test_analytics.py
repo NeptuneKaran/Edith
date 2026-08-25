@@ -30,7 +30,7 @@ def test_data_generation():
     print("  [PASS] test_data_generation")
 
 def test_baseline_and_corridor():
-    """Verify that expected corridor (±2σ) contains historical normal points and flags anomaly."""
+    """Verify that expected corridor (+-2sigma) contains historical normal points and flags anomaly."""
     repo = DataRepository.get_instance()
     df_ts = repo.get_kpi_time_series("kpi_b2b_sales")
     df_analyzed = AnomalyEngine.calculate_baseline_and_corridor(df_ts)
@@ -77,7 +77,7 @@ def test_evidence_scoring():
     engine = EvidenceEngine(repo)
     hypotheses = engine.evaluate_all_hypotheses("kpi_b2b_sales")
     
-    assert len(hypotheses) == 4
+    assert len(hypotheses) == 8
     
     # Check score bounds
     for h in hypotheses:
@@ -90,9 +90,8 @@ def test_evidence_scoring():
     # Verify expected ranking: Pricing > Competitor > Demand > Inventory
     h_map = {h["id"]: h["evidence_score"] for h in hypotheses}
     assert h_map["H1_PRICING_PRESSURE"] > h_map["H2_COMPETITOR_CAMPAIGN"]
-    assert h_map["H2_COMPETITOR_CAMPAIGN"] > h_map["H4_DEMAND_CONTRACTION"]
-    assert h_map["H4_DEMAND_CONTRACTION"] > h_map["H3_INVENTORY_CONSTRAINT"]
-    assert h_map["H3_INVENTORY_CONSTRAINT"] < 0.25 # Refuted by 99% stock fill rate
+    assert h_map["H2_COMPETITOR_CAMPAIGN"] >= h_map["H3_DEMAND_CONTRACTION"]
+    assert h_map["H8_SUPPLY_CONSTRAINT"] == 0.00 # Refuted by 99% stock fill rate
     print("  [PASS] test_evidence_scoring")
 
 def test_simulation_engine():

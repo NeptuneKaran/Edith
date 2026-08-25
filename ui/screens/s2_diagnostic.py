@@ -57,8 +57,8 @@ def render_screen_2():
         st.markdown("---")
         
         # 3. Dimensional Variance Decomposition
-        st.markdown("<h3 style='font-size: 16px; font-weight: 700; color: #FFFFFF; margin-bottom: 2px;'>🧩 Dimensional Variance Breakdown: Localizing the Shock Origin</h3>", unsafe_allow_html=True)
-        st.caption("Traversing the hierarchical dimensions to isolate the epicenter of revenue variance:")
+        st.markdown("<h3 style='font-size: 16px; font-weight: 700; color: #FFFFFF; margin-bottom: 2px;'>🧩 Dimensional Variance Localization: Isolating Impact Epicenter</h3>", unsafe_allow_html=True)
+        st.caption("Decomposes aggregate variance to localize where the shock is concentrated (empirical locus of effect, distinct from causal mechanism):")
         
         breakdowns = contrib_ctx.get("breakdowns", {})
         tab_reg, tab_tier, tab_prod, tab_chan = st.tabs(["🌍 By Region", "🏢 By Customer Tier", "📦 By Product Line", "🌐 By Channel"])
@@ -72,7 +72,7 @@ def render_screen_2():
                 st.markdown(
                     f"""
                     <div style="background: rgba(99, 102, 241, 0.08); border-left: 3px solid #6366F1; padding: 8px 12px; border-radius: 4px; font-size: 12px; color: #E0E7FF;">
-                        💡 <b>Key Finding:</b> <b>{reg_name}</b> accounts for <b>{reg_pct:.1f}%</b> of the entire global revenue contraction. Other regions remained within expected variation.
+                        💡 <b>Localization Finding:</b> <b>{reg_name}</b> accounts for <b>{reg_pct:.1f}%</b> of the aggregate revenue contraction. Other regions remained within normal variation.
                     </div>
                     """,
                     unsafe_allow_html=True
@@ -87,7 +87,7 @@ def render_screen_2():
                 st.markdown(
                     f"""
                     <div style="background: rgba(99, 102, 241, 0.08); border-left: 3px solid #6366F1; padding: 8px 12px; border-radius: 4px; font-size: 12px; color: #E0E7FF;">
-                        💡 <b>Key Finding:</b> <b>{tier_name}</b> accounts for <b>{tier_pct:.1f}%</b> of the tier-level variance; Mid-Market and SMB customer cohorts remained stable.
+                        💡 <b>Localization Finding:</b> <b>{tier_name}</b> accounts for <b>{tier_pct:.1f}%</b> of the tier-level variance; Mid-Market and SMB cohorts remained stable.
                     </div>
                     """,
                     unsafe_allow_html=True
@@ -102,7 +102,7 @@ def render_screen_2():
                 st.markdown(
                     f"""
                     <div style="background: rgba(99, 102, 241, 0.08); border-left: 3px solid #6366F1; padding: 8px 12px; border-radius: 4px; font-size: 12px; color: #E0E7FF;">
-                        💡 <b>Key Finding:</b> <b>{prod_name}</b> accounts for <b>{prod_pct:.1f}%</b> of product variance. Suite Beta and Gamma were unaffected.
+                        💡 <b>Localization Finding:</b> <b>{prod_name}</b> accounts for <b>{prod_pct:.1f}%</b> of product variance. Suite Beta and Gamma were unaffected.
                     </div>
                     """,
                     unsafe_allow_html=True
@@ -118,9 +118,9 @@ def render_screen_2():
         # CTA to transition to Screen 3
         col_cta1, col_cta2 = st.columns([3, 1])
         with col_cta1:
-            st.markdown("<div style='font-size: 13px; color: #9CA3AF; margin-top: 6px;'><b>Next Step:</b> Evaluate competing hypotheses, analyze empirical ledgers, and consult EDITH.</div>", unsafe_allow_html=True)
+            st.markdown("<div style='font-size: 13px; color: #9CA3AF; margin-top: 6px;'><b>Next Step:</b> Evaluate competing hypotheses, test empirical predictions, and consult EDITH.</div>", unsafe_allow_html=True)
         with col_cta2:
-            if st.button("🚀 Analyze Root Causes (Screen 3) →", type="primary", use_container_width=True):
+            if st.button("🚀 Investigate Hypotheses (Screen 3) →", type="primary", use_container_width=True):
                 set_screen("workspace")
     else:
         # Diagnostic for other normal KPIs
