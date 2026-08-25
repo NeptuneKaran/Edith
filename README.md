@@ -5,7 +5,7 @@ Developed by **Team IIT Kanpur** (Chhavi Tanwar & Karan Kosta)
 
 ---
 
-## 🎯 Executive Summary
+## Executive Summary
 Conventional Business Intelligence dashboards show **what happened** (e.g., *Monthly B2B Sales dropped 10.5% in Region B*), but leave the critical questions—**why did it happen?**, **what evidence supports that?**, and **what should we do next?**—to days of manual analyst drill-downs.
 
 **EDITH** is an evidence-grounded KPI intelligence and investigation system that enforces an explicit analytical chain:
@@ -15,7 +15,7 @@ Unlike generic chatbot copilots that hallucinate numbers, EDITH strictly decoupl
 
 ---
 
-## 🚀 Key Features
+## Key Features
 
 1. **Executive Command Center & Investigation Flow**:
    - **0. Data Sources Manager (`s0_data_sources.py`)**: Load and analyze custom enterprise datasets from CSV, Excel (`.xlsx`), SQLite (`.db`), or remote SQL databases (PostgreSQL, MySQL, SQL Server) with safe read-only SQL validation and schema mapping.
@@ -35,7 +35,7 @@ Unlike generic chatbot copilots that hallucinate numbers, EDITH strictly decoupl
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
 ```
 Edith_New/
@@ -92,7 +92,7 @@ Edith_New/
 
 ---
 
-## 🏃 Quickstart & Local Execution
+## Quickstart & Local Execution
 
 ```bash
 # 1. Clone repository
@@ -111,7 +111,7 @@ streamlit run app.py
 
 ---
 
-## 🧪 Automated Test Suite (100% Pass)
+## Automated Test Suite (100% Pass)
 
 ```bash
 python tests/test_all_imports.py
