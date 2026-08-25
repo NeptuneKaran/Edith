@@ -72,19 +72,6 @@ st.markdown("""
         box-shadow: 0 2px 6px rgba(37, 99, 235, 0.35);
     }
     
-    /* Top Workflow Progress Stepper */
-    .workflow-container {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        background: #FFFFFF;
-        border: 1px solid #E2E8F0;
-        border-radius: 10px;
-        padding: 8px 16px;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.03);
-        margin-bottom: 20px;
-    }
-    
     /* Metrics */
     div[data-testid="stMetricValue"] {
         font-size: 26px !important;
@@ -163,6 +150,8 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 from state.session_state import init_session_state, set_screen
+from data.repository import DataRepository
+from ui.screens.s0_data_sources import render_screen_0
 from ui.screens.s1_overview import render_screen_1
 from ui.screens.s2_diagnostic import render_screen_2
 from ui.screens.s3_workspace import render_screen_3
@@ -174,16 +163,26 @@ def main():
     init_session_state()
     
     screen = st.session_state.current_screen
+    repo = DataRepository.get_instance()
+    source_info = repo.get_active_source_info()
+    is_demo = source_info.get("is_demo", True)
     
-    # 1. TOP HEADER (Brand, Live Status, Persistent "Ask EDITH" CTA)
+    # 1. TOP HEADER (Brand, Active Source, Live Status, Persistent "Ask EDITH" CTA)
     col_brand, col_cta = st.columns([3.2, 1.8])
     with col_brand:
+        source_badge_text = "Demo Data Active" if is_demo else f"Source: {source_info.get('name', 'Custom')[:24]}"
+        source_badge_bg = "#EFF6FF" if is_demo else "#F0FDF4"
+        source_badge_color = "#1D4ED8" if is_demo else "#166534"
+        
         st.markdown(
-            """
+            f"""
             <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
                 <div style="background: #2563EB; width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 19px; font-weight: 900; color: white; box-shadow: 0 2px 6px rgba(37, 99, 235, 0.3);">E</div>
                 <div>
-                    <div style="font-size: 19px; font-weight: 800; color: #0F172A; letter-spacing: -0.3px; line-height: 1.1;">EDITH</div>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <span style="font-size: 19px; font-weight: 800; color: #0F172A; letter-spacing: -0.3px; line-height: 1.1;">EDITH</span>
+                        <span style="background: {source_badge_bg}; color: {source_badge_color}; border: 1px solid #BFDBFE; font-size: 10px; font-weight: 800; padding: 2px 8px; border-radius: 4px; letter-spacing: 0.4px;">{source_badge_text}</span>
+                    </div>
                     <div style="font-size: 11px; font-weight: 700; color: #2563EB; letter-spacing: 0.5px;">EXECUTIVE DECISION INTELLIGENCE PLATFORM</div>
                 </div>
             </div>
@@ -193,7 +192,7 @@ def main():
     with col_cta:
         # Check API key status for indicator
         has_key = bool(os.getenv("GEMINI_API_KEY") or st.session_state.get("api_key_input"))
-        status_text = "Live Gemini API" if has_key else "Offline Grounded Mode"
+        status_text = "Live Gemini Agent" if has_key else "Offline Mode"
         status_icon = "🟢" if has_key else "🛡️"
         
         c_status, c_ask = st.columns([1.1, 1.4])
@@ -216,8 +215,11 @@ def main():
                 if st.button("💬 Ask EDITH Console", key="btn_hdr_ask_edith", type="primary", use_container_width=True):
                     set_screen("console")
 
-    # 2. TOP WORKFLOW PROGRESS STEPPER (Detect → Diagnose → Explain → Simulate)
-    col_w1, col_w2, col_w3, col_w4 = st.columns(4)
+    # 2. TOP WORKFLOW PROGRESS STEPPER (Data Sources → Detect → Diagnose → Explain → Simulate)
+    col_w0, col_w1, col_w2, col_w3, col_w4 = st.columns(5)
+    with col_w0:
+        if st.button("0. Data Sources", key="nav_s0", use_container_width=True, type="primary" if screen == "sources" else "secondary"):
+            set_screen("sources")
     with col_w1:
         if st.button("1. Detect (Overview)", key="nav_s1", use_container_width=True, type="primary" if screen == "overview" else "secondary"):
             set_screen("overview")
@@ -248,12 +250,14 @@ def main():
         st.session_state.api_key_input = key_input
         
         if key_input:
-            st.success("🟢 Live Gemini API Configured")
+            st.success("🟢 Live Gemini Agent Configured")
         else:
-            st.info("🛡️ Offline Fallback Active (Zero-Key Guaranteed Reliability)")
+            st.info("🛡️ Offline Evidence Mode (Zero-Key Guaranteed)")
             
         st.markdown("---")
-        st.markdown("### 🧭 Quick Navigation")
+        st.markdown("### 🧭 Quick Switcher")
+        if st.button("📁 Switch / Manage Data Sources", key="sb_sources_btn", use_container_width=True):
+            set_screen("sources")
         if st.button("💬 Open EDITH Console", key="sb_console_btn", use_container_width=True, type="primary" if screen == "console" else "secondary"):
             set_screen("console")
             
@@ -264,13 +268,15 @@ def main():
         Problem Track 3: BusinessIntelligence.ai
         
         **Workflow:**
-        `DETECT → DIAGNOSE → EXPLAIN → SIMULATE`
+        `SOURCES → DETECT → DIAGNOSE → EXPLAIN → SIMULATE`
         
         *Engineered by Team IIT Kanpur (2026).*
         """)
 
     # 4. SCREEN ROUTING
-    if screen == "overview":
+    if screen == "sources":
+        render_screen_0()
+    elif screen == "overview":
         render_screen_1()
     elif screen == "diagnostic":
         render_screen_2()

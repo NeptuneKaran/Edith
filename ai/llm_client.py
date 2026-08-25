@@ -1,18 +1,18 @@
 """
 ai/llm_client.py
-Unified LLM Gateway for EDITH Conversational AI.
-Supports Google Gemini via google-genai SDK with transparent, guaranteed fallback to OfflineEdithReasoner.
-Preserves multi-turn conversation history, response style preferences, and rigorous data grounding.
+Unified LLM Gateway for EDITH Conversational AI with Tool-Calling capabilities.
+Executes Gemini with safe read-only analytical tools and automatic fallback to OfflineEdithReasoner.
 """
 import os
 import time
 from typing import Dict, List, Any, Tuple, Optional
-from ai.prompts import EDITH_SYSTEM_PROMPT, format_investigation_prompt, classify_user_intent
+from ai.prompts import EDITH_SYSTEM_PROMPT, classify_user_intent
+from ai.tools import AVAILABLE_TOOLS, execute_tool_call
 from ai.offline_reasoner import OfflineEdithReasoner
-from config.settings import DEFAULT_GEMINI_MODEL, FALLBACK_GEMINI_MODEL
+from config.settings import DEFAULT_GEMINI_MODEL
 
 class EdithLLMClient:
-    """Gateway managing conversational LLM interactions with automatic offline fallback."""
+    """Conversational Agent Gateway managing Gemini tool-calling and offline fallback."""
     
     def __init__(self, api_key: str = ""):
         self.api_key = api_key or os.getenv("GEMINI_API_KEY", "")
@@ -31,31 +31,33 @@ class EdithLLMClient:
         hypotheses: List[Dict[str, Any]],
         response_style: str = "concise"
     ) -> Tuple[str, Dict[str, Any]]:
-        """Generates the primary executive briefing using Gemini or deterministic fallback."""
+        """Generates the primary executive briefing using tool-grounded Gemini or deterministic fallback."""
         start_time = time.time()
         
-        # If client is configured, attempt live call
+        # If client is configured, attempt live call with tools
         if self.client:
-            prompt = format_investigation_prompt(anomaly_context, hypotheses, response_style=response_style)
             try:
+                prompt = f"Synthesize an executive diagnostic briefing for the active anomaly ({anomaly_context.get('kpi_name', 'Monthly B2B Sales')}). Response style: {response_style}."
                 response = self.client.models.generate_content(
                     model=DEFAULT_GEMINI_MODEL,
                     contents=prompt,
                     config={
                         "system_instruction": EDITH_SYSTEM_PROMPT,
+                        "tools": AVAILABLE_TOOLS,
                         "temperature": 0.2
                     }
                 )
                 latency = round(time.time() - start_time, 2)
-                text = response.text
-                metadata = {
-                    "provider": "Google Gemini",
-                    "model": DEFAULT_GEMINI_MODEL,
-                    "latency_sec": latency,
-                    "mode": "Live Cloud LLM",
-                    "status": "Success"
-                }
-                return text, metadata
+                text = response.text if hasattr(response, "text") and response.text else ""
+                if text:
+                    metadata = {
+                        "provider": "Google Gemini (Tool-Equipped Agent)",
+                        "model": DEFAULT_GEMINI_MODEL,
+                        "latency_sec": latency,
+                        "mode": "Live Tool-Calling Agent",
+                        "status": "Success"
+                    }
+                    return text, metadata
             except Exception as e:
                 print(f"[LLM Client] Gemini briefing call failed ({e}). Falling back to Offline Reasoner.")
 
@@ -66,8 +68,8 @@ class EdithLLMClient:
             "provider": "Deterministic Analytical Engine",
             "model": "OfflineEdithReasoner v2.0",
             "latency_sec": latency,
-            "mode": "Deterministic Offline Fallback (100% Grounded)",
-            "status": "Active (Zero-Key Mode)"
+            "mode": "Deterministic Offline Evidence Mode (Zero-Key)",
+            "status": "Active (Offline Mode)"
         }
         return fallback_text, metadata
 
@@ -81,40 +83,56 @@ class EdithLLMClient:
         simulation_levers: Dict[str, Any] = None,
         response_style: str = "concise"
     ) -> Tuple[str, Dict[str, Any]]:
-        """Answers an interactive user question grounded in multi-turn conversational context."""
+        """Answers user queries via tool-calling Gemini agent with guaranteed offline fallback."""
         start_time = time.time()
         intent = classify_user_intent(query)
+        tools_called = []
         
         if self.client:
-            prompt = format_investigation_prompt(
-                anomaly_context=anomaly_context,
-                hypotheses=hypotheses,
-                user_query=query,
-                chat_history=chat_history,
-                simulation_levers=simulation_levers,
-                response_style=response_style
-            )
             try:
+                # Format conversation contents
+                contents = []
+                if chat_history:
+                    for msg in chat_history[-6:]:
+                        role = "user" if msg.get("role") == "user" else "model"
+                        contents.append({"role": role, "parts": [{"text": msg.get("content", "")}]})
+                        
+                # Current user message with style context
+                styled_query = f"{query}\n\n(Style: {response_style})"
+                contents.append({"role": "user", "parts": [{"text": styled_query}]})
+                
+                # Execute with tools enabled
                 response = self.client.models.generate_content(
                     model=DEFAULT_GEMINI_MODEL,
-                    contents=prompt,
+                    contents=contents,
                     config={
                         "system_instruction": EDITH_SYSTEM_PROMPT,
-                        "temperature": 0.3
+                        "tools": AVAILABLE_TOOLS,
+                        "temperature": 0.2
                     }
                 )
+                
+                # Inspect for tool usage metadata if available
+                if hasattr(response, "function_calls") and response.function_calls:
+                    for fc in response.function_calls:
+                        tools_called.append(fc.name)
+                        
                 latency = round(time.time() - start_time, 2)
-                metadata = {
-                    "provider": "Google Gemini",
-                    "model": DEFAULT_GEMINI_MODEL,
-                    "latency_sec": latency,
-                    "mode": "Live Conversational Assistant",
-                    "intent": intent,
-                    "status": "Success"
-                }
-                return response.text, metadata
+                text = response.text if hasattr(response, "text") and response.text else ""
+                
+                if text:
+                    metadata = {
+                        "provider": "Google Gemini (Tool-Equipped Agent)",
+                        "model": DEFAULT_GEMINI_MODEL,
+                        "latency_sec": latency,
+                        "mode": "Live Tool-Calling Agent",
+                        "intent": intent,
+                        "tools_called": tools_called,
+                        "status": "Success"
+                    }
+                    return text, metadata
             except Exception as e:
-                print(f"[LLM Client] Gemini conversational turn failed ({e}). Using Offline Reasoner.")
+                print(f"[LLM Client] Gemini tool-calling turn failed ({e}). Falling back to Offline Reasoner.")
 
         # Fallback to Conversational Offline Reasoner
         fallback_text = OfflineEdithReasoner.answer_conversational_query(
@@ -131,8 +149,9 @@ class EdithLLMClient:
             "provider": "Deterministic Analytical Engine",
             "model": "OfflineEdithReasoner v2.0",
             "latency_sec": latency,
-            "mode": "Deterministic Grounded Assistant (Zero-Key)",
+            "mode": "Offline Evidence Mode (Zero-Key)",
             "intent": intent,
+            "tools_called": ["offline_deterministic_lookup"],
             "status": "Active (Offline Mode)"
         }
         return fallback_text, metadata

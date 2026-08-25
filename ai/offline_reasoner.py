@@ -131,8 +131,9 @@ Ask me any specific question about the active investigation, evidence ledgers, o
             last_user_msg = chat_history[-2].get("content", "").lower()
             last_bot_msg = chat_history[-1].get("content", "").lower()
             
-        # Follow-up: "Why?" / "Why is that?"
-        if q_clean in ["why", "why so", "why is this happening", "why did it happen", "why is that"]:
+        # Follow-up: "Why?" / "Why is that?" / "Why did that happen?"
+        if q_clean in ["why", "why so", "why is this happening", "why did it happen", "why did that happen", "why did this happen", "why is that", "why so"] or (q_clean.startswith("why ") and len(q_clean.split()) <= 4 and not any(k in q_clean for k in ["inventory", "competitor", "pricing", "margin", "defect", "churn"])):
+
             if "competitor" in last_user_msg or "competitor" in last_bot_msg:
                 return r"""**Why Competitor Action is Secondary to Pricing:**
 - **Timing:** Sales volume began softening in **Week 06**, whereas ApexTech's switcher campaign launched in **Week 07** ($\tau = 1$ week later).
@@ -192,9 +193,14 @@ Ask me any specific question about the active investigation, evidence ledgers, o
 *Interpretation:* The revenue contraction was overwhelmingly driven by contract loss (-21 units), with the higher price point on retained accounts providing only partial (+11.5%) compensation."""
 
         # 5. CONTROL GROUP & DIFFERENCE-IN-DIFFERENCES
-        if any(k in q_clean for k in ["control group", "control cohort", "did", "difference in differences", "differenceindifferences", "pretrend", "parallel trend"]):
+        is_did_query = (
+            any(k in q_clean for k in ["control group", "control cohort", "difference in differences", "pretrend", "parallel trend"]) or
+            ("did" in q_clean.split() and any(w in q_clean for w in ["cohort", "treatment", "control", "estimator", "divergence", "parallel", "methodology"]))
+        )
+        if is_did_query:
             ctrl = price_h.get("control_group_analysis", {})
             return f"""**Control Cohort & Difference-in-Differences Analysis:**
+
 
 - **Selected Control Cohort:** `{ctrl.get('control_cohort', 'Region B Mid-Market Product Suite Alpha')}`
 - **Selection Basis:** Shares identical geographic market and product exposure without the price increase (Cosine similarity: **{ctrl.get('similarity_score', 0.85):.2f}**).

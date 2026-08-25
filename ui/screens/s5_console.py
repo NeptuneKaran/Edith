@@ -1,22 +1,26 @@
 """
 ui/screens/s5_console.py
 Screen 5: Dedicated Full-Page EDITH Conversational AI Console.
-Natural-language decision intelligence assistant combining conversational agility with rigorous evidence grounding.
+Natural-language decision intelligence assistant powered by Gemini tool-calling and safe native Markdown rendering.
 """
 import streamlit as st
 from state.session_state import set_screen
 from ai.llm_client import EdithLLMClient
+from data.repository import DataRepository
 
 def render_screen_5():
     """Renders the dedicated full-page EDITH Conversational Console screen."""
     prev_screen = st.session_state.get("previous_screen", "overview")
     screen_names = {
+        "sources": "Data Sources",
         "overview": "Overview (Detect)",
         "diagnostic": "Diagnostic (Diagnose)",
         "workspace": "Investigation Workspace (Explain)",
         "simulation": "Simulation Workbench (Simulate)"
     }
     prev_label = screen_names.get(prev_screen, "Investigation")
+    repo = DataRepository.get_instance()
+    source_info = repo.get_active_source_info()
     
     # 1. Top Action & Navigation Bar
     col_back, col_title, col_actions = st.columns([1.5, 3.2, 1.3])
@@ -27,7 +31,7 @@ def render_screen_5():
             
     with col_title:
         st.markdown("<h2 style='margin:0; padding:0; font-size: 22px; font-weight: 800; color: #0F172A;'>🤖 EDITH Conversational Assistant</h2>", unsafe_allow_html=True)
-        st.markdown("<div style='font-size: 13px; color: #64748B; margin-top: 2px;'>Natural-language decision intelligence grounded in verified analytical evidence.</div>", unsafe_allow_html=True)
+        st.markdown("<div style='font-size: 13px; color: #64748B; margin-top: 2px;'>Natural-language decision intelligence powered by analytical tool-calling and grounded evidence.</div>", unsafe_allow_html=True)
         
     with col_actions:
         st.markdown("<div style='text-align: right; display: flex; gap: 8px; justify-content: flex-end;'>", unsafe_allow_html=True)
@@ -37,7 +41,7 @@ def render_screen_5():
             st.rerun()
         st.markdown("</div>", unsafe_allow_html=True)
         
-    st.markdown("<div style='margin-bottom: 12px;'></div>", unsafe_allow_html=True)
+    st.markdown("<div style='margin-bottom: 10px;'></div>", unsafe_allow_html=True)
     
     # Analytical Context & LLM Client Initialization
     anomaly_context = st.session_state.get("anomaly_context", {})
@@ -64,7 +68,7 @@ def render_screen_5():
             key="radio_resp_style"
         )
         st.session_state.response_style = "concise" if "Executive" in style_choice else "detailed"
-        
+
     # Generate initial executive briefing if conversation is blank
     if not st.session_state.get("edith_briefing"):
         with st.spinner("EDITH is synthesizing verified analytical telemetry..."):
@@ -77,7 +81,7 @@ def render_screen_5():
             st.session_state.llm_metadata = metadata
 
     meta = st.session_state.get("llm_metadata", {})
-    mode = meta.get("mode", "Deterministic Grounded Assistant")
+    mode = meta.get("mode", "Offline Evidence Mode (Zero-Key)")
     latency = meta.get("latency_sec", 0.01)
     provider = meta.get("provider", "Deterministic Engine")
     
@@ -86,8 +90,8 @@ def render_screen_5():
             f"""
             <div style="background: #EFF6FF; border: 1px solid #BFDBFE; border-radius: 8px; padding: 8px 14px; font-size: 12px; color: #1D4ED8; display: flex; justify-content: space-between; align-items: center; margin-top: 4px;">
                 <div style="display: flex; align-items: center; gap: 8px;">
-                    <span style="font-weight: 800;">🛡️ Telemetry Grounding:</span>
-                    <span>Verified Causal DAG & Empirical Ledgers</span>
+                    <span style="font-weight: 800;">📁 Active Source:</span>
+                    <span>{source_info.get('name', 'Demo Dataset')}</span>
                 </div>
                 <div style="display: flex; align-items: center; gap: 8px;">
                     <span style="background: #DBEAFE; color: #1E40AF; padding: 2px 6px; border-radius: 4px; font-weight: 700; font-size: 11px;">{provider}</span>
@@ -101,19 +105,8 @@ def render_screen_5():
     st.markdown("<div style='margin-bottom: 14px;'></div>", unsafe_allow_html=True)
     
     # 2. Executive Diagnostic Briefing Container
-    st.markdown(
-        f"""
-        <div style="background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 10px; padding: 18px 22px; margin-bottom: 18px; box-shadow: 0 1px 3px rgba(0,0,0,0.03);">
-            <div style="font-size: 12px; font-weight: 700; color: #64748B; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">
-                📋 Active Incident Briefing (Grounded in Verified Data)
-            </div>
-            <div style="font-size: 14px; color: #1E293B; line-height: 1.6;">
-                {st.session_state.edith_briefing}
-            </div>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
+    with st.expander("📋 Active Incident Briefing (Grounded in Verified Data)", expanded=True):
+        st.markdown(st.session_state.edith_briefing)
     
     # 3. Suggested Starter Probes
     st.markdown("<h4 style='font-size: 13px; font-weight: 700; color: #475569; text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 8px;'>💡 Suggested Investigation Questions</h4>", unsafe_allow_html=True)
@@ -122,7 +115,7 @@ def render_screen_5():
     with col_p1:
         if st.button("👋 Hi EDITH, what can you do?", key="chip_greet", use_container_width=True):
             _handle_console_query(client, "Hello, what are your core capabilities?", anomaly_context, selected_hypothesis, hypotheses, sim_levers)
-        if st.button("❓ Explain mathematical volume loss", key="chip_math", use_container_width=True):
+        if st.button("❓ Explain volume vs price loss", key="chip_math", use_container_width=True):
             _handle_console_query(client, "Explain the exact mathematical volume and price decomposition.", anomaly_context, selected_hypothesis, hypotheses, sim_levers)
     with col_p2:
         if st.button("❓ Compare pricing vs competitor", key="chip_comp", use_container_width=True):
@@ -137,35 +130,24 @@ def render_screen_5():
 
     st.markdown("<div style='margin-bottom: 16px;'></div>", unsafe_allow_html=True)
     
-    # 4. Render Dialogue History
+    # 4. Render Dialogue History with native Streamlit chat bubbles (Zero HTML escaping issues)
     if st.session_state.get("chat_history"):
         st.markdown("<h4 style='font-size: 13px; font-weight: 700; color: #475569; text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 10px;'>💬 Conversation History</h4>", unsafe_allow_html=True)
         for msg in st.session_state.chat_history:
             if msg["role"] == "user":
-                st.markdown(
-                    f"""
-                    <div style="background: #EFF6FF; border-left: 4px solid #2563EB; border-radius: 6px; padding: 12px 16px; margin-bottom: 10px; font-size: 13px; color: #0F172A; box-shadow: 0 1px 2px rgba(0,0,0,0.02);">
-                        <div style="font-weight: 700; color: #1D4ED8; margin-bottom: 4px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.4px;">👤 You</div>
-                        <div style="line-height: 1.5;">{msg['content']}</div>
-                    </div>
-                    """,
-                    unsafe_allow_html=True
-                )
+                with st.chat_message("user", avatar="👤"):
+                    st.markdown(msg["content"])
             else:
-                st.markdown(
-                    f"""
-                    <div style="background: #F0FDF4; border-left: 4px solid #16A34A; border-radius: 6px; padding: 14px 16px; margin-bottom: 14px; font-size: 13px; color: #1E293B; box-shadow: 0 1px 2px rgba(0,0,0,0.02); line-height: 1.6;">
-                        <div style="font-weight: 700; color: #166534; margin-bottom: 6px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.4px;">🤖 EDITH</div>
-                        <div>{msg['content']}</div>
-                    </div>
-                    """,
-                    unsafe_allow_html=True
-                )
+                with st.chat_message("assistant", avatar="🤖"):
+                    st.markdown(msg["content"])
+                    tools_used = msg.get("metadata", {}).get("tools_called", [])
+                    if tools_used and tools_used != ["offline_deterministic_lookup"]:
+                        st.caption(f"🔧 Tools executed: `{', '.join(tools_used)}`")
                 
     st.markdown("<div style='margin-bottom: 24px;'></div>", unsafe_allow_html=True)
     
     # 5. Fixed Chat Input
-    user_query = st.chat_input("Ask EDITH any question about root causes, evidence, trade-offs, or general BI...")
+    user_query = st.chat_input("Ask EDITH any question about root causes, evidence, trade-offs, or data...")
     if user_query:
         _handle_console_query(client, user_query, anomaly_context, selected_hypothesis, hypotheses, sim_levers)
 

@@ -1,7 +1,7 @@
 """
 tests/test_all_screens.py
-Directly tests each of the 5 screen data contracts and navigation behaviors within an initialized Streamlit session mock.
-Verifies that all 5 screens (Detect, Diagnose, Explain, Simulate, Console) execute cleanly without exceptions.
+Directly tests each of the 6 screen data contracts and navigation behaviors within an initialized Streamlit session mock.
+Verifies that all screens (Data Sources, Detect, Diagnose, Explain, Simulate, Console) execute cleanly without exceptions.
 """
 import sys
 import os
@@ -9,6 +9,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")
 
 import streamlit as st
 from data.repository import DataRepository
+from data.source_manager import DataParser, ColumnMapper, SQLQueryValidator
 from core.baseline_engine import AnomalyEngine
 from core.contribution_engine import ContributionEngine
 from core.evidence_engine import EvidenceEngine
@@ -17,9 +18,18 @@ from state.session_state import init_session_state, set_screen
 from ai.llm_client import EdithLLMClient
 
 def test_screen_data_contracts():
-    print("=== TESTING DATA CONTRACTS FOR ALL 5 SCREENS ===")
+    print("=== TESTING DATA CONTRACTS FOR ALL 6 SCREENS ===")
     
     repo = DataRepository.get_instance()
+    
+    # Screen 0: Data Sources Manager
+    src_info = repo.get_active_source_info()
+    assert "name" in src_info
+    assert "source_type" in src_info
+    assert src_info["is_demo"] is True
+    is_safe, _ = SQLQueryValidator.validate_query("SELECT * FROM sales LIMIT 100;")
+    assert is_safe
+    print("  [PASS] Screen 0: Data Sources Manager contracts verified.")
     
     # Screen 1: Detect (Overview)
     kpis = ["kpi_b2b_sales", "kpi_gross_margin", "kpi_customer_churn", "kpi_marketing_roas"]
@@ -83,7 +93,7 @@ def test_screen_data_contracts():
     assert "inventory" in ans.lower() or "fill rate" in ans.lower() or "99.4%" in ans
     print("  [PASS] Screen 5: Full-page EDITH Console grounding & Q&A turn verified.")
     
-    print("\n[PASS] ALL 5 SCREEN DATA CONTRACTS PASSED 100%!")
+    print("\n[PASS] ALL 6 SCREEN DATA CONTRACTS PASSED 100%!")
 
 if __name__ == "__main__":
     test_screen_data_contracts()

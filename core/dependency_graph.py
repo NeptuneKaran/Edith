@@ -47,7 +47,26 @@ class MetricDependencyGraph:
         return False
 
     @staticmethod
+    def get_full_graph_structure() -> Dict[str, Any]:
+        """Returns the full DAG nodes and edges structure."""
+        nodes = []
+        edges = []
+        for m_id, meta in METRIC_DEFINITIONS.items():
+            nodes.append({
+                "id": m_id,
+                "name": meta.get("name"),
+                "category": meta.get("category"),
+                "role": meta.get("role")
+            })
+            for driver in meta.get("upstream_drivers", []):
+                edges.append({"source": driver, "target": m_id, "type": "upstream_driver"})
+            for effect in meta.get("downstream_effects", []):
+                edges.append({"source": m_id, "target": effect, "type": "downstream_effect"})
+        return {"nodes": nodes, "edges": edges, "total_nodes": len(nodes), "total_edges": len(edges)}
+
+    @staticmethod
     def get_expected_direction(target_id: str, driver_id: str) -> str:
+
         """
         Returns the theoretical domain direction ('+' or '-') for how driver movements impact the target.
         '+' means driver up -> target up, driver down -> target down.
