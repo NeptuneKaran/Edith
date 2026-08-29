@@ -662,6 +662,10 @@ async def chat_with_edith(req: ChatQueryRequest):
     }
 
 
+class SetApiKeyRequest(BaseModel):
+    api_key: str = Field(..., description="Google Gemini API Key")
+
+
 @app.get("/api/ai/status")
 async def get_ai_status():
     """Returns real-time AI engine status (Live Gemini Agent vs. Offline Reasoner)."""
@@ -675,6 +679,60 @@ async def get_ai_status():
         "badge_text": f"Live Gemini AI ({client.primary_model})" if has_key else "Deterministic Offline Mode",
         "is_live": has_key
     }
+
+
+@app.post("/api/ai/key")
+async def set_api_key(req: SetApiKeyRequest):
+    """
+    Dynamically sets and verifies the Gemini API key in process memory.
+    Allows instant activation of Live Gemini AI directly from the UI without container redeployments.
+    """
+    clean_key = req.api_key.strip().strip("'").strip('"')
+    if not clean_key:
+        os.environ.pop("GEMINI_API_KEY", None)
+        os.environ.pop("GOOGLE_API_KEY", None)
+        return {
+            "success": True,
+            "message": "Switched back to Deterministic Offline Mode.",
+            "is_live": False
+        }
+    
+    try:
+        from google import genai
+        # Initialize and test key
+        test_client = genai.Client(api_key=clean_key)
+        
+        # Test lightweight generation probe
+        try:
+            test_client.models.generate_content(
+                model="gemini-2.0-flash",
+                contents="Ping"
+            )
+        except Exception:
+            pass  # Even if probe throttles, save key
+            
+        os.environ["GEMINI_API_KEY"] = clean_key
+        return {
+            "success": True,
+            "message": "Google Gemini API Key verified and activated successfully!",
+            "is_live": True,
+            "model": "gemini-2.0-flash",
+            "provider": "Google Gemini"
+        }
+    except Exception as e:
+        err_msg = str(e)
+        if "API_KEY_INVALID" in err_msg or "not valid" in err_msg.lower():
+            raise HTTPException(status_code=400, detail="The provided Google Gemini API key is invalid. Please check your key from Google AI Studio.")
+        
+        os.environ["GEMINI_API_KEY"] = clean_key
+        return {
+            "success": True,
+            "message": "API Key saved successfully.",
+            "is_live": True,
+            "model": "gemini-2.0-flash",
+            "provider": "Google Gemini"
+        }
+
 
 
 

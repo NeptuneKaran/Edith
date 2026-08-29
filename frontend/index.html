@@ -754,15 +754,19 @@
               <p class="text-xs text-slate-400 mt-1">Ask questions about observed metric changes, dimensional concentrations, driver correlations, or data quality.</p>
             </div>
             
-            <!-- Real-Time AI Status Badge -->
+            <!-- Real-Time AI Status Badge & Modal Trigger -->
             <div class="flex items-center gap-2 self-start sm:self-auto shrink-0">
-              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-semibold border"
-                    :class="aiStatus.is_live ? 'bg-emerald-950/60 text-emerald-300 border-emerald-500/40' : 'bg-indigo-950/60 text-indigo-300 border-indigo-500/40'">
+              <button @click="showApiKeyModal = true" 
+                      title="Click to configure or test your Gemini API Key"
+                      class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-semibold border transition hover:brightness-110 cursor-pointer shadow"
+                      :class="aiStatus.is_live ? 'bg-emerald-950/70 text-emerald-300 border-emerald-500/50' : 'bg-indigo-950/70 text-indigo-300 border-indigo-500/50'">
                 <span class="w-2 h-2 rounded-full" :class="aiStatus.is_live ? 'bg-emerald-400 animate-pulse' : 'bg-indigo-400'"></span>
                 <span x-text="aiStatus.badge_text || 'Deterministic Offline Mode'"></span>
-              </span>
+                <span class="text-[10px] text-slate-400 ml-1">⚙️ Key</span>
+              </button>
             </div>
           </div>
+
 
 
           <!-- Suggested Starter Chips -->
@@ -826,7 +830,50 @@
 
       </div>
 
+      <!-- API Key Setup Modal -->
+      <div x-show="showApiKeyModal" x-cloak 
+           class="fixed inset-0 z-50 flex items-center justify-center bg-black/75 backdrop-blur-sm p-4">
+        <div @click.away="showApiKeyModal = false" 
+             class="bg-slate-900 border border-slate-700/80 rounded-2xl max-w-md w-full p-6 shadow-2xl space-y-4 animate-in fade-in zoom-in-95 duration-150">
+          <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+            <h3 class="text-sm font-bold text-slate-100 flex items-center gap-2">
+              <span>✨</span> Connect Google Gemini AI Agent
+            </h3>
+            <button @click="showApiKeyModal = false" class="text-slate-400 hover:text-white text-lg font-bold">&times;</button>
+          </div>
+
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Enter your <strong>Google Gemini API Key</strong> to unlock free-form conversational reasoning, adaptive executive dialogue, and autonomous tool calling.
+          </p>
+
+          <div class="space-y-1.5">
+            <label class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Gemini API Key</label>
+            <input type="password" x-model="apiKeyInput" placeholder="Paste your AIzaSy... key here" 
+                   class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2 text-xs text-slate-100 focus:border-indigo-500 focus:outline-none" />
+            <div class="flex items-center justify-between text-[11px] text-slate-400 pt-1">
+              <span>Don't have a key?</span>
+              <a href="https://aistudio.google.com/" target="_blank" class="text-indigo-400 hover:text-indigo-300 font-semibold underline">
+                Get free key from Google AI Studio &rarr;
+              </a>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-end gap-2 pt-3 border-t border-slate-800">
+            <button type="button" @click="saveApiKey(true)" :disabled="savingApiKey"
+                    class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold transition">
+              Use Offline Mode
+            </button>
+            <button type="button" @click="saveApiKey(false)" :disabled="savingApiKey || !apiKeyInput.trim()"
+                    class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold shadow-lg shadow-indigo-600/20 transition disabled:opacity-50 flex items-center gap-1.5">
+              <span x-show="savingApiKey" class="animate-spin text-xs">⏳</span>
+              <span x-text="savingApiKey ? 'Verifying Key...' : 'Activate Live Gemini AI'"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+
     </main>
+
   </div>
 
   <!-- Alpine Application Logic -->
@@ -872,8 +919,12 @@
         chatQuery: '',
         chatLoading: false,
         aiStatus: { is_live: false, badge_text: 'Deterministic Offline Mode', provider: 'Deterministic Analytical Engine' },
+        showApiKeyModal: false,
+        apiKeyInput: '',
+        savingApiKey: false,
 
         // Alerts
+
         alertMsg: '',
         alertType: 'success',
 
@@ -1300,6 +1351,30 @@
             console.error('Failed to fetch AI status:', e);
           }
         },
+
+        async saveApiKey(isReset = false) {
+          this.savingApiKey = true;
+          const keyToSend = isReset ? '' : this.apiKeyInput.trim();
+          try {
+            const res = await fetch('/api/ai/key', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ api_key: keyToSend })
+            });
+            const data = await res.json();
+            if (!res.ok) throw new Error(data.detail || 'Failed to verify key');
+            
+            this.showAlert(data.message, 'success');
+            this.showApiKeyModal = false;
+            this.apiKeyInput = '';
+            await this.fetchAiStatus();
+          } catch (e) {
+            this.showAlert(e.message, 'error');
+          } finally {
+            this.savingApiKey = false;
+          }
+        },
+
 
         formatMarkdown(text) {
           if (!text) return '';
