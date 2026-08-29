@@ -8,8 +8,8 @@ import os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 def test_imports():
-    print("=== TESTING ALL REPOSITORY IMPORTS ===")
     modules_to_test = [
+        "main",
         "config.settings",
         "config.semantic_contracts",
         "data.generator",
@@ -24,16 +24,6 @@ def test_imports():
         "ai.tools",
         "ai.offline_reasoner",
         "ai.llm_client",
-        "state.session_state",
-        "ui.components.cards",
-        "ui.components.charts",
-        "ui.components.chat_pane",
-        "ui.screens.s0_data_sources",
-        "ui.screens.s1_overview",
-        "ui.screens.s2_diagnostic",
-        "ui.screens.s3_workspace",
-        "ui.screens.s4_simulation",
-        "ui.screens.s5_console",
     ]
     
     passed = 0

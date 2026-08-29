@@ -18,8 +18,6 @@ ENV/
 *.pem
 *.key
 
-# Streamlit local runtime state
-.streamlit/secrets.toml
 
 # IDE & OS files
 .vscode/

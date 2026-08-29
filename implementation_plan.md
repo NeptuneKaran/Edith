@@ -249,7 +249,7 @@ We evaluate the top options based on live demo reliability, latency, structured 
 - **Why**: Fastest sub-second latency, excellent structured grounding, and minimal token cost.
 - **Python Package**: `google-genai`
 - **Environment Variable**: `GEMINI_API_KEY` (also supports `OPENAI_API_KEY` via an interchangeable gateway).
-- **Setup Steps**: User sets `export GEMINI_API_KEY="your-key"` in terminal or enters it in the Streamlit sidebar settings.
+- **Setup Steps**: User sets `export GEMINI_API_KEY="your-key"` in terminal or enters it dynamically via the in-app Key Activation modal.
 - **Offline / Zero-Key Fallback**: The app includes a **Deterministic Offline Reasoner** (`offline_reasoner.py`). If no API key is provided or the network is offline, Edith continues to function seamlessly using deterministic template synthesis directly from the analytical JSON. **The demo will never break during evaluation.**
 
 ---
@@ -337,38 +337,30 @@ $$\text{Projected Margin \%} = \frac{\text{Projected Revenue} - (\hat{Q}_{\text{
 
 ---
 
-## 8. Proposed Clean Technical Architecture (Streamlit)
+## 8. Proposed Clean Technical Architecture (FastAPI + Standalone Frontend)
 
 ```
 edith/
-├── app.py                         # Streamlit entrypoint & workflow navigation
+├── main.py                        # Production FastAPI server & REST API routes
+├── frontend/
+│   └── index.html                 # Enterprise HTML5 SPA (Alpine.js, Tailwind, Plotly.js)
 ├── config/
 │   ├── settings.py                # Configurable weights, thresholds, API keys
 │   └── semantic_contracts.py      # KPI definitions, dimensions, driver catalog
 ├── data/
 │   ├── generator.py               # Coherent synthetic dataset generator
-│   └── repository.py              # In-memory data queries & aggregations
+│   ├── repository.py              # In-memory data queries & aggregations
+│   └── source_manager.py          # Arbitrary dataset intake, profiler & SQL parser
 ├── core/
 │   ├── baseline_engine.py         # Rolling baseline, expected range & anomaly detector
 │   ├── contribution_engine.py     # Multi-dimensional variance decomposition
 │   ├── evidence_engine.py         # Multi-hypothesis tester & Evidence Score calculator
 │   └── simulation_engine.py       # Parametric what-if counterfactual model
-├── ai/
-│   ├── llm_client.py              # Gemini / OpenAI / Offline Reasoner gateway
-│   ├── prompts.py                 # Grounded, evidence-cited prompt templates
-│   └── offline_reasoner.py        # Deterministic offline synthesis engine
-├── state/
-│   └── session_state.py           # Typed session state manager across workflow steps
-└── ui/
-    ├── components/
-    │   ├── cards.py               # KPI metric cards & anomaly badges
-    │   ├── charts.py              # Plotly interactive charts (Corridor, Waterfall, DiD)
-    │   └── chat_pane.py           # Edith split-pane conversation interface
-    └── screens/
-        ├── s1_overview.py         # Screen 1: Business Overview
-        ├── s2_diagnostic.py       # Screen 2: KPI Deep Diagnostic
-        ├── s3_workspace.py        # Screen 3: Dual-Pane Investigation Workspace
-        └── s4_simulation.py       # Screen 4: Scenario Simulation Workbench
+└── ai/
+    ├── llm_client.py              # Gemini / Offline Reasoner gateway
+    ├── prompts.py                 # Grounded, evidence-cited prompt templates
+    ├── tools.py                   # Autonomous tool declarations
+    └── offline_reasoner.py        # Deterministic offline synthesis engine
 ```
 
 ---
