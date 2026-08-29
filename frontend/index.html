@@ -754,8 +754,13 @@
               <p class="text-xs text-slate-400 mt-1">Ask questions about observed metric changes, dimensional concentrations, driver correlations, or data quality.</p>
             </div>
             
-            <!-- Real-Time AI Status Badge & Modal Trigger -->
+            <!-- Real-Time AI Status Badge & Actions -->
             <div class="flex items-center gap-2 self-start sm:self-auto shrink-0">
+              <button @click="resetChat()" 
+                      title="Clear chat history and reset session"
+                      class="px-2.5 py-1.5 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-slate-200 border border-slate-700/60 text-[11px] font-medium transition cursor-pointer flex items-center gap-1">
+                <span>🔄</span> Clear
+              </button>
               <button @click="showApiKeyModal = true" 
                       title="Click to configure or test your Gemini API Key"
                       class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-semibold border transition hover:brightness-110 cursor-pointer shadow"
@@ -766,6 +771,7 @@
               </button>
             </div>
           </div>
+
 
 
 
@@ -1360,6 +1366,12 @@
           }
         },
 
+        resetChat() {
+          this.chatHistory = [];
+          this.chatQuery = '';
+          this.showAlert('Chat conversation reset.', 'success');
+        },
+
         async saveApiKey(isReset = false) {
           this.savingApiKey = true;
           const keyToSend = isReset ? '' : this.apiKeyInput.trim();
@@ -1375,13 +1387,23 @@
             this.showAlert(data.message, 'success');
             this.showApiKeyModal = false;
             this.apiKeyInput = '';
+            
+            // Clean conversation history and refresh all variables
+            this.chatHistory = [];
+            this.chatQuery = '';
             await this.fetchAiStatus();
+            await this.loadActiveSource();
+            await this.loadOverview();
+            await this.loadDiagnostic();
+            await this.loadWorkspace();
+            await this.loadSimulation();
           } catch (e) {
             this.showAlert(e.message, 'error');
           } finally {
             this.savingApiKey = false;
           }
         },
+
 
 
         formatMarkdown(text) {
