@@ -1614,9 +1614,65 @@
           }
         },
 
-        formatMarkdown(text) {
+        formatInlineMarkdown(text) {
           if (!text) return '';
           let safe = text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+          safe = safe.replace(/\*\*(.*?)\*\*/g, '<strong class="text-[#171717] font-semibold">$1</strong>');
+          safe = safe.replace(/\*([^\*]+)\*/g, '<em class="text-[#555555] italic">$1</em>');
+          safe = safe.replace(/`([^`]+)`/g, '<code class="px-1 py-0.5 rounded bg-[#F5E8FF] text-[#6F00B5] font-mono text-[11px]">$1</code>');
+          return safe;
+        },
+
+        formatMarkdown(text) {
+          if (!text) return '';
+          
+          // 1. Extract and format GFM tables before other line-based regexes
+          const tables = [];
+          const tableRegex = /(?:^|\n)(\|(?:[^\n]+\|)+\s*\n\|(?:\s*:?-+:?\s*\|)+\s*(?:\n\|(?:[^\n]+\|)+)+)/g;
+          
+          let processed = text.replace(tableRegex, (match) => {
+            const lines = match.trim().split('\n').map(l => l.trim()).filter(l => l.length > 0);
+            if (lines.length < 2) return match;
+            
+            const headerLine = lines[0];
+            const sepLine = lines[1];
+            if (!sepLine.includes('-') || !sepLine.includes('|')) return match;
+            
+            const parseCells = (line) => {
+              let cleaned = line;
+              if (cleaned.startsWith('|')) cleaned = cleaned.slice(1);
+              if (cleaned.endsWith('|')) cleaned = cleaned.slice(0, -1);
+              return cleaned.split('|').map(c => this.formatInlineMarkdown(c.trim()));
+            };
+            
+            const headers = parseCells(headerLine);
+            const dataRows = lines.slice(2);
+            
+            let html = '<div class="overflow-x-auto my-2.5"><table class="w-full text-xs text-left border border-[#E5E5E5] rounded bg-white shadow-2xs">';
+            html += '<thead class="bg-[#FAFAFA] text-[#737373] uppercase font-semibold border-b border-[#E5E5E5]"><tr>';
+            for (const h of headers) {
+              html += `<th class="p-2 border-r border-[#EEEEEE] last:border-r-0">${h}</th>`;
+            }
+            html += '</tr></thead>';
+            
+            html += '<tbody class="divide-y divide-[#EEEEEE]">';
+            for (const rLine of dataRows) {
+              const cells = parseCells(rLine);
+              html += '<tr class="hover:bg-[#FAFAFA]">';
+              for (let i = 0; i < headers.length; i++) {
+                const cell = cells[i] !== undefined ? cells[i] : '';
+                html += `<td class="p-2 border-r border-[#EEEEEE] last:border-r-0 text-[#171717]">${cell}</td>`;
+              }
+              html += '</tr>';
+            }
+            html += '</tbody></table></div>';
+            
+            const tIdx = tables.length;
+            tables.push(html);
+            return `\n\n@@@TABLE_${tIdx}@@@\n\n`;
+          });
+
+          let safe = processed.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
           safe = safe.replace(/^#### (.*$)/gim, '<div class="font-bold text-[#171717] text-xs mt-2.5 mb-1">$1</div>');
           safe = safe.replace(/^### (.*$)/gim, '<div class="font-bold text-[#171717] text-sm mt-3 mb-1.5 text-[#6F00B5]">$1</div>');
           safe = safe.replace(/^## (.*$)/gim, '<div class="font-bold text-[#171717] text-base mt-3.5 mb-2 pb-1 border-b border-[#E5E5E5]">$1</div>');
@@ -1627,6 +1683,12 @@
           safe = safe.replace(/^\s*-\s+(.*$)/gim, '<div class="flex items-start gap-1.5 ml-1 my-0.5"><span class="text-[#A100FF] font-bold">&bull;</span><span>$1</span></div>');
           safe = safe.replace(/\n\n/g, '<div class="h-1.5"></div>');
           safe = safe.replace(/\n/g, '<br/>');
+
+          // Re-substitute tables
+          for (let i = 0; i < tables.length; i++) {
+            safe = safe.replace(`@@@TABLE_${i}@@@`, tables[i]);
+          }
+
           return safe;
         }
 

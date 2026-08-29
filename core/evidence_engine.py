@@ -1056,7 +1056,7 @@ class EvidenceEngine:
             },
             {
                 "step": "2. Temporal Precedence",
-                "finding": f"+12% price hike on Week 06 preceded Week 08 contraction by exactly 2 weeks (tau = 2 wks), matching the standard enterprise contract negotiation cycle.",
+                "finding": f"+12% price hike on Week 06 preceded Week 08 contraction by exactly 2 weeks (τ = 2 weeks), matching the standard enterprise contract negotiation cycle.",
                 "status": "Verified"
             },
             {
@@ -1071,7 +1071,7 @@ class EvidenceEngine:
             },
             {
                 "step": "5. Pre-Trend Validation",
-                "finding": f"Pre-event parallel trends between treated and control cohorts held firmly across Weeks 1-48 (correlation r = {control_analysis.get('pre_trend_correlation', 0.88):.2f}, slope divergence Delta-Slope = {control_analysis.get('pre_trend_slope_diff', 0.0001):.5f}).",
+                "finding": f"Pre-event parallel trends between treated and control cohorts held firmly across Weeks 1-48 (correlation r = {control_analysis.get('pre_trend_correlation', 0.88):.2f}, slope divergence Δ-Slope = {control_analysis.get('pre_trend_slope_diff', 0.0001):.5f}).",
                 "status": "Validated"
             },
             {
