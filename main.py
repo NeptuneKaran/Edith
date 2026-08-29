@@ -650,8 +650,25 @@ async def chat_with_edith(req: ChatQueryRequest):
         "answer": answer_text,
         "intent": meta.get("intent", "evidence_retrieval"),
         "citations": meta.get("citations", []),
+        "metadata": meta,
         "is_demo": is_demo
     }
+
+
+@app.get("/api/ai/status")
+async def get_ai_status():
+    """Returns real-time AI engine status (Live Gemini Agent vs. Offline Reasoner)."""
+    client = EdithLLMClient()
+    has_key = bool(client.api_key and client.client)
+    return {
+        "has_api_key": has_key,
+        "provider": "Google Gemini" if has_key else "Deterministic Analytical Engine",
+        "model": client.primary_model if has_key else "OfflineEdithReasoner v2.0",
+        "mode": f"Live Gemini Agent ({client.primary_model})" if has_key else "Deterministic Offline Mode (Zero-Key)",
+        "badge_text": f"Live Gemini AI ({client.primary_model})" if has_key else "Deterministic Offline Mode",
+        "is_live": has_key
+    }
+
 
 
 # ==============================================================================

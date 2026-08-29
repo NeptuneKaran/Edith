@@ -746,12 +746,24 @@
       <div x-show="activeTab === 'console'" class="space-y-6">
         
         <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-4">
-          <div>
-            <h2 class="text-base font-bold text-slate-100 flex items-center gap-2">
-              <span>💬</span> EDITH Grounded Decision Assistant
-            </h2>
-            <p class="text-xs text-slate-400 mt-1">Ask questions about observed metric changes, dimensional concentrations, driver correlations, or data quality.</p>
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-2 border-b border-slate-800/80">
+            <div>
+              <h2 class="text-base font-bold text-slate-100 flex items-center gap-2">
+                <span>💬</span> EDITH Grounded Decision Assistant
+              </h2>
+              <p class="text-xs text-slate-400 mt-1">Ask questions about observed metric changes, dimensional concentrations, driver correlations, or data quality.</p>
+            </div>
+            
+            <!-- Real-Time AI Status Badge -->
+            <div class="flex items-center gap-2 self-start sm:self-auto shrink-0">
+              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-semibold border"
+                    :class="aiStatus.is_live ? 'bg-emerald-950/60 text-emerald-300 border-emerald-500/40' : 'bg-indigo-950/60 text-indigo-300 border-indigo-500/40'">
+                <span class="w-2 h-2 rounded-full" :class="aiStatus.is_live ? 'bg-emerald-400 animate-pulse' : 'bg-indigo-400'"></span>
+                <span x-text="aiStatus.badge_text || 'Deterministic Offline Mode'"></span>
+              </span>
+            </div>
           </div>
+
 
           <!-- Suggested Starter Chips -->
           <div class="space-y-2">
@@ -859,6 +871,7 @@
         chatHistory: [],
         chatQuery: '',
         chatLoading: false,
+        aiStatus: { is_live: false, badge_text: 'Deterministic Offline Mode', provider: 'Deterministic Analytical Engine' },
 
         // Alerts
         alertMsg: '',
@@ -870,7 +883,9 @@
           await this.loadDiagnostic();
           await this.loadWorkspace();
           await this.loadSimulation();
+          await this.fetchAiStatus();
         },
+
 
         switchTab(tab) {
           this.activeTab = tab;
@@ -1275,6 +1290,17 @@
           return `${num.toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 1 })} ${unit}`.trim();
         },
 
+        async fetchAiStatus() {
+          try {
+            const res = await fetch('/api/ai/status');
+            if (res.ok) {
+              this.aiStatus = await res.json();
+            }
+          } catch (e) {
+            console.error('Failed to fetch AI status:', e);
+          }
+        },
+
         formatMarkdown(text) {
           if (!text) return '';
           let safe = text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
@@ -1291,6 +1317,7 @@
 
       };
     }
+
 
   </script>
 </body>
