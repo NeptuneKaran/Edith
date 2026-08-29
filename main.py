@@ -14,7 +14,14 @@ from typing import List, Dict, Any, Optional
 import pandas as pd
 import numpy as np
 
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
+
 from fastapi import FastAPI, UploadFile, File, HTTPException, Body
+
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse, JSONResponse

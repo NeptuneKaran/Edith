@@ -26,7 +26,7 @@ class EdithLLMClient:
     def __init__(self, api_key: str = ""):
         # Priority: explicitly passed key -> environment variable GEMINI_API_KEY
         raw_key = api_key if api_key else os.getenv("GEMINI_API_KEY", "")
-        self.api_key = raw_key.strip() if raw_key else ""
+        self.api_key = raw_key.strip().strip("'").strip('"') if raw_key else ""
         self.client = None
         self.primary_model = DEFAULT_GEMINI_MODEL
         self.fallback_model = FALLBACK_GEMINI_MODEL
@@ -43,6 +43,7 @@ class EdithLLMClient:
                 self.client = None
         else:
             print("[LLM Gateway] No GEMINI_API_KEY found. Operating in 100% Deterministic Offline Mode.")
+
 
     def generate_briefing(
         self,
@@ -116,6 +117,14 @@ class EdithLLMClient:
                         initial_prompt=styled_query,
                         chat_history=chat_history
                     )
+                    if not text:
+                        text = self._execute_direct_generation(
+                            model_name=model_name,
+                            prompt=styled_query,
+                            chat_history=chat_history
+                        )
+                        tools_called = ["direct_prompt_generation"]
+                    
                     latency = round(time.time() - start_time, 2)
                     if text:
                         metadata = {
@@ -131,6 +140,29 @@ class EdithLLMClient:
                 except Exception as e:
                     last_error = _sanitize_log_message(str(e), self.api_key)
                     print(f"[LLM Gateway] Query failed on {model_name}: {last_error}")
+                    try:
+                        # Try direct generation without tools as second line of defense
+                        text = self._execute_direct_generation(
+                            model_name=model_name,
+                            prompt=styled_query,
+                            chat_history=chat_history
+                        )
+                        if text:
+                            latency = round(time.time() - start_time, 2)
+                            metadata = {
+                                "provider": "Google Gemini",
+                                "model": model_name,
+                                "latency_sec": latency,
+                                "mode": f"Live Gemini Agent ({model_name})",
+                                "intent": intent,
+                                "tools_called": ["direct_generation_fallback"],
+                                "status": "Success"
+                            }
+                            return text, metadata
+                    except Exception as e2:
+                        last_error = _sanitize_log_message(str(e2), self.api_key)
+                        print(f"[LLM Gateway] Direct generation failed on {model_name}: {last_error}")
+
 
         # Fallback to Conversational Offline Reasoner
         fallback_text = OfflineEdithReasoner.answer_conversational_query(
@@ -247,7 +279,39 @@ class EdithLLMClient:
                 
         return "", tools_called
 
+    def _execute_direct_generation(
+        self,
+        model_name: str,
+        prompt: str,
+        chat_history: Optional[List[Dict[str, Any]]] = None
+    ) -> str:
+        """Direct prompt generation without function calling as a resilient fallback."""
+        from google.genai import types
+        contents: List[Any] = []
+        if chat_history:
+            for msg in chat_history[-4:]:
+                role = "user" if msg.get("role") == "user" else "model"
+                contents.append(types.Content(
+                    role=role,
+                    parts=[types.Part.from_text(text=msg.get("content", ""))]
+                ))
+        contents.append(types.Content(
+            role="user",
+            parts=[types.Part.from_text(text=prompt)]
+        ))
+        config = types.GenerateContentConfig(
+            system_instruction=EDITH_SYSTEM_PROMPT,
+            temperature=0.3
+        )
+        response = self.client.models.generate_content(
+            model=model_name,
+            contents=contents,
+            config=config
+        )
+        return response.text if hasattr(response, "text") and response.text else ""
+
     def chat_turn(
+
         self,
         query: str,
         anomaly_context: Dict[str, Any],
