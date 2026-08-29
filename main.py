@@ -42,6 +42,15 @@ from core.evidence_engine import EvidenceEngine
 from core.simulation_engine import SimulationEngine
 from ai.llm_client import EdithLLMClient
 from ai.offline_reasoner import OfflineEdithReasoner
+from config.personas import get_personas, get_persona, DEFAULT_PERSONA
+from core.access_control import (
+    scope_overview,
+    scope_diagnostic,
+    scope_workspace,
+    scope_simulation,
+    get_access_log,
+    log_access
+)
 
 
 
@@ -121,6 +130,7 @@ class SimulationLeversRequest(BaseModel):
     price_rollback_pct: float = 6.0
     promo_fund_k: float = 15.0
     churn_mitigation: bool = True
+    persona: Optional[str] = None
 
 
 class ChatQueryRequest(BaseModel):
@@ -128,6 +138,7 @@ class ChatQueryRequest(BaseModel):
     chat_history: Optional[List[Dict[str, Any]]] = Field(default_factory=list)
     selected_hypothesis_id: Optional[str] = None
     simulation_levers: Optional[Dict[str, Any]] = None
+    persona: Optional[str] = None
 
 
 # ==============================================================================
@@ -334,11 +345,25 @@ async def get_active_source():
 
 
 # ==============================================================================
+@app.get("/api/personas")
+async def list_personas():
+    """Returns available enterprise personas with metadata and permission profiles."""
+    return _to_json_safe(get_personas())
+
+@app.get("/api/access-log")
+async def get_access_audit_log(limit: int = 50):
+    """Returns recent role-based access control and scoping audit events."""
+    return _to_json_safe({
+        "total_logged": len(get_access_log(200)),
+        "events": get_access_log(limit)
+    })
+
+
 # ANALYTICAL DASHBOARD ENDPOINTS
 # ==============================================================================
 
 @app.get("/api/overview")
-async def get_overview():
+async def get_overview(persona: Optional[str] = None):
     """
     Returns executive overview metrics:
     - Primary KPI cards (Observed, Baseline, Delta, Status)
@@ -413,7 +438,7 @@ async def get_overview():
     # 4. Data Quality
     dq = repo.get_data_quality_report()
 
-    return _to_json_safe({
+    res_payload = {
         "dataset_name": repo.active_source_info.get("name", "EDITH Benchmark"),
         "is_demo": is_demo,
         "is_temporal": is_temporal,
@@ -434,11 +459,14 @@ async def get_overview():
         "top_driver": top_driver,
         "data_quality_score": float(dq.get("data_quality_score", 100.0)),
         "total_records": int(repo.active_source_info.get("row_count", len(ts)))
-    })
+    }
+    if persona:
+        res_payload = scope_overview(res_payload, persona, repo)
+    return _to_json_safe(res_payload)
 
 
 @app.get("/api/diagnostic")
-async def get_diagnostic():
+async def get_diagnostic(persona: Optional[str] = None):
     """
     Returns deep diagnostic decomposition:
     - Time-series corridor data (temporal) OR distribution & outlier profile (non-temporal)
@@ -483,7 +511,7 @@ async def get_diagnostic():
     # 5. Variance Decomposition
     decomp = ContributionEngine.calculate_variance_decomposition(repo)
 
-    return _to_json_safe({
+    res_payload = {
         "is_demo": is_demo,
         "is_temporal": is_temporal,
         "primary_measure_label": label,
@@ -493,11 +521,14 @@ async def get_diagnostic():
         "distribution_stats": dist_stats,
         "data_quality_report": dq_report,
         "variance_decomposition": decomp
-    })
+    }
+    if persona:
+        res_payload = scope_diagnostic(res_payload, persona)
+    return _to_json_safe(res_payload)
 
 
 @app.get("/api/workspace")
-async def get_investigation_workspace():
+async def get_investigation_workspace(persona: Optional[str] = None):
     """
     Returns investigation findings:
     - For Built-in Demo: 8 full Causal Hypotheses with DiD, mathematical decomposition, DAG roles, and rank.
@@ -511,17 +542,20 @@ async def get_investigation_workspace():
     
     decomp = ContributionEngine.calculate_variance_decomposition(repo)
     
-    return _to_json_safe({
+    res_payload = {
         "is_demo": is_demo,
         "findings": findings,
         "variance_decomposition": decomp,
         "disclaimer": "" if is_demo else "Observational Integrity Notice: For custom uploaded datasets, results represent empirical concentrations, statistical associations, and distribution patterns—not confirmed causal hypotheses."
-    })
+    }
+    if persona:
+        res_payload = scope_workspace(res_payload, persona)
+    return _to_json_safe(res_payload)
 
 
 
 @app.get("/api/simulation")
-async def get_simulation():
+async def get_simulation(persona: Optional[str] = None):
     """
     Returns simulation state.
     Available strictly for the built-in B2B SaaS benchmark.
@@ -561,12 +595,15 @@ async def get_simulation():
         "net_revenue_delta": float(res.get("net_revenue_delta", 0.0))
     }
     
-    return {
+    res_payload = {
         "available": True,
         "levers": _ACTIVE_SIM_LEVERS,
         "trajectory": trajectory,
         "summary": summary
     }
+    if persona:
+        res_payload = scope_simulation(res_payload, persona)
+    return _to_json_safe(res_payload)
 
 
 @app.post("/api/simulation")
@@ -607,13 +644,16 @@ async def update_simulation(req: SimulationLeversRequest):
         "net_revenue_delta": float(res.get("net_revenue_delta", 0.0))
     }
     
-    return {
+    res_payload = {
         "success": True,
         "available": True,
         "levers": _ACTIVE_SIM_LEVERS,
         "trajectory": trajectory,
         "summary": summary
     }
+    if req.persona:
+        res_payload = scope_simulation(res_payload, req.persona, is_update=True, requested_levers=dict(req))
+    return _to_json_safe(res_payload)
 
 
 
@@ -650,7 +690,8 @@ async def chat_with_edith(req: ChatQueryRequest):
             selected_hypothesis=selected_h,
             hypotheses=all_hypotheses,
             chat_history=req.chat_history or [],
-            simulation_levers=req.simulation_levers or _ACTIVE_SIM_LEVERS
+            simulation_levers=req.simulation_levers or _ACTIVE_SIM_LEVERS,
+            persona=req.persona
         )
     except Exception as e:
         print(f"[Chat API Exception] Falling back to reasoner: {e}")
@@ -682,6 +723,41 @@ async def chat_with_edith(req: ChatQueryRequest):
 
 class SetApiKeyRequest(BaseModel):
     api_key: str = Field(..., description="Google Gemini API Key")
+
+
+@app.get("/api/briefing")
+async def get_executive_briefing(persona: Optional[str] = None):
+    """
+    Generates persona-specific standing Executive Briefing report artifact.
+    Works 100% offline with zero API key requirement.
+    """
+    p_id = persona or DEFAULT_PERSONA
+    repo = DataRepository.get_instance()
+    is_demo = repo.active_source_info.get("is_demo", True)
+    label = repo.active_source_info.get("primary_measure_label", "Gross Revenue" if is_demo else "Primary Measure")
+    
+    ts = repo.get_kpi_time_series(region="Region B" if p_id == "regional_lead" else None)
+    anom_ctx = AnomalyEngine.evaluate_current_anomaly(ts, kpi_name=label)
+    
+    ev_engine = EvidenceEngine(repo)
+    all_hypotheses = ev_engine.evaluate_all_hypotheses()
+    
+    client = EdithLLMClient()
+    briefing = client.generate_executive_briefing(
+        persona=p_id,
+        anomaly_context=anom_ctx,
+        hypotheses=all_hypotheses,
+        simulation_levers=_ACTIVE_SIM_LEVERS
+    )
+    
+    log_access(
+        persona=p_id,
+        endpoint="/api/briefing",
+        granted_sections=["executive_briefing_narrative", "recommended_actions_matrix", "primary_root_cause"],
+        restricted_sections=["competitor_telemetry", "cross_region_lineage"] if p_id == "regional_lead" else []
+    )
+    
+    return _to_json_safe(briefing)
 
 
 @app.get("/api/ai/status")

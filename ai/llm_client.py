@@ -7,7 +7,7 @@ import os
 import time
 import re
 from typing import Dict, List, Any, Tuple, Optional
-from ai.prompts import EDITH_SYSTEM_PROMPT, classify_user_intent
+from ai.prompts import EDITH_SYSTEM_PROMPT, get_persona_prompt_addendum, classify_user_intent
 from ai.tools import AVAILABLE_TOOLS, execute_tool_call
 from ai.offline_reasoner import OfflineEdithReasoner
 from config.settings import DEFAULT_GEMINI_MODEL, FALLBACK_GEMINI_MODEL
@@ -173,16 +173,7 @@ class EdithLLMClient:
         }
         return fallback_text, metadata
 
-    def answer_question(
-        self,
-        query: str,
-        anomaly_context: Dict[str, Any],
-        selected_hypothesis: Dict[str, Any],
-        hypotheses: List[Dict[str, Any]],
-        chat_history: List[Dict[str, Any]] = None,
-        simulation_levers: Dict[str, Any] = None,
-        response_style: str = "concise"
-    ) -> Tuple[str, Dict[str, Any]]:
+    def answer_question(self, query: str, anomaly_context: Dict[str, Any], selected_hypothesis: Dict[str, Any], hypotheses: List[Dict[str, Any]], chat_history: List[Dict[str, Any]] = None, simulation_levers: Dict[str, Any] = None, response_style: str = "concise", persona: Optional[str] = None) -> Tuple[str, Dict[str, Any]]:
         """Answers user queries via tool-calling Gemini agent with guaranteed offline fallback."""
         start_time = time.time()
         intent = classify_user_intent(query)
@@ -195,13 +186,15 @@ class EdithLLMClient:
                     text, tools_called = self._execute_tool_calling_loop(
                         model_name=model_name,
                         initial_prompt=styled_query,
-                        chat_history=chat_history
+                        chat_history=chat_history,
+                        persona_id=persona
                     )
                     if not text:
                         text = self._execute_direct_generation(
                             model_name=model_name,
                             prompt=styled_query,
-                            chat_history=chat_history
+                            chat_history=chat_history,
+                            persona_id=persona
                         )
                         tools_called = ["direct_prompt_generation"]
                     
@@ -225,7 +218,8 @@ class EdithLLMClient:
                         text = self._execute_direct_generation(
                             model_name=model_name,
                             prompt=styled_query,
-                            chat_history=chat_history
+                            chat_history=chat_history,
+                            persona_id=persona
                         )
                         if text:
                             latency = round(time.time() - start_time, 2)
@@ -268,13 +262,7 @@ class EdithLLMClient:
         }
         return fallback_text, metadata
 
-    def _execute_tool_calling_loop(
-        self,
-        model_name: str,
-        initial_prompt: str,
-        chat_history: Optional[List[Dict[str, Any]]] = None,
-        max_turns: int = 5
-    ) -> Tuple[str, List[str]]:
+    def _execute_tool_calling_loop(self, model_name: str, initial_prompt: str, chat_history: Optional[List[Dict[str, Any]]] = None, persona_id: Optional[str] = None, max_turns: int = 5) -> Tuple[str, List[str]]:
         """
         Executes a bounded multi-turn tool-calling loop with Google GenAI SDK.
         1. Formats conversation messages using _build_gemini_contents to prevent role mismatch.
@@ -287,8 +275,9 @@ class EdithLLMClient:
         # Build contents from history ensuring strict alternating user/model roles
         contents: List[Any] = _build_gemini_contents(initial_prompt, chat_history)
         
+        sys_inst = EDITH_SYSTEM_PROMPT + ("\n" + get_persona_prompt_addendum(persona_id) if persona_id else "")
         config = types.GenerateContentConfig(
-            system_instruction=EDITH_SYSTEM_PROMPT,
+            system_instruction=sys_inst,
             tools=AVAILABLE_TOOLS,
             temperature=0.2
         )
@@ -329,7 +318,7 @@ class EdithLLMClient:
                         args_dict = {}
                     tools_called.append(fn_name)
                     
-                    tool_result = execute_tool_call(fn_name, args_dict)
+                    tool_result = execute_tool_call(fn_name, args_dict, persona_id=persona_id)
                     fn_response_parts.append(types.Part.from_function_response(
                         name=fn_name,
                         response={"result": tool_result}
@@ -346,17 +335,13 @@ class EdithLLMClient:
                 
         return "", tools_called
 
-    def _execute_direct_generation(
-        self,
-        model_name: str,
-        prompt: str,
-        chat_history: Optional[List[Dict[str, Any]]] = None
-    ) -> str:
+    def _execute_direct_generation(self, model_name: str, prompt: str, chat_history: Optional[List[Dict[str, Any]]] = None, persona_id: Optional[str] = None) -> str:
         """Direct prompt generation without function calling as a resilient fallback."""
         from google.genai import types
         contents = _build_gemini_contents(prompt, chat_history)
+        sys_inst = EDITH_SYSTEM_PROMPT + ("\n" + get_persona_prompt_addendum(persona_id) if persona_id else "")
         config = types.GenerateContentConfig(
-            system_instruction=EDITH_SYSTEM_PROMPT,
+            system_instruction=sys_inst,
             temperature=0.3
         )
         response = self.client.models.generate_content(
@@ -366,6 +351,57 @@ class EdithLLMClient:
         )
         return response.text if hasattr(response, "text") and response.text else ""
 
+
+
+    def generate_executive_briefing(
+        self,
+        persona: str = "executive",
+        anomaly_context: Optional[Dict[str, Any]] = None,
+        hypotheses: Optional[List[Dict[str, Any]]] = None,
+        simulation_levers: Optional[Dict[str, Any]] = None
+    ) -> Dict[str, Any]:
+        """
+        Generates persona-tailored Executive Briefing report artifact.
+        Uses Gemini agent if available; falls back seamlessly to 100% deterministic OfflineEdithReasoner.
+        """
+        start_time = time.time()
+        
+        # Primary deterministic generation (guaranteed accuracy on numbers)
+        briefing = OfflineEdithReasoner.generate_executive_briefing(
+            persona_id=persona,
+            anomaly_context=anomaly_context,
+            hypotheses=hypotheses,
+            simulation_levers=simulation_levers
+        )
+        
+        # If Gemini is live, we can enhance or verify the narrative while preserving exact figures
+        if self.client:
+            try:
+                gen_prompt = f"Synthesize a grounded Executive Briefing report for active persona: {persona}. Grounded facts:\n{briefing.get('narrative_markdown')}"
+                for model_name in [self.primary_model, self.fallback_model]:
+                    try:
+                        text, tools = self._execute_tool_calling_loop(
+                            model_name=model_name,
+                            initial_prompt=gen_prompt,
+                            chat_history=None,
+                            persona_id=persona
+                        )
+                        if text and len(text) > 100:
+                            briefing["narrative_markdown"] = text
+                            briefing["metadata"] = {
+                                "provider": "Google Gemini",
+                                "model": model_name,
+                                "latency_sec": round(time.time() - start_time, 2),
+                                "mode": f"Live Gemini AI ({model_name})",
+                                "status": "Success"
+                            }
+                            return briefing
+                    except Exception as e:
+                        print(f"[LLM Gateway] Live briefing synthesis warning: {e}")
+            except Exception:
+                pass
+                
+        return briefing
 
     def chat_turn(
 

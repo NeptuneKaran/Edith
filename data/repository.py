@@ -56,11 +56,16 @@ class DataRepository:
         """Returns the active SemanticDataModel if configured."""
         return self.semantic_model
 
-    def get_kpi_time_series(self, kpi_id: str = "kpi_b2b_sales") -> pd.DataFrame:
-        """Returns the time series for a specified KPI or user-configured primary measure."""
+    def get_kpi_time_series(self, kpi_id: str = "kpi_b2b_sales", region: Optional[str] = None) -> pd.DataFrame:
+        """Returns the time series for a specified KPI or user-configured primary measure, optionally filtered by region."""
         df_sales = self.tables.get("sales", pd.DataFrame())
         if df_sales.empty:
             return pd.DataFrame(columns=["week_idx", "week_label", "week_date", "value"])
+            
+        if region and "region" in df_sales.columns:
+            df_sales = df_sales[df_sales["region"] == region]
+            if df_sales.empty:
+                return pd.DataFrame(columns=["week_idx", "week_label", "week_date", "value"])
             
         if kpi_id == "kpi_b2b_sales" or not self.active_source_info.get("is_demo", True):
             # Check aggregation type if custom semantic model is active

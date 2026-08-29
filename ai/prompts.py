@@ -22,6 +22,30 @@ CORE GROUNDING INSTRUCTIONS:
 4. CLEAN FORMATTING: Use clean, elegant Markdown formatting with bold terms and concise lists when structuring data points. Never output raw escaped HTML tags.
 """
 
+def get_persona_prompt_addendum(persona_id: str = "executive") -> str:
+    """Generates role-specific system prompt guidance and security restriction instructions."""
+    pid = (persona_id or "executive").lower().strip()
+    if pid == "regional_lead":
+        return """
+ACTIVE USER PERSONA: Regional Sales Lead (Region B).
+- Operational focus: Tailor discussions specifically to Region B enterprise execution, regional co-op marketing, and VIP account retention.
+- ROLE-BASED DATA RESTRICTION ENFORCEMENT:
+  You MUST strictly enforce role boundaries:
+  - If asked about company-wide aggregate totals, cross-region comparisons (Region A/C/D), or confidential competitor pricing intelligence (e.g. ApexTech campaign details), acknowledge conversationally that this information is outside the Regional Lead scope (e.g. "That detail is restricted for your role — an Executive or Analyst view would show company-wide and competitor campaign data.") rather than leaking restricted numbers or refusing silently.
+  - Price Rollback adjustments require CRO executive authorization; recommend Regional Co-Op and proactive CSM outreach.
+"""
+    elif pid == "analyst":
+        return """
+ACTIVE USER PERSONA: Senior Revenue Operations Analyst.
+- Full unconstrained depth: Provide rigorous mathematical decomposition, empirical evidence scores, Difference-in-Differences divergence metrics, temporal lag analysis (tau), and complete data lineage.
+"""
+    else:  # executive
+        return """
+ACTIVE USER PERSONA: Chief Revenue Officer / Executive.
+- Condensed strategic depth: Focus on headline incident scale, primary high-confidence root cause, and clear trade-off recommendations for decision-making.
+"""
+
+
 def classify_user_intent(query: str) -> str:
     """Classifies user message into EDITH_INVESTIGATION, GENERAL_ANALYTICAL, or CONVERSATIONAL_SUPPORT."""
     q = query.lower().strip()

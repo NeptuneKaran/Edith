@@ -252,17 +252,24 @@ TOOL_REGISTRY = {
     "get_data_quality_report": get_data_quality_report
 }
 
-def execute_tool_call(tool_name: str, args: Dict[str, Any]) -> Dict[str, Any]:
-    """Executes a tool by name with parameter validation and safe error handling."""
+def execute_tool_call(tool_name: str, args: Dict[str, Any], persona_id: Optional[str] = None) -> Any:
+    """Executes a tool by name with parameter validation, safe error handling, and role-based access scoping."""
     if tool_name not in TOOL_REGISTRY:
         return {"error": f"Tool '{tool_name}' is not registered."}
         
     func = TOOL_REGISTRY[tool_name]
     try:
         if args:
-            return func(**args)
+            raw_result = func(**args)
         else:
-            return func()
+            raw_result = func()
+            
+        # Apply role-based scoping if persona is set
+        if persona_id:
+            from core.access_control import scope_tool_call
+            return scope_tool_call(tool_name, args, persona_id, raw_result)
+        return raw_result
     except Exception as e:
         return {"error": f"Tool execution failed for '{tool_name}': {str(e)}"}
+
 
