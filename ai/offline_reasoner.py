@@ -85,7 +85,8 @@ class OfflineEdithReasoner:
 **3. Recommended Next Step:**
 - Apply a targeted **-6% price adjustment** on Enterprise Suite Alpha combined with a **$15k regional co-op marketing fund** to recover projected volume."""
         else:
-            return f"""### 🔍 Detailed Analytical Investigation Briefing: {kpi_name} Anomaly
+            return rf"""### 🔍 Detailed Analytical Investigation Briefing: {kpi_name} Anomaly
+
 
 **1. Statistical Anomaly Detection & Impact Localization:**
 - **Metric:** {kpi_name} (Fiscal Q1 2026, Week 08)
@@ -156,7 +157,8 @@ What would you like to examine first?"""
         # 2. CAPABILITIES & HELP
         # ==============================================================================
         if any(k in q_clean for k in ["who are you", "what can you do", "what is edith", "help me", "capabilities", "how do you work"]):
-            return f"""I am **EDITH (Executive Decision Intelligence & Tactical Hypothesis)**, an AI-assisted analytics partner engineered to uncover the empirical drivers behind business performance.
+            return rf"""I am **EDITH (Executive Decision Intelligence & Tactical Hypothesis)**, an AI-assisted analytics partner engineered to uncover the empirical drivers behind business performance.
+
 
 **Here is how I assist decision-makers:**
 1. **Anomaly & Outlier Detection:** Pinpointing statistically significant deviations ($\pm 2\sigma$) and IQR-based distribution outliers.
@@ -274,8 +276,27 @@ Would you like to see how `{matched_entity}` compares across other dimensions or
 4. **Competitor Defection:** ApexTech launched a 15% discount campaign in Week 07, capturing uncommitted Enterprise renewals in Region B.
 5. **Refuted Causes:** Physical warehouse availability was at 99.4% (0 stockouts), and platform uptime was 99.98%."""
 
-        # Recommendations / Fixes
-        if any(k in q_clean for k in ["recommend", "how to fix", "what should we do", "next steps", "action plan", "solution", "what to do"]):
+        # Combined KPI Fault & Next Approach
+        if (any(k in q_clean for k in ["fault", "faulting", "what is wrong", "problem", "issue", "kpi"]) and any(k in q_clean for k in ["approach", "strategy", "next", "action", "do", "fix", "recommend"])) or "what kpi is faulting" in q_clean:
+            return rf"""### 🚨 Faulting Metric Diagnostic & Recovery Roadmap
+
+**1. Faulting Metric & Anomaly Localization:**
+- **Primary KPI:** **{kpi_name}** (Fiscal Q1 2026, Week 08).
+- **Observed Deficit:** **${current_val:,.0f}** vs **${anomaly_context.get('baseline_value', 1400000):,.0f}** baseline (**{delta_pct:+.1f}%** / -${abs(anomaly_context.get('delta_value', 147700)):,.0f}).
+- **Localized Concentration:** **97.3%** of the decline is concentrated in **Region B $\rightarrow$ Enterprise Tier $\rightarrow$ Product Suite Alpha**.
+- **Root Mechanism:** Internal +12% price hike triggered elastic demand contraction ($\varepsilon_p = -1.65$), losing 21 enterprise accounts, compounded by ApexTech's 15% promotional campaign in Week 07.
+
+**2. Recommended 3-Step Tactical Approach:**
+1. **Targeted -6% Price Calibration:**
+   - Roll back half the price increase on Enterprise renewals in Region B (setting unit price to $10,528).
+   - This restores contract volume while protecting +$528/unit in pricing gains over baseline.
+2. **Deploy $15k Competitive Defense Fund:**
+   - Direct $15,000 in regional co-op incentives to neutralize ApexTech's discount pressure in Region B.
+3. **Validate in Screen 4 (Policy Simulator):**
+   - Head to **Screen 4 (Policy Simulator)** to test this policy trajectory, projected to recover **78.2% of lost volume** within 8 weeks and stabilize gross margin at **70.2%**."""
+
+        # Recommendations / Fixes / Next Approach
+        if any(k in q_clean for k in ["recommend", "how to fix", "what should we do", "next steps", "action plan", "solution", "what to do", "approach", "next approach", "strategy", "roadmap"]):
             return r"""**Recommended 3-Step Strategy to Recover Revenue:**
 
 1. **Targeted Price Adjustment (-6%):**
@@ -287,6 +308,7 @@ Would you like to see how `{matched_entity}` compares across other dimensions or
 
 3. **Win-Back Trajectory:**
    - This combined policy is projected to recover **78.2% of lost volume** within 8 weeks, stabilizing gross margin at **70.2%**."""
+
 
         # Comparisons
         if any(k in q_clean for k in ["compare", "vs", "versus", "difference"]):

@@ -21,10 +21,12 @@ def _sanitize_log_message(msg: str, key: str = "") -> str:
     return msg
 
 def _build_gemini_contents(initial_prompt: str, chat_history: Optional[List[Dict[str, Any]]] = None) -> List[Any]:
-
     """
-    Builds clean, valid Google GenAI Content messages ensuring strict role alternation (user -> model -> user).
-    Deduplicates trailing user queries and collapses consecutive same-role turns.
+    Builds clean, valid Google GenAI Content messages.
+    Crucial requirements enforced:
+    1. The conversation MUST start with a 'user' turn (leading model greetings are dropped).
+    2. Roles strictly alternate: user -> model -> user -> model.
+    3. The final message is the current user query with role='user'.
     """
     from google.genai import types
     
@@ -42,7 +44,11 @@ def _build_gemini_contents(initial_prompt: str, chat_history: Optional[List[Dict
     if clean_history and clean_history[-1]["role"] == "user" and clean_history[-1]["content"].lower() == initial_prompt.strip().lower():
         clean_history.pop()
 
-    # Build alternating sequence
+    # Gemini API requirement: Conversation MUST start with 'user'. Drop any leading 'model' greeting messages.
+    while clean_history and clean_history[0]["role"] == "model":
+        clean_history.pop(0)
+
+    # Build strictly alternating sequence: user -> model -> user -> model ...
     contents: List[Any] = []
     prev_role = None
     
@@ -51,17 +57,18 @@ def _build_gemini_contents(initial_prompt: str, chat_history: Optional[List[Dict
         role = item["role"]
         text = item["content"]
         
-        # If consecutive same role, combine parts
         if role == prev_role and contents:
             contents[-1].parts.append(types.Part.from_text(text=f"\n{text}"))
         else:
+            if not contents and role == "model":
+                continue  # Never start with model
             contents.append(types.Content(
                 role=role,
                 parts=[types.Part.from_text(text=text)]
             ))
             prev_role = role
 
-    # Ensure last message is current user prompt
+    # Ensure last message is current user prompt with role="user"
     if contents and contents[-1].role == "user":
         contents[-1].parts.append(types.Part.from_text(text=f"\n\n{initial_prompt}"))
     else:
@@ -70,7 +77,18 @@ def _build_gemini_contents(initial_prompt: str, chat_history: Optional[List[Dict
             parts=[types.Part.from_text(text=initial_prompt)]
         ))
         
+    # Final sanity check: ensure contents[0].role == 'user'
+    while contents and contents[0].role == "model":
+        contents.pop(0)
+        
+    if not contents:
+        contents.append(types.Content(
+            role="user",
+            parts=[types.Part.from_text(text=initial_prompt)]
+        ))
+        
     return contents
+
 
 
 class EdithLLMClient:
