@@ -14,9 +14,10 @@ This guide provides practical, step-by-step instructions for testing EDITH using
    ```
 2. **Start the EDITH application**:
    ```bash
-   streamlit run app.py
+   uvicorn main:app --reload
    ```
-3. **Open the application** in your web browser at `http://localhost:8501` (or click your live Render cloud deployment URL).
+3. **Open the application** in your web browser at `http://127.0.0.1:8000` (or your live cloud deployment URL).
+
 4. **Locate the Navigation Menu** in the left-hand sidebar. The screens are numbered in order of the investigation workflow:
    - **`0. 📂 Data Sources & Intake`** (Start here to upload and configure datasets)
    - **`1. 📊 Executive Overview`** (High-level trajectory, current baseline, and summary health)

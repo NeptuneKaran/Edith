@@ -23,8 +23,9 @@ def check():
             if f.endswith(('.py', '.toml', '.yaml', '.yml', '.md', '.txt', '.json')):
                 p = os.path.join(root, f)
                 # Skip documentation files and test fixtures designed to test dummy invalid keys
-                if f in ['README.md', 'HOW_IT_WORKS.md', 'check_deployment_readiness.py', 'test_deployment_simulation.py']:
+                if f in ['README.md', 'HOW_IT_WORKS.md', 'EDITH_TESTING_GUIDE.md', 'check_deployment_readiness.py', 'test_deployment_simulation.py']:
                     continue
+
                 with open(p, 'r', encoding='utf-8', errors='ignore') as file:
                     content = file.read()
                     for label, pat in patterns.items():

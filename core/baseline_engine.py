@@ -107,12 +107,15 @@ class AnomalyEngine:
                 "current_week_date": str(curr.get("week_date", "Snapshot"))
             }
 
+        if "baseline" not in df_analyzed.columns:
+            df_analyzed = AnomalyEngine.calculate_baseline_and_corridor(df_analyzed)
+
         curr = df_analyzed.iloc[-1]
         prev = df_analyzed.iloc[-2] if len(df_analyzed) > 1 else curr
-
         
         curr_val = float(curr["value"])
-        baseline_val = float(curr["baseline"])
+        baseline_val = float(curr.get("baseline", curr_val))
+
         delta_val = curr_val - baseline_val
         delta_pct = (delta_val / baseline_val * 100.0) if baseline_val != 0 else 0.0
         z_score = float(curr["z_score"])

@@ -1,0 +1,1281 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-slate-900 text-slate-100">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EDITH | Decision Intelligence Platform</title>
+  
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eef2ff',
+              100: '#e0e7ff',
+              400: '#818cf8',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca',
+              900: '#312e81'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- Plotly.js for Rich Analytics Charts -->
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+  
+  <!-- Alpine.js via CDN -->
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.3/dist/cdn.min.js"></script>
+
+  <style>
+    [x-cloak] { display: none !important; }
+    /* Custom subtle scrollbar */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #0f172a; }
+    ::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #475569; }
+  </style>
+</head>
+<body class="h-full flex flex-col font-sans antialiased bg-slate-950 text-slate-100" x-data="edithApp()" x-init="initApp()" x-cloak>
+
+  <!-- Top Global Header -->
+  <header class="bg-slate-900/90 backdrop-blur border-b border-slate-800 sticky top-0 z-40 px-6 py-3.5 flex items-center justify-between shadow-lg">
+    <div class="flex items-center space-x-3">
+      <div class="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center font-bold text-white shadow-indigo-500/20 shadow-md">
+        E
+      </div>
+      <div>
+        <h1 class="text-base font-bold text-slate-100 tracking-tight flex items-center gap-2">
+          EDITH
+          <span class="text-xs font-semibold px-2 py-0.5 rounded bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">Decision Intelligence</span>
+        </h1>
+        <p class="text-xs text-slate-400">Empirical Diagnostic & Tactical Decision Platform</p>
+      </div>
+    </div>
+
+    <!-- Active Dataset Badge & Global Controls -->
+    <div class="flex items-center space-x-4">
+      <div class="hidden sm:flex items-center space-x-2 bg-slate-800/80 px-3 py-1.5 rounded-lg border border-slate-700/60">
+        <span class="w-2 h-2 rounded-full" :class="sourceInfo.is_demo ? 'bg-emerald-400 animate-pulse' : 'bg-indigo-400'"></span>
+        <span class="text-xs text-slate-300 font-medium" x-text="sourceInfo.name || 'Loading...'"></span>
+        <span class="text-[10px] px-1.5 py-0.5 rounded font-semibold uppercase tracking-wider" 
+              :class="sourceInfo.is_demo ? 'bg-emerald-950/80 text-emerald-300 border border-emerald-800/50' : 'bg-indigo-950/80 text-indigo-300 border border-indigo-800/50'"
+              x-text="sourceInfo.is_demo ? 'Benchmark' : 'Observational'"></span>
+      </div>
+
+      <button @click="resetToDemo()" 
+              class="text-xs font-medium px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition flex items-center gap-1.5">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+        Reset to Demo
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Workspace Container -->
+  <div class="flex-1 flex overflow-hidden">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="w-64 bg-slate-900 border-r border-slate-800 flex flex-col justify-between shrink-0">
+      <nav class="p-4 space-y-1.5">
+        <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider px-3 mb-2">Workflow Screens</div>
+        
+        <button @click="switchTab('sources')" 
+                :class="activeTab === 'sources' ? 'bg-indigo-600 text-white shadow-indigo-600/30 shadow-md font-semibold' : 'text-slate-400 hover:bg-slate-800/60 hover:text-slate-200'"
+                class="w-full flex items-center space-x-3 px-3 py-2.5 rounded-lg text-xs transition">
+          <span>📂</span>
+          <span>0. Data Sources & Intake</span>
+        </button>
+
+        <button @click="switchTab('overview')" 
+                :class="activeTab === 'overview' ? 'bg-indigo-600 text-white shadow-indigo-600/30 shadow-md font-semibold' : 'text-slate-400 hover:bg-slate-800/60 hover:text-slate-200'"
+                class="w-full flex items-center space-x-3 px-3 py-2.5 rounded-lg text-xs transition">
+          <span>📊</span>
+          <span>1. Executive Overview</span>
+        </button>
+
+        <button @click="switchTab('diagnostic')" 
+                :class="activeTab === 'diagnostic' ? 'bg-indigo-600 text-white shadow-indigo-600/30 shadow-md font-semibold' : 'text-slate-400 hover:bg-slate-800/60 hover:text-slate-200'"
+                class="w-full flex items-center space-x-3 px-3 py-2.5 rounded-lg text-xs transition">
+          <span>🔍</span>
+          <span>2. Diagnostic Decomposition</span>
+        </button>
+
+        <button @click="switchTab('workspace')" 
+                :class="activeTab === 'workspace' ? 'bg-indigo-600 text-white shadow-indigo-600/30 shadow-md font-semibold' : 'text-slate-400 hover:bg-slate-800/60 hover:text-slate-200'"
+                class="w-full flex items-center space-x-3 px-3 py-2.5 rounded-lg text-xs transition">
+          <span>🔬</span>
+          <span>3. Investigation Workspace</span>
+        </button>
+
+        <button @click="switchTab('simulation')" 
+                :class="activeTab === 'simulation' ? 'bg-indigo-600 text-white shadow-indigo-600/30 shadow-md font-semibold' : 'text-slate-400 hover:bg-slate-800/60 hover:text-slate-200'"
+                class="w-full flex items-center space-x-3 px-3 py-2.5 rounded-lg text-xs transition">
+          <span>🎯</span>
+          <span>4. Policy Simulator</span>
+        </button>
+
+        <button @click="switchTab('console')" 
+                :class="activeTab === 'console' ? 'bg-indigo-600 text-white shadow-indigo-600/30 shadow-md font-semibold' : 'text-slate-400 hover:bg-slate-800/60 hover:text-slate-200'"
+                class="w-full flex items-center space-x-3 px-3 py-2.5 rounded-lg text-xs transition">
+          <span>💬</span>
+          <span>5. EDITH Console</span>
+        </button>
+      </nav>
+
+      <!-- System Status Footer -->
+      <div class="p-4 border-t border-slate-800/80 bg-slate-950/40 text-[11px] text-slate-400 space-y-1">
+        <div class="flex items-center justify-between">
+          <span>Backend Status:</span>
+          <span class="text-emerald-400 font-semibold flex items-center gap-1">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> FastAPI Ready
+          </span>
+        </div>
+        <div class="flex items-center justify-between">
+          <span>Reasoning Engine:</span>
+          <span class="text-slate-300 font-medium">Deterministic / Grounded</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 overflow-y-auto p-6 bg-slate-950 space-y-6">
+
+      <!-- Dynamic Alert Banner -->
+      <div x-show="alertMsg" x-transition class="p-4 rounded-xl text-xs font-medium border flex items-start justify-between"
+           :class="alertType === 'error' ? 'bg-rose-950/80 text-rose-300 border-rose-800' : 'bg-emerald-950/80 text-emerald-300 border-emerald-800'">
+        <div class="flex items-center gap-2">
+          <span x-text="alertType === 'error' ? '⚠️' : '✅'"></span>
+          <span x-text="alertMsg"></span>
+        </div>
+        <button @click="alertMsg = ''" class="text-slate-400 hover:text-slate-200 font-bold ml-4">✕</button>
+      </div>
+
+      <!-- =================================================================== -->
+      <!-- SCREEN 0: DATA SOURCES & INTAKE -->
+      <!-- =================================================================== -->
+      <div x-show="activeTab === 'sources'" class="space-y-6">
+        
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl">
+          <h2 class="text-lg font-bold text-slate-100 flex items-center gap-2">
+            <span>📂</span> Structured Business Dataset Intake & Profiling
+          </h2>
+          <p class="text-xs text-slate-400 mt-1">
+            Upload arbitrary CSV, Excel, or SQLite business datasets (Finance, HR, Operations, Marketing, Healthcare, Support). 
+            EDITH automatically profiles schemas, validates data types, and assists with semantic mapping.
+          </p>
+
+          <!-- Upload Dropzone -->
+          <div class="mt-5 border-2 border-dashed border-slate-700 hover:border-indigo-500 rounded-xl p-8 text-center bg-slate-950/50 transition cursor-pointer"
+               @dragover.prevent="" @drop.prevent="handleFileDrop($event)">
+            <input type="file" id="fileUploadInput" class="hidden" accept=".csv,.xlsx,.xls,.sqlite,.db" @change="handleFileSelect($event)" />
+            <label for="fileUploadInput" class="cursor-pointer block">
+              <div class="text-3xl mb-2">📄</div>
+              <div class="text-sm font-semibold text-slate-200">Click to browse or drag & drop business data</div>
+              <div class="text-xs text-slate-500 mt-1">Supports CSV, Excel (.xlsx, .xls), and SQLite (.db, .sqlite) files</div>
+            </label>
+            <div x-show="uploading" class="mt-4 text-xs text-indigo-400 font-medium flex items-center justify-center gap-2">
+              <svg class="animate-spin h-4 w-4 text-indigo-400" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path></svg>
+              Profiling dataset schema and calculating data health...
+            </div>
+          </div>
+        </div>
+
+        <!-- Profiler & Semantic Configuration Section (Shown when file uploaded) -->
+        <div x-show="uploadData" class="space-y-6">
+          
+          <!-- 1. Automated Profile Table -->
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-4">
+            <div class="flex items-center justify-between">
+              <h3 class="text-sm font-bold text-slate-200 uppercase tracking-wider flex items-center gap-2">
+                <span>📋</span> Automated Data Profile & Role Heuristics
+              </h3>
+              <span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded-lg border border-slate-700"
+                    x-text="`${uploadData?.total_rows || 0} rows | ${uploadData?.total_columns || 0} columns`"></span>
+            </div>
+
+            <div class="overflow-x-auto border border-slate-800 rounded-xl">
+              <table class="w-full text-left text-xs text-slate-300">
+                <thead class="bg-slate-800/80 text-[11px] uppercase tracking-wider text-slate-400 border-b border-slate-700">
+                  <tr>
+                    <th class="p-3">Column Name</th>
+                    <th class="p-3">Inferred Type</th>
+                    <th class="p-3">Null %</th>
+                    <th class="p-3">Unique Values</th>
+                    <th class="p-3">Semantic Guess</th>
+                    <th class="p-3">Sample Values</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-800/60 bg-slate-900/60 font-mono">
+                  <template x-for="col in uploadData?.profiles || []" :key="col.column_name">
+                    <tr class="hover:bg-slate-800/40 transition">
+                      <td class="p-3 font-semibold text-indigo-300" x-text="col.column_name"></td>
+                      <td class="p-3 text-slate-300" x-text="col.inferred_type"></td>
+                      <td class="p-3" :class="col.null_pct > 10 ? 'text-rose-400 font-bold' : 'text-slate-400'" x-text="`${col.null_pct}%`"></td>
+                      <td class="p-3 text-slate-400" x-text="col.unique_count"></td>
+                      <td class="p-3">
+                        <span class="px-2 py-0.5 rounded text-[10px] font-sans font-bold"
+                              :class="col.semantic_guess === 'NUMERIC_MEASURE' ? 'bg-blue-950 text-blue-300 border border-blue-800' : (col.semantic_guess === 'DATE' ? 'bg-purple-950 text-purple-300 border border-purple-800' : 'bg-slate-800 text-slate-300')"
+                              x-text="col.suggested_role"></span>
+                      </td>
+                      <td class="p-3 text-slate-500 truncate max-w-xs text-[11px]" x-text="col.sample_values.join(', ')"></td>
+                    </tr>
+                  </template>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- 2. Semantic Model Configuration Form -->
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-6">
+            <h3 class="text-sm font-bold text-slate-200 uppercase tracking-wider flex items-center gap-2">
+              <span>📐</span> Define Dataset Meaning & Semantic Roles
+            </h3>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 text-xs">
+              
+              <!-- Dataset Name -->
+              <div>
+                <label class="block font-semibold text-slate-300 mb-1.5">Dataset Display Name</label>
+                <input type="text" x-model="configForm.dataset_name" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-slate-100 focus:border-indigo-500 focus:outline-none" />
+              </div>
+
+              <!-- Analysis Grain -->
+              <div>
+                <label class="block font-semibold text-slate-300 mb-1.5">Analysis Grain & Structure</label>
+                <select x-model="configForm.analysis_grain" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-slate-100 focus:border-indigo-500 focus:outline-none">
+                  <option value="Time Series (Weekly / Monthly / Daily)">Time Series (Weekly / Monthly / Daily)</option>
+                  <option value="Cross-Sectional Snapshot">Cross-Sectional Snapshot (Non-Temporal)</option>
+                  <option value="Record-Level Event Log">Record-Level Event Log</option>
+                </select>
+              </div>
+
+              <!-- Primary Measure -->
+              <div>
+                <label class="block font-semibold text-slate-300 mb-1.5">Primary Quantitative Measure <span class="text-rose-400">*</span></label>
+                <select x-model="configForm.primary_measure" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-slate-100 focus:border-indigo-500 focus:outline-none">
+                  <template x-for="col in uploadData?.valid_numeric_columns || []" :key="col">
+                    <option :value="col" x-text="col"></option>
+                  </template>
+                </select>
+                <span class="text-[11px] text-slate-500 mt-1 block">Filtered to strictly numeric quantitative columns.</span>
+              </div>
+
+              <!-- Aggregation Method -->
+              <div>
+                <label class="block font-semibold text-slate-300 mb-1.5">Aggregation Function</label>
+                <select x-model="configForm.aggregation_type" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-slate-100 focus:border-indigo-500 focus:outline-none">
+                  <option value="sum">Sum (Totals)</option>
+                  <option value="mean">Mean / Average</option>
+                  <option value="distinct_count">Distinct Count (Unique Entities)</option>
+                  <option value="count">Count (Total Records)</option>
+                  <option value="min">Minimum</option>
+                  <option value="max">Maximum</option>
+                </select>
+              </div>
+
+              <!-- Distinct Entity (shown if distinct_count) -->
+              <div x-show="configForm.aggregation_type === 'distinct_count'" class="md:col-span-2 bg-slate-950/60 p-4 rounded-xl border border-indigo-900/60">
+                <label class="block font-semibold text-indigo-300 mb-1.5">Distinct Entity / ID Column to Count</label>
+                <select x-model="configForm.distinct_entity_column" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-slate-100 focus:border-indigo-500 focus:outline-none">
+                  <template x-for="col in uploadData?.columns || []" :key="col">
+                    <option :value="col" x-text="col"></option>
+                  </template>
+                </select>
+              </div>
+
+              <!-- Measure Label & Unit -->
+              <div>
+                <label class="block font-semibold text-slate-300 mb-1.5">Measure Label</label>
+                <input type="text" x-model="configForm.primary_measure_label" placeholder="e.g. Total Defect Count" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-slate-100 focus:border-indigo-500 focus:outline-none" />
+              </div>
+
+              <div>
+                <label class="block font-semibold text-slate-300 mb-1.5">Measure Unit</label>
+                <input type="text" x-model="configForm.primary_measure_unit" placeholder="e.g. $, %, Units, Defects, Hours" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-slate-100 focus:border-indigo-500 focus:outline-none" />
+              </div>
+
+              <!-- Date Column -->
+              <div>
+                <label class="block font-semibold text-slate-300 mb-1.5">Date / Timestamp Column</label>
+                <select x-model="configForm.date_column" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-slate-100 focus:border-indigo-500 focus:outline-none">
+                  <option value="None (Snapshot)">None (Snapshot / No Date)</option>
+                  <template x-for="col in uploadData?.valid_date_columns || []" :key="col">
+                    <option :value="col" x-text="col"></option>
+                  </template>
+                </select>
+              </div>
+
+              <!-- Categorical Dimensions (Multi-select check boxes) -->
+              <div class="md:col-span-2">
+                <label class="block font-semibold text-slate-300 mb-1.5">Primary Categorical Dimensions</label>
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 bg-slate-950 p-3 rounded-xl border border-slate-800 max-h-40 overflow-y-auto">
+                  <template x-for="col in uploadData?.columns || []" :key="col">
+                    <label class="flex items-center space-x-2 text-xs text-slate-300 cursor-pointer">
+                      <input type="checkbox" :value="col" x-model="configForm.dimension_columns" class="rounded bg-slate-800 border-slate-700 text-indigo-600 focus:ring-0" />
+                      <span class="truncate" x-text="col"></span>
+                    </label>
+                  </template>
+                </div>
+              </div>
+
+              <!-- Explanatory Numeric Drivers -->
+              <div class="md:col-span-2">
+                <label class="block font-semibold text-slate-300 mb-1.5">Explanatory Numeric Drivers</label>
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 bg-slate-950 p-3 rounded-xl border border-slate-800 max-h-40 overflow-y-auto">
+                  <template x-for="col in uploadData?.valid_numeric_columns || []" :key="col">
+                    <label class="flex items-center space-x-2 text-xs text-slate-300 cursor-pointer">
+                      <input type="checkbox" :value="col" x-model="configForm.driver_columns" class="rounded bg-slate-800 border-slate-700 text-indigo-600 focus:ring-0" />
+                      <span class="truncate" x-text="col"></span>
+                    </label>
+                  </template>
+                </div>
+              </div>
+
+              <!-- Cleaning option -->
+              <div class="md:col-span-2 flex items-center space-x-3 bg-slate-950/60 p-3.5 rounded-xl border border-slate-800">
+                <input type="checkbox" id="dropInvalidCheck" x-model="configForm.drop_invalid_rows" class="rounded bg-slate-800 border-slate-700 text-indigo-600 focus:ring-0" />
+                <label for="dropInvalidCheck" class="text-xs text-slate-300 cursor-pointer">
+                  <span class="font-semibold text-slate-200">Drop invalid/unparseable rows</span> — Safely removes corrupt date strings or non-numeric values while preserving overall data integrity.
+                </label>
+              </div>
+
+            </div>
+
+            <!-- Apply and Ingest Action -->
+            <div class="pt-3 flex justify-end">
+              <button @click="submitSemanticConfiguration()" 
+                      :disabled="configuring"
+                      class="px-6 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold shadow-lg shadow-indigo-600/30 transition flex items-center gap-2 disabled:opacity-50">
+                <span x-show="!configuring">🚀 Apply Semantic Model & Ingest Dataset</span>
+                <span x-show="configuring">Validating and Transforming...</span>
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- =================================================================== -->
+      <!-- SCREEN 1: EXECUTIVE OVERVIEW -->
+      <!-- =================================================================== -->
+      <div x-show="activeTab === 'overview'" class="space-y-6">
+        
+        <!-- Header Banner -->
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <div class="flex items-center gap-2">
+              <h2 class="text-xl font-bold text-slate-100" x-text="overviewData.dataset_name"></h2>
+              <span class="text-xs px-2 py-0.5 rounded-full font-bold uppercase"
+                    :class="overviewData.kpi_metrics?.is_anomaly ? 'bg-rose-950 text-rose-300 border border-rose-800' : 'bg-emerald-950 text-emerald-300 border border-emerald-800'"
+                    x-text="overviewData.kpi_metrics?.status_label || 'Active'"></span>
+            </div>
+            <p class="text-xs text-slate-400 mt-1" x-text="`Target Measure: ${overviewData.primary_measure_label} (${overviewData.primary_measure_unit}) | Total Records: ${(overviewData.total_records || 0).toLocaleString()}`"></p>
+          </div>
+
+          <div class="flex items-center gap-4">
+            <div class="bg-slate-950 px-4 py-2 rounded-xl border border-slate-800 text-right">
+              <div class="text-[11px] text-slate-500 font-semibold uppercase">Data Health Score</div>
+              <div class="text-base font-extrabold text-emerald-400" x-text="`${overviewData.data_quality_score || 100}%`"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 Primary KPI Summary Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 shadow">
+            <div class="text-xs text-slate-400 font-medium">Observed Value</div>
+            <div class="text-2xl font-bold text-slate-100 mt-1" x-text="formatNumber(overviewData.kpi_metrics?.current_value, overviewData.primary_measure_unit)"></div>
+          </div>
+
+          <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 shadow">
+            <div class="text-xs text-slate-400 font-medium">Expected Baseline</div>
+            <div class="text-2xl font-bold text-slate-100 mt-1" x-text="formatNumber(overviewData.kpi_metrics?.baseline_value, overviewData.primary_measure_unit)"></div>
+          </div>
+
+          <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 shadow">
+            <div class="text-xs text-slate-400 font-medium">Variance / Deficit</div>
+            <div class="text-2xl font-bold mt-1" 
+                 :class="(overviewData.kpi_metrics?.delta_value || 0) < 0 ? 'text-rose-400' : 'text-emerald-400'"
+                 x-text="`${formatNumber(overviewData.kpi_metrics?.delta_value, overviewData.primary_measure_unit)} (${(overviewData.kpi_metrics?.delta_pct || 0) > 0 ? '+' : ''}${(overviewData.kpi_metrics?.delta_pct || 0).toFixed(1)}%)`"></div>
+          </div>
+
+          <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 shadow">
+            <div class="text-xs text-slate-400 font-medium">Corridor Z-Score</div>
+            <div class="text-2xl font-bold text-slate-100 mt-1" x-text="(overviewData.kpi_metrics?.z_score || 0).toFixed(2)"></div>
+          </div>
+        </div>
+
+        <!-- Main Trajectory Corridor or Snapshot View -->
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-4">
+          <div class="flex items-center justify-between">
+            <h3 class="text-sm font-bold text-slate-200 uppercase tracking-wider flex items-center gap-2">
+              <span x-text="overviewData.is_temporal ? '📈 Historical Trajectory & 2σ Corridor' : '📊 Cross-Sectional Distribution Summary'"></span>
+            </h3>
+            <span class="text-xs text-slate-400" x-text="overviewData.analysis_grain"></span>
+          </div>
+
+          <!-- Temporal Plotly Chart -->
+          <div x-show="overviewData.is_temporal" id="overviewCorridorChart" class="w-full h-80"></div>
+
+          <!-- Non-Temporal Hero Summary Card -->
+          <div x-show="!overviewData.is_temporal" class="bg-slate-950 p-6 rounded-xl border border-slate-800 text-center space-y-3">
+            <div class="text-3xl">📊</div>
+            <h4 class="text-base font-bold text-slate-200">Cross-Sectional Snapshot Dataset Active</h4>
+            <p class="text-xs text-slate-400 max-w-lg mx-auto">
+              This dataset is configured as a non-temporal snapshot. Sequential time-series corridors are disabled to preserve analysis integrity. 
+              Visit <strong class="text-indigo-400">Diagnostic Decomposition</strong> to view distribution statistics, outlier boundaries ($1.5 	imes 	ext{IQR}$), and dimensional concentrations.
+            </p>
+          </div>
+        </div>
+
+        <!-- Primary Concentration & Top Driver Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+          
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow">
+            <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-2 mb-3">
+              <span>🎯</span> Primary Segment Concentration
+            </h4>
+            <template x-if="overviewData.primary_concentration">
+              <div class="space-y-2">
+                <div class="flex items-center justify-between text-sm font-semibold text-slate-200">
+                  <span x-text="`${overviewData.primary_concentration.dimension}: ${overviewData.primary_concentration.segment}`"></span>
+                  <span class="text-indigo-400 font-bold" x-text="`${overviewData.primary_concentration.share_pct.toFixed(1)}% Share`"></span>
+                </div>
+                <div class="w-full bg-slate-950 rounded-full h-2 overflow-hidden border border-slate-800">
+                  <div class="bg-indigo-500 h-full rounded-full" :style="`width: ${Math.min(100, overviewData.primary_concentration.share_pct)}%`"></div>
+                </div>
+              </div>
+            </template>
+            <template x-if="!overviewData.primary_concentration">
+              <div class="text-xs text-slate-500">No dimensional concentration detected.</div>
+            </template>
+          </div>
+
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow">
+            <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-2 mb-3">
+              <span>🔗</span> Top Numeric Driver Association
+            </h4>
+            <template x-if="overviewData.top_driver">
+              <div class="space-y-1 text-xs">
+                <div class="flex items-center justify-between text-sm font-semibold text-slate-200">
+                  <span x-text="overviewData.top_driver.name"></span>
+                  <span class="font-mono font-bold" 
+                        :class="overviewData.top_driver.pearson_r < 0 ? 'text-rose-400' : 'text-emerald-400'"
+                        x-text="`r = ${overviewData.top_driver.pearson_r.toFixed(3)}`"></span>
+                </div>
+                <div class="text-slate-400 text-[11px]" x-text="`${overviewData.top_driver.strength} ${overviewData.top_driver.direction} empirical correlation.`"></div>
+              </div>
+            </template>
+            <template x-if="!overviewData.top_driver">
+              <div class="text-xs text-slate-500">No numeric driver correlations configured.</div>
+            </template>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- =================================================================== -->
+      <!-- SCREEN 2: DIAGNOSTIC DECOMPOSITION -->
+      <!-- =================================================================== -->
+      <div x-show="activeTab === 'diagnostic'" class="space-y-6">
+        
+        <!-- Snapshot Distribution & Outliers (for non-temporal) -->
+        <div x-show="!diagnosticData.is_temporal" class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-4">
+          <h3 class="text-sm font-bold text-slate-200 uppercase tracking-wider flex items-center gap-2">
+            <span>📦</span> Distribution Profile & Outlier Audit ($1.5 	imes 	ext{IQR}$)
+          </h3>
+
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
+              <div class="text-xs text-slate-400">Median (P50)</div>
+              <div class="text-xl font-bold text-slate-100 mt-1" x-text="formatNumber(diagnosticData.distribution_stats?.p50, diagnosticData.primary_measure_unit)"></div>
+            </div>
+            <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
+              <div class="text-xs text-slate-400">IQR (P75 - P25)</div>
+              <div class="text-xl font-bold text-slate-100 mt-1" x-text="formatNumber(diagnosticData.distribution_stats?.iqr, diagnosticData.primary_measure_unit)"></div>
+            </div>
+            <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
+              <div class="text-xs text-slate-400">Skewness</div>
+              <div class="text-xl font-bold text-slate-100 mt-1" x-text="(diagnosticData.distribution_stats?.skewness || 0).toFixed(2)"></div>
+            </div>
+            <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
+              <div class="text-xs text-slate-400">Outliers Count</div>
+              <div class="text-xl font-bold text-amber-400 mt-1" x-text="diagnosticData.distribution_stats?.outlier_count || 0"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Multi-Dimensional Breakdown Tabs -->
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-5">
+          <div class="flex items-center justify-between">
+            <h3 class="text-sm font-bold text-slate-200 uppercase tracking-wider flex items-center gap-2">
+              <span>📊</span> Multi-Dimensional Variance & Concentration
+            </h3>
+          </div>
+
+          <!-- Dimension Selector Buttons -->
+          <div class="flex flex-wrap gap-2 border-b border-slate-800 pb-3">
+            <template x-for="(rows, dim) in diagnosticData.breakdowns || {}" :key="dim">
+              <button @click="activeDimension = dim; renderDiagnosticDimensionChart()" 
+                      :class="activeDimension === dim ? 'bg-indigo-600 text-white font-bold' : 'bg-slate-800 text-slate-300 hover:bg-slate-700'"
+                      class="px-3.5 py-1.5 rounded-lg text-xs transition capitalize" 
+                      x-text="dim.replace('_', ' ')"></button>
+            </template>
+          </div>
+
+          <!-- Dimension Chart -->
+          <div id="diagnosticDimChart" class="w-full h-72"></div>
+
+          <!-- Dimension Data Table -->
+          <div class="overflow-x-auto border border-slate-800 rounded-xl">
+            <table class="w-full text-left text-xs text-slate-300">
+              <thead class="bg-slate-800/80 text-[11px] uppercase tracking-wider text-slate-400 border-b border-slate-700">
+                <tr>
+                  <th class="p-3 capitalize" x-text="activeDimension.replace('_', ' ')"></th>
+                  <th class="p-3 text-right">Current Value</th>
+                  <th class="p-3 text-right">Prior Baseline</th>
+                  <th class="p-3 text-right">Net Delta</th>
+                  <th class="p-3 text-right">Contribution / Share %</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-800/60 font-mono">
+                <template x-for="row in (diagnosticData.breakdowns?.[activeDimension] || [])" :key="row[activeDimension]">
+                  <tr class="hover:bg-slate-800/40 transition">
+                    <td class="p-3 font-semibold font-sans text-slate-200" x-text="row[activeDimension]"></td>
+                    <td class="p-3 text-right" x-text="formatNumber(row.curr_value, diagnosticData.primary_measure_unit)"></td>
+                    <td class="p-3 text-right text-slate-400" x-text="formatNumber(row.prev_value, diagnosticData.primary_measure_unit)"></td>
+                    <td class="p-3 text-right" :class="row.delta_value < 0 ? 'text-rose-400' : 'text-emerald-400'" x-text="formatNumber(row.delta_value, diagnosticData.primary_measure_unit)"></td>
+                    <td class="p-3 text-right font-bold text-indigo-400" x-text="`${(row.contribution_pct || 0).toFixed(1)}%`"></td>
+                  </tr>
+                </template>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+
+        <!-- Driver Correlation Ranking Matrix -->
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-4">
+          <h3 class="text-sm font-bold text-slate-200 uppercase tracking-wider flex items-center gap-2">
+            <span>📈</span> Explanatory Driver Correlation Rankings
+          </h3>
+
+          <div class="overflow-x-auto border border-slate-800 rounded-xl">
+            <table class="w-full text-left text-xs text-slate-300">
+              <thead class="bg-slate-800/80 text-[11px] uppercase tracking-wider text-slate-400 border-b border-slate-700">
+                <tr>
+                  <th class="p-3">Explanatory Driver Field</th>
+                  <th class="p-3 text-right">Pearson Correlation ($r$)</th>
+                  <th class="p-3 text-right">Spearman Rank ($r_s$)</th>
+                  <th class="p-3">Association Direction</th>
+                  <th class="p-3">Strength Band</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-800/60 font-mono">
+                <template x-for="drv in diagnosticData.driver_correlations || []" :key="drv.column">
+                  <tr class="hover:bg-slate-800/40 transition">
+                    <td class="p-3 font-semibold font-sans text-slate-200" x-text="drv.label"></td>
+                    <td class="p-3 text-right font-bold" :class="drv.pearson_r < 0 ? 'text-rose-400' : 'text-emerald-400'" x-text="drv.pearson_r.toFixed(3)"></td>
+                    <td class="p-3 text-right text-slate-400" x-text="drv.spearman_r.toFixed(3)"></td>
+                    <td class="p-3 text-slate-300 font-sans" x-text="drv.direction"></td>
+                    <td class="p-3 font-sans">
+                      <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-800 text-slate-300" x-text="drv.strength"></span>
+                    </td>
+                  </tr>
+                </template>
+                <template x-if="!(diagnosticData.driver_correlations?.length)">
+                  <tr><td colspan="5" class="p-4 text-center text-slate-500 font-sans">No numeric drivers selected during ingestion.</td></tr>
+                </template>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- =================================================================== -->
+      <!-- SCREEN 3: INVESTIGATION WORKSPACE -->
+      <!-- =================================================================== -->
+      <div x-show="activeTab === 'workspace'" class="space-y-6">
+        
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-4">
+          <div class="flex items-center justify-between">
+            <h2 class="text-base font-bold text-slate-100 flex items-center gap-2">
+              <span>🔬</span>
+              <span x-text="workspaceData.is_demo ? 'Ranked Causal Hypotheses & DAG Evidence' : 'Observational Patterns & Empirical Findings'"></span>
+            </h2>
+            <span class="text-xs px-2.5 py-1 rounded bg-slate-800 text-slate-300 border border-slate-700"
+                  x-text="`${workspaceData.findings?.length || 0} Findings Evaluated`"></span>
+          </div>
+
+          <!-- Observational Notice for custom data -->
+          <div x-show="!workspaceData.is_demo" class="bg-indigo-950/40 border border-indigo-800/60 p-4 rounded-xl text-xs text-indigo-300 flex items-start gap-3">
+            <span class="text-base">ℹ️</span>
+            <div>
+              <div class="font-bold">Observational Integrity Safeguard:</div>
+              <div>For custom datasets, EDITH evaluates statistical associations, driver correlations, and segment concentrations. Correlation does not imply causation; structural causal DAGs require controlled experimental data.</div>
+            </div>
+          </div>
+
+          <!-- Findings List -->
+          <div class="space-y-4">
+            <template x-for="(finding, idx) in workspaceData.findings || []" :key="finding.id || idx">
+              <div class="bg-slate-950 p-5 rounded-xl border border-slate-800 space-y-3">
+                <div class="flex items-start justify-between">
+                  <div>
+                    <div class="flex items-center gap-2">
+                      <span class="text-xs font-bold text-slate-400 font-mono" x-text="`#${idx + 1}`"></span>
+                      <h4 class="text-sm font-bold text-slate-200" x-text="finding.name"></h4>
+                      <span class="text-[10px] px-2 py-0.5 rounded font-bold uppercase"
+                            :class="finding.cause_score_100 > 75 ? 'bg-rose-950 text-rose-300 border border-rose-800' : (finding.cause_score_100 > 40 ? 'bg-amber-950 text-amber-300 border border-amber-800' : 'bg-slate-800 text-slate-400')"
+                            x-text="finding.confidence_classification || finding.dependency_role"></span>
+                    </div>
+                    <p class="text-xs text-slate-400 mt-1" x-text="finding.summary"></p>
+                  </div>
+
+                  <div class="text-right shrink-0">
+                    <div class="text-xs text-slate-500 font-semibold">Evidence Score</div>
+                    <div class="text-lg font-extrabold text-indigo-400" x-text="`${(finding.cause_score_100 || 0).toFixed(1)}/100`"></div>
+                  </div>
+                </div>
+
+                <!-- Evidence Chains -->
+                <div class="bg-slate-900/80 p-3.5 rounded-lg border border-slate-800/80 text-xs space-y-1.5">
+                  <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Supporting Empirical Evidence</div>
+                  <ul class="list-disc list-inside space-y-1 text-slate-300 text-[11px]">
+                    <template x-for="ev in finding.supporting_evidence || []" :key="ev">
+                      <li x-text="ev"></li>
+                    </template>
+                  </ul>
+                </div>
+              </div>
+            </template>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- =================================================================== -->
+      <!-- SCREEN 4: POLICY SIMULATOR -->
+      <!-- =================================================================== -->
+      <div x-show="activeTab === 'simulation'" class="space-y-6">
+        
+        <!-- Custom data unavailable card -->
+        <div x-show="!simulationData.available" class="bg-slate-900 border border-slate-800 rounded-2xl p-8 shadow-xl text-center space-y-4">
+          <div class="text-4xl">🎯</div>
+          <h3 class="text-base font-bold text-slate-200">Counterfactual Simulation Unavailable</h3>
+          <p class="text-xs text-slate-400 max-w-lg mx-auto" x-text="simulationData.reason"></p>
+          <button @click="resetToDemo()" class="mt-4 px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold transition">
+            Switch to Built-in Demo Benchmark to Explore Simulation
+          </button>
+        </div>
+
+        <!-- Demo Benchmark Simulation Workbench -->
+        <div x-show="simulationData.available" class="space-y-6">
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-6">
+            <div>
+              <h2 class="text-base font-bold text-slate-100 flex items-center gap-2">
+                <span>🎯</span> Counterfactual Policy Intervention Simulator
+              </h2>
+              <p class="text-xs text-slate-400 mt-1">Simulate multi-lever recovery trajectories for B2B SaaS revenue restoration over an 8-week horizon.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 bg-slate-950 p-5 rounded-xl border border-slate-800 text-xs">
+              
+              <!-- Lever 1 -->
+              <div class="space-y-2">
+                <div class="flex justify-between font-semibold">
+                  <span class="text-slate-300">Price Rollback</span>
+                  <span class="text-indigo-400 font-bold" x-text="`-${simLevers.price_rollback_pct}%`"></span>
+                </div>
+                <input type="range" min="0" max="15" step="1" x-model.number="simLevers.price_rollback_pct" @input="updateSimulationLevers()" class="w-full accent-indigo-500" />
+                <span class="text-[11px] text-slate-500 block">Mitigates price elasticity resistance.</span>
+              </div>
+
+              <!-- Lever 2 -->
+              <div class="space-y-2">
+                <div class="flex justify-between font-semibold">
+                  <span class="text-slate-300">Regional Co-Op Fund</span>
+                  <span class="text-indigo-400 font-bold" x-text="`$${simLevers.promo_fund_k}k`"></span>
+                </div>
+                <input type="range" min="0" max="50" step="5" x-model.number="simLevers.promo_fund_k" @input="updateSimulationLevers()" class="w-full accent-indigo-500" />
+                <span class="text-[11px] text-slate-500 block">Counters competitor marketing pressure.</span>
+              </div>
+
+              <!-- Lever 3 -->
+              <div class="space-y-2">
+                <div class="flex justify-between font-semibold">
+                  <span class="text-slate-300">VIP Retention Guard</span>
+                  <span class="text-indigo-400 font-bold" x-text="simLevers.churn_mitigation ? 'Active' : 'Disabled'"></span>
+                </div>
+                <div class="pt-2">
+                  <label class="flex items-center space-x-2 cursor-pointer">
+                    <input type="checkbox" x-model="simLevers.churn_mitigation" @change="updateSimulationLevers()" class="rounded bg-slate-800 border-slate-700 text-indigo-600 focus:ring-0" />
+                    <span class="text-slate-300">Enable proactive account CSM outreach</span>
+                  </label>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Simulation Trajectory Chart -->
+            <div class="space-y-3">
+              <h3 class="text-xs font-bold text-slate-300 uppercase tracking-wider">8-Week Projected Revenue Recovery Path</h3>
+              <div id="simTrajectoryChart" class="w-full h-80"></div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <!-- =================================================================== -->
+      <!-- SCREEN 5: EDITH CONSOLE (AI CHAT) -->
+      <!-- =================================================================== -->
+      <div x-show="activeTab === 'console'" class="space-y-6">
+        
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-4">
+          <div>
+            <h2 class="text-base font-bold text-slate-100 flex items-center gap-2">
+              <span>💬</span> EDITH Grounded Decision Assistant
+            </h2>
+            <p class="text-xs text-slate-400 mt-1">Ask questions about observed metric changes, dimensional concentrations, driver correlations, or data quality.</p>
+          </div>
+
+          <!-- Suggested Starter Chips -->
+          <div class="space-y-2">
+            <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Suggested Probes</div>
+            <div class="flex flex-wrap gap-2">
+              <template x-for="q in getStarterQuestions()" :key="q">
+                <button @click="sendStarterQuery(q)" 
+                        class="text-xs px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700/60 transition"
+                        x-text="q"></button>
+              </template>
+            </div>
+          </div>
+
+          <!-- Chat History Stream -->
+          <div class="bg-slate-950 rounded-xl border border-slate-800 p-4 h-96 overflow-y-auto space-y-4" id="chatStreamBox">
+            
+            <!-- Default Welcome Bubble -->
+            <div class="flex items-start space-x-3">
+              <div class="w-7 h-7 rounded-lg bg-indigo-600 flex items-center justify-center font-bold text-xs text-white shrink-0">E</div>
+              <div class="bg-slate-900 border border-slate-800 rounded-2xl rounded-tl-none p-3.5 text-xs text-slate-200 max-w-xl space-y-2">
+                <div>Hello! I am <strong>EDITH</strong>, your Decision Intelligence Assistant. I am actively grounded in the current dataset.</div>
+                <div>You can ask me about metric deficits, dimensional concentrations, statistical driver associations, or data-quality health scores.</div>
+              </div>
+            </div>
+
+            <!-- Dialogue Turns -->
+            <template x-for="(msg, i) in chatHistory" :key="i">
+              <div class="flex items-start space-x-3" :class="msg.role === 'user' ? 'flex-row-reverse space-x-reverse' : ''">
+                <div class="w-7 h-7 rounded-lg flex items-center justify-center font-bold text-xs text-white shrink-0"
+                     :class="msg.role === 'user' ? 'bg-slate-700' : 'bg-indigo-600'"
+                     x-text="msg.role === 'user' ? 'U' : 'E'"></div>
+                <div class="rounded-2xl p-3.5 text-xs max-w-xl whitespace-pre-line leading-relaxed"
+                     :class="msg.role === 'user' ? 'bg-indigo-600 text-white rounded-tr-none' : 'bg-slate-900 border border-slate-800 text-slate-200 rounded-tl-none'"
+                     x-text="msg.content"></div>
+              </div>
+            </template>
+
+            <div x-show="chatLoading" class="flex items-start space-x-3">
+              <div class="w-7 h-7 rounded-lg bg-indigo-600 flex items-center justify-center font-bold text-xs text-white shrink-0">E</div>
+              <div class="bg-slate-900 border border-slate-800 rounded-2xl rounded-tl-none p-3.5 text-xs text-slate-400 flex items-center gap-2">
+                <svg class="animate-spin h-3.5 w-3.5 text-indigo-400" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path></svg>
+                Evaluating evidence from verified data...
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Input Bar -->
+          <form @submit.prevent="submitChat()" class="flex gap-2">
+            <input type="text" x-model="chatQuery" placeholder="Ask a question about the active investigation..." 
+                   class="flex-1 bg-slate-950 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-slate-100 focus:border-indigo-500 focus:outline-none" />
+            <button type="submit" :disabled="chatLoading || !chatQuery.trim()" 
+                    class="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold shadow-lg shadow-indigo-600/20 transition disabled:opacity-50">
+              Send
+            </button>
+          </form>
+
+        </div>
+
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Alpine Application Logic -->
+  <script>
+    function edithApp() {
+      return {
+        activeTab: 'overview',
+        sourceInfo: {},
+        overviewData: {},
+        diagnosticData: {},
+        workspaceData: {},
+        simulationData: {},
+        activeDimension: '',
+        
+        // Upload & Config
+        uploadData: null,
+        uploading: false,
+        configuring: false,
+        configForm: {
+          dataset_name: '',
+          analysis_grain: 'Time Series (Weekly / Monthly / Daily)',
+          primary_measure: '',
+          primary_measure_label: '',
+          primary_measure_unit: '',
+          aggregation_type: 'sum',
+          distinct_entity_column: '',
+          date_column: 'None (Snapshot)',
+          dimension_columns: [],
+          driver_columns: [],
+          identifier_columns: [],
+          drop_invalid_rows: true
+        },
+
+        // Simulation
+        simLevers: {
+          price_rollback_pct: 6.0,
+          promo_fund_k: 15.0,
+          churn_mitigation: true
+        },
+
+        // Chat
+        chatHistory: [],
+        chatQuery: '',
+        chatLoading: false,
+
+        // Alerts
+        alertMsg: '',
+        alertType: 'success',
+
+        async initApp() {
+          await this.loadActiveSource();
+          await this.loadOverview();
+          await this.loadDiagnostic();
+          await this.loadWorkspace();
+          await this.loadSimulation();
+        },
+
+        switchTab(tab) {
+          this.activeTab = tab;
+          if (tab === 'overview') {
+            this.loadOverview();
+          } else if (tab === 'diagnostic') {
+            this.loadDiagnostic();
+          } else if (tab === 'workspace') {
+            this.loadWorkspace();
+          } else if (tab === 'simulation') {
+            this.loadSimulation();
+          }
+        },
+
+        async loadActiveSource() {
+          try {
+            const res = await fetch('/api/data/source');
+            if (res.ok) {
+              this.sourceInfo = await res.json();
+            }
+          } catch (e) {
+            console.error('Failed to load active source:', e);
+          }
+        },
+
+        async resetToDemo() {
+          try {
+            const res = await fetch('/api/data/reset-demo', { method: 'POST' });
+            if (res.ok) {
+              this.showAlert('Successfully reset to built-in B2B SaaS Benchmark.', 'success');
+              this.uploadData = null;
+              await this.initApp();
+            }
+          } catch (e) {
+            this.showAlert('Failed to reset demo dataset.', 'error');
+          }
+        },
+
+        async handleFileSelect(event) {
+          const file = event.target.files[0];
+          if (file) await this.uploadFile(file);
+        },
+
+        async handleFileDrop(event) {
+          const file = event.dataTransfer.files[0];
+          if (file) await this.uploadFile(file);
+        },
+
+        async uploadFile(file) {
+          this.uploading = true;
+          this.alertMsg = '';
+          const formData = new FormData();
+          formData.append('file', file);
+
+          try {
+            const res = await fetch('/api/data/upload', {
+              method: 'POST',
+              body: formData
+            });
+            const data = await res.json();
+            if (!res.ok) throw new Error(data.detail || 'Upload failed');
+
+            this.uploadData = data;
+            // Pre-populate semantic configuration form with sensible defaults
+            this.configForm.dataset_name = file.name.replace(/\.[^/.]+$/, '').replace(/_/g, ' ').toUpperCase();
+            this.configForm.primary_measure = data.valid_numeric_columns[0] || '';
+            this.configForm.primary_measure_label = this.configForm.primary_measure.replace(/_/g, ' ').toUpperCase();
+            this.configForm.primary_measure_unit = 'Units';
+            this.configForm.date_column = data.valid_date_columns[0] || 'None (Snapshot)';
+            this.configForm.analysis_grain = (data.valid_date_columns.length > 0) ? 'Time Series (Weekly / Monthly / Daily)' : 'Cross-Sectional Snapshot';
+            this.configForm.dimension_columns = data.columns.filter(c => !data.valid_numeric_columns.includes(c) && !data.valid_date_columns.includes(c)).slice(0, 4);
+            this.configForm.driver_columns = data.valid_numeric_columns.filter(c => c !== this.configForm.primary_measure).slice(0, 3);
+            this.configForm.distinct_entity_column = data.columns[0] || '';
+
+            this.showAlert(`File '${file.name}' profiled successfully (${data.total_rows.toLocaleString()} rows). Review and apply semantic model below.`, 'success');
+          } catch (e) {
+            this.showAlert(e.message, 'error');
+          } finally {
+            this.uploading = false;
+          }
+        },
+
+        async submitSemanticConfiguration() {
+          this.configuring = true;
+          try {
+            const payload = {
+              dataset_name: this.configForm.dataset_name,
+              analysis_grain: this.configForm.analysis_grain,
+              primary_measure: this.configForm.primary_measure,
+              primary_measure_label: this.configForm.primary_measure_label,
+              primary_measure_unit: this.configForm.primary_measure_unit,
+              aggregation_type: this.configForm.aggregation_type,
+              distinct_entity_column: this.configForm.distinct_entity_column,
+              date_column: this.configForm.date_column,
+              dimension_columns: this.configForm.dimension_columns,
+              driver_columns: this.configForm.driver_columns,
+              identifier_columns: this.configForm.identifier_columns,
+              drop_invalid_rows: this.configForm.drop_invalid_rows
+            };
+
+            const res = await fetch('/api/data/configure', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(payload)
+            });
+
+            const data = await res.json();
+            if (!res.ok) throw new Error(data.detail || 'Configuration error');
+
+            this.showAlert(data.message, 'success');
+            await this.initApp();
+            this.activeTab = 'overview';
+          } catch (e) {
+            this.showAlert(e.message, 'error');
+          } finally {
+            this.configuring = false;
+          }
+        },
+
+        async loadOverview() {
+          try {
+            const res = await fetch('/api/overview');
+            if (res.ok) {
+              this.overviewData = await res.json();
+              if (this.overviewData.is_temporal && this.overviewData.time_series?.length > 0) {
+                this.$nextTick(() => this.renderOverviewCorridorChart());
+              }
+            }
+          } catch (e) {
+            console.error('Overview error:', e);
+          }
+        },
+
+        renderOverviewCorridorChart() {
+          const elem = document.getElementById('overviewCorridorChart');
+          if (!elem || !this.overviewData.time_series) return;
+
+          const ts = this.overviewData.time_series;
+          const xLabels = ts.map(d => d.week_label || `W${d.week_idx}`);
+          const actualVals = ts.map(d => d.value);
+          const baselines = ts.map(d => d.baseline);
+          const lowerBounds = ts.map(d => d.lower_bound);
+          const upperBounds = ts.map(d => d.upper_bound);
+
+          const traces = [
+            {
+              x: xLabels,
+              y: upperBounds,
+              type: 'scatter',
+              mode: 'lines',
+              line: { color: 'rgba(99, 102, 241, 0.15)', width: 1 },
+              name: 'Upper Corridor (+2σ)',
+              showlegend: false
+            },
+            {
+              x: xLabels,
+              y: lowerBounds,
+              type: 'scatter',
+              mode: 'lines',
+              fill: 'tonexty',
+              fillcolor: 'rgba(99, 102, 241, 0.08)',
+              line: { color: 'rgba(99, 102, 241, 0.15)', width: 1 },
+              name: 'Corridor (±2σ)',
+              showlegend: true
+            },
+            {
+              x: xLabels,
+              y: baselines,
+              type: 'scatter',
+              mode: 'lines',
+              line: { color: '#94a3b8', width: 1.5, dash: 'dash' },
+              name: 'Expected Baseline'
+            },
+            {
+              x: xLabels,
+              y: actualVals,
+              type: 'scatter',
+              mode: 'lines+markers',
+              line: { color: '#6366f1', width: 2.5 },
+              marker: { color: '#818cf8', size: 6 },
+              name: `Observed ${this.overviewData.primary_measure_label}`
+            }
+          ];
+
+          const layout = {
+            paper_bgcolor: 'transparent',
+            plot_bgcolor: 'transparent',
+            margin: { l: 60, r: 20, t: 20, b: 40 },
+            xaxis: { color: '#94a3b8', gridcolor: '#1e293b' },
+            yaxis: { color: '#94a3b8', gridcolor: '#1e293b' },
+            legend: { orientation: 'h', y: 1.15, font: { color: '#cbd5e1', size: 11 } }
+          };
+
+          Plotly.newPlot(elem, traces, layout, { responsive: true, displayModeBar: false });
+        },
+
+        async loadDiagnostic() {
+          try {
+            const res = await fetch('/api/diagnostic');
+            if (res.ok) {
+              this.diagnosticData = await res.json();
+              const dims = Object.keys(this.diagnosticData.breakdowns || {});
+              if (dims.length > 0 && !this.activeDimension) {
+                this.activeDimension = dims[0];
+              }
+              this.$nextTick(() => this.renderDiagnosticDimensionChart());
+            }
+          } catch (e) {
+            console.error('Diagnostic error:', e);
+          }
+        },
+
+        renderDiagnosticDimensionChart() {
+          const elem = document.getElementById('diagnosticDimChart');
+          if (!elem || !this.activeDimension) return;
+
+          const rows = this.diagnosticData.breakdowns?.[this.activeDimension] || [];
+          if (rows.length === 0) return;
+
+          const xCategories = rows.map(r => r[this.activeDimension]);
+          const yValues = rows.map(r => r.curr_value);
+
+          const trace = {
+            x: xCategories,
+            y: yValues,
+            type: 'bar',
+            marker: {
+              color: '#6366f1',
+              line: { color: '#818cf8', width: 1 }
+            }
+          };
+
+          const layout = {
+            paper_bgcolor: 'transparent',
+            plot_bgcolor: 'transparent',
+            margin: { l: 60, r: 20, t: 10, b: 60 },
+            xaxis: { color: '#94a3b8', gridcolor: '#1e293b' },
+            yaxis: { color: '#94a3b8', gridcolor: '#1e293b' }
+          };
+
+          Plotly.newPlot(elem, [trace], layout, { responsive: true, displayModeBar: false });
+        },
+
+        async loadWorkspace() {
+          try {
+            const res = await fetch('/api/workspace');
+            if (res.ok) {
+              this.workspaceData = await res.json();
+            }
+          } catch (e) {
+            console.error('Workspace error:', e);
+          }
+        },
+
+        async loadSimulation() {
+          try {
+            const res = await fetch('/api/simulation');
+            if (res.ok) {
+              this.simulationData = await res.json();
+              if (this.simulationData.available) {
+                this.simLevers = this.simulationData.levers || this.simLevers;
+                this.$nextTick(() => this.renderSimulationChart());
+              }
+            }
+          } catch (e) {
+            console.error('Simulation error:', e);
+          }
+        },
+
+        async updateSimulationLevers() {
+          try {
+            const res = await fetch('/api/simulation', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(this.simLevers)
+            });
+            if (res.ok) {
+              this.simulationData = await res.json();
+              this.renderSimulationChart();
+            }
+          } catch (e) {
+            console.error('Lever update error:', e);
+          }
+        },
+
+        renderSimulationChart() {
+          const elem = document.getElementById('simTrajectoryChart');
+          if (!elem || !this.simulationData.trajectory) return;
+
+          const traj = this.simulationData.trajectory;
+          const xWeeks = traj.map(t => t.week_label || `W${t.week_idx}`);
+          const doNothing = traj.map(t => t.do_nothing_revenue || t.status_quo || 0);
+          const simulated = traj.map(t => t.simulated_revenue || t.counterfactual || 0);
+
+          const traces = [
+            {
+              x: xWeeks,
+              y: doNothing,
+              type: 'scatter',
+              mode: 'lines+markers',
+              line: { color: '#f43f5e', dash: 'dash', width: 2 },
+              name: 'Status Quo (No Action)'
+            },
+            {
+              x: xWeeks,
+              y: simulated,
+              type: 'scatter',
+              mode: 'lines+markers',
+              line: { color: '#10b981', width: 2.5 },
+              name: 'Simulated Policy Recovery'
+            }
+          ];
+
+          const layout = {
+            paper_bgcolor: 'transparent',
+            plot_bgcolor: 'transparent',
+            margin: { l: 60, r: 20, t: 20, b: 40 },
+            xaxis: { color: '#94a3b8', gridcolor: '#1e293b' },
+            yaxis: { color: '#94a3b8', gridcolor: '#1e293b' },
+            legend: { orientation: 'h', y: 1.15, font: { color: '#cbd5e1', size: 11 } }
+          };
+
+          Plotly.newPlot(elem, traces, layout, { responsive: true, displayModeBar: false });
+        },
+
+        getStarterQuestions() {
+          if (this.sourceInfo?.is_demo) {
+            return [
+              'What can you do?',
+              'Explain volume vs price loss',
+              'Compare pricing vs competitor',
+              'Why is inventory ruled out?',
+              'What should we do first?'
+            ];
+          }
+          return [
+            'What changed in the selected metric?',
+            'Which groups show the greatest concentration?',
+            'Which numeric fields have the strongest observed association?',
+            'Summarize data-quality issues.'
+          ];
+        },
+
+        sendStarterQuery(query) {
+          this.chatQuery = query;
+          this.submitChat();
+        },
+
+        async submitChat() {
+          const q = this.chatQuery.trim();
+          if (!q || this.chatLoading) return;
+
+          this.chatHistory.push({ role: 'user', content: q });
+          this.chatQuery = '';
+          this.chatLoading = true;
+          this.scrollToBottom();
+
+          try {
+            const res = await fetch('/api/chat', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                query: q,
+                chat_history: this.chatHistory,
+                simulation_levers: this.simLevers
+              })
+            });
+
+            const data = await res.json();
+            if (!res.ok) throw new Error(data.detail || 'Failed to get answer');
+
+            this.chatHistory.push({ role: 'assistant', content: data.answer });
+          } catch (e) {
+            this.chatHistory.push({ role: 'assistant', content: `Error: ${e.message}` });
+          } finally {
+            this.chatLoading = false;
+            this.scrollToBottom();
+          }
+        },
+
+        scrollToBottom() {
+          this.$nextTick(() => {
+            const box = document.getElementById('chatStreamBox');
+            if (box) box.scrollTop = box.scrollHeight;
+          });
+        },
+
+        showAlert(msg, type = 'success') {
+          this.alertMsg = msg;
+          this.alertType = type;
+        },
+
+        formatNumber(val, unit = '') {
+          if (val === null || val === undefined || isNaN(val)) return '0.0';
+          const num = Number(val);
+          if (unit === '$') {
+            return `$${Math.abs(num).toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 1 })}`;
+          }
+          if (unit === '%') {
+            return `${num.toFixed(1)}%`;
+          }
+          return `${num.toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 1 })} ${unit}`.trim();
+        }
+
+      };
+    }
+  </script>
+</body>
+</html>

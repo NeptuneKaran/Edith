@@ -39,8 +39,10 @@ Unlike generic chatbot copilots that hallucinate numbers, EDITH strictly decoupl
 
 ```
 Edith_New/
-├── app.py                         # Streamlit entrypoint & workflow stage routing
-├── render.yaml                    # Render Blueprint specification
+├── main.py                        # FastAPI Application entrypoint & REST API Gateway
+├── frontend/
+│   └── index.html                 # Single-page application (Alpine.js + Tailwind + Plotly)
+├── render.yaml                    # Render Cloud Blueprint specification
 ├── requirements.txt               # Python package dependencies
 ├── runtime.txt                    # Python runtime version for cloud deployment
 ├── .env.example                   # Environment variable template
@@ -50,11 +52,11 @@ Edith_New/
 ├── data/
 │   ├── generator.py               # Deterministic synthetic data generator (52 weeks)
 │   ├── repository.py              # In-memory analytical data mart & custom source repository
-│   └── source_manager.py          # CSV/Excel/SQLite parser, SQL connector & query validator
+│   └── source_manager.py          # Generic profiler, semantic mapper, & SQL validator
 ├── core/
 │   ├── baseline_engine.py         # Rolling corridor (±2σ), Z-score, & anomaly detection
 │   ├── contribution_engine.py     # Dimensional variance decomposition
-│   ├── evidence_engine.py         # Multi-factor causal evidence scoring & hypothesis ranking
+│   ├── evidence_engine.py         # Multi-factor causal evidence & observational findings
 │   ├── dependency_graph.py        # Metric DAG traversal & revenue decomposition
 │   └── simulation_engine.py       # Counterfactual simulation & 8-week trajectory projection
 ├── ai/
@@ -62,32 +64,18 @@ Edith_New/
 │   ├── tools.py                   # 11 safe read-only analytical tools for Gemini
 │   ├── prompts.py                 # Grounded system prompts & intent classification
 │   └── offline_reasoner.py        # Deterministic offline conversational engine
-├── state/
-│   └── session_state.py           # Typed Streamlit session state management
-├── ui/
-│   ├── components/
-│   │   ├── cards.py               # Incident banner & KPI metric card components
-│   │   ├── charts.py              # Plotly corridor, waterfall, & trajectory charts
-│   │   └── chat_pane.py           # Investigation chat pane
-│   └── screens/
-│       ├── s0_data_sources.py     # Data sources & ingestion manager
-│       ├── s1_overview.py         # Detect: Executive Command Center
-│       ├── s2_diagnostic.py       # Diagnose: 52-week corridor & dimensional waterfall
-│       ├── s3_workspace.py        # Explain: Causal Investigation Workspace
-│       ├── s4_simulation.py       # Simulate: Policy Scenario Workbench
-│       └── s5_console.py          # Dedicated full-page EDITH Console
+├── test_datasets/                 # 10 synthetic business domain datasets (HR, Finance, etc.)
+│   ├── EDITH_TESTING_GUIDE.md     # Step-by-step user testing guide
+│   └── README.md                  # Dataset catalog
 └── tests/
+    ├── test_api_endpoints.py      # FastAPI REST endpoint integration tests
+    ├── test_generic_data_sources.py # Ingestion, validation & profiling tests
     ├── test_all_imports.py
-    ├── test_all_screens.py
     ├── test_data_sources_and_tools.py
-    ├── test_gemini_tool_agent.py
     ├── test_conversational_ai.py
     ├── test_causal_reasoning.py
     ├── test_analytics.py
-    ├── audit_numbers.py
-    ├── red_team_audit.py
-    ├── check_deployment_readiness.py
-    └── test_deployment_simulation.py
+    └── check_deployment_readiness.py
 ```
 
 ---
@@ -99,36 +87,35 @@ Edith_New/
 git clone https://github.com/NeptuneKaran/Edith.git
 cd Edith
 
-
 # 2. Install dependencies
 pip install -r requirements.txt
 
 # 3. (Optional) Configure Gemini API Key
 export GEMINI_API_KEY="your_api_key_here"
 
-# 4. Launch Streamlit Application
-streamlit run app.py
+# 4. Launch EDITH FastAPI Single-Page Web Dashboard
+uvicorn main:app --reload
 ```
+
+Then navigate to `http://localhost:8000` (or `http://localhost:8501` if running with `python main.py`) in your web browser.
 
 ---
 
 ## Automated Test Suite (100% Pass)
 
 ```bash
+python -m unittest tests/test_api_endpoints.py -v
+python -m unittest tests/test_generic_data_sources.py -v
 python tests/test_all_imports.py
-python tests/test_all_screens.py
 python tests/test_data_sources_and_tools.py
-python tests/test_gemini_tool_agent.py
 python tests/test_conversational_ai.py
 python tests/test_causal_reasoning.py
 python tests/test_analytics.py
-python tests/audit_numbers.py
-python tests/red_team_audit.py
 python tests/check_deployment_readiness.py
-python tests/test_deployment_simulation.py
 ```
 
 ---
 
 ## 📄 License & Intellectual Property
 Accenture Innovation Challenge 2026 Submission. Developed by Team IIT Kanpur.
+
