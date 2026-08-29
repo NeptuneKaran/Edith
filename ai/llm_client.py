@@ -12,13 +12,57 @@ from ai.tools import AVAILABLE_TOOLS, execute_tool_call
 from ai.offline_reasoner import OfflineEdithReasoner
 from config.settings import DEFAULT_GEMINI_MODEL, FALLBACK_GEMINI_MODEL
 
-def _sanitize_log_message(msg: str, key: str = "") -> str:
-    """Removes sensitive API key tokens from logs."""
-    if key and len(key) > 6:
-        msg = msg.replace(key, f"{key[:6]}...[REDACTED]")
-    # Also strip common API key patterns
-    msg = re.sub(r'AIzaSy[A-Za-z0-9_-]{33}', '[REDACTED_API_KEY]', msg)
-    return msg
+def _build_gemini_contents(initial_prompt: str, chat_history: Optional[List[Dict[str, Any]]] = None) -> List[Any]:
+    """
+    Builds clean, valid Google GenAI Content messages ensuring strict role alternation (user -> model -> user).
+    Deduplicates trailing user queries and collapses consecutive same-role turns.
+    """
+    from google.genai import types
+    
+    clean_history = []
+    if chat_history:
+        for msg in chat_history:
+            content_str = str(msg.get("content", "")).strip()
+            if not content_str:
+                continue
+            raw_role = str(msg.get("role", "user")).lower()
+            role = "model" if raw_role in ["assistant", "model", "bot"] else "user"
+            clean_history.append({"role": role, "content": content_str})
+            
+    # If the last message in history is the current user query, remove it to prevent duplicate user turns
+    if clean_history and clean_history[-1]["role"] == "user" and clean_history[-1]["content"].lower() == initial_prompt.strip().lower():
+        clean_history.pop()
+
+    # Build alternating sequence
+    contents: List[Any] = []
+    prev_role = None
+    
+    # Take up to last 8 turns of history
+    for item in clean_history[-8:]:
+        role = item["role"]
+        text = item["content"]
+        
+        # If consecutive same role, combine parts
+        if role == prev_role and contents:
+            contents[-1].parts.append(types.Part.from_text(text=f"\n{text}"))
+        else:
+            contents.append(types.Content(
+                role=role,
+                parts=[types.Part.from_text(text=text)]
+            ))
+            prev_role = role
+
+    # Ensure last message is current user prompt
+    if contents and contents[-1].role == "user":
+        contents[-1].parts.append(types.Part.from_text(text=f"\n\n{initial_prompt}"))
+    else:
+        contents.append(types.Content(
+            role="user",
+            parts=[types.Part.from_text(text=initial_prompt)]
+        ))
+        
+    return contents
+
 
 class EdithLLMClient:
     """Conversational Agent Gateway managing Gemini tool-calling loop and offline fallback."""
@@ -206,28 +250,15 @@ class EdithLLMClient:
     ) -> Tuple[str, List[str]]:
         """
         Executes a bounded multi-turn tool-calling loop with Google GenAI SDK.
-        1. Formats conversation messages.
+        1. Formats conversation messages using _build_gemini_contents to prevent role mismatch.
         2. Calls Gemini with tools.
         3. If Gemini returns function_calls, executes each tool and passes results back.
         4. Continues until final text is synthesized or max_turns is reached.
         """
         from google.genai import types
         
-        # Build contents from history
-        contents: List[Any] = []
-        if chat_history:
-            for msg in chat_history[-6:]:
-                role = "user" if msg.get("role") == "user" else "model"
-                contents.append(types.Content(
-                    role=role,
-                    parts=[types.Part.from_text(text=msg.get("content", ""))]
-                ))
-                
-        # Append current user prompt
-        contents.append(types.Content(
-            role="user",
-            parts=[types.Part.from_text(text=initial_prompt)]
-        ))
+        # Build contents from history ensuring strict alternating user/model roles
+        contents: List[Any] = _build_gemini_contents(initial_prompt, chat_history)
         
         config = types.GenerateContentConfig(
             system_instruction=EDITH_SYSTEM_PROMPT,
@@ -296,18 +327,7 @@ class EdithLLMClient:
     ) -> str:
         """Direct prompt generation without function calling as a resilient fallback."""
         from google.genai import types
-        contents: List[Any] = []
-        if chat_history:
-            for msg in chat_history[-4:]:
-                role = "user" if msg.get("role") == "user" else "model"
-                contents.append(types.Content(
-                    role=role,
-                    parts=[types.Part.from_text(text=msg.get("content", ""))]
-                ))
-        contents.append(types.Content(
-            role="user",
-            parts=[types.Part.from_text(text=prompt)]
-        ))
+        contents = _build_gemini_contents(prompt, chat_history)
         config = types.GenerateContentConfig(
             system_instruction=EDITH_SYSTEM_PROMPT,
             temperature=0.3
@@ -318,6 +338,7 @@ class EdithLLMClient:
             config=config
         )
         return response.text if hasattr(response, "text") and response.text else ""
+
 
     def chat_turn(
 
