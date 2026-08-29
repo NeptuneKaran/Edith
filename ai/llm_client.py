@@ -24,8 +24,16 @@ class EdithLLMClient:
     """Conversational Agent Gateway managing Gemini tool-calling loop and offline fallback."""
     
     def __init__(self, api_key: str = ""):
-        # Priority: explicitly passed key -> environment variable GEMINI_API_KEY
-        raw_key = api_key if api_key else os.getenv("GEMINI_API_KEY", "")
+        # Priority: explicitly passed key -> GEMINI_API_KEY -> GOOGLE_API_KEY -> GEMINI_KEY -> GENAI_API_KEY
+        raw_key = (
+            api_key or
+            os.getenv("GEMINI_API_KEY") or
+            os.getenv("GOOGLE_API_KEY") or
+            os.getenv("GEMINI_KEY") or
+            os.getenv("GEMINI_API_TOKEN") or
+            os.getenv("GENAI_API_KEY") or
+            ""
+        )
         self.api_key = raw_key.strip().strip("'").strip('"') if raw_key else ""
         self.client = None
         self.primary_model = DEFAULT_GEMINI_MODEL
@@ -42,7 +50,8 @@ class EdithLLMClient:
                 print(f"[LLM Gateway] Failed to initialize Google GenAI SDK: {safe_err}")
                 self.client = None
         else:
-            print("[LLM Gateway] No GEMINI_API_KEY found. Operating in 100% Deterministic Offline Mode.")
+            print("[LLM Gateway] No GEMINI_API_KEY / GOOGLE_API_KEY found. Operating in 100% Deterministic Offline Mode.")
+
 
 
     def generate_briefing(
