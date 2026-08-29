@@ -12,7 +12,16 @@ from ai.tools import AVAILABLE_TOOLS, execute_tool_call
 from ai.offline_reasoner import OfflineEdithReasoner
 from config.settings import DEFAULT_GEMINI_MODEL, FALLBACK_GEMINI_MODEL
 
+def _sanitize_log_message(msg: str, key: str = "") -> str:
+    """Removes sensitive API key tokens from logs."""
+    if key and len(key) > 6:
+        msg = msg.replace(key, f"{key[:6]}...[REDACTED]")
+    # Also strip common API key patterns
+    msg = re.sub(r'AIzaSy[A-Za-z0-9_-]{33}', '[REDACTED_API_KEY]', msg)
+    return msg
+
 def _build_gemini_contents(initial_prompt: str, chat_history: Optional[List[Dict[str, Any]]] = None) -> List[Any]:
+
     """
     Builds clean, valid Google GenAI Content messages ensuring strict role alternation (user -> model -> user).
     Deduplicates trailing user queries and collapses consecutive same-role turns.

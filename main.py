@@ -642,16 +642,33 @@ async def chat_with_edith(req: ChatQueryRequest):
                 break
 
     # Initialize Gemini client / Offline reasoner
-    client = EdithLLMClient()
-    answer_text, meta = client.answer_question(
-        query=req.query,
-        anomaly_context=anom_ctx,
-        selected_hypothesis=selected_h,
-        hypotheses=all_hypotheses,
-        chat_history=req.chat_history or [],
-        simulation_levers=req.simulation_levers or _ACTIVE_SIM_LEVERS
-    )
-
+    try:
+        client = EdithLLMClient()
+        answer_text, meta = client.answer_question(
+            query=req.query,
+            anomaly_context=anom_ctx,
+            selected_hypothesis=selected_h,
+            hypotheses=all_hypotheses,
+            chat_history=req.chat_history or [],
+            simulation_levers=req.simulation_levers or _ACTIVE_SIM_LEVERS
+        )
+    except Exception as e:
+        print(f"[Chat API Exception] Falling back to reasoner: {e}")
+        answer_text = OfflineEdithReasoner.answer_conversational_query(
+            query=req.query,
+            anomaly_context=anom_ctx,
+            selected_hypothesis=selected_h,
+            all_hypotheses=all_hypotheses,
+            chat_history=req.chat_history or [],
+            simulation_levers=req.simulation_levers or _ACTIVE_SIM_LEVERS
+        )
+        meta = {
+            "provider": "Deterministic Analytical Engine",
+            "model": "OfflineEdithReasoner v2.0",
+            "status": "Active (Fallback on Error)",
+            "intent": "general_inquiry",
+            "error_detail": str(e)
+        }
 
     return {
         "answer": answer_text,
@@ -660,6 +677,7 @@ async def chat_with_edith(req: ChatQueryRequest):
         "metadata": meta,
         "is_demo": is_demo
     }
+
 
 
 class SetApiKeyRequest(BaseModel):

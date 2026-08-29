@@ -1305,16 +1305,24 @@
               })
             });
 
-            const data = await res.json();
-            if (!res.ok) throw new Error(data.detail || 'Failed to get answer');
+            let data;
+            const resText = await res.text();
+            try {
+              data = JSON.parse(resText);
+            } catch (jsonErr) {
+              throw new Error(resText || `HTTP ${res.status}`);
+            }
+
+            if (!res.ok) throw new Error(data.detail || data.message || 'Failed to get answer');
 
             this.chatHistory.push({ role: 'assistant', content: data.answer });
           } catch (e) {
-            this.chatHistory.push({ role: 'assistant', content: `Error: ${e.message}` });
+            this.chatHistory.push({ role: 'assistant', content: `⚠️ ${e.message}` });
           } finally {
             this.chatLoading = false;
             this.scrollToBottom();
           }
+
         },
 
         scrollToBottom() {
