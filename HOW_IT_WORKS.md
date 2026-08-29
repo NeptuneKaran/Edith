@@ -47,9 +47,11 @@ EDITH is an **evidence-grounded KPI intelligence and investigation system**. Its
                                                   │
                                                   ▼
 +----------------------------------------------------------------------------------------------------+
-|                                  STREAMLIT INVESTIGATION WORKSPACE                                 |
-|  Screen 1: Overview  →  Screen 2: Diagnostic  →  Screen 3: Workspace  →  Screen 4: Simulation     |
+|                             FASTAPI & ALPINE.JS INVESTIGATION DASHBOARD                            |
+|  Screen 0: Data Sources  →  Screen 1: Overview  →  Screen 2: Diagnostic  →  Screen 3: Workspace   |
+|  Screen 4: Simulation    →  Screen 5: Conversational Console                                       |
 +----------------------------------------------------------------------------------------------------+
+
 ```
 
 ---
