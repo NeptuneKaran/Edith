@@ -66,8 +66,50 @@ class AnomalyEngine:
         Evaluates whether the most recent data point constitutes a Material P1 Anomaly
         against statistical significance, materiality threshold, and temporal persistence.
         """
+        if df_analyzed.empty:
+            return {
+                "kpi_name": kpi_name,
+                "current_value": 0.0,
+                "baseline_value": 0.0,
+                "delta_value": 0.0,
+                "delta_pct": 0.0,
+                "z_score": 0.0,
+                "upper_corridor": 0.0,
+                "lower_corridor": 0.0,
+                "is_anomaly": False,
+                "is_p1_material": False,
+                "is_persistent": False,
+                "is_temporal": False,
+                "status_label": "No Data",
+                "current_week_label": "N/A",
+                "current_week_date": "N/A"
+            }
+            
+        is_snapshot = len(df_analyzed) <= 1 or str(df_analyzed["week_label"].iloc[0]) in ["Snapshot", "Record-Level"] or df_analyzed["week_idx"].nunique() <= 1
+        if is_snapshot:
+            curr = df_analyzed.iloc[-1]
+            curr_val = float(curr["value"])
+            return {
+                "kpi_name": kpi_name,
+                "current_value": curr_val,
+                "baseline_value": curr_val,
+                "delta_value": 0.0,
+                "delta_pct": 0.0,
+                "z_score": 0.0,
+                "upper_corridor": curr_val,
+                "lower_corridor": curr_val,
+                "is_anomaly": False,
+                "is_p1_material": False,
+                "is_persistent": False,
+                "is_temporal": False,
+                "status_label": "Cross-Sectional Snapshot",
+                "current_week_label": str(curr.get("week_label", "Snapshot")),
+                "current_week_date": str(curr.get("week_date", "Snapshot"))
+            }
+
         curr = df_analyzed.iloc[-1]
-        prev = df_analyzed.iloc[-2]
+        prev = df_analyzed.iloc[-2] if len(df_analyzed) > 1 else curr
+
         
         curr_val = float(curr["value"])
         baseline_val = float(curr["baseline"])

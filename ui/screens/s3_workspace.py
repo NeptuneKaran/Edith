@@ -26,34 +26,42 @@ def render_screen_3():
             set_screen("diagnostic")
             st.rerun()
             
+    repo = DataRepository.get_instance()
+    is_demo = repo.active_source_info.get("is_demo", True)
+    
     with col_title:
-        st.markdown("<h2 style='margin:0; padding:0; font-size: 20px; font-weight: 800; color: #0F172A;'>🔬 Stage 3: Causal Investigation Workspace</h2>", unsafe_allow_html=True)
+        st.markdown("<h2 style='margin:0; padding:0; font-size: 20px; font-weight: 800; color: #0F172A;'>🔬 Stage 3: Investigation Workspace</h2>", unsafe_allow_html=True)
     with col_tag:
         st.markdown("<div style='text-align: right; margin-top: 4px;'>", unsafe_allow_html=True)
-        render_epistemology_chip("DATA-DERIVED")
+        render_epistemology_chip("DATA-DERIVED" if is_demo else "OBSERVATIONAL")
         st.markdown("</div>", unsafe_allow_html=True)
         
-    st.caption("Deterministic multi-dimensional evaluation of 8 competing hypotheses across temporal precedence, magnitude, directional consistency, lag correlations, metric DAG hierarchy, and mathematical decomposition.")
+    if is_demo:
+        st.caption("Deterministic multi-dimensional evaluation of 8 competing hypotheses across temporal precedence, magnitude, directional consistency, lag correlations, metric DAG hierarchy, and mathematical decomposition.")
+    else:
+        st.caption("Empirical pattern isolation: evaluating dimensional concentrations, driver associations, and distribution properties with epistemological integrity (associations, not unearned causal claims).")
     st.markdown("<div style='margin-bottom: 16px;'></div>", unsafe_allow_html=True)
     
     hypotheses = st.session_state.get("hypotheses", [])
-    selected_hypo_id = st.session_state.get("selected_hypothesis_id", "H1_PRICING_PRESSURE")
+    selected_hypo_id = st.session_state.get("selected_hypothesis_id", hypotheses[0]["id"] if hypotheses else "")
     
     # Get active hypothesis object
     active_h = next((h for h in hypotheses if h["id"] == selected_hypo_id), hypotheses[0] if hypotheses else {})
     
     # =========================================================================
-    # 1. CANDIDATE HYPOTHESIS SELECTION STRIP
+    # 1. CANDIDATE HYPOTHESIS / PATTERN SELECTION STRIP
     # =========================================================================
+    section_title = "Candidate Root-Cause Hypotheses (Ranked by Multi-Dimensional Evidence)" if is_demo else "Empirical Investigation Findings (Ranked by Impact & Association Strength)"
     st.markdown(
-        """
+        f"""
         <div style="background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 10px; padding: 16px 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.03); margin-bottom: 16px;">
             <div style="font-size: 13px; font-weight: 700; color: #0F172A; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.4px;">
-                Candidate Root-Cause Hypotheses (Ranked by Multi-Dimensional Evidence)
+                {section_title}
             </div>
         """,
         unsafe_allow_html=True
     )
+
     
     # 8 Hypotheses in 2 rows of 4 columns
     for row_idx in range(0, len(hypotheses), 4):

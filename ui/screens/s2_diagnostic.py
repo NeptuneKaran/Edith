@@ -33,15 +33,30 @@ def render_screen_2():
     st.markdown("<div style='margin-bottom: 14px;'></div>", unsafe_allow_html=True)
     
     repo = DataRepository.get_instance()
+    is_demo = repo.active_source_info.get("is_demo", True)
+    sem_model = repo.get_semantic_model()
+    unit_sym = sem_model.primary_measure_unit if (sem_model and sem_model.primary_measure_unit) else "$"
     
-    # If B2B Sales (the primary anomaly)
+    is_temporal = repo.active_source_info.get("feature_status", {}).get("is_temporal", True)
+    if sem_model and any(kw in sem_model.analysis_grain.lower() for kw in ["snapshot", "cross-sectional", "record", "event"]):
+        is_temporal = False
+
+    def fmt_v(v: float) -> str:
+        if unit_sym == "$":
+            return f"${v:,.0f}"
+        elif unit_sym == "%":
+            return f"{v:.1f}%"
+        else:
+            return f"{v:,.1f} {unit_sym}".strip()
+
+    # Primary Investigated Metric
     if selected_kpi_id == "kpi_b2b_sales":
         df_ts = st.session_state.get("kpi_ts")
         anom_ctx = st.session_state.get("anomaly_context", {})
         contrib_ctx = st.session_state.get("contribution_context", {})
         
-        # 1. Historical Time-Series Chart Container
-        if df_ts is not None:
+        # 1. Historical Time-Series Chart Container (Temporal datasets only)
+        if is_temporal and df_ts is not None and len(df_ts) > 1:
             st.markdown(
                 """
                 <div style="background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 10px; padding: 16px 20px; margin-bottom: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.03);">
@@ -52,84 +67,80 @@ def render_screen_2():
             st.plotly_chart(fig_corridor, use_container_width=True)
             st.markdown("</div>", unsafe_allow_html=True)
             
-        # 2. Anomaly Summary Metrics Strip
-        col_m1, col_m2, col_m3, col_m4 = st.columns(4)
-        with col_m1:
-            st.metric("Observed Revenue", f"${anom_ctx.get('current_value', 0):,.0f}", f"{anom_ctx.get('delta_pct', 0):+.1f}% vs baseline", delta_color="inverse")
-        with col_m2:
-            st.metric("Baseline Target", f"${anom_ctx.get('baseline_value', 0):,.0f}", "Rolling 8-Wk Median")
-        with col_m3:
-            st.metric("Statistical Z-Score", f"{anom_ctx.get('z_score', 0):.2f}", "Breaches ±2.0σ Corridor", delta_color="inverse")
-        with col_m4:
-            st.metric("Persistence", "2 Consecutive Wks", "P1 Material Anomaly", delta_color="off")
+            # 2. Anomaly Summary Metrics Strip
+            col_m1, col_m2, col_m3, col_m4 = st.columns(4)
+            with col_m1:
+                val_lbl = "Observed Revenue" if is_demo else "Observed Value"
+                st.metric(val_lbl, fmt_v(anom_ctx.get('current_value', 0)), f"{anom_ctx.get('delta_pct', 0):+.1f}% vs baseline", delta_color="inverse")
+            with col_m2:
+                base_lbl = "Baseline Target" if is_demo else "Expected Baseline"
+                st.metric(base_lbl, fmt_v(anom_ctx.get('baseline_value', 0)), "Rolling Baseline")
+            with col_m3:
+                st.metric("Statistical Z-Score", f"{anom_ctx.get('z_score', 0):.2f}", "Corridor Variance", delta_color="inverse")
+            with col_m4:
+                st.metric("Persistence", "2 Consecutive Wks" if is_demo else "Active Telemetry", "Material Variance" if anom_ctx.get('is_anomaly') else "Normal", delta_color="off")
+        else:
+            # Non-temporal Snapshot Mode: Display Distribution Profile
+            dist_stats = repo.get_distribution_statistics()
+            outlier_cnt = dist_stats.get("outlier_count", 0)
+            outlier_pct = dist_stats.get("outlier_pct", 0.0)
+            p50_val = dist_stats.get("percentiles", {}).get("P50_median", anom_ctx.get('current_value', 0))
+            iqr_val = dist_stats.get("iqr", 0.0)
+            skew_val = dist_stats.get("skewness", 0.0)
+            
+            st.markdown(
+                f"""
+                <div style="background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 10px; padding: 18px 22px; margin-bottom: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.03);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                        <h4 style="margin: 0; font-size: 15px; font-weight: 800; color: #0F172A;">📊 Cross-Sectional Distribution & Outlier Profile</h4>
+                        <span style="background: #EFF6FF; color: #1D4ED8; font-size: 11px; font-weight: 800; padding: 2px 8px; border-radius: 4px;">Snapshot Grain</span>
+                    </div>
+                    <div style="font-size: 13px; color: #475569; line-height: 1.5;">
+                        Parametric and non-parametric distribution statistics across active records. Identifies concentration spread and empirical outlier boundaries ($1.5 \\times \\text{{IQR}}$).
+                    </div>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
+            col_m1, col_m2, col_m3, col_m4 = st.columns(4)
+            with col_m1:
+                st.metric("Observed Aggregate", fmt_v(anom_ctx.get('current_value', 0)), f"{dist_stats.get('count', 0):,} Records")
+            with col_m2:
+                st.metric("Median (P50)", fmt_v(p50_val), f"IQR: {iqr_val:.2f}")
+            with col_m3:
+                st.metric("Distribution Skewness", f"{skew_val:.2f}", "Symmetric" if abs(skew_val) < 0.5 else ("Right-Skewed" if skew_val > 0 else "Left-Skewed"))
+            with col_m4:
+                st.metric("Empirical Outliers", f"{outlier_cnt} ({outlier_pct:.1f}%)", "Outside 1.5x IQR", delta_color="off")
             
         st.markdown("<div style='margin-bottom: 16px;'></div>", unsafe_allow_html=True)
         st.markdown("---")
         
-        # 3. Dimensional Variance Decomposition
-        st.markdown("<h3 style='font-size: 16px; font-weight: 700; color: #0F172A; margin-bottom: 2px;'>🧩 Dimensional Variance Localization: Isolating Impact Epicenter</h3>", unsafe_allow_html=True)
-        st.caption("Decomposes aggregate variance to localize where the shock is concentrated (empirical locus of effect, distinct from causal mechanism):")
+        # 3. Dimensional Variance / Concentration Decomposition
+        decomp_title = "🧩 Dimensional Variance Localization: Isolating Impact Epicenter" if is_demo else "🧩 Dimensional Breakdown & Segment Concentration"
+        st.markdown(f"<h3 style='font-size: 16px; font-weight: 700; color: #0F172A; margin-bottom: 2px;'>{decomp_title}</h3>", unsafe_allow_html=True)
+        st.caption("Decomposes aggregate variance to localize where the measure is concentrated (empirical locus of effect, distinct from causal mechanism):")
         
         breakdowns = contrib_ctx.get("breakdowns", {})
-        tab_reg, tab_tier, tab_prod, tab_chan = st.tabs(["🌍 By Region", "🏢 By Customer Tier", "📦 By Product Line", "🌐 By Channel"])
-        
-        with tab_reg:
-            if "region" in breakdowns:
-                fig_reg = plot_waterfall_contribution(breakdowns["region"], "region", "Region Variance Breakdown")
-                st.plotly_chart(fig_reg, use_container_width=True)
-                reg_name = contrib_ctx.get("primary_region", "Region B")
-                reg_pct = contrib_ctx.get("primary_region_share", 97.3)
-                st.markdown(
-                    f"""
-                    <div style="background: #EFF6FF; border: 1px solid #BFDBFE; border-left: 4px solid #2563EB; padding: 10px 14px; border-radius: 6px; font-size: 13px; color: #1E293B;">
-                        💡 <b>Localization Finding:</b> <b>{reg_name}</b> accounts for <b>{reg_pct:.1f}%</b> of the aggregate revenue contraction. Other regions remained within normal variation.
-                    </div>
-                    """,
-                    unsafe_allow_html=True
-                )
-                
-        with tab_tier:
-            if "customer_tier" in breakdowns:
-                fig_tier = plot_waterfall_contribution(breakdowns["customer_tier"], "customer_tier", "Customer Tier Variance Breakdown")
-                st.plotly_chart(fig_tier, use_container_width=True)
-                tier_name = contrib_ctx.get("primary_tier", "Enterprise")
-                tier_pct = contrib_ctx.get("primary_tier_share", 97.3)
-                st.markdown(
-                    f"""
-                    <div style="background: #EFF6FF; border: 1px solid #BFDBFE; border-left: 4px solid #2563EB; padding: 10px 14px; border-radius: 6px; font-size: 13px; color: #1E293B;">
-                        💡 <b>Localization Finding:</b> <b>{tier_name}</b> accounts for <b>{tier_pct:.1f}%</b> of the tier-level variance; Mid-Market and SMB cohorts remained stable.
-                    </div>
-                    """,
-                    unsafe_allow_html=True
-                )
-                
-        with tab_prod:
-            if "product_line" in breakdowns:
-                fig_prod = plot_waterfall_contribution(breakdowns["product_line"], "product_line", "Product Line Variance Breakdown")
-                st.plotly_chart(fig_prod, use_container_width=True)
-                prod_name = contrib_ctx.get("primary_product", "Product Suite Alpha")
-                prod_pct = contrib_ctx.get("primary_product_share", 100.0)
-                st.markdown(
-                    f"""
-                    <div style="background: #EFF6FF; border: 1px solid #BFDBFE; border-left: 4px solid #2563EB; padding: 10px 14px; border-radius: 6px; font-size: 13px; color: #1E293B;">
-                        💡 <b>Localization Finding:</b> <b>{prod_name}</b> accounts for <b>{prod_pct:.1f}%</b> of the product-level variance; Suite Beta and Suite Gamma lines were unaffected.
-                    </div>
-                    """,
-                    unsafe_allow_html=True
-                )
-                
-        with tab_chan:
-            if "channel" in breakdowns:
-                fig_chan = plot_waterfall_contribution(breakdowns["channel"], "channel", "Sales Channel Variance Breakdown")
-                st.plotly_chart(fig_chan, use_container_width=True)
-                st.markdown(
-                    """
-                    <div style="background: #EFF6FF; border: 1px solid #BFDBFE; border-left: 4px solid #2563EB; padding: 10px 14px; border-radius: 6px; font-size: 13px; color: #1E293B;">
-                        💡 <b>Localization Finding:</b> Contraction is shared across <b>Direct Sales</b> and <b>Partner Network</b> channels proportionally to Enterprise deal volume.
-                    </div>
-                    """,
-                    unsafe_allow_html=True
-                )
+        if breakdowns:
+            tab_labels = [f"📊 By {dim.replace('_', ' ').title()}" for dim in breakdowns.keys()]
+            tabs = st.tabs(tab_labels)
+            for tab_i, (dim_name, df_dim) in enumerate(breakdowns.items()):
+                with tabs[tab_i]:
+                    fig_dim = plot_waterfall_contribution(df_dim, dim_name, f"{dim_name.replace('_', ' ').title()} Breakdown")
+                    st.plotly_chart(fig_dim, use_container_width=True)
+                    if not df_dim.empty:
+                        top_seg = str(df_dim.iloc[0][dim_name])
+                        top_pct = float(df_dim.iloc[0].get("contribution_pct", 0.0))
+                        st.markdown(
+                            f"""
+                            <div style="background: #EFF6FF; border: 1px solid #BFDBFE; border-left: 4px solid #2563EB; padding: 10px 14px; border-radius: 6px; font-size: 13px; color: #1E293B;">
+                                💡 <b>Concentration Finding:</b> <b>{top_seg}</b> accounts for <b>{top_pct:.1f}%</b> of the {dim_name.replace('_', ' ').title()}-level total.
+                            </div>
+                            """,
+                            unsafe_allow_html=True
+                        )
+        else:
+            st.info("ℹ️ No categorical dimensions mapped for variance breakdown.")
                 
         st.markdown("<div style='margin-bottom: 20px;'></div>", unsafe_allow_html=True)
         st.markdown("---")
@@ -137,7 +148,8 @@ def render_screen_2():
         # Primary Action to Stage 3: Explain (Workspace)
         col_cta, col_space = st.columns([2.2, 2.8])
         with col_cta:
-            if st.button("🔬 Proceed to Causal Investigation (Explain) →", key="btn_to_workspace_s2", type="primary", use_container_width=True):
+            btn_label = "🔬 Proceed to Causal Investigation (Explain) →" if is_demo else "🔬 Proceed to Investigation Workspace (Explain) →"
+            if st.button(btn_label, key="btn_to_workspace_s2", type="primary", use_container_width=True):
                 set_screen("workspace")
                 st.rerun()
                 

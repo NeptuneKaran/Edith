@@ -19,7 +19,6 @@ class OfflineEdithReasoner:
         """Synthesizes the primary executive investigation diagnosis."""
         top_h = hypotheses[0] if hypotheses else {}
         second_h = hypotheses[1] if len(hypotheses) > 1 else {}
-        refuted_h = next((h for h in hypotheses if h["id"] in ["H8_SUPPLY_CONSTRAINT", "H3_INVENTORY_CONSTRAINT"]), {})
         
         delta_pct = anomaly_context.get("delta_pct", -10.54)
         kpi_name = anomaly_context.get("kpi_name", "Monthly B2B Sales")
@@ -27,6 +26,31 @@ class OfflineEdithReasoner:
         baseline_val = anomaly_context.get("baseline_value", 1_401_300.0)
         z_score = anomaly_context.get("z_score", -2.30)
         
+        # Custom generic dataset briefing
+        if top_h.get("id", "").startswith("GEN_"):
+            from data.repository import DataRepository
+            repo = DataRepository.get_instance()
+            dq = repo.get_data_quality_report()
+            dist = repo.get_distribution_statistics()
+            drvs = repo.get_driver_correlations().get("correlations", {})
+            top_drv_name = list(drvs.keys())[0] if drvs else "None"
+            top_drv_r = drvs[top_drv_name]["pearson_r"] if drvs else 0.0
+            
+            return f"""### 📋 Investigation Briefing: {kpi_name} Analysis
+
+**1. Incident Overview & Scope:**
+- **Primary Metric:** {kpi_name} (Observed: {current_val:,.1f} across {dq.get('total_rows', 0):,} records).
+- **Analysis Grain:** {anomaly_context.get('status_label', 'Cross-Sectional Snapshot')}.
+
+**2. Observational Findings & Associations:**
+- **Primary Concentration:** {top_h.get('name', 'Segment Variance')} ({top_h.get('summary', '')}).
+- **Explanatory Driver Association:** {top_drv_name.replace('_', ' ').title()} (Pearson correlation $r = {top_drv_r:+.2f}$).
+- **Distribution Profile:** Median = {dist.get('percentiles', {}).get('P50_median', 0.0):,.1f} | IQR = {dist.get('iqr', 0.0):.2f} | Outliers = {dist.get('outlier_count', 0)} ({dist.get('outlier_pct', 0.0):.1f}%).
+
+**3. Epistemological Grounding:**
+- All reported signals represent empirical concentrations and statistical correlations to guide operational inquiry, not confirmed causal mechanisms."""
+
+        refuted_h = next((h for h in hypotheses if h["id"] in ["H8_SUPPLY_CONSTRAINT", "H3_INVENTORY_CONSTRAINT"]), {})
         ctrl = top_h.get("control_group_analysis", {})
         ctrl_cohort = ctrl.get("control_cohort", "Mid-Market Alpha")
         did_gap = ctrl.get("did_divergence_pct", 48.3)
@@ -68,15 +92,16 @@ class OfflineEdithReasoner:
   - *Difference-in-Differences:* {did_gap:.1f}% relative performance divergence against parallel pre-trend control ($r = 0.88$).
   - *Customer Telemetry:* Pricing complaints surged to 38/week in CRM logs.
 - **#2 Aggressive Competitor Campaign (Score: {second_h.get('cause_score_100', 60.4):.1f}/100 | {second_h.get('confidence_classification', 'POSSIBLE DRIVER')}):**
-  - ApexTech launched 15% discount in Week 07 ($\tau = 1$ week after price hike). Acts as a secondary compounding factor.
-- **#8 Supply & Fulfillment Bottleneck (Score: 0.0/100 | REFUTED BY DATA):**
-  - Warehouse fill rate of 99.4% with 0 stockout days rules out physical supply constraints.
+  - *Competitor Action:* ApexTech launched 15% discount in Week 07.
+  - *Temporal Lag:* $\\tau = 1$ week lead-lag alignment with mid-tier contract churn ($|r| = 0.850$).
+- **#3 Supply Chain / Inventory (Score: 0.0/100 | REFUTED):**
+  - *Refutation Fact:* Fill rate remained at 99.4% with zero recorded stockout days.
 
-**3. Actionable Recovery Strategy:**
-- Proceed to the **Scenario Simulation Workbench** to simulate recovery curves balancing volume recapture vs margin realization."""
+**3. Policy Intervention & Simulation Recommendation:**
+- **Counterfactual Action:** Enact a **-6% pricing rollback** on Enterprise Product Suite Alpha combined with a **$15k regional co-op promotion fund** to recover 78.2% of lost volume."""
 
     @staticmethod
-    def answer_conversational_query(
+    def answer_query(
         query: str,
         anomaly_context: Dict[str, Any],
         selected_hypothesis: Dict[str, Any],
@@ -89,6 +114,11 @@ class OfflineEdithReasoner:
         q = query.strip()
         q_clean = re.sub(r'[^\w\s]', '', q.lower()).strip()
         q_lower = q.lower()
+        kpi_name = anomaly_context.get("kpi_name", "Primary Measure")
+        current_val = anomaly_context.get("current_value", 0.0)
+        delta_pct = anomaly_context.get("delta_pct", 0.0)
+        z_score = anomaly_context.get("z_score", 0.0)
+        top_h = all_hypotheses[0] if all_hypotheses else {}
         
         price_h = next((h for h in all_hypotheses if h["id"] == "H1_PRICING_PRESSURE"), {})
         comp_h = next((h for h in all_hypotheses if h["id"] == "H2_COMPETITOR_CAMPAIGN"), {})
@@ -97,32 +127,85 @@ class OfflineEdithReasoner:
         channel_h = next((h for h in all_hypotheses if h["id"] == "H6_CHANNEL_EXECUTION"), {})
         churn_h = next((h for h in all_hypotheses if h["id"] == "H4_CUSTOMER_CHURN"), {})
         defect_h = next((h for h in all_hypotheses if h["id"] == "H5_PRODUCT_DEFECT"), {})
+
         
         # 1. GREETINGS & CHATBOT INTRODUCTION
         greetings = ["hello", "hi", "hey", "good morning", "good afternoon", "good evening", "howdy"]
         if any(q_clean == g or q_clean.startswith(g + " ") for g in greetings):
-            return """Hello! I am **EDITH**, your AI-assisted Business Intelligence Decision Assistant.
+            return f"""Hello! I am **EDITH**, your AI-assisted Business Intelligence Decision Assistant.
 
 I can help you:
-- **Investigate the active B2B Sales anomaly** (-$147.7k drop in Region B Enterprise).
-- **Evaluate competing root causes** (Pricing Elasticity vs Competitor Campaign vs Supply).
-- **Inspect empirical evidence** (Mathematical revenue decomposition, lead-lag correlations, Difference-in-Differences control cohorts).
-- **Simulate policy interventions** (Price rollbacks, co-op promotional spending, and margin trade-offs).
+- **Investigate {kpi_name} patterns** and anomalies.
+- **Inspect dimensional concentrations** and segment variance.
+- **Analyze driver associations** and correlation coefficients.
+- **Audit data quality** and distribution outliers.
 
 What would you like to explore first?"""
 
         # 2. CAPABILITIES / HELP / WHO ARE YOU
         if any(k in q_clean for k in ["who are you", "what can you do", "what is edith", "help me", "capabilities"]):
             return r"""**EDITH (Executive Decision Intelligence Platform)**
-I am an AI decision assistant engineered for root-cause analytics and scenario planning.
+I am an AI decision assistant engineered for empirical root-cause analytics and scenario planning.
 
 **Core Capabilities:**
-1. **Anomaly Detection:** Continuous corridor monitoring ($\pm2.0\sigma$ rolling expected boundaries).
-2. **Impact Localization:** Multi-dimensional variance decomposition across regions, customer tiers, and products.
-3. **Causal Reasoning Engine:** Evaluation of 8 competing hypotheses across temporal precedence, lead-lag correlation, DiD control groups, and DAG hierarchies.
-4. **Counterfactual Simulation:** 8-week recovery trajectory modeling with explicit elasticity parameters ($\varepsilon_p = -1.65$).
+1. **Anomaly & Outlier Detection:** Continuous corridor monitoring and $1.5 \times \text{IQR}$ outlier analysis.
+2. **Dimensional Breakdown:** Multi-dimensional decomposition isolating segment concentrations.
+3. **Driver Correlation Analysis:** Parametric Pearson ($r$) and non-parametric Spearman ($r_s$) driver associations.
+4. **Causal Reasoning & Simulation:** Structural hypothesis testing and counterfactual scenario modeling (available on calibrated econometric models).
 
-Ask me any specific question about the active investigation, evidence ledgers, or simulation trade-offs!"""
+Ask me any question about the active data investigation!"""
+
+        # 2.1 GENERIC NEUTRAL STARTER PROBES
+        if any(k in q_clean for k in ["what changed in the selected metric", "what changed", "metric movement", "tell me what changed"]):
+            if top_h.get("id", "").startswith("GEN_"):
+                from data.repository import DataRepository
+                repo = DataRepository.get_instance()
+                dq = repo.get_data_quality_report()
+                return f"""**Observed Metric Summary ({kpi_name}):**
+- **Observed Value:** {current_val:,.1f}
+- **Primary Epicenter:** {top_h.get('name', 'Segment Concentration')} ({top_h.get('summary', '')})
+- **Data Quality:** {dq.get('data_quality_score', 100.0):.1f}% Health Score across {dq.get('total_rows', 0):,} rows."""
+            else:
+                return f"""**What Changed in {kpi_name}:**
+- **Observed Deficit:** {kpi_name} dropped by **{delta_pct:+.1f}%** (${anomaly_context.get('delta_value', -147700):+,.0f}), breaching the ±2.0σ corridor ($Z = {z_score:.2f}$).
+- **Concentration:** **97.3% of the deficit** occurred in Region B Enterprise accounts on Product Suite Alpha."""
+
+        if any(k in q_clean for k in ["which groups show the greatest concentration", "greatest concentration", "which groups", "highest concentration", "biggest segment"]):
+            from data.repository import DataRepository
+            repo = DataRepository.get_instance()
+            breakdowns = repo.get_dimensional_breakdown()
+            if breakdowns:
+                lines = []
+                for dim, df_dim in breakdowns.items():
+                    if not df_dim.empty:
+                        top_row = df_dim.iloc[0]
+                        lines.append(f"- **{dim.replace('_', ' ').title()}:** `{top_row[dim]}` accounts for **{top_row.get('contribution_pct', 0.0):.1f}%** of category total.")
+                return f"""**Dimensional Concentration Analysis:**\n\n""" + "\n".join(lines) + "\n\n*Note: High concentration indicates where the metric is concentrated; it does not prove an underlying causal mechanism.*"
+            return "No dimensional breakdown available for this dataset."
+
+        if any(k in q_clean for k in ["which numeric fields have the strongest observed association", "strongest observed association", "numeric fields", "strongest association", "driver correlation", "correlations"]):
+            from data.repository import DataRepository
+            repo = DataRepository.get_instance()
+            drvs = repo.get_driver_correlations().get("correlations", {})
+            if drvs:
+                lines = []
+                for drv_name, stats in drvs.items():
+                    lines.append(f"- **{drv_name.replace('_', ' ').title()}:** Pearson $r = {stats.get('pearson_r', 0.0):+.2f}$ | Spearman $r_s = {stats.get('spearman_rs', 0.0):+.2f}$ ({stats.get('relationship_type', 'Association')})")
+                return f"""**Numeric Driver Associations with {kpi_name}:**\n\n""" + "\n".join(lines) + "\n\n*Note: Correlation establishes observational association to guide investigation; it does not prove causation.*"
+            return "No numeric drivers were mapped for correlation analysis."
+
+        if any(k in q_clean for k in ["summarize dataquality issues", "summarize data quality issues", "summarize data quality", "data quality", "quality issues", "missing values", "duplicates"]):
+            from data.repository import DataRepository
+            repo = DataRepository.get_instance()
+            dq = repo.get_data_quality_report()
+            col_nulls = dq.get("column_null_percentages", {})
+            null_str = ", ".join([f"`{c}` ({p}%)" for c, p in col_nulls.items() if p > 0]) or "None"
+            return f"""**Data Quality Audit Report:**
+- **Overall Data Quality Score:** **{dq.get('data_quality_score', 100.0):.1f}%**
+- **Total Records:** {dq.get('total_rows', 0):,}
+- **Duplicate Rows:** {dq.get('duplicate_rows', 0)} ({dq.get('duplicate_pct', 0.0):.1f}%)
+- **Fields with Missing Values:** {null_str}
+- **Status:** {'High Integrity' if dq.get('data_quality_score', 100.0) >= 90.0 else 'Data Cleaning Recommended'}"""
 
         # 3. CONTEXT RESOLUTION FOR SHORT FOLLOW-UPS ("why?", "what should we do first?", "summarize")
         last_user_msg = ""
@@ -364,12 +447,16 @@ $$\varepsilon_p = \frac{\% \Delta Q}{\% \Delta P}$$
         all_hypotheses: List[Dict[str, Any]],
         anomaly_context: Dict[str, Any] = None
     ) -> str:
-        """Backward-compatible alias for answer_conversational_query."""
-        return OfflineEdithReasoner.answer_conversational_query(
+        """Backward-compatible alias for answer_query."""
+        return OfflineEdithReasoner.answer_query(
             query=query,
             anomaly_context=anomaly_context or {},
             selected_hypothesis=selected_hypothesis,
             all_hypotheses=all_hypotheses
         )
+
+# Method alias
+OfflineEdithReasoner.answer_conversational_query = OfflineEdithReasoner.answer_query
+
 
 

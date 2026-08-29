@@ -15,57 +15,74 @@ class ContributionEngine:
     @staticmethod
     def calculate_variance_decomposition(repo: DataRepository, kpi_id: str = "kpi_b2b_sales") -> Dict[str, Any]:
         """
-        Decomposes the variance between current anomaly week (52) and pre-shock baseline (48)
-        across all governed dimensions. Returns exact data-derived variance concentration shares.
+        Decomposes the variance across all governed dimensions. Returns exact data-derived variance concentration shares.
         """
-        breakdowns = repo.get_dimensional_breakdown(kpi_id, current_week_idx=52, prev_week_idx=48)
-        
-        # Identify the primary driving slice across dimensions
-        primary_region = breakdowns["region"].iloc[0] # Largest drop
-        primary_tier = breakdowns["customer_tier"].iloc[0]
-        primary_product = breakdowns["product_line"].iloc[0]
-        primary_channel = breakdowns["channel"].iloc[0]
-        
-        # Summary path (Concentration Trail)
-        top_epicenter_path = [
-            {
-                "dimension": "Region",
-                "segment": str(primary_region["region"]),
-                "contribution_pct": float(primary_region["contribution_pct"]),
-                "delta_value": float(primary_region["delta_value"]),
-                "interpretation": f"Region {primary_region['region']} accounts for {float(primary_region['contribution_pct']):.1f}% of aggregate net variance."
-            },
-            {
-                "dimension": "Customer Tier",
-                "segment": str(primary_tier["customer_tier"]),
-                "contribution_pct": float(primary_tier["contribution_pct"]),
-                "delta_value": float(primary_tier["delta_value"]),
-                "interpretation": f"Customer Tier {primary_tier['customer_tier']} accounts for {float(primary_tier['contribution_pct']):.1f}% of aggregate net variance."
-            },
-            {
-                "dimension": "Product Line",
-                "segment": str(primary_product["product_line"]),
-                "contribution_pct": float(primary_product["contribution_pct"]),
-                "delta_value": float(primary_product["delta_value"]),
-                "interpretation": f"Product Line {primary_product['product_line']} accounts for {float(primary_product['contribution_pct']):.1f}% of aggregate net variance."
-            },
-            {
-                "dimension": "Channel",
-                "segment": str(primary_channel["channel"]),
-                "contribution_pct": float(primary_channel["contribution_pct"]),
-                "delta_value": float(primary_channel["delta_value"]),
-                "interpretation": f"Channel {primary_channel['channel']} accounts for {float(primary_channel['contribution_pct']):.1f}% of aggregate net variance."
+        breakdowns = repo.get_dimensional_breakdown(kpi_id)
+        if not breakdowns:
+            return {
+                "breakdowns": {},
+                "top_epicenter_path": [],
+                "primary_region": "All",
+                "primary_region_share": 100.0,
+                "primary_tier": "All",
+                "primary_tier_share": 100.0,
+                "primary_product": "All",
+                "primary_product_share": 100.0,
+                "localization_note": "No categorical dimensions mapped for variance decomposition."
             }
-        ]
+            
+        top_epicenter_path = []
+        primary_dim_name = ""
+        primary_dim_val = "All"
+        primary_dim_share = 100.0
         
+        for dim_name, df_dim in breakdowns.items():
+            if df_dim.empty:
+                continue
+            # Largest contributor is at the top
+            top_row = df_dim.iloc[0]
+            seg_val = str(top_row[dim_name])
+            contrib_pct = float(top_row.get("contribution_pct", 0.0))
+            delta_val = float(top_row.get("delta_value", 0.0))
+            
+            top_epicenter_path.append({
+                "dimension": dim_name.replace("_", " ").title(),
+                "segment": seg_val,
+                "contribution_pct": contrib_pct,
+                "delta_value": delta_val,
+                "interpretation": f"{dim_name.replace('_', ' ').title()} '{seg_val}' accounts for {contrib_pct:.1f}% of aggregate net variance."
+            })
+            
+            if not primary_dim_name:
+                primary_dim_name = dim_name
+                primary_dim_val = seg_val
+                primary_dim_share = contrib_pct
+
+        # Backward compatibility aliases for B2B demo views
+        reg_df = breakdowns.get("region")
+        primary_region = str(reg_df.iloc[0]["region"]) if (reg_df is not None and not reg_df.empty and "region" in reg_df.columns) else primary_dim_val
+        primary_region_share = float(reg_df.iloc[0]["contribution_pct"]) if (reg_df is not None and not reg_df.empty and "contribution_pct" in reg_df.columns) else primary_dim_share
+
+        tier_df = breakdowns.get("customer_tier")
+        primary_tier = str(tier_df.iloc[0]["customer_tier"]) if (tier_df is not None and not tier_df.empty and "customer_tier" in tier_df.columns) else "General"
+        primary_tier_share = float(tier_df.iloc[0]["contribution_pct"]) if (tier_df is not None and not tier_df.empty and "contribution_pct" in tier_df.columns) else 100.0
+
+        prod_df = breakdowns.get("product_line")
+        primary_product = str(prod_df.iloc[0]["product_line"]) if (prod_df is not None and not prod_df.empty and "product_line" in prod_df.columns) else "Primary"
+        primary_product_share = float(prod_df.iloc[0]["contribution_pct"]) if (prod_df is not None and not prod_df.empty and "contribution_pct" in prod_df.columns) else 100.0
+
         return {
             "breakdowns": breakdowns,
             "top_epicenter_path": top_epicenter_path,
-            "primary_region": str(primary_region["region"]),
-            "primary_region_share": float(primary_region["contribution_pct"]),
-            "primary_tier": str(primary_tier["customer_tier"]),
-            "primary_tier_share": float(primary_tier["contribution_pct"]),
-            "primary_product": str(primary_product["product_line"]),
-            "primary_product_share": float(primary_product["contribution_pct"]),
-            "localization_note": "Impact Concentration localizes the empirical segment where the anomaly is concentrated. It does not establish causal origin."
+            "primary_dimension_name": primary_dim_name,
+            "primary_dimension_val": primary_dim_val,
+            "primary_dimension_share": primary_dim_share,
+            "primary_region": primary_region,
+            "primary_region_share": primary_region_share,
+            "primary_tier": primary_tier,
+            "primary_tier_share": primary_tier_share,
+            "primary_product": primary_product,
+            "primary_product_share": primary_product_share,
+            "localization_note": "Impact Concentration localizes the empirical segment where the variance is concentrated. It indicates an observed locus of effect, not proven causation."
         }
+

@@ -199,6 +199,21 @@ def get_data_source_metadata() -> Dict[str, Any]:
     repo = DataRepository.get_instance()
     return repo.get_active_source_info()
 
+def get_driver_correlations() -> Dict[str, Any]:
+    """Returns Pearson and Spearman correlations between the primary metric and numeric explanatory drivers."""
+    repo = DataRepository.get_instance()
+    return repo.get_driver_correlations()
+
+def get_distribution_summary() -> Dict[str, Any]:
+    """Returns statistical distribution properties (mean, median, IQR, skewness, outliers) for the primary measure."""
+    repo = DataRepository.get_instance()
+    return repo.get_distribution_statistics()
+
+def get_data_quality_report() -> Dict[str, Any]:
+    """Returns dataset integrity audit including row counts, null percentages, duplicate rates, and data quality score."""
+    repo = DataRepository.get_instance()
+    return repo.get_data_quality_report()
+
 # =============================================================================
 # 2. TOOL DECLARATIONS & DISPATCHER
 # =============================================================================
@@ -214,7 +229,10 @@ AVAILABLE_TOOLS = [
     get_counter_evidence,
     get_simulation_results,
     list_available_metrics,
-    get_data_source_metadata
+    get_data_source_metadata,
+    get_driver_correlations,
+    get_distribution_summary,
+    get_data_quality_report
 ]
 
 TOOL_REGISTRY = {
@@ -228,7 +246,10 @@ TOOL_REGISTRY = {
     "get_counter_evidence": get_counter_evidence,
     "get_simulation_results": get_simulation_results,
     "list_available_metrics": list_available_metrics,
-    "get_data_source_metadata": get_data_source_metadata
+    "get_data_source_metadata": get_data_source_metadata,
+    "get_driver_correlations": get_driver_correlations,
+    "get_distribution_summary": get_distribution_summary,
+    "get_data_quality_report": get_data_quality_report
 }
 
 def execute_tool_call(tool_name: str, args: Dict[str, Any]) -> Dict[str, Any]:
@@ -244,3 +265,4 @@ def execute_tool_call(tool_name: str, args: Dict[str, Any]) -> Dict[str, Any]:
             return func()
     except Exception as e:
         return {"error": f"Tool execution failed for '{tool_name}': {str(e)}"}
+

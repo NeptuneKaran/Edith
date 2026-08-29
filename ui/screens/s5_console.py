@@ -114,22 +114,42 @@ def render_screen_5():
     # 3. Suggested Starter Probes
     st.markdown("<h4 style='font-size: 13px; font-weight: 700; color: #475569; text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 8px;'>💡 Suggested Investigation Questions</h4>", unsafe_allow_html=True)
     
+    is_demo = DataRepository.get_instance().active_source_info.get("is_demo", True)
+    
     col_p1, col_p2, col_p3 = st.columns(3)
-    with col_p1:
-        if st.button("👋 Hi EDITH, what can you do?", key="chip_greet", use_container_width=True):
-            _handle_console_query(client, "Hello, what are your core capabilities?", anomaly_context, selected_hypothesis, hypotheses, sim_levers)
-        if st.button("❓ Explain volume vs price loss", key="chip_math", use_container_width=True):
-            _handle_console_query(client, "Explain the exact mathematical volume and price decomposition.", anomaly_context, selected_hypothesis, hypotheses, sim_levers)
-    with col_p2:
-        if st.button("❓ Compare pricing vs competitor", key="chip_comp", use_container_width=True):
-            _handle_console_query(client, "Compare #1 Pricing Elasticity vs #2 Competitor Campaign.", anomaly_context, selected_hypothesis, hypotheses, sim_levers)
-        if st.button("❓ Why is inventory ruled out?", key="chip_inv", use_container_width=True):
-            _handle_console_query(client, "Why are supply and inventory constraints ruled out?", anomaly_context, selected_hypothesis, hypotheses, sim_levers)
-    with col_p3:
-        if st.button("❓ What should we do first?", key="chip_action", use_container_width=True):
-            _handle_console_query(client, "What should we do first to fix this?", anomaly_context, selected_hypothesis, hypotheses, sim_levers)
-        if st.button("❓ What is Difference-in-Differences?", key="chip_did_concept", use_container_width=True):
-            _handle_console_query(client, "Explain what Difference-in-Differences is and how EDITH uses it.", anomaly_context, selected_hypothesis, hypotheses, sim_levers)
+    if is_demo:
+        with col_p1:
+            if st.button("👋 Hi EDITH, what can you do?", key="chip_greet", use_container_width=True):
+                _handle_console_query(client, "Hello, what are your core capabilities?", anomaly_context, selected_hypothesis, hypotheses, sim_levers)
+            if st.button("❓ Explain volume vs price loss", key="chip_math", use_container_width=True):
+                _handle_console_query(client, "Explain the exact mathematical volume and price decomposition.", anomaly_context, selected_hypothesis, hypotheses, sim_levers)
+        with col_p2:
+            if st.button("❓ Compare pricing vs competitor", key="chip_comp", use_container_width=True):
+                _handle_console_query(client, "Compare #1 Pricing Elasticity vs #2 Competitor Campaign.", anomaly_context, selected_hypothesis, hypotheses, sim_levers)
+            if st.button("❓ Why is inventory ruled out?", key="chip_inv", use_container_width=True):
+                _handle_console_query(client, "Why are supply and inventory constraints ruled out?", anomaly_context, selected_hypothesis, hypotheses, sim_levers)
+        with col_p3:
+            if st.button("❓ What should we do first?", key="chip_action", use_container_width=True):
+                _handle_console_query(client, "What should we do first to fix this?", anomaly_context, selected_hypothesis, hypotheses, sim_levers)
+            if st.button("❓ What is Difference-in-Differences?", key="chip_did_concept", use_container_width=True):
+                _handle_console_query(client, "Explain what Difference-in-Differences is and how EDITH uses it.", anomaly_context, selected_hypothesis, hypotheses, sim_levers)
+    else:
+        with col_p1:
+            if st.button("👋 Hi EDITH, what can you do?", key="chip_greet_custom", use_container_width=True):
+                _handle_console_query(client, "Hello, what are your core capabilities?", anomaly_context, selected_hypothesis, hypotheses, sim_levers)
+            if st.button("❓ What changed in the selected metric?", key="chip_metric_custom", use_container_width=True):
+                _handle_console_query(client, "What changed in the selected metric?", anomaly_context, selected_hypothesis, hypotheses, sim_levers)
+        with col_p2:
+            if st.button("❓ Which groups show the greatest concentration?", key="chip_conc_custom", use_container_width=True):
+                _handle_console_query(client, "Which groups show the greatest concentration?", anomaly_context, selected_hypothesis, hypotheses, sim_levers)
+            if st.button("❓ Which numeric fields have the strongest observed association?", key="chip_assoc_custom", use_container_width=True):
+                _handle_console_query(client, "Which numeric fields have the strongest observed association?", anomaly_context, selected_hypothesis, hypotheses, sim_levers)
+        with col_p3:
+            if st.button("❓ Summarize data-quality issues", key="chip_dq_custom", use_container_width=True):
+                _handle_console_query(client, "Summarize data-quality issues.", anomaly_context, selected_hypothesis, hypotheses, sim_levers)
+            if st.button("❓ What is Difference-in-Differences?", key="chip_did_custom", use_container_width=True):
+                _handle_console_query(client, "Explain what Difference-in-Differences is and how EDITH uses it.", anomaly_context, selected_hypothesis, hypotheses, sim_levers)
+
 
     st.markdown("<div style='margin-bottom: 16px;'></div>", unsafe_allow_html=True)
     

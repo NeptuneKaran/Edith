@@ -243,9 +243,13 @@ class EvidenceEngine:
         
     def evaluate_all_hypotheses(self, kpi_id: str = "kpi_b2b_sales") -> List[Dict[str, Any]]:
         """
-        Evaluates all candidate hypotheses against empirical tables.
-        Returns a sorted list of structured hypothesis evaluations from highest to lowest cause score.
+        Evaluates candidate hypotheses or empirical patterns against active dataset tables.
+        For demo data: evaluates 8 structural causal hypotheses.
+        For custom data: generates observational investigation patterns (dimensional concentration, driver correlations, outliers).
         """
+        if not self.repo.active_source_info.get("is_demo", True):
+            return self._evaluate_generic_patterns()
+
         results = []
         
         # Load empirical tables
@@ -255,6 +259,7 @@ class EvidenceEngine:
         df_fb = self.repo.get_feedback_signals()
         df_sales = self.repo.tables["sales"]
         df_segments = self.repo.get_all_segment_time_series()
+
         
         # Historical target series (Region B Enterprise Alpha gross revenue across weeks 1 to 48)
         reg_b_ent = df_sales[(df_sales["region"] == "Region B") & (df_sales["customer_tier"] == "Enterprise") & (df_sales["product_line"] == "Product Suite Alpha")]
@@ -1080,3 +1085,164 @@ class EvidenceEngine:
                 "status": "Disconfirmed"
             }
         ]
+
+    def _evaluate_generic_patterns(self) -> List[Dict[str, Any]]:
+        """
+        Generates empirical investigation findings and observational patterns
+        (dimensional concentrations, correlational drivers, distributional outliers)
+        for custom datasets. Adheres to strict observational epistemology:
+        describes patterns as associations/concentrations to investigate, never claiming confirmed causation.
+        """
+        results = []
+        breakdowns = self.repo.get_dimensional_breakdown()
+        correlations = self.repo.get_driver_correlations().get("correlations", {})
+        dist_stats = self.repo.get_distribution_statistics()
+        rank_idx = 1
+        
+        # 1. Dimensional Concentrations
+        for dim_name, df_dim in breakdowns.items():
+            if df_dim.empty:
+                continue
+            top_row = df_dim.iloc[0]
+            seg_name = str(top_row[dim_name])
+            contrib_pct = float(top_row.get("contribution_pct", 0.0))
+            delta_val = float(top_row.get("delta_value", 0.0))
+            
+            score_100 = min(100.0, max(20.0, contrib_pct))
+            
+            results.append({
+                "id": f"GEN_DIM_{dim_name.upper()}",
+                "name": f"Concentration in {dim_name.replace('_', ' ').title()} '{seg_name}'",
+                "rank": rank_idx,
+                "category": "Dimensional Concentration",
+                "dependency_role": "OBSERVED_CONCENTRATION",
+                "cause_score_100": round(score_100, 1),
+                "cause_score_normalized": round(score_100 / 100.0, 3),
+                "confidence_band": "High Concentration" if contrib_pct >= 50.0 else "Moderate Concentration",
+                "confidence_color": "#16A34A" if contrib_pct >= 50.0 else "#D97706",
+                "testable": True,
+                "summary": f"Observed variance is concentrated in {dim_name.replace('_', ' ').title()} '{seg_name}', accounting for {contrib_pct:.1f}% of total net movement.",
+                "evidence_chain": [
+                    f"Dimensional breakdown isolates '{seg_name}' with delta of {delta_val:+,.0f}.",
+                    f"Concentration share: {contrib_pct:.1f}% of aggregate movement across categories.",
+                    "Empirical concentration indicates where the variance is situated, but does not prove root-cause mechanism."
+                ],
+                "predictions": [
+                    {
+                        "metric": f"{dim_name} Variance Concentration",
+                        "expected": f"High concentration in {seg_name}",
+                        "observed": f"{contrib_pct:.1f}% share",
+                        "status": "SUPPORTED"
+                    }
+                ],
+                "confounders": [],
+                "did_analysis": {
+                    "treated_cohort": f"{dim_name}: {seg_name}",
+                    "control_cohort": "Remaining categories",
+                    "did_divergence_pct": round(contrib_pct, 1)
+                },
+                "decomposition": {
+                    "total_delta": delta_val,
+                    "interpretation": f"Dimensional segment '{seg_name}' represents the largest observed concentration of variance."
+                }
+            })
+            rank_idx += 1
+            
+        # 2. Driver Correlations
+        for drv_name, drv_info in correlations.items():
+            r_val = float(drv_info.get("pearson_r", 0.0))
+            abs_r = abs(r_val)
+            score_100 = round(abs_r * 85.0 + 10.0, 1)
+            
+            results.append({
+                "id": f"GEN_DRV_{drv_name.upper()}",
+                "name": f"Association with {drv_name.replace('_', ' ').title()}",
+                "rank": rank_idx,
+                "category": "Explanatory Driver Correlation",
+                "dependency_role": "CORRELATED_DRIVER",
+                "cause_score_100": score_100,
+                "cause_score_normalized": round(score_100 / 100.0, 3),
+                "confidence_band": "Strong Association" if abs_r >= 0.6 else ("Moderate Association" if abs_r >= 0.3 else "Weak Association"),
+                "confidence_color": "#16A34A" if abs_r >= 0.6 else ("#D97706" if abs_r >= 0.3 else "#94A3B8"),
+                "testable": True,
+                "summary": drv_info.get("interpretation", f"Linear correlation r = {r_val:+.2f} observed with {drv_name}."),
+                "evidence_chain": [
+                    f"Pearson linear correlation coefficient: r = {r_val:+.2f}.",
+                    f"Spearman rank correlation: r_s = {drv_info.get('spearman_r', 0.0):+.2f}.",
+                    "Correlational association suggests a potential driver to investigate; not a proven causal relationship."
+                ],
+                "predictions": [
+                    {
+                        "metric": f"Correlation with {drv_name}",
+                        "expected": "Statistical association",
+                        "observed": f"r = {r_val:+.2f}",
+                        "status": "SUPPORTED" if abs_r >= 0.2 else "INCONCLUSIVE"
+                    }
+                ],
+                "confounders": [],
+                "did_analysis": {},
+                "decomposition": {}
+            })
+            rank_idx += 1
+            
+        # 3. Distributional Outliers
+        if dist_stats:
+            outlier_cnt = dist_stats.get("outlier_count", 0)
+            outlier_pct = dist_stats.get("outlier_pct", 0.0)
+            results.append({
+                "id": "GEN_DIST_OUTLIERS",
+                "name": "Distributional Tail Outliers",
+                "rank": rank_idx,
+                "category": "Statistical Distribution",
+                "dependency_role": "DISTRIBUTIONAL_PROPERTY",
+                "cause_score_100": min(100.0, max(20.0, outlier_pct * 10.0)),
+                "cause_score_normalized": round(min(1.0, outlier_pct / 10.0), 3),
+                "confidence_band": "Identified Outliers" if outlier_cnt > 0 else "Normal Distribution",
+                "confidence_color": "#DC2626" if outlier_cnt > 0 else "#64748B",
+                "testable": True,
+                "summary": f"Detected {outlier_cnt} empirical tail outlier(s) ({outlier_pct:.1f}% of records) outside 1.5*IQR boundaries [{dist_stats.get('lower_iqr_threshold', 0):,.1f}, {dist_stats.get('upper_iqr_threshold', 0):,.1f}].",
+                "evidence_chain": [
+                    f"Interquartile Range (IQR): {dist_stats.get('iqr', 0):,.1f}.",
+                    f"Skewness: {dist_stats.get('skewness', 0):.2f}.",
+                    "Outlier presence suggests isolated extreme events or data anomalies to audit."
+                ],
+                "predictions": [
+                    {
+                        "metric": "Outlier Detection (1.5*IQR)",
+                        "expected": "Normal statistical bounds",
+                        "observed": f"{outlier_cnt} outlier records",
+                        "status": "SUPPORTED" if outlier_cnt > 0 else "CONTRADICTED"
+                    }
+                ],
+                "confounders": [],
+                "did_analysis": {},
+                "decomposition": {}
+            })
+            
+        if not results:
+            results.append({
+                "id": "GEN_OBS_OVERVIEW",
+                "name": "Observed Aggregate Trajectory",
+                "rank": 1,
+                "category": "Baseline Telemetry",
+                "dependency_role": "OBSERVED_TRAJECTORY",
+                "cause_score_100": 50.0,
+                "cause_score_normalized": 0.50,
+                "confidence_band": "Baseline Telemetry",
+                "confidence_color": "#2563EB",
+                "testable": True,
+                "summary": "Telemetry indicates primary measure variation across records.",
+                "evidence_chain": ["Baseline corridor evaluated across active dataset records."],
+                "predictions": [],
+                "confounders": [],
+                "did_analysis": {},
+                "decomposition": {}
+            })
+
+        # Sort results by score
+        results.sort(key=lambda x: x.get("cause_score_100", 0.0), reverse=True)
+        for i, res in enumerate(results):
+            res["rank"] = i + 1
+            
+        return results
+

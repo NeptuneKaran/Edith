@@ -28,7 +28,49 @@ def render_screen_4():
         
     st.markdown("<div style='margin-bottom: 12px;'></div>", unsafe_allow_html=True)
     
+    from data.repository import DataRepository
+    repo = DataRepository.get_instance()
+    is_demo = repo.active_source_info.get("is_demo", True)
+    
+    if not is_demo:
+        st.markdown(
+            """
+            <div style="background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 10px; padding: 28px 32px; box-shadow: 0 1px 3px rgba(0,0,0,0.03); max-width: 850px; margin: 20px auto;">
+                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+                    <span style="font-size: 28px;">⚙️</span>
+                    <div>
+                        <h3 style="margin:0; font-size: 18px; font-weight: 800; color: #0F172A;">Counterfactual Simulation Model Specification Required</h3>
+                        <div style="font-size: 13px; color: #64748B;">Dynamic scenario workbench for custom datasets</div>
+                    </div>
+                </div>
+                <div style="font-size: 13.5px; color: #334155; line-height: 1.6; margin-bottom: 20px;">
+                    Simulating counterfactual recovery curves (e.g., price rollbacks, promotion shifts, or capacity realignments) requires an <b>explicitly parameterized econometric or structural causal model</b> with calibrated elasticity parameters (&epsilon;) and response lag functions (&tau;).
+
+                    <br/><br/>
+                    For custom ingested datasets, EDITH maintains <b>epistemological integrity</b> by distinguishing observational associations and dimensional concentrations from speculative counterfactual projections.
+                </div>
+                <div style="background: #EFF6FF; border: 1px solid #BFDBFE; border-radius: 6px; padding: 14px 18px; font-size: 13px; color: #1E40AF; margin-bottom: 24px;">
+                    💡 <b>Tip:</b> To experience full interactive policy lever simulations with live recovery curves and decision-governance export, switch to the <b>Built-in Enterprise B2B SaaS Benchmark</b>.
+                </div>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+        col_c1, col_c2, col_c3 = st.columns([1.5, 1.5, 2.0])
+        with col_c1:
+            if st.button("📊 Switch to Demo Benchmark", key="btn_sim_to_demo", type="primary", use_container_width=True):
+                repo.reset_to_demo_dataset()
+                from ui.screens.s0_data_sources import _reinitialize_analytics
+                _reinitialize_analytics()
+                st.rerun()
+        with col_c2:
+            if st.button("🔍 Explore Diagnostic View", key="btn_sim_to_diag", use_container_width=True):
+                set_screen("diagnostic")
+                st.rerun()
+        return
+
     col_levers, col_results = st.columns([1.0, 1.2], gap="large")
+
     
     # =========================================================================
     # LEFT COLUMN: CONTROLLABLE LEVER SLIDERS & ASSUMPTIONS
