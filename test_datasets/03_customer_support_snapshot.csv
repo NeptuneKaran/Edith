@@ -1,0 +1,1251 @@
+ticket_id,channel,team,priority,issue_type,resolution_hours,csat_score,reopen_count,customer_segment
+TICK-10000,Live Chat,Technical Ops,P4-Low,Integration Error,13.99,3.51,0,SMB
+TICK-10001,Live Chat,Tier 2 Escalations,P3-Medium,Account Access,3.27,4.43,0,Enterprise
+TICK-10002,Live Chat,Tier 1 Support,P3-Medium,Integration Error,19.97,3.48,0,Mid-Market
+TICK-10003,Web Portal,Tier 2 Escalations,P3-Medium,Account Access,14.58,4.37,0,Enterprise
+TICK-10004,Live Chat,Technical Ops,P3-Medium,Feature Inquiry,1.53,4.82,0,SMB
+TICK-10005,Phone,Tier 1 Support,P3-Medium,Integration Error,3.47,4.03,0,SMB
+TICK-10006,Web Portal,Billing Support,P3-Medium,Account Access,3.43,4.49,0,Free Tier
+TICK-10007,Phone,Tier 1 Support,P3-Medium,Latency Shock,1.99,3.85,0,Mid-Market
+TICK-10008,In-App Support,Tier 1 Support,P4-Low,Feature Inquiry,1.02,3.41,0,Mid-Market
+TICK-10009,Live Chat,VIP Enterprise Desk,P2-High,Bug Report,17.86,3.31,0,Mid-Market
+TICK-10010,Web Portal,Technical Ops,P4-Low,Feature Inquiry,4.91,2.55,1,SMB
+TICK-10011,Live Chat,Tier 2 Escalations,P2-High,Bug Report,1.57,3.96,2,Mid-Market
+TICK-10012,Phone,Technical Ops,P3-Medium,Integration Error,12.97,3.62,1,Free Tier
+TICK-10013,Email,Tier 2 Escalations,P3-Medium,Latency Shock,13.42,3.62,0,Enterprise
+TICK-10014,Email,Technical Ops,P3-Medium,Feature Inquiry,3.25,4.29,0,SMB
+TICK-10015,Phone,Tier 2 Escalations,P2-High,Account Access,1.51,3.77,0,SMB
+TICK-10016,Live Chat,Billing Support,P2-High,Latency Shock,5.78,4.6,0,Free Tier
+TICK-10017,Email,Tier 2 Escalations,P1-Critical,Bug Report,8.79,3.01,2,SMB
+TICK-10018,Live Chat,Tier 1 Support,P2-High,Latency Shock,10.36,4.0,1,SMB
+TICK-10019,Phone,Technical Ops,P3-Medium,Integration Error,8.53,4.97,0,SMB
+TICK-10020,Phone,VIP Enterprise Desk,P3-Medium,Latency Shock,10.91,4.51,0,Mid-Market
+TICK-10021,Email,Technical Ops,P1-Critical,Account Access,27.97,3.37,2,Free Tier
+TICK-10022,In-App Support,Technical Ops,P3-Medium,Feature Inquiry,7.92,5.0,0,Enterprise
+TICK-10023,Live Chat,Tier 1 Support,P4-Low,Integration Error,1.15,3.9,1,SMB
+TICK-10024,Email,VIP Enterprise Desk,P3-Medium,Billing Dispute,15.5,5.0,2,SMB
+TICK-10025,Email,Technical Ops,P2-High,Account Access,8.58,4.05,0,Enterprise
+TICK-10026,Live Chat,Billing Support,P3-Medium,Bug Report,6.5,4.53,0,SMB
+TICK-10027,Email,Tier 2 Escalations,P3-Medium,Integration Error,94.93,2.13,1,Mid-Market
+TICK-10028,Email,Tier 1 Support,P3-Medium,Feature Inquiry,3.52,4.23,0,SMB
+TICK-10029,In-App Support,Technical Ops,P2-High,Billing Dispute,8.48,4.45,0,Mid-Market
+TICK-10030,Email,Tier 1 Support,P3-Medium,Bug Report,3.23,3.89,0,SMB
+TICK-10031,Email,Tier 1 Support,P2-High,Latency Shock,2.47,4.27,0,Mid-Market
+TICK-10032,Phone,Tier 1 Support,P3-Medium,Integration Error,5.37,3.44,0,Enterprise
+TICK-10033,Phone,Tier 2 Escalations,P2-High,Account Access,4.47,5.0,1,SMB
+TICK-10034,In-App Support,Tier 1 Support,P2-High,Latency Shock,1.3,4.91,1,SMB
+TICK-10035,Web Portal,Technical Ops,P4-Low,Feature Inquiry,7.95,5.0,0,Free Tier
+TICK-10036,Live Chat,VIP Enterprise Desk,P2-High,Billing Dispute,1.88,4.16,0,Mid-Market
+TICK-10037,Web Portal,Tier 1 Support,P4-Low,Billing Dispute,3.64,4.47,0,Enterprise
+TICK-10038,Email,Billing Support,P2-High,Feature Inquiry,7.0,5.0,0,Mid-Market
+TICK-10039,Phone,Billing Support,P3-Medium,Bug Report,7.83,4.86,0,Mid-Market
+TICK-10040,Live Chat,Tier 1 Support,P3-Medium,Integration Error,1.18,3.38,0,SMB
+TICK-10041,Live Chat,Technical Ops,P3-Medium,Integration Error,8.89,4.67,0,Enterprise
+TICK-10042,In-App Support,Tier 1 Support,P3-Medium,Latency Shock,7.42,4.13,0,Mid-Market
+TICK-10043,Email,Billing Support,P3-Medium,Billing Dispute,5.21,5.0,1,SMB
+TICK-10044,Email,VIP Enterprise Desk,P3-Medium,Bug Report,8.87,3.64,0,Mid-Market
+TICK-10045,Email,VIP Enterprise Desk,P2-High,Feature Inquiry,6.81,5.0,0,Enterprise
+TICK-10046,Email,Billing Support,P3-Medium,Latency Shock,11.0,4.48,0,SMB
+TICK-10047,Phone,Tier 1 Support,P3-Medium,Latency Shock,10.17,4.53,0,SMB
+TICK-10048,Live Chat,Tier 1 Support,P1-Critical,Latency Shock,13.42,3.16,1,Free Tier
+TICK-10049,Live Chat,VIP Enterprise Desk,P1-Critical,Billing Dispute,34.77,2.48,2,SMB
+TICK-10050,Web Portal,Billing Support,P3-Medium,Latency Shock,4.79,4.24,0,SMB
+TICK-10051,Email,Tier 2 Escalations,P4-Low,Integration Error,70.19,2.76,1,Mid-Market
+TICK-10052,Live Chat,Tier 2 Escalations,P3-Medium,Billing Dispute,59.78,1.88,1,Enterprise
+TICK-10053,Web Portal,Tier 2 Escalations,P2-High,Bug Report,5.5,5.0,0,Enterprise
+TICK-10054,Email,Technical Ops,P3-Medium,Billing Dispute,21.58,4.49,0,SMB
+TICK-10055,Live Chat,Tier 1 Support,P3-Medium,Account Access,1.44,4.4,0,Free Tier
+TICK-10056,Phone,Billing Support,P2-High,Latency Shock,6.51,3.73,1,SMB
+TICK-10057,Live Chat,VIP Enterprise Desk,P1-Critical,Integration Error,25.47,3.86,0,Enterprise
+TICK-10058,Phone,Technical Ops,P2-High,Billing Dispute,7.75,3.9,0,Free Tier
+TICK-10059,Email,Tier 1 Support,P1-Critical,Bug Report,11.97,3.36,0,SMB
+TICK-10060,Web Portal,Technical Ops,P3-Medium,Account Access,1.36,4.42,0,Mid-Market
+TICK-10061,In-App Support,Tier 1 Support,P3-Medium,Billing Dispute,1.34,4.12,1,Enterprise
+TICK-10062,Phone,Tier 1 Support,P3-Medium,Account Access,30.41,5.0,0,SMB
+TICK-10063,Live Chat,Tier 1 Support,P2-High,Feature Inquiry,6.19,4.11,1,SMB
+TICK-10064,In-App Support,Tier 1 Support,P4-Low,Latency Shock,8.21,5.0,1,Free Tier
+TICK-10065,Email,Tier 2 Escalations,P1-Critical,Integration Error,147.75,2.2,1,SMB
+TICK-10066,Email,Tier 2 Escalations,P2-High,Bug Report,0.96,5.0,0,Free Tier
+TICK-10067,Phone,Tier 2 Escalations,P3-Medium,Feature Inquiry,1.35,4.47,2,SMB
+TICK-10068,Email,Tier 1 Support,P3-Medium,Account Access,2.21,3.52,0,SMB
+TICK-10069,Live Chat,Tier 2 Escalations,P3-Medium,Billing Dispute,18.16,2.13,4,Free Tier
+TICK-10070,Phone,Tier 1 Support,P3-Medium,Latency Shock,14.89,5.0,1,Mid-Market
+TICK-10071,Web Portal,Tier 1 Support,P1-Critical,Billing Dispute,6.94,1.36,1,Mid-Market
+TICK-10072,Email,Tier 1 Support,P3-Medium,Billing Dispute,2.13,4.89,0,Mid-Market
+TICK-10073,Email,Tier 1 Support,P2-High,Feature Inquiry,4.58,4.42,0,Mid-Market
+TICK-10074,Email,Tier 1 Support,P4-Low,Billing Dispute,11.91,3.68,0,SMB
+TICK-10075,In-App Support,Tier 1 Support,P1-Critical,Feature Inquiry,16.8,3.23,3,Mid-Market
+TICK-10076,Live Chat,Tier 2 Escalations,P3-Medium,Latency Shock,0.87,3.6,0,SMB
+TICK-10077,Live Chat,Tier 1 Support,P1-Critical,Account Access,26.84,2.64,1,Mid-Market
+TICK-10078,Phone,Billing Support,P4-Low,Billing Dispute,1.88,4.41,0,Free Tier
+TICK-10079,Email,Tier 1 Support,P4-Low,Integration Error,4.97,3.4,0,Free Tier
+TICK-10080,Phone,Tier 1 Support,P4-Low,Integration Error,9.22,4.34,0,SMB
+TICK-10081,Email,Billing Support,P1-Critical,Billing Dispute,54.35,3.56,0,Enterprise
+TICK-10082,Live Chat,Technical Ops,P2-High,Bug Report,6.98,4.38,0,Enterprise
+TICK-10083,Web Portal,Tier 1 Support,P3-Medium,Feature Inquiry,3.98,4.41,0,Enterprise
+TICK-10084,Live Chat,Tier 2 Escalations,P3-Medium,Billing Dispute,33.1,2.07,3,Free Tier
+TICK-10085,Email,Tier 2 Escalations,P4-Low,Billing Dispute,100.09,3.01,1,SMB
+TICK-10086,Phone,Technical Ops,P3-Medium,Feature Inquiry,5.51,4.97,0,Mid-Market
+TICK-10087,In-App Support,Technical Ops,P3-Medium,Billing Dispute,12.29,4.59,1,SMB
+TICK-10088,Live Chat,Tier 2 Escalations,P4-Low,Billing Dispute,153.8,2.28,1,Enterprise
+TICK-10089,Email,Tier 1 Support,P3-Medium,Account Access,1.42,4.78,0,Enterprise
+TICK-10090,Live Chat,Tier 1 Support,P2-High,Integration Error,5.54,3.8,0,SMB
+TICK-10091,Phone,Technical Ops,P4-Low,Account Access,2.45,3.08,1,Enterprise
+TICK-10092,Phone,Tier 2 Escalations,P2-High,Latency Shock,13.68,4.21,0,Mid-Market
+TICK-10093,Email,Billing Support,P1-Critical,Billing Dispute,18.19,2.83,1,Mid-Market
+TICK-10094,Email,Tier 2 Escalations,P2-High,Account Access,6.63,4.9,0,Free Tier
+TICK-10095,In-App Support,Tier 2 Escalations,P2-High,Account Access,16.91,4.67,1,Enterprise
+TICK-10096,Live Chat,Technical Ops,P3-Medium,Feature Inquiry,2.44,4.11,0,Mid-Market
+TICK-10097,Email,Technical Ops,P3-Medium,Latency Shock,6.76,4.16,0,Mid-Market
+TICK-10098,Email,Tier 1 Support,P3-Medium,Feature Inquiry,4.59,4.92,1,Enterprise
+TICK-10099,Email,VIP Enterprise Desk,P3-Medium,Integration Error,15.0,4.86,1,Enterprise
+TICK-10100,Live Chat,Billing Support,P3-Medium,Latency Shock,21.72,4.06,0,Mid-Market
+TICK-10101,Web Portal,Billing Support,P4-Low,Latency Shock,4.79,3.73,0,SMB
+TICK-10102,Live Chat,Billing Support,P3-Medium,Account Access,1.15,4.65,0,SMB
+TICK-10103,Live Chat,Tier 1 Support,P2-High,Billing Dispute,11.28,4.34,0,Enterprise
+TICK-10104,Email,Billing Support,P3-Medium,Latency Shock,0.95,3.53,0,Free Tier
+TICK-10105,In-App Support,Technical Ops,P2-High,Integration Error,12.39,4.67,1,Mid-Market
+TICK-10106,Live Chat,Tier 1 Support,P3-Medium,Bug Report,17.65,4.39,0,Mid-Market
+TICK-10107,Web Portal,Tier 2 Escalations,P4-Low,Feature Inquiry,2.05,4.07,0,Mid-Market
+TICK-10108,Live Chat,Billing Support,P2-High,Latency Shock,9.51,2.79,1,SMB
+TICK-10109,Live Chat,Tier 1 Support,P3-Medium,Latency Shock,15.71,4.26,0,SMB
+TICK-10110,Live Chat,Tier 2 Escalations,P2-High,Billing Dispute,173.72,4.08,1,SMB
+TICK-10111,Phone,Tier 2 Escalations,P4-Low,Billing Dispute,32.84,2.4,1,SMB
+TICK-10112,Email,VIP Enterprise Desk,P2-High,Latency Shock,11.21,4.98,0,Free Tier
+TICK-10113,Web Portal,VIP Enterprise Desk,P2-High,Billing Dispute,5.42,4.77,0,SMB
+TICK-10114,Live Chat,Tier 1 Support,P2-High,Account Access,1.83,4.27,0,Enterprise
+TICK-10115,Email,Tier 1 Support,P3-Medium,Bug Report,2.14,4.97,0,Mid-Market
+TICK-10116,Live Chat,Technical Ops,P3-Medium,Feature Inquiry,5.25,3.81,0,Enterprise
+TICK-10117,Live Chat,Billing Support,P4-Low,Billing Dispute,3.58,4.75,0,SMB
+TICK-10118,Email,Tier 1 Support,P3-Medium,Account Access,6.61,5.0,0,Mid-Market
+TICK-10119,Web Portal,Tier 2 Escalations,P2-High,Billing Dispute,36.53,2.07,4,SMB
+TICK-10120,Phone,Tier 1 Support,P1-Critical,Bug Report,18.54,1.16,0,SMB
+TICK-10121,Live Chat,Tier 1 Support,P3-Medium,Bug Report,7.16,4.35,0,Free Tier
+TICK-10122,Email,Tier 2 Escalations,P4-Low,Billing Dispute,30.09,1.73,1,SMB
+TICK-10123,Email,Tier 1 Support,P3-Medium,Billing Dispute,5.77,4.96,0,SMB
+TICK-10124,Phone,Tier 1 Support,P2-High,Bug Report,1.72,5.0,0,Enterprise
+TICK-10125,Phone,Technical Ops,P4-Low,Feature Inquiry,6.52,4.24,0,SMB
+TICK-10126,Email,Tier 2 Escalations,P2-High,Feature Inquiry,1.75,3.89,0,Enterprise
+TICK-10127,Phone,VIP Enterprise Desk,P3-Medium,Latency Shock,8.72,4.55,0,Enterprise
+TICK-10128,Phone,Tier 1 Support,P3-Medium,Integration Error,13.98,3.83,0,SMB
+TICK-10129,In-App Support,Tier 1 Support,P3-Medium,Billing Dispute,4.51,4.17,0,Enterprise
+TICK-10130,Live Chat,Technical Ops,P3-Medium,Billing Dispute,5.72,5.0,0,Mid-Market
+TICK-10131,Email,Technical Ops,P3-Medium,Latency Shock,13.24,4.61,0,Mid-Market
+TICK-10132,Phone,Billing Support,P3-Medium,Feature Inquiry,6.1,4.31,1,SMB
+TICK-10133,Phone,Tier 1 Support,P3-Medium,Account Access,1.93,2.67,1,SMB
+TICK-10134,Live Chat,Technical Ops,P2-High,Account Access,15.6,5.0,0,SMB
+TICK-10135,Email,Tier 1 Support,P3-Medium,Billing Dispute,3.6,3.42,0,Mid-Market
+TICK-10136,Email,Tier 1 Support,P3-Medium,Bug Report,4.77,4.08,0,Mid-Market
+TICK-10137,In-App Support,Technical Ops,P3-Medium,Latency Shock,32.31,4.12,1,SMB
+TICK-10138,Email,VIP Enterprise Desk,P4-Low,Account Access,3.7,4.16,2,Enterprise
+TICK-10139,Phone,Tier 1 Support,P2-High,Latency Shock,5.3,4.0,0,SMB
+TICK-10140,Live Chat,Tier 1 Support,P3-Medium,Integration Error,3.01,4.22,1,Enterprise
+TICK-10141,Live Chat,Tier 2 Escalations,P3-Medium,Integration Error,104.27,1.82,1,Mid-Market
+TICK-10142,In-App Support,Technical Ops,P4-Low,Account Access,12.41,5.0,0,Mid-Market
+TICK-10143,Live Chat,Technical Ops,P3-Medium,Bug Report,1.88,3.84,0,Mid-Market
+TICK-10144,Web Portal,Billing Support,P4-Low,Billing Dispute,15.06,3.48,0,SMB
+TICK-10145,Web Portal,Tier 1 Support,P2-High,Account Access,2.43,4.45,1,SMB
+TICK-10146,Email,VIP Enterprise Desk,P3-Medium,Bug Report,8.31,3.5,1,SMB
+TICK-10147,Live Chat,Tier 1 Support,P4-Low,Billing Dispute,4.26,4.32,0,Enterprise
+TICK-10148,Web Portal,Billing Support,P2-High,Feature Inquiry,5.17,3.48,0,Enterprise
+TICK-10149,In-App Support,Billing Support,P3-Medium,Integration Error,11.55,4.66,0,Enterprise
+TICK-10150,Phone,Tier 2 Escalations,P2-High,Billing Dispute,147.7,1.92,1,Enterprise
+TICK-10151,Email,Tier 1 Support,P3-Medium,Feature Inquiry,4.34,4.28,0,Enterprise
+TICK-10152,Email,Billing Support,P3-Medium,Account Access,4.76,4.59,0,Enterprise
+TICK-10153,Phone,Billing Support,P1-Critical,Feature Inquiry,8.24,2.91,0,Mid-Market
+TICK-10154,Web Portal,Tier 1 Support,P3-Medium,Latency Shock,0.8,4.36,0,Enterprise
+TICK-10155,Email,Tier 1 Support,P1-Critical,Integration Error,6.96,3.56,1,Enterprise
+TICK-10156,In-App Support,Tier 2 Escalations,P4-Low,Feature Inquiry,4.13,4.14,0,SMB
+TICK-10157,Live Chat,Tier 1 Support,P4-Low,Account Access,4.56,3.34,0,SMB
+TICK-10158,Live Chat,Billing Support,P1-Critical,Integration Error,61.25,3.23,1,SMB
+TICK-10159,Email,VIP Enterprise Desk,P2-High,Integration Error,3.09,4.56,1,Enterprise
+TICK-10160,In-App Support,Technical Ops,P3-Medium,Billing Dispute,1.09,4.71,0,Mid-Market
+TICK-10161,Email,Tier 1 Support,P2-High,Billing Dispute,8.21,4.12,0,Enterprise
+TICK-10162,Email,Tier 1 Support,P2-High,Bug Report,6.1,4.47,0,Enterprise
+TICK-10163,In-App Support,Tier 2 Escalations,P2-High,Integration Error,43.42,2.72,2,SMB
+TICK-10164,Live Chat,Billing Support,P3-Medium,Feature Inquiry,8.45,4.42,0,SMB
+TICK-10165,In-App Support,Tier 1 Support,P2-High,Bug Report,12.34,4.82,0,SMB
+TICK-10166,Email,Billing Support,P4-Low,Account Access,3.28,5.0,0,Enterprise
+TICK-10167,Email,Technical Ops,P3-Medium,Feature Inquiry,1.61,4.78,0,Mid-Market
+TICK-10168,Email,Tier 2 Escalations,P2-High,Integration Error,72.83,1.69,3,Mid-Market
+TICK-10169,Web Portal,Technical Ops,P3-Medium,Billing Dispute,4.69,5.0,2,Mid-Market
+TICK-10170,In-App Support,Billing Support,P3-Medium,Bug Report,2.9,3.62,0,Enterprise
+TICK-10171,Web Portal,Tier 2 Escalations,P2-High,Feature Inquiry,5.17,5.0,0,Free Tier
+TICK-10172,Phone,Tier 1 Support,P4-Low,Account Access,3.88,4.41,0,Free Tier
+TICK-10173,Phone,Tier 2 Escalations,P3-Medium,Account Access,2.1,4.19,1,Enterprise
+TICK-10174,In-App Support,Tier 1 Support,P3-Medium,Latency Shock,4.47,4.34,0,Mid-Market
+TICK-10175,Email,Tier 2 Escalations,P3-Medium,Integration Error,126.99,2.74,2,SMB
+TICK-10176,Email,Tier 1 Support,P2-High,Account Access,4.19,4.22,0,SMB
+TICK-10177,Email,Technical Ops,P4-Low,Integration Error,9.05,4.28,0,Free Tier
+TICK-10178,Phone,Billing Support,P1-Critical,Billing Dispute,10.22,2.97,0,SMB
+TICK-10179,Email,VIP Enterprise Desk,P3-Medium,Bug Report,4.89,4.43,0,Mid-Market
+TICK-10180,Email,Tier 1 Support,P4-Low,Account Access,4.96,4.61,0,Enterprise
+TICK-10181,Email,Tier 1 Support,P3-Medium,Bug Report,11.12,4.33,0,SMB
+TICK-10182,In-App Support,Billing Support,P3-Medium,Integration Error,1.32,5.0,1,Free Tier
+TICK-10183,Live Chat,Technical Ops,P2-High,Billing Dispute,11.12,3.77,0,Mid-Market
+TICK-10184,Live Chat,Tier 1 Support,P3-Medium,Integration Error,14.86,5.0,0,Enterprise
+TICK-10185,Live Chat,Tier 1 Support,P1-Critical,Bug Report,24.58,2.96,0,SMB
+TICK-10186,Phone,Tier 1 Support,P3-Medium,Integration Error,12.34,4.16,0,Mid-Market
+TICK-10187,Email,Tier 1 Support,P3-Medium,Account Access,9.8,4.63,1,SMB
+TICK-10188,Live Chat,Billing Support,P3-Medium,Billing Dispute,2.44,3.24,2,SMB
+TICK-10189,Live Chat,VIP Enterprise Desk,P3-Medium,Feature Inquiry,6.46,4.98,1,Enterprise
+TICK-10190,Live Chat,Tier 2 Escalations,P1-Critical,Feature Inquiry,20.62,3.41,1,SMB
+TICK-10191,In-App Support,Tier 1 Support,P1-Critical,Integration Error,26.15,2.38,1,SMB
+TICK-10192,Email,Tier 1 Support,P3-Medium,Bug Report,18.34,3.26,0,SMB
+TICK-10193,Web Portal,VIP Enterprise Desk,P2-High,Feature Inquiry,6.42,4.59,1,Enterprise
+TICK-10194,Email,Tier 2 Escalations,P3-Medium,Bug Report,4.19,3.81,0,SMB
+TICK-10195,Phone,Tier 1 Support,P2-High,Account Access,1.97,5.0,0,Free Tier
+TICK-10196,Live Chat,Tier 2 Escalations,P3-Medium,Bug Report,1.97,4.37,0,Mid-Market
+TICK-10197,Phone,Billing Support,P4-Low,Integration Error,1.63,4.76,0,Mid-Market
+TICK-10198,Phone,Billing Support,P3-Medium,Account Access,8.55,4.79,0,Mid-Market
+TICK-10199,Phone,Tier 2 Escalations,P3-Medium,Latency Shock,4.68,4.33,1,SMB
+TICK-10200,Email,Tier 2 Escalations,P3-Medium,Feature Inquiry,3.78,4.22,0,Free Tier
+TICK-10201,Web Portal,Tier 2 Escalations,P3-Medium,Feature Inquiry,4.66,4.37,0,Mid-Market
+TICK-10202,In-App Support,Technical Ops,P2-High,Account Access,12.31,5.0,0,Enterprise
+TICK-10203,In-App Support,VIP Enterprise Desk,P3-Medium,Integration Error,8.21,3.68,0,SMB
+TICK-10204,Web Portal,Billing Support,P4-Low,Feature Inquiry,8.77,4.02,0,Mid-Market
+TICK-10205,Web Portal,Tier 2 Escalations,P3-Medium,Account Access,2.34,3.76,0,Enterprise
+TICK-10206,Live Chat,Billing Support,P1-Critical,Account Access,135.5,2.19,0,Free Tier
+TICK-10207,Live Chat,Billing Support,P3-Medium,Billing Dispute,5.1,4.16,2,SMB
+TICK-10208,Web Portal,Tier 1 Support,P3-Medium,Feature Inquiry,6.68,4.52,0,SMB
+TICK-10209,Live Chat,Technical Ops,P2-High,Account Access,4.13,4.89,0,Mid-Market
+TICK-10210,In-App Support,Tier 2 Escalations,P2-High,Integration Error,105.9,2.79,3,SMB
+TICK-10211,Live Chat,Technical Ops,P1-Critical,Feature Inquiry,7.56,1.87,0,Enterprise
+TICK-10212,Live Chat,Technical Ops,P3-Medium,Bug Report,3.43,5.0,1,Mid-Market
+TICK-10213,Live Chat,Tier 1 Support,P3-Medium,Account Access,5.24,4.1,1,SMB
+TICK-10214,Live Chat,Tier 2 Escalations,P4-Low,Feature Inquiry,1.12,3.66,0,Mid-Market
+TICK-10215,Email,Billing Support,P4-Low,Feature Inquiry,21.01,4.59,0,Enterprise
+TICK-10216,Email,Tier 1 Support,P4-Low,Billing Dispute,5.74,5.0,0,Mid-Market
+TICK-10217,Email,Tier 1 Support,P4-Low,Bug Report,18.12,4.49,0,Enterprise
+TICK-10218,Web Portal,Technical Ops,P1-Critical,Integration Error,35.28,2.87,0,Free Tier
+TICK-10219,Phone,Tier 2 Escalations,P3-Medium,Feature Inquiry,9.74,3.87,0,Enterprise
+TICK-10220,Email,Technical Ops,P3-Medium,Latency Shock,1.19,5.0,0,Free Tier
+TICK-10221,In-App Support,VIP Enterprise Desk,P2-High,Account Access,4.4,5.0,0,SMB
+TICK-10222,Web Portal,Tier 1 Support,P3-Medium,Integration Error,7.63,3.8,0,SMB
+TICK-10223,Email,Tier 1 Support,P2-High,Feature Inquiry,7.44,4.0,0,SMB
+TICK-10224,Email,Tier 1 Support,P4-Low,Integration Error,9.14,3.86,0,Mid-Market
+TICK-10225,Email,Tier 1 Support,P2-High,Account Access,5.69,4.46,0,SMB
+TICK-10226,In-App Support,Technical Ops,P2-High,Account Access,14.99,3.62,0,Mid-Market
+TICK-10227,Phone,Tier 1 Support,P2-High,Feature Inquiry,3.36,5.0,1,SMB
+TICK-10228,Phone,Technical Ops,P3-Medium,Bug Report,3.99,4.78,0,Mid-Market
+TICK-10229,Email,Tier 1 Support,P4-Low,Latency Shock,11.8,4.46,0,SMB
+TICK-10230,Live Chat,Tier 1 Support,P3-Medium,Bug Report,16.23,4.4,1,SMB
+TICK-10231,Email,Tier 1 Support,P3-Medium,Feature Inquiry,9.89,4.46,0,Enterprise
+TICK-10232,Phone,VIP Enterprise Desk,P4-Low,Integration Error,7.1,5.0,2,SMB
+TICK-10233,Live Chat,VIP Enterprise Desk,P3-Medium,Latency Shock,18.08,3.83,0,Enterprise
+TICK-10234,Email,Tier 1 Support,P2-High,Latency Shock,0.9,4.03,0,Mid-Market
+TICK-10235,Phone,VIP Enterprise Desk,P3-Medium,Account Access,18.11,5.0,0,SMB
+TICK-10236,Phone,Tier 1 Support,P4-Low,Integration Error,2.59,4.3,0,Enterprise
+TICK-10237,Live Chat,Tier 2 Escalations,P2-High,Integration Error,35.56,1.91,4,Mid-Market
+TICK-10238,Live Chat,Tier 2 Escalations,P3-Medium,Bug Report,12.11,4.45,0,Free Tier
+TICK-10239,Email,Tier 1 Support,P4-Low,Latency Shock,0.96,3.98,0,Mid-Market
+TICK-10240,In-App Support,Tier 2 Escalations,P2-High,Integration Error,78.22,2.37,1,Mid-Market
+TICK-10241,Web Portal,VIP Enterprise Desk,P3-Medium,Integration Error,1.44,4.74,0,Mid-Market
+TICK-10242,Live Chat,Technical Ops,P3-Medium,Feature Inquiry,1.21,3.91,0,Mid-Market
+TICK-10243,Phone,Tier 2 Escalations,P1-Critical,Billing Dispute,34.04,2.12,1,Mid-Market
+TICK-10244,Phone,Tier 2 Escalations,P3-Medium,Bug Report,1.04,4.11,1,Mid-Market
+TICK-10245,Web Portal,Tier 1 Support,P4-Low,Bug Report,4.71,4.94,0,SMB
+TICK-10246,Phone,VIP Enterprise Desk,P1-Critical,Billing Dispute,23.52,3.42,1,Free Tier
+TICK-10247,Email,Tier 1 Support,P4-Low,Latency Shock,4.63,4.52,1,Enterprise
+TICK-10248,Phone,Billing Support,P3-Medium,Feature Inquiry,1.86,4.03,2,SMB
+TICK-10249,Web Portal,Billing Support,P2-High,Integration Error,10.24,5.0,0,Mid-Market
+TICK-10250,Email,Billing Support,P3-Medium,Feature Inquiry,0.98,4.32,0,SMB
+TICK-10251,Email,Tier 1 Support,P4-Low,Latency Shock,8.58,4.83,0,Enterprise
+TICK-10252,Email,VIP Enterprise Desk,P2-High,Latency Shock,1.74,3.7,0,Mid-Market
+TICK-10253,Email,Tier 1 Support,P3-Medium,Latency Shock,17.53,4.82,0,Enterprise
+TICK-10254,Email,Billing Support,P4-Low,Feature Inquiry,25.19,3.51,0,Mid-Market
+TICK-10255,Web Portal,Tier 1 Support,P3-Medium,Account Access,1.56,4.74,1,Mid-Market
+TICK-10256,In-App Support,Tier 1 Support,P2-High,Bug Report,4.48,3.7,0,Free Tier
+TICK-10257,Email,VIP Enterprise Desk,P4-Low,Feature Inquiry,7.11,4.61,0,Mid-Market
+TICK-10258,Phone,Tier 1 Support,P3-Medium,Bug Report,1.78,4.2,0,Enterprise
+TICK-10259,Live Chat,Tier 1 Support,P3-Medium,Feature Inquiry,3.77,3.49,0,Enterprise
+TICK-10260,Phone,VIP Enterprise Desk,P3-Medium,Feature Inquiry,11.16,4.58,0,Mid-Market
+TICK-10261,Email,Tier 1 Support,P3-Medium,Bug Report,6.31,3.55,0,Enterprise
+TICK-10262,Phone,VIP Enterprise Desk,P3-Medium,Integration Error,9.73,3.71,0,Mid-Market
+TICK-10263,Phone,Tier 1 Support,P2-High,Latency Shock,18.89,4.68,1,Enterprise
+TICK-10264,Phone,Tier 1 Support,P3-Medium,Integration Error,5.89,2.96,0,Mid-Market
+TICK-10265,Phone,Billing Support,P2-High,Billing Dispute,1.32,4.17,0,SMB
+TICK-10266,Phone,Tier 1 Support,P2-High,Latency Shock,13.99,4.4,1,Free Tier
+TICK-10267,Email,Tier 2 Escalations,P3-Medium,Bug Report,1.42,5.0,1,SMB
+TICK-10268,Live Chat,Billing Support,P3-Medium,Feature Inquiry,3.0,4.04,0,SMB
+TICK-10269,Email,VIP Enterprise Desk,P3-Medium,Latency Shock,0.93,4.34,0,SMB
+TICK-10270,Web Portal,Tier 1 Support,P2-High,Latency Shock,13.85,3.97,0,SMB
+TICK-10271,Live Chat,Billing Support,P3-Medium,Account Access,3.1,3.17,0,Mid-Market
+TICK-10272,Live Chat,Technical Ops,P1-Critical,Feature Inquiry,97.85,3.46,0,Enterprise
+TICK-10273,Live Chat,Tier 1 Support,P3-Medium,Integration Error,7.67,3.84,2,SMB
+TICK-10274,Web Portal,Tier 1 Support,P1-Critical,Bug Report,84.04,3.18,1,Enterprise
+TICK-10275,Email,Technical Ops,P4-Low,Account Access,2.19,4.51,0,SMB
+TICK-10276,Phone,Tier 1 Support,P3-Medium,Latency Shock,8.6,3.99,1,Free Tier
+TICK-10277,Live Chat,Tier 1 Support,P1-Critical,Account Access,21.72,4.2,0,Mid-Market
+TICK-10278,Live Chat,VIP Enterprise Desk,P2-High,Latency Shock,2.44,3.84,0,Enterprise
+TICK-10279,Email,Tier 1 Support,P4-Low,Bug Report,7.42,3.63,0,Mid-Market
+TICK-10280,Phone,Technical Ops,P3-Medium,Latency Shock,8.61,4.39,1,SMB
+TICK-10281,In-App Support,Tier 2 Escalations,P1-Critical,Feature Inquiry,20.97,3.84,0,SMB
+TICK-10282,Phone,Tier 1 Support,P4-Low,Integration Error,4.21,4.68,2,Free Tier
+TICK-10283,Live Chat,VIP Enterprise Desk,P3-Medium,Integration Error,0.93,4.89,0,Mid-Market
+TICK-10284,Email,Tier 1 Support,P3-Medium,Feature Inquiry,2.3,4.01,0,Mid-Market
+TICK-10285,Phone,Tier 2 Escalations,P3-Medium,Bug Report,6.77,4.13,0,Enterprise
+TICK-10286,Live Chat,Tier 1 Support,P3-Medium,Feature Inquiry,1.67,4.44,0,SMB
+TICK-10287,Live Chat,Tier 1 Support,P2-High,Billing Dispute,16.8,4.18,0,SMB
+TICK-10288,Phone,Tier 2 Escalations,P4-Low,Integration Error,44.8,2.98,4,SMB
+TICK-10289,Email,Tier 2 Escalations,P3-Medium,Feature Inquiry,8.61,4.13,0,Mid-Market
+TICK-10290,Email,Billing Support,P2-High,Latency Shock,5.21,4.48,0,Mid-Market
+TICK-10291,Email,Billing Support,P3-Medium,Integration Error,11.54,5.0,0,SMB
+TICK-10292,Web Portal,Tier 1 Support,P3-Medium,Bug Report,1.78,3.88,1,Free Tier
+TICK-10293,Live Chat,Tier 2 Escalations,P3-Medium,Bug Report,11.16,3.31,0,Free Tier
+TICK-10294,Phone,Technical Ops,P3-Medium,Latency Shock,6.84,5.0,0,SMB
+TICK-10295,Email,Tier 1 Support,P3-Medium,Bug Report,6.51,4.32,0,Mid-Market
+TICK-10296,Email,Tier 1 Support,P3-Medium,Feature Inquiry,7.8,4.19,0,Free Tier
+TICK-10297,Email,Tier 1 Support,P3-Medium,Feature Inquiry,8.73,4.55,0,SMB
+TICK-10298,Web Portal,Tier 1 Support,P3-Medium,Bug Report,20.74,4.5,2,SMB
+TICK-10299,Phone,Technical Ops,P2-High,Bug Report,13.23,4.07,0,Enterprise
+TICK-10300,In-App Support,Tier 1 Support,P3-Medium,Account Access,6.27,4.31,0,SMB
+TICK-10301,Email,Tier 2 Escalations,P2-High,Feature Inquiry,0.89,4.2,0,SMB
+TICK-10302,Phone,VIP Enterprise Desk,P3-Medium,Feature Inquiry,5.3,3.82,0,SMB
+TICK-10303,Web Portal,Tier 2 Escalations,P4-Low,Integration Error,54.89,1.49,2,Enterprise
+TICK-10304,Email,Technical Ops,P3-Medium,Billing Dispute,10.19,4.35,0,Mid-Market
+TICK-10305,Phone,Tier 1 Support,P3-Medium,Bug Report,19.59,4.7,0,Mid-Market
+TICK-10306,Web Portal,Tier 1 Support,P2-High,Billing Dispute,3.35,4.66,0,Enterprise
+TICK-10307,Email,Billing Support,P3-Medium,Billing Dispute,8.26,4.26,1,Free Tier
+TICK-10308,Web Portal,Tier 2 Escalations,P4-Low,Latency Shock,9.18,4.03,1,SMB
+TICK-10309,Phone,Tier 1 Support,P1-Critical,Account Access,24.59,2.78,1,Mid-Market
+TICK-10310,Live Chat,Tier 1 Support,P3-Medium,Integration Error,1.49,4.39,1,SMB
+TICK-10311,Live Chat,Tier 2 Escalations,P3-Medium,Latency Shock,2.57,3.37,0,Free Tier
+TICK-10312,Email,Tier 1 Support,P3-Medium,Bug Report,5.81,4.43,0,Enterprise
+TICK-10313,Live Chat,Tier 1 Support,P2-High,Account Access,1.04,3.37,1,SMB
+TICK-10314,Email,Billing Support,P3-Medium,Latency Shock,3.84,3.96,0,SMB
+TICK-10315,Email,Tier 2 Escalations,P2-High,Integration Error,155.88,2.3,1,Enterprise
+TICK-10316,Phone,VIP Enterprise Desk,P2-High,Feature Inquiry,6.08,3.74,1,Enterprise
+TICK-10317,Phone,Tier 1 Support,P2-High,Integration Error,10.97,4.47,0,Mid-Market
+TICK-10318,In-App Support,Tier 1 Support,P1-Critical,Integration Error,31.38,4.27,2,Mid-Market
+TICK-10319,Phone,Billing Support,P3-Medium,Feature Inquiry,9.28,3.68,0,SMB
+TICK-10320,Email,Tier 2 Escalations,P2-High,Billing Dispute,112.76,1.73,1,Enterprise
+TICK-10321,Email,Tier 1 Support,P2-High,Bug Report,3.58,5.0,0,Mid-Market
+TICK-10322,Web Portal,Technical Ops,P3-Medium,Billing Dispute,7.26,4.46,0,Free Tier
+TICK-10323,Email,Billing Support,P2-High,Feature Inquiry,16.0,3.58,0,Enterprise
+TICK-10324,Email,Tier 2 Escalations,P3-Medium,Bug Report,15.48,3.94,0,SMB
+TICK-10325,Email,Tier 2 Escalations,P3-Medium,Latency Shock,3.33,5.0,0,SMB
+TICK-10326,Live Chat,VIP Enterprise Desk,P3-Medium,Integration Error,2.34,4.13,0,Mid-Market
+TICK-10327,Live Chat,Tier 2 Escalations,P4-Low,Bug Report,2.73,5.0,1,Enterprise
+TICK-10328,Phone,Tier 2 Escalations,P2-High,Latency Shock,6.65,3.21,0,Free Tier
+TICK-10329,Phone,Tier 1 Support,P3-Medium,Latency Shock,6.23,2.95,0,Mid-Market
+TICK-10330,Email,Tier 1 Support,P3-Medium,Integration Error,3.57,3.28,0,Enterprise
+TICK-10331,Email,Technical Ops,P3-Medium,Integration Error,2.06,4.27,0,Mid-Market
+TICK-10332,Phone,Billing Support,P4-Low,Billing Dispute,6.4,4.85,0,Enterprise
+TICK-10333,Phone,Billing Support,P4-Low,Feature Inquiry,1.92,4.67,0,Mid-Market
+TICK-10334,Phone,Tier 1 Support,P3-Medium,Bug Report,22.37,4.01,1,Free Tier
+TICK-10335,Web Portal,VIP Enterprise Desk,P3-Medium,Account Access,3.97,5.0,0,SMB
+TICK-10336,Live Chat,Tier 2 Escalations,P4-Low,Bug Report,3.0,4.84,0,Free Tier
+TICK-10337,Phone,Tier 1 Support,P3-Medium,Latency Shock,8.22,4.18,0,SMB
+TICK-10338,Live Chat,Tier 1 Support,P3-Medium,Latency Shock,1.28,3.95,0,SMB
+TICK-10339,Email,Billing Support,P3-Medium,Account Access,2.28,3.54,1,Mid-Market
+TICK-10340,Live Chat,Tier 2 Escalations,P3-Medium,Latency Shock,2.67,4.0,1,Mid-Market
+TICK-10341,Email,Technical Ops,P3-Medium,Bug Report,14.87,4.73,0,Free Tier
+TICK-10342,Web Portal,Tier 1 Support,P2-High,Integration Error,0.83,4.95,1,Free Tier
+TICK-10343,Email,Billing Support,P2-High,Integration Error,10.29,4.64,0,SMB
+TICK-10344,Email,Tier 1 Support,P1-Critical,Account Access,6.27,4.04,1,Free Tier
+TICK-10345,Phone,Billing Support,P3-Medium,Bug Report,1.63,4.85,0,SMB
+TICK-10346,Email,VIP Enterprise Desk,P3-Medium,Feature Inquiry,5.5,3.99,0,SMB
+TICK-10347,Email,Tier 1 Support,P1-Critical,Feature Inquiry,61.24,3.69,1,SMB
+TICK-10348,Phone,Tier 2 Escalations,P2-High,Latency Shock,2.74,4.59,0,Enterprise
+TICK-10349,Live Chat,Tier 1 Support,P2-High,Latency Shock,2.92,3.95,0,Enterprise
+TICK-10350,In-App Support,Tier 1 Support,P3-Medium,Account Access,15.19,4.35,1,Enterprise
+TICK-10351,Phone,Tier 1 Support,P2-High,Integration Error,28.21,4.97,0,SMB
+TICK-10352,Phone,Billing Support,P2-High,Integration Error,6.67,4.13,0,Mid-Market
+TICK-10353,Web Portal,Tier 1 Support,P3-Medium,Latency Shock,24.15,4.79,0,SMB
+TICK-10354,Email,VIP Enterprise Desk,P4-Low,Account Access,14.37,4.28,0,Mid-Market
+TICK-10355,Live Chat,Tier 1 Support,P2-High,Account Access,15.11,4.1,0,SMB
+TICK-10356,Phone,Tier 2 Escalations,P2-High,Account Access,2.52,4.49,0,Mid-Market
+TICK-10357,Live Chat,Tier 1 Support,P3-Medium,Feature Inquiry,3.14,4.07,0,Enterprise
+TICK-10358,Email,Tier 1 Support,P1-Critical,Feature Inquiry,10.78,2.52,0,Enterprise
+TICK-10359,Live Chat,Tier 2 Escalations,P2-High,Latency Shock,18.38,3.96,0,Enterprise
+TICK-10360,In-App Support,Tier 2 Escalations,P1-Critical,Latency Shock,6.21,2.07,1,Mid-Market
+TICK-10361,Email,Tier 1 Support,P4-Low,Bug Report,12.99,4.56,1,SMB
+TICK-10362,Live Chat,Tier 1 Support,P1-Critical,Feature Inquiry,74.71,1.01,1,SMB
+TICK-10363,Phone,Billing Support,P2-High,Account Access,6.73,3.3,0,Mid-Market
+TICK-10364,Email,Tier 2 Escalations,P2-High,Feature Inquiry,23.58,4.34,0,Enterprise
+TICK-10365,Web Portal,Tier 1 Support,P3-Medium,Billing Dispute,9.79,4.0,1,Enterprise
+TICK-10366,In-App Support,Billing Support,P2-High,Integration Error,14.65,4.81,1,Free Tier
+TICK-10367,In-App Support,Billing Support,P4-Low,Account Access,22.63,4.37,0,Enterprise
+TICK-10368,Live Chat,Technical Ops,P3-Medium,Billing Dispute,9.21,4.09,0,Mid-Market
+TICK-10369,Phone,Tier 1 Support,P3-Medium,Latency Shock,1.21,3.61,0,SMB
+TICK-10370,Live Chat,Tier 1 Support,P4-Low,Feature Inquiry,4.68,4.98,1,Mid-Market
+TICK-10371,In-App Support,VIP Enterprise Desk,P1-Critical,Account Access,8.86,3.67,0,Mid-Market
+TICK-10372,Phone,Tier 1 Support,P3-Medium,Account Access,18.84,4.26,0,SMB
+TICK-10373,Email,Tier 1 Support,P1-Critical,Account Access,9.28,2.96,1,Enterprise
+TICK-10374,In-App Support,VIP Enterprise Desk,P2-High,Billing Dispute,1.23,4.64,0,SMB
+TICK-10375,Email,VIP Enterprise Desk,P1-Critical,Bug Report,81.02,2.97,3,SMB
+TICK-10376,Email,Tier 1 Support,P3-Medium,Latency Shock,6.43,3.98,0,SMB
+TICK-10377,Live Chat,Tier 1 Support,P2-High,Feature Inquiry,8.58,4.6,0,SMB
+TICK-10378,Live Chat,Tier 1 Support,P3-Medium,Integration Error,44.25,3.64,0,SMB
+TICK-10379,Email,Tier 1 Support,P4-Low,Integration Error,14.94,4.85,0,Mid-Market
+TICK-10380,In-App Support,Technical Ops,P3-Medium,Billing Dispute,3.15,4.24,0,Mid-Market
+TICK-10381,Email,VIP Enterprise Desk,P3-Medium,Billing Dispute,4.3,4.43,1,Mid-Market
+TICK-10382,Phone,Tier 2 Escalations,P3-Medium,Feature Inquiry,10.67,4.14,0,Free Tier
+TICK-10383,Email,Technical Ops,P3-Medium,Bug Report,2.67,3.88,2,Mid-Market
+TICK-10384,Phone,Tier 1 Support,P4-Low,Feature Inquiry,11.6,4.65,0,Mid-Market
+TICK-10385,Live Chat,Tier 2 Escalations,P3-Medium,Feature Inquiry,1.34,4.47,0,Enterprise
+TICK-10386,Live Chat,Tier 1 Support,P4-Low,Billing Dispute,1.21,3.73,0,Mid-Market
+TICK-10387,Email,Tier 1 Support,P1-Critical,Integration Error,11.54,2.99,1,Enterprise
+TICK-10388,Email,Tier 1 Support,P3-Medium,Integration Error,3.23,5.0,0,Mid-Market
+TICK-10389,Email,VIP Enterprise Desk,P3-Medium,Latency Shock,2.78,4.58,0,Enterprise
+TICK-10390,Web Portal,Tier 1 Support,P2-High,Feature Inquiry,6.19,5.0,1,Mid-Market
+TICK-10391,Email,Tier 2 Escalations,P2-High,Integration Error,42.93,2.59,1,Free Tier
+TICK-10392,Live Chat,Tier 1 Support,P3-Medium,Billing Dispute,8.17,4.96,0,SMB
+TICK-10393,In-App Support,Tier 1 Support,P2-High,Account Access,4.3,4.57,0,Enterprise
+TICK-10394,Live Chat,Billing Support,P4-Low,Account Access,1.03,5.0,0,SMB
+TICK-10395,Live Chat,Tier 1 Support,P3-Medium,Latency Shock,2.41,3.28,0,Enterprise
+TICK-10396,Phone,Billing Support,P2-High,Bug Report,18.91,4.04,0,SMB
+TICK-10397,Live Chat,Tier 1 Support,P3-Medium,Feature Inquiry,0.85,4.82,2,Mid-Market
+TICK-10398,Web Portal,Billing Support,P4-Low,Feature Inquiry,6.09,3.72,0,Mid-Market
+TICK-10399,Email,Tier 1 Support,P4-Low,Billing Dispute,6.63,3.74,0,Enterprise
+TICK-10400,Live Chat,Technical Ops,P4-Low,Latency Shock,2.43,4.38,0,Mid-Market
+TICK-10401,Live Chat,Tier 1 Support,P3-Medium,Latency Shock,4.53,4.39,0,Mid-Market
+TICK-10402,Live Chat,Tier 2 Escalations,P4-Low,Account Access,3.16,4.48,0,Enterprise
+TICK-10403,Phone,Tier 1 Support,P3-Medium,Bug Report,2.28,5.0,0,Mid-Market
+TICK-10404,Phone,Tier 1 Support,P3-Medium,Latency Shock,13.41,4.46,0,Enterprise
+TICK-10405,Web Portal,Tier 2 Escalations,P2-High,Billing Dispute,33.12,2.68,1,SMB
+TICK-10406,Email,Tier 1 Support,P3-Medium,Latency Shock,1.62,3.17,0,SMB
+TICK-10407,Email,Billing Support,P2-High,Bug Report,10.12,4.55,0,SMB
+TICK-10408,Web Portal,VIP Enterprise Desk,P3-Medium,Latency Shock,2.85,4.87,1,Mid-Market
+TICK-10409,Email,Tier 1 Support,P3-Medium,Integration Error,5.07,4.77,0,SMB
+TICK-10410,Live Chat,Billing Support,P3-Medium,Integration Error,2.02,5.0,0,Free Tier
+TICK-10411,Live Chat,Tier 1 Support,P3-Medium,Feature Inquiry,4.16,4.21,0,Enterprise
+TICK-10412,Email,Tier 1 Support,P4-Low,Bug Report,6.33,4.05,0,Mid-Market
+TICK-10413,In-App Support,Tier 2 Escalations,P3-Medium,Integration Error,43.51,2.31,2,Free Tier
+TICK-10414,In-App Support,Tier 1 Support,P1-Critical,Integration Error,31.36,2.86,1,Mid-Market
+TICK-10415,Email,Tier 1 Support,P3-Medium,Bug Report,4.44,4.73,0,SMB
+TICK-10416,Phone,Technical Ops,P4-Low,Account Access,10.07,5.0,0,Free Tier
+TICK-10417,Live Chat,Tier 2 Escalations,P3-Medium,Bug Report,6.33,2.93,0,Enterprise
+TICK-10418,In-App Support,VIP Enterprise Desk,P3-Medium,Bug Report,11.32,5.0,0,Free Tier
+TICK-10419,Phone,Billing Support,P1-Critical,Billing Dispute,49.19,4.53,3,Free Tier
+TICK-10420,Web Portal,Tier 2 Escalations,P4-Low,Bug Report,31.24,4.78,0,Mid-Market
+TICK-10421,Email,Tier 1 Support,P2-High,Feature Inquiry,5.67,4.74,0,Enterprise
+TICK-10422,Live Chat,Tier 1 Support,P4-Low,Feature Inquiry,12.42,3.87,0,Mid-Market
+TICK-10423,Phone,Tier 1 Support,P3-Medium,Integration Error,3.44,5.0,0,SMB
+TICK-10424,Email,Tier 2 Escalations,P2-High,Billing Dispute,64.43,1.7,1,Free Tier
+TICK-10425,Web Portal,Tier 1 Support,P2-High,Latency Shock,12.45,5.0,0,Mid-Market
+TICK-10426,Email,Tier 1 Support,P4-Low,Billing Dispute,3.2,4.87,0,Mid-Market
+TICK-10427,Phone,Tier 1 Support,P2-High,Account Access,18.33,3.98,0,SMB
+TICK-10428,Phone,Tier 2 Escalations,P2-High,Feature Inquiry,2.61,4.0,0,Enterprise
+TICK-10429,Email,Tier 2 Escalations,P2-High,Latency Shock,10.67,3.93,0,Enterprise
+TICK-10430,Phone,VIP Enterprise Desk,P2-High,Billing Dispute,4.23,5.0,0,Enterprise
+TICK-10431,Web Portal,Billing Support,P1-Critical,Billing Dispute,11.39,4.7,0,Enterprise
+TICK-10432,Phone,Technical Ops,P1-Critical,Latency Shock,25.6,3.0,2,Mid-Market
+TICK-10433,In-App Support,Tier 2 Escalations,P4-Low,Integration Error,67.71,1.75,1,Mid-Market
+TICK-10434,Live Chat,Tier 1 Support,P1-Critical,Account Access,12.12,1.49,1,Mid-Market
+TICK-10435,Phone,Tier 2 Escalations,P1-Critical,Integration Error,68.79,1.62,4,Enterprise
+TICK-10436,In-App Support,Billing Support,P2-High,Bug Report,13.43,4.51,0,Free Tier
+TICK-10437,Email,Tier 1 Support,P2-High,Account Access,10.55,4.5,0,Mid-Market
+TICK-10438,Web Portal,Tier 2 Escalations,P4-Low,Integration Error,102.57,3.74,1,Mid-Market
+TICK-10439,In-App Support,Tier 1 Support,P3-Medium,Integration Error,5.4,4.53,0,Mid-Market
+TICK-10440,Live Chat,Technical Ops,P2-High,Feature Inquiry,4.95,3.97,0,SMB
+TICK-10441,Live Chat,Tier 1 Support,P3-Medium,Bug Report,5.62,4.55,0,Mid-Market
+TICK-10442,Phone,Tier 2 Escalations,P3-Medium,Integration Error,66.48,2.28,4,Free Tier
+TICK-10443,Live Chat,Tier 1 Support,P4-Low,Latency Shock,1.06,4.87,0,Mid-Market
+TICK-10444,Email,Tier 1 Support,P1-Critical,Billing Dispute,42.17,3.91,0,Enterprise
+TICK-10445,Live Chat,Tier 1 Support,P4-Low,Billing Dispute,15.56,4.6,0,Free Tier
+TICK-10446,Live Chat,Technical Ops,P3-Medium,Account Access,2.5,3.99,0,SMB
+TICK-10447,Email,Tier 2 Escalations,P2-High,Feature Inquiry,2.68,5.0,0,Enterprise
+TICK-10448,Live Chat,Tier 1 Support,P3-Medium,Billing Dispute,24.66,5.0,0,SMB
+TICK-10449,Live Chat,Tier 1 Support,P3-Medium,Feature Inquiry,2.92,4.94,1,Enterprise
+TICK-10450,Live Chat,Tier 2 Escalations,P3-Medium,Feature Inquiry,1.99,4.37,0,Enterprise
+TICK-10451,Live Chat,Tier 1 Support,P2-High,Feature Inquiry,2.33,3.51,0,Enterprise
+TICK-10452,Web Portal,Tier 2 Escalations,P3-Medium,Account Access,19.38,3.88,0,Free Tier
+TICK-10453,Phone,Technical Ops,P3-Medium,Feature Inquiry,10.0,5.0,0,SMB
+TICK-10454,Email,Technical Ops,P2-High,Feature Inquiry,11.27,5.0,0,Mid-Market
+TICK-10455,Live Chat,Tier 2 Escalations,P2-High,Integration Error,149.29,1.66,4,Mid-Market
+TICK-10456,Live Chat,Tier 2 Escalations,P4-Low,Latency Shock,17.27,3.77,0,Mid-Market
+TICK-10457,Phone,Tier 1 Support,P3-Medium,Integration Error,3.33,4.2,1,Enterprise
+TICK-10458,Live Chat,Tier 1 Support,P3-Medium,Feature Inquiry,4.71,4.76,0,Free Tier
+TICK-10459,Email,Tier 1 Support,P3-Medium,Integration Error,2.9,3.96,0,Mid-Market
+TICK-10460,Email,Technical Ops,P2-High,Integration Error,4.53,5.0,0,Enterprise
+TICK-10461,Email,Tier 1 Support,P4-Low,Billing Dispute,3.37,3.87,0,Free Tier
+TICK-10462,Web Portal,Tier 2 Escalations,P3-Medium,Account Access,7.64,4.3,1,Enterprise
+TICK-10463,Phone,Tier 1 Support,P2-High,Latency Shock,9.95,4.7,0,SMB
+TICK-10464,Email,Tier 1 Support,P3-Medium,Account Access,1.17,4.62,0,Mid-Market
+TICK-10465,Email,Tier 2 Escalations,P3-Medium,Latency Shock,2.4,4.28,0,Mid-Market
+TICK-10466,In-App Support,Tier 2 Escalations,P4-Low,Bug Report,9.63,4.8,0,Mid-Market
+TICK-10467,Live Chat,Billing Support,P3-Medium,Latency Shock,11.16,3.78,0,SMB
+TICK-10468,In-App Support,Billing Support,P2-High,Bug Report,7.56,3.21,0,Mid-Market
+TICK-10469,Phone,Tier 2 Escalations,P3-Medium,Billing Dispute,174.56,2.02,4,Free Tier
+TICK-10470,Live Chat,Tier 1 Support,P3-Medium,Billing Dispute,3.05,3.06,1,Free Tier
+TICK-10471,Live Chat,Tier 2 Escalations,P3-Medium,Account Access,1.65,3.77,0,Mid-Market
+TICK-10472,Web Portal,Tier 1 Support,P4-Low,Billing Dispute,14.74,5.0,1,Enterprise
+TICK-10473,Live Chat,Tier 1 Support,P2-High,Latency Shock,7.34,3.91,0,Mid-Market
+TICK-10474,Live Chat,Tier 1 Support,P3-Medium,Feature Inquiry,10.58,3.81,1,Mid-Market
+TICK-10475,Live Chat,Tier 2 Escalations,P2-High,Bug Report,6.29,4.39,0,Enterprise
+TICK-10476,Email,Technical Ops,P1-Critical,Latency Shock,7.86,1.3,0,Enterprise
+TICK-10477,Live Chat,Billing Support,P4-Low,Bug Report,1.32,4.91,0,Free Tier
+TICK-10478,Live Chat,Tier 1 Support,P3-Medium,Bug Report,2.19,5.0,1,Mid-Market
+TICK-10479,Live Chat,Technical Ops,P2-High,Integration Error,2.23,4.47,1,SMB
+TICK-10480,In-App Support,Tier 2 Escalations,P2-High,Feature Inquiry,4.18,3.36,0,SMB
+TICK-10481,Web Portal,VIP Enterprise Desk,P4-Low,Integration Error,1.99,4.36,0,SMB
+TICK-10482,Email,Billing Support,P2-High,Billing Dispute,8.11,4.62,1,Enterprise
+TICK-10483,Phone,Tier 2 Escalations,P4-Low,Latency Shock,7.57,2.86,0,SMB
+TICK-10484,Live Chat,VIP Enterprise Desk,P2-High,Latency Shock,2.16,4.96,0,Mid-Market
+TICK-10485,In-App Support,Tier 2 Escalations,P3-Medium,Latency Shock,4.53,4.33,0,Mid-Market
+TICK-10486,In-App Support,Tier 1 Support,P3-Medium,Latency Shock,3.85,4.05,2,SMB
+TICK-10487,Email,Tier 2 Escalations,P2-High,Feature Inquiry,24.01,5.0,1,SMB
+TICK-10488,Live Chat,Billing Support,P3-Medium,Bug Report,21.3,5.0,0,Enterprise
+TICK-10489,Email,Tier 1 Support,P1-Critical,Bug Report,52.6,3.52,0,SMB
+TICK-10490,In-App Support,VIP Enterprise Desk,P1-Critical,Integration Error,46.61,4.12,2,Free Tier
+TICK-10491,Live Chat,Tier 1 Support,P4-Low,Latency Shock,3.28,3.37,0,Free Tier
+TICK-10492,Phone,Tier 2 Escalations,P3-Medium,Latency Shock,20.22,3.91,0,SMB
+TICK-10493,Email,Billing Support,P3-Medium,Billing Dispute,6.62,4.07,0,SMB
+TICK-10494,Live Chat,Tier 2 Escalations,P3-Medium,Account Access,13.68,4.49,0,SMB
+TICK-10495,Live Chat,Tier 1 Support,P4-Low,Latency Shock,2.92,4.38,0,Enterprise
+TICK-10496,Live Chat,Billing Support,P3-Medium,Latency Shock,15.73,4.27,0,Enterprise
+TICK-10497,Phone,Tier 1 Support,P3-Medium,Billing Dispute,7.93,4.18,0,Enterprise
+TICK-10498,Phone,Technical Ops,P1-Critical,Latency Shock,10.09,2.49,1,Enterprise
+TICK-10499,Email,Technical Ops,P4-Low,Latency Shock,1.43,4.92,0,SMB
+TICK-10500,In-App Support,Tier 2 Escalations,P3-Medium,Latency Shock,2.58,3.32,0,Enterprise
+TICK-10501,Live Chat,Technical Ops,P3-Medium,Latency Shock,1.48,4.76,0,SMB
+TICK-10502,Email,Tier 1 Support,P4-Low,Feature Inquiry,3.27,3.81,0,Mid-Market
+TICK-10503,In-App Support,Tier 2 Escalations,P1-Critical,Bug Report,8.1,4.02,1,Enterprise
+TICK-10504,Web Portal,Tier 1 Support,P2-High,Billing Dispute,5.01,3.4,0,Mid-Market
+TICK-10505,Live Chat,Technical Ops,P3-Medium,Bug Report,9.36,4.09,0,Mid-Market
+TICK-10506,Phone,Tier 1 Support,P1-Critical,Feature Inquiry,19.39,2.38,2,Mid-Market
+TICK-10507,Email,Billing Support,P3-Medium,Integration Error,4.42,4.32,0,Enterprise
+TICK-10508,Live Chat,Tier 2 Escalations,P2-High,Bug Report,25.58,4.19,0,Mid-Market
+TICK-10509,Email,Tier 1 Support,P1-Critical,Integration Error,53.04,2.12,0,Enterprise
+TICK-10510,Live Chat,Tier 1 Support,P2-High,Bug Report,7.69,5.0,0,Mid-Market
+TICK-10511,Live Chat,Tier 1 Support,P3-Medium,Feature Inquiry,2.04,5.0,0,Mid-Market
+TICK-10512,Web Portal,Tier 1 Support,P3-Medium,Integration Error,19.56,3.84,0,SMB
+TICK-10513,In-App Support,Tier 2 Escalations,P2-High,Billing Dispute,25.17,1.7,4,Mid-Market
+TICK-10514,Email,Tier 2 Escalations,P3-Medium,Bug Report,4.16,4.97,0,SMB
+TICK-10515,Email,Tier 1 Support,P3-Medium,Account Access,4.03,4.69,0,Mid-Market
+TICK-10516,Phone,Tier 2 Escalations,P3-Medium,Bug Report,9.89,4.32,0,Free Tier
+TICK-10517,Email,VIP Enterprise Desk,P1-Critical,Integration Error,37.24,1.93,1,Free Tier
+TICK-10518,In-App Support,Technical Ops,P4-Low,Account Access,10.07,4.18,1,SMB
+TICK-10519,Web Portal,Billing Support,P1-Critical,Billing Dispute,22.21,1.32,1,Enterprise
+TICK-10520,In-App Support,VIP Enterprise Desk,P3-Medium,Billing Dispute,13.11,5.0,0,Enterprise
+TICK-10521,Email,Tier 1 Support,P3-Medium,Account Access,13.28,4.07,0,Mid-Market
+TICK-10522,In-App Support,Billing Support,P3-Medium,Billing Dispute,1.59,3.86,0,SMB
+TICK-10523,Phone,Technical Ops,P1-Critical,Billing Dispute,24.63,3.27,0,Enterprise
+TICK-10524,Live Chat,Technical Ops,P2-High,Bug Report,19.14,4.02,2,SMB
+TICK-10525,Live Chat,Tier 1 Support,P2-High,Account Access,10.68,4.65,2,SMB
+TICK-10526,Web Portal,Tier 1 Support,P3-Medium,Integration Error,1.55,4.94,0,Free Tier
+TICK-10527,Live Chat,Tier 1 Support,P4-Low,Bug Report,8.7,3.71,0,Free Tier
+TICK-10528,Email,VIP Enterprise Desk,P3-Medium,Account Access,4.55,3.79,0,SMB
+TICK-10529,Live Chat,Billing Support,P4-Low,Feature Inquiry,2.08,3.74,0,Enterprise
+TICK-10530,Email,Tier 2 Escalations,P4-Low,Integration Error,60.66,2.92,1,SMB
+TICK-10531,Email,Tier 2 Escalations,P3-Medium,Account Access,9.56,4.1,0,Mid-Market
+TICK-10532,Email,Tier 1 Support,P4-Low,Latency Shock,1.39,5.0,1,Enterprise
+TICK-10533,Web Portal,Tier 1 Support,P4-Low,Account Access,2.05,4.13,1,Enterprise
+TICK-10534,Web Portal,Tier 1 Support,P3-Medium,Billing Dispute,0.97,4.48,0,Enterprise
+TICK-10535,Email,VIP Enterprise Desk,P2-High,Account Access,8.98,4.04,0,Enterprise
+TICK-10536,Web Portal,Tier 2 Escalations,P2-High,Feature Inquiry,8.06,5.0,1,Enterprise
+TICK-10537,Phone,Tier 2 Escalations,P4-Low,Account Access,19.36,4.88,2,SMB
+TICK-10538,Email,Tier 1 Support,P3-Medium,Account Access,8.89,3.52,0,Enterprise
+TICK-10539,In-App Support,VIP Enterprise Desk,P4-Low,Feature Inquiry,2.93,5.0,1,SMB
+TICK-10540,Phone,Tier 2 Escalations,P4-Low,Billing Dispute,80.28,2.51,4,Free Tier
+TICK-10541,Phone,Technical Ops,P1-Critical,Billing Dispute,34.46,1.44,0,Mid-Market
+TICK-10542,Email,Technical Ops,P1-Critical,Latency Shock,121.41,2.84,0,SMB
+TICK-10543,Live Chat,Tier 2 Escalations,P3-Medium,Billing Dispute,73.65,1.0,4,SMB
+TICK-10544,Live Chat,Tier 1 Support,P2-High,Latency Shock,6.22,4.85,0,Enterprise
+TICK-10545,Web Portal,Tier 1 Support,P2-High,Integration Error,1.5,5.0,0,Enterprise
+TICK-10546,Phone,Tier 2 Escalations,P3-Medium,Account Access,9.75,3.53,0,Enterprise
+TICK-10547,Phone,VIP Enterprise Desk,P3-Medium,Bug Report,5.42,4.46,0,Free Tier
+TICK-10548,Web Portal,Technical Ops,P3-Medium,Integration Error,2.07,3.67,0,SMB
+TICK-10549,Live Chat,Tier 2 Escalations,P4-Low,Billing Dispute,45.2,2.85,5,Mid-Market
+TICK-10550,In-App Support,VIP Enterprise Desk,P3-Medium,Bug Report,14.3,4.05,1,Enterprise
+TICK-10551,Live Chat,Tier 1 Support,P3-Medium,Latency Shock,1.81,4.45,0,Mid-Market
+TICK-10552,Phone,Technical Ops,P3-Medium,Account Access,2.69,4.57,0,SMB
+TICK-10553,Web Portal,Tier 1 Support,P3-Medium,Latency Shock,7.72,4.78,0,Mid-Market
+TICK-10554,Web Portal,Tier 2 Escalations,P2-High,Account Access,0.91,3.42,0,Enterprise
+TICK-10555,In-App Support,Billing Support,P2-High,Latency Shock,7.77,3.83,0,SMB
+TICK-10556,Email,Tier 1 Support,P2-High,Account Access,2.08,5.0,0,SMB
+TICK-10557,Live Chat,Billing Support,P3-Medium,Account Access,29.02,4.2,0,Enterprise
+TICK-10558,Web Portal,Technical Ops,P3-Medium,Account Access,2.42,3.18,0,SMB
+TICK-10559,In-App Support,Tier 1 Support,P4-Low,Account Access,16.62,3.39,0,Enterprise
+TICK-10560,Web Portal,VIP Enterprise Desk,P4-Low,Account Access,2.5,3.86,0,Mid-Market
+TICK-10561,Live Chat,Billing Support,P3-Medium,Feature Inquiry,1.88,3.88,0,Mid-Market
+TICK-10562,Web Portal,Billing Support,P3-Medium,Latency Shock,2.79,4.27,0,Mid-Market
+TICK-10563,Email,VIP Enterprise Desk,P1-Critical,Integration Error,9.94,3.45,3,SMB
+TICK-10564,Live Chat,VIP Enterprise Desk,P3-Medium,Latency Shock,5.48,3.59,0,Free Tier
+TICK-10565,Web Portal,Tier 1 Support,P3-Medium,Integration Error,11.94,4.12,0,Enterprise
+TICK-10566,Phone,Tier 2 Escalations,P3-Medium,Account Access,8.93,4.42,0,SMB
+TICK-10567,In-App Support,Technical Ops,P1-Critical,Account Access,16.54,4.07,0,Free Tier
+TICK-10568,Phone,VIP Enterprise Desk,P2-High,Billing Dispute,2.33,3.28,0,SMB
+TICK-10569,Email,Tier 1 Support,P2-High,Latency Shock,0.85,4.26,0,Enterprise
+TICK-10570,Web Portal,Technical Ops,P4-Low,Integration Error,5.05,4.8,0,Enterprise
+TICK-10571,Live Chat,Tier 1 Support,P3-Medium,Account Access,1.24,4.5,0,SMB
+TICK-10572,Live Chat,Tier 1 Support,P2-High,Bug Report,1.33,4.39,0,Mid-Market
+TICK-10573,Web Portal,Billing Support,P2-High,Feature Inquiry,2.38,4.78,0,Mid-Market
+TICK-10574,Live Chat,Tier 1 Support,P4-Low,Account Access,0.98,4.98,0,Enterprise
+TICK-10575,Email,Tier 1 Support,P4-Low,Account Access,1.06,5.0,0,Mid-Market
+TICK-10576,In-App Support,Tier 1 Support,P3-Medium,Billing Dispute,13.22,4.14,0,SMB
+TICK-10577,Live Chat,Tier 2 Escalations,P4-Low,Bug Report,1.29,4.27,0,SMB
+TICK-10578,Phone,VIP Enterprise Desk,P2-High,Integration Error,5.95,5.0,1,Mid-Market
+TICK-10579,Email,Technical Ops,P2-High,Feature Inquiry,5.17,4.12,0,Free Tier
+TICK-10580,Phone,Tier 1 Support,P3-Medium,Billing Dispute,4.68,4.96,0,Mid-Market
+TICK-10581,Phone,Tier 1 Support,P3-Medium,Bug Report,1.63,4.46,0,Enterprise
+TICK-10582,Web Portal,Tier 2 Escalations,P3-Medium,Feature Inquiry,6.54,4.5,0,Enterprise
+TICK-10583,Web Portal,Tier 1 Support,P3-Medium,Bug Report,1.42,4.46,1,Mid-Market
+TICK-10584,In-App Support,Tier 2 Escalations,P2-High,Account Access,7.16,4.28,0,Mid-Market
+TICK-10585,Phone,Tier 1 Support,P2-High,Billing Dispute,12.82,4.31,2,Mid-Market
+TICK-10586,Web Portal,Technical Ops,P3-Medium,Billing Dispute,0.84,4.37,0,Mid-Market
+TICK-10587,Live Chat,Tier 1 Support,P2-High,Feature Inquiry,10.64,4.58,1,SMB
+TICK-10588,Web Portal,VIP Enterprise Desk,P1-Critical,Bug Report,76.07,2.18,2,SMB
+TICK-10589,Email,Tier 1 Support,P4-Low,Account Access,12.57,3.47,0,SMB
+TICK-10590,Live Chat,Technical Ops,P2-High,Billing Dispute,6.19,4.36,0,Free Tier
+TICK-10591,Phone,Tier 2 Escalations,P3-Medium,Feature Inquiry,11.23,3.51,0,Enterprise
+TICK-10592,Email,Tier 1 Support,P2-High,Feature Inquiry,2.98,5.0,0,Free Tier
+TICK-10593,Web Portal,Tier 1 Support,P3-Medium,Latency Shock,11.65,5.0,0,Enterprise
+TICK-10594,Live Chat,Tier 1 Support,P3-Medium,Integration Error,7.67,4.4,0,Enterprise
+TICK-10595,Email,Tier 1 Support,P3-Medium,Integration Error,2.79,4.64,0,SMB
+TICK-10596,Web Portal,Tier 1 Support,P2-High,Account Access,2.82,4.61,0,Enterprise
+TICK-10597,Web Portal,Tier 1 Support,P3-Medium,Latency Shock,11.14,4.69,1,Enterprise
+TICK-10598,Live Chat,Tier 2 Escalations,P3-Medium,Latency Shock,11.96,4.33,0,SMB
+TICK-10599,Phone,Tier 2 Escalations,P3-Medium,Feature Inquiry,4.73,4.14,0,Enterprise
+TICK-10600,Live Chat,Tier 2 Escalations,P3-Medium,Integration Error,57.57,2.22,4,SMB
+TICK-10601,Web Portal,Technical Ops,P3-Medium,Feature Inquiry,8.91,3.53,2,Mid-Market
+TICK-10602,In-App Support,VIP Enterprise Desk,P1-Critical,Bug Report,25.96,1.61,0,SMB
+TICK-10603,Email,Tier 1 Support,P4-Low,Billing Dispute,6.88,4.94,0,Mid-Market
+TICK-10604,Live Chat,Tier 1 Support,P1-Critical,Latency Shock,86.49,4.57,0,Mid-Market
+TICK-10605,Email,Tier 2 Escalations,P4-Low,Latency Shock,8.46,5.0,0,SMB
+TICK-10606,Live Chat,Technical Ops,P3-Medium,Latency Shock,2.98,3.2,0,Mid-Market
+TICK-10607,In-App Support,Billing Support,P1-Critical,Billing Dispute,21.52,4.02,2,Mid-Market
+TICK-10608,Live Chat,Tier 1 Support,P4-Low,Bug Report,5.36,3.81,0,SMB
+TICK-10609,Phone,Billing Support,P3-Medium,Feature Inquiry,1.14,4.21,0,SMB
+TICK-10610,Phone,Tier 1 Support,P3-Medium,Feature Inquiry,8.74,4.5,1,SMB
+TICK-10611,Phone,Tier 1 Support,P2-High,Feature Inquiry,18.84,3.7,0,Enterprise
+TICK-10612,Email,Tier 2 Escalations,P2-High,Latency Shock,4.94,3.95,0,SMB
+TICK-10613,Email,Tier 1 Support,P3-Medium,Latency Shock,3.33,3.93,0,SMB
+TICK-10614,Live Chat,Tier 1 Support,P3-Medium,Integration Error,6.0,4.23,0,Mid-Market
+TICK-10615,Phone,Billing Support,P1-Critical,Latency Shock,20.79,3.22,1,Mid-Market
+TICK-10616,Live Chat,Tier 1 Support,P4-Low,Bug Report,11.14,4.31,1,Free Tier
+TICK-10617,Web Portal,Tier 1 Support,P4-Low,Feature Inquiry,13.89,4.99,0,Free Tier
+TICK-10618,In-App Support,Tier 2 Escalations,P3-Medium,Account Access,2.87,3.7,1,Free Tier
+TICK-10619,Phone,VIP Enterprise Desk,P3-Medium,Bug Report,6.17,3.6,0,SMB
+TICK-10620,Email,Tier 1 Support,P3-Medium,Latency Shock,43.96,4.78,0,Enterprise
+TICK-10621,Live Chat,Tier 1 Support,P1-Critical,Billing Dispute,6.65,3.65,0,Enterprise
+TICK-10622,Web Portal,Tier 1 Support,P3-Medium,Account Access,8.1,4.17,1,SMB
+TICK-10623,Email,Tier 1 Support,P3-Medium,Bug Report,46.46,3.95,0,Mid-Market
+TICK-10624,Live Chat,VIP Enterprise Desk,P2-High,Bug Report,3.59,3.82,1,Enterprise
+TICK-10625,In-App Support,Technical Ops,P1-Critical,Bug Report,12.54,4.78,1,Mid-Market
+TICK-10626,Phone,Billing Support,P3-Medium,Integration Error,5.15,4.33,2,SMB
+TICK-10627,Live Chat,VIP Enterprise Desk,P2-High,Bug Report,2.46,4.31,0,Enterprise
+TICK-10628,Email,Technical Ops,P3-Medium,Feature Inquiry,12.53,5.0,0,SMB
+TICK-10629,Email,Billing Support,P3-Medium,Latency Shock,1.88,4.0,2,SMB
+TICK-10630,Web Portal,Billing Support,P4-Low,Account Access,7.56,4.04,0,SMB
+TICK-10631,Email,Tier 1 Support,P2-High,Feature Inquiry,17.7,5.0,0,SMB
+TICK-10632,Live Chat,Billing Support,P2-High,Billing Dispute,1.2,5.0,0,SMB
+TICK-10633,In-App Support,Tier 1 Support,P2-High,Latency Shock,14.75,4.32,0,Free Tier
+TICK-10634,Phone,VIP Enterprise Desk,P4-Low,Latency Shock,1.91,3.22,0,Mid-Market
+TICK-10635,Live Chat,Billing Support,P4-Low,Latency Shock,3.34,4.38,0,SMB
+TICK-10636,Phone,Tier 2 Escalations,P4-Low,Feature Inquiry,1.7,4.74,0,Free Tier
+TICK-10637,Email,Tier 1 Support,P3-Medium,Feature Inquiry,2.88,5.0,0,SMB
+TICK-10638,Phone,Technical Ops,P3-Medium,Feature Inquiry,20.03,5.0,2,Free Tier
+TICK-10639,In-App Support,Tier 1 Support,P3-Medium,Account Access,1.41,3.92,1,SMB
+TICK-10640,Phone,Tier 2 Escalations,P4-Low,Account Access,18.23,3.74,0,Enterprise
+TICK-10641,Live Chat,Billing Support,P3-Medium,Account Access,6.46,4.17,0,Enterprise
+TICK-10642,Phone,Technical Ops,P3-Medium,Bug Report,1.4,4.95,0,Enterprise
+TICK-10643,Phone,Billing Support,P2-High,Account Access,2.23,4.87,2,Mid-Market
+TICK-10644,Web Portal,Technical Ops,P3-Medium,Latency Shock,10.14,3.64,2,Mid-Market
+TICK-10645,Live Chat,Tier 1 Support,P3-Medium,Latency Shock,18.28,4.24,0,Mid-Market
+TICK-10646,In-App Support,Billing Support,P3-Medium,Feature Inquiry,10.71,4.15,0,Mid-Market
+TICK-10647,Live Chat,Tier 1 Support,P3-Medium,Feature Inquiry,9.08,4.04,0,SMB
+TICK-10648,Live Chat,Billing Support,P3-Medium,Latency Shock,4.52,4.57,2,Enterprise
+TICK-10649,Email,Tier 2 Escalations,P3-Medium,Feature Inquiry,1.4,4.67,0,SMB
+TICK-10650,Web Portal,Tier 2 Escalations,P1-Critical,Billing Dispute,30.2,1.07,2,Mid-Market
+TICK-10651,Email,Technical Ops,P3-Medium,Account Access,1.18,3.78,0,Mid-Market
+TICK-10652,Email,VIP Enterprise Desk,P3-Medium,Account Access,16.58,3.71,0,Enterprise
+TICK-10653,Phone,Tier 1 Support,P4-Low,Integration Error,16.1,5.0,0,Mid-Market
+TICK-10654,Live Chat,Tier 2 Escalations,P3-Medium,Billing Dispute,33.16,2.71,1,SMB
+TICK-10655,Email,Tier 1 Support,P4-Low,Integration Error,13.36,3.4,0,Free Tier
+TICK-10656,Web Portal,Technical Ops,P2-High,Bug Report,3.44,4.74,0,Mid-Market
+TICK-10657,In-App Support,Tier 2 Escalations,P4-Low,Billing Dispute,278.84,3.75,1,Mid-Market
+TICK-10658,Live Chat,Billing Support,P4-Low,Account Access,1.59,4.64,0,SMB
+TICK-10659,Email,Tier 1 Support,P3-Medium,Integration Error,1.45,4.79,0,SMB
+TICK-10660,Phone,Tier 2 Escalations,P3-Medium,Bug Report,29.0,3.86,0,Mid-Market
+TICK-10661,Live Chat,Tier 2 Escalations,P1-Critical,Billing Dispute,26.99,1.46,2,Mid-Market
+TICK-10662,Email,Tier 2 Escalations,P4-Low,Feature Inquiry,1.39,3.57,1,Free Tier
+TICK-10663,Email,VIP Enterprise Desk,P1-Critical,Latency Shock,14.73,3.69,2,Enterprise
+TICK-10664,Email,Billing Support,P2-High,Billing Dispute,8.43,4.36,0,SMB
+TICK-10665,Live Chat,Technical Ops,P4-Low,Integration Error,11.02,4.08,0,Mid-Market
+TICK-10666,Web Portal,Billing Support,P3-Medium,Bug Report,1.06,4.13,0,Mid-Market
+TICK-10667,In-App Support,Billing Support,P3-Medium,Bug Report,1.01,4.24,0,Enterprise
+TICK-10668,Email,Technical Ops,P2-High,Integration Error,3.56,4.96,0,Mid-Market
+TICK-10669,Web Portal,Tier 2 Escalations,P1-Critical,Integration Error,232.27,3.37,3,SMB
+TICK-10670,Email,Tier 2 Escalations,P3-Medium,Billing Dispute,39.46,1.03,1,SMB
+TICK-10671,Live Chat,Tier 1 Support,P3-Medium,Feature Inquiry,14.79,5.0,0,SMB
+TICK-10672,Phone,Technical Ops,P2-High,Billing Dispute,11.72,3.86,0,Free Tier
+TICK-10673,Email,VIP Enterprise Desk,P4-Low,Account Access,2.85,2.87,0,Mid-Market
+TICK-10674,Web Portal,VIP Enterprise Desk,P3-Medium,Feature Inquiry,2.28,4.43,0,SMB
+TICK-10675,Live Chat,Billing Support,P3-Medium,Account Access,3.63,4.85,0,SMB
+TICK-10676,Live Chat,Tier 2 Escalations,P4-Low,Feature Inquiry,18.47,4.73,2,Mid-Market
+TICK-10677,Live Chat,Billing Support,P3-Medium,Feature Inquiry,1.65,4.93,0,Enterprise
+TICK-10678,Email,Billing Support,P3-Medium,Latency Shock,3.94,5.0,1,Mid-Market
+TICK-10679,Live Chat,Tier 1 Support,P3-Medium,Account Access,39.83,4.71,1,SMB
+TICK-10680,Phone,Billing Support,P4-Low,Account Access,10.28,4.65,0,SMB
+TICK-10681,Live Chat,Tier 1 Support,P4-Low,Bug Report,2.87,3.45,0,SMB
+TICK-10682,Phone,Billing Support,P2-High,Account Access,3.62,4.36,0,Free Tier
+TICK-10683,Phone,Tier 2 Escalations,P3-Medium,Integration Error,63.86,2.13,2,Free Tier
+TICK-10684,Email,Tier 1 Support,P3-Medium,Billing Dispute,3.39,4.94,1,Mid-Market
+TICK-10685,Email,Tier 2 Escalations,P3-Medium,Feature Inquiry,4.85,4.46,2,Enterprise
+TICK-10686,In-App Support,Tier 1 Support,P1-Critical,Latency Shock,54.66,2.98,0,Free Tier
+TICK-10687,Web Portal,Tier 2 Escalations,P2-High,Feature Inquiry,12.52,4.42,0,Mid-Market
+TICK-10688,Phone,Billing Support,P3-Medium,Billing Dispute,3.16,3.95,0,Enterprise
+TICK-10689,Email,Tier 1 Support,P1-Critical,Bug Report,55.34,3.98,0,Mid-Market
+TICK-10690,Phone,VIP Enterprise Desk,P3-Medium,Integration Error,3.02,4.23,2,Enterprise
+TICK-10691,Email,Billing Support,P3-Medium,Account Access,5.17,4.65,0,Enterprise
+TICK-10692,Live Chat,Tier 1 Support,P3-Medium,Billing Dispute,2.6,2.76,2,SMB
+TICK-10693,Web Portal,Tier 1 Support,P2-High,Latency Shock,1.75,4.36,0,Enterprise
+TICK-10694,Email,Tier 1 Support,P2-High,Feature Inquiry,11.25,3.92,0,Mid-Market
+TICK-10695,Live Chat,VIP Enterprise Desk,P4-Low,Account Access,5.88,3.5,0,Enterprise
+TICK-10696,Phone,Technical Ops,P4-Low,Billing Dispute,5.11,4.97,0,Free Tier
+TICK-10697,Email,Technical Ops,P3-Medium,Integration Error,6.9,5.0,0,Mid-Market
+TICK-10698,Web Portal,Technical Ops,P3-Medium,Bug Report,8.36,4.75,1,Enterprise
+TICK-10699,Phone,Tier 1 Support,P1-Critical,Integration Error,8.14,2.79,1,Enterprise
+TICK-10700,Live Chat,Tier 2 Escalations,P3-Medium,Billing Dispute,63.32,2.67,3,Enterprise
+TICK-10701,Email,Technical Ops,P4-Low,Feature Inquiry,25.0,4.74,0,Mid-Market
+TICK-10702,Web Portal,Tier 2 Escalations,P2-High,Feature Inquiry,7.11,4.39,2,Free Tier
+TICK-10703,Phone,Tier 1 Support,P4-Low,Bug Report,3.6,4.55,0,SMB
+TICK-10704,Web Portal,Tier 2 Escalations,P3-Medium,Account Access,13.51,4.02,0,SMB
+TICK-10705,Email,Tier 1 Support,P2-High,Billing Dispute,6.85,4.58,0,Enterprise
+TICK-10706,Live Chat,Technical Ops,P3-Medium,Latency Shock,3.43,4.51,0,Free Tier
+TICK-10707,Web Portal,VIP Enterprise Desk,P3-Medium,Billing Dispute,10.4,4.93,0,Free Tier
+TICK-10708,Live Chat,Tier 1 Support,P3-Medium,Bug Report,3.54,4.29,2,Mid-Market
+TICK-10709,Phone,Tier 2 Escalations,P1-Critical,Billing Dispute,49.0,1.56,1,SMB
+TICK-10710,Email,Tier 1 Support,P2-High,Feature Inquiry,5.14,4.81,1,Enterprise
+TICK-10711,Phone,Tier 1 Support,P2-High,Feature Inquiry,5.69,5.0,0,Enterprise
+TICK-10712,Email,VIP Enterprise Desk,P4-Low,Latency Shock,9.15,4.48,0,Enterprise
+TICK-10713,Web Portal,Tier 2 Escalations,P1-Critical,Bug Report,52.1,4.83,0,SMB
+TICK-10714,Live Chat,Tier 2 Escalations,P3-Medium,Bug Report,2.94,4.02,0,SMB
+TICK-10715,Phone,Tier 1 Support,P3-Medium,Integration Error,3.3,3.89,0,SMB
+TICK-10716,Email,Billing Support,P3-Medium,Integration Error,9.76,4.92,0,SMB
+TICK-10717,In-App Support,Tier 2 Escalations,P3-Medium,Feature Inquiry,1.23,4.75,0,Enterprise
+TICK-10718,Phone,Tier 1 Support,P3-Medium,Billing Dispute,3.51,4.68,0,SMB
+TICK-10719,In-App Support,VIP Enterprise Desk,P3-Medium,Feature Inquiry,1.28,4.01,0,Mid-Market
+TICK-10720,Email,Technical Ops,P3-Medium,Bug Report,2.46,4.24,0,SMB
+TICK-10721,Live Chat,Billing Support,P4-Low,Account Access,2.31,4.39,0,Mid-Market
+TICK-10722,In-App Support,Billing Support,P3-Medium,Integration Error,12.48,5.0,0,Free Tier
+TICK-10723,Email,Billing Support,P3-Medium,Integration Error,3.69,4.12,0,Enterprise
+TICK-10724,Email,Tier 2 Escalations,P1-Critical,Bug Report,15.1,2.77,1,Enterprise
+TICK-10725,Live Chat,Technical Ops,P3-Medium,Billing Dispute,1.95,5.0,0,SMB
+TICK-10726,Phone,Technical Ops,P4-Low,Latency Shock,8.8,4.55,2,Mid-Market
+TICK-10727,Web Portal,VIP Enterprise Desk,P2-High,Latency Shock,21.06,4.37,0,Enterprise
+TICK-10728,In-App Support,Tier 1 Support,P2-High,Bug Report,8.1,4.16,0,SMB
+TICK-10729,In-App Support,VIP Enterprise Desk,P3-Medium,Billing Dispute,13.37,3.28,0,SMB
+TICK-10730,Email,Tier 2 Escalations,P1-Critical,Latency Shock,9.41,2.43,0,SMB
+TICK-10731,Web Portal,Tier 1 Support,P3-Medium,Feature Inquiry,17.18,5.0,0,Mid-Market
+TICK-10732,Email,Billing Support,P3-Medium,Latency Shock,6.63,5.0,2,SMB
+TICK-10733,Live Chat,Tier 2 Escalations,P4-Low,Account Access,1.05,4.5,0,Enterprise
+TICK-10734,Email,Technical Ops,P3-Medium,Bug Report,15.62,4.38,2,Free Tier
+TICK-10735,Web Portal,Tier 2 Escalations,P3-Medium,Integration Error,18.5,2.49,1,Enterprise
+TICK-10736,Email,Tier 1 Support,P1-Critical,Feature Inquiry,24.49,4.03,1,Enterprise
+TICK-10737,Email,Technical Ops,P2-High,Integration Error,1.37,4.6,0,Mid-Market
+TICK-10738,Web Portal,Billing Support,P2-High,Billing Dispute,11.91,3.97,1,SMB
+TICK-10739,In-App Support,Tier 1 Support,P3-Medium,Feature Inquiry,25.59,4.58,2,SMB
+TICK-10740,Live Chat,Tier 1 Support,P2-High,Billing Dispute,21.78,4.56,0,Mid-Market
+TICK-10741,In-App Support,VIP Enterprise Desk,P4-Low,Billing Dispute,4.47,3.39,0,Mid-Market
+TICK-10742,Email,VIP Enterprise Desk,P4-Low,Account Access,8.37,4.06,0,Mid-Market
+TICK-10743,In-App Support,VIP Enterprise Desk,P1-Critical,Bug Report,11.84,2.73,3,Enterprise
+TICK-10744,Web Portal,VIP Enterprise Desk,P4-Low,Feature Inquiry,1.09,4.7,1,SMB
+TICK-10745,Email,Technical Ops,P3-Medium,Feature Inquiry,14.79,5.0,1,SMB
+TICK-10746,Phone,Tier 1 Support,P3-Medium,Billing Dispute,3.56,3.32,0,Free Tier
+TICK-10747,Email,Tier 1 Support,P3-Medium,Account Access,18.16,4.23,0,Free Tier
+TICK-10748,Email,Billing Support,P2-High,Billing Dispute,1.97,3.62,0,Enterprise
+TICK-10749,Phone,Tier 2 Escalations,P1-Critical,Feature Inquiry,94.55,2.37,1,SMB
+TICK-10750,Email,Billing Support,P3-Medium,Bug Report,4.8,5.0,0,SMB
+TICK-10751,Web Portal,Tier 1 Support,P2-High,Bug Report,4.69,3.23,0,Mid-Market
+TICK-10752,Web Portal,VIP Enterprise Desk,P2-High,Billing Dispute,8.34,4.7,0,Free Tier
+TICK-10753,Phone,Tier 2 Escalations,P2-High,Latency Shock,3.81,4.97,0,Free Tier
+TICK-10754,Email,Billing Support,P2-High,Bug Report,7.83,4.22,0,Free Tier
+TICK-10755,Live Chat,Technical Ops,P2-High,Billing Dispute,7.99,3.76,0,Free Tier
+TICK-10756,Live Chat,Billing Support,P4-Low,Account Access,8.38,4.06,1,Free Tier
+TICK-10757,Email,Billing Support,P3-Medium,Integration Error,19.68,4.07,1,Mid-Market
+TICK-10758,Web Portal,Tier 2 Escalations,P2-High,Account Access,20.53,4.93,0,SMB
+TICK-10759,In-App Support,Tier 1 Support,P1-Critical,Account Access,108.4,1.0,0,Mid-Market
+TICK-10760,Email,Billing Support,P3-Medium,Latency Shock,3.21,3.71,1,Mid-Market
+TICK-10761,Email,Tier 2 Escalations,P3-Medium,Billing Dispute,50.33,1.72,1,Mid-Market
+TICK-10762,Web Portal,Billing Support,P4-Low,Integration Error,15.99,4.54,1,Mid-Market
+TICK-10763,Live Chat,Tier 1 Support,P4-Low,Account Access,2.9,4.78,0,Mid-Market
+TICK-10764,Live Chat,VIP Enterprise Desk,P4-Low,Integration Error,2.03,3.84,0,Mid-Market
+TICK-10765,Email,Tier 1 Support,P3-Medium,Billing Dispute,0.87,3.67,1,Enterprise
+TICK-10766,Phone,Tier 2 Escalations,P1-Critical,Latency Shock,21.86,4.39,3,Mid-Market
+TICK-10767,Phone,Tier 1 Support,P2-High,Account Access,8.28,5.0,0,Free Tier
+TICK-10768,In-App Support,VIP Enterprise Desk,P1-Critical,Feature Inquiry,30.25,3.66,0,Mid-Market
+TICK-10769,Phone,Billing Support,P1-Critical,Billing Dispute,12.67,3.82,0,Free Tier
+TICK-10770,Live Chat,Tier 1 Support,P2-High,Billing Dispute,5.62,4.66,2,Mid-Market
+TICK-10771,Email,Tier 1 Support,P1-Critical,Latency Shock,16.34,3.75,0,SMB
+TICK-10772,Phone,Tier 1 Support,P4-Low,Bug Report,0.83,4.0,0,Enterprise
+TICK-10773,Web Portal,Tier 2 Escalations,P3-Medium,Latency Shock,15.2,4.34,0,SMB
+TICK-10774,In-App Support,Technical Ops,P2-High,Feature Inquiry,20.36,4.05,0,Enterprise
+TICK-10775,Email,Tier 2 Escalations,P2-High,Latency Shock,6.46,3.71,0,Mid-Market
+TICK-10776,Live Chat,Tier 2 Escalations,P1-Critical,Integration Error,259.19,1.82,4,Enterprise
+TICK-10777,Web Portal,Tier 2 Escalations,P2-High,Latency Shock,6.85,4.53,0,Enterprise
+TICK-10778,In-App Support,Tier 1 Support,P3-Medium,Account Access,2.83,4.44,1,SMB
+TICK-10779,Live Chat,Technical Ops,P1-Critical,Bug Report,20.32,3.72,0,Mid-Market
+TICK-10780,Phone,Tier 1 Support,P2-High,Bug Report,1.69,3.75,0,Enterprise
+TICK-10781,Phone,Tier 1 Support,P3-Medium,Integration Error,4.42,5.0,1,Mid-Market
+TICK-10782,Email,Technical Ops,P2-High,Latency Shock,1.17,3.98,0,Enterprise
+TICK-10783,Live Chat,Technical Ops,P3-Medium,Feature Inquiry,4.1,5.0,0,SMB
+TICK-10784,Live Chat,Billing Support,P3-Medium,Latency Shock,22.67,4.66,0,Enterprise
+TICK-10785,Email,Tier 2 Escalations,P4-Low,Integration Error,60.08,2.55,3,Mid-Market
+TICK-10786,Email,Tier 2 Escalations,P2-High,Bug Report,3.21,5.0,0,Mid-Market
+TICK-10787,Email,Tier 2 Escalations,P3-Medium,Integration Error,40.53,1.26,4,Free Tier
+TICK-10788,Phone,Tier 1 Support,P3-Medium,Account Access,2.29,4.22,0,SMB
+TICK-10789,Email,VIP Enterprise Desk,P2-High,Latency Shock,24.68,3.11,0,Enterprise
+TICK-10790,Live Chat,Tier 1 Support,P3-Medium,Integration Error,5.12,4.39,0,Enterprise
+TICK-10791,Phone,VIP Enterprise Desk,P1-Critical,Bug Report,56.17,3.8,0,SMB
+TICK-10792,Web Portal,Tier 2 Escalations,P2-High,Feature Inquiry,19.29,4.19,0,Mid-Market
+TICK-10793,Live Chat,Billing Support,P4-Low,Bug Report,5.91,3.75,2,SMB
+TICK-10794,Live Chat,Tier 2 Escalations,P2-High,Latency Shock,2.65,4.35,0,SMB
+TICK-10795,Live Chat,Tier 1 Support,P3-Medium,Billing Dispute,5.76,4.15,0,Enterprise
+TICK-10796,Web Portal,Technical Ops,P1-Critical,Bug Report,31.62,2.17,0,Mid-Market
+TICK-10797,Web Portal,Billing Support,P4-Low,Billing Dispute,4.53,4.98,0,Mid-Market
+TICK-10798,Email,Technical Ops,P3-Medium,Bug Report,4.82,5.0,1,Mid-Market
+TICK-10799,Web Portal,Tier 1 Support,P3-Medium,Bug Report,1.58,3.88,0,Mid-Market
+TICK-10800,In-App Support,Billing Support,P3-Medium,Account Access,3.17,5.0,0,Free Tier
+TICK-10801,Phone,Tier 1 Support,P2-High,Latency Shock,6.35,4.67,0,SMB
+TICK-10802,Web Portal,Billing Support,P2-High,Latency Shock,12.63,3.85,1,Enterprise
+TICK-10803,Email,Tier 1 Support,P2-High,Billing Dispute,2.23,5.0,0,Enterprise
+TICK-10804,In-App Support,Tier 1 Support,P3-Medium,Account Access,17.63,3.49,0,Free Tier
+TICK-10805,Phone,Tier 1 Support,P3-Medium,Billing Dispute,1.6,4.41,1,Mid-Market
+TICK-10806,Email,Tier 1 Support,P3-Medium,Billing Dispute,5.27,4.41,0,Free Tier
+TICK-10807,Live Chat,VIP Enterprise Desk,P3-Medium,Billing Dispute,2.7,4.59,0,Free Tier
+TICK-10808,Web Portal,Tier 1 Support,P4-Low,Feature Inquiry,1.36,3.64,0,SMB
+TICK-10809,Email,Tier 1 Support,P1-Critical,Integration Error,10.21,2.42,2,Enterprise
+TICK-10810,Email,Tier 2 Escalations,P1-Critical,Billing Dispute,60.05,2.1,2,Free Tier
+TICK-10811,Live Chat,Billing Support,P3-Medium,Account Access,2.13,3.69,1,Mid-Market
+TICK-10812,Web Portal,VIP Enterprise Desk,P1-Critical,Integration Error,32.67,3.12,1,Mid-Market
+TICK-10813,Live Chat,Tier 1 Support,P2-High,Integration Error,5.26,4.63,0,SMB
+TICK-10814,Email,Technical Ops,P2-High,Billing Dispute,3.13,4.54,0,SMB
+TICK-10815,Live Chat,Tier 2 Escalations,P3-Medium,Bug Report,3.46,4.23,0,Enterprise
+TICK-10816,Email,Billing Support,P4-Low,Bug Report,8.34,4.93,0,Enterprise
+TICK-10817,Email,Tier 2 Escalations,P3-Medium,Bug Report,68.98,4.37,1,Free Tier
+TICK-10818,Email,Tier 1 Support,P2-High,Billing Dispute,1.29,4.43,1,Mid-Market
+TICK-10819,Phone,Technical Ops,P3-Medium,Bug Report,6.58,5.0,0,Mid-Market
+TICK-10820,Email,Tier 1 Support,P4-Low,Integration Error,9.45,3.56,0,SMB
+TICK-10821,Web Portal,Tier 1 Support,P3-Medium,Billing Dispute,5.27,4.96,0,SMB
+TICK-10822,Phone,Tier 1 Support,P1-Critical,Account Access,63.91,3.1,1,SMB
+TICK-10823,Phone,Technical Ops,P3-Medium,Bug Report,9.82,5.0,1,Mid-Market
+TICK-10824,Email,Billing Support,P4-Low,Integration Error,5.07,4.58,0,Enterprise
+TICK-10825,Email,Tier 1 Support,P3-Medium,Latency Shock,10.35,3.59,1,Mid-Market
+TICK-10826,In-App Support,Technical Ops,P3-Medium,Integration Error,15.24,4.6,0,Enterprise
+TICK-10827,Phone,Tier 2 Escalations,P1-Critical,Latency Shock,12.5,1.83,1,Enterprise
+TICK-10828,Web Portal,VIP Enterprise Desk,P2-High,Latency Shock,1.77,3.96,0,Mid-Market
+TICK-10829,Phone,Tier 2 Escalations,P3-Medium,Latency Shock,3.03,4.7,0,Mid-Market
+TICK-10830,Email,Tier 1 Support,P4-Low,Integration Error,3.08,4.47,0,SMB
+TICK-10831,Live Chat,Tier 1 Support,P2-High,Latency Shock,4.79,4.81,0,Mid-Market
+TICK-10832,Email,Tier 2 Escalations,P2-High,Integration Error,138.02,1.96,2,Enterprise
+TICK-10833,Web Portal,Tier 2 Escalations,P3-Medium,Latency Shock,32.92,4.44,0,SMB
+TICK-10834,Phone,VIP Enterprise Desk,P3-Medium,Billing Dispute,5.93,4.02,0,Mid-Market
+TICK-10835,Phone,Tier 1 Support,P3-Medium,Feature Inquiry,19.27,4.84,0,Free Tier
+TICK-10836,Live Chat,Tier 1 Support,P2-High,Integration Error,9.2,5.0,0,Free Tier
+TICK-10837,Phone,Technical Ops,P2-High,Integration Error,4.66,5.0,0,Enterprise
+TICK-10838,Phone,Tier 1 Support,P2-High,Account Access,4.28,3.79,0,Mid-Market
+TICK-10839,Live Chat,Tier 2 Escalations,P4-Low,Billing Dispute,50.5,2.13,3,SMB
+TICK-10840,Web Portal,Technical Ops,P4-Low,Account Access,32.88,3.61,0,Mid-Market
+TICK-10841,Email,Tier 1 Support,P3-Medium,Latency Shock,6.12,4.81,0,SMB
+TICK-10842,In-App Support,Technical Ops,P2-High,Bug Report,20.97,4.78,0,SMB
+TICK-10843,Phone,Tier 1 Support,P4-Low,Latency Shock,2.86,3.44,0,Free Tier
+TICK-10844,Web Portal,VIP Enterprise Desk,P1-Critical,Bug Report,6.93,3.43,1,Mid-Market
+TICK-10845,Live Chat,Billing Support,P2-High,Bug Report,3.75,3.82,0,SMB
+TICK-10846,Email,Tier 2 Escalations,P4-Low,Integration Error,100.01,2.16,1,Enterprise
+TICK-10847,In-App Support,Billing Support,P3-Medium,Latency Shock,13.5,3.93,0,Enterprise
+TICK-10848,Web Portal,Tier 2 Escalations,P2-High,Integration Error,58.05,1.13,1,Enterprise
+TICK-10849,Phone,Tier 1 Support,P3-Medium,Account Access,1.07,4.26,0,Free Tier
+TICK-10850,Live Chat,Tier 1 Support,P3-Medium,Bug Report,8.67,4.37,0,Free Tier
+TICK-10851,Live Chat,Tier 1 Support,P4-Low,Integration Error,5.77,4.86,1,SMB
+TICK-10852,Live Chat,Billing Support,P3-Medium,Feature Inquiry,25.5,4.67,0,Mid-Market
+TICK-10853,Phone,Tier 2 Escalations,P2-High,Feature Inquiry,2.36,4.89,0,Free Tier
+TICK-10854,Email,VIP Enterprise Desk,P3-Medium,Account Access,6.34,4.87,0,Mid-Market
+TICK-10855,Email,Billing Support,P3-Medium,Billing Dispute,2.87,4.87,0,Mid-Market
+TICK-10856,Web Portal,Tier 2 Escalations,P3-Medium,Integration Error,48.82,1.79,2,Free Tier
+TICK-10857,Phone,Tier 2 Escalations,P4-Low,Bug Report,5.52,4.34,0,Mid-Market
+TICK-10858,In-App Support,VIP Enterprise Desk,P4-Low,Integration Error,2.5,3.14,0,Mid-Market
+TICK-10859,Live Chat,Tier 2 Escalations,P3-Medium,Integration Error,19.03,2.53,2,Mid-Market
+TICK-10860,In-App Support,Tier 2 Escalations,P4-Low,Account Access,2.04,4.98,1,Enterprise
+TICK-10861,Live Chat,Tier 2 Escalations,P2-High,Latency Shock,2.05,4.1,0,Mid-Market
+TICK-10862,Web Portal,Tier 1 Support,P3-Medium,Bug Report,2.77,3.83,0,Mid-Market
+TICK-10863,In-App Support,Tier 2 Escalations,P2-High,Latency Shock,12.65,3.57,0,Enterprise
+TICK-10864,Live Chat,Tier 2 Escalations,P3-Medium,Integration Error,70.56,1.42,2,Mid-Market
+TICK-10865,Phone,Tier 1 Support,P3-Medium,Bug Report,1.76,4.18,0,Mid-Market
+TICK-10866,In-App Support,Tier 2 Escalations,P4-Low,Billing Dispute,51.66,2.78,4,Mid-Market
+TICK-10867,Live Chat,Tier 1 Support,P3-Medium,Latency Shock,3.65,4.11,0,Enterprise
+TICK-10868,Email,Tier 2 Escalations,P4-Low,Integration Error,211.16,4.03,2,Free Tier
+TICK-10869,Live Chat,VIP Enterprise Desk,P2-High,Account Access,5.44,5.0,0,SMB
+TICK-10870,Live Chat,Tier 2 Escalations,P3-Medium,Latency Shock,1.37,5.0,1,Free Tier
+TICK-10871,Email,VIP Enterprise Desk,P2-High,Latency Shock,5.51,3.88,0,Mid-Market
+TICK-10872,Email,Tier 1 Support,P3-Medium,Latency Shock,3.62,4.9,0,SMB
+TICK-10873,Email,Technical Ops,P4-Low,Account Access,5.83,4.29,1,Enterprise
+TICK-10874,Phone,Technical Ops,P1-Critical,Latency Shock,18.14,1.86,1,Mid-Market
+TICK-10875,Web Portal,Tier 1 Support,P4-Low,Integration Error,11.77,4.96,0,Mid-Market
+TICK-10876,Web Portal,Tier 1 Support,P4-Low,Integration Error,6.58,3.41,0,Free Tier
+TICK-10877,Phone,Tier 1 Support,P4-Low,Feature Inquiry,29.26,4.12,0,Free Tier
+TICK-10878,Email,Technical Ops,P4-Low,Integration Error,1.86,3.38,0,Mid-Market
+TICK-10879,Web Portal,Tier 2 Escalations,P2-High,Feature Inquiry,7.07,3.93,0,Mid-Market
+TICK-10880,Email,Tier 2 Escalations,P1-Critical,Feature Inquiry,17.81,2.67,2,Enterprise
+TICK-10881,Email,Tier 1 Support,P1-Critical,Integration Error,13.12,3.22,0,Enterprise
+TICK-10882,Phone,Billing Support,P2-High,Billing Dispute,10.02,5.0,0,Free Tier
+TICK-10883,Live Chat,Technical Ops,P1-Critical,Account Access,32.32,3.8,0,Mid-Market
+TICK-10884,Email,Tier 2 Escalations,P4-Low,Feature Inquiry,22.1,4.05,0,Enterprise
+TICK-10885,Email,Tier 1 Support,P1-Critical,Feature Inquiry,33.13,3.46,1,Enterprise
+TICK-10886,Web Portal,Tier 1 Support,P2-High,Feature Inquiry,2.91,4.14,1,Mid-Market
+TICK-10887,In-App Support,Tier 1 Support,P3-Medium,Integration Error,4.54,3.62,1,Enterprise
+TICK-10888,Phone,VIP Enterprise Desk,P1-Critical,Integration Error,28.89,1.54,1,Mid-Market
+TICK-10889,Email,Tier 2 Escalations,P3-Medium,Billing Dispute,78.22,2.61,2,Mid-Market
+TICK-10890,Phone,Tier 2 Escalations,P3-Medium,Bug Report,4.78,4.74,0,Free Tier
+TICK-10891,Live Chat,Tier 2 Escalations,P4-Low,Latency Shock,0.91,5.0,0,Free Tier
+TICK-10892,Web Portal,Tier 1 Support,P2-High,Integration Error,6.16,4.4,0,Mid-Market
+TICK-10893,Phone,Technical Ops,P1-Critical,Integration Error,54.4,4.52,0,SMB
+TICK-10894,Live Chat,Tier 2 Escalations,P3-Medium,Bug Report,10.6,3.37,0,Mid-Market
+TICK-10895,Email,Tier 2 Escalations,P2-High,Billing Dispute,19.84,1.62,2,SMB
+TICK-10896,Web Portal,Tier 2 Escalations,P3-Medium,Feature Inquiry,1.68,4.7,0,Enterprise
+TICK-10897,In-App Support,Technical Ops,P3-Medium,Bug Report,12.26,4.07,0,Enterprise
+TICK-10898,Live Chat,VIP Enterprise Desk,P4-Low,Account Access,2.02,4.6,0,Enterprise
+TICK-10899,Phone,Tier 1 Support,P3-Medium,Latency Shock,13.14,3.97,0,SMB
+TICK-10900,Email,Technical Ops,P3-Medium,Account Access,14.18,4.92,0,SMB
+TICK-10901,Web Portal,Technical Ops,P3-Medium,Account Access,4.16,3.63,0,Enterprise
+TICK-10902,In-App Support,Billing Support,P3-Medium,Billing Dispute,17.77,4.11,0,Enterprise
+TICK-10903,Web Portal,Tier 1 Support,P3-Medium,Bug Report,1.89,4.92,0,SMB
+TICK-10904,Live Chat,Tier 1 Support,P2-High,Bug Report,8.48,4.12,0,Mid-Market
+TICK-10905,Email,Tier 2 Escalations,P3-Medium,Bug Report,7.89,4.25,0,Enterprise
+TICK-10906,Email,Tier 2 Escalations,P2-High,Account Access,26.63,3.65,0,Free Tier
+TICK-10907,Phone,Technical Ops,P3-Medium,Bug Report,9.71,4.54,0,Mid-Market
+TICK-10908,In-App Support,Tier 1 Support,P2-High,Feature Inquiry,1.94,4.87,1,Mid-Market
+TICK-10909,Web Portal,Tier 1 Support,P4-Low,Billing Dispute,7.05,3.2,1,Enterprise
+TICK-10910,Phone,VIP Enterprise Desk,P3-Medium,Billing Dispute,0.96,4.64,0,Enterprise
+TICK-10911,Web Portal,Tier 2 Escalations,P2-High,Bug Report,3.87,5.0,0,Enterprise
+TICK-10912,Live Chat,Billing Support,P4-Low,Latency Shock,3.18,4.08,0,Mid-Market
+TICK-10913,Email,Tier 2 Escalations,P3-Medium,Billing Dispute,36.93,1.51,2,SMB
+TICK-10914,Live Chat,VIP Enterprise Desk,P4-Low,Feature Inquiry,14.88,4.07,0,Free Tier
+TICK-10915,Phone,Billing Support,P3-Medium,Billing Dispute,15.89,5.0,0,SMB
+TICK-10916,Live Chat,Tier 2 Escalations,P3-Medium,Bug Report,2.65,4.33,1,SMB
+TICK-10917,Email,Billing Support,P3-Medium,Integration Error,8.73,4.05,0,Mid-Market
+TICK-10918,Email,Tier 1 Support,P1-Critical,Feature Inquiry,29.82,2.02,3,Enterprise
+TICK-10919,Live Chat,VIP Enterprise Desk,P4-Low,Bug Report,6.15,4.7,0,SMB
+TICK-10920,Email,Technical Ops,P2-High,Billing Dispute,6.38,3.95,0,Enterprise
+TICK-10921,Email,Tier 1 Support,P3-Medium,Billing Dispute,20.71,3.94,0,Mid-Market
+TICK-10922,Live Chat,Technical Ops,P3-Medium,Latency Shock,16.75,5.0,0,Mid-Market
+TICK-10923,Email,VIP Enterprise Desk,P2-High,Integration Error,2.71,4.32,0,SMB
+TICK-10924,Live Chat,Tier 1 Support,P3-Medium,Latency Shock,4.12,4.66,2,Mid-Market
+TICK-10925,Live Chat,Tier 1 Support,P3-Medium,Bug Report,16.85,5.0,0,Mid-Market
+TICK-10926,Phone,Technical Ops,P2-High,Account Access,2.54,3.99,1,Free Tier
+TICK-10927,Phone,Tier 2 Escalations,P4-Low,Account Access,12.0,5.0,0,Mid-Market
+TICK-10928,In-App Support,Tier 1 Support,P3-Medium,Feature Inquiry,1.88,3.24,2,Enterprise
+TICK-10929,Live Chat,Technical Ops,P4-Low,Bug Report,2.68,3.68,0,SMB
+TICK-10930,Email,Technical Ops,P3-Medium,Bug Report,6.72,3.9,0,Mid-Market
+TICK-10931,Web Portal,Billing Support,P1-Critical,Latency Shock,27.45,4.15,3,SMB
+TICK-10932,Phone,Tier 1 Support,P2-High,Integration Error,23.19,5.0,0,Free Tier
+TICK-10933,Live Chat,Technical Ops,P3-Medium,Account Access,1.05,4.72,0,Enterprise
+TICK-10934,In-App Support,Tier 1 Support,P3-Medium,Latency Shock,27.62,5.0,0,Free Tier
+TICK-10935,Web Portal,VIP Enterprise Desk,P1-Critical,Bug Report,18.59,3.8,3,Mid-Market
+TICK-10936,Web Portal,Technical Ops,P3-Medium,Integration Error,10.76,4.03,0,Free Tier
+TICK-10937,Email,Tier 1 Support,P2-High,Bug Report,3.05,4.45,0,Free Tier
+TICK-10938,Phone,Tier 1 Support,P3-Medium,Account Access,8.95,4.12,0,Free Tier
+TICK-10939,Web Portal,Tier 1 Support,P2-High,Latency Shock,8.61,4.71,0,Enterprise
+TICK-10940,In-App Support,Billing Support,P2-High,Bug Report,5.23,4.31,0,Enterprise
+TICK-10941,Email,Technical Ops,P3-Medium,Bug Report,5.0,4.8,0,Enterprise
+TICK-10942,Web Portal,Tier 1 Support,P2-High,Billing Dispute,5.06,4.45,0,Enterprise
+TICK-10943,Email,Tier 1 Support,P2-High,Latency Shock,2.62,4.15,0,Free Tier
+TICK-10944,Web Portal,Tier 2 Escalations,P4-Low,Latency Shock,11.39,4.65,0,Free Tier
+TICK-10945,Live Chat,Tier 1 Support,P2-High,Account Access,1.13,3.58,0,Enterprise
+TICK-10946,Phone,Technical Ops,P3-Medium,Integration Error,4.75,4.54,1,Enterprise
+TICK-10947,Email,Billing Support,P3-Medium,Bug Report,5.37,3.77,0,Enterprise
+TICK-10948,Phone,Tier 2 Escalations,P2-High,Latency Shock,3.71,4.61,0,SMB
+TICK-10949,Email,VIP Enterprise Desk,P2-High,Feature Inquiry,2.12,4.03,0,SMB
+TICK-10950,Web Portal,Tier 1 Support,P3-Medium,Latency Shock,13.23,3.89,1,Mid-Market
+TICK-10951,Live Chat,Tier 1 Support,P2-High,Integration Error,1.23,5.0,1,SMB
+TICK-10952,Email,Billing Support,P3-Medium,Feature Inquiry,1.07,4.46,0,Mid-Market
+TICK-10953,Email,Technical Ops,P3-Medium,Account Access,4.25,3.82,0,Mid-Market
+TICK-10954,Phone,Tier 2 Escalations,P3-Medium,Feature Inquiry,5.24,4.9,0,Enterprise
+TICK-10955,Web Portal,VIP Enterprise Desk,P3-Medium,Feature Inquiry,10.02,5.0,0,Enterprise
+TICK-10956,In-App Support,Billing Support,P2-High,Integration Error,9.69,3.01,2,Enterprise
+TICK-10957,In-App Support,VIP Enterprise Desk,P2-High,Latency Shock,5.95,4.42,1,SMB
+TICK-10958,Web Portal,Technical Ops,P4-Low,Integration Error,2.18,4.21,0,Mid-Market
+TICK-10959,Email,Tier 1 Support,P3-Medium,Account Access,17.89,5.0,0,Free Tier
+TICK-10960,In-App Support,Technical Ops,P1-Critical,Account Access,11.94,3.19,2,Mid-Market
+TICK-10961,Phone,Tier 2 Escalations,P3-Medium,Bug Report,1.01,5.0,0,Enterprise
+TICK-10962,Email,Technical Ops,P3-Medium,Latency Shock,12.34,4.88,0,Enterprise
+TICK-10963,Web Portal,Tier 2 Escalations,P1-Critical,Latency Shock,85.94,3.45,1,Mid-Market
+TICK-10964,Email,VIP Enterprise Desk,P2-High,Bug Report,2.36,3.32,0,SMB
+TICK-10965,Phone,Tier 1 Support,P3-Medium,Integration Error,4.09,4.62,0,Mid-Market
+TICK-10966,Email,Technical Ops,P1-Critical,Latency Shock,13.26,2.3,1,Mid-Market
+TICK-10967,Email,Tier 1 Support,P3-Medium,Latency Shock,18.2,3.14,0,Mid-Market
+TICK-10968,Live Chat,Tier 2 Escalations,P3-Medium,Bug Report,8.22,4.95,0,Mid-Market
+TICK-10969,Phone,Tier 1 Support,P3-Medium,Latency Shock,23.87,5.0,0,Free Tier
+TICK-10970,Live Chat,Tier 1 Support,P3-Medium,Latency Shock,4.08,3.75,0,SMB
+TICK-10971,Email,Tier 1 Support,P3-Medium,Integration Error,11.33,4.37,0,Mid-Market
+TICK-10972,Email,Billing Support,P4-Low,Integration Error,18.53,4.2,1,Enterprise
+TICK-10973,Web Portal,Tier 1 Support,P4-Low,Latency Shock,7.85,4.1,1,SMB
+TICK-10974,Email,Tier 1 Support,P1-Critical,Integration Error,45.91,1.8,2,Mid-Market
+TICK-10975,Live Chat,VIP Enterprise Desk,P3-Medium,Feature Inquiry,14.5,4.35,0,Free Tier
+TICK-10976,Email,Tier 1 Support,P3-Medium,Latency Shock,3.83,5.0,0,Mid-Market
+TICK-10977,Live Chat,Tier 1 Support,P4-Low,Latency Shock,1.5,5.0,0,Mid-Market
+TICK-10978,Email,Tier 1 Support,P2-High,Integration Error,15.6,2.88,0,Mid-Market
+TICK-10979,Email,Tier 1 Support,P2-High,Latency Shock,8.04,4.16,1,Mid-Market
+TICK-10980,Phone,Billing Support,P4-Low,Account Access,8.13,4.76,2,Enterprise
+TICK-10981,Web Portal,Tier 1 Support,P3-Medium,Bug Report,6.31,3.79,0,SMB
+TICK-10982,In-App Support,Tier 1 Support,P4-Low,Billing Dispute,3.0,4.14,1,Mid-Market
+TICK-10983,In-App Support,Technical Ops,P2-High,Integration Error,10.84,4.93,0,Mid-Market
+TICK-10984,Phone,Technical Ops,P3-Medium,Integration Error,11.88,3.39,0,Free Tier
+TICK-10985,Email,Tier 1 Support,P3-Medium,Latency Shock,1.28,4.04,0,SMB
+TICK-10986,Email,VIP Enterprise Desk,P4-Low,Latency Shock,4.63,5.0,0,Mid-Market
+TICK-10987,In-App Support,Billing Support,P4-Low,Latency Shock,5.31,4.36,0,SMB
+TICK-10988,Phone,VIP Enterprise Desk,P3-Medium,Integration Error,8.31,4.89,0,Free Tier
+TICK-10989,Phone,Tier 1 Support,P2-High,Account Access,2.34,3.99,0,Enterprise
+TICK-10990,Email,Technical Ops,P2-High,Bug Report,6.94,3.72,0,Enterprise
+TICK-10991,In-App Support,Tier 1 Support,P2-High,Integration Error,12.25,4.3,1,SMB
+TICK-10992,Email,Tier 1 Support,P2-High,Feature Inquiry,5.06,4.44,0,Mid-Market
+TICK-10993,Email,Technical Ops,P3-Medium,Billing Dispute,2.34,4.47,0,SMB
+TICK-10994,Phone,Tier 1 Support,P2-High,Latency Shock,18.09,4.37,0,Enterprise
+TICK-10995,Web Portal,Technical Ops,P4-Low,Feature Inquiry,1.03,4.37,0,Free Tier
+TICK-10996,Phone,Technical Ops,P3-Medium,Feature Inquiry,5.93,4.48,0,Free Tier
+TICK-10997,Live Chat,Technical Ops,P3-Medium,Integration Error,10.38,4.57,1,SMB
+TICK-10998,Phone,Tier 1 Support,P2-High,Account Access,6.12,4.75,0,Enterprise
+TICK-10999,Web Portal,Tier 2 Escalations,P3-Medium,Billing Dispute,60.02,2.58,5,Mid-Market
+TICK-11000,In-App Support,Tier 1 Support,P3-Medium,Feature Inquiry,6.86,4.76,0,Mid-Market
+TICK-11001,In-App Support,Tier 1 Support,P2-High,Account Access,9.8,4.01,0,Enterprise
+TICK-11002,Web Portal,Tier 2 Escalations,P4-Low,Bug Report,9.05,3.49,0,Mid-Market
+TICK-11003,Live Chat,Tier 1 Support,P4-Low,Latency Shock,5.17,4.96,0,Free Tier
+TICK-11004,Email,Tier 1 Support,P3-Medium,Billing Dispute,4.55,4.04,1,Mid-Market
+TICK-11005,Live Chat,VIP Enterprise Desk,P2-High,Latency Shock,4.7,4.83,0,Mid-Market
+TICK-11006,Live Chat,Tier 2 Escalations,P4-Low,Latency Shock,2.98,4.98,0,SMB
+TICK-11007,Web Portal,Billing Support,P3-Medium,Latency Shock,11.42,3.96,0,SMB
+TICK-11008,Live Chat,Tier 1 Support,P3-Medium,Bug Report,11.08,4.72,2,Enterprise
+TICK-11009,Email,Tier 1 Support,P4-Low,Integration Error,19.77,4.65,0,SMB
+TICK-11010,Live Chat,Tier 1 Support,P2-High,Account Access,2.65,4.27,0,Mid-Market
+TICK-11011,Phone,Tier 2 Escalations,P3-Medium,Latency Shock,1.97,4.86,0,SMB
+TICK-11012,Email,Technical Ops,P3-Medium,Bug Report,10.91,3.0,0,SMB
+TICK-11013,Live Chat,Billing Support,P3-Medium,Billing Dispute,7.96,3.87,2,Enterprise
+TICK-11014,Phone,Tier 2 Escalations,P2-High,Latency Shock,8.1,4.62,0,Mid-Market
+TICK-11015,In-App Support,Tier 1 Support,P3-Medium,Account Access,6.33,4.23,0,Mid-Market
+TICK-11016,Email,Tier 2 Escalations,P2-High,Feature Inquiry,12.87,3.42,0,Enterprise
+TICK-11017,Web Portal,Tier 2 Escalations,P3-Medium,Feature Inquiry,8.26,5.0,1,Enterprise
+TICK-11018,Live Chat,Tier 1 Support,P3-Medium,Account Access,17.39,5.0,2,Mid-Market
+TICK-11019,Email,Tier 1 Support,P3-Medium,Feature Inquiry,14.23,3.99,0,Free Tier
+TICK-11020,Email,Tier 1 Support,P4-Low,Account Access,5.27,4.12,0,Enterprise
+TICK-11021,Live Chat,Technical Ops,P3-Medium,Feature Inquiry,5.94,4.17,0,SMB
+TICK-11022,Live Chat,Tier 1 Support,P1-Critical,Account Access,49.63,3.77,2,Free Tier
+TICK-11023,Web Portal,Billing Support,P3-Medium,Feature Inquiry,7.22,4.94,0,SMB
+TICK-11024,Web Portal,Technical Ops,P4-Low,Feature Inquiry,1.94,5.0,2,Free Tier
+TICK-11025,Phone,Technical Ops,P1-Critical,Integration Error,13.72,4.14,0,SMB
+TICK-11026,Live Chat,Technical Ops,P2-High,Latency Shock,1.42,4.49,0,Mid-Market
+TICK-11027,Phone,Tier 1 Support,P3-Medium,Account Access,34.03,4.83,0,Free Tier
+TICK-11028,Email,Tier 1 Support,P3-Medium,Integration Error,10.58,3.72,0,SMB
+TICK-11029,Email,Tier 1 Support,P3-Medium,Account Access,4.27,3.67,0,SMB
+TICK-11030,Phone,Technical Ops,P1-Critical,Feature Inquiry,57.14,4.2,0,Enterprise
+TICK-11031,Email,VIP Enterprise Desk,P4-Low,Account Access,6.31,5.0,0,Enterprise
+TICK-11032,Web Portal,Tier 1 Support,P3-Medium,Latency Shock,5.97,4.28,0,SMB
+TICK-11033,Email,VIP Enterprise Desk,P3-Medium,Integration Error,4.44,5.0,0,Enterprise
+TICK-11034,Email,Tier 1 Support,P3-Medium,Latency Shock,3.83,4.89,1,SMB
+TICK-11035,Web Portal,Tier 1 Support,P2-High,Integration Error,14.2,4.32,2,Mid-Market
+TICK-11036,Email,Tier 1 Support,P2-High,Latency Shock,24.4,4.49,0,SMB
+TICK-11037,Live Chat,Tier 2 Escalations,P3-Medium,Billing Dispute,60.74,2.88,2,Mid-Market
+TICK-11038,Live Chat,Billing Support,P2-High,Feature Inquiry,8.48,5.0,0,Free Tier
+TICK-11039,Live Chat,Tier 1 Support,P3-Medium,Account Access,5.19,4.28,0,Mid-Market
+TICK-11040,Web Portal,Tier 2 Escalations,P2-High,Integration Error,124.01,2.67,4,Mid-Market
+TICK-11041,Email,VIP Enterprise Desk,P1-Critical,Latency Shock,34.08,3.3,1,Enterprise
+TICK-11042,In-App Support,Tier 1 Support,P3-Medium,Latency Shock,10.92,4.63,0,Enterprise
+TICK-11043,Live Chat,Billing Support,P3-Medium,Integration Error,19.91,4.02,2,Mid-Market
+TICK-11044,Web Portal,Technical Ops,P3-Medium,Account Access,8.45,4.05,1,Enterprise
+TICK-11045,Phone,Technical Ops,P3-Medium,Account Access,3.27,4.73,0,Enterprise
+TICK-11046,Email,Tier 2 Escalations,P3-Medium,Feature Inquiry,2.69,5.0,0,Enterprise
+TICK-11047,Email,Billing Support,P4-Low,Integration Error,1.8,4.67,0,Mid-Market
+TICK-11048,Web Portal,Tier 1 Support,P3-Medium,Feature Inquiry,1.57,4.44,1,Mid-Market
+TICK-11049,Email,Tier 1 Support,P3-Medium,Bug Report,12.55,4.3,0,Mid-Market
+TICK-11050,Phone,VIP Enterprise Desk,P1-Critical,Integration Error,83.3,2.49,0,SMB
+TICK-11051,Live Chat,Tier 1 Support,P3-Medium,Latency Shock,7.2,3.73,0,Enterprise
+TICK-11052,Phone,VIP Enterprise Desk,P3-Medium,Account Access,5.52,4.39,0,Mid-Market
+TICK-11053,Live Chat,Tier 1 Support,P4-Low,Latency Shock,7.34,3.81,2,Enterprise
+TICK-11054,Phone,Technical Ops,P3-Medium,Billing Dispute,0.95,4.45,2,Free Tier
+TICK-11055,Live Chat,Technical Ops,P3-Medium,Feature Inquiry,15.3,4.17,2,Enterprise
+TICK-11056,Web Portal,Billing Support,P3-Medium,Latency Shock,0.97,4.63,0,Mid-Market
+TICK-11057,Live Chat,Tier 1 Support,P2-High,Integration Error,3.76,4.04,0,SMB
+TICK-11058,Email,Tier 1 Support,P3-Medium,Billing Dispute,1.14,4.75,0,SMB
+TICK-11059,Phone,Technical Ops,P2-High,Account Access,19.79,4.53,0,Enterprise
+TICK-11060,Email,Tier 1 Support,P2-High,Latency Shock,8.36,3.97,0,Mid-Market
+TICK-11061,Live Chat,Tier 2 Escalations,P3-Medium,Account Access,4.31,4.89,0,Mid-Market
+TICK-11062,Web Portal,Technical Ops,P3-Medium,Integration Error,5.33,5.0,0,SMB
+TICK-11063,Live Chat,Technical Ops,P3-Medium,Integration Error,7.72,4.67,0,Free Tier
+TICK-11064,In-App Support,Tier 2 Escalations,P3-Medium,Integration Error,55.62,2.53,2,SMB
+TICK-11065,Live Chat,Tier 1 Support,P3-Medium,Feature Inquiry,2.99,4.13,2,Enterprise
+TICK-11066,Phone,Tier 2 Escalations,P4-Low,Account Access,19.6,5.0,1,Mid-Market
+TICK-11067,Live Chat,Tier 1 Support,P3-Medium,Latency Shock,8.54,3.45,0,Mid-Market
+TICK-11068,Phone,Tier 2 Escalations,P1-Critical,Latency Shock,16.74,5.0,1,SMB
+TICK-11069,In-App Support,Tier 1 Support,P2-High,Integration Error,7.45,4.73,0,Free Tier
+TICK-11070,Live Chat,Technical Ops,P1-Critical,Billing Dispute,29.22,4.98,0,Enterprise
+TICK-11071,In-App Support,Tier 1 Support,P3-Medium,Billing Dispute,1.08,3.98,1,Free Tier
+TICK-11072,Phone,Tier 2 Escalations,P2-High,Account Access,2.16,3.7,0,SMB
+TICK-11073,Phone,Billing Support,P1-Critical,Account Access,8.53,3.9,0,SMB
+TICK-11074,Live Chat,Billing Support,P2-High,Billing Dispute,18.83,4.27,0,Mid-Market
+TICK-11075,Web Portal,Tier 1 Support,P4-Low,Account Access,16.4,4.02,0,SMB
+TICK-11076,Live Chat,Billing Support,P2-High,Latency Shock,5.29,4.62,1,SMB
+TICK-11077,Email,Tier 1 Support,P3-Medium,Bug Report,21.76,4.5,0,Mid-Market
+TICK-11078,Phone,Technical Ops,P3-Medium,Billing Dispute,6.34,5.0,1,Mid-Market
+TICK-11079,Live Chat,Technical Ops,P1-Critical,Latency Shock,40.24,2.18,1,Enterprise
+TICK-11080,Live Chat,Tier 1 Support,P3-Medium,Latency Shock,1.44,5.0,0,SMB
+TICK-11081,In-App Support,Tier 1 Support,P2-High,Feature Inquiry,6.13,4.76,1,SMB
+TICK-11082,Web Portal,Tier 2 Escalations,P3-Medium,Bug Report,7.47,5.0,0,SMB
+TICK-11083,Web Portal,Billing Support,P3-Medium,Latency Shock,1.76,4.63,0,SMB
+TICK-11084,In-App Support,Technical Ops,P4-Low,Account Access,5.56,4.0,2,SMB
+TICK-11085,Email,VIP Enterprise Desk,P3-Medium,Integration Error,3.38,4.52,0,SMB
+TICK-11086,Email,Tier 1 Support,P3-Medium,Integration Error,6.3,4.07,0,Mid-Market
+TICK-11087,Web Portal,Tier 1 Support,P3-Medium,Bug Report,13.07,3.98,2,Enterprise
+TICK-11088,Email,Tier 1 Support,P2-High,Feature Inquiry,19.39,4.93,0,Mid-Market
+TICK-11089,Live Chat,Tier 1 Support,P4-Low,Bug Report,5.32,4.1,0,SMB
+TICK-11090,Phone,Tier 2 Escalations,P2-High,Account Access,1.81,4.48,0,Enterprise
+TICK-11091,Live Chat,Tier 1 Support,P2-High,Feature Inquiry,2.61,3.66,0,Enterprise
+TICK-11092,Web Portal,Billing Support,P3-Medium,Billing Dispute,0.98,5.0,0,Mid-Market
+TICK-11093,Email,Technical Ops,P3-Medium,Bug Report,23.64,4.83,1,Enterprise
+TICK-11094,Live Chat,Tier 1 Support,P2-High,Bug Report,4.71,5.0,0,Free Tier
+TICK-11095,Live Chat,Billing Support,P4-Low,Bug Report,6.71,3.57,1,Enterprise
+TICK-11096,Email,Tier 1 Support,P2-High,Account Access,1.68,3.83,0,Enterprise
+TICK-11097,Live Chat,Tier 1 Support,P3-Medium,Account Access,1.37,3.49,0,SMB
+TICK-11098,Email,Tier 1 Support,P3-Medium,Bug Report,4.16,5.0,0,SMB
+TICK-11099,Email,Tier 1 Support,P2-High,Account Access,14.74,4.59,1,SMB
+TICK-11100,In-App Support,VIP Enterprise Desk,P2-High,Latency Shock,3.96,4.37,0,Mid-Market
+TICK-11101,Phone,VIP Enterprise Desk,P3-Medium,Account Access,13.33,4.49,1,Enterprise
+TICK-11102,Web Portal,Billing Support,P2-High,Latency Shock,2.99,5.0,0,SMB
+TICK-11103,Email,Tier 1 Support,P2-High,Billing Dispute,1.31,4.9,0,Enterprise
+TICK-11104,Live Chat,Tier 1 Support,P3-Medium,Bug Report,34.62,3.67,0,Enterprise
+TICK-11105,Phone,Technical Ops,P2-High,Integration Error,16.64,3.73,1,Mid-Market
+TICK-11106,Live Chat,Tier 2 Escalations,P4-Low,Latency Shock,1.39,3.81,0,SMB
+TICK-11107,Web Portal,Billing Support,P3-Medium,Feature Inquiry,12.08,4.94,1,SMB
+TICK-11108,In-App Support,Tier 1 Support,P3-Medium,Integration Error,1.43,4.55,0,Enterprise
+TICK-11109,Email,Billing Support,P3-Medium,Latency Shock,2.77,4.65,0,Mid-Market
+TICK-11110,In-App Support,Tier 1 Support,P2-High,Account Access,20.27,4.94,1,Mid-Market
+TICK-11111,Email,Tier 2 Escalations,P2-High,Feature Inquiry,19.45,4.14,2,SMB
+TICK-11112,Live Chat,Tier 2 Escalations,P2-High,Feature Inquiry,8.03,4.61,0,Enterprise
+TICK-11113,Live Chat,VIP Enterprise Desk,P2-High,Billing Dispute,1.17,3.89,0,Enterprise
+TICK-11114,Web Portal,Tier 1 Support,P4-Low,Latency Shock,1.99,3.88,0,Enterprise
+TICK-11115,Phone,Technical Ops,P3-Medium,Latency Shock,2.0,4.83,0,Enterprise
+TICK-11116,Web Portal,Tier 2 Escalations,P3-Medium,Feature Inquiry,3.71,4.08,0,Mid-Market
+TICK-11117,Web Portal,Billing Support,P3-Medium,Feature Inquiry,12.98,4.56,0,Mid-Market
+TICK-11118,Live Chat,Tier 2 Escalations,P3-Medium,Latency Shock,3.99,5.0,0,Enterprise
+TICK-11119,Email,Technical Ops,P3-Medium,Account Access,28.96,5.0,0,Mid-Market
+TICK-11120,Email,Tier 2 Escalations,P2-High,Billing Dispute,19.35,1.5,1,SMB
+TICK-11121,Email,Billing Support,P3-Medium,Latency Shock,1.32,4.45,0,Mid-Market
+TICK-11122,Phone,Tier 2 Escalations,P4-Low,Latency Shock,6.42,4.82,0,Free Tier
+TICK-11123,Phone,VIP Enterprise Desk,P2-High,Feature Inquiry,8.78,3.07,0,Free Tier
+TICK-11124,Live Chat,Tier 1 Support,P4-Low,Bug Report,5.8,5.0,0,SMB
+TICK-11125,Email,Tier 2 Escalations,P3-Medium,Latency Shock,7.23,4.08,0,SMB
+TICK-11126,Live Chat,Technical Ops,P4-Low,Billing Dispute,1.52,5.0,0,Free Tier
+TICK-11127,In-App Support,Tier 1 Support,P3-Medium,Feature Inquiry,14.91,4.33,0,SMB
+TICK-11128,Phone,Tier 2 Escalations,P3-Medium,Bug Report,5.25,5.0,0,Mid-Market
+TICK-11129,In-App Support,Tier 1 Support,P3-Medium,Bug Report,11.56,3.23,0,Free Tier
+TICK-11130,Live Chat,Tier 1 Support,P3-Medium,Latency Shock,6.22,4.03,0,Free Tier
+TICK-11131,Live Chat,Billing Support,P1-Critical,Integration Error,52.21,4.84,0,SMB
+TICK-11132,Live Chat,Billing Support,P3-Medium,Billing Dispute,11.56,4.42,2,Mid-Market
+TICK-11133,Web Portal,Billing Support,P3-Medium,Bug Report,1.05,5.0,0,Free Tier
+TICK-11134,Live Chat,Tier 1 Support,P2-High,Account Access,4.89,3.81,0,Enterprise
+TICK-11135,Email,Tier 1 Support,P2-High,Latency Shock,5.0,4.76,1,Enterprise
+TICK-11136,Live Chat,Tier 1 Support,P4-Low,Latency Shock,11.99,4.56,0,Mid-Market
+TICK-11137,Live Chat,Technical Ops,P4-Low,Billing Dispute,2.97,4.35,0,Mid-Market
+TICK-11138,Live Chat,Tier 2 Escalations,P3-Medium,Latency Shock,0.94,3.29,0,SMB
+TICK-11139,In-App Support,Tier 2 Escalations,P4-Low,Latency Shock,1.58,3.48,0,Mid-Market
+TICK-11140,Live Chat,Technical Ops,P3-Medium,Feature Inquiry,8.35,4.58,0,Free Tier
+TICK-11141,Web Portal,Billing Support,P2-High,Feature Inquiry,24.52,4.12,0,Free Tier
+TICK-11142,Phone,Tier 1 Support,P3-Medium,Feature Inquiry,4.85,4.14,0,SMB
+TICK-11143,Live Chat,Tier 1 Support,P3-Medium,Feature Inquiry,25.31,3.99,0,Enterprise
+TICK-11144,Live Chat,Tier 1 Support,P2-High,Integration Error,1.79,4.58,0,Mid-Market
+TICK-11145,Phone,Tier 1 Support,P3-Medium,Feature Inquiry,4.4,2.99,0,Enterprise
+TICK-11146,Web Portal,Tier 1 Support,P3-Medium,Billing Dispute,1.06,3.75,0,SMB
+TICK-11147,Phone,Tier 1 Support,P4-Low,Bug Report,3.79,3.88,0,SMB
+TICK-11148,Phone,Tier 1 Support,P3-Medium,Billing Dispute,6.23,4.19,0,Mid-Market
+TICK-11149,Email,Tier 1 Support,P3-Medium,Integration Error,7.63,4.21,0,SMB
+TICK-11150,In-App Support,Tier 2 Escalations,P2-High,Bug Report,5.02,3.14,0,Enterprise
+TICK-11151,Live Chat,Billing Support,P1-Critical,Billing Dispute,41.63,3.41,0,Mid-Market
+TICK-11152,Live Chat,Tier 1 Support,P2-High,Bug Report,1.8,4.92,1,SMB
+TICK-11153,Phone,Tier 2 Escalations,P3-Medium,Billing Dispute,41.1,2.62,3,Enterprise
+TICK-11154,Phone,Technical Ops,P1-Critical,Feature Inquiry,60.33,2.64,1,Mid-Market
+TICK-11155,Live Chat,Tier 2 Escalations,P3-Medium,Account Access,2.93,5.0,1,Mid-Market
+TICK-11156,In-App Support,Tier 2 Escalations,P1-Critical,Latency Shock,20.39,2.82,0,Mid-Market
+TICK-11157,Web Portal,VIP Enterprise Desk,P1-Critical,Bug Report,25.77,3.46,0,Enterprise
+TICK-11158,In-App Support,Tier 2 Escalations,P3-Medium,Feature Inquiry,5.46,4.29,0,Mid-Market
+TICK-11159,Live Chat,Tier 1 Support,P3-Medium,Integration Error,9.71,3.8,0,Mid-Market
+TICK-11160,Email,VIP Enterprise Desk,P3-Medium,Feature Inquiry,3.05,4.51,0,SMB
+TICK-11161,Live Chat,Tier 1 Support,P3-Medium,Bug Report,9.61,4.21,0,Mid-Market
+TICK-11162,Email,Tier 1 Support,P2-High,Billing Dispute,5.18,5.0,1,SMB
+TICK-11163,Email,Technical Ops,P3-Medium,Account Access,16.35,5.0,0,Mid-Market
+TICK-11164,Email,Technical Ops,P3-Medium,Feature Inquiry,10.26,4.11,0,SMB
+TICK-11165,Live Chat,Technical Ops,P2-High,Account Access,4.99,4.86,0,Enterprise
+TICK-11166,Web Portal,Tier 1 Support,P2-High,Billing Dispute,19.2,5.0,0,Mid-Market
+TICK-11167,Live Chat,Tier 2 Escalations,P2-High,Bug Report,12.06,5.0,0,Enterprise
+TICK-11168,Email,Tier 1 Support,P3-Medium,Latency Shock,4.61,4.8,0,Enterprise
+TICK-11169,Email,Tier 1 Support,P4-Low,Latency Shock,9.7,4.5,0,Enterprise
+TICK-11170,Email,Tier 2 Escalations,P3-Medium,Latency Shock,3.34,5.0,0,SMB
+TICK-11171,Phone,Tier 1 Support,P3-Medium,Account Access,0.98,4.98,0,SMB
+TICK-11172,Web Portal,Tier 2 Escalations,P3-Medium,Bug Report,7.71,5.0,0,Mid-Market
+TICK-11173,Email,Tier 2 Escalations,P2-High,Integration Error,80.02,1.81,2,Enterprise
+TICK-11174,Live Chat,VIP Enterprise Desk,P3-Medium,Billing Dispute,14.38,4.64,0,Mid-Market
+TICK-11175,Live Chat,Tier 2 Escalations,P3-Medium,Latency Shock,17.51,3.96,1,Enterprise
+TICK-11176,Live Chat,Tier 1 Support,P2-High,Account Access,4.71,4.69,1,Enterprise
+TICK-11177,Live Chat,Tier 1 Support,P3-Medium,Billing Dispute,7.28,5.0,0,Enterprise
+TICK-11178,In-App Support,Technical Ops,P1-Critical,Account Access,76.05,3.32,0,Free Tier
+TICK-11179,Email,Tier 1 Support,P3-Medium,Billing Dispute,5.98,3.7,0,Free Tier
+TICK-11180,In-App Support,Tier 1 Support,P1-Critical,Latency Shock,24.44,4.4,3,Enterprise
+TICK-11181,Web Portal,Tier 1 Support,P2-High,Billing Dispute,1.94,4.25,0,Mid-Market
+TICK-11182,Live Chat,Technical Ops,P2-High,Billing Dispute,5.15,3.86,0,Enterprise
+TICK-11183,Phone,Technical Ops,P4-Low,Account Access,4.98,4.1,0,Enterprise
+TICK-11184,Email,Technical Ops,P2-High,Bug Report,10.96,5.0,0,Mid-Market
+TICK-11185,Phone,Billing Support,P3-Medium,Latency Shock,9.51,4.85,0,Mid-Market
+TICK-11186,Live Chat,Billing Support,P4-Low,Bug Report,11.87,4.37,1,SMB
+TICK-11187,Web Portal,Tier 1 Support,P3-Medium,Billing Dispute,1.23,3.48,1,Free Tier
+TICK-11188,Live Chat,Technical Ops,P4-Low,Latency Shock,3.12,3.54,0,SMB
+TICK-11189,Email,Technical Ops,P1-Critical,Feature Inquiry,29.55,3.73,1,Mid-Market
+TICK-11190,Email,Tier 1 Support,P3-Medium,Bug Report,2.81,4.61,0,Enterprise
+TICK-11191,Phone,Tier 2 Escalations,P3-Medium,Latency Shock,5.74,4.99,0,SMB
+TICK-11192,Email,Tier 1 Support,P1-Critical,Bug Report,35.71,4.01,0,Mid-Market
+TICK-11193,Web Portal,Technical Ops,P2-High,Account Access,1.35,5.0,0,SMB
+TICK-11194,Live Chat,Tier 1 Support,P3-Medium,Integration Error,14.45,4.68,0,Mid-Market
+TICK-11195,Email,Tier 2 Escalations,P4-Low,Latency Shock,7.53,4.42,1,SMB
+TICK-11196,Web Portal,Tier 1 Support,P2-High,Feature Inquiry,3.81,4.82,2,Free Tier
+TICK-11197,Web Portal,Tier 1 Support,P3-Medium,Bug Report,27.25,4.25,1,Mid-Market
+TICK-11198,Web Portal,Tier 1 Support,P3-Medium,Billing Dispute,21.26,3.21,0,Mid-Market
+TICK-11199,Email,Tier 1 Support,P1-Critical,Latency Shock,43.65,2.97,3,Mid-Market
+TICK-11200,In-App Support,Technical Ops,P3-Medium,Integration Error,2.51,3.89,0,Enterprise
+TICK-11201,Email,Tier 2 Escalations,P2-High,Latency Shock,6.36,4.18,0,Mid-Market
+TICK-11202,In-App Support,Billing Support,P3-Medium,Billing Dispute,14.93,3.45,1,Mid-Market
+TICK-11203,Web Portal,Billing Support,P4-Low,Account Access,3.09,4.83,0,Enterprise
+TICK-11204,Web Portal,VIP Enterprise Desk,P2-High,Feature Inquiry,1.51,4.62,0,Enterprise
+TICK-11205,Phone,Billing Support,P2-High,Billing Dispute,1.96,4.64,0,SMB
+TICK-11206,Email,Billing Support,P2-High,Account Access,4.96,4.32,0,SMB
+TICK-11207,Live Chat,Tier 1 Support,P4-Low,Feature Inquiry,1.71,4.56,1,Mid-Market
+TICK-11208,Web Portal,Tier 2 Escalations,P3-Medium,Billing Dispute,26.89,2.97,2,Free Tier
+TICK-11209,Email,VIP Enterprise Desk,P1-Critical,Bug Report,23.74,3.67,0,Mid-Market
+TICK-11210,Web Portal,Tier 1 Support,P3-Medium,Latency Shock,0.94,5.0,0,Enterprise
+TICK-11211,Phone,Tier 2 Escalations,P2-High,Account Access,10.4,3.56,0,Free Tier
+TICK-11212,Email,Tier 1 Support,P3-Medium,Latency Shock,15.33,4.02,0,SMB
+TICK-11213,Phone,Technical Ops,P3-Medium,Feature Inquiry,7.37,3.62,1,Free Tier
+TICK-11214,Phone,Technical Ops,P3-Medium,Bug Report,5.86,5.0,1,Enterprise
+TICK-11215,Phone,Billing Support,P3-Medium,Account Access,10.08,5.0,0,Free Tier
+TICK-11216,Phone,Tier 1 Support,P3-Medium,Integration Error,17.27,4.72,0,SMB
+TICK-11217,Email,Tier 1 Support,P2-High,Bug Report,10.11,4.71,1,Mid-Market
+TICK-11218,Live Chat,Billing Support,P2-High,Latency Shock,1.26,4.63,2,SMB
+TICK-11219,Live Chat,Technical Ops,P3-Medium,Feature Inquiry,15.27,4.38,0,Mid-Market
+TICK-11220,Live Chat,Tier 2 Escalations,P3-Medium,Account Access,17.14,5.0,0,SMB
+TICK-11221,Email,VIP Enterprise Desk,P4-Low,Bug Report,3.73,4.6,0,SMB
+TICK-11222,Web Portal,Billing Support,P2-High,Latency Shock,8.51,3.14,0,Mid-Market
+TICK-11223,Live Chat,Billing Support,P2-High,Latency Shock,3.73,3.65,2,Mid-Market
+TICK-11224,Live Chat,Billing Support,P3-Medium,Feature Inquiry,3.95,4.38,0,Enterprise
+TICK-11225,Email,Tier 2 Escalations,P3-Medium,Integration Error,21.65,1.53,3,Mid-Market
+TICK-11226,Phone,Tier 1 Support,P4-Low,Account Access,8.36,3.7,0,Mid-Market
+TICK-11227,Web Portal,Tier 1 Support,P3-Medium,Bug Report,12.08,4.43,1,SMB
+TICK-11228,Email,Tier 2 Escalations,P3-Medium,Bug Report,4.92,5.0,0,SMB
+TICK-11229,In-App Support,Tier 1 Support,P3-Medium,Billing Dispute,8.18,4.05,1,Mid-Market
+TICK-11230,Live Chat,Tier 2 Escalations,P3-Medium,Billing Dispute,21.32,1.9,2,Mid-Market
+TICK-11231,Live Chat,Billing Support,P3-Medium,Bug Report,4.53,4.42,0,SMB
+TICK-11232,In-App Support,Tier 1 Support,P3-Medium,Bug Report,3.92,4.94,2,Enterprise
+TICK-11233,Phone,VIP Enterprise Desk,P1-Critical,Feature Inquiry,39.36,3.24,2,Mid-Market
+TICK-11234,Email,VIP Enterprise Desk,P1-Critical,Integration Error,6.99,3.91,1,SMB
+TICK-11235,Email,Tier 1 Support,P3-Medium,Account Access,20.46,4.72,1,SMB
+TICK-11236,Live Chat,Billing Support,P4-Low,Billing Dispute,1.67,4.38,0,SMB
+TICK-11237,Email,Billing Support,P3-Medium,Latency Shock,1.75,3.82,0,Enterprise
+TICK-11238,Live Chat,Tier 2 Escalations,P3-Medium,Feature Inquiry,2.19,3.87,0,SMB
+TICK-11239,Live Chat,Billing Support,P3-Medium,Feature Inquiry,16.83,3.9,0,Enterprise
+TICK-11240,Web Portal,Billing Support,P2-High,Latency Shock,3.6,4.86,0,Enterprise
+TICK-11241,Live Chat,Tier 2 Escalations,P3-Medium,Bug Report,13.42,3.22,0,Mid-Market
+TICK-11242,Phone,Billing Support,P2-High,Latency Shock,0.86,4.46,0,Mid-Market
+TICK-11243,Live Chat,Technical Ops,P2-High,Account Access,3.82,5.0,1,Free Tier
+TICK-11244,Email,Tier 2 Escalations,P2-High,Feature Inquiry,1.46,4.68,0,Mid-Market
+TICK-11245,Email,Technical Ops,P3-Medium,Account Access,6.89,3.93,2,SMB
+TICK-11246,Live Chat,Tier 2 Escalations,P4-Low,Account Access,13.2,4.13,0,Mid-Market
+TICK-11247,Email,Tier 1 Support,P3-Medium,Account Access,14.34,4.77,0,Enterprise
+TICK-11248,Live Chat,Tier 1 Support,P4-Low,Account Access,4.82,4.16,0,Mid-Market
+TICK-11249,Web Portal,Tier 2 Escalations,P3-Medium,Latency Shock,3.51,4.51,1,Enterprise

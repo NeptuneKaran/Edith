@@ -1,0 +1,2497 @@
+snapshot_date,department,office_location,job_level,headcount,attrition_rate,average_salary,engagement_score,average_tenure_years
+2025-01-05,Engineering,San Francisco,IC3-Senior,48,2.36,112511.24,85.6,3.72
+2025-01-05,Engineering,New York,M1-Manager,43,1.94,78802.67,80.0,2.81
+2025-01-05,Engineering,London,IC1-Associate,40,0.93,105546.94,73.4,2.74
+2025-01-05,Engineering,Austin,M2-Director,52,2.4,71096.1,76.7,3.68
+2025-01-05,Engineering,Singapore,IC2-Mid,45,1.81,89354.53,78.6,2.76
+2025-01-05,Engineering,Berlin,IC4-Staff,48,2.12,104195.43,79.5,3.96
+2025-01-05,Sales,San Francisco,IC2-Mid,44,2.63,95961.2,71.9,3.86
+2025-01-05,Sales,New York,IC2-Mid,29,3.22,106693.62,77.1,3.25
+2025-01-05,Sales,London,IC2-Mid,46,2.96,130871.7,70.1,2.39
+2025-01-05,Sales,Austin,M1-Manager,40,1.87,116735.5,73.2,3.54
+2025-01-05,Sales,Singapore,IC1-Associate,39,2.0,126010.17,82.7,4.02
+2025-01-05,Sales,Berlin,M1-Manager,42,2.25,87853.24,77.1,4.08
+2025-01-05,Customer Support,San Francisco,IC1-Associate,51,2.72,139412.32,83.0,3.14
+2025-01-05,Customer Support,New York,IC4-Staff,39,2.7,98192.27,74.9,3.83
+2025-01-05,Customer Support,London,IC3-Senior,33,2.18,133764.85,78.1,3.92
+2025-01-05,Customer Support,Austin,M2-Director,33,3.04,144212.57,79.5,3.86
+2025-01-05,Customer Support,Singapore,IC2-Mid,52,2.56,120917.52,80.6,2.78
+2025-01-05,Customer Support,Berlin,IC3-Senior,52,2.78,109102.75,76.7,2.51
+2025-01-05,Marketing,San Francisco,IC4-Staff,55,2.26,109744.85,79.7,1.08
+2025-01-05,Marketing,New York,IC4-Staff,42,1.62,103010.91,79.5,2.79
+2025-01-05,Marketing,London,M2-Director,47,2.54,113659.97,77.9,1.66
+2025-01-05,Marketing,Austin,M1-Manager,64,3.14,113558.43,85.2,3.01
+2025-01-05,Marketing,Singapore,M2-Director,47,2.03,114867.16,72.3,3.81
+2025-01-05,Marketing,Berlin,IC1-Associate,51,3.81,140250.3,80.9,2.08
+2025-01-05,Operations,San Francisco,IC2-Mid,45,1.84,93452.43,80.2,3.83
+2025-01-05,Operations,New York,IC1-Associate,39,2.78,87088.06,72.7,3.25
+2025-01-05,Operations,London,M2-Director,48,2.0,70545.42,82.6,3.59
+2025-01-05,Operations,Austin,IC1-Associate,50,2.57,96501.2,69.4,3.79
+2025-01-05,Operations,Singapore,M2-Director,47,2.81,129072.81,71.4,2.21
+2025-01-05,Operations,Berlin,IC3-Senior,47,3.01,126117.54,79.1,4.17
+2025-01-05,Product,San Francisco,IC4-Staff,49,2.59,112038.99,68.3,3.09
+2025-01-05,Product,New York,IC3-Senior,44,2.01,97455.73,83.8,3.83
+2025-01-05,Product,London,M2-Director,51,1.97,149142.27,74.2,3.0
+2025-01-05,Product,Austin,M1-Manager,38,3.02,114794.02,77.3,3.53
+2025-01-05,Product,Singapore,IC3-Senior,66,1.92,116687.78,77.8,2.07
+2025-01-05,Product,Berlin,IC4-Staff,52,2.29,114791.5,81.0,3.35
+2025-01-05,Finance,San Francisco,IC2-Mid,48,2.23,113689.08,70.4,2.52
+2025-01-05,Finance,New York,IC2-Mid,51,3.56,127781.97,81.2,3.27
+2025-01-05,Finance,London,M1-Manager,45,3.15,94426.53,80.8,3.49
+2025-01-05,Finance,Austin,IC4-Staff,53,1.64,102995.02,81.3,1.85
+2025-01-05,Finance,Singapore,IC4-Staff,49,3.07,184349.17,83.7,3.66
+2025-01-05,Finance,Berlin,IC2-Mid,50,3.22,86909.97,72.0,4.8
+2025-01-05,HR,San Francisco,IC1-Associate,30,1.96,121431.48,78.4,2.87
+2025-01-05,HR,New York,M2-Director,42,2.81,105256.86,77.8,3.82
+2025-01-05,HR,London,IC1-Associate,45,1.28,103271.19,81.2,4.92
+2025-01-05,HR,Austin,IC2-Mid,46,3.0,91457.54,73.7,1.61
+2025-01-05,HR,Singapore,IC1-Associate,38,2.69,144903.43,76.4,2.93
+2025-01-05,HR,Berlin,IC3-Senior,32,3.12,92304.09,88.6,3.93
+2025-01-12,Engineering,San Francisco,IC4-Staff,39,2.49,91961.44,87.4,3.01
+2025-01-12,Engineering,New York,M1-Manager,37,1.64,110453.77,86.2,2.2
+2025-01-12,Engineering,London,IC2-Mid,42,3.08,124442.96,78.4,5.75
+2025-01-12,Engineering,Austin,IC2-Mid,57,2.9,116256.44,78.6,2.89
+2025-01-12,Engineering,Singapore,IC2-Mid,36,3.18,118677.09,80.3,3.58
+2025-01-12,Engineering,Berlin,M1-Manager,48,1.74,102958.45,75.3,2.51
+2025-01-12,Sales,San Francisco,IC4-Staff,47,2.15,103791.41,75.5,3.03
+2025-01-12,Sales,New York,IC4-Staff,51,2.45,96226.69,80.2,4.26
+2025-01-12,Sales,London,M2-Director,49,2.1,102217.7,71.9,1.77
+2025-01-12,Sales,Austin,IC3-Senior,54,3.01,87386.83,83.7,3.49
+2025-01-12,Sales,Singapore,IC4-Staff,55,2.69,115378.07,76.4,3.75
+2025-01-12,Sales,Berlin,IC1-Associate,43,2.23,149421.72,69.0,4.05
+2025-01-12,Customer Support,San Francisco,M2-Director,33,2.55,119847.72,80.0,4.65
+2025-01-12,Customer Support,New York,M1-Manager,45,2.64,119409.4,75.6,2.79
+2025-01-12,Customer Support,London,IC4-Staff,48,1.45,88688.38,77.1,3.43
+2025-01-12,Customer Support,Austin,IC4-Staff,53,2.5,78332.63,76.5,4.46
+2025-01-12,Customer Support,Singapore,IC4-Staff,57,3.0,123489.56,80.7,3.72
+2025-01-12,Customer Support,Berlin,M2-Director,54,2.26,113042.32,81.5,3.52
+2025-01-12,Marketing,San Francisco,M1-Manager,55,2.34,109845.76,79.9,3.24
+2025-01-12,Marketing,New York,M2-Director,44,2.74,123525.29,89.4,3.24
+2025-01-12,Marketing,London,M1-Manager,37,1.97,142464.94,79.0,3.49
+2025-01-12,Marketing,Austin,IC2-Mid,43,2.18,99885.01,67.4,2.72
+2025-01-12,Marketing,Singapore,M1-Manager,38,3.54,90918.79,69.7,2.94
+2025-01-12,Marketing,Berlin,IC2-Mid,33,2.59,112789.8,81.9,3.72
+2025-01-12,Operations,San Francisco,IC3-Senior,54,2.43,106554.84,84.8,1.83
+2025-01-12,Operations,New York,IC3-Senior,54,2.64,118936.3,86.2,2.81
+2025-01-12,Operations,London,IC1-Associate,57,1.68,120624.25,70.0,2.95
+2025-01-12,Operations,Austin,IC1-Associate,49,3.04,52392.95,75.4,2.99
+2025-01-12,Operations,Singapore,IC2-Mid,61,2.89,146596.14,82.9,3.0
+2025-01-12,Operations,Berlin,IC3-Senior,55,3.26,118656.04,86.1,3.24
+2025-01-12,Product,San Francisco,IC2-Mid,47,2.34,106831.66,87.8,1.58
+2025-01-12,Product,New York,M1-Manager,49,2.48,84339.12,79.9,3.16
+2025-01-12,Product,London,IC3-Senior,35,1.2,104159.39,82.6,1.74
+2025-01-12,Product,Austin,IC3-Senior,61,1.86,121598.77,75.4,2.45
+2025-01-12,Product,Singapore,IC2-Mid,45,2.87,134326.28,79.8,3.26
+2025-01-12,Product,Berlin,IC2-Mid,40,2.39,100321.02,70.8,2.75
+2025-01-12,Finance,San Francisco,M2-Director,42,3.68,100263.81,76.6,2.7
+2025-01-12,Finance,New York,IC4-Staff,43,2.03,108176.96,78.9,2.35
+2025-01-12,Finance,London,M1-Manager,40,2.12,92895.03,76.4,5.1
+2025-01-12,Finance,Austin,IC4-Staff,27,2.89,122203.94,80.4,2.57
+2025-01-12,Finance,Singapore,IC2-Mid,43,2.05,97800.27,79.0,1.91
+2025-01-12,Finance,Berlin,IC1-Associate,33,1.97,136412.8,78.4,3.38
+2025-01-12,HR,San Francisco,M2-Director,46,1.98,131390.15,81.3,4.04
+2025-01-12,HR,New York,IC1-Associate,44,2.39,142416.23,72.8,3.63
+2025-01-12,HR,London,IC1-Associate,50,1.25,109791.2,81.0,2.07
+2025-01-12,HR,Austin,IC4-Staff,44,2.12,108494.39,75.7,3.01
+2025-01-12,HR,Singapore,IC3-Senior,51,2.84,117613.67,77.6,4.64
+2025-01-12,HR,Berlin,M2-Director,51,2.84,84950.7,74.7,3.63
+2025-01-19,Engineering,San Francisco,M2-Director,37,3.09,126495.23,86.5,3.37
+2025-01-19,Engineering,New York,IC1-Associate,51,1.53,94495.45,91.9,3.41
+2025-01-19,Engineering,London,IC4-Staff,39,2.88,76501.59,87.9,4.8
+2025-01-19,Engineering,Austin,M2-Director,36,3.36,130042.46,80.6,2.3
+2025-01-19,Engineering,Singapore,M1-Manager,30,2.79,96412.68,78.4,3.34
+2025-01-19,Engineering,Berlin,M1-Manager,57,2.24,121076.85,75.6,2.87
+2025-01-19,Sales,San Francisco,IC2-Mid,40,2.99,102746.6,79.2,3.79
+2025-01-19,Sales,New York,M2-Director,31,1.16,110497.79,74.6,4.24
+2025-01-19,Sales,London,M1-Manager,26,2.91,142194.46,83.0,1.71
+2025-01-19,Sales,Austin,IC4-Staff,26,3.19,119241.06,70.6,3.82
+2025-01-19,Sales,Singapore,IC1-Associate,49,2.21,137451.89,78.4,3.97
+2025-01-19,Sales,Berlin,IC2-Mid,48,2.24,132461.4,76.2,3.78
+2025-01-19,Customer Support,San Francisco,M1-Manager,48,2.34,121005.92,75.4,4.03
+2025-01-19,Customer Support,New York,IC3-Senior,37,2.22,96664.85,85.1,5.58
+2025-01-19,Customer Support,London,IC2-Mid,56,1.86,133154.85,79.4,1.89
+2025-01-19,Customer Support,Austin,IC3-Senior,40,2.14,93799.86,69.6,2.66
+2025-01-19,Customer Support,Singapore,IC4-Staff,47,2.57,94741.2,78.6,5.16
+2025-01-19,Customer Support,Berlin,IC3-Senior,50,2.39,136689.47,74.9,3.74
+2025-01-19,Marketing,San Francisco,M1-Manager,46,4.02,116801.72,81.9,3.13
+2025-01-19,Marketing,New York,IC2-Mid,49,2.12,140148.96,81.1,2.65
+2025-01-19,Marketing,London,IC2-Mid,36,1.73,85212.58,78.4,3.86
+2025-01-19,Marketing,Austin,IC4-Staff,34,1.58,117904.36,80.4,3.82
+2025-01-19,Marketing,Singapore,IC4-Staff,51,1.89,112170.15,68.8,4.06
+2025-01-19,Marketing,Berlin,IC1-Associate,49,3.18,155979.73,78.5,1.9
+2025-01-19,Operations,San Francisco,M2-Director,36,2.16,94876.99,68.4,2.11
+2025-01-19,Operations,New York,IC4-Staff,54,0.9,161258.68,84.9,2.31
+2025-01-19,Operations,London,IC3-Senior,40,2.16,50772.3,79.2,2.91
+2025-01-19,Operations,Austin,IC4-Staff,43,3.55,89664.79,72.4,2.58
+2025-01-19,Operations,Singapore,IC1-Associate,54,4.04,75862.18,74.9,2.58
+2025-01-19,Operations,Berlin,IC2-Mid,46,2.93,105558.64,71.9,3.59
+2025-01-19,Product,San Francisco,IC2-Mid,54,2.14,122565.84,72.7,2.98
+2025-01-19,Product,New York,IC2-Mid,42,2.01,84943.97,71.8,4.61
+2025-01-19,Product,London,M1-Manager,42,2.12,113257.13,83.1,2.82
+2025-01-19,Product,Austin,IC2-Mid,55,2.74,118798.31,75.3,3.12
+2025-01-19,Product,Singapore,IC1-Associate,47,3.87,115693.93,77.4,2.13
+2025-01-19,Product,Berlin,IC3-Senior,22,2.25,153794.31,74.9,3.74
+2025-01-19,Finance,San Francisco,M1-Manager,36,3.07,110996.9,81.1,3.44
+2025-01-19,Finance,New York,M2-Director,49,2.09,114851.74,77.3,4.29
+2025-01-19,Finance,London,M1-Manager,41,1.9,124484.87,85.9,4.5
+2025-01-19,Finance,Austin,IC2-Mid,49,3.37,109181.22,75.9,4.11
+2025-01-19,Finance,Singapore,IC3-Senior,49,2.13,101936.61,74.2,3.35
+2025-01-19,Finance,Berlin,IC2-Mid,33,1.45,139143.61,80.9,2.49
+2025-01-19,HR,San Francisco,IC3-Senior,49,2.68,112870.18,72.4,3.16
+2025-01-19,HR,New York,IC2-Mid,31,2.44,104638.52,90.8,3.3
+2025-01-19,HR,London,IC2-Mid,41,3.49,156372.44,71.4,2.19
+2025-01-19,HR,Austin,IC3-Senior,39,2.1,100654.87,76.5,3.14
+2025-01-19,HR,Singapore,M1-Manager,44,2.73,126172.1,71.3,3.34
+2025-01-19,HR,Berlin,IC2-Mid,49,2.51,129486.46,78.2,3.94
+2025-01-26,Engineering,San Francisco,IC2-Mid,32,2.77,113957.71,78.7,3.85
+2025-01-26,Engineering,New York,IC1-Associate,43,0.87,139423.42,84.8,2.91
+2025-01-26,Engineering,London,IC2-Mid,34,2.55,140452.73,91.7,2.52
+2025-01-26,Engineering,Austin,M1-Manager,53,1.34,110301.51,80.1,3.31
+2025-01-26,Engineering,Singapore,IC3-Senior,54,2.37,130049.1,81.6,1.08
+2025-01-26,Engineering,Berlin,M1-Manager,52,3.35,116481.11,75.4,4.05
+2025-01-26,Sales,San Francisco,IC4-Staff,65,2.34,103293.32,70.4,2.66
+2025-01-26,Sales,New York,M2-Director,39,2.02,99292.65,76.5,3.83
+2025-01-26,Sales,London,IC4-Staff,48,2.35,128392.69,81.2,1.93
+2025-01-26,Sales,Austin,M1-Manager,37,2.9,132717.8,77.8,3.03
+2025-01-26,Sales,Singapore,IC1-Associate,43,2.42,103130.56,81.0,2.82
+2025-01-26,Sales,Berlin,IC1-Associate,40,2.4,124996.78,75.5,2.7
+2025-01-26,Customer Support,San Francisco,IC1-Associate,65,1.4,123453.17,78.9,1.84
+2025-01-26,Customer Support,New York,IC1-Associate,70,2.08,121185.13,74.5,2.9
+2025-01-26,Customer Support,London,IC1-Associate,57,2.67,147325.8,76.1,2.71
+2025-01-26,Customer Support,Austin,IC3-Senior,47,1.75,99689.98,69.3,3.28
+2025-01-26,Customer Support,Singapore,M2-Director,44,2.49,147302.04,79.1,2.79
+2025-01-26,Customer Support,Berlin,IC3-Senior,54,1.82,136701.31,84.6,3.47
+2025-01-26,Marketing,San Francisco,IC1-Associate,48,2.12,126483.52,78.3,4.08
+2025-01-26,Marketing,New York,M1-Manager,41,2.86,93959.87,73.4,2.61
+2025-01-26,Marketing,London,M1-Manager,42,2.75,99995.94,80.5,2.65
+2025-01-26,Marketing,Austin,IC1-Associate,48,2.14,100922.28,76.8,2.71
+2025-01-26,Marketing,Singapore,M2-Director,34,2.32,128432.56,88.8,3.72
+2025-01-26,Marketing,Berlin,M2-Director,46,3.16,114164.43,76.2,2.94
+2025-01-26,Operations,San Francisco,M2-Director,51,2.95,127181.86,74.9,3.61
+2025-01-26,Operations,New York,M1-Manager,52,2.73,136510.84,75.2,1.98
+2025-01-26,Operations,London,IC2-Mid,39,2.16,111965.99,83.6,2.84
+2025-01-26,Operations,Austin,M1-Manager,50,3.2,112966.15,78.4,2.22
+2025-01-26,Operations,Singapore,IC1-Associate,36,1.73,127750.42,75.2,3.4
+2025-01-26,Operations,Berlin,IC3-Senior,51,3.43,122755.12,76.3,3.39
+2025-01-26,Product,San Francisco,IC4-Staff,52,2.54,111281.79,74.7,2.63
+2025-01-26,Product,New York,IC1-Associate,43,2.59,94062.03,71.9,5.25
+2025-01-26,Product,London,IC4-Staff,47,2.89,123221.56,80.2,3.66
+2025-01-26,Product,Austin,IC1-Associate,55,2.47,137485.63,72.8,3.59
+2025-01-26,Product,Singapore,M1-Manager,33,2.77,125910.97,79.6,2.01
+2025-01-26,Product,Berlin,M1-Manager,37,1.37,130131.58,75.8,2.68
+2025-01-26,Finance,San Francisco,IC1-Associate,43,3.11,102613.13,75.5,5.18
+2025-01-26,Finance,New York,M2-Director,36,2.53,131917.27,76.4,3.88
+2025-01-26,Finance,London,IC1-Associate,57,2.63,130792.52,78.1,3.02
+2025-01-26,Finance,Austin,IC2-Mid,28,1.91,106520.05,81.2,4.06
+2025-01-26,Finance,Singapore,IC1-Associate,45,3.39,110067.43,82.4,3.37
+2025-01-26,Finance,Berlin,M2-Director,57,2.88,127568.02,82.5,3.51
+2025-01-26,HR,San Francisco,IC3-Senior,42,3.31,158441.09,87.9,3.72
+2025-01-26,HR,New York,IC1-Associate,48,3.15,145341.67,86.7,2.83
+2025-01-26,HR,London,IC2-Mid,42,2.49,122634.99,75.1,3.62
+2025-01-26,HR,Austin,IC3-Senior,62,2.49,124107.84,73.8,1.6
+2025-01-26,HR,Singapore,IC4-Staff,40,3.06,118808.71,77.4,4.07
+2025-01-26,HR,Berlin,IC2-Mid,51,3.45,139919.96,78.1,3.81
+2025-02-02,Engineering,San Francisco,IC2-Mid,46,3.15,133847.77,75.7,4.55
+2025-02-02,Engineering,New York,IC2-Mid,44,1.57,125796.11,71.6,4.11
+2025-02-02,Engineering,London,M1-Manager,56,2.69,128986.29,74.6,3.52
+2025-02-02,Engineering,Austin,IC1-Associate,42,1.51,98910.38,86.1,3.09
+2025-02-02,Engineering,Singapore,M1-Manager,39,3.13,119959.45,83.4,2.14
+2025-02-02,Engineering,Berlin,IC3-Senior,42,2.34,134938.97,70.2,2.63
+2025-02-02,Sales,San Francisco,IC3-Senior,29,2.4,103160.09,75.1,4.76
+2025-02-02,Sales,New York,IC4-Staff,35,3.22,91662.97,69.8,1.99
+2025-02-02,Sales,London,M1-Manager,54,2.32,113388.59,84.5,3.49
+2025-02-02,Sales,Austin,IC3-Senior,48,2.21,109210.78,78.7,2.84
+2025-02-02,Sales,Singapore,IC3-Senior,50,3.05,113547.1,68.0,3.26
+2025-02-02,Sales,Berlin,IC2-Mid,47,1.88,152590.74,83.5,3.09
+2025-02-02,Customer Support,San Francisco,M2-Director,39,2.22,124097.69,73.9,3.68
+2025-02-02,Customer Support,New York,M2-Director,40,2.62,129493.47,77.7,2.22
+2025-02-02,Customer Support,London,IC3-Senior,64,3.16,113962.86,83.3,3.36
+2025-02-02,Customer Support,Austin,M2-Director,54,2.24,130105.33,73.0,4.65
+2025-02-02,Customer Support,Singapore,M2-Director,51,2.68,107830.22,75.5,2.99
+2025-02-02,Customer Support,Berlin,IC1-Associate,38,2.92,136410.47,81.0,2.22
+2025-02-02,Marketing,San Francisco,IC1-Associate,51,1.7,107954.34,73.5,2.02
+2025-02-02,Marketing,New York,IC1-Associate,54,3.43,91995.59,73.6,1.89
+2025-02-02,Marketing,London,M2-Director,53,1.79,155430.32,77.8,2.96
+2025-02-02,Marketing,Austin,IC2-Mid,47,2.31,102613.29,82.9,5.0
+2025-02-02,Marketing,Singapore,IC4-Staff,41,3.37,114641.16,70.3,2.27
+2025-02-02,Marketing,Berlin,IC4-Staff,30,2.7,71503.87,86.1,2.77
+2025-02-02,Operations,San Francisco,M1-Manager,51,2.05,120061.45,77.7,3.28
+2025-02-02,Operations,New York,IC4-Staff,42,2.62,123310.54,80.6,5.08
+2025-02-02,Operations,London,IC1-Associate,29,2.14,122143.1,81.9,4.41
+2025-02-02,Operations,Austin,IC1-Associate,32,2.74,95944.49,79.6,3.25
+2025-02-02,Operations,Singapore,M1-Manager,32,2.63,122928.55,80.8,3.18
+2025-02-02,Operations,Berlin,M2-Director,55,2.73,123495.3,84.0,3.31
+2025-02-02,Product,San Francisco,IC1-Associate,55,2.94,122596.24,80.4,2.35
+2025-02-02,Product,New York,IC4-Staff,42,2.16,128448.97,82.0,2.64
+2025-02-02,Product,London,IC1-Associate,53,1.81,125256.29,80.2,2.75
+2025-02-02,Product,Austin,M1-Manager,42,2.42,126407.98,77.1,3.53
+2025-02-02,Product,Singapore,M2-Director,54,3.38,144221.14,79.3,1.97
+2025-02-02,Product,Berlin,IC2-Mid,31,3.05,107173.14,86.4,2.65
+2025-02-02,Finance,San Francisco,M1-Manager,58,2.27,105035.41,86.1,3.66
+2025-02-02,Finance,New York,IC1-Associate,43,2.38,95185.97,75.1,2.63
+2025-02-02,Finance,London,IC3-Senior,48,2.88,132377.34,75.0,3.36
+2025-02-02,Finance,Austin,IC4-Staff,32,1.77,79112.76,84.1,3.5
+2025-02-02,Finance,Singapore,IC4-Staff,50,2.56,150037.77,86.6,2.99
+2025-02-02,Finance,Berlin,IC2-Mid,39,2.81,116988.83,74.6,3.5
+2025-02-02,HR,San Francisco,M2-Director,44,3.15,98729.66,84.2,2.61
+2025-02-02,HR,New York,IC1-Associate,49,2.97,105389.64,78.4,2.07
+2025-02-02,HR,London,IC4-Staff,39,2.68,119920.77,74.6,3.85
+2025-02-02,HR,Austin,M1-Manager,53,1.7,127745.96,74.1,3.97
+2025-02-02,HR,Singapore,IC2-Mid,35,2.62,102063.73,78.2,4.25
+2025-02-02,HR,Berlin,M1-Manager,44,2.5,130053.83,79.3,3.23
+2025-02-09,Engineering,San Francisco,IC2-Mid,45,3.39,70566.23,66.5,3.91
+2025-02-09,Engineering,New York,IC1-Associate,53,3.1,119813.06,74.7,3.46
+2025-02-09,Engineering,London,M1-Manager,41,2.57,105211.97,80.7,3.27
+2025-02-09,Engineering,Austin,IC3-Senior,50,2.82,159367.8,74.7,2.96
+2025-02-09,Engineering,Singapore,IC4-Staff,38,2.44,121327.86,61.1,3.96
+2025-02-09,Engineering,Berlin,IC2-Mid,44,1.31,113731.02,78.3,3.59
+2025-02-09,Sales,San Francisco,IC2-Mid,50,3.19,106738.78,84.3,1.87
+2025-02-09,Sales,New York,IC1-Associate,28,2.25,102604.0,75.2,3.15
+2025-02-09,Sales,London,IC1-Associate,39,3.41,130380.29,73.4,3.64
+2025-02-09,Sales,Austin,M2-Director,55,1.88,101810.43,80.5,2.64
+2025-02-09,Sales,Singapore,IC4-Staff,36,2.2,111238.71,82.9,3.1
+2025-02-09,Sales,Berlin,IC2-Mid,35,2.44,91294.8,80.1,3.14
+2025-02-09,Customer Support,San Francisco,M1-Manager,43,1.9,96163.4,84.8,3.51
+2025-02-09,Customer Support,New York,IC4-Staff,49,3.74,97106.09,68.2,3.18
+2025-02-09,Customer Support,London,M1-Manager,39,2.77,106752.1,71.8,3.79
+2025-02-09,Customer Support,Austin,IC1-Associate,54,3.12,141481.07,74.7,3.03
+2025-02-09,Customer Support,Singapore,IC3-Senior,47,2.49,111998.97,74.4,3.85
+2025-02-09,Customer Support,Berlin,M1-Manager,55,3.09,87830.41,77.4,2.98
+2025-02-09,Marketing,San Francisco,IC3-Senior,48,2.28,102801.12,78.7,4.81
+2025-02-09,Marketing,New York,IC3-Senior,46,1.7,100555.13,73.1,4.24
+2025-02-09,Marketing,London,IC1-Associate,36,3.1,124659.75,81.6,4.15
+2025-02-09,Marketing,Austin,IC2-Mid,38,2.84,111195.95,77.9,3.11
+2025-02-09,Marketing,Singapore,IC4-Staff,38,3.0,108330.89,77.7,2.39
+2025-02-09,Marketing,Berlin,M2-Director,44,2.03,119139.18,76.8,2.47
+2025-02-09,Operations,San Francisco,IC3-Senior,61,2.68,95142.25,76.6,3.02
+2025-02-09,Operations,New York,IC2-Mid,51,2.83,93175.77,76.3,4.11
+2025-02-09,Operations,London,M2-Director,35,2.41,125899.72,79.2,2.17
+2025-02-09,Operations,Austin,IC3-Senior,42,2.85,122194.38,75.4,2.68
+2025-02-09,Operations,Singapore,M2-Director,41,2.9,98077.32,75.5,4.38
+2025-02-09,Operations,Berlin,M1-Manager,56,3.04,147604.75,79.6,3.7
+2025-02-09,Product,San Francisco,IC2-Mid,43,2.15,92962.63,73.7,3.03
+2025-02-09,Product,New York,M1-Manager,49,3.07,128665.8,85.7,3.67
+2025-02-09,Product,London,IC4-Staff,58,3.0,162251.55,79.2,3.38
+2025-02-09,Product,Austin,M1-Manager,51,2.28,99025.14,81.6,2.85
+2025-02-09,Product,Singapore,M2-Director,42,2.23,98051.39,81.1,4.17
+2025-02-09,Product,Berlin,IC4-Staff,42,2.16,145259.66,83.8,2.6
+2025-02-09,Finance,San Francisco,IC4-Staff,52,2.37,110394.14,78.4,4.63
+2025-02-09,Finance,New York,IC4-Staff,42,2.86,152107.06,83.1,4.17
+2025-02-09,Finance,London,IC3-Senior,44,3.07,138623.36,74.8,4.09
+2025-02-09,Finance,Austin,IC2-Mid,50,1.38,94449.6,74.4,3.05
+2025-02-09,Finance,Singapore,IC1-Associate,40,1.96,111917.51,81.5,3.69
+2025-02-09,Finance,Berlin,M2-Director,53,2.66,148512.5,76.3,2.34
+2025-02-09,HR,San Francisco,IC3-Senior,47,3.51,90219.55,86.4,3.77
+2025-02-09,HR,New York,IC3-Senior,50,1.54,120817.02,75.7,3.08
+2025-02-09,HR,London,IC2-Mid,39,2.59,74974.98,74.0,1.03
+2025-02-09,HR,Austin,IC1-Associate,47,2.4,118702.35,63.6,2.9
+2025-02-09,HR,Singapore,IC4-Staff,41,2.31,108770.48,77.1,3.78
+2025-02-09,HR,Berlin,IC1-Associate,44,1.34,97826.89,72.7,2.44
+2025-02-16,Engineering,San Francisco,IC2-Mid,40,1.44,114747.65,72.3,3.28
+2025-02-16,Engineering,New York,M2-Director,36,2.27,121323.2,83.8,4.55
+2025-02-16,Engineering,London,IC4-Staff,51,2.78,92422.79,71.2,3.43
+2025-02-16,Engineering,Austin,IC2-Mid,44,2.17,100448.44,75.9,2.95
+2025-02-16,Engineering,Singapore,IC3-Senior,47,2.2,104371.39,78.2,3.5
+2025-02-16,Engineering,Berlin,M2-Director,33,2.55,118175.95,73.9,2.91
+2025-02-16,Sales,San Francisco,IC3-Senior,43,2.38,135705.23,73.6,3.52
+2025-02-16,Sales,New York,IC4-Staff,43,2.06,126144.78,78.1,4.85
+2025-02-16,Sales,London,IC2-Mid,45,3.01,114607.5,85.3,3.19
+2025-02-16,Sales,Austin,M1-Manager,42,2.56,135914.81,70.8,2.59
+2025-02-16,Sales,Singapore,M2-Director,37,3.6,123270.95,79.9,4.47
+2025-02-16,Sales,Berlin,IC4-Staff,61,2.22,91907.09,84.3,2.46
+2025-02-16,Customer Support,San Francisco,IC4-Staff,27,2.18,96325.84,73.6,3.1
+2025-02-16,Customer Support,New York,M2-Director,40,2.82,121526.27,83.9,4.29
+2025-02-16,Customer Support,London,IC3-Senior,35,3.0,117118.98,81.3,3.99
+2025-02-16,Customer Support,Austin,IC4-Staff,41,2.31,160786.02,77.5,3.35
+2025-02-16,Customer Support,Singapore,M1-Manager,40,2.49,131997.21,83.7,2.51
+2025-02-16,Customer Support,Berlin,IC3-Senior,47,2.35,135677.2,72.1,4.35
+2025-02-16,Marketing,San Francisco,M2-Director,40,2.79,119987.13,71.7,2.78
+2025-02-16,Marketing,New York,IC4-Staff,43,2.43,96882.23,84.6,4.11
+2025-02-16,Marketing,London,IC4-Staff,36,1.53,99883.15,78.6,3.31
+2025-02-16,Marketing,Austin,IC2-Mid,46,1.28,104824.87,74.7,2.87
+2025-02-16,Marketing,Singapore,IC3-Senior,35,2.76,151267.81,80.6,4.47
+2025-02-16,Marketing,Berlin,IC4-Staff,48,3.21,98733.37,72.1,3.46
+2025-02-16,Operations,San Francisco,M1-Manager,37,2.14,124068.73,76.1,3.89
+2025-02-16,Operations,New York,IC3-Senior,35,2.79,124250.34,79.8,3.34
+2025-02-16,Operations,London,M2-Director,51,2.16,121231.2,70.9,1.95
+2025-02-16,Operations,Austin,IC1-Associate,34,1.93,119552.86,77.1,3.15
+2025-02-16,Operations,Singapore,IC4-Staff,41,3.1,113786.96,82.4,3.63
+2025-02-16,Operations,Berlin,IC1-Associate,61,3.6,105352.66,79.8,3.85
+2025-02-16,Product,San Francisco,IC4-Staff,29,3.13,109667.19,81.9,1.91
+2025-02-16,Product,New York,M2-Director,38,3.85,108572.16,80.8,3.84
+2025-02-16,Product,London,IC1-Associate,45,3.09,135913.81,79.2,2.46
+2025-02-16,Product,Austin,M2-Director,49,2.22,94832.39,73.1,3.11
+2025-02-16,Product,Singapore,IC4-Staff,57,2.55,138668.46,81.7,4.51
+2025-02-16,Product,Berlin,IC1-Associate,32,1.45,128091.76,77.0,2.66
+2025-02-16,Finance,San Francisco,IC2-Mid,63,2.24,116926.76,77.1,3.12
+2025-02-16,Finance,New York,M1-Manager,27,1.58,111484.64,65.5,3.44
+2025-02-16,Finance,London,M2-Director,33,2.55,113504.1,81.8,2.0
+2025-02-16,Finance,Austin,M1-Manager,33,1.42,120362.58,76.5,3.43
+2025-02-16,Finance,Singapore,IC1-Associate,48,2.03,164155.61,77.1,3.5
+2025-02-16,Finance,Berlin,M1-Manager,43,3.1,117378.46,79.0,4.26
+2025-02-16,HR,San Francisco,IC3-Senior,42,2.28,117036.42,77.6,3.81
+2025-02-16,HR,New York,IC1-Associate,36,3.42,129964.29,81.9,3.05
+2025-02-16,HR,London,IC4-Staff,41,2.34,117642.27,82.5,4.49
+2025-02-16,HR,Austin,IC1-Associate,37,2.21,99013.34,85.6,2.95
+2025-02-16,HR,Singapore,IC3-Senior,31,3.3,98868.59,85.5,2.78
+2025-02-16,HR,Berlin,IC1-Associate,55,2.64,113225.41,81.5,3.22
+2025-02-23,Engineering,San Francisco,M2-Director,42,3.27,109287.78,81.8,4.27
+2025-02-23,Engineering,New York,IC2-Mid,45,2.21,84452.25,91.4,2.68
+2025-02-23,Engineering,London,IC1-Associate,43,2.06,88269.6,76.3,4.04
+2025-02-23,Engineering,Austin,IC3-Senior,43,2.35,133010.48,85.0,2.66
+2025-02-23,Engineering,Singapore,IC4-Staff,62,2.34,90186.47,79.2,2.91
+2025-02-23,Engineering,Berlin,IC4-Staff,44,1.77,97237.85,76.7,4.39
+2025-02-23,Sales,San Francisco,IC1-Associate,43,2.76,122750.31,79.7,1.32
+2025-02-23,Sales,New York,IC4-Staff,55,2.14,132367.33,71.8,4.49
+2025-02-23,Sales,London,IC3-Senior,37,2.43,117553.5,78.5,2.31
+2025-02-23,Sales,Austin,M1-Manager,43,2.29,95233.38,69.0,2.91
+2025-02-23,Sales,Singapore,IC1-Associate,41,2.58,134276.11,66.6,2.82
+2025-02-23,Sales,Berlin,IC4-Staff,44,1.82,113068.56,70.1,3.56
+2025-02-23,Customer Support,San Francisco,IC3-Senior,44,2.89,122150.4,78.6,2.19
+2025-02-23,Customer Support,New York,IC4-Staff,41,1.98,95858.76,71.7,2.5
+2025-02-23,Customer Support,London,M1-Manager,46,2.19,137683.73,72.1,3.43
+2025-02-23,Customer Support,Austin,M1-Manager,49,2.8,134817.27,71.9,4.77
+2025-02-23,Customer Support,Singapore,IC2-Mid,45,2.65,113476.25,79.4,3.62
+2025-02-23,Customer Support,Berlin,IC1-Associate,36,2.67,119785.95,76.2,4.62
+2025-02-23,Marketing,San Francisco,M2-Director,42,2.63,150422.18,81.3,3.22
+2025-02-23,Marketing,New York,IC3-Senior,42,2.11,83085.42,73.5,4.21
+2025-02-23,Marketing,London,IC3-Senior,27,2.47,171479.47,79.1,4.04
+2025-02-23,Marketing,Austin,IC1-Associate,47,3.33,142315.36,77.5,4.56
+2025-02-23,Marketing,Singapore,M2-Director,33,3.03,132335.6,72.6,2.57
+2025-02-23,Marketing,Berlin,M2-Director,51,2.74,135234.03,74.1,3.96
+2025-02-23,Operations,San Francisco,IC3-Senior,53,3.37,123818.93,73.7,4.17
+2025-02-23,Operations,New York,M1-Manager,46,2.93,105358.96,80.6,3.89
+2025-02-23,Operations,London,IC2-Mid,48,2.37,123747.32,81.4,3.48
+2025-02-23,Operations,Austin,IC3-Senior,38,2.41,112064.79,74.6,2.6
+2025-02-23,Operations,Singapore,IC1-Associate,61,2.73,129122.81,81.4,4.58
+2025-02-23,Operations,Berlin,IC2-Mid,51,2.55,141190.38,77.1,3.2
+2025-02-23,Product,San Francisco,M2-Director,52,1.54,137242.81,76.3,3.54
+2025-02-23,Product,New York,M1-Manager,38,2.65,135705.33,70.6,3.42
+2025-02-23,Product,London,M2-Director,31,2.5,136656.03,79.7,2.52
+2025-02-23,Product,Austin,IC2-Mid,53,2.99,138413.27,88.3,3.05
+2025-02-23,Product,Singapore,M1-Manager,51,3.14,97476.17,80.5,3.58
+2025-02-23,Product,Berlin,IC2-Mid,67,2.31,119073.42,72.4,3.54
+2025-02-23,Finance,San Francisco,IC2-Mid,47,3.07,97945.14,78.1,2.7
+2025-02-23,Finance,New York,IC2-Mid,36,1.87,77678.42,78.9,2.86
+2025-02-23,Finance,London,IC4-Staff,53,2.36,103053.03,82.7,3.07
+2025-02-23,Finance,Austin,IC4-Staff,51,2.17,101514.27,78.4,3.47
+2025-02-23,Finance,Singapore,M2-Director,56,2.55,131671.88,84.2,3.97
+2025-02-23,Finance,Berlin,IC4-Staff,46,1.92,111663.93,78.0,1.81
+2025-02-23,HR,San Francisco,M1-Manager,44,2.33,135010.93,73.8,3.43
+2025-02-23,HR,New York,IC3-Senior,47,1.82,120881.41,81.1,3.44
+2025-02-23,HR,London,IC4-Staff,51,2.44,138523.73,81.8,3.72
+2025-02-23,HR,Austin,M2-Director,41,3.49,99346.06,72.1,4.1
+2025-02-23,HR,Singapore,M1-Manager,46,1.45,112331.99,70.9,2.5
+2025-02-23,HR,Berlin,IC3-Senior,45,2.55,95517.39,78.9,3.83
+2025-03-02,Engineering,San Francisco,IC4-Staff,24,2.49,111561.5,81.9,5.13
+2025-03-02,Engineering,New York,IC1-Associate,42,3.44,113036.05,76.7,2.81
+2025-03-02,Engineering,London,M1-Manager,48,2.29,115353.1,81.0,3.74
+2025-03-02,Engineering,Austin,IC4-Staff,40,1.76,137392.97,81.1,2.54
+2025-03-02,Engineering,Singapore,M2-Director,46,2.37,115915.98,79.2,3.34
+2025-03-02,Engineering,Berlin,IC4-Staff,56,3.94,120617.25,74.9,3.32
+2025-03-02,Sales,San Francisco,IC3-Senior,39,2.38,114258.95,78.3,3.63
+2025-03-02,Sales,New York,M1-Manager,39,1.94,128830.17,72.3,4.36
+2025-03-02,Sales,London,IC4-Staff,48,2.01,135522.68,72.9,4.46
+2025-03-02,Sales,Austin,M2-Director,34,2.54,137377.3,74.5,2.48
+2025-03-02,Sales,Singapore,M1-Manager,36,2.5,112195.21,80.9,3.23
+2025-03-02,Sales,Berlin,M2-Director,31,2.61,116938.51,71.5,3.53
+2025-03-02,Customer Support,San Francisco,IC3-Senior,53,2.0,118273.1,77.8,3.96
+2025-03-02,Customer Support,New York,IC3-Senior,48,2.7,123061.51,78.2,3.5
+2025-03-02,Customer Support,London,M1-Manager,51,2.82,113550.07,75.1,2.8
+2025-03-02,Customer Support,Austin,M2-Director,51,2.79,122665.97,74.8,3.22
+2025-03-02,Customer Support,Singapore,M2-Director,37,2.64,129955.34,83.9,4.31
+2025-03-02,Customer Support,Berlin,IC4-Staff,35,2.83,120508.26,80.3,4.04
+2025-03-02,Marketing,San Francisco,M1-Manager,34,2.22,125881.28,75.7,3.91
+2025-03-02,Marketing,New York,IC1-Associate,47,1.62,104968.95,95.0,2.03
+2025-03-02,Marketing,London,IC2-Mid,39,3.25,119354.85,75.9,1.84
+2025-03-02,Marketing,Austin,IC3-Senior,29,1.93,93198.91,78.1,3.78
+2025-03-02,Marketing,Singapore,IC3-Senior,38,3.51,128429.59,81.5,2.33
+2025-03-02,Marketing,Berlin,IC2-Mid,40,2.6,82160.06,77.1,2.59
+2025-03-02,Operations,San Francisco,M1-Manager,43,1.63,131589.7,85.6,3.1
+2025-03-02,Operations,New York,M2-Director,44,2.55,99519.76,75.8,2.38
+2025-03-02,Operations,London,IC2-Mid,45,2.21,127773.54,76.2,4.21
+2025-03-02,Operations,Austin,IC1-Associate,52,3.29,103246.76,78.3,4.17
+2025-03-02,Operations,Singapore,IC1-Associate,30,2.71,120753.73,77.6,2.8
+2025-03-02,Operations,Berlin,M2-Director,41,1.99,103303.21,84.8,3.31
+2025-03-02,Product,San Francisco,IC1-Associate,44,2.99,111037.77,73.2,2.72
+2025-03-02,Product,New York,IC1-Associate,55,1.78,110468.85,72.7,4.11
+2025-03-02,Product,London,M2-Director,38,2.92,98376.54,73.9,2.91
+2025-03-02,Product,Austin,IC2-Mid,38,2.02,146300.19,78.4,3.98
+2025-03-02,Product,Singapore,IC1-Associate,31,2.79,117395.69,89.5,2.94
+2025-03-02,Product,Berlin,IC3-Senior,43,3.08,118096.28,81.6,2.35
+2025-03-02,Finance,San Francisco,IC1-Associate,49,2.31,111702.46,82.4,3.63
+2025-03-02,Finance,New York,IC4-Staff,59,2.22,107479.96,76.2,3.95
+2025-03-02,Finance,London,IC4-Staff,53,1.07,131876.08,78.4,3.71
+2025-03-02,Finance,Austin,IC4-Staff,44,2.46,127519.68,76.5,3.88
+2025-03-02,Finance,Singapore,M1-Manager,47,2.58,109181.72,79.8,4.06
+2025-03-02,Finance,Berlin,M2-Director,37,2.52,118477.73,87.1,4.26
+2025-03-02,HR,San Francisco,M2-Director,48,1.61,109546.8,83.1,3.66
+2025-03-02,HR,New York,IC3-Senior,53,1.68,134078.85,81.4,3.69
+2025-03-02,HR,London,M1-Manager,34,2.47,127277.07,75.9,2.89
+2025-03-02,HR,Austin,M2-Director,43,1.98,137496.05,84.1,1.99
+2025-03-02,HR,Singapore,IC3-Senior,33,3.24,125750.95,76.8,2.66
+2025-03-02,HR,Berlin,M2-Director,35,2.8,112193.83,78.8,2.76
+2025-03-09,Engineering,San Francisco,IC1-Associate,40,2.75,121121.07,81.3,3.74
+2025-03-09,Engineering,New York,IC2-Mid,43,2.13,91090.33,85.6,3.26
+2025-03-09,Engineering,London,IC3-Senior,34,2.73,121740.65,78.2,2.56
+2025-03-09,Engineering,Austin,IC3-Senior,64,2.54,98406.52,79.0,2.4
+2025-03-09,Engineering,Singapore,IC2-Mid,35,1.97,121208.15,74.9,4.61
+2025-03-09,Engineering,Berlin,IC4-Staff,44,3.06,136418.41,70.1,4.01
+2025-03-09,Sales,San Francisco,M1-Manager,62,2.59,97403.88,85.2,2.04
+2025-03-09,Sales,New York,IC4-Staff,40,2.46,87440.06,80.9,3.61
+2025-03-09,Sales,London,IC3-Senior,51,2.48,141263.93,81.5,2.53
+2025-03-09,Sales,Austin,IC4-Staff,61,2.61,99440.96,79.6,3.09
+2025-03-09,Sales,Singapore,IC2-Mid,47,3.68,120348.29,80.9,0.94
+2025-03-09,Sales,Berlin,IC4-Staff,49,2.36,105946.45,79.5,3.41
+2025-03-09,Customer Support,San Francisco,IC2-Mid,39,3.47,99330.69,76.5,4.56
+2025-03-09,Customer Support,New York,IC4-Staff,52,3.04,88393.35,76.6,2.29
+2025-03-09,Customer Support,London,M2-Director,45,3.02,128368.28,71.8,3.59
+2025-03-09,Customer Support,Austin,IC3-Senior,52,2.3,132596.22,71.1,2.6
+2025-03-09,Customer Support,Singapore,M1-Manager,31,3.16,120127.64,76.7,3.85
+2025-03-09,Customer Support,Berlin,IC4-Staff,50,2.76,132987.93,83.3,3.01
+2025-03-09,Marketing,San Francisco,IC2-Mid,35,3.4,117045.24,85.0,2.88
+2025-03-09,Marketing,New York,IC1-Associate,45,2.49,102573.04,82.0,3.2
+2025-03-09,Marketing,London,M1-Manager,41,2.33,140985.38,82.1,2.19
+2025-03-09,Marketing,Austin,IC4-Staff,42,3.26,130409.07,77.0,3.97
+2025-03-09,Marketing,Singapore,IC2-Mid,36,1.21,94892.67,69.7,3.28
+2025-03-09,Marketing,Berlin,M1-Manager,49,2.35,123673.59,80.7,3.64
+2025-03-09,Operations,San Francisco,IC3-Senior,35,3.14,90459.29,78.0,3.77
+2025-03-09,Operations,New York,IC4-Staff,27,2.63,120548.7,79.4,1.47
+2025-03-09,Operations,London,M1-Manager,48,2.78,125923.31,72.3,4.85
+2025-03-09,Operations,Austin,M1-Manager,37,2.25,101193.68,64.2,4.38
+2025-03-09,Operations,Singapore,IC4-Staff,52,2.07,131532.18,78.3,2.2
+2025-03-09,Operations,Berlin,M2-Director,34,1.89,97486.9,74.7,3.37
+2025-03-09,Product,San Francisco,IC1-Associate,38,2.48,92936.18,85.8,3.56
+2025-03-09,Product,New York,IC1-Associate,46,3.13,139150.61,83.4,1.34
+2025-03-09,Product,London,M1-Manager,40,2.47,95887.94,84.9,4.99
+2025-03-09,Product,Austin,M1-Manager,60,2.89,98883.77,73.0,2.87
+2025-03-09,Product,Singapore,IC3-Senior,50,2.75,134958.19,84.7,3.63
+2025-03-09,Product,Berlin,IC1-Associate,51,3.0,151515.32,72.5,3.97
+2025-03-09,Finance,San Francisco,IC4-Staff,52,2.34,134320.8,86.1,3.02
+2025-03-09,Finance,New York,IC2-Mid,47,2.38,134736.45,71.4,2.7
+2025-03-09,Finance,London,M2-Director,41,1.96,69465.11,77.0,3.17
+2025-03-09,Finance,Austin,IC4-Staff,39,2.78,90913.14,81.3,3.13
+2025-03-09,Finance,Singapore,IC3-Senior,40,1.37,118803.11,75.5,4.16
+2025-03-09,Finance,Berlin,IC4-Staff,49,2.99,117718.22,85.7,2.97
+2025-03-09,HR,San Francisco,IC4-Staff,59,2.37,109908.76,82.8,4.23
+2025-03-09,HR,New York,IC2-Mid,61,3.59,101263.76,69.7,3.4
+2025-03-09,HR,London,IC4-Staff,50,2.75,129203.02,85.1,3.27
+2025-03-09,HR,Austin,M1-Manager,38,2.43,102028.49,78.8,3.62
+2025-03-09,HR,Singapore,M1-Manager,41,2.82,102589.4,87.9,2.19
+2025-03-09,HR,Berlin,M2-Director,48,2.37,96414.57,87.0,3.52
+2025-03-16,Engineering,San Francisco,IC1-Associate,55,3.07,83309.59,71.9,3.51
+2025-03-16,Engineering,New York,M2-Director,51,1.26,96274.75,68.9,3.39
+2025-03-16,Engineering,London,IC1-Associate,39,2.6,130381.45,82.5,2.33
+2025-03-16,Engineering,Austin,IC3-Senior,49,2.32,138353.59,69.2,3.29
+2025-03-16,Engineering,Singapore,M2-Director,32,2.93,126121.75,80.7,4.04
+2025-03-16,Engineering,Berlin,IC1-Associate,51,2.77,126980.51,74.8,3.76
+2025-03-16,Sales,San Francisco,M2-Director,31,2.77,110330.95,77.0,3.95
+2025-03-16,Sales,New York,M1-Manager,53,2.32,92763.81,81.4,4.13
+2025-03-16,Sales,London,IC2-Mid,47,2.95,120690.81,70.3,3.58
+2025-03-16,Sales,Austin,M1-Manager,49,2.88,114762.89,69.2,3.05
+2025-03-16,Sales,Singapore,M2-Director,54,1.78,104243.76,81.2,1.75
+2025-03-16,Sales,Berlin,IC2-Mid,50,1.83,96428.78,78.2,4.09
+2025-03-16,Customer Support,San Francisco,IC3-Senior,61,2.59,133426.77,83.2,3.4
+2025-03-16,Customer Support,New York,IC3-Senior,45,2.17,146837.89,71.2,2.81
+2025-03-16,Customer Support,London,M1-Manager,42,2.19,132249.19,70.5,4.31
+2025-03-16,Customer Support,Austin,IC3-Senior,62,2.57,126259.14,75.0,3.91
+2025-03-16,Customer Support,Singapore,IC1-Associate,41,2.59,134057.39,81.3,3.36
+2025-03-16,Customer Support,Berlin,IC4-Staff,41,1.89,91389.71,80.0,3.89
+2025-03-16,Marketing,San Francisco,IC2-Mid,34,2.88,107995.08,75.3,3.27
+2025-03-16,Marketing,New York,M2-Director,44,2.78,142974.89,80.1,3.88
+2025-03-16,Marketing,London,IC3-Senior,46,2.11,127918.43,79.5,4.15
+2025-03-16,Marketing,Austin,IC4-Staff,46,2.41,83696.82,74.0,4.09
+2025-03-16,Marketing,Singapore,IC3-Senior,35,3.04,126208.8,74.0,3.7
+2025-03-16,Marketing,Berlin,IC1-Associate,39,3.46,104142.26,82.3,2.69
+2025-03-16,Operations,San Francisco,M2-Director,54,2.71,112837.95,75.6,3.05
+2025-03-16,Operations,New York,IC2-Mid,47,3.32,123885.76,76.0,1.72
+2025-03-16,Operations,London,IC3-Senior,43,2.35,87124.87,76.6,2.81
+2025-03-16,Operations,Austin,IC4-Staff,43,2.85,107594.98,71.7,2.81
+2025-03-16,Operations,Singapore,M2-Director,41,2.62,134627.82,73.0,2.12
+2025-03-16,Operations,Berlin,M2-Director,47,1.43,114434.09,80.9,2.52
+2025-03-16,Product,San Francisco,M2-Director,46,1.64,95865.68,78.1,2.27
+2025-03-16,Product,New York,IC2-Mid,51,2.61,112106.73,77.8,4.03
+2025-03-16,Product,London,IC1-Associate,38,2.63,90097.84,72.5,2.77
+2025-03-16,Product,Austin,IC1-Associate,45,2.58,107545.82,84.1,3.84
+2025-03-16,Product,Singapore,IC4-Staff,45,3.61,108663.0,76.0,4.88
+2025-03-16,Product,Berlin,IC4-Staff,49,1.95,132126.09,69.5,2.91
+2025-03-16,Finance,San Francisco,M2-Director,48,2.56,67717.85,84.7,3.23
+2025-03-16,Finance,New York,IC3-Senior,58,3.02,92801.16,67.5,3.73
+2025-03-16,Finance,London,IC2-Mid,46,2.14,95248.55,73.8,2.73
+2025-03-16,Finance,Austin,M2-Director,40,3.72,118842.15,85.8,3.86
+2025-03-16,Finance,Singapore,M1-Manager,42,2.57,97071.1,84.0,2.77
+2025-03-16,Finance,Berlin,M2-Director,38,2.91,105438.14,72.5,3.59
+2025-03-16,HR,San Francisco,IC1-Associate,64,3.31,155809.24,80.6,4.4
+2025-03-16,HR,New York,M1-Manager,58,1.79,139372.34,77.3,3.75
+2025-03-16,HR,London,M1-Manager,44,2.68,98625.7,74.7,2.45
+2025-03-16,HR,Austin,IC2-Mid,43,1.77,143638.35,77.8,3.04
+2025-03-16,HR,Singapore,IC3-Senior,60,2.37,117151.05,81.0,3.06
+2025-03-16,HR,Berlin,IC2-Mid,59,2.63,117542.63,81.8,1.5
+2025-03-23,Engineering,San Francisco,IC4-Staff,41,2.03,120660.08,82.1,2.06
+2025-03-23,Engineering,New York,M2-Director,50,2.95,104743.01,70.4,3.46
+2025-03-23,Engineering,London,M1-Manager,52,2.67,143008.01,82.3,4.73
+2025-03-23,Engineering,Austin,M1-Manager,33,2.4,128371.47,74.8,3.29
+2025-03-23,Engineering,Singapore,M1-Manager,41,1.5,143163.16,75.7,3.0
+2025-03-23,Engineering,Berlin,IC1-Associate,39,2.63,116651.54,77.4,3.4
+2025-03-23,Sales,San Francisco,M2-Director,36,2.6,124829.32,70.5,3.9
+2025-03-23,Sales,New York,IC4-Staff,65,3.12,97671.63,83.0,2.42
+2025-03-23,Sales,London,IC4-Staff,40,3.1,110868.12,76.0,1.89
+2025-03-23,Sales,Austin,M2-Director,41,2.68,106568.19,72.5,2.28
+2025-03-23,Sales,Singapore,IC3-Senior,51,2.17,113105.73,82.3,2.15
+2025-03-23,Sales,Berlin,IC4-Staff,38,2.36,97919.5,82.7,4.6
+2025-03-23,Customer Support,San Francisco,IC3-Senior,38,3.5,133218.46,76.4,2.7
+2025-03-23,Customer Support,New York,M2-Director,41,3.53,99950.07,79.1,1.69
+2025-03-23,Customer Support,London,IC2-Mid,47,3.19,117327.72,74.8,3.53
+2025-03-23,Customer Support,Austin,IC4-Staff,59,1.99,131404.53,84.3,3.28
+2025-03-23,Customer Support,Singapore,IC2-Mid,37,2.06,118392.42,83.4,3.25
+2025-03-23,Customer Support,Berlin,M1-Manager,58,1.95,123400.89,78.9,3.61
+2025-03-23,Marketing,San Francisco,IC2-Mid,57,1.93,125838.13,76.9,3.26
+2025-03-23,Marketing,New York,IC4-Staff,45,2.73,127197.51,70.2,3.83
+2025-03-23,Marketing,London,M2-Director,44,2.58,123111.8,77.3,2.86
+2025-03-23,Marketing,Austin,M2-Director,42,1.57,125017.96,80.4,2.13
+2025-03-23,Marketing,Singapore,M1-Manager,47,2.55,122977.58,80.1,2.81
+2025-03-23,Marketing,Berlin,M2-Director,39,2.46,113771.0,84.2,2.52
+2025-03-23,Operations,San Francisco,IC3-Senior,42,2.07,110217.15,80.2,4.4
+2025-03-23,Operations,New York,IC2-Mid,52,2.59,112443.86,81.2,2.59
+2025-03-23,Operations,London,M1-Manager,35,3.53,109376.41,78.3,3.33
+2025-03-23,Operations,Austin,IC4-Staff,48,2.54,102032.53,85.8,2.59
+2025-03-23,Operations,Singapore,IC3-Senior,53,2.12,139224.46,72.5,3.79
+2025-03-23,Operations,Berlin,M2-Director,30,3.49,113846.9,79.0,3.62
+2025-03-23,Product,San Francisco,M1-Manager,37,2.24,102251.18,69.2,3.57
+2025-03-23,Product,New York,IC2-Mid,40,1.83,105260.49,73.6,3.42
+2025-03-23,Product,London,M1-Manager,46,2.62,127469.01,86.5,2.18
+2025-03-23,Product,Austin,M1-Manager,58,2.42,106203.62,82.7,4.28
+2025-03-23,Product,Singapore,IC2-Mid,41,1.56,110216.04,85.9,3.2
+2025-03-23,Product,Berlin,IC3-Senior,41,2.96,79880.17,68.9,3.31
+2025-03-23,Finance,San Francisco,IC3-Senior,55,1.83,119072.12,83.4,4.0
+2025-03-23,Finance,New York,IC3-Senior,39,2.22,138544.21,84.7,2.26
+2025-03-23,Finance,London,IC2-Mid,56,1.92,110649.43,71.2,1.33
+2025-03-23,Finance,Austin,M2-Director,40,1.38,91723.45,80.3,3.66
+2025-03-23,Finance,Singapore,M2-Director,41,2.89,121112.83,87.9,1.8
+2025-03-23,Finance,Berlin,IC3-Senior,51,2.71,99871.52,72.3,3.02
+2025-03-23,HR,San Francisco,IC2-Mid,50,1.96,105807.49,79.4,3.1
+2025-03-23,HR,New York,M1-Manager,37,3.29,112490.85,68.5,3.79
+2025-03-23,HR,London,M2-Director,39,3.07,133812.42,72.8,3.86
+2025-03-23,HR,Austin,M2-Director,29,3.06,83791.13,72.9,3.47
+2025-03-23,HR,Singapore,IC2-Mid,35,2.28,109439.66,72.7,2.64
+2025-03-23,HR,Berlin,M2-Director,43,2.28,113008.02,82.2,2.48
+2025-03-30,Engineering,San Francisco,IC4-Staff,37,2.98,93003.62,79.8,3.87
+2025-03-30,Engineering,New York,M1-Manager,52,2.12,124030.94,74.7,4.67
+2025-03-30,Engineering,London,IC2-Mid,40,1.81,123206.28,74.5,2.83
+2025-03-30,Engineering,Austin,M1-Manager,30,1.82,143220.33,80.6,2.51
+2025-03-30,Engineering,Singapore,IC4-Staff,34,2.68,92785.82,76.2,2.61
+2025-03-30,Engineering,Berlin,IC2-Mid,38,2.81,132555.62,82.9,3.61
+2025-03-30,Sales,San Francisco,IC4-Staff,46,2.47,108271.93,78.4,2.53
+2025-03-30,Sales,New York,M1-Manager,41,2.93,131073.17,76.0,4.66
+2025-03-30,Sales,London,M2-Director,42,2.51,141959.98,73.2,4.89
+2025-03-30,Sales,Austin,M1-Manager,61,2.26,113982.46,74.7,2.89
+2025-03-30,Sales,Singapore,IC4-Staff,37,3.04,102814.09,82.2,2.58
+2025-03-30,Sales,Berlin,IC2-Mid,48,2.28,96887.15,77.9,2.92
+2025-03-30,Customer Support,San Francisco,IC3-Senior,49,3.14,91307.14,81.5,2.55
+2025-03-30,Customer Support,New York,IC2-Mid,47,2.36,121609.06,73.0,2.21
+2025-03-30,Customer Support,London,M2-Director,36,3.1,149405.54,78.9,2.18
+2025-03-30,Customer Support,Austin,M1-Manager,34,2.69,137607.51,72.2,2.86
+2025-03-30,Customer Support,Singapore,IC4-Staff,31,2.76,134057.11,81.9,3.06
+2025-03-30,Customer Support,Berlin,IC4-Staff,39,2.2,130860.22,82.4,3.76
+2025-03-30,Marketing,San Francisco,M2-Director,44,3.23,119546.62,72.3,3.72
+2025-03-30,Marketing,New York,M2-Director,58,3.66,98716.94,81.3,4.14
+2025-03-30,Marketing,London,IC1-Associate,38,2.27,120168.4,74.7,4.43
+2025-03-30,Marketing,Austin,IC1-Associate,47,3.05,94260.95,78.6,3.34
+2025-03-30,Marketing,Singapore,IC3-Senior,57,2.02,95432.7,66.0,2.85
+2025-03-30,Marketing,Berlin,IC1-Associate,43,1.3,113373.27,76.7,3.98
+2025-03-30,Operations,San Francisco,IC3-Senior,58,2.7,97980.88,83.7,2.28
+2025-03-30,Operations,New York,IC4-Staff,37,2.78,100795.45,70.1,3.48
+2025-03-30,Operations,London,M1-Manager,45,2.45,111915.68,81.7,4.1
+2025-03-30,Operations,Austin,IC3-Senior,29,1.91,108493.67,77.7,3.53
+2025-03-30,Operations,Singapore,M2-Director,52,2.49,101429.56,80.3,4.01
+2025-03-30,Operations,Berlin,IC3-Senior,48,2.95,113663.56,78.2,3.07
+2025-03-30,Product,San Francisco,IC3-Senior,36,3.45,130025.52,70.3,3.93
+2025-03-30,Product,New York,M1-Manager,49,2.4,133192.64,80.3,3.8
+2025-03-30,Product,London,IC3-Senior,36,2.33,137140.01,86.1,2.43
+2025-03-30,Product,Austin,IC3-Senior,57,3.13,129726.29,74.7,1.51
+2025-03-30,Product,Singapore,M2-Director,44,1.75,121088.54,75.5,3.05
+2025-03-30,Product,Berlin,IC1-Associate,45,3.14,97396.36,77.3,3.2
+2025-03-30,Finance,San Francisco,IC1-Associate,30,2.18,90601.94,87.8,2.63
+2025-03-30,Finance,New York,M1-Manager,46,2.17,118105.48,90.2,3.61
+2025-03-30,Finance,London,IC4-Staff,38,3.4,105935.98,78.4,3.04
+2025-03-30,Finance,Austin,M1-Manager,52,3.12,153971.01,79.1,4.15
+2025-03-30,Finance,Singapore,IC4-Staff,38,1.85,96497.14,79.7,4.79
+2025-03-30,Finance,Berlin,IC4-Staff,47,1.81,101126.73,76.9,2.85
+2025-03-30,HR,San Francisco,M2-Director,48,1.64,157509.01,68.1,2.94
+2025-03-30,HR,New York,M1-Manager,45,2.84,155886.1,80.5,2.88
+2025-03-30,HR,London,IC3-Senior,49,3.26,96686.71,69.9,2.41
+2025-03-30,HR,Austin,IC1-Associate,48,2.78,162403.68,78.9,3.63
+2025-03-30,HR,Singapore,M1-Manager,48,2.72,106193.69,83.8,1.96
+2025-03-30,HR,Berlin,IC3-Senior,33,2.41,150847.96,75.2,2.53
+2025-04-06,Engineering,San Francisco,IC3-Senior,43,2.24,90600.47,79.1,3.49
+2025-04-06,Engineering,New York,M2-Director,48,2.16,120865.14,83.7,4.17
+2025-04-06,Engineering,London,IC1-Associate,25,2.36,87815.86,78.6,3.11
+2025-04-06,Engineering,Austin,IC2-Mid,44,2.13,91810.46,78.7,3.43
+2025-04-06,Engineering,Singapore,M1-Manager,51,2.76,105851.31,81.7,1.46
+2025-04-06,Engineering,Berlin,IC3-Senior,39,1.0,105311.75,79.4,3.09
+2025-04-06,Sales,San Francisco,IC3-Senior,42,3.13,125350.59,71.0,3.11
+2025-04-06,Sales,New York,M1-Manager,67,1.7,117820.49,78.9,4.02
+2025-04-06,Sales,London,IC1-Associate,29,2.93,104840.9,89.3,2.27
+2025-04-06,Sales,Austin,IC2-Mid,44,2.58,85523.11,79.6,3.3
+2025-04-06,Sales,Singapore,IC4-Staff,52,3.57,93311.16,74.4,4.12
+2025-04-06,Sales,Berlin,M2-Director,36,2.9,96809.23,85.7,2.79
+2025-04-06,Customer Support,San Francisco,M1-Manager,34,2.74,114328.38,75.4,3.31
+2025-04-06,Customer Support,New York,IC1-Associate,34,2.29,129679.02,77.1,3.16
+2025-04-06,Customer Support,London,IC3-Senior,52,3.88,122645.61,72.4,4.16
+2025-04-06,Customer Support,Austin,IC3-Senior,43,3.46,104246.38,75.2,4.06
+2025-04-06,Customer Support,Singapore,IC4-Staff,48,3.12,73785.12,88.4,2.76
+2025-04-06,Customer Support,Berlin,IC3-Senior,57,1.8,97618.03,75.1,4.5
+2025-04-06,Marketing,San Francisco,IC3-Senior,50,2.95,144852.73,80.6,3.06
+2025-04-06,Marketing,New York,IC4-Staff,35,2.13,89855.19,84.0,3.47
+2025-04-06,Marketing,London,M1-Manager,36,2.54,137075.6,85.6,2.76
+2025-04-06,Marketing,Austin,IC1-Associate,33,1.56,94991.56,75.3,3.17
+2025-04-06,Marketing,Singapore,M2-Director,37,2.38,125219.63,69.3,2.55
+2025-04-06,Marketing,Berlin,IC2-Mid,47,2.46,116155.01,73.5,2.91
+2025-04-06,Operations,San Francisco,IC1-Associate,37,1.69,139809.11,75.2,2.91
+2025-04-06,Operations,New York,IC3-Senior,51,3.04,119123.34,79.1,4.06
+2025-04-06,Operations,London,IC4-Staff,48,1.93,136980.36,73.7,2.38
+2025-04-06,Operations,Austin,M1-Manager,41,1.68,105909.12,88.1,4.22
+2025-04-06,Operations,Singapore,IC4-Staff,60,2.08,92987.89,71.5,3.26
+2025-04-06,Operations,Berlin,M1-Manager,37,2.31,137171.83,83.0,1.89
+2025-04-06,Product,San Francisco,IC2-Mid,44,2.79,132989.54,81.8,4.72
+2025-04-06,Product,New York,M2-Director,46,1.95,99994.55,79.7,3.74
+2025-04-06,Product,London,M1-Manager,30,2.61,95945.01,78.7,4.81
+2025-04-06,Product,Austin,IC1-Associate,50,2.94,111776.32,81.5,3.52
+2025-04-06,Product,Singapore,IC3-Senior,41,3.33,98739.5,80.4,3.14
+2025-04-06,Product,Berlin,IC3-Senior,51,2.96,102629.92,84.5,1.78
+2025-04-06,Finance,San Francisco,IC3-Senior,51,2.12,115821.1,80.2,3.57
+2025-04-06,Finance,New York,IC3-Senior,53,2.77,108895.8,77.4,3.5
+2025-04-06,Finance,London,IC3-Senior,46,2.61,116985.78,75.0,3.84
+2025-04-06,Finance,Austin,IC2-Mid,38,2.75,108207.84,75.2,3.77
+2025-04-06,Finance,Singapore,IC3-Senior,46,2.6,121554.53,67.6,3.21
+2025-04-06,Finance,Berlin,M2-Director,62,2.43,107938.22,73.8,3.06
+2025-04-06,HR,San Francisco,M2-Director,54,2.74,128957.63,75.9,3.85
+2025-04-06,HR,New York,M2-Director,39,3.58,124960.54,77.0,2.91
+2025-04-06,HR,London,IC1-Associate,49,1.46,132610.66,86.5,2.22
+2025-04-06,HR,Austin,M2-Director,50,3.0,137957.03,80.7,3.08
+2025-04-06,HR,Singapore,IC4-Staff,38,2.24,71845.02,79.1,3.56
+2025-04-06,HR,Berlin,IC4-Staff,38,2.61,111023.04,78.4,2.46
+2025-04-13,Engineering,San Francisco,IC2-Mid,51,2.45,96314.41,79.7,3.97
+2025-04-13,Engineering,New York,M2-Director,46,1.22,89153.63,79.4,2.15
+2025-04-13,Engineering,London,IC2-Mid,40,2.41,114263.09,73.1,3.02
+2025-04-13,Engineering,Austin,M1-Manager,39,3.55,118866.88,70.2,2.75
+2025-04-13,Engineering,Singapore,M2-Director,54,2.62,108718.32,80.0,2.53
+2025-04-13,Engineering,Berlin,IC1-Associate,49,2.4,129277.16,75.7,3.1
+2025-04-13,Sales,San Francisco,IC1-Associate,33,2.59,107644.55,81.4,3.58
+2025-04-13,Sales,New York,IC3-Senior,42,2.02,128711.09,72.7,2.41
+2025-04-13,Sales,London,M1-Manager,56,3.25,88465.62,79.6,2.73
+2025-04-13,Sales,Austin,IC2-Mid,41,2.6,130658.84,79.0,4.09
+2025-04-13,Sales,Singapore,M2-Director,43,2.65,142075.86,79.5,3.19
+2025-04-13,Sales,Berlin,IC1-Associate,31,1.47,133440.98,79.3,2.97
+2025-04-13,Customer Support,San Francisco,IC3-Senior,50,2.03,105047.42,75.5,4.0
+2025-04-13,Customer Support,New York,M1-Manager,38,1.75,102804.69,74.9,3.11
+2025-04-13,Customer Support,London,IC1-Associate,28,1.87,113450.75,76.4,3.08
+2025-04-13,Customer Support,Austin,M1-Manager,35,1.73,97291.71,77.5,3.99
+2025-04-13,Customer Support,Singapore,IC2-Mid,43,2.12,118966.33,78.3,4.46
+2025-04-13,Customer Support,Berlin,IC3-Senior,37,2.6,90006.23,71.9,1.92
+2025-04-13,Marketing,San Francisco,IC1-Associate,37,1.89,126051.25,77.0,4.2
+2025-04-13,Marketing,New York,M1-Manager,59,2.05,117941.3,76.9,2.24
+2025-04-13,Marketing,London,IC2-Mid,39,2.71,100163.12,80.3,3.84
+2025-04-13,Marketing,Austin,M2-Director,39,2.61,107801.82,77.8,3.42
+2025-04-13,Marketing,Singapore,IC3-Senior,57,3.43,112696.46,84.9,4.35
+2025-04-13,Marketing,Berlin,M2-Director,25,2.91,124710.17,87.4,3.92
+2025-04-13,Operations,San Francisco,IC2-Mid,37,1.92,107843.96,79.9,4.19
+2025-04-13,Operations,New York,IC1-Associate,42,2.56,116302.54,81.6,3.37
+2025-04-13,Operations,London,IC4-Staff,57,1.18,117908.16,81.1,2.49
+2025-04-13,Operations,Austin,IC2-Mid,26,1.71,68553.31,76.1,3.61
+2025-04-13,Operations,Singapore,M2-Director,42,2.07,112276.61,81.0,2.08
+2025-04-13,Operations,Berlin,IC1-Associate,43,2.47,105348.9,72.7,2.99
+2025-04-13,Product,San Francisco,IC2-Mid,38,1.92,109328.26,86.1,4.7
+2025-04-13,Product,New York,IC4-Staff,51,2.59,117517.97,71.0,4.0
+2025-04-13,Product,London,IC4-Staff,43,2.73,125722.64,74.7,4.26
+2025-04-13,Product,Austin,IC3-Senior,43,2.29,145088.49,77.3,4.61
+2025-04-13,Product,Singapore,IC4-Staff,32,1.39,111466.95,78.9,3.44
+2025-04-13,Product,Berlin,IC4-Staff,37,2.79,134952.22,68.9,3.53
+2025-04-13,Finance,San Francisco,M1-Manager,40,3.22,134203.66,76.9,4.12
+2025-04-13,Finance,New York,M2-Director,40,2.53,85052.44,75.2,4.04
+2025-04-13,Finance,London,IC4-Staff,40,3.47,112658.91,73.3,4.54
+2025-04-13,Finance,Austin,IC2-Mid,42,2.89,108002.59,72.3,5.08
+2025-04-13,Finance,Singapore,IC4-Staff,39,1.97,98248.04,86.3,3.11
+2025-04-13,Finance,Berlin,IC4-Staff,24,3.1,115762.34,85.7,3.64
+2025-04-13,HR,San Francisco,IC3-Senior,42,1.79,108945.03,80.3,3.97
+2025-04-13,HR,New York,M2-Director,46,2.77,114773.54,81.9,3.78
+2025-04-13,HR,London,M2-Director,30,3.1,130556.39,79.0,2.74
+2025-04-13,HR,Austin,IC4-Staff,40,3.34,96586.98,88.6,2.74
+2025-04-13,HR,Singapore,M1-Manager,49,2.81,122707.35,71.6,2.98
+2025-04-13,HR,Berlin,M2-Director,38,2.8,117795.4,81.4,1.73
+2025-04-20,Engineering,San Francisco,IC4-Staff,48,2.7,130845.13,77.6,3.67
+2025-04-20,Engineering,New York,IC1-Associate,46,2.83,116276.03,80.9,2.48
+2025-04-20,Engineering,London,M1-Manager,61,2.71,138231.6,72.5,2.88
+2025-04-20,Engineering,Austin,IC1-Associate,45,1.26,99982.36,77.2,3.67
+2025-04-20,Engineering,Singapore,IC4-Staff,43,1.65,160029.61,79.8,1.55
+2025-04-20,Engineering,Berlin,M2-Director,45,1.05,130051.98,78.7,2.61
+2025-04-20,Sales,San Francisco,M2-Director,51,3.11,126110.33,82.3,3.0
+2025-04-20,Sales,New York,IC2-Mid,37,2.36,114464.65,81.0,2.76
+2025-04-20,Sales,London,M2-Director,46,1.79,105924.02,75.7,3.05
+2025-04-20,Sales,Austin,IC4-Staff,55,2.12,90396.55,64.5,3.67
+2025-04-20,Sales,Singapore,IC3-Senior,39,2.57,104021.79,78.1,4.46
+2025-04-20,Sales,Berlin,IC1-Associate,39,1.77,107043.88,68.5,4.26
+2025-04-20,Customer Support,San Francisco,M2-Director,41,3.8,127531.02,77.6,2.79
+2025-04-20,Customer Support,New York,M1-Manager,33,2.66,91903.39,82.5,4.25
+2025-04-20,Customer Support,London,IC3-Senior,46,1.86,109120.78,83.1,3.42
+2025-04-20,Customer Support,Austin,IC1-Associate,52,2.01,94437.89,74.8,4.01
+2025-04-20,Customer Support,Singapore,IC3-Senior,43,2.39,99503.78,78.9,2.21
+2025-04-20,Customer Support,Berlin,IC3-Senior,41,2.52,118466.08,73.3,4.12
+2025-04-20,Marketing,San Francisco,M2-Director,46,2.25,145077.85,81.9,3.54
+2025-04-20,Marketing,New York,IC2-Mid,52,3.0,105977.57,79.6,4.34
+2025-04-20,Marketing,London,IC4-Staff,37,3.73,131848.64,75.7,3.9
+2025-04-20,Marketing,Austin,IC1-Associate,42,2.08,93593.82,80.9,4.04
+2025-04-20,Marketing,Singapore,M1-Manager,50,3.2,97213.06,76.4,1.9
+2025-04-20,Marketing,Berlin,M1-Manager,43,3.38,109779.33,76.0,2.91
+2025-04-20,Operations,San Francisco,IC4-Staff,32,3.52,98811.27,75.2,3.21
+2025-04-20,Operations,New York,M2-Director,35,2.75,111763.3,78.8,3.33
+2025-04-20,Operations,London,IC3-Senior,43,2.9,98928.62,80.8,2.2
+2025-04-20,Operations,Austin,IC3-Senior,46,2.54,125718.84,77.3,2.73
+2025-04-20,Operations,Singapore,M1-Manager,39,1.64,103402.93,76.1,3.09
+2025-04-20,Operations,Berlin,IC1-Associate,40,1.84,133987.46,74.6,3.05
+2025-04-20,Product,San Francisco,IC4-Staff,42,2.76,161279.26,75.3,2.9
+2025-04-20,Product,New York,IC3-Senior,43,1.88,110631.42,75.7,1.69
+2025-04-20,Product,London,IC1-Associate,45,3.52,103562.38,83.0,4.55
+2025-04-20,Product,Austin,IC3-Senior,39,3.36,87369.66,78.2,3.63
+2025-04-20,Product,Singapore,IC3-Senior,54,3.57,115847.29,75.4,1.46
+2025-04-20,Product,Berlin,M2-Director,47,2.44,87659.61,79.9,1.1
+2025-04-20,Finance,San Francisco,IC4-Staff,51,2.17,122405.13,79.9,3.7
+2025-04-20,Finance,New York,M2-Director,41,2.44,81484.9,83.7,3.29
+2025-04-20,Finance,London,IC2-Mid,35,3.18,122357.08,78.6,4.66
+2025-04-20,Finance,Austin,IC2-Mid,41,2.11,79357.29,77.6,2.8
+2025-04-20,Finance,Singapore,IC3-Senior,37,1.71,132681.75,72.5,3.12
+2025-04-20,Finance,Berlin,IC2-Mid,60,1.04,122124.38,84.4,3.41
+2025-04-20,HR,San Francisco,M2-Director,45,2.91,84991.19,78.4,3.25
+2025-04-20,HR,New York,M2-Director,44,1.85,60862.62,79.2,3.66
+2025-04-20,HR,London,M1-Manager,50,3.51,144533.12,83.9,2.88
+2025-04-20,HR,Austin,M1-Manager,41,2.35,84312.37,75.1,3.26
+2025-04-20,HR,Singapore,M1-Manager,59,3.18,110717.79,74.8,2.03
+2025-04-20,HR,Berlin,IC1-Associate,40,2.21,115818.85,87.3,3.65
+2025-04-27,Engineering,San Francisco,IC2-Mid,48,2.31,109113.75,77.3,3.14
+2025-04-27,Engineering,New York,IC4-Staff,40,1.82,138159.26,76.0,2.71
+2025-04-27,Engineering,London,M1-Manager,46,1.96,77202.28,83.5,2.72
+2025-04-27,Engineering,Austin,M2-Director,49,2.85,84092.88,63.5,3.23
+2025-04-27,Engineering,Singapore,M2-Director,46,2.31,106771.12,79.8,3.89
+2025-04-27,Engineering,Berlin,IC1-Associate,32,2.13,95051.55,76.0,4.48
+2025-04-27,Sales,San Francisco,IC3-Senior,41,1.37,124832.92,71.8,2.6
+2025-04-27,Sales,New York,IC4-Staff,40,2.24,105215.33,76.5,2.59
+2025-04-27,Sales,London,M2-Director,42,3.41,119374.21,78.8,3.26
+2025-04-27,Sales,Austin,IC2-Mid,45,3.12,136637.02,76.2,3.67
+2025-04-27,Sales,Singapore,IC3-Senior,46,2.42,103159.83,81.4,2.54
+2025-04-27,Sales,Berlin,M1-Manager,54,2.45,118223.18,70.4,3.55
+2025-04-27,Customer Support,San Francisco,IC2-Mid,36,2.25,117272.82,74.0,2.41
+2025-04-27,Customer Support,New York,IC4-Staff,34,3.11,115080.99,76.9,3.01
+2025-04-27,Customer Support,London,IC3-Senior,35,2.56,98929.07,78.2,4.43
+2025-04-27,Customer Support,Austin,IC2-Mid,45,1.74,95317.24,81.2,3.6
+2025-04-27,Customer Support,Singapore,IC3-Senior,44,2.04,113069.23,72.6,4.18
+2025-04-27,Customer Support,Berlin,M1-Manager,53,3.16,106617.49,82.7,1.77
+2025-04-27,Marketing,San Francisco,M1-Manager,50,2.78,94233.54,79.0,3.8
+2025-04-27,Marketing,New York,IC4-Staff,39,1.73,147242.77,78.9,3.32
+2025-04-27,Marketing,London,IC4-Staff,39,1.94,115491.64,70.1,3.16
+2025-04-27,Marketing,Austin,IC1-Associate,40,2.44,94232.81,72.5,2.52
+2025-04-27,Marketing,Singapore,IC4-Staff,35,2.86,112034.66,70.5,3.94
+2025-04-27,Marketing,Berlin,IC4-Staff,42,3.22,120533.26,79.4,2.54
+2025-04-27,Operations,San Francisco,IC2-Mid,51,1.36,103885.79,75.3,3.77
+2025-04-27,Operations,New York,IC2-Mid,44,4.08,109941.9,76.2,3.04
+2025-04-27,Operations,London,M1-Manager,26,2.59,151757.25,74.1,3.44
+2025-04-27,Operations,Austin,IC2-Mid,46,2.41,107687.64,80.9,2.71
+2025-04-27,Operations,Singapore,M2-Director,44,2.36,123640.9,79.3,5.41
+2025-04-27,Operations,Berlin,M1-Manager,35,3.07,98787.92,83.4,2.43
+2025-04-27,Product,San Francisco,IC4-Staff,31,4.28,96055.36,79.8,3.8
+2025-04-27,Product,New York,IC4-Staff,53,2.23,105252.84,83.4,3.14
+2025-04-27,Product,London,M1-Manager,54,2.08,121178.21,83.7,3.11
+2025-04-27,Product,Austin,M1-Manager,32,1.85,108684.71,84.8,1.43
+2025-04-27,Product,Singapore,M1-Manager,36,2.07,134842.76,75.7,3.07
+2025-04-27,Product,Berlin,IC3-Senior,47,2.49,122724.39,83.5,2.63
+2025-04-27,Finance,San Francisco,M1-Manager,40,2.3,127525.55,76.6,4.14
+2025-04-27,Finance,New York,M1-Manager,49,1.69,93484.3,81.6,4.19
+2025-04-27,Finance,London,M1-Manager,43,2.62,136221.07,67.9,3.68
+2025-04-27,Finance,Austin,IC1-Associate,42,1.75,126536.3,76.0,3.52
+2025-04-27,Finance,Singapore,M1-Manager,45,3.16,104320.15,83.0,2.77
+2025-04-27,Finance,Berlin,IC2-Mid,31,3.2,136394.74,82.2,4.68
+2025-04-27,HR,San Francisco,M2-Director,38,1.81,108826.63,74.0,3.51
+2025-04-27,HR,New York,IC2-Mid,48,2.08,132672.06,83.4,1.88
+2025-04-27,HR,London,IC1-Associate,51,1.66,124253.13,81.8,2.83
+2025-04-27,HR,Austin,IC4-Staff,53,2.91,126357.54,74.5,2.69
+2025-04-27,HR,Singapore,IC1-Associate,44,2.77,103598.28,74.2,3.73
+2025-04-27,HR,Berlin,M1-Manager,42,2.49,133456.96,82.4,2.83
+2025-05-04,Engineering,San Francisco,IC3-Senior,46,3.02,114194.58,72.8,2.38
+2025-05-04,Engineering,New York,IC2-Mid,29,2.66,85024.44,76.9,2.97
+2025-05-04,Engineering,London,M2-Director,44,1.94,123803.51,79.9,3.32
+2025-05-04,Engineering,Austin,M2-Director,40,2.71,111797.48,75.9,2.47
+2025-05-04,Engineering,Singapore,IC2-Mid,58,2.41,108811.78,84.1,3.33
+2025-05-04,Engineering,Berlin,IC4-Staff,43,2.75,139239.58,87.9,2.19
+2025-05-04,Sales,San Francisco,IC1-Associate,33,2.6,128749.49,75.2,3.16
+2025-05-04,Sales,New York,IC2-Mid,52,2.29,81705.33,87.7,2.5
+2025-05-04,Sales,London,IC4-Staff,36,2.58,129297.42,78.7,3.05
+2025-05-04,Sales,Austin,IC1-Associate,45,2.14,96276.51,68.9,4.76
+2025-05-04,Sales,Singapore,M2-Director,44,3.14,98589.82,71.3,3.71
+2025-05-04,Sales,Berlin,IC2-Mid,44,3.02,119191.68,73.2,3.78
+2025-05-04,Customer Support,San Francisco,M2-Director,44,2.18,109591.61,79.8,2.4
+2025-05-04,Customer Support,New York,IC4-Staff,50,2.0,129738.47,86.7,3.33
+2025-05-04,Customer Support,London,M2-Director,45,2.2,130456.39,79.6,2.88
+2025-05-04,Customer Support,Austin,IC1-Associate,38,2.01,126781.66,74.7,2.67
+2025-05-04,Customer Support,Singapore,IC2-Mid,35,2.63,147769.79,82.2,2.75
+2025-05-04,Customer Support,Berlin,IC2-Mid,37,2.48,100556.31,74.3,2.35
+2025-05-04,Marketing,San Francisco,IC3-Senior,38,2.38,124851.45,71.1,4.29
+2025-05-04,Marketing,New York,IC3-Senior,40,3.27,114853.96,76.6,3.33
+2025-05-04,Marketing,London,IC2-Mid,52,2.7,110565.31,82.3,3.67
+2025-05-04,Marketing,Austin,IC2-Mid,43,3.19,101801.23,73.6,2.66
+2025-05-04,Marketing,Singapore,IC2-Mid,56,3.19,105777.26,76.5,3.24
+2025-05-04,Marketing,Berlin,M1-Manager,22,2.25,129990.38,72.2,3.88
+2025-05-04,Operations,San Francisco,IC2-Mid,39,2.11,113149.17,85.4,4.67
+2025-05-04,Operations,New York,M2-Director,45,0.8,124418.02,67.9,2.22
+2025-05-04,Operations,London,M2-Director,50,2.07,107797.46,81.4,4.46
+2025-05-04,Operations,Austin,IC4-Staff,46,2.42,120074.54,79.8,3.06
+2025-05-04,Operations,Singapore,IC1-Associate,50,2.65,153788.72,73.3,2.95
+2025-05-04,Operations,Berlin,IC1-Associate,38,2.11,104803.53,77.8,2.47
+2025-05-04,Product,San Francisco,IC1-Associate,46,1.76,122212.45,64.9,3.65
+2025-05-04,Product,New York,IC4-Staff,52,2.49,105046.01,80.3,4.56
+2025-05-04,Product,London,IC2-Mid,51,3.38,119523.7,75.1,3.01
+2025-05-04,Product,Austin,IC2-Mid,39,1.54,102861.83,74.7,2.6
+2025-05-04,Product,Singapore,IC2-Mid,43,1.86,126647.77,75.0,3.45
+2025-05-04,Product,Berlin,M2-Director,37,2.38,132123.51,77.0,3.62
+2025-05-04,Finance,San Francisco,IC4-Staff,47,2.45,99058.08,82.0,3.4
+2025-05-04,Finance,New York,M2-Director,45,2.86,132194.85,75.0,3.17
+2025-05-04,Finance,London,IC1-Associate,29,2.64,134514.4,77.8,3.38
+2025-05-04,Finance,Austin,M1-Manager,70,2.81,115677.27,79.0,2.98
+2025-05-04,Finance,Singapore,IC1-Associate,48,2.82,112612.08,80.7,3.43
+2025-05-04,Finance,Berlin,IC1-Associate,53,2.47,143668.06,72.1,3.22
+2025-05-04,HR,San Francisco,M2-Director,54,2.64,117067.34,71.5,3.59
+2025-05-04,HR,New York,IC3-Senior,39,2.13,118480.35,81.8,2.68
+2025-05-04,HR,London,IC4-Staff,49,2.54,118122.77,73.8,3.73
+2025-05-04,HR,Austin,IC1-Associate,53,2.35,99371.3,83.5,3.28
+2025-05-04,HR,Singapore,IC3-Senior,49,2.65,108335.94,74.7,3.51
+2025-05-04,HR,Berlin,IC1-Associate,38,2.21,120216.84,76.6,3.67
+2025-05-11,Engineering,San Francisco,M1-Manager,50,1.89,126119.5,68.9,2.15
+2025-05-11,Engineering,New York,IC1-Associate,43,2.52,107723.58,84.8,3.41
+2025-05-11,Engineering,London,M1-Manager,27,3.3,107675.49,67.1,3.56
+2025-05-11,Engineering,Austin,IC1-Associate,48,2.1,104774.99,78.4,4.06
+2025-05-11,Engineering,Singapore,IC4-Staff,44,2.46,77334.4,80.1,2.0
+2025-05-11,Engineering,Berlin,IC2-Mid,56,2.64,121888.96,76.3,3.24
+2025-05-11,Sales,San Francisco,M2-Director,43,2.28,92389.67,72.9,3.73
+2025-05-11,Sales,New York,IC1-Associate,50,2.73,101483.81,77.5,1.56
+2025-05-11,Sales,London,M2-Director,44,2.63,90578.71,73.4,3.96
+2025-05-11,Sales,Austin,M2-Director,40,1.35,140691.5,81.8,2.86
+2025-05-11,Sales,Singapore,IC2-Mid,46,1.92,129196.09,77.2,4.26
+2025-05-11,Sales,Berlin,M2-Director,49,1.95,91476.7,73.1,2.96
+2025-05-11,Customer Support,San Francisco,IC2-Mid,38,2.55,114746.22,79.2,3.15
+2025-05-11,Customer Support,New York,M2-Director,51,2.47,114757.69,75.3,3.89
+2025-05-11,Customer Support,London,IC3-Senior,41,2.01,117615.72,85.4,3.24
+2025-05-11,Customer Support,Austin,IC2-Mid,41,2.55,139315.34,74.0,2.68
+2025-05-11,Customer Support,Singapore,IC4-Staff,57,2.57,138678.48,79.7,2.67
+2025-05-11,Customer Support,Berlin,M2-Director,54,2.74,100377.49,79.5,2.97
+2025-05-11,Marketing,San Francisco,M1-Manager,24,3.21,160882.17,78.7,3.62
+2025-05-11,Marketing,New York,IC2-Mid,63,2.88,115766.27,72.8,4.63
+2025-05-11,Marketing,London,M1-Manager,39,1.87,122479.91,79.3,2.98
+2025-05-11,Marketing,Austin,IC2-Mid,38,3.02,89586.67,87.7,3.01
+2025-05-11,Marketing,Singapore,M1-Manager,46,1.75,105601.63,84.8,5.66
+2025-05-11,Marketing,Berlin,M2-Director,46,4.93,136917.4,75.7,2.46
+2025-05-11,Operations,San Francisco,M2-Director,49,2.77,126049.59,75.9,2.6
+2025-05-11,Operations,New York,IC1-Associate,38,2.22,99657.04,81.2,3.58
+2025-05-11,Operations,London,IC4-Staff,45,1.31,123938.47,78.8,1.83
+2025-05-11,Operations,Austin,IC3-Senior,43,1.92,114908.12,76.7,2.67
+2025-05-11,Operations,Singapore,IC4-Staff,46,2.14,83654.97,78.2,2.96
+2025-05-11,Operations,Berlin,M2-Director,54,1.17,106628.75,78.2,4.15
+2025-05-11,Product,San Francisco,IC3-Senior,45,2.75,130418.59,72.3,2.86
+2025-05-11,Product,New York,IC2-Mid,53,2.89,81904.97,72.4,2.12
+2025-05-11,Product,London,IC4-Staff,58,2.77,120494.38,85.1,3.67
+2025-05-11,Product,Austin,IC3-Senior,40,2.86,117175.51,76.4,2.5
+2025-05-11,Product,Singapore,IC1-Associate,44,3.08,110556.06,82.5,4.92
+2025-05-11,Product,Berlin,IC2-Mid,48,2.55,113696.84,71.1,4.02
+2025-05-11,Finance,San Francisco,IC2-Mid,45,2.85,137139.83,71.0,3.99
+2025-05-11,Finance,New York,M2-Director,43,3.46,137235.27,85.0,3.06
+2025-05-11,Finance,London,M1-Manager,48,1.95,106786.55,79.8,4.42
+2025-05-11,Finance,Austin,IC3-Senior,50,2.18,116518.99,76.7,2.44
+2025-05-11,Finance,Singapore,M2-Director,53,2.53,93207.71,85.2,2.46
+2025-05-11,Finance,Berlin,IC4-Staff,43,1.68,96847.92,70.6,1.53
+2025-05-11,HR,San Francisco,IC2-Mid,59,2.66,112756.34,71.5,2.31
+2025-05-11,HR,New York,IC1-Associate,34,3.94,111021.24,79.0,3.26
+2025-05-11,HR,London,IC2-Mid,43,3.18,101188.68,74.7,4.74
+2025-05-11,HR,Austin,IC1-Associate,35,2.53,120627.72,69.8,4.63
+2025-05-11,HR,Singapore,IC3-Senior,43,3.31,90519.02,73.8,2.42
+2025-05-11,HR,Berlin,IC1-Associate,55,3.12,123831.92,76.8,3.57
+2025-05-18,Engineering,San Francisco,IC1-Associate,48,1.89,105484.67,68.2,1.65
+2025-05-18,Engineering,New York,IC4-Staff,39,1.49,86308.65,65.6,3.03
+2025-05-18,Engineering,London,M2-Director,49,2.62,136359.65,78.0,2.63
+2025-05-18,Engineering,Austin,IC1-Associate,50,3.94,128158.01,81.6,3.63
+2025-05-18,Engineering,Singapore,IC1-Associate,51,2.34,120296.47,86.7,3.25
+2025-05-18,Engineering,Berlin,M2-Director,54,1.83,129604.99,77.1,4.3
+2025-05-18,Sales,San Francisco,M1-Manager,28,2.94,114603.37,77.1,4.1
+2025-05-18,Sales,New York,M2-Director,47,3.76,124161.83,79.5,3.27
+2025-05-18,Sales,London,IC1-Associate,31,2.16,102068.24,81.3,2.57
+2025-05-18,Sales,Austin,M2-Director,40,3.02,127583.79,81.7,2.93
+2025-05-18,Sales,Singapore,M2-Director,44,2.87,120205.31,76.9,2.26
+2025-05-18,Sales,Berlin,M2-Director,32,2.49,98854.5,74.0,3.88
+2025-05-18,Customer Support,San Francisco,IC2-Mid,58,2.55,151980.79,79.1,1.81
+2025-05-18,Customer Support,New York,IC2-Mid,41,2.58,84224.73,75.3,2.75
+2025-05-18,Customer Support,London,IC4-Staff,30,2.43,102296.08,86.5,2.09
+2025-05-18,Customer Support,Austin,IC2-Mid,42,2.9,127683.77,77.9,3.48
+2025-05-18,Customer Support,Singapore,IC1-Associate,41,3.34,132460.67,81.6,2.49
+2025-05-18,Customer Support,Berlin,M2-Director,43,2.53,122204.25,72.9,3.36
+2025-05-18,Marketing,San Francisco,IC2-Mid,51,2.74,131661.44,84.7,2.05
+2025-05-18,Marketing,New York,M1-Manager,44,2.04,137621.98,75.4,3.18
+2025-05-18,Marketing,London,IC1-Associate,39,2.11,85179.53,73.3,2.94
+2025-05-18,Marketing,Austin,M1-Manager,49,1.46,116625.7,80.4,2.99
+2025-05-18,Marketing,Singapore,M1-Manager,48,1.55,130189.11,80.3,3.51
+2025-05-18,Marketing,Berlin,IC4-Staff,45,2.66,100741.72,86.5,3.74
+2025-05-18,Operations,San Francisco,M2-Director,50,2.61,103790.54,83.3,2.86
+2025-05-18,Operations,New York,IC3-Senior,54,3.16,108890.09,78.0,2.6
+2025-05-18,Operations,London,IC1-Associate,63,1.98,99659.96,75.4,3.61
+2025-05-18,Operations,Austin,M1-Manager,44,2.1,93982.27,68.3,3.21
+2025-05-18,Operations,Singapore,M1-Manager,29,2.64,112320.74,69.2,3.55
+2025-05-18,Operations,Berlin,IC4-Staff,52,1.9,120578.11,75.9,2.18
+2025-05-18,Product,San Francisco,IC4-Staff,47,1.33,100498.95,74.1,4.18
+2025-05-18,Product,New York,IC3-Senior,61,2.38,118771.53,81.3,3.25
+2025-05-18,Product,London,IC2-Mid,42,2.12,118848.56,86.7,2.47
+2025-05-18,Product,Austin,IC3-Senior,44,1.95,101696.33,80.7,2.17
+2025-05-18,Product,Singapore,IC1-Associate,48,2.66,126161.44,76.3,2.73
+2025-05-18,Product,Berlin,IC2-Mid,43,3.74,149198.91,65.1,1.59
+2025-05-18,Finance,San Francisco,M1-Manager,45,2.72,95586.77,80.0,3.06
+2025-05-18,Finance,New York,IC1-Associate,49,2.73,117937.57,88.3,2.87
+2025-05-18,Finance,London,IC2-Mid,45,2.26,73070.05,79.7,2.74
+2025-05-18,Finance,Austin,IC3-Senior,24,2.02,108391.15,84.3,3.05
+2025-05-18,Finance,Singapore,IC2-Mid,46,1.63,138632.47,74.2,3.14
+2025-05-18,Finance,Berlin,IC3-Senior,50,3.37,143466.35,77.9,2.95
+2025-05-18,HR,San Francisco,IC2-Mid,44,1.69,98914.94,73.3,3.92
+2025-05-18,HR,New York,IC2-Mid,42,1.61,97615.91,75.7,2.77
+2025-05-18,HR,London,M1-Manager,48,3.26,145096.84,75.4,4.11
+2025-05-18,HR,Austin,M2-Director,41,2.78,101228.88,74.7,4.14
+2025-05-18,HR,Singapore,M2-Director,52,2.81,91086.2,84.1,3.41
+2025-05-18,HR,Berlin,IC3-Senior,64,2.92,138233.65,72.0,5.27
+2025-05-25,Engineering,San Francisco,IC3-Senior,45,3.12,108239.75,81.6,1.28
+2025-05-25,Engineering,New York,IC2-Mid,35,3.31,127189.75,79.4,2.34
+2025-05-25,Engineering,London,IC4-Staff,35,3.44,139540.78,82.6,2.72
+2025-05-25,Engineering,Austin,IC4-Staff,48,2.76,106333.71,79.8,2.08
+2025-05-25,Engineering,Singapore,IC1-Associate,61,2.67,125120.51,73.1,3.81
+2025-05-25,Engineering,Berlin,IC1-Associate,47,1.53,123562.53,77.0,2.56
+2025-05-25,Sales,San Francisco,IC4-Staff,56,2.45,121599.7,76.3,3.23
+2025-05-25,Sales,New York,IC2-Mid,54,2.56,97279.8,81.3,2.84
+2025-05-25,Sales,London,M1-Manager,43,2.85,132485.08,75.2,3.53
+2025-05-25,Sales,Austin,IC3-Senior,54,2.25,124935.16,85.9,3.47
+2025-05-25,Sales,Singapore,IC2-Mid,32,3.24,102448.44,80.7,1.75
+2025-05-25,Sales,Berlin,IC1-Associate,43,2.02,101108.67,75.4,2.8
+2025-05-25,Customer Support,San Francisco,M1-Manager,62,1.96,144477.75,80.2,5.12
+2025-05-25,Customer Support,New York,M2-Director,36,1.78,121057.69,76.7,3.93
+2025-05-25,Customer Support,London,M1-Manager,42,1.3,145147.47,67.0,2.98
+2025-05-25,Customer Support,Austin,IC2-Mid,45,3.36,139551.42,68.0,2.81
+2025-05-25,Customer Support,Singapore,IC1-Associate,38,2.12,86114.41,68.2,2.92
+2025-05-25,Customer Support,Berlin,M1-Manager,42,3.32,118143.78,70.8,2.5
+2025-05-25,Marketing,San Francisco,M1-Manager,55,1.75,109534.73,85.9,2.81
+2025-05-25,Marketing,New York,IC4-Staff,35,2.51,133926.86,74.6,3.66
+2025-05-25,Marketing,London,IC2-Mid,43,2.19,148361.39,78.1,3.56
+2025-05-25,Marketing,Austin,IC2-Mid,49,1.9,128718.73,70.1,2.84
+2025-05-25,Marketing,Singapore,IC2-Mid,55,2.08,87774.48,67.1,2.14
+2025-05-25,Marketing,Berlin,M2-Director,46,3.47,79409.95,82.4,2.25
+2025-05-25,Operations,San Francisco,M2-Director,53,2.12,88423.65,76.7,3.57
+2025-05-25,Operations,New York,M1-Manager,46,2.12,118647.95,74.5,3.39
+2025-05-25,Operations,London,M2-Director,35,3.47,95345.75,74.6,2.83
+2025-05-25,Operations,Austin,M2-Director,40,2.45,93232.82,71.3,2.43
+2025-05-25,Operations,Singapore,IC2-Mid,38,2.27,130771.13,81.2,2.63
+2025-05-25,Operations,Berlin,IC4-Staff,29,3.37,153178.42,62.3,3.02
+2025-05-25,Product,San Francisco,M2-Director,43,1.71,71687.71,75.9,2.03
+2025-05-25,Product,New York,M1-Manager,51,3.21,127382.79,77.7,2.71
+2025-05-25,Product,London,M2-Director,46,2.72,125793.71,74.8,4.29
+2025-05-25,Product,Austin,M1-Manager,61,3.18,127246.91,88.0,3.09
+2025-05-25,Product,Singapore,IC4-Staff,35,2.73,142846.9,73.2,3.99
+2025-05-25,Product,Berlin,M2-Director,52,3.2,103885.23,68.2,3.14
+2025-05-25,Finance,San Francisco,IC1-Associate,52,2.55,104508.04,82.1,3.51
+2025-05-25,Finance,New York,M2-Director,40,2.45,102984.73,83.0,3.8
+2025-05-25,Finance,London,IC3-Senior,60,1.07,123111.03,78.2,3.27
+2025-05-25,Finance,Austin,IC2-Mid,50,2.38,146324.76,73.3,2.63
+2025-05-25,Finance,Singapore,IC1-Associate,39,3.45,117609.09,66.8,4.17
+2025-05-25,Finance,Berlin,IC1-Associate,41,3.74,98817.3,78.5,2.91
+2025-05-25,HR,San Francisco,M2-Director,41,2.36,130152.05,65.3,2.36
+2025-05-25,HR,New York,IC1-Associate,43,2.26,111187.9,87.1,3.9
+2025-05-25,HR,London,IC3-Senior,49,2.05,126277.69,70.5,2.21
+2025-05-25,HR,Austin,IC4-Staff,39,2.71,142885.07,76.8,3.83
+2025-05-25,HR,Singapore,IC4-Staff,48,2.48,138416.95,78.0,2.74
+2025-05-25,HR,Berlin,M2-Director,45,2.42,128647.21,83.5,2.13
+2025-06-01,Engineering,San Francisco,IC1-Associate,42,2.2,84918.94,80.3,4.83
+2025-06-01,Engineering,New York,M1-Manager,55,2.48,141122.58,83.3,2.61
+2025-06-01,Engineering,London,M2-Director,42,2.43,80985.32,69.3,2.98
+2025-06-01,Engineering,Austin,IC3-Senior,52,2.91,115566.85,83.4,3.75
+2025-06-01,Engineering,Singapore,IC4-Staff,33,2.4,104113.87,82.0,3.23
+2025-06-01,Engineering,Berlin,IC2-Mid,45,3.42,103401.88,83.9,1.01
+2025-06-01,Sales,San Francisco,IC2-Mid,46,3.2,124032.24,73.6,2.93
+2025-06-01,Sales,New York,IC2-Mid,47,1.91,91875.51,75.0,3.91
+2025-06-01,Sales,London,M1-Manager,47,1.98,152212.88,77.1,3.0
+2025-06-01,Sales,Austin,M1-Manager,48,2.59,118308.39,82.3,2.87
+2025-06-01,Sales,Singapore,IC2-Mid,57,1.72,114226.75,78.8,2.57
+2025-06-01,Sales,Berlin,M2-Director,44,2.79,109233.07,73.3,1.78
+2025-06-01,Customer Support,San Francisco,IC4-Staff,49,2.71,122165.71,83.6,4.39
+2025-06-01,Customer Support,New York,M2-Director,41,2.66,117351.29,82.2,2.82
+2025-06-01,Customer Support,London,IC3-Senior,61,2.97,96857.59,79.2,2.93
+2025-06-01,Customer Support,Austin,M2-Director,40,1.96,135640.28,83.0,2.48
+2025-06-01,Customer Support,Singapore,M1-Manager,59,1.49,93007.47,83.1,4.06
+2025-06-01,Customer Support,Berlin,IC3-Senior,42,2.1,133184.94,84.9,3.16
+2025-06-01,Marketing,San Francisco,IC1-Associate,40,2.41,152052.86,73.2,1.89
+2025-06-01,Marketing,New York,IC2-Mid,29,1.07,117941.77,78.2,3.8
+2025-06-01,Marketing,London,M2-Director,51,1.99,129330.41,78.6,3.32
+2025-06-01,Marketing,Austin,M2-Director,39,1.83,112318.95,78.3,3.61
+2025-06-01,Marketing,Singapore,IC2-Mid,43,2.23,123850.04,75.8,0.92
+2025-06-01,Marketing,Berlin,IC4-Staff,56,2.52,105359.97,72.1,2.59
+2025-06-01,Operations,San Francisco,IC1-Associate,48,2.59,115817.97,66.5,4.43
+2025-06-01,Operations,New York,IC4-Staff,54,2.37,113110.58,77.9,3.69
+2025-06-01,Operations,London,IC1-Associate,49,1.98,108940.53,76.2,2.42
+2025-06-01,Operations,Austin,M2-Director,49,2.66,138043.87,69.0,2.99
+2025-06-01,Operations,Singapore,IC3-Senior,44,2.12,102657.19,78.7,2.18
+2025-06-01,Operations,Berlin,IC4-Staff,29,1.36,123108.92,80.8,2.99
+2025-06-01,Product,San Francisco,IC3-Senior,52,2.33,105134.42,73.5,1.83
+2025-06-01,Product,New York,IC4-Staff,46,1.84,109238.19,71.2,1.28
+2025-06-01,Product,London,IC1-Associate,38,3.28,149013.42,78.7,2.87
+2025-06-01,Product,Austin,IC1-Associate,45,2.62,83157.09,76.1,3.49
+2025-06-01,Product,Singapore,IC2-Mid,46,1.73,104935.16,79.0,3.92
+2025-06-01,Product,Berlin,IC1-Associate,55,2.19,98751.61,69.7,3.47
+2025-06-01,Finance,San Francisco,M1-Manager,40,1.01,118809.91,73.1,3.9
+2025-06-01,Finance,New York,M2-Director,40,1.66,115529.75,73.1,3.61
+2025-06-01,Finance,London,IC4-Staff,37,2.83,119734.26,76.0,3.84
+2025-06-01,Finance,Austin,IC2-Mid,33,2.13,107968.54,75.1,3.35
+2025-06-01,Finance,Singapore,M2-Director,42,2.52,111101.47,88.6,4.39
+2025-06-01,Finance,Berlin,IC1-Associate,35,2.56,113074.51,69.3,4.75
+2025-06-01,HR,San Francisco,IC1-Associate,57,2.63,133753.31,85.4,3.44
+2025-06-01,HR,New York,M1-Manager,40,1.2,121819.01,87.6,3.76
+2025-06-01,HR,London,IC3-Senior,49,1.92,100218.06,77.4,3.3
+2025-06-01,HR,Austin,IC1-Associate,45,1.99,134857.92,79.1,4.35
+2025-06-01,HR,Singapore,M2-Director,39,3.19,105848.31,74.4,2.15
+2025-06-01,HR,Berlin,IC3-Senior,54,2.33,148015.64,74.8,3.68
+2025-06-08,Engineering,San Francisco,IC4-Staff,40,2.6,84859.55,78.2,3.11
+2025-06-08,Engineering,New York,IC1-Associate,55,3.14,129001.24,72.4,3.68
+2025-06-08,Engineering,London,IC2-Mid,50,2.9,146872.7,72.0,1.83
+2025-06-08,Engineering,Austin,M1-Manager,36,1.99,105351.67,77.3,3.03
+2025-06-08,Engineering,Singapore,IC4-Staff,50,1.95,105186.65,73.0,5.54
+2025-06-08,Engineering,Berlin,IC4-Staff,40,2.36,119900.91,71.4,2.48
+2025-06-08,Sales,San Francisco,IC2-Mid,37,3.15,70684.37,76.7,2.57
+2025-06-08,Sales,New York,IC1-Associate,34,2.33,104212.29,84.4,2.77
+2025-06-08,Sales,London,IC4-Staff,43,2.7,118916.43,73.4,2.6
+2025-06-08,Sales,Austin,IC4-Staff,37,2.87,143715.09,80.3,2.95
+2025-06-08,Sales,Singapore,IC1-Associate,38,2.9,120783.25,85.0,1.28
+2025-06-08,Sales,Berlin,IC3-Senior,32,3.15,110040.15,79.7,2.77
+2025-06-08,Customer Support,San Francisco,IC1-Associate,33,3.21,88950.88,76.1,4.08
+2025-06-08,Customer Support,New York,IC4-Staff,57,2.92,97293.84,86.5,2.2
+2025-06-08,Customer Support,London,M1-Manager,43,2.39,134082.59,76.1,2.49
+2025-06-08,Customer Support,Austin,IC4-Staff,21,2.78,100872.23,78.5,4.62
+2025-06-08,Customer Support,Singapore,IC1-Associate,37,2.55,124436.81,74.5,2.5
+2025-06-08,Customer Support,Berlin,IC1-Associate,65,2.6,126626.03,84.3,2.32
+2025-06-08,Marketing,San Francisco,IC1-Associate,52,2.81,102897.01,72.6,3.77
+2025-06-08,Marketing,New York,IC4-Staff,42,3.01,119566.72,75.2,2.48
+2025-06-08,Marketing,London,IC2-Mid,51,2.69,127581.44,73.3,4.15
+2025-06-08,Marketing,Austin,M1-Manager,45,3.84,137086.62,84.2,1.94
+2025-06-08,Marketing,Singapore,M1-Manager,31,2.41,105619.56,76.1,4.08
+2025-06-08,Marketing,Berlin,IC1-Associate,35,1.6,104179.72,69.7,4.13
+2025-06-08,Operations,San Francisco,IC1-Associate,47,2.47,123076.1,75.5,4.42
+2025-06-08,Operations,New York,IC2-Mid,49,2.57,127655.17,79.3,2.78
+2025-06-08,Operations,London,IC4-Staff,54,2.79,115034.33,79.0,1.87
+2025-06-08,Operations,Austin,IC1-Associate,60,3.23,139625.43,82.3,3.3
+2025-06-08,Operations,Singapore,IC2-Mid,38,3.07,87107.54,75.6,4.0
+2025-06-08,Operations,Berlin,M2-Director,37,2.12,127345.44,80.2,1.48
+2025-06-08,Product,San Francisco,IC3-Senior,63,3.07,111216.26,84.9,2.59
+2025-06-08,Product,New York,IC3-Senior,54,2.16,150844.67,86.0,3.51
+2025-06-08,Product,London,IC2-Mid,36,1.71,153055.15,78.7,3.29
+2025-06-08,Product,Austin,IC1-Associate,40,1.76,131897.03,79.5,2.22
+2025-06-08,Product,Singapore,IC1-Associate,48,1.55,125040.17,79.2,3.35
+2025-06-08,Product,Berlin,IC4-Staff,51,2.28,113236.85,78.6,4.18
+2025-06-08,Finance,San Francisco,IC2-Mid,53,2.58,111603.19,79.1,2.26
+2025-06-08,Finance,New York,IC3-Senior,60,2.37,96954.71,73.4,2.91
+2025-06-08,Finance,London,IC3-Senior,64,3.14,110047.81,78.6,2.95
+2025-06-08,Finance,Austin,M1-Manager,32,1.36,114216.47,74.5,2.87
+2025-06-08,Finance,Singapore,IC2-Mid,49,3.02,98966.52,78.3,2.06
+2025-06-08,Finance,Berlin,M1-Manager,31,3.08,125595.44,82.1,3.78
+2025-06-08,HR,San Francisco,M2-Director,38,2.21,123754.72,81.6,3.57
+2025-06-08,HR,New York,M1-Manager,51,3.11,90789.74,84.9,2.51
+2025-06-08,HR,London,IC2-Mid,54,3.56,102545.24,78.8,4.0
+2025-06-08,HR,Austin,IC3-Senior,67,1.95,115703.01,72.9,3.8
+2025-06-08,HR,Singapore,IC3-Senior,47,1.44,93035.76,79.9,4.51
+2025-06-08,HR,Berlin,IC4-Staff,44,2.82,94745.23,76.3,2.33
+2025-06-15,Engineering,San Francisco,M1-Manager,36,2.33,119024.39,77.3,4.16
+2025-06-15,Engineering,New York,IC3-Senior,48,2.69,90941.77,85.7,4.27
+2025-06-15,Engineering,London,M1-Manager,39,2.02,81192.78,69.9,3.68
+2025-06-15,Engineering,Austin,M2-Director,48,2.65,115607.02,80.0,3.44
+2025-06-15,Engineering,Singapore,IC1-Associate,43,1.81,99318.53,81.7,3.26
+2025-06-15,Engineering,Berlin,M2-Director,45,1.84,127712.16,81.1,3.38
+2025-06-15,Sales,San Francisco,M1-Manager,48,2.14,98224.69,76.3,3.42
+2025-06-15,Sales,New York,IC1-Associate,44,1.98,133737.18,80.4,2.19
+2025-06-15,Sales,London,IC2-Mid,45,2.56,132940.62,81.6,4.7
+2025-06-15,Sales,Austin,IC4-Staff,48,2.04,123320.72,77.0,2.21
+2025-06-15,Sales,Singapore,M2-Director,56,2.27,117562.47,83.0,3.55
+2025-06-15,Sales,Berlin,IC3-Senior,28,2.16,100560.41,83.4,2.28
+2025-06-15,Customer Support,San Francisco,M2-Director,50,1.67,113109.05,82.4,2.07
+2025-06-15,Customer Support,New York,IC3-Senior,52,2.5,134299.91,88.1,2.96
+2025-06-15,Customer Support,London,M1-Manager,33,2.04,119636.82,73.6,4.71
+2025-06-15,Customer Support,Austin,M1-Manager,38,1.95,128042.65,77.2,3.56
+2025-06-15,Customer Support,Singapore,IC2-Mid,59,2.78,137481.51,79.0,2.74
+2025-06-15,Customer Support,Berlin,IC3-Senior,46,2.41,143429.88,83.7,2.71
+2025-06-15,Marketing,San Francisco,M2-Director,42,2.62,91584.83,69.6,2.02
+2025-06-15,Marketing,New York,M2-Director,43,3.42,155290.36,73.3,2.45
+2025-06-15,Marketing,London,IC3-Senior,33,3.04,106185.49,80.0,2.69
+2025-06-15,Marketing,Austin,M1-Manager,48,3.25,91998.73,78.2,3.8
+2025-06-15,Marketing,Singapore,IC4-Staff,30,1.61,86500.5,76.1,2.79
+2025-06-15,Marketing,Berlin,IC2-Mid,53,3.62,105059.3,89.5,2.32
+2025-06-15,Operations,San Francisco,IC4-Staff,33,2.27,108837.24,69.0,2.11
+2025-06-15,Operations,New York,IC2-Mid,46,3.37,110329.89,74.4,5.48
+2025-06-15,Operations,London,M2-Director,37,2.34,85455.16,72.0,3.21
+2025-06-15,Operations,Austin,M1-Manager,55,2.64,132286.79,77.8,3.17
+2025-06-15,Operations,Singapore,IC3-Senior,46,2.23,132362.83,73.6,2.62
+2025-06-15,Operations,Berlin,IC1-Associate,55,2.09,136652.73,87.2,3.9
+2025-06-15,Product,San Francisco,IC4-Staff,51,1.99,94862.21,72.7,4.61
+2025-06-15,Product,New York,M1-Manager,49,2.66,94404.13,73.9,2.29
+2025-06-15,Product,London,M2-Director,40,1.48,123960.19,81.2,3.63
+2025-06-15,Product,Austin,IC1-Associate,53,3.0,97301.26,87.8,3.09
+2025-06-15,Product,Singapore,M1-Manager,41,2.66,95246.09,73.1,3.48
+2025-06-15,Product,Berlin,M2-Director,46,2.2,96560.85,79.2,2.82
+2025-06-15,Finance,San Francisco,IC4-Staff,45,2.28,132437.86,80.5,3.97
+2025-06-15,Finance,New York,IC3-Senior,50,2.29,130994.04,77.0,4.49
+2025-06-15,Finance,London,M1-Manager,45,1.95,131398.49,82.5,3.85
+2025-06-15,Finance,Austin,M1-Manager,50,1.33,109057.93,77.1,4.47
+2025-06-15,Finance,Singapore,IC4-Staff,43,1.79,141402.09,80.2,3.6
+2025-06-15,Finance,Berlin,IC3-Senior,50,2.74,135522.22,78.6,4.85
+2025-06-15,HR,San Francisco,IC2-Mid,52,2.13,113265.76,75.2,3.45
+2025-06-15,HR,New York,IC2-Mid,47,2.12,111248.05,79.4,2.5
+2025-06-15,HR,London,IC2-Mid,43,3.16,136818.33,81.0,2.21
+2025-06-15,HR,Austin,IC3-Senior,50,2.9,103634.91,73.6,3.87
+2025-06-15,HR,Singapore,IC3-Senior,52,2.87,83590.94,76.5,4.51
+2025-06-15,HR,Berlin,M1-Manager,49,2.33,138727.55,75.8,2.11
+2025-06-22,Engineering,San Francisco,M2-Director,42,2.24,106161.47,82.6,2.88
+2025-06-22,Engineering,New York,M2-Director,59,2.35,103805.39,87.2,3.87
+2025-06-22,Engineering,London,M2-Director,43,2.24,112028.55,78.4,3.23
+2025-06-22,Engineering,Austin,IC4-Staff,55,2.25,123922.56,82.3,2.32
+2025-06-22,Engineering,Singapore,IC2-Mid,44,1.46,108831.28,68.2,2.72
+2025-06-22,Engineering,Berlin,IC2-Mid,60,1.93,108780.5,71.9,3.34
+2025-06-22,Sales,San Francisco,IC1-Associate,56,2.01,147172.24,66.5,3.0
+2025-06-22,Sales,New York,M2-Director,41,0.99,123902.83,85.3,3.44
+2025-06-22,Sales,London,IC4-Staff,43,3.04,134772.73,78.3,3.49
+2025-06-22,Sales,Austin,IC2-Mid,45,2.22,141995.02,76.5,2.76
+2025-06-22,Sales,Singapore,M2-Director,34,2.5,122896.02,77.8,4.56
+2025-06-22,Sales,Berlin,M2-Director,57,2.99,86377.45,73.5,2.67
+2025-06-22,Customer Support,San Francisco,M2-Director,30,1.73,119688.49,79.5,2.5
+2025-06-22,Customer Support,New York,M1-Manager,52,3.3,108417.81,80.6,3.6
+2025-06-22,Customer Support,London,IC3-Senior,56,3.42,112761.27,74.1,2.88
+2025-06-22,Customer Support,Austin,M2-Director,52,3.31,103267.47,82.8,2.91
+2025-06-22,Customer Support,Singapore,IC3-Senior,59,2.14,122875.22,74.6,2.92
+2025-06-22,Customer Support,Berlin,IC2-Mid,54,2.81,138446.63,75.2,3.31
+2025-06-22,Marketing,San Francisco,M2-Director,50,2.65,147649.41,61.7,2.08
+2025-06-22,Marketing,New York,IC3-Senior,45,3.6,106169.72,74.9,3.08
+2025-06-22,Marketing,London,IC1-Associate,57,2.9,136829.28,74.4,2.7
+2025-06-22,Marketing,Austin,IC1-Associate,47,2.22,129114.64,74.2,2.48
+2025-06-22,Marketing,Singapore,M2-Director,45,1.52,128242.98,76.4,3.92
+2025-06-22,Marketing,Berlin,IC3-Senior,36,3.4,102845.73,80.4,2.23
+2025-06-22,Operations,San Francisco,IC4-Staff,56,3.14,106226.29,77.5,3.71
+2025-06-22,Operations,New York,IC3-Senior,44,2.34,120186.87,73.9,3.6
+2025-06-22,Operations,London,IC3-Senior,35,2.33,96378.3,79.9,3.69
+2025-06-22,Operations,Austin,IC4-Staff,51,3.4,121714.38,75.8,3.25
+2025-06-22,Operations,Singapore,IC3-Senior,43,2.56,89674.41,84.6,3.52
+2025-06-22,Operations,Berlin,M1-Manager,37,3.52,136330.35,76.3,2.18
+2025-06-22,Product,San Francisco,M2-Director,56,2.86,94014.61,75.7,3.11
+2025-06-22,Product,New York,M2-Director,49,2.79,134176.77,84.3,2.99
+2025-06-22,Product,London,M2-Director,49,1.88,102471.64,70.1,4.24
+2025-06-22,Product,Austin,IC2-Mid,55,2.99,94918.75,79.6,3.19
+2025-06-22,Product,Singapore,IC2-Mid,23,2.28,121108.4,77.6,2.92
+2025-06-22,Product,Berlin,IC4-Staff,51,2.9,108791.13,79.4,3.42
+2025-06-22,Finance,San Francisco,IC4-Staff,49,2.85,115199.71,79.0,2.84
+2025-06-22,Finance,New York,M2-Director,39,2.26,97432.91,77.9,3.73
+2025-06-22,Finance,London,IC2-Mid,37,2.67,127526.78,72.9,2.79
+2025-06-22,Finance,Austin,IC1-Associate,23,1.87,111760.78,75.3,3.72
+2025-06-22,Finance,Singapore,M2-Director,39,3.5,113260.67,78.6,3.09
+2025-06-22,Finance,Berlin,IC4-Staff,43,3.28,96479.74,68.0,3.04
+2025-06-22,HR,San Francisco,IC3-Senior,44,2.63,127730.16,77.0,4.38
+2025-06-22,HR,New York,IC3-Senior,55,1.96,126125.58,77.3,3.51
+2025-06-22,HR,London,M1-Manager,44,2.97,137830.8,80.5,3.71
+2025-06-22,HR,Austin,M1-Manager,42,1.57,109817.69,76.7,3.4
+2025-06-22,HR,Singapore,IC1-Associate,52,3.67,138846.91,77.6,2.63
+2025-06-22,HR,Berlin,IC3-Senior,43,2.27,124252.87,72.3,4.44
+2025-06-29,Engineering,San Francisco,IC1-Associate,35,2.09,115015.28,72.2,2.18
+2025-06-29,Engineering,New York,M1-Manager,46,2.61,113926.22,74.0,1.84
+2025-06-29,Engineering,London,M1-Manager,52,3.18,127367.21,86.2,3.78
+2025-06-29,Engineering,Austin,M1-Manager,43,3.92,128814.63,83.4,3.2
+2025-06-29,Engineering,Singapore,IC4-Staff,45,1.85,85795.62,67.4,2.47
+2025-06-29,Engineering,Berlin,M1-Manager,43,2.08,108983.88,80.6,3.77
+2025-06-29,Sales,San Francisco,IC3-Senior,63,2.08,106654.82,82.2,3.07
+2025-06-29,Sales,New York,IC4-Staff,51,2.58,110031.8,74.6,2.93
+2025-06-29,Sales,London,M1-Manager,42,1.55,86279.79,77.4,3.23
+2025-06-29,Sales,Austin,IC1-Associate,40,1.58,116128.75,80.8,2.68
+2025-06-29,Sales,Singapore,IC3-Senior,53,2.05,118612.58,76.3,3.41
+2025-06-29,Sales,Berlin,IC3-Senior,47,1.93,126730.8,79.9,3.13
+2025-06-29,Customer Support,San Francisco,M2-Director,41,2.62,123517.25,83.6,3.88
+2025-06-29,Customer Support,New York,IC4-Staff,57,1.95,130556.47,74.4,1.03
+2025-06-29,Customer Support,London,M1-Manager,52,2.29,136176.21,78.6,4.4
+2025-06-29,Customer Support,Austin,IC4-Staff,36,2.69,117587.76,78.8,3.13
+2025-06-29,Customer Support,Singapore,IC1-Associate,48,2.01,105456.77,81.5,2.88
+2025-06-29,Customer Support,Berlin,M2-Director,30,2.08,105713.7,69.2,2.46
+2025-06-29,Marketing,San Francisco,M1-Manager,46,2.32,124970.03,81.4,4.01
+2025-06-29,Marketing,New York,IC3-Senior,38,0.95,135416.46,75.5,3.08
+2025-06-29,Marketing,London,IC2-Mid,54,2.35,112356.64,71.0,1.42
+2025-06-29,Marketing,Austin,M1-Manager,35,2.89,149577.18,66.2,3.1
+2025-06-29,Marketing,Singapore,IC4-Staff,50,2.63,119338.0,76.3,3.23
+2025-06-29,Marketing,Berlin,M2-Director,56,3.02,133871.2,86.7,3.14
+2025-06-29,Operations,San Francisco,M1-Manager,47,2.76,133959.87,75.3,4.03
+2025-06-29,Operations,New York,IC4-Staff,48,1.55,119577.68,69.4,2.64
+2025-06-29,Operations,London,IC1-Associate,29,1.97,130605.76,73.6,2.4
+2025-06-29,Operations,Austin,IC2-Mid,59,1.88,129610.7,92.7,3.47
+2025-06-29,Operations,Singapore,IC2-Mid,29,2.12,112652.83,76.9,2.18
+2025-06-29,Operations,Berlin,IC4-Staff,37,1.88,118681.29,75.6,2.8
+2025-06-29,Product,San Francisco,IC1-Associate,40,2.72,107075.03,76.4,2.67
+2025-06-29,Product,New York,IC3-Senior,41,2.38,152155.96,82.1,3.33
+2025-06-29,Product,London,IC1-Associate,43,2.55,104272.57,77.9,4.52
+2025-06-29,Product,Austin,IC4-Staff,45,1.72,145200.22,81.6,2.54
+2025-06-29,Product,Singapore,M2-Director,33,2.37,94914.82,68.9,4.57
+2025-06-29,Product,Berlin,M1-Manager,51,2.34,136634.77,78.3,3.21
+2025-06-29,Finance,San Francisco,M2-Director,34,2.74,100439.76,65.6,2.27
+2025-06-29,Finance,New York,IC2-Mid,42,2.83,85821.85,80.7,2.64
+2025-06-29,Finance,London,IC1-Associate,53,3.27,115229.28,70.5,2.17
+2025-06-29,Finance,Austin,IC4-Staff,27,2.42,72691.79,73.7,4.54
+2025-06-29,Finance,Singapore,IC4-Staff,58,1.92,95894.62,78.0,2.39
+2025-06-29,Finance,Berlin,M2-Director,23,3.1,106555.67,77.1,2.88
+2025-06-29,HR,San Francisco,IC1-Associate,44,4.05,115539.81,82.0,5.57
+2025-06-29,HR,New York,M2-Director,44,1.79,94264.04,79.9,3.29
+2025-06-29,HR,London,IC2-Mid,38,2.82,146086.53,83.2,2.12
+2025-06-29,HR,Austin,IC1-Associate,64,2.32,92531.13,78.1,3.87
+2025-06-29,HR,Singapore,M2-Director,40,1.25,111952.12,82.0,3.07
+2025-06-29,HR,Berlin,IC3-Senior,40,1.46,94832.48,78.2,2.6
+2025-07-06,Engineering,San Francisco,M1-Manager,48,3.59,130073.59,71.9,3.67
+2025-07-06,Engineering,New York,IC4-Staff,45,2.34,127049.64,80.2,3.58
+2025-07-06,Engineering,London,IC1-Associate,53,2.75,100492.15,71.4,2.78
+2025-07-06,Engineering,Austin,IC3-Senior,50,3.61,94972.81,73.6,3.72
+2025-07-06,Engineering,Singapore,IC1-Associate,38,2.47,130217.04,73.6,1.44
+2025-07-06,Engineering,Berlin,M2-Director,46,2.2,111504.02,74.0,2.4
+2025-07-06,Sales,San Francisco,M2-Director,39,1.75,113258.32,95.0,4.01
+2025-07-06,Sales,New York,M2-Director,48,2.15,125511.46,72.0,3.59
+2025-07-06,Sales,London,IC1-Associate,36,2.67,103467.67,78.0,2.88
+2025-07-06,Sales,Austin,M1-Manager,61,1.49,124662.39,79.3,2.01
+2025-07-06,Sales,Singapore,M1-Manager,44,1.9,136786.8,75.3,3.23
+2025-07-06,Sales,Berlin,IC4-Staff,55,2.26,128200.27,73.5,2.62
+2025-07-06,Customer Support,San Francisco,IC2-Mid,37,2.45,106161.95,67.1,1.91
+2025-07-06,Customer Support,New York,IC2-Mid,44,1.71,122782.35,67.8,2.63
+2025-07-06,Customer Support,London,IC2-Mid,15,1.22,116354.47,75.0,3.57
+2025-07-06,Customer Support,Austin,IC1-Associate,44,2.07,143667.1,73.4,3.46
+2025-07-06,Customer Support,Singapore,M1-Manager,41,3.28,91580.03,82.8,2.86
+2025-07-06,Customer Support,Berlin,M2-Director,52,2.36,100949.32,70.2,4.07
+2025-07-06,Marketing,San Francisco,M1-Manager,39,3.23,122523.72,71.4,1.75
+2025-07-06,Marketing,New York,M1-Manager,45,3.58,97034.3,78.5,1.8
+2025-07-06,Marketing,London,IC2-Mid,45,2.56,104354.01,78.8,3.82
+2025-07-06,Marketing,Austin,M2-Director,40,1.68,111512.55,78.3,3.22
+2025-07-06,Marketing,Singapore,M1-Manager,40,1.86,113605.1,82.1,3.15
+2025-07-06,Marketing,Berlin,IC2-Mid,44,3.92,117129.6,78.6,2.65
+2025-07-06,Operations,San Francisco,IC4-Staff,48,2.23,124864.38,82.0,3.64
+2025-07-06,Operations,New York,M1-Manager,48,2.1,91322.06,76.6,4.25
+2025-07-06,Operations,London,IC3-Senior,28,2.26,127099.13,71.2,1.65
+2025-07-06,Operations,Austin,M1-Manager,35,1.43,114908.08,81.9,3.52
+2025-07-06,Operations,Singapore,IC3-Senior,43,2.86,124491.57,78.4,3.24
+2025-07-06,Operations,Berlin,M2-Director,56,2.31,121928.83,71.3,3.81
+2025-07-06,Product,San Francisco,IC1-Associate,43,2.18,119156.96,79.7,3.26
+2025-07-06,Product,New York,IC1-Associate,47,2.69,116934.74,76.3,2.86
+2025-07-06,Product,London,M2-Director,41,2.18,132793.69,73.4,3.05
+2025-07-06,Product,Austin,IC4-Staff,47,1.94,143896.41,70.1,4.18
+2025-07-06,Product,Singapore,M1-Manager,53,2.71,109537.29,80.2,3.04
+2025-07-06,Product,Berlin,IC2-Mid,48,2.17,123294.35,82.0,1.98
+2025-07-06,Finance,San Francisco,M2-Director,29,2.7,128852.17,71.2,4.09
+2025-07-06,Finance,New York,IC1-Associate,53,2.48,117573.83,76.6,1.82
+2025-07-06,Finance,London,IC4-Staff,50,3.37,125784.63,78.7,2.12
+2025-07-06,Finance,Austin,IC1-Associate,27,2.03,87040.9,77.3,3.73
+2025-07-06,Finance,Singapore,IC2-Mid,53,3.02,139510.73,85.4,2.4
+2025-07-06,Finance,Berlin,IC4-Staff,38,3.39,110320.29,73.3,3.22
+2025-07-06,HR,San Francisco,IC4-Staff,46,2.87,150462.48,74.9,4.89
+2025-07-06,HR,New York,M1-Manager,59,3.02,117485.41,78.3,1.69
+2025-07-06,HR,London,M1-Manager,51,1.82,123065.45,90.4,4.28
+2025-07-06,HR,Austin,IC1-Associate,42,2.37,85081.94,74.5,3.7
+2025-07-06,HR,Singapore,IC4-Staff,49,3.11,139035.15,81.8,1.93
+2025-07-06,HR,Berlin,IC4-Staff,50,2.71,80170.65,66.2,3.08
+2025-07-13,Engineering,San Francisco,IC2-Mid,41,2.27,135939.45,73.9,2.43
+2025-07-13,Engineering,New York,IC2-Mid,45,2.92,104777.49,80.4,3.45
+2025-07-13,Engineering,London,IC4-Staff,30,4.36,84090.72,73.5,4.63
+2025-07-13,Engineering,Austin,IC2-Mid,30,3.29,115415.45,79.0,3.7
+2025-07-13,Engineering,Singapore,M1-Manager,37,2.9,90386.1,79.3,3.3
+2025-07-13,Engineering,Berlin,M2-Director,31,2.84,125734.61,74.2,3.82
+2025-07-13,Sales,San Francisco,IC2-Mid,45,2.85,84744.33,80.4,3.45
+2025-07-13,Sales,New York,M2-Director,23,2.9,127358.22,73.6,3.79
+2025-07-13,Sales,London,M1-Manager,28,2.33,108473.15,83.8,2.58
+2025-07-13,Sales,Austin,M1-Manager,36,1.98,108103.88,79.1,3.12
+2025-07-13,Sales,Singapore,IC2-Mid,41,2.12,127366.19,68.5,4.15
+2025-07-13,Sales,Berlin,IC4-Staff,53,0.81,105553.34,76.6,2.32
+2025-07-13,Customer Support,San Francisco,M2-Director,45,2.33,127363.44,88.6,1.55
+2025-07-13,Customer Support,New York,M1-Manager,28,2.7,145581.13,69.9,2.28
+2025-07-13,Customer Support,London,IC3-Senior,61,2.45,107326.12,82.3,3.01
+2025-07-13,Customer Support,Austin,IC4-Staff,48,1.52,121986.76,79.2,3.33
+2025-07-13,Customer Support,Singapore,M1-Manager,31,1.74,117822.81,85.4,3.42
+2025-07-13,Customer Support,Berlin,IC2-Mid,54,3.0,124826.18,89.9,3.06
+2025-07-13,Marketing,San Francisco,IC2-Mid,58,1.53,116535.11,72.6,1.78
+2025-07-13,Marketing,New York,IC4-Staff,31,2.78,104172.97,83.6,3.64
+2025-07-13,Marketing,London,IC1-Associate,44,1.88,114085.59,81.3,3.33
+2025-07-13,Marketing,Austin,IC3-Senior,58,2.48,94790.63,69.0,2.67
+2025-07-13,Marketing,Singapore,IC3-Senior,40,2.39,101051.5,73.3,2.4
+2025-07-13,Marketing,Berlin,IC2-Mid,42,2.25,155513.95,76.0,4.12
+2025-07-13,Operations,San Francisco,IC2-Mid,46,4.01,114660.43,72.7,2.62
+2025-07-13,Operations,New York,IC4-Staff,33,2.25,122861.19,79.2,3.52
+2025-07-13,Operations,London,M2-Director,45,0.97,93245.1,76.9,3.99
+2025-07-13,Operations,Austin,M1-Manager,47,3.32,150705.41,79.9,3.21
+2025-07-13,Operations,Singapore,M2-Director,56,1.54,119667.87,82.4,1.87
+2025-07-13,Operations,Berlin,IC3-Senior,42,2.33,130712.79,80.4,5.14
+2025-07-13,Product,San Francisco,IC3-Senior,73,2.04,119447.53,76.3,1.89
+2025-07-13,Product,New York,IC2-Mid,50,2.48,101050.67,87.8,4.29
+2025-07-13,Product,London,M2-Director,53,2.49,134305.37,87.5,3.14
+2025-07-13,Product,Austin,IC4-Staff,51,3.2,119611.53,76.3,1.82
+2025-07-13,Product,Singapore,IC3-Senior,49,3.0,104673.32,84.4,2.63
+2025-07-13,Product,Berlin,IC2-Mid,39,1.92,133389.43,72.7,4.35
+2025-07-13,Finance,San Francisco,IC1-Associate,36,3.38,94896.41,79.4,4.87
+2025-07-13,Finance,New York,M1-Manager,38,3.09,115665.42,78.2,3.3
+2025-07-13,Finance,London,IC2-Mid,41,3.21,119409.23,81.5,3.58
+2025-07-13,Finance,Austin,IC1-Associate,48,2.8,137015.4,77.8,3.62
+2025-07-13,Finance,Singapore,M1-Manager,49,3.23,116616.13,75.7,2.98
+2025-07-13,Finance,Berlin,IC3-Senior,44,2.49,124835.18,83.2,2.67
+2025-07-13,HR,San Francisco,IC3-Senior,38,2.63,91897.43,86.8,3.56
+2025-07-13,HR,New York,IC2-Mid,51,3.02,105948.36,84.6,4.14
+2025-07-13,HR,London,M2-Director,44,2.3,158483.49,79.4,3.18
+2025-07-13,HR,Austin,M1-Manager,47,3.41,125726.15,76.3,3.95
+2025-07-13,HR,Singapore,IC3-Senior,42,3.5,97706.87,80.7,2.56
+2025-07-13,HR,Berlin,IC2-Mid,51,2.87,123468.69,80.3,4.78
+2025-07-20,Engineering,San Francisco,IC3-Senior,49,1.59,88916.82,81.8,2.92
+2025-07-20,Engineering,New York,IC4-Staff,31,2.77,130225.32,80.7,2.93
+2025-07-20,Engineering,London,IC4-Staff,49,3.58,101085.15,77.5,3.09
+2025-07-20,Engineering,Austin,IC2-Mid,48,3.75,104212.44,72.8,3.78
+2025-07-20,Engineering,Singapore,IC1-Associate,44,2.27,111686.44,86.3,2.58
+2025-07-20,Engineering,Berlin,IC2-Mid,50,3.13,129354.42,80.7,4.4
+2025-07-20,Sales,San Francisco,IC3-Senior,50,1.96,116246.86,85.2,2.58
+2025-07-20,Sales,New York,IC2-Mid,20,2.82,94584.92,69.0,4.02
+2025-07-20,Sales,London,IC1-Associate,42,2.35,112852.22,78.9,2.57
+2025-07-20,Sales,Austin,M2-Director,45,2.08,113529.21,78.8,2.41
+2025-07-20,Sales,Singapore,M2-Director,59,1.43,165259.76,81.9,3.27
+2025-07-20,Sales,Berlin,IC4-Staff,57,2.4,132577.8,77.6,4.85
+2025-07-20,Customer Support,San Francisco,IC4-Staff,49,3.13,98446.72,72.7,2.38
+2025-07-20,Customer Support,New York,IC1-Associate,37,2.48,103898.04,75.0,2.12
+2025-07-20,Customer Support,London,IC3-Senior,36,2.3,118329.19,75.7,3.51
+2025-07-20,Customer Support,Austin,IC3-Senior,49,2.81,104095.84,82.9,3.04
+2025-07-20,Customer Support,Singapore,M2-Director,35,1.15,137939.92,86.7,3.12
+2025-07-20,Customer Support,Berlin,IC3-Senior,46,1.95,104012.59,75.4,3.49
+2025-07-20,Marketing,San Francisco,M1-Manager,42,2.51,126205.56,70.4,3.86
+2025-07-20,Marketing,New York,M2-Director,26,3.46,121498.94,87.3,2.91
+2025-07-20,Marketing,London,IC4-Staff,49,2.74,113408.8,70.5,3.27
+2025-07-20,Marketing,Austin,IC4-Staff,58,2.2,126334.06,78.5,3.25
+2025-07-20,Marketing,Singapore,IC2-Mid,58,1.79,158287.08,75.7,3.37
+2025-07-20,Marketing,Berlin,M1-Manager,48,2.01,90813.36,74.5,3.88
+2025-07-20,Operations,San Francisco,IC4-Staff,49,3.09,117764.78,79.1,2.76
+2025-07-20,Operations,New York,IC3-Senior,44,2.16,106674.14,75.8,2.35
+2025-07-20,Operations,London,IC3-Senior,33,2.55,78109.46,81.1,4.21
+2025-07-20,Operations,Austin,IC4-Staff,41,2.76,102774.41,75.4,2.45
+2025-07-20,Operations,Singapore,M1-Manager,44,3.66,105687.47,84.6,4.31
+2025-07-20,Operations,Berlin,IC2-Mid,45,3.08,87679.62,84.3,3.6
+2025-07-20,Product,San Francisco,IC2-Mid,51,1.98,119757.22,77.9,4.25
+2025-07-20,Product,New York,IC1-Associate,43,1.95,126648.32,84.7,2.39
+2025-07-20,Product,London,IC4-Staff,39,2.34,106409.97,80.7,3.11
+2025-07-20,Product,Austin,IC2-Mid,35,2.15,108548.74,83.9,2.22
+2025-07-20,Product,Singapore,M2-Director,33,3.39,109729.03,83.1,3.95
+2025-07-20,Product,Berlin,IC3-Senior,45,2.84,117244.72,81.2,2.9
+2025-07-20,Finance,San Francisco,IC3-Senior,40,1.81,106809.16,83.7,3.12
+2025-07-20,Finance,New York,M1-Manager,27,2.86,122134.61,73.8,3.34
+2025-07-20,Finance,London,M2-Director,43,3.31,82940.25,81.7,3.04
+2025-07-20,Finance,Austin,M1-Manager,47,2.76,94716.13,76.8,4.03
+2025-07-20,Finance,Singapore,M2-Director,41,2.02,114121.06,59.6,3.39
+2025-07-20,Finance,Berlin,IC1-Associate,41,1.32,109789.47,79.7,2.26
+2025-07-20,HR,San Francisco,IC4-Staff,41,2.89,103000.68,70.3,3.29
+2025-07-20,HR,New York,M2-Director,45,3.04,103074.21,76.3,1.98
+2025-07-20,HR,London,IC3-Senior,57,3.69,82813.01,68.7,4.28
+2025-07-20,HR,Austin,M2-Director,46,2.56,108955.93,81.0,2.3
+2025-07-20,HR,Singapore,IC3-Senior,39,1.08,160472.76,73.3,4.15
+2025-07-20,HR,Berlin,IC2-Mid,36,2.05,120613.19,83.5,2.59
+2025-07-27,Engineering,San Francisco,M1-Manager,32,2.84,120299.07,86.4,3.38
+2025-07-27,Engineering,New York,M2-Director,50,3.03,152161.91,78.0,3.26
+2025-07-27,Engineering,London,IC2-Mid,35,1.83,114998.69,72.0,3.7
+2025-07-27,Engineering,Austin,IC3-Senior,43,2.18,88002.38,74.1,3.2
+2025-07-27,Engineering,Singapore,IC4-Staff,41,2.07,120593.56,78.5,4.42
+2025-07-27,Engineering,Berlin,IC4-Staff,40,2.38,106002.3,76.8,3.63
+2025-07-27,Sales,San Francisco,IC3-Senior,50,3.49,106178.78,75.6,3.91
+2025-07-27,Sales,New York,M1-Manager,40,2.89,94634.7,83.1,3.91
+2025-07-27,Sales,London,IC3-Senior,34,2.83,137435.4,85.1,3.51
+2025-07-27,Sales,Austin,IC3-Senior,46,2.1,125389.48,80.7,2.22
+2025-07-27,Sales,Singapore,IC4-Staff,38,1.48,104403.71,87.8,3.49
+2025-07-27,Sales,Berlin,IC2-Mid,45,1.53,144469.81,71.6,2.05
+2025-07-27,Customer Support,San Francisco,IC1-Associate,40,2.33,113292.06,74.5,3.42
+2025-07-27,Customer Support,New York,M2-Director,45,1.46,108796.1,78.5,3.21
+2025-07-27,Customer Support,London,IC1-Associate,38,2.48,107840.29,74.4,3.8
+2025-07-27,Customer Support,Austin,IC4-Staff,48,3.34,140542.64,81.6,3.43
+2025-07-27,Customer Support,Singapore,IC1-Associate,43,2.7,116178.53,75.6,3.01
+2025-07-27,Customer Support,Berlin,IC2-Mid,48,1.66,76149.85,84.5,2.7
+2025-07-27,Marketing,San Francisco,IC2-Mid,44,1.5,135263.87,82.9,3.35
+2025-07-27,Marketing,New York,M2-Director,35,2.77,131044.19,76.5,3.04
+2025-07-27,Marketing,London,IC1-Associate,41,2.85,139410.28,82.8,3.63
+2025-07-27,Marketing,Austin,M2-Director,49,2.53,136748.84,89.1,1.8
+2025-07-27,Marketing,Singapore,M1-Manager,58,1.94,118604.71,83.5,3.16
+2025-07-27,Marketing,Berlin,M1-Manager,41,2.31,116329.54,71.3,4.15
+2025-07-27,Operations,San Francisco,IC4-Staff,52,1.77,101254.22,73.4,3.73
+2025-07-27,Operations,New York,IC2-Mid,47,3.4,140566.84,67.5,2.54
+2025-07-27,Operations,London,M1-Manager,49,1.65,116226.17,73.3,3.77
+2025-07-27,Operations,Austin,IC1-Associate,38,2.72,126356.7,70.8,3.81
+2025-07-27,Operations,Singapore,M2-Director,36,3.15,108387.6,78.6,3.86
+2025-07-27,Operations,Berlin,M2-Director,42,2.49,135439.12,77.5,4.69
+2025-07-27,Product,San Francisco,IC2-Mid,43,2.41,144287.34,74.6,2.83
+2025-07-27,Product,New York,IC1-Associate,48,2.26,122441.84,78.1,1.7
+2025-07-27,Product,London,M1-Manager,37,3.7,116254.68,76.4,2.68
+2025-07-27,Product,Austin,IC2-Mid,42,2.37,96416.84,72.7,3.69
+2025-07-27,Product,Singapore,IC4-Staff,22,1.65,124802.48,78.7,4.84
+2025-07-27,Product,Berlin,IC1-Associate,39,2.88,81251.48,82.3,2.73
+2025-07-27,Finance,San Francisco,IC4-Staff,48,2.21,88991.85,91.6,2.72
+2025-07-27,Finance,New York,IC2-Mid,68,1.96,126342.78,75.2,4.4
+2025-07-27,Finance,London,IC4-Staff,34,2.58,110702.45,77.7,4.23
+2025-07-27,Finance,Austin,M2-Director,48,2.45,147496.19,81.0,3.9
+2025-07-27,Finance,Singapore,M1-Manager,29,2.3,126333.48,84.6,3.03
+2025-07-27,Finance,Berlin,IC4-Staff,28,2.26,123180.8,70.1,2.58
+2025-07-27,HR,San Francisco,IC1-Associate,48,2.97,111924.15,77.2,2.79
+2025-07-27,HR,New York,M2-Director,53,2.5,111182.39,76.3,3.63
+2025-07-27,HR,London,IC3-Senior,29,2.4,145291.65,80.1,3.27
+2025-07-27,HR,Austin,IC4-Staff,45,2.95,120413.48,79.5,3.81
+2025-07-27,HR,Singapore,IC1-Associate,39,2.64,96776.4,79.8,3.59
+2025-07-27,HR,Berlin,M1-Manager,45,3.31,120647.02,81.0,2.01
+2025-08-03,Engineering,San Francisco,M2-Director,52,0.88,113386.05,65.5,3.75
+2025-08-03,Engineering,New York,M1-Manager,35,2.77,79502.4,70.8,3.43
+2025-08-03,Engineering,London,M2-Director,55,2.81,135090.42,86.3,3.22
+2025-08-03,Engineering,Austin,IC3-Senior,54,2.74,99890.09,89.3,2.9
+2025-08-03,Engineering,Singapore,IC1-Associate,48,2.33,110816.11,81.9,3.95
+2025-08-03,Engineering,Berlin,IC4-Staff,44,2.08,141852.08,74.4,2.81
+2025-08-03,Sales,San Francisco,IC2-Mid,43,1.86,75922.31,75.2,1.94
+2025-08-03,Sales,New York,IC4-Staff,37,2.93,116438.47,73.1,3.46
+2025-08-03,Sales,London,IC3-Senior,60,1.45,123404.51,88.9,2.71
+2025-08-03,Sales,Austin,IC3-Senior,48,2.99,90323.85,83.9,3.75
+2025-08-03,Sales,Singapore,M2-Director,46,3.23,108662.42,80.9,3.46
+2025-08-03,Sales,Berlin,IC4-Staff,44,2.42,99321.77,77.1,4.76
+2025-08-03,Customer Support,San Francisco,IC2-Mid,44,2.22,95877.18,80.1,4.09
+2025-08-03,Customer Support,New York,IC4-Staff,46,3.06,123500.75,76.3,3.01
+2025-08-03,Customer Support,London,M1-Manager,50,3.03,127027.84,78.3,4.12
+2025-08-03,Customer Support,Austin,IC4-Staff,43,3.31,112955.87,76.1,3.16
+2025-08-03,Customer Support,Singapore,IC3-Senior,37,2.78,79465.64,72.6,3.1
+2025-08-03,Customer Support,Berlin,IC1-Associate,48,1.9,128594.37,76.9,3.04
+2025-08-03,Marketing,San Francisco,M2-Director,53,2.42,112246.23,77.8,2.88
+2025-08-03,Marketing,New York,IC3-Senior,32,2.97,107531.51,85.1,4.4
+2025-08-03,Marketing,London,IC4-Staff,53,1.96,72706.76,76.5,3.57
+2025-08-03,Marketing,Austin,IC4-Staff,41,2.63,114314.21,88.0,3.01
+2025-08-03,Marketing,Singapore,IC4-Staff,52,1.72,129203.35,74.5,2.7
+2025-08-03,Marketing,Berlin,M1-Manager,45,3.0,110796.38,84.6,4.1
+2025-08-03,Operations,San Francisco,M1-Manager,46,3.02,116100.93,76.3,2.58
+2025-08-03,Operations,New York,IC2-Mid,46,2.55,87945.16,73.6,4.0
+2025-08-03,Operations,London,M1-Manager,59,2.55,122186.85,80.8,2.72
+2025-08-03,Operations,Austin,IC4-Staff,31,2.47,146796.1,80.4,4.05
+2025-08-03,Operations,Singapore,IC4-Staff,39,1.62,135486.71,81.9,2.78
+2025-08-03,Operations,Berlin,IC2-Mid,46,2.52,137270.5,72.5,2.48
+2025-08-03,Product,San Francisco,IC3-Senior,50,3.15,112347.52,77.1,3.23
+2025-08-03,Product,New York,IC3-Senior,45,2.57,98345.12,87.2,2.33
+2025-08-03,Product,London,M1-Manager,25,1.81,102778.35,68.6,2.82
+2025-08-03,Product,Austin,IC1-Associate,29,2.19,114517.79,78.5,4.65
+2025-08-03,Product,Singapore,IC4-Staff,41,2.9,134129.85,70.6,1.66
+2025-08-03,Product,Berlin,IC3-Senior,43,2.69,100474.7,78.6,3.61
+2025-08-03,Finance,San Francisco,IC1-Associate,51,2.81,120939.14,82.9,1.71
+2025-08-03,Finance,New York,M2-Director,49,2.6,107351.16,77.0,3.09
+2025-08-03,Finance,London,IC2-Mid,46,2.86,107465.25,74.6,1.85
+2025-08-03,Finance,Austin,M1-Manager,43,3.33,100423.35,76.2,3.28
+2025-08-03,Finance,Singapore,IC2-Mid,41,2.73,88324.21,70.1,3.16
+2025-08-03,Finance,Berlin,M2-Director,50,3.07,90597.29,74.4,2.25
+2025-08-03,HR,San Francisco,M2-Director,46,2.41,96352.69,74.2,3.55
+2025-08-03,HR,New York,IC4-Staff,52,2.25,115696.64,91.4,3.83
+2025-08-03,HR,London,M2-Director,38,2.66,112955.34,84.3,2.77
+2025-08-03,HR,Austin,M2-Director,38,3.29,104021.61,75.2,3.31
+2025-08-03,HR,Singapore,IC1-Associate,54,1.53,107141.81,69.7,4.21
+2025-08-03,HR,Berlin,IC3-Senior,55,1.89,91452.6,79.3,3.38
+2025-08-10,Engineering,San Francisco,M2-Director,45,2.91,91127.28,81.2,3.65
+2025-08-10,Engineering,New York,IC4-Staff,52,2.86,109352.88,88.5,2.99
+2025-08-10,Engineering,London,IC3-Senior,62,2.18,116433.69,84.2,0.8
+2025-08-10,Engineering,Austin,IC1-Associate,38,3.35,106483.81,86.7,2.63
+2025-08-10,Engineering,Singapore,IC4-Staff,49,2.2,126547.75,73.1,2.57
+2025-08-10,Engineering,Berlin,M2-Director,46,1.83,91219.92,88.8,3.4
+2025-08-10,Sales,San Francisco,IC4-Staff,39,2.28,98132.66,74.1,4.2
+2025-08-10,Sales,New York,IC3-Senior,53,2.94,107212.52,76.8,4.95
+2025-08-10,Sales,London,IC2-Mid,20,2.85,115935.86,72.8,4.24
+2025-08-10,Sales,Austin,M2-Director,48,1.64,106452.05,81.3,2.64
+2025-08-10,Sales,Singapore,IC1-Associate,46,2.08,114813.66,84.7,3.06
+2025-08-10,Sales,Berlin,M2-Director,34,2.48,110052.14,76.0,2.23
+2025-08-10,Customer Support,San Francisco,IC1-Associate,47,3.14,117660.38,74.9,3.13
+2025-08-10,Customer Support,New York,IC4-Staff,48,2.17,122271.58,69.2,2.64
+2025-08-10,Customer Support,London,M1-Manager,49,2.19,114970.68,82.3,3.92
+2025-08-10,Customer Support,Austin,M2-Director,32,2.27,88420.17,75.3,4.05
+2025-08-10,Customer Support,Singapore,IC4-Staff,45,3.29,80242.46,86.2,3.0
+2025-08-10,Customer Support,Berlin,M1-Manager,48,1.17,133486.83,70.4,2.7
+2025-08-10,Marketing,San Francisco,IC1-Associate,36,2.12,131998.93,72.9,3.32
+2025-08-10,Marketing,New York,IC2-Mid,29,2.68,157902.23,86.3,3.11
+2025-08-10,Marketing,London,IC3-Senior,46,2.4,126127.68,77.3,3.29
+2025-08-10,Marketing,Austin,IC1-Associate,53,3.65,129966.98,70.9,3.84
+2025-08-10,Marketing,Singapore,M1-Manager,54,3.18,121369.37,73.4,2.78
+2025-08-10,Marketing,Berlin,IC4-Staff,34,1.79,107600.53,76.9,3.79
+2025-08-10,Operations,San Francisco,IC1-Associate,36,3.38,113340.45,79.0,2.72
+2025-08-10,Operations,New York,IC1-Associate,38,2.43,112118.66,78.3,3.01
+2025-08-10,Operations,London,IC2-Mid,27,2.18,131341.26,73.8,2.33
+2025-08-10,Operations,Austin,IC1-Associate,28,3.23,128024.48,76.3,2.99
+2025-08-10,Operations,Singapore,IC4-Staff,35,2.47,113495.35,74.5,2.33
+2025-08-10,Operations,Berlin,IC3-Senior,53,2.25,92208.56,81.1,4.6
+2025-08-10,Product,San Francisco,IC1-Associate,36,1.65,105308.05,78.8,2.89
+2025-08-10,Product,New York,M1-Manager,47,2.24,126794.21,71.4,3.41
+2025-08-10,Product,London,IC4-Staff,53,2.59,92595.08,80.4,2.96
+2025-08-10,Product,Austin,IC2-Mid,50,1.86,129059.42,75.7,3.22
+2025-08-10,Product,Singapore,IC4-Staff,51,2.56,119152.81,79.5,3.28
+2025-08-10,Product,Berlin,M1-Manager,54,2.93,162767.05,73.9,4.15
+2025-08-10,Finance,San Francisco,IC3-Senior,51,3.07,123231.09,79.0,3.54
+2025-08-10,Finance,New York,IC4-Staff,51,2.48,131655.07,81.4,3.33
+2025-08-10,Finance,London,IC3-Senior,53,2.48,94645.24,69.2,1.24
+2025-08-10,Finance,Austin,IC4-Staff,46,2.45,127264.37,90.7,2.95
+2025-08-10,Finance,Singapore,M1-Manager,55,2.12,72432.6,69.5,4.84
+2025-08-10,Finance,Berlin,IC2-Mid,44,1.93,148244.77,87.2,3.29
+2025-08-10,HR,San Francisco,IC4-Staff,51,2.77,96690.19,74.9,2.69
+2025-08-10,HR,New York,M1-Manager,47,2.52,125839.49,77.0,3.27
+2025-08-10,HR,London,IC2-Mid,51,2.04,98695.65,75.3,1.78
+2025-08-10,HR,Austin,M2-Director,44,2.44,126601.4,77.1,2.74
+2025-08-10,HR,Singapore,IC3-Senior,59,2.59,137472.42,80.4,4.83
+2025-08-10,HR,Berlin,M2-Director,37,2.73,104506.1,76.7,3.52
+2025-08-17,Engineering,San Francisco,IC3-Senior,37,3.1,103752.98,81.7,2.32
+2025-08-17,Engineering,New York,IC1-Associate,45,3.54,110670.47,78.9,3.4
+2025-08-17,Engineering,London,IC3-Senior,33,1.55,139812.82,81.0,3.55
+2025-08-17,Engineering,Austin,M1-Manager,55,1.16,142039.07,81.9,3.12
+2025-08-17,Engineering,Singapore,IC4-Staff,48,3.83,104609.88,70.2,3.32
+2025-08-17,Engineering,Berlin,IC2-Mid,34,2.57,108184.01,69.4,3.51
+2025-08-17,Sales,San Francisco,M2-Director,54,1.85,152681.12,80.1,2.42
+2025-08-17,Sales,New York,IC1-Associate,49,1.97,103937.03,73.8,3.2
+2025-08-17,Sales,London,M1-Manager,30,3.64,134155.07,75.7,5.2
+2025-08-17,Sales,Austin,IC4-Staff,42,2.75,130927.22,75.7,2.23
+2025-08-17,Sales,Singapore,M1-Manager,51,3.19,115088.39,82.8,4.03
+2025-08-17,Sales,Berlin,IC2-Mid,40,2.85,141433.17,72.8,2.5
+2025-08-17,Customer Support,San Francisco,IC3-Senior,31,3.11,96004.17,79.1,2.94
+2025-08-17,Customer Support,New York,IC2-Mid,41,2.15,110380.22,84.4,2.8
+2025-08-17,Customer Support,London,M1-Manager,39,1.89,134537.37,74.2,2.16
+2025-08-17,Customer Support,Austin,IC4-Staff,48,2.49,109225.89,74.6,2.11
+2025-08-17,Customer Support,Singapore,M2-Director,45,2.53,153881.37,75.4,2.35
+2025-08-17,Customer Support,Berlin,IC2-Mid,49,2.19,116487.04,84.9,2.75
+2025-08-17,Marketing,San Francisco,M2-Director,55,3.2,107353.71,84.1,5.37
+2025-08-17,Marketing,New York,M1-Manager,54,2.25,113937.71,69.2,4.68
+2025-08-17,Marketing,London,IC1-Associate,39,2.41,122404.44,84.1,3.53
+2025-08-17,Marketing,Austin,IC2-Mid,48,2.81,101960.84,75.5,4.68
+2025-08-17,Marketing,Singapore,IC4-Staff,46,3.26,144418.9,77.1,2.72
+2025-08-17,Marketing,Berlin,IC3-Senior,59,2.19,130521.03,81.4,3.9
+2025-08-17,Operations,San Francisco,IC3-Senior,39,3.66,111231.24,69.8,4.36
+2025-08-17,Operations,New York,M1-Manager,46,3.02,92594.47,73.4,3.74
+2025-08-17,Operations,London,IC1-Associate,55,2.59,86577.28,76.4,2.87
+2025-08-17,Operations,Austin,IC1-Associate,29,2.47,140957.91,68.4,3.35
+2025-08-17,Operations,Singapore,IC2-Mid,24,2.63,101162.2,80.9,2.83
+2025-08-17,Operations,Berlin,IC2-Mid,43,3.79,127058.22,75.4,5.01
+2025-08-17,Product,San Francisco,IC3-Senior,31,3.52,131450.93,75.7,3.64
+2025-08-17,Product,New York,IC2-Mid,30,2.46,127529.07,80.2,1.86
+2025-08-17,Product,London,IC2-Mid,57,3.26,135636.77,72.2,2.31
+2025-08-17,Product,Austin,IC4-Staff,35,1.5,127913.45,79.6,2.99
+2025-08-17,Product,Singapore,IC3-Senior,42,2.23,133949.84,87.0,3.6
+2025-08-17,Product,Berlin,IC2-Mid,51,2.9,123123.1,77.0,3.42
+2025-08-17,Finance,San Francisco,M2-Director,39,2.29,122762.2,69.2,2.08
+2025-08-17,Finance,New York,M1-Manager,50,2.64,147008.85,82.8,3.71
+2025-08-17,Finance,London,IC1-Associate,58,1.95,99596.77,80.3,1.94
+2025-08-17,Finance,Austin,IC3-Senior,49,2.77,108838.51,79.0,3.92
+2025-08-17,Finance,Singapore,IC3-Senior,46,1.58,131537.57,82.1,3.27
+2025-08-17,Finance,Berlin,IC1-Associate,45,2.97,117672.96,79.8,3.58
+2025-08-17,HR,San Francisco,M2-Director,43,3.18,109410.54,82.8,2.99
+2025-08-17,HR,New York,IC2-Mid,44,2.43,124189.64,80.7,3.36
+2025-08-17,HR,London,IC3-Senior,46,1.96,108021.23,76.0,3.36
+2025-08-17,HR,Austin,IC4-Staff,44,2.34,90060.42,77.8,3.16
+2025-08-17,HR,Singapore,IC2-Mid,33,2.62,126487.37,81.3,4.6
+2025-08-17,HR,Berlin,IC1-Associate,48,2.47,80577.3,85.8,2.89
+2025-08-24,Engineering,San Francisco,IC1-Associate,53,2.81,125198.84,78.7,3.72
+2025-08-24,Engineering,New York,IC2-Mid,38,2.25,131880.89,78.7,2.42
+2025-08-24,Engineering,London,IC3-Senior,43,2.75,108206.38,82.5,5.73
+2025-08-24,Engineering,Austin,M1-Manager,43,3.08,113865.32,84.2,3.56
+2025-08-24,Engineering,Singapore,IC2-Mid,36,2.99,87272.6,82.0,4.38
+2025-08-24,Engineering,Berlin,IC4-Staff,43,3.02,119332.63,83.5,2.92
+2025-08-24,Sales,San Francisco,M2-Director,44,3.03,110096.32,76.4,1.64
+2025-08-24,Sales,New York,IC3-Senior,49,1.48,119419.61,73.8,3.14
+2025-08-24,Sales,London,M1-Manager,30,3.61,120154.0,84.9,4.2
+2025-08-24,Sales,Austin,IC3-Senior,30,1.72,108206.22,85.2,4.19
+2025-08-24,Sales,Singapore,IC3-Senior,42,2.06,135559.73,77.1,4.13
+2025-08-24,Sales,Berlin,IC2-Mid,52,1.77,97791.55,82.0,1.5
+2025-08-24,Customer Support,San Francisco,IC1-Associate,42,2.63,119974.73,76.6,3.03
+2025-08-24,Customer Support,New York,IC4-Staff,39,2.33,76935.52,78.3,2.86
+2025-08-24,Customer Support,London,IC3-Senior,32,3.02,107986.04,80.2,2.28
+2025-08-24,Customer Support,Austin,M1-Manager,46,2.53,101515.82,74.4,4.12
+2025-08-24,Customer Support,Singapore,M2-Director,46,2.13,104130.08,71.8,4.66
+2025-08-24,Customer Support,Berlin,M1-Manager,36,2.54,116527.58,79.6,3.75
+2025-08-24,Marketing,San Francisco,IC3-Senior,40,1.32,97531.32,72.1,3.62
+2025-08-24,Marketing,New York,IC2-Mid,54,1.68,119772.95,82.4,2.68
+2025-08-24,Marketing,London,M1-Manager,41,2.67,133394.56,75.0,3.33
+2025-08-24,Marketing,Austin,M2-Director,34,1.56,112447.32,85.5,1.56
+2025-08-24,Marketing,Singapore,IC3-Senior,32,2.93,107599.8,82.2,2.79
+2025-08-24,Marketing,Berlin,M2-Director,44,2.58,112291.57,79.0,2.67
+2025-08-24,Operations,San Francisco,M1-Manager,51,3.1,106205.31,73.9,1.94
+2025-08-24,Operations,New York,IC2-Mid,48,2.55,115801.94,83.3,2.11
+2025-08-24,Operations,London,M1-Manager,66,2.06,116079.99,72.0,4.23
+2025-08-24,Operations,Austin,IC1-Associate,36,3.19,91719.78,78.9,2.09
+2025-08-24,Operations,Singapore,IC3-Senior,47,2.32,112688.83,76.7,3.15
+2025-08-24,Operations,Berlin,IC4-Staff,49,2.03,118348.95,71.9,4.24
+2025-08-24,Product,San Francisco,IC3-Senior,47,2.58,127630.78,75.7,2.65
+2025-08-24,Product,New York,M2-Director,38,2.74,95782.45,84.0,2.42
+2025-08-24,Product,London,IC2-Mid,50,2.59,120807.38,81.0,2.2
+2025-08-24,Product,Austin,M1-Manager,40,3.0,146733.63,69.4,2.79
+2025-08-24,Product,Singapore,IC4-Staff,44,2.3,110057.6,73.8,3.5
+2025-08-24,Product,Berlin,M1-Manager,33,2.61,96921.92,76.2,3.3
+2025-08-24,Finance,San Francisco,IC2-Mid,50,2.79,114122.22,89.2,2.41
+2025-08-24,Finance,New York,M2-Director,43,2.16,131557.66,80.1,4.32
+2025-08-24,Finance,London,IC3-Senior,38,2.67,124258.79,81.2,1.75
+2025-08-24,Finance,Austin,IC3-Senior,42,3.36,147652.83,77.8,3.27
+2025-08-24,Finance,Singapore,IC3-Senior,47,2.28,110887.49,70.3,3.73
+2025-08-24,Finance,Berlin,IC2-Mid,47,2.79,117458.65,85.1,3.38
+2025-08-24,HR,San Francisco,IC2-Mid,45,2.74,99770.25,75.9,2.71
+2025-08-24,HR,New York,M2-Director,33,3.0,109469.57,77.5,4.3
+2025-08-24,HR,London,M2-Director,47,1.92,126725.38,82.8,2.96
+2025-08-24,HR,Austin,IC4-Staff,32,2.49,94795.28,75.0,3.98
+2025-08-24,HR,Singapore,IC2-Mid,47,3.74,114175.66,70.2,4.2
+2025-08-24,HR,Berlin,IC2-Mid,38,2.59,94934.07,72.2,4.15
+2025-08-31,Engineering,San Francisco,IC2-Mid,48,2.21,133434.63,77.9,4.0
+2025-08-31,Engineering,New York,IC3-Senior,51,1.98,101844.42,77.1,3.09
+2025-08-31,Engineering,London,M2-Director,43,1.88,126985.8,86.0,3.35
+2025-08-31,Engineering,Austin,M1-Manager,52,2.95,148032.58,78.6,2.67
+2025-08-31,Engineering,Singapore,M2-Director,33,3.3,112992.39,78.2,3.34
+2025-08-31,Engineering,Berlin,IC3-Senior,43,2.33,111706.77,81.5,3.97
+2025-08-31,Sales,San Francisco,IC1-Associate,42,3.57,102835.78,80.0,3.29
+2025-08-31,Sales,New York,IC1-Associate,48,2.96,104497.44,75.3,4.33
+2025-08-31,Sales,London,IC1-Associate,46,2.86,114366.79,73.5,3.06
+2025-08-31,Sales,Austin,IC2-Mid,42,3.19,111696.27,70.6,3.11
+2025-08-31,Sales,Singapore,IC4-Staff,46,2.31,123416.99,71.5,3.84
+2025-08-31,Sales,Berlin,IC4-Staff,53,1.78,146520.44,80.1,2.74
+2025-08-31,Customer Support,San Francisco,IC4-Staff,52,3.73,105628.65,85.5,1.92
+2025-08-31,Customer Support,New York,M1-Manager,57,2.18,84452.38,85.1,2.36
+2025-08-31,Customer Support,London,IC2-Mid,52,2.49,135080.93,73.5,2.9
+2025-08-31,Customer Support,Austin,M2-Director,49,3.27,127550.28,72.2,2.92
+2025-08-31,Customer Support,Singapore,IC2-Mid,38,3.93,109661.26,81.3,3.19
+2025-08-31,Customer Support,Berlin,IC3-Senior,45,2.28,111533.49,72.1,3.68
+2025-08-31,Marketing,San Francisco,IC3-Senior,37,3.42,108822.55,80.2,3.81
+2025-08-31,Marketing,New York,M2-Director,48,1.92,118579.98,76.6,4.17
+2025-08-31,Marketing,London,IC2-Mid,55,2.14,90934.34,79.6,4.52
+2025-08-31,Marketing,Austin,M1-Manager,28,1.58,113755.61,82.4,2.57
+2025-08-31,Marketing,Singapore,M1-Manager,45,3.08,126902.15,81.0,3.87
+2025-08-31,Marketing,Berlin,IC2-Mid,57,2.18,119393.77,70.4,3.42
+2025-08-31,Operations,San Francisco,IC1-Associate,42,2.57,100981.51,79.9,2.2
+2025-08-31,Operations,New York,IC1-Associate,46,2.75,110536.82,75.4,2.82
+2025-08-31,Operations,London,M1-Manager,45,2.24,126084.28,68.3,3.16
+2025-08-31,Operations,Austin,IC4-Staff,45,2.44,140161.2,75.3,4.15
+2025-08-31,Operations,Singapore,IC4-Staff,64,3.32,153654.97,78.9,3.14
+2025-08-31,Operations,Berlin,M1-Manager,44,3.02,102538.0,72.8,2.83
+2025-08-31,Product,San Francisco,IC3-Senior,53,1.88,108204.44,75.3,4.21
+2025-08-31,Product,New York,M2-Director,41,3.2,119168.19,75.3,3.4
+2025-08-31,Product,London,IC2-Mid,39,2.35,134173.3,72.4,3.33
+2025-08-31,Product,Austin,IC2-Mid,43,1.42,113394.34,73.3,4.49
+2025-08-31,Product,Singapore,IC2-Mid,41,3.12,111296.46,74.0,3.56
+2025-08-31,Product,Berlin,IC3-Senior,51,3.26,118070.18,76.7,3.17
+2025-08-31,Finance,San Francisco,M1-Manager,49,2.1,73054.86,82.9,2.26
+2025-08-31,Finance,New York,IC4-Staff,33,1.95,119450.89,70.7,3.91
+2025-08-31,Finance,London,IC3-Senior,52,2.64,116721.1,77.2,3.14
+2025-08-31,Finance,Austin,IC1-Associate,45,1.88,107593.74,74.5,2.76
+2025-08-31,Finance,Singapore,M2-Director,30,3.01,134445.86,74.2,3.7
+2025-08-31,Finance,Berlin,IC1-Associate,40,1.71,116240.31,83.9,3.09
+2025-08-31,HR,San Francisco,IC3-Senior,40,2.53,100057.2,77.6,3.15
+2025-08-31,HR,New York,IC2-Mid,48,2.25,97373.46,73.3,3.19
+2025-08-31,HR,London,IC3-Senior,55,3.93,84255.37,77.1,3.12
+2025-08-31,HR,Austin,M1-Manager,56,2.21,107167.5,79.1,2.15
+2025-08-31,HR,Singapore,IC1-Associate,40,2.65,123750.75,81.9,3.85
+2025-08-31,HR,Berlin,M1-Manager,55,1.9,120567.09,74.7,2.73
+2025-09-07,Engineering,San Francisco,IC4-Staff,49,1.5,108474.13,76.8,4.43
+2025-09-07,Engineering,New York,IC4-Staff,51,2.32,107357.23,75.7,3.52
+2025-09-07,Engineering,London,IC2-Mid,44,2.13,105947.98,85.5,3.59
+2025-09-07,Engineering,Austin,IC3-Senior,43,3.5,149941.71,76.7,3.09
+2025-09-07,Engineering,Singapore,IC2-Mid,38,3.36,152072.89,83.0,4.21
+2025-09-07,Engineering,Berlin,IC2-Mid,45,1.86,101323.56,78.6,2.63
+2025-09-07,Sales,San Francisco,IC4-Staff,34,2.66,105301.32,83.0,4.04
+2025-09-07,Sales,New York,IC1-Associate,41,2.79,85181.11,83.5,4.69
+2025-09-07,Sales,London,M2-Director,54,2.07,130764.4,89.0,2.19
+2025-09-07,Sales,Austin,IC2-Mid,52,2.12,121121.61,75.6,2.74
+2025-09-07,Sales,Singapore,IC3-Senior,39,2.41,94014.67,85.3,3.5
+2025-09-07,Sales,Berlin,IC2-Mid,38,3.02,140392.46,75.1,2.95
+2025-09-07,Customer Support,San Francisco,IC2-Mid,38,2.38,100611.05,79.5,3.01
+2025-09-07,Customer Support,New York,IC1-Associate,56,1.98,116179.06,79.0,3.86
+2025-09-07,Customer Support,London,IC1-Associate,41,1.36,127467.56,74.0,3.39
+2025-09-07,Customer Support,Austin,IC2-Mid,31,2.79,125966.3,79.6,2.93
+2025-09-07,Customer Support,Singapore,IC1-Associate,45,2.68,96328.08,75.1,4.14
+2025-09-07,Customer Support,Berlin,IC3-Senior,46,2.52,111685.71,78.9,4.69
+2025-09-07,Marketing,San Francisco,IC1-Associate,56,3.17,140447.85,78.7,3.18
+2025-09-07,Marketing,New York,IC2-Mid,32,2.85,103961.18,76.3,2.83
+2025-09-07,Marketing,London,IC4-Staff,44,2.32,135937.48,75.6,2.75
+2025-09-07,Marketing,Austin,IC3-Senior,41,3.17,151080.37,69.6,2.56
+2025-09-07,Marketing,Singapore,IC3-Senior,44,2.07,95786.19,73.0,2.19
+2025-09-07,Marketing,Berlin,M2-Director,47,2.93,145359.72,81.9,2.65
+2025-09-07,Operations,San Francisco,M2-Director,42,2.86,111154.28,76.7,4.07
+2025-09-07,Operations,New York,IC1-Associate,47,2.88,126464.35,75.3,2.82
+2025-09-07,Operations,London,IC1-Associate,42,2.79,144982.31,75.9,3.89
+2025-09-07,Operations,Austin,M1-Manager,65,1.83,100927.35,76.2,3.3
+2025-09-07,Operations,Singapore,IC4-Staff,41,2.84,139404.5,73.5,3.17
+2025-09-07,Operations,Berlin,M1-Manager,41,2.1,95143.9,76.6,2.85
+2025-09-07,Product,San Francisco,M1-Manager,48,2.13,99156.67,79.1,3.38
+2025-09-07,Product,New York,M1-Manager,42,2.13,130638.37,73.1,3.22
+2025-09-07,Product,London,IC2-Mid,53,2.28,112679.72,75.8,2.99
+2025-09-07,Product,Austin,IC2-Mid,46,3.21,109343.49,76.8,3.94
+2025-09-07,Product,Singapore,M1-Manager,51,1.92,113127.83,76.7,1.79
+2025-09-07,Product,Berlin,IC4-Staff,45,3.45,123363.39,74.9,3.14
+2025-09-07,Finance,San Francisco,IC2-Mid,48,2.42,112003.97,71.4,4.08
+2025-09-07,Finance,New York,M1-Manager,43,2.38,129064.45,83.2,3.24
+2025-09-07,Finance,London,IC3-Senior,42,2.0,119078.28,76.4,3.55
+2025-09-07,Finance,Austin,IC4-Staff,39,2.85,136896.03,83.1,2.39
+2025-09-07,Finance,Singapore,IC1-Associate,39,1.39,113303.16,85.9,3.53
+2025-09-07,Finance,Berlin,IC3-Senior,40,2.57,136547.7,83.2,2.6
+2025-09-07,HR,San Francisco,IC3-Senior,49,1.6,107165.53,79.4,2.07
+2025-09-07,HR,New York,IC3-Senior,55,2.01,145964.78,76.9,2.92
+2025-09-07,HR,London,IC1-Associate,41,3.25,122064.21,72.0,2.46
+2025-09-07,HR,Austin,IC3-Senior,50,2.21,69118.34,71.0,3.41
+2025-09-07,HR,Singapore,IC2-Mid,49,2.85,116525.14,84.8,3.49
+2025-09-07,HR,Berlin,M2-Director,46,3.04,98036.5,88.0,4.53
+2025-09-14,Engineering,San Francisco,IC1-Associate,25,2.62,96643.58,76.8,3.98
+2025-09-14,Engineering,New York,M2-Director,34,3.79,112832.0,84.7,3.24
+2025-09-14,Engineering,London,M2-Director,51,1.47,89087.32,83.9,4.8
+2025-09-14,Engineering,Austin,M1-Manager,47,5.33,102173.58,76.0,3.85
+2025-09-14,Engineering,Singapore,IC1-Associate,46,1.58,112264.88,84.2,3.85
+2025-09-14,Engineering,Berlin,M2-Director,40,3.1,111914.01,72.3,2.43
+2025-09-14,Sales,San Francisco,M2-Director,40,1.93,83970.7,77.9,3.18
+2025-09-14,Sales,New York,M2-Director,52,2.95,140355.15,81.4,3.1
+2025-09-14,Sales,London,IC3-Senior,52,1.57,105092.55,73.4,2.84
+2025-09-14,Sales,Austin,IC1-Associate,45,1.93,156044.68,73.3,2.61
+2025-09-14,Sales,Singapore,IC2-Mid,42,2.78,100538.18,85.0,3.66
+2025-09-14,Sales,Berlin,IC1-Associate,45,2.4,102633.15,72.0,3.72
+2025-09-14,Customer Support,San Francisco,IC4-Staff,50,2.15,130346.9,86.8,2.64
+2025-09-14,Customer Support,New York,IC3-Senior,50,1.65,95523.68,85.3,2.93
+2025-09-14,Customer Support,London,M2-Director,50,2.18,103794.17,85.1,1.96
+2025-09-14,Customer Support,Austin,IC2-Mid,42,1.73,134824.01,76.5,3.5
+2025-09-14,Customer Support,Singapore,IC2-Mid,42,2.57,159293.55,75.2,2.95
+2025-09-14,Customer Support,Berlin,IC4-Staff,52,2.89,137856.02,79.1,3.0
+2025-09-14,Marketing,San Francisco,M1-Manager,40,1.71,101238.6,84.0,3.14
+2025-09-14,Marketing,New York,M2-Director,45,1.69,82135.5,80.9,4.0
+2025-09-14,Marketing,London,M2-Director,48,2.82,156951.69,83.7,3.18
+2025-09-14,Marketing,Austin,IC4-Staff,60,3.4,113772.35,77.6,2.07
+2025-09-14,Marketing,Singapore,IC4-Staff,45,2.42,100143.62,70.7,3.79
+2025-09-14,Marketing,Berlin,IC4-Staff,33,2.61,143899.91,85.9,4.33
+2025-09-14,Operations,San Francisco,M2-Director,53,2.75,127185.89,85.6,3.35
+2025-09-14,Operations,New York,IC3-Senior,55,2.91,124957.47,71.4,3.27
+2025-09-14,Operations,London,M2-Director,46,3.27,110128.72,77.4,2.87
+2025-09-14,Operations,Austin,IC1-Associate,32,1.54,118367.93,72.9,3.51
+2025-09-14,Operations,Singapore,IC4-Staff,48,2.92,136191.39,80.4,3.33
+2025-09-14,Operations,Berlin,IC1-Associate,37,2.96,84975.73,81.8,2.67
+2025-09-14,Product,San Francisco,IC2-Mid,35,3.01,87471.09,82.6,3.02
+2025-09-14,Product,New York,IC3-Senior,47,2.36,123725.22,90.7,2.96
+2025-09-14,Product,London,M1-Manager,36,2.02,95168.73,68.9,2.98
+2025-09-14,Product,Austin,M2-Director,30,3.31,128943.82,72.4,4.39
+2025-09-14,Product,Singapore,IC2-Mid,39,3.04,75093.06,77.4,3.18
+2025-09-14,Product,Berlin,IC4-Staff,44,1.86,123184.68,79.3,3.15
+2025-09-14,Finance,San Francisco,IC1-Associate,49,2.83,85880.88,84.5,4.01
+2025-09-14,Finance,New York,IC1-Associate,37,2.73,115039.3,75.7,2.1
+2025-09-14,Finance,London,IC1-Associate,52,2.41,107388.3,75.2,3.35
+2025-09-14,Finance,Austin,IC2-Mid,46,2.17,122709.89,81.0,1.6
+2025-09-14,Finance,Singapore,IC4-Staff,44,2.21,94174.06,83.8,2.65
+2025-09-14,Finance,Berlin,IC3-Senior,46,1.97,120076.13,71.3,2.96
+2025-09-14,HR,San Francisco,M2-Director,43,2.62,105079.91,73.7,2.06
+2025-09-14,HR,New York,M2-Director,47,2.63,122398.51,76.2,3.82
+2025-09-14,HR,London,IC1-Associate,29,2.83,151750.81,81.8,3.49
+2025-09-14,HR,Austin,IC1-Associate,45,3.14,130065.84,75.7,3.49
+2025-09-14,HR,Singapore,IC3-Senior,60,1.69,156334.9,82.9,2.08
+2025-09-14,HR,Berlin,IC1-Associate,46,1.93,129808.28,78.9,3.47
+2025-09-21,Engineering,San Francisco,M2-Director,48,1.77,148832.49,78.9,3.5
+2025-09-21,Engineering,New York,IC3-Senior,51,2.87,112191.75,70.3,4.21
+2025-09-21,Engineering,London,IC2-Mid,36,1.67,124564.74,74.6,3.11
+2025-09-21,Engineering,Austin,M1-Manager,33,4.85,95632.47,72.6,2.18
+2025-09-21,Engineering,Singapore,M2-Director,41,2.94,109323.62,76.9,3.2
+2025-09-21,Engineering,Berlin,IC2-Mid,42,1.58,100482.83,77.1,2.83
+2025-09-21,Sales,San Francisco,IC4-Staff,54,1.7,126078.0,71.0,4.77
+2025-09-21,Sales,New York,IC2-Mid,35,3.11,143151.86,72.2,3.84
+2025-09-21,Sales,London,IC2-Mid,49,2.46,149879.39,68.2,2.11
+2025-09-21,Sales,Austin,IC3-Senior,39,2.3,87426.33,77.9,2.02
+2025-09-21,Sales,Singapore,M2-Director,41,2.13,91456.8,80.8,3.67
+2025-09-21,Sales,Berlin,M2-Director,36,1.62,128021.46,82.6,3.37
+2025-09-21,Customer Support,San Francisco,IC3-Senior,49,2.57,123507.52,72.6,3.62
+2025-09-21,Customer Support,New York,M2-Director,44,2.55,107737.04,85.3,3.86
+2025-09-21,Customer Support,London,IC4-Staff,47,3.07,131407.19,81.8,2.95
+2025-09-21,Customer Support,Austin,IC4-Staff,44,2.77,115827.3,72.0,3.01
+2025-09-21,Customer Support,Singapore,M1-Manager,44,1.75,121031.24,84.8,1.6
+2025-09-21,Customer Support,Berlin,M2-Director,41,2.03,108462.84,77.3,3.03
+2025-09-21,Marketing,San Francisco,IC4-Staff,33,2.32,131236.79,76.1,4.26
+2025-09-21,Marketing,New York,IC4-Staff,29,2.54,104971.11,72.9,4.46
+2025-09-21,Marketing,London,IC2-Mid,50,2.63,156806.97,85.1,4.05
+2025-09-21,Marketing,Austin,M2-Director,52,2.9,90997.84,83.5,1.79
+2025-09-21,Marketing,Singapore,IC3-Senior,50,2.46,131180.26,74.7,3.3
+2025-09-21,Marketing,Berlin,IC3-Senior,45,2.35,92495.44,74.1,3.21
+2025-09-21,Operations,San Francisco,M1-Manager,43,2.71,101682.88,74.9,3.36
+2025-09-21,Operations,New York,IC2-Mid,60,3.45,126309.94,71.6,3.49
+2025-09-21,Operations,London,IC1-Associate,44,2.9,157277.0,69.2,3.03
+2025-09-21,Operations,Austin,IC2-Mid,49,2.13,111526.34,66.3,1.77
+2025-09-21,Operations,Singapore,IC3-Senior,49,2.18,73227.37,78.7,3.72
+2025-09-21,Operations,Berlin,IC4-Staff,48,2.64,123487.51,74.8,3.0
+2025-09-21,Product,San Francisco,IC4-Staff,53,3.51,118742.67,84.7,3.9
+2025-09-21,Product,New York,IC1-Associate,48,2.36,95728.0,81.4,2.57
+2025-09-21,Product,London,M1-Manager,43,2.2,107287.88,68.7,3.73
+2025-09-21,Product,Austin,IC1-Associate,42,3.26,127634.88,76.2,2.48
+2025-09-21,Product,Singapore,M1-Manager,48,2.16,115974.94,75.5,2.61
+2025-09-21,Product,Berlin,M1-Manager,47,2.26,124466.87,72.0,3.4
+2025-09-21,Finance,San Francisco,IC4-Staff,30,2.51,108040.58,73.6,3.82
+2025-09-21,Finance,New York,IC3-Senior,43,3.11,143111.96,77.1,2.64
+2025-09-21,Finance,London,M1-Manager,29,2.09,102304.3,81.2,3.6
+2025-09-21,Finance,Austin,IC2-Mid,42,2.31,136364.61,82.9,4.87
+2025-09-21,Finance,Singapore,M1-Manager,38,2.99,133262.55,82.2,3.83
+2025-09-21,Finance,Berlin,IC3-Senior,37,3.14,102465.06,79.8,2.11
+2025-09-21,HR,San Francisco,IC2-Mid,39,3.32,147301.45,81.0,4.44
+2025-09-21,HR,New York,IC4-Staff,45,1.89,109011.99,76.4,2.79
+2025-09-21,HR,London,M2-Director,44,2.08,94659.2,73.9,3.89
+2025-09-21,HR,Austin,M2-Director,48,2.18,112040.0,78.7,4.55
+2025-09-21,HR,Singapore,IC2-Mid,53,2.52,89880.3,77.3,2.51
+2025-09-21,HR,Berlin,M1-Manager,39,2.19,121673.64,78.0,4.09
+2025-09-28,Engineering,San Francisco,IC2-Mid,48,2.1,122807.46,81.2,1.78
+2025-09-28,Engineering,New York,IC1-Associate,36,2.72,144175.19,85.6,3.59
+2025-09-28,Engineering,London,IC1-Associate,42,2.24,122807.49,76.2,3.37
+2025-09-28,Engineering,Austin,IC1-Associate,36,6.09,111306.17,71.0,2.66
+2025-09-28,Engineering,Singapore,M1-Manager,54,3.32,136820.21,88.4,3.34
+2025-09-28,Engineering,Berlin,IC4-Staff,38,3.44,148275.94,79.4,2.15
+2025-09-28,Sales,San Francisco,M2-Director,38,3.57,95310.45,76.1,3.48
+2025-09-28,Sales,New York,M1-Manager,55,2.31,104436.7,71.8,1.39
+2025-09-28,Sales,London,IC3-Senior,34,3.17,123861.71,76.9,3.16
+2025-09-28,Sales,Austin,M1-Manager,53,2.17,77153.19,73.7,2.66
+2025-09-28,Sales,Singapore,IC4-Staff,43,2.04,160351.34,74.2,3.69
+2025-09-28,Sales,Berlin,M1-Manager,33,2.3,146845.57,78.7,1.63
+2025-09-28,Customer Support,San Francisco,M1-Manager,40,2.46,123423.35,79.0,3.91
+2025-09-28,Customer Support,New York,M1-Manager,37,2.42,127585.82,76.6,1.91
+2025-09-28,Customer Support,London,M2-Director,44,1.72,117169.7,71.4,2.9
+2025-09-28,Customer Support,Austin,IC2-Mid,49,2.08,126636.58,81.0,3.33
+2025-09-28,Customer Support,Singapore,IC4-Staff,48,3.42,138554.13,74.6,3.36
+2025-09-28,Customer Support,Berlin,IC2-Mid,28,2.0,111783.74,74.9,3.8
+2025-09-28,Marketing,San Francisco,IC4-Staff,48,2.45,110079.21,78.3,3.67
+2025-09-28,Marketing,New York,IC3-Senior,35,2.36,87253.39,82.9,3.27
+2025-09-28,Marketing,London,IC2-Mid,34,2.7,92632.97,80.7,1.81
+2025-09-28,Marketing,Austin,IC4-Staff,38,2.8,120096.35,65.6,3.12
+2025-09-28,Marketing,Singapore,IC1-Associate,57,2.09,103066.8,78.6,4.23
+2025-09-28,Marketing,Berlin,IC1-Associate,44,2.83,103099.53,77.6,3.04
+2025-09-28,Operations,San Francisco,IC4-Staff,46,3.17,128787.93,72.8,2.33
+2025-09-28,Operations,New York,IC1-Associate,45,2.75,108547.37,75.0,3.04
+2025-09-28,Operations,London,IC4-Staff,46,3.15,153102.45,76.7,2.53
+2025-09-28,Operations,Austin,M2-Director,44,2.86,141185.49,80.7,4.7
+2025-09-28,Operations,Singapore,IC3-Senior,51,2.04,82363.08,70.0,2.6
+2025-09-28,Operations,Berlin,M1-Manager,51,2.09,142290.09,78.1,1.99
+2025-09-28,Product,San Francisco,IC4-Staff,42,2.0,89741.12,81.4,3.11
+2025-09-28,Product,New York,IC4-Staff,28,2.6,108362.6,83.0,2.57
+2025-09-28,Product,London,IC4-Staff,54,1.9,92058.62,86.6,3.57
+2025-09-28,Product,Austin,M1-Manager,37,2.59,98911.3,70.5,2.32
+2025-09-28,Product,Singapore,M2-Director,48,2.81,92775.87,68.7,2.76
+2025-09-28,Product,Berlin,IC1-Associate,58,3.35,107421.45,81.8,2.0
+2025-09-28,Finance,San Francisco,IC2-Mid,51,2.82,115110.37,83.0,2.75
+2025-09-28,Finance,New York,IC2-Mid,38,2.12,135791.82,76.9,3.05
+2025-09-28,Finance,London,IC2-Mid,44,2.34,111463.15,78.2,2.56
+2025-09-28,Finance,Austin,IC3-Senior,38,3.22,114816.25,87.7,3.43
+2025-09-28,Finance,Singapore,IC4-Staff,43,3.68,124094.7,76.0,2.91
+2025-09-28,Finance,Berlin,M2-Director,52,2.05,106440.96,83.6,3.13
+2025-09-28,HR,San Francisco,IC2-Mid,47,2.57,113882.4,79.2,4.03
+2025-09-28,HR,New York,IC1-Associate,47,2.3,107778.38,80.6,1.97
+2025-09-28,HR,London,IC3-Senior,35,1.8,130454.63,76.8,1.69
+2025-09-28,HR,Austin,IC3-Senior,38,2.77,72597.34,83.4,4.46
+2025-09-28,HR,Singapore,IC2-Mid,48,1.86,117421.28,83.9,2.99
+2025-09-28,HR,Berlin,M2-Director,48,2.93,122638.66,68.6,2.45
+2025-10-05,Engineering,San Francisco,IC4-Staff,45,2.11,105596.53,82.1,2.75
+2025-10-05,Engineering,New York,M1-Manager,52,2.05,128365.49,76.9,2.62
+2025-10-05,Engineering,London,IC4-Staff,46,1.85,83808.53,75.5,2.97
+2025-10-05,Engineering,Austin,M1-Manager,51,7.71,121598.04,67.8,2.53
+2025-10-05,Engineering,Singapore,IC3-Senior,34,2.41,107723.98,75.7,2.36
+2025-10-05,Engineering,Berlin,IC1-Associate,41,2.89,98489.0,80.7,1.68
+2025-10-05,Sales,San Francisco,IC3-Senior,52,2.58,140172.71,76.9,3.82
+2025-10-05,Sales,New York,M2-Director,32,3.49,114208.47,80.4,2.5
+2025-10-05,Sales,London,IC4-Staff,49,1.93,115948.1,72.3,3.68
+2025-10-05,Sales,Austin,M2-Director,45,2.89,119415.25,73.3,2.21
+2025-10-05,Sales,Singapore,IC3-Senior,54,3.17,80527.62,83.9,4.0
+2025-10-05,Sales,Berlin,IC1-Associate,40,2.53,100663.35,78.4,2.02
+2025-10-05,Customer Support,San Francisco,M2-Director,56,3.84,95326.18,69.2,2.73
+2025-10-05,Customer Support,New York,M1-Manager,27,2.56,157283.95,73.4,3.96
+2025-10-05,Customer Support,London,M1-Manager,46,3.09,139998.12,88.2,4.34
+2025-10-05,Customer Support,Austin,IC3-Senior,48,2.99,106988.97,82.5,3.63
+2025-10-05,Customer Support,Singapore,M1-Manager,49,3.13,116130.22,72.5,2.78
+2025-10-05,Customer Support,Berlin,IC4-Staff,46,3.13,136570.63,75.9,3.21
+2025-10-05,Marketing,San Francisco,IC2-Mid,48,2.32,102962.2,68.9,4.03
+2025-10-05,Marketing,New York,M2-Director,40,1.79,119337.04,81.2,1.96
+2025-10-05,Marketing,London,IC3-Senior,48,1.34,130580.06,75.7,2.85
+2025-10-05,Marketing,Austin,IC2-Mid,41,1.5,96219.9,80.6,3.83
+2025-10-05,Marketing,Singapore,IC1-Associate,42,2.79,105250.83,75.1,3.13
+2025-10-05,Marketing,Berlin,M1-Manager,46,2.55,101649.84,78.7,2.03
+2025-10-05,Operations,San Francisco,IC3-Senior,53,2.68,131992.76,84.3,2.26
+2025-10-05,Operations,New York,IC2-Mid,35,2.61,79093.97,77.9,3.27
+2025-10-05,Operations,London,IC2-Mid,39,2.01,99777.59,74.5,2.99
+2025-10-05,Operations,Austin,IC1-Associate,54,2.62,126072.14,77.1,4.51
+2025-10-05,Operations,Singapore,IC4-Staff,43,1.74,95846.31,79.5,2.36
+2025-10-05,Operations,Berlin,M2-Director,33,2.06,120985.75,70.0,1.98
+2025-10-05,Product,San Francisco,IC1-Associate,50,2.61,113532.17,83.4,3.57
+2025-10-05,Product,New York,IC1-Associate,40,1.42,134518.91,81.4,2.89
+2025-10-05,Product,London,IC2-Mid,46,2.9,88546.87,83.5,3.51
+2025-10-05,Product,Austin,M1-Manager,62,2.0,107989.67,80.1,3.18
+2025-10-05,Product,Singapore,M1-Manager,48,2.44,94640.76,78.0,2.43
+2025-10-05,Product,Berlin,IC2-Mid,33,1.78,131169.96,82.7,4.11
+2025-10-05,Finance,San Francisco,M2-Director,60,1.89,103183.74,74.7,3.19
+2025-10-05,Finance,New York,IC1-Associate,35,2.56,150098.24,76.4,2.85
+2025-10-05,Finance,London,IC3-Senior,57,1.53,105523.32,82.1,2.85
+2025-10-05,Finance,Austin,IC2-Mid,35,3.27,104869.58,79.1,3.08
+2025-10-05,Finance,Singapore,IC4-Staff,42,2.86,90758.62,78.0,3.95
+2025-10-05,Finance,Berlin,IC2-Mid,41,3.3,95003.92,80.1,3.78
+2025-10-05,HR,San Francisco,M1-Manager,39,3.11,89611.59,70.7,2.16
+2025-10-05,HR,New York,IC1-Associate,32,2.61,137077.35,85.4,4.62
+2025-10-05,HR,London,M1-Manager,38,2.55,154805.26,78.8,3.92
+2025-10-05,HR,Austin,IC3-Senior,47,2.64,121746.5,74.9,1.55
+2025-10-05,HR,Singapore,IC2-Mid,30,1.83,105608.2,80.1,2.23
+2025-10-05,HR,Berlin,IC4-Staff,48,2.55,92977.76,81.5,1.83
+2025-10-12,Engineering,San Francisco,IC1-Associate,46,1.77,91805.35,77.9,2.71
+2025-10-12,Engineering,New York,IC4-Staff,56,2.69,99842.22,82.1,2.19
+2025-10-12,Engineering,London,M1-Manager,48,1.92,112465.59,80.9,4.17
+2025-10-12,Engineering,Austin,IC4-Staff,50,7.53,100478.13,68.2,2.66
+2025-10-12,Engineering,Singapore,IC2-Mid,38,2.88,141822.26,80.0,2.78
+2025-10-12,Engineering,Berlin,IC3-Senior,36,2.43,118292.46,80.3,1.72
+2025-10-12,Sales,San Francisco,IC1-Associate,29,1.99,113614.07,84.9,2.77
+2025-10-12,Sales,New York,M2-Director,50,3.03,100788.03,76.7,3.79
+2025-10-12,Sales,London,M2-Director,56,2.13,111267.72,69.6,3.17
+2025-10-12,Sales,Austin,IC2-Mid,46,3.59,138397.68,82.7,2.63
+2025-10-12,Sales,Singapore,IC1-Associate,39,1.58,113611.29,68.6,3.41
+2025-10-12,Sales,Berlin,IC3-Senior,32,2.96,102669.67,80.1,4.63
+2025-10-12,Customer Support,San Francisco,M2-Director,38,2.28,119073.26,79.7,4.77
+2025-10-12,Customer Support,New York,IC1-Associate,32,2.23,105585.27,86.8,2.61
+2025-10-12,Customer Support,London,IC2-Mid,55,2.19,106815.15,82.1,2.38
+2025-10-12,Customer Support,Austin,IC4-Staff,45,2.78,150032.38,79.0,3.71
+2025-10-12,Customer Support,Singapore,IC3-Senior,48,2.53,108751.44,76.0,2.84
+2025-10-12,Customer Support,Berlin,IC3-Senior,33,1.95,129034.53,73.6,3.15
+2025-10-12,Marketing,San Francisco,IC1-Associate,54,2.49,133624.12,76.0,3.07
+2025-10-12,Marketing,New York,IC2-Mid,46,2.34,86609.89,69.8,2.52
+2025-10-12,Marketing,London,IC1-Associate,32,2.7,89032.61,80.9,3.38
+2025-10-12,Marketing,Austin,IC1-Associate,49,2.87,124381.88,75.2,1.53
+2025-10-12,Marketing,Singapore,M1-Manager,58,3.44,139827.76,75.9,3.13
+2025-10-12,Marketing,Berlin,IC4-Staff,49,2.27,76895.75,70.7,4.2
+2025-10-12,Operations,San Francisco,IC4-Staff,43,3.06,126133.33,85.5,3.82
+2025-10-12,Operations,New York,IC4-Staff,34,2.49,102512.94,80.5,4.04
+2025-10-12,Operations,London,IC3-Senior,50,1.13,102247.21,70.6,2.85
+2025-10-12,Operations,Austin,IC1-Associate,36,2.19,85633.88,78.8,4.18
+2025-10-12,Operations,Singapore,IC3-Senior,43,2.29,89615.24,78.0,2.89
+2025-10-12,Operations,Berlin,IC3-Senior,36,2.9,100373.77,76.3,2.34
+2025-10-12,Product,San Francisco,IC4-Staff,38,2.39,107939.87,77.6,4.54
+2025-10-12,Product,New York,M2-Director,37,2.64,106068.95,83.0,2.95
+2025-10-12,Product,London,IC4-Staff,40,2.74,114937.34,77.4,3.08
+2025-10-12,Product,Austin,M1-Manager,37,1.92,123229.16,88.8,3.71
+2025-10-12,Product,Singapore,M2-Director,39,1.79,120535.34,62.8,2.82
+2025-10-12,Product,Berlin,IC4-Staff,41,2.63,130815.79,88.0,4.28
+2025-10-12,Finance,San Francisco,IC3-Senior,50,2.04,86142.77,86.8,4.91
+2025-10-12,Finance,New York,IC4-Staff,56,1.62,107766.55,78.5,3.61
+2025-10-12,Finance,London,IC2-Mid,31,2.53,106806.03,75.5,2.99
+2025-10-12,Finance,Austin,IC1-Associate,48,3.11,105054.22,77.8,3.32
+2025-10-12,Finance,Singapore,M1-Manager,46,2.67,118616.4,78.3,4.38
+2025-10-12,Finance,Berlin,IC1-Associate,34,3.16,93169.7,77.2,0.8
+2025-10-12,HR,San Francisco,M1-Manager,39,2.44,124144.22,79.1,2.63
+2025-10-12,HR,New York,IC2-Mid,46,2.45,132993.36,60.7,3.9
+2025-10-12,HR,London,IC1-Associate,32,2.28,121697.47,76.6,2.31
+2025-10-12,HR,Austin,IC3-Senior,47,2.44,101937.69,78.7,2.34
+2025-10-12,HR,Singapore,M2-Director,44,2.19,99701.65,81.6,2.55
+2025-10-12,HR,Berlin,M2-Director,49,2.31,86366.23,76.0,3.5
+2025-10-19,Engineering,San Francisco,IC4-Staff,41,2.33,111271.09,84.5,4.22
+2025-10-19,Engineering,New York,IC2-Mid,39,2.01,135083.11,76.1,3.07
+2025-10-19,Engineering,London,IC1-Associate,37,1.41,99918.82,75.0,2.65
+2025-10-19,Engineering,Austin,M1-Manager,51,9.13,114792.31,66.3,1.92
+2025-10-19,Engineering,Singapore,M1-Manager,44,2.07,141490.76,74.0,3.34
+2025-10-19,Engineering,Berlin,IC3-Senior,49,2.02,132422.41,73.7,3.26
+2025-10-19,Sales,San Francisco,IC1-Associate,43,1.92,126689.25,79.7,4.32
+2025-10-19,Sales,New York,M1-Manager,37,1.93,124455.04,79.4,3.67
+2025-10-19,Sales,London,M2-Director,45,2.3,123520.06,80.6,3.18
+2025-10-19,Sales,Austin,IC3-Senior,47,2.63,104097.76,69.2,1.79
+2025-10-19,Sales,Singapore,IC3-Senior,25,2.39,94614.51,82.2,2.84
+2025-10-19,Sales,Berlin,M1-Manager,46,2.08,99973.06,75.3,3.47
+2025-10-19,Customer Support,San Francisco,IC1-Associate,45,2.54,102471.37,76.3,2.96
+2025-10-19,Customer Support,New York,IC1-Associate,55,3.26,122123.77,77.3,3.29
+2025-10-19,Customer Support,London,IC3-Senior,44,2.27,118278.32,76.8,3.38
+2025-10-19,Customer Support,Austin,IC4-Staff,34,1.41,107128.07,78.4,2.79
+2025-10-19,Customer Support,Singapore,M1-Manager,31,2.71,100492.24,72.5,2.36
+2025-10-19,Customer Support,Berlin,M1-Manager,49,1.4,108873.96,81.6,3.2
+2025-10-19,Marketing,San Francisco,M2-Director,51,1.21,120689.58,77.2,2.66
+2025-10-19,Marketing,New York,M1-Manager,46,2.56,95876.77,88.5,2.99
+2025-10-19,Marketing,London,M1-Manager,38,2.47,123204.26,77.7,2.76
+2025-10-19,Marketing,Austin,IC1-Associate,42,2.95,106047.27,78.5,3.85
+2025-10-19,Marketing,Singapore,M1-Manager,43,3.58,106333.32,70.6,2.61
+2025-10-19,Marketing,Berlin,M2-Director,46,2.82,72835.39,76.0,3.44
+2025-10-19,Operations,San Francisco,M1-Manager,34,1.83,121475.65,78.8,4.49
+2025-10-19,Operations,New York,M1-Manager,32,1.83,92192.97,78.9,3.04
+2025-10-19,Operations,London,IC3-Senior,47,1.79,136226.74,76.6,3.83
+2025-10-19,Operations,Austin,IC2-Mid,48,1.73,88481.15,84.8,3.86
+2025-10-19,Operations,Singapore,IC2-Mid,53,3.52,70419.73,79.1,2.83
+2025-10-19,Operations,Berlin,IC2-Mid,35,3.78,74333.73,71.2,3.28
+2025-10-19,Product,San Francisco,IC1-Associate,45,2.72,143766.0,70.9,3.37
+2025-10-19,Product,New York,M2-Director,46,2.57,94371.54,75.7,4.51
+2025-10-19,Product,London,M1-Manager,43,2.12,111764.39,81.4,2.81
+2025-10-19,Product,Austin,M1-Manager,42,2.0,106962.83,74.8,3.26
+2025-10-19,Product,Singapore,M2-Director,43,3.37,134350.38,82.3,3.2
+2025-10-19,Product,Berlin,IC1-Associate,40,2.76,83367.87,71.5,3.22
+2025-10-19,Finance,San Francisco,M2-Director,43,2.37,128401.53,90.8,3.21
+2025-10-19,Finance,New York,IC2-Mid,47,3.54,101902.23,87.0,2.96
+2025-10-19,Finance,London,M1-Manager,47,2.75,108898.58,71.5,2.5
+2025-10-19,Finance,Austin,IC2-Mid,33,2.02,92344.82,89.6,3.24
+2025-10-19,Finance,Singapore,IC4-Staff,55,3.38,109112.68,80.3,2.96
+2025-10-19,Finance,Berlin,IC2-Mid,48,2.31,113514.75,77.8,3.27
+2025-10-19,HR,San Francisco,IC1-Associate,48,3.43,96415.63,76.9,2.73
+2025-10-19,HR,New York,M2-Director,36,2.75,90484.39,73.4,5.15
+2025-10-19,HR,London,IC1-Associate,60,2.37,79185.99,81.1,2.95
+2025-10-19,HR,Austin,M1-Manager,34,1.87,119095.7,75.5,2.04
+2025-10-19,HR,Singapore,IC3-Senior,35,3.73,94260.48,71.2,4.42
+2025-10-19,HR,Berlin,IC4-Staff,37,2.32,104158.85,86.1,2.76
+2025-10-26,Engineering,San Francisco,IC1-Associate,29,3.63,124605.44,72.6,3.16
+2025-10-26,Engineering,New York,IC4-Staff,46,2.24,79041.61,83.5,2.09
+2025-10-26,Engineering,London,M2-Director,53,2.93,102468.43,69.2,3.64
+2025-10-26,Engineering,Austin,M2-Director,40,9.2,112553.84,60.7,1.1
+2025-10-26,Engineering,Singapore,M1-Manager,37,1.8,93724.08,77.1,2.77
+2025-10-26,Engineering,Berlin,M1-Manager,56,2.37,94993.19,70.6,3.24
+2025-10-26,Sales,San Francisco,M2-Director,32,1.84,79868.02,76.5,4.68
+2025-10-26,Sales,New York,IC2-Mid,35,1.92,126799.98,84.6,4.64
+2025-10-26,Sales,London,IC3-Senior,45,2.97,87248.63,80.9,5.22
+2025-10-26,Sales,Austin,IC1-Associate,44,2.1,110630.88,80.6,4.0
+2025-10-26,Sales,Singapore,IC3-Senior,47,0.5,131801.61,78.9,2.91
+2025-10-26,Sales,Berlin,IC1-Associate,41,2.55,106600.81,84.4,2.91
+2025-10-26,Customer Support,San Francisco,IC4-Staff,44,2.11,117412.43,76.7,4.49
+2025-10-26,Customer Support,New York,IC2-Mid,50,2.43,131323.01,74.7,2.04
+2025-10-26,Customer Support,London,M1-Manager,59,1.69,108859.27,74.5,3.4
+2025-10-26,Customer Support,Austin,IC2-Mid,49,2.74,93024.74,79.4,5.2
+2025-10-26,Customer Support,Singapore,IC3-Senior,34,1.82,101132.16,70.4,2.7
+2025-10-26,Customer Support,Berlin,IC4-Staff,45,2.43,106451.18,87.5,2.68
+2025-10-26,Marketing,San Francisco,IC3-Senior,51,3.18,121093.01,82.3,4.51
+2025-10-26,Marketing,New York,IC1-Associate,53,1.7,148445.38,72.6,4.39
+2025-10-26,Marketing,London,IC4-Staff,45,3.42,83156.42,75.5,3.57
+2025-10-26,Marketing,Austin,IC2-Mid,41,2.44,138351.36,79.1,3.14
+2025-10-26,Marketing,Singapore,IC1-Associate,59,2.24,120938.04,75.6,2.73
+2025-10-26,Marketing,Berlin,IC1-Associate,53,2.33,115026.41,71.9,1.65
+2025-10-26,Operations,San Francisco,IC4-Staff,40,2.69,104673.34,71.2,3.16
+2025-10-26,Operations,New York,IC1-Associate,55,3.51,118827.54,79.3,2.33
+2025-10-26,Operations,London,M1-Manager,39,3.11,91205.33,70.4,3.35
+2025-10-26,Operations,Austin,IC3-Senior,50,2.3,122670.82,88.7,2.42
+2025-10-26,Operations,Singapore,M2-Director,40,3.49,104948.44,74.3,2.59
+2025-10-26,Operations,Berlin,M1-Manager,36,2.22,122560.31,83.9,3.35
+2025-10-26,Product,San Francisco,IC3-Senior,54,2.02,148014.42,71.9,1.78
+2025-10-26,Product,New York,IC3-Senior,41,2.41,136953.95,82.9,3.86
+2025-10-26,Product,London,IC3-Senior,45,2.31,124097.55,75.6,1.63
+2025-10-26,Product,Austin,IC4-Staff,42,2.88,132977.91,86.0,4.15
+2025-10-26,Product,Singapore,IC1-Associate,41,1.99,94642.23,72.6,3.1
+2025-10-26,Product,Berlin,IC3-Senior,34,2.47,124548.28,76.1,1.95
+2025-10-26,Finance,San Francisco,M1-Manager,52,2.73,122305.3,74.0,3.14
+2025-10-26,Finance,New York,IC3-Senior,50,2.69,129504.89,79.7,3.24
+2025-10-26,Finance,London,IC2-Mid,40,1.65,60164.36,72.7,3.63
+2025-10-26,Finance,Austin,IC1-Associate,46,3.16,121288.54,80.5,3.47
+2025-10-26,Finance,Singapore,IC4-Staff,51,2.62,128266.72,84.6,3.44
+2025-10-26,Finance,Berlin,IC4-Staff,45,3.02,90559.03,79.0,4.01
+2025-10-26,HR,San Francisco,IC4-Staff,41,2.34,115542.53,75.7,3.29
+2025-10-26,HR,New York,IC1-Associate,55,2.45,119478.33,74.6,2.49
+2025-10-26,HR,London,M1-Manager,52,3.88,151903.59,74.5,2.87
+2025-10-26,HR,Austin,IC4-Staff,44,2.44,90652.18,67.4,3.14
+2025-10-26,HR,Singapore,IC3-Senior,54,3.25,88601.01,73.5,1.65
+2025-10-26,HR,Berlin,M1-Manager,41,3.11,95025.03,75.7,3.01
+2025-11-02,Engineering,San Francisco,IC4-Staff,45,2.56,94034.52,80.3,2.34
+2025-11-02,Engineering,New York,M2-Director,54,2.95,111342.97,82.3,3.07
+2025-11-02,Engineering,London,M2-Director,40,2.91,111882.27,79.6,3.48
+2025-11-02,Engineering,Austin,IC2-Mid,46,10.88,120499.43,60.3,2.36
+2025-11-02,Engineering,Singapore,IC3-Senior,43,2.2,95700.05,83.0,3.33
+2025-11-02,Engineering,Berlin,IC4-Staff,43,2.15,104824.82,74.5,3.45
+2025-11-02,Sales,San Francisco,M2-Director,38,3.33,127809.19,76.2,3.35
+2025-11-02,Sales,New York,M1-Manager,40,3.2,138481.86,74.1,3.77
+2025-11-02,Sales,London,IC3-Senior,45,2.32,103439.82,75.4,3.17
+2025-11-02,Sales,Austin,IC4-Staff,51,2.14,108775.21,77.2,3.5
+2025-11-02,Sales,Singapore,M1-Manager,44,3.35,91791.26,77.8,3.68
+2025-11-02,Sales,Berlin,IC4-Staff,42,1.87,97500.97,65.5,2.02
+2025-11-02,Customer Support,San Francisco,M2-Director,31,2.72,93250.54,84.4,3.05
+2025-11-02,Customer Support,New York,M1-Manager,45,1.86,142865.34,79.7,3.15
+2025-11-02,Customer Support,London,M2-Director,34,2.37,136541.6,81.1,3.38
+2025-11-02,Customer Support,Austin,IC3-Senior,30,2.98,120768.57,83.6,1.54
+2025-11-02,Customer Support,Singapore,M2-Director,39,2.15,108128.12,80.2,3.67
+2025-11-02,Customer Support,Berlin,IC2-Mid,32,1.13,97007.73,73.2,3.31
+2025-11-02,Marketing,San Francisco,IC1-Associate,49,3.29,140691.52,75.4,2.34
+2025-11-02,Marketing,New York,IC4-Staff,36,2.56,106640.77,83.9,4.34
+2025-11-02,Marketing,London,M2-Director,36,2.38,111246.15,76.3,2.93
+2025-11-02,Marketing,Austin,IC1-Associate,43,2.25,114141.25,85.1,2.73
+2025-11-02,Marketing,Singapore,IC4-Staff,44,3.19,104866.74,83.5,3.44
+2025-11-02,Marketing,Berlin,IC3-Senior,55,2.24,106441.27,76.8,2.67
+2025-11-02,Operations,San Francisco,IC4-Staff,48,2.5,66175.93,91.0,3.78
+2025-11-02,Operations,New York,IC4-Staff,42,2.8,121142.22,76.4,4.7
+2025-11-02,Operations,London,M2-Director,51,1.36,84339.84,80.1,2.53
+2025-11-02,Operations,Austin,M1-Manager,40,1.87,91265.21,80.8,4.07
+2025-11-02,Operations,Singapore,IC1-Associate,46,1.84,79210.87,76.0,3.65
+2025-11-02,Operations,Berlin,IC2-Mid,38,3.32,143028.9,81.1,3.35
+2025-11-02,Product,San Francisco,IC1-Associate,45,1.5,115710.27,77.4,5.0
+2025-11-02,Product,New York,IC3-Senior,39,2.45,141134.68,84.3,2.44
+2025-11-02,Product,London,IC2-Mid,36,1.83,127322.35,83.5,2.69
+2025-11-02,Product,Austin,IC4-Staff,45,2.35,106693.65,79.5,2.79
+2025-11-02,Product,Singapore,IC2-Mid,46,3.1,110537.51,74.6,3.66
+2025-11-02,Product,Berlin,M2-Director,42,1.41,116565.56,80.8,3.03
+2025-11-02,Finance,San Francisco,IC3-Senior,41,2.81,96781.23,75.9,4.08
+2025-11-02,Finance,New York,IC2-Mid,40,1.91,123701.19,73.4,4.15
+2025-11-02,Finance,London,IC4-Staff,59,1.87,143834.56,71.6,2.04
+2025-11-02,Finance,Austin,M1-Manager,57,2.13,83761.22,77.4,3.03
+2025-11-02,Finance,Singapore,IC2-Mid,46,2.64,141893.28,77.5,2.62
+2025-11-02,Finance,Berlin,IC1-Associate,44,1.86,139448.96,82.7,1.93
+2025-11-02,HR,San Francisco,M1-Manager,51,2.98,115653.53,87.8,3.57
+2025-11-02,HR,New York,M1-Manager,42,2.24,125627.92,81.0,3.37
+2025-11-02,HR,London,IC4-Staff,47,2.27,135352.12,65.0,3.01
+2025-11-02,HR,Austin,M1-Manager,50,2.94,116715.28,85.5,4.44
+2025-11-02,HR,Singapore,M1-Manager,52,2.37,118234.52,76.7,3.16
+2025-11-02,HR,Berlin,M1-Manager,49,2.45,146787.72,70.3,3.55
+2025-11-09,Engineering,San Francisco,IC1-Associate,44,1.97,134740.08,78.3,4.21
+2025-11-09,Engineering,New York,IC3-Senior,52,3.09,135645.33,79.0,3.15
+2025-11-09,Engineering,London,IC1-Associate,49,1.36,112315.89,83.0,3.25
+2025-11-09,Engineering,Austin,IC4-Staff,47,11.32,139474.93,56.5,1.33
+2025-11-09,Engineering,Singapore,IC4-Staff,51,3.28,111222.56,75.1,2.68
+2025-11-09,Engineering,Berlin,M1-Manager,49,2.18,116825.61,82.2,2.6
+2025-11-09,Sales,San Francisco,IC4-Staff,55,3.11,94209.18,76.9,3.84
+2025-11-09,Sales,New York,IC1-Associate,38,2.84,138660.0,80.6,3.19
+2025-11-09,Sales,London,IC1-Associate,37,3.21,109839.01,78.4,4.76
+2025-11-09,Sales,Austin,IC4-Staff,49,1.56,150257.69,75.0,2.75
+2025-11-09,Sales,Singapore,IC1-Associate,29,1.81,87021.19,80.7,2.67
+2025-11-09,Sales,Berlin,M1-Manager,39,1.95,92265.2,86.1,3.79
+2025-11-09,Customer Support,San Francisco,M2-Director,31,2.04,142896.73,81.7,3.61
+2025-11-09,Customer Support,New York,IC4-Staff,49,1.68,154962.02,76.1,3.23
+2025-11-09,Customer Support,London,IC4-Staff,41,3.16,129027.41,79.0,2.39
+2025-11-09,Customer Support,Austin,IC1-Associate,52,2.04,117845.74,83.5,3.42
+2025-11-09,Customer Support,Singapore,IC2-Mid,30,2.33,91263.99,81.7,3.88
+2025-11-09,Customer Support,Berlin,IC2-Mid,45,3.97,105997.25,72.8,3.63
+2025-11-09,Marketing,San Francisco,IC1-Associate,43,1.96,132283.31,80.7,3.39
+2025-11-09,Marketing,New York,IC4-Staff,44,2.6,96851.87,81.9,1.89
+2025-11-09,Marketing,London,M2-Director,44,2.75,112910.73,81.0,3.9
+2025-11-09,Marketing,Austin,IC2-Mid,20,2.66,97086.71,77.4,3.31
+2025-11-09,Marketing,Singapore,M1-Manager,32,3.31,142511.56,76.1,3.42
+2025-11-09,Marketing,Berlin,M2-Director,38,2.57,130895.13,74.5,4.58
+2025-11-09,Operations,San Francisco,M1-Manager,42,2.64,115861.57,74.3,2.55
+2025-11-09,Operations,New York,M2-Director,31,2.37,167104.31,75.2,3.3
+2025-11-09,Operations,London,IC1-Associate,36,2.85,139720.78,74.4,2.59
+2025-11-09,Operations,Austin,IC4-Staff,47,2.24,113562.72,68.8,2.71
+2025-11-09,Operations,Singapore,IC3-Senior,44,2.28,105585.34,87.0,2.55
+2025-11-09,Operations,Berlin,IC3-Senior,51,1.54,125193.04,79.1,4.01
+2025-11-09,Product,San Francisco,M1-Manager,43,1.95,99848.09,85.3,2.91
+2025-11-09,Product,New York,M2-Director,31,3.05,123555.48,82.1,2.96
+2025-11-09,Product,London,M2-Director,45,3.14,104881.08,79.1,2.06
+2025-11-09,Product,Austin,M1-Manager,51,2.36,138969.44,85.1,2.69
+2025-11-09,Product,Singapore,IC1-Associate,46,1.67,132429.52,90.8,2.66
+2025-11-09,Product,Berlin,IC4-Staff,46,2.99,128013.94,72.4,4.19
+2025-11-09,Finance,San Francisco,IC3-Senior,42,2.69,121658.27,82.0,3.11
+2025-11-09,Finance,New York,IC1-Associate,58,2.44,118106.11,83.5,5.48
+2025-11-09,Finance,London,IC1-Associate,51,1.93,124565.84,79.3,3.8
+2025-11-09,Finance,Austin,IC2-Mid,56,1.71,80581.8,82.2,3.55
+2025-11-09,Finance,Singapore,IC1-Associate,56,2.23,91522.8,81.7,3.35
+2025-11-09,Finance,Berlin,IC2-Mid,54,2.61,134394.23,75.9,2.32
+2025-11-09,HR,San Francisco,M2-Director,28,2.46,101258.37,77.9,4.08
+2025-11-09,HR,New York,IC2-Mid,45,2.21,101941.75,77.7,3.63
+2025-11-09,HR,London,IC1-Associate,42,1.9,114262.22,76.8,2.91
+2025-11-09,HR,Austin,M2-Director,47,2.18,116047.45,79.1,1.31
+2025-11-09,HR,Singapore,IC1-Associate,45,2.39,128701.13,76.3,3.1
+2025-11-09,HR,Berlin,IC2-Mid,39,2.21,73380.63,76.4,2.72
+2025-11-16,Engineering,San Francisco,M2-Director,36,1.52,117752.01,70.0,4.89
+2025-11-16,Engineering,New York,IC4-Staff,55,4.05,74156.61,76.8,2.42
+2025-11-16,Engineering,London,IC3-Senior,60,3.15,126989.62,75.7,3.17
+2025-11-16,Engineering,Austin,IC3-Senior,46,10.61,95551.91,63.9,2.48
+2025-11-16,Engineering,Singapore,M1-Manager,51,2.93,130138.74,75.5,3.66
+2025-11-16,Engineering,Berlin,IC2-Mid,47,2.37,97830.98,73.4,2.77
+2025-11-16,Sales,San Francisco,IC1-Associate,35,3.19,122827.95,71.3,3.87
+2025-11-16,Sales,New York,IC4-Staff,44,3.02,98021.63,80.8,2.46
+2025-11-16,Sales,London,IC2-Mid,46,2.6,105403.1,75.2,3.07
+2025-11-16,Sales,Austin,M1-Manager,39,1.63,151319.96,80.9,3.24
+2025-11-16,Sales,Singapore,IC3-Senior,54,3.49,98946.72,76.2,2.55
+2025-11-16,Sales,Berlin,IC4-Staff,43,2.79,121371.11,75.2,2.15
+2025-11-16,Customer Support,San Francisco,IC1-Associate,56,2.71,113552.38,76.0,3.02
+2025-11-16,Customer Support,New York,IC2-Mid,57,2.5,124390.14,76.6,2.71
+2025-11-16,Customer Support,London,IC3-Senior,51,2.81,131901.12,81.2,1.7
+2025-11-16,Customer Support,Austin,IC3-Senior,49,3.84,118662.68,79.8,2.07
+2025-11-16,Customer Support,Singapore,IC1-Associate,44,2.19,89980.87,75.8,4.24
+2025-11-16,Customer Support,Berlin,IC2-Mid,48,2.13,127071.2,82.4,2.9
+2025-11-16,Marketing,San Francisco,IC3-Senior,43,3.12,108708.88,76.7,4.02
+2025-11-16,Marketing,New York,IC4-Staff,41,3.12,130058.64,67.3,1.15
+2025-11-16,Marketing,London,IC1-Associate,56,2.08,107642.14,80.4,3.4
+2025-11-16,Marketing,Austin,IC1-Associate,44,2.55,129514.48,71.0,2.68
+2025-11-16,Marketing,Singapore,IC4-Staff,48,2.56,116686.47,85.1,2.29
+2025-11-16,Marketing,Berlin,IC1-Associate,50,3.97,132390.65,72.4,3.59
+2025-11-16,Operations,San Francisco,M2-Director,37,1.53,104691.59,81.0,2.12
+2025-11-16,Operations,New York,IC4-Staff,55,2.72,128191.28,72.8,2.64
+2025-11-16,Operations,London,IC1-Associate,47,3.5,113174.66,82.0,3.12
+2025-11-16,Operations,Austin,M1-Manager,47,2.55,106073.65,77.9,1.21
+2025-11-16,Operations,Singapore,M2-Director,49,2.63,130651.15,84.0,2.33
+2025-11-16,Operations,Berlin,IC4-Staff,46,3.06,113201.6,75.5,3.45
+2025-11-16,Product,San Francisco,IC2-Mid,40,2.9,91116.2,79.1,2.72
+2025-11-16,Product,New York,IC1-Associate,46,2.03,99682.39,81.8,3.6
+2025-11-16,Product,London,IC4-Staff,61,2.52,111715.51,75.2,2.21
+2025-11-16,Product,Austin,M2-Director,41,2.94,114803.1,86.4,3.55
+2025-11-16,Product,Singapore,IC2-Mid,54,1.68,101689.58,76.5,3.17
+2025-11-16,Product,Berlin,IC2-Mid,35,3.18,87927.44,76.2,2.64
+2025-11-16,Finance,San Francisco,M2-Director,49,2.9,91408.38,76.4,3.19
+2025-11-16,Finance,New York,M2-Director,46,2.92,124399.27,77.2,4.33
+2025-11-16,Finance,London,M1-Manager,30,3.04,162803.69,87.1,3.81
+2025-11-16,Finance,Austin,IC1-Associate,37,3.71,123347.02,77.3,2.27
+2025-11-16,Finance,Singapore,IC1-Associate,33,2.63,81332.06,83.1,4.08
+2025-11-16,Finance,Berlin,M1-Manager,48,2.01,118054.48,74.2,3.59
+2025-11-16,HR,San Francisco,IC3-Senior,48,1.45,155763.05,75.8,2.52
+2025-11-16,HR,New York,IC3-Senior,48,2.69,136113.42,87.8,2.78
+2025-11-16,HR,London,IC3-Senior,46,1.91,111234.75,73.5,3.87
+2025-11-16,HR,Austin,M2-Director,35,2.13,99329.43,78.4,2.93
+2025-11-16,HR,Singapore,IC2-Mid,53,1.18,129664.32,72.5,2.95
+2025-11-16,HR,Berlin,IC4-Staff,42,2.43,124661.95,73.6,4.19
+2025-11-23,Engineering,San Francisco,IC1-Associate,61,2.54,136154.04,70.5,3.84
+2025-11-23,Engineering,New York,IC3-Senior,47,1.21,109754.09,81.4,3.99
+2025-11-23,Engineering,London,M2-Director,44,1.28,116445.75,79.9,5.22
+2025-11-23,Engineering,Austin,IC2-Mid,40,12.46,114941.68,52.4,2.54
+2025-11-23,Engineering,Singapore,M1-Manager,49,1.64,149600.04,75.9,3.53
+2025-11-23,Engineering,Berlin,M1-Manager,37,2.94,129035.91,84.8,3.42
+2025-11-23,Sales,San Francisco,IC3-Senior,39,2.7,118130.62,78.1,2.52
+2025-11-23,Sales,New York,IC1-Associate,58,2.04,112593.9,76.9,4.85
+2025-11-23,Sales,London,IC1-Associate,40,3.6,96860.0,78.4,3.86
+2025-11-23,Sales,Austin,M1-Manager,47,2.39,126874.29,71.1,4.3
+2025-11-23,Sales,Singapore,IC1-Associate,36,2.77,140591.44,80.4,3.34
+2025-11-23,Sales,Berlin,IC4-Staff,49,1.68,140812.68,84.7,3.43
+2025-11-23,Customer Support,San Francisco,IC1-Associate,38,3.88,113695.4,75.2,3.07
+2025-11-23,Customer Support,New York,IC2-Mid,38,2.92,125428.76,74.7,3.91
+2025-11-23,Customer Support,London,M1-Manager,46,2.9,148100.32,78.2,2.5
+2025-11-23,Customer Support,Austin,M2-Director,47,1.79,104041.09,78.8,2.71
+2025-11-23,Customer Support,Singapore,M2-Director,51,2.82,144274.3,77.3,4.88
+2025-11-23,Customer Support,Berlin,IC1-Associate,43,2.32,114283.04,74.9,4.31
+2025-11-23,Marketing,San Francisco,M1-Manager,56,2.98,108054.72,76.7,1.71
+2025-11-23,Marketing,New York,M2-Director,50,2.88,87875.4,75.0,3.32
+2025-11-23,Marketing,London,IC1-Associate,37,3.68,119213.72,82.5,3.91
+2025-11-23,Marketing,Austin,IC2-Mid,39,2.11,114248.82,78.0,2.45
+2025-11-23,Marketing,Singapore,M1-Manager,43,2.3,125922.31,70.9,3.4
+2025-11-23,Marketing,Berlin,IC2-Mid,40,2.45,100729.1,78.1,3.13
+2025-11-23,Operations,San Francisco,IC1-Associate,57,2.08,129599.92,79.6,2.57
+2025-11-23,Operations,New York,IC3-Senior,41,2.4,149028.86,84.9,3.87
+2025-11-23,Operations,London,IC1-Associate,55,2.91,122288.94,74.6,2.53
+2025-11-23,Operations,Austin,M2-Director,53,3.27,120630.82,82.6,3.19
+2025-11-23,Operations,Singapore,IC4-Staff,52,1.36,108727.3,68.6,3.56
+2025-11-23,Operations,Berlin,M1-Manager,31,3.24,114672.45,77.6,3.84
+2025-11-23,Product,San Francisco,IC4-Staff,52,2.28,119940.43,65.8,2.24
+2025-11-23,Product,New York,IC4-Staff,44,2.38,95841.27,82.3,3.54
+2025-11-23,Product,London,IC4-Staff,52,2.21,112077.68,73.8,2.41
+2025-11-23,Product,Austin,IC3-Senior,49,2.79,106716.65,81.0,3.12
+2025-11-23,Product,Singapore,M1-Manager,37,2.11,130300.66,77.8,3.37
+2025-11-23,Product,Berlin,IC4-Staff,34,3.55,128447.35,75.9,1.92
+2025-11-23,Finance,San Francisco,IC3-Senior,46,2.59,138764.37,76.2,3.27
+2025-11-23,Finance,New York,IC3-Senior,40,2.79,145643.06,66.6,2.32
+2025-11-23,Finance,London,IC3-Senior,36,3.91,97774.52,71.4,3.52
+2025-11-23,Finance,Austin,M2-Director,38,3.68,109574.41,79.6,2.86
+2025-11-23,Finance,Singapore,M1-Manager,50,2.33,85396.45,79.3,2.44
+2025-11-23,Finance,Berlin,M2-Director,45,2.45,102707.17,76.0,2.91
+2025-11-23,HR,San Francisco,IC1-Associate,50,2.18,113869.63,84.6,3.55
+2025-11-23,HR,New York,M2-Director,45,3.4,102541.35,74.9,4.23
+2025-11-23,HR,London,IC3-Senior,48,3.05,109449.36,78.6,4.12
+2025-11-23,HR,Austin,IC3-Senior,38,2.91,91104.87,81.8,2.8
+2025-11-23,HR,Singapore,M2-Director,64,1.86,104038.45,78.4,2.78
+2025-11-23,HR,Berlin,M1-Manager,40,2.41,119338.78,85.6,3.68
+2025-11-30,Engineering,San Francisco,IC3-Senior,42,3.59,136418.6,77.7,3.13
+2025-11-30,Engineering,New York,IC2-Mid,34,3.3,132739.76,72.8,3.11
+2025-11-30,Engineering,London,M1-Manager,39,3.31,116530.83,76.6,3.01
+2025-11-30,Engineering,Austin,IC1-Associate,57,13.18,99966.05,54.7,2.23
+2025-11-30,Engineering,Singapore,IC2-Mid,43,1.89,108852.04,78.5,3.73
+2025-11-30,Engineering,Berlin,IC3-Senior,45,3.68,103674.41,73.7,2.05
+2025-11-30,Sales,San Francisco,IC3-Senior,35,2.25,92028.08,77.0,2.08
+2025-11-30,Sales,New York,IC4-Staff,47,2.99,132345.21,72.7,3.44
+2025-11-30,Sales,London,IC4-Staff,30,1.92,114130.25,88.9,1.97
+2025-11-30,Sales,Austin,IC4-Staff,43,3.26,128627.66,73.8,1.82
+2025-11-30,Sales,Singapore,M2-Director,47,2.35,124149.38,85.4,2.53
+2025-11-30,Sales,Berlin,IC4-Staff,48,2.8,140390.58,80.5,2.18
+2025-11-30,Customer Support,San Francisco,M1-Manager,39,1.51,125084.91,77.1,3.36
+2025-11-30,Customer Support,New York,IC3-Senior,44,1.2,120015.93,76.8,3.86
+2025-11-30,Customer Support,London,M1-Manager,63,2.65,100068.1,72.9,2.18
+2025-11-30,Customer Support,Austin,M1-Manager,30,1.91,124193.24,74.2,2.39
+2025-11-30,Customer Support,Singapore,M2-Director,48,2.13,111673.71,67.7,2.27
+2025-11-30,Customer Support,Berlin,IC2-Mid,45,3.07,92755.99,75.5,3.08
+2025-11-30,Marketing,San Francisco,M1-Manager,45,2.04,105552.53,75.2,2.44
+2025-11-30,Marketing,New York,IC3-Senior,50,1.91,96289.42,75.7,3.01
+2025-11-30,Marketing,London,M2-Director,54,3.48,115015.76,81.1,1.92
+2025-11-30,Marketing,Austin,IC4-Staff,37,1.63,73602.51,85.0,3.67
+2025-11-30,Marketing,Singapore,M2-Director,42,2.36,110202.15,74.2,2.68
+2025-11-30,Marketing,Berlin,M1-Manager,46,3.38,97974.34,85.4,3.09
+2025-11-30,Operations,San Francisco,IC4-Staff,42,2.26,114261.14,82.3,2.88
+2025-11-30,Operations,New York,IC2-Mid,44,2.14,94087.55,76.0,3.18
+2025-11-30,Operations,London,M1-Manager,36,1.5,107173.23,76.3,3.63
+2025-11-30,Operations,Austin,M2-Director,41,2.3,109002.21,75.9,2.73
+2025-11-30,Operations,Singapore,IC2-Mid,44,1.98,151412.96,74.1,2.93
+2025-11-30,Operations,Berlin,M1-Manager,41,2.31,119033.84,71.5,3.55
+2025-11-30,Product,San Francisco,IC2-Mid,35,3.38,140322.54,92.8,2.54
+2025-11-30,Product,New York,IC2-Mid,38,2.24,82521.69,77.5,4.28
+2025-11-30,Product,London,M1-Manager,44,2.77,135793.47,79.9,2.9
+2025-11-30,Product,Austin,M1-Manager,37,2.07,122828.16,72.9,4.47
+2025-11-30,Product,Singapore,IC2-Mid,46,2.55,145038.55,85.8,1.98
+2025-11-30,Product,Berlin,IC3-Senior,48,2.6,119928.42,82.8,2.54
+2025-11-30,Finance,San Francisco,M2-Director,50,2.12,98721.31,78.8,2.01
+2025-11-30,Finance,New York,M1-Manager,53,1.64,112808.73,79.1,2.93
+2025-11-30,Finance,London,IC3-Senior,48,2.42,134840.99,73.6,3.03
+2025-11-30,Finance,Austin,M1-Manager,45,3.01,149188.91,73.7,3.24
+2025-11-30,Finance,Singapore,IC2-Mid,44,1.57,102108.91,80.4,3.48
+2025-11-30,Finance,Berlin,IC3-Senior,37,2.08,118669.36,80.4,2.28
+2025-11-30,HR,San Francisco,IC1-Associate,36,3.16,130383.58,83.6,2.73
+2025-11-30,HR,New York,IC4-Staff,41,2.61,147178.43,81.0,1.65
+2025-11-30,HR,London,M2-Director,44,2.17,111729.23,78.4,3.59
+2025-11-30,HR,Austin,IC3-Senior,38,2.3,130469.11,73.5,3.05
+2025-11-30,HR,Singapore,IC2-Mid,50,2.79,123883.67,79.0,4.03
+2025-11-30,HR,Berlin,IC3-Senior,46,2.79,119435.51,68.1,3.37
+2025-12-07,Engineering,San Francisco,M2-Director,44,2.74,122301.96,66.2,2.71
+2025-12-07,Engineering,New York,M2-Director,52,3.17,108643.84,74.6,3.22
+2025-12-07,Engineering,London,IC4-Staff,42,1.73,94928.47,72.2,2.64
+2025-12-07,Engineering,Austin,IC1-Associate,36,15.13,112076.48,52.8,2.43
+2025-12-07,Engineering,Singapore,IC2-Mid,51,0.92,110946.0,76.1,4.48
+2025-12-07,Engineering,Berlin,M2-Director,37,2.47,90519.58,73.2,3.03
+2025-12-07,Sales,San Francisco,IC3-Senior,36,2.92,139479.91,86.7,4.79
+2025-12-07,Sales,New York,IC1-Associate,31,2.29,104417.82,85.3,3.09
+2025-12-07,Sales,London,IC2-Mid,63,3.22,131926.65,85.5,1.96
+2025-12-07,Sales,Austin,M1-Manager,42,3.34,107156.6,78.9,2.04
+2025-12-07,Sales,Singapore,IC1-Associate,52,3.78,122417.97,69.7,3.66
+2025-12-07,Sales,Berlin,M1-Manager,31,2.93,112169.46,79.7,2.14
+2025-12-07,Customer Support,San Francisco,M1-Manager,49,2.15,110157.26,84.8,4.13
+2025-12-07,Customer Support,New York,M2-Director,45,2.58,118425.82,72.2,3.42
+2025-12-07,Customer Support,London,IC1-Associate,50,3.11,127728.03,81.6,2.62
+2025-12-07,Customer Support,Austin,IC4-Staff,36,2.33,134750.48,80.2,5.01
+2025-12-07,Customer Support,Singapore,M2-Director,45,2.56,106541.19,72.7,3.21
+2025-12-07,Customer Support,Berlin,M2-Director,46,2.01,92325.61,68.5,3.44
+2025-12-07,Marketing,San Francisco,IC2-Mid,37,3.51,132556.04,86.7,3.56
+2025-12-07,Marketing,New York,IC1-Associate,42,2.57,135177.83,77.8,3.72
+2025-12-07,Marketing,London,IC2-Mid,41,3.42,130329.14,85.4,1.88
+2025-12-07,Marketing,Austin,IC4-Staff,39,2.32,108008.6,85.1,3.38
+2025-12-07,Marketing,Singapore,M1-Manager,53,2.08,144734.24,71.9,1.76
+2025-12-07,Marketing,Berlin,M1-Manager,45,2.59,94763.02,79.4,1.97
+2025-12-07,Operations,San Francisco,M2-Director,52,2.58,99267.47,73.8,3.24
+2025-12-07,Operations,New York,IC2-Mid,53,3.32,131905.65,77.2,2.66
+2025-12-07,Operations,London,IC4-Staff,54,2.85,124255.7,80.1,2.62
+2025-12-07,Operations,Austin,IC3-Senior,51,2.25,120255.19,76.7,3.04
+2025-12-07,Operations,Singapore,IC2-Mid,35,2.33,135124.28,85.7,2.52
+2025-12-07,Operations,Berlin,IC4-Staff,48,1.78,108206.78,87.1,2.39
+2025-12-07,Product,San Francisco,IC1-Associate,41,2.36,130517.66,78.4,4.95
+2025-12-07,Product,New York,IC3-Senior,44,2.67,124605.28,77.0,2.04
+2025-12-07,Product,London,M1-Manager,55,2.46,128234.35,81.0,3.36
+2025-12-07,Product,Austin,IC2-Mid,46,1.99,95582.16,69.6,2.86
+2025-12-07,Product,Singapore,IC4-Staff,27,2.51,121353.16,76.5,3.23
+2025-12-07,Product,Berlin,M2-Director,49,2.34,111858.95,75.6,3.82
+2025-12-07,Finance,San Francisco,IC1-Associate,34,2.47,101122.02,83.0,2.92
+2025-12-07,Finance,New York,IC1-Associate,43,1.59,109993.54,72.6,3.98
+2025-12-07,Finance,London,M1-Manager,38,4.16,112128.6,76.0,2.83
+2025-12-07,Finance,Austin,IC2-Mid,31,2.42,96867.08,72.5,3.05
+2025-12-07,Finance,Singapore,IC2-Mid,48,3.19,145022.41,71.7,2.62
+2025-12-07,Finance,Berlin,M2-Director,59,1.78,131872.23,76.4,1.98
+2025-12-07,HR,San Francisco,IC3-Senior,43,2.95,129858.05,73.7,4.42
+2025-12-07,HR,New York,M1-Manager,41,2.49,102049.5,82.7,2.7
+2025-12-07,HR,London,IC4-Staff,51,2.73,87114.55,66.3,3.29
+2025-12-07,HR,Austin,IC1-Associate,46,3.0,99431.87,72.1,4.22
+2025-12-07,HR,Singapore,IC1-Associate,38,2.54,112129.88,80.2,2.97
+2025-12-07,HR,Berlin,IC4-Staff,39,2.87,86260.27,82.4,3.79
+2025-12-14,Engineering,San Francisco,IC2-Mid,52,2.22,158186.56,79.0,3.28
+2025-12-14,Engineering,New York,IC4-Staff,43,2.64,123622.05,79.3,2.52
+2025-12-14,Engineering,London,IC3-Senior,53,3.59,105870.85,70.2,4.38
+2025-12-14,Engineering,Austin,IC3-Senior,45,14.51,100324.29,49.0,2.83
+2025-12-14,Engineering,Singapore,IC3-Senior,30,2.63,138588.13,75.9,3.91
+2025-12-14,Engineering,Berlin,IC2-Mid,53,2.39,125354.48,74.2,3.78
+2025-12-14,Sales,San Francisco,IC3-Senior,54,1.2,106889.2,68.9,2.56
+2025-12-14,Sales,New York,IC3-Senior,50,2.78,97934.41,74.6,4.06
+2025-12-14,Sales,London,M2-Director,32,2.01,98441.83,73.6,3.08
+2025-12-14,Sales,Austin,M1-Manager,42,2.42,73650.75,85.1,3.1
+2025-12-14,Sales,Singapore,IC4-Staff,32,1.79,107426.59,69.3,4.18
+2025-12-14,Sales,Berlin,IC3-Senior,40,3.91,112134.37,77.1,4.01
+2025-12-14,Customer Support,San Francisco,M1-Manager,33,1.88,127863.2,80.4,2.01
+2025-12-14,Customer Support,New York,M2-Director,43,2.44,94086.06,80.4,2.46
+2025-12-14,Customer Support,London,IC1-Associate,59,1.96,103671.26,84.7,3.76
+2025-12-14,Customer Support,Austin,IC4-Staff,41,2.77,109639.55,77.9,3.24
+2025-12-14,Customer Support,Singapore,M1-Manager,44,2.64,107106.56,85.9,3.43
+2025-12-14,Customer Support,Berlin,IC1-Associate,62,1.29,116692.12,79.4,4.16
+2025-12-14,Marketing,San Francisco,IC3-Senior,48,2.4,101491.32,80.0,3.37
+2025-12-14,Marketing,New York,M2-Director,39,3.51,123360.41,78.3,4.12
+2025-12-14,Marketing,London,M1-Manager,48,2.21,102527.33,75.2,2.82
+2025-12-14,Marketing,Austin,M2-Director,38,2.81,149575.68,88.0,3.24
+2025-12-14,Marketing,Singapore,M1-Manager,38,2.72,118878.07,71.5,1.23
+2025-12-14,Marketing,Berlin,IC3-Senior,53,3.67,136748.95,74.0,2.82
+2025-12-14,Operations,San Francisco,IC3-Senior,56,3.07,138660.04,84.9,2.81
+2025-12-14,Operations,New York,IC4-Staff,54,2.83,90143.21,71.9,2.87
+2025-12-14,Operations,London,M1-Manager,45,1.39,89323.65,67.4,3.49
+2025-12-14,Operations,Austin,M1-Manager,51,3.0,146506.06,72.2,3.71
+2025-12-14,Operations,Singapore,IC1-Associate,42,2.32,138033.67,82.6,3.17
+2025-12-14,Operations,Berlin,M2-Director,66,2.33,107450.43,70.4,3.79
+2025-12-14,Product,San Francisco,IC1-Associate,37,3.13,114555.44,65.6,3.48
+2025-12-14,Product,New York,IC4-Staff,41,2.67,156912.19,83.2,2.84
+2025-12-14,Product,London,IC4-Staff,37,4.18,108301.58,76.6,3.15
+2025-12-14,Product,Austin,IC3-Senior,48,3.16,133662.68,80.0,0.93
+2025-12-14,Product,Singapore,IC3-Senior,63,3.68,123090.86,75.7,4.24
+2025-12-14,Product,Berlin,IC2-Mid,42,1.76,126665.4,87.4,4.33
+2025-12-14,Finance,San Francisco,M1-Manager,39,2.38,124485.03,84.3,3.36
+2025-12-14,Finance,New York,IC2-Mid,38,4.32,126692.89,75.1,1.83
+2025-12-14,Finance,London,IC2-Mid,36,2.25,118766.92,72.1,2.63
+2025-12-14,Finance,Austin,IC4-Staff,42,2.1,108045.52,73.4,3.75
+2025-12-14,Finance,Singapore,M1-Manager,46,2.24,94804.57,78.8,2.97
+2025-12-14,Finance,Berlin,IC1-Associate,64,3.18,130052.0,71.3,3.71
+2025-12-14,HR,San Francisco,IC2-Mid,43,1.39,119758.51,73.0,2.59
+2025-12-14,HR,New York,IC4-Staff,40,3.34,126154.65,77.5,2.15
+2025-12-14,HR,London,IC1-Associate,46,2.95,141292.25,78.5,2.71
+2025-12-14,HR,Austin,IC2-Mid,34,2.6,115015.43,84.2,3.88
+2025-12-14,HR,Singapore,M1-Manager,40,1.77,128395.35,74.4,4.29
+2025-12-14,HR,Berlin,M1-Manager,44,3.23,111905.44,81.9,4.61
+2025-12-21,Engineering,San Francisco,IC2-Mid,56,2.97,117353.9,70.6,3.31
+2025-12-21,Engineering,New York,IC4-Staff,38,2.66,93240.92,75.4,2.77
+2025-12-21,Engineering,London,IC3-Senior,27,1.46,131578.96,79.3,3.76
+2025-12-21,Engineering,Austin,M2-Director,38,14.27,140275.95,46.6,1.37
+2025-12-21,Engineering,Singapore,IC4-Staff,30,2.56,135640.1,79.4,3.95
+2025-12-21,Engineering,Berlin,IC2-Mid,49,2.0,113305.38,79.0,2.57
+2025-12-21,Sales,San Francisco,IC4-Staff,41,2.08,111241.08,68.2,3.26
+2025-12-21,Sales,New York,IC1-Associate,46,2.79,120632.52,77.7,3.39
+2025-12-21,Sales,London,IC4-Staff,46,2.81,92085.35,81.4,3.22
+2025-12-21,Sales,Austin,IC3-Senior,50,2.39,111497.48,75.6,3.23
+2025-12-21,Sales,Singapore,M1-Manager,40,2.52,125075.46,78.7,2.05
+2025-12-21,Sales,Berlin,M2-Director,36,2.68,110262.09,79.0,3.59
+2025-12-21,Customer Support,San Francisco,M2-Director,39,2.83,122182.09,82.6,4.57
+2025-12-21,Customer Support,New York,IC1-Associate,50,2.53,116284.27,81.3,3.11
+2025-12-21,Customer Support,London,IC2-Mid,45,1.83,116180.46,69.3,2.85
+2025-12-21,Customer Support,Austin,M1-Manager,37,2.55,131293.89,87.1,3.0
+2025-12-21,Customer Support,Singapore,IC2-Mid,54,2.04,136680.41,83.9,3.26
+2025-12-21,Customer Support,Berlin,IC1-Associate,46,3.4,143633.44,80.1,2.36
+2025-12-21,Marketing,San Francisco,M1-Manager,26,2.0,138019.73,80.2,3.24
+2025-12-21,Marketing,New York,IC4-Staff,38,3.23,122954.85,70.5,3.5
+2025-12-21,Marketing,London,IC3-Senior,40,2.25,118624.49,77.1,3.66
+2025-12-21,Marketing,Austin,M1-Manager,50,2.39,78049.92,75.2,2.62
+2025-12-21,Marketing,Singapore,IC3-Senior,47,2.67,137784.54,75.2,3.22
+2025-12-21,Marketing,Berlin,IC1-Associate,48,2.06,124209.99,80.5,4.02
+2025-12-21,Operations,San Francisco,IC4-Staff,51,1.6,112596.54,74.3,2.78
+2025-12-21,Operations,New York,IC2-Mid,52,1.67,112191.62,70.7,4.55
+2025-12-21,Operations,London,IC4-Staff,49,2.44,108443.67,78.6,4.61
+2025-12-21,Operations,Austin,M2-Director,42,2.76,121704.65,83.8,2.79
+2025-12-21,Operations,Singapore,IC4-Staff,43,2.49,103705.7,78.3,3.37
+2025-12-21,Operations,Berlin,IC4-Staff,48,2.0,157181.65,78.0,2.9
+2025-12-21,Product,San Francisco,M2-Director,51,2.71,130432.68,80.5,4.0
+2025-12-21,Product,New York,M1-Manager,60,1.91,138360.04,78.1,4.61
+2025-12-21,Product,London,IC2-Mid,48,2.67,96660.84,76.9,3.49
+2025-12-21,Product,Austin,M1-Manager,39,1.75,106781.73,80.7,2.87
+2025-12-21,Product,Singapore,IC4-Staff,49,2.36,109111.53,70.5,5.23
+2025-12-21,Product,Berlin,IC3-Senior,38,2.12,121530.55,72.4,3.3
+2025-12-21,Finance,San Francisco,M1-Manager,50,2.39,120916.72,77.4,3.96
+2025-12-21,Finance,New York,IC1-Associate,53,3.27,104946.79,76.5,3.92
+2025-12-21,Finance,London,M2-Director,37,3.11,119669.56,76.6,2.7
+2025-12-21,Finance,Austin,IC1-Associate,52,1.88,136869.05,75.2,3.79
+2025-12-21,Finance,Singapore,IC4-Staff,51,2.61,107113.27,83.4,3.66
+2025-12-21,Finance,Berlin,M2-Director,28,1.55,130692.37,79.3,2.79
+2025-12-21,HR,San Francisco,IC4-Staff,45,2.92,121111.52,84.7,5.75
+2025-12-21,HR,New York,IC4-Staff,37,2.29,98456.16,76.9,3.65
+2025-12-21,HR,London,M1-Manager,36,0.81,122877.03,81.7,3.28
+2025-12-21,HR,Austin,IC4-Staff,41,2.62,128508.46,76.0,3.16
+2025-12-21,HR,Singapore,IC4-Staff,50,2.26,120577.48,89.0,4.51
+2025-12-21,HR,Berlin,IC3-Senior,52,2.21,124178.12,83.4,3.81
+2025-12-28,Engineering,San Francisco,IC1-Associate,47,3.36,118618.6,74.9,4.89
+2025-12-28,Engineering,New York,IC3-Senior,47,2.83,115347.13,77.5,2.91
+2025-12-28,Engineering,London,IC2-Mid,51,2.07,107387.29,78.4,3.23
+2025-12-28,Engineering,Austin,M2-Director,35,14.74,107444.44,47.5,1.49
+2025-12-28,Engineering,Singapore,IC3-Senior,48,2.93,119257.76,80.7,3.81
+2025-12-28,Engineering,Berlin,M2-Director,55,3.01,129606.12,73.2,1.57
+2025-12-28,Sales,San Francisco,IC1-Associate,48,1.73,82520.66,74.4,2.48
+2025-12-28,Sales,New York,IC3-Senior,45,3.21,123434.08,72.9,2.77
+2025-12-28,Sales,London,M1-Manager,55,1.67,108290.04,81.5,2.62
+2025-12-28,Sales,Austin,M1-Manager,50,2.88,116504.57,82.8,3.68
+2025-12-28,Sales,Singapore,IC4-Staff,43,2.55,97474.87,72.6,2.38
+2025-12-28,Sales,Berlin,M2-Director,49,3.17,103410.3,80.0,4.09
+2025-12-28,Customer Support,San Francisco,IC3-Senior,48,2.51,82481.93,86.9,4.14
+2025-12-28,Customer Support,New York,M2-Director,45,2.25,105555.96,70.5,3.81
+2025-12-28,Customer Support,London,M2-Director,58,1.94,96952.81,83.9,3.58
+2025-12-28,Customer Support,Austin,M2-Director,56,2.28,115916.45,68.6,3.34
+2025-12-28,Customer Support,Singapore,M1-Manager,43,2.32,122418.0,73.9,2.7
+2025-12-28,Customer Support,Berlin,M2-Director,28,2.29,113196.11,74.7,3.03
+2025-12-28,Marketing,San Francisco,M1-Manager,40,2.43,106990.64,81.8,4.9
+2025-12-28,Marketing,New York,IC1-Associate,48,2.91,145346.86,80.6,3.02
+2025-12-28,Marketing,London,IC4-Staff,39,1.56,118687.43,85.6,2.46
+2025-12-28,Marketing,Austin,M1-Manager,54,2.7,102095.19,76.4,2.71
+2025-12-28,Marketing,Singapore,M1-Manager,46,2.6,95577.56,85.1,3.3
+2025-12-28,Marketing,Berlin,M2-Director,38,3.2,131357.74,81.5,3.84
+2025-12-28,Operations,San Francisco,IC2-Mid,56,2.52,106356.37,79.8,1.66
+2025-12-28,Operations,New York,IC2-Mid,32,2.49,130350.88,83.1,2.36
+2025-12-28,Operations,London,IC4-Staff,33,2.99,149007.53,68.5,3.8
+2025-12-28,Operations,Austin,IC3-Senior,51,2.84,154228.22,83.5,3.19
+2025-12-28,Operations,Singapore,IC1-Associate,48,3.2,82797.19,69.1,2.6
+2025-12-28,Operations,Berlin,M1-Manager,44,0.96,91474.26,80.2,2.63
+2025-12-28,Product,San Francisco,IC4-Staff,52,1.95,130193.17,77.2,2.43
+2025-12-28,Product,New York,M2-Director,37,1.94,157514.03,81.8,3.23
+2025-12-28,Product,London,M1-Manager,51,2.66,87633.32,70.0,3.04
+2025-12-28,Product,Austin,IC2-Mid,33,2.85,118054.33,85.2,3.36
+2025-12-28,Product,Singapore,M2-Director,23,2.37,98910.42,85.8,3.73
+2025-12-28,Product,Berlin,IC2-Mid,44,2.79,126325.24,84.9,1.9
+2025-12-28,Finance,San Francisco,IC2-Mid,59,2.37,116339.32,77.8,5.18
+2025-12-28,Finance,New York,IC3-Senior,51,3.75,120260.02,76.9,2.87
+2025-12-28,Finance,London,M2-Director,52,2.01,98547.15,79.9,2.29
+2025-12-28,Finance,Austin,IC4-Staff,39,2.98,131335.58,74.7,4.07
+2025-12-28,Finance,Singapore,IC4-Staff,31,3.84,137148.59,69.2,4.74
+2025-12-28,Finance,Berlin,M2-Director,44,1.07,75102.49,68.6,4.65
+2025-12-28,HR,San Francisco,M2-Director,37,1.62,101483.79,83.8,3.62
+2025-12-28,HR,New York,IC2-Mid,47,3.0,100142.55,73.5,2.87
+2025-12-28,HR,London,IC4-Staff,35,2.82,131196.16,83.6,2.8
+2025-12-28,HR,Austin,M1-Manager,44,1.58,132037.92,78.0,3.86
+2025-12-28,HR,Singapore,M2-Director,49,2.96,138595.89,77.3,4.41
+2025-12-28,HR,Berlin,IC1-Associate,38,1.79,114894.77,77.8,2.75

@@ -1,0 +1,1651 @@
+sku_id,store,city,product_category,brand,on_hand_units,reorder_point,weekly_sales_units,stockout_flag,unit_margin
+SKU-20000,Store #102 Westside Mall,Los Angeles,Footwear & Apparel,AuraTech,170,23,91,0,179.6
+SKU-20001,Store #103 Suburban Plaza,Los Angeles,Home & Kitchen,VelocityAthletics,230,44,10,0,59.78
+SKU-20002,Store #105 Airport Terminal,Miami,Outdoor & Sporting,VelocityAthletics,153,28,5,0,87.69
+SKU-20003,Store #105 Airport Terminal,Seattle,Outdoor & Sporting,AuraTech,180,36,82,0,44.53
+SKU-20004,Store #104 Galleria,Seattle,Electronics & Audio,AuraTech,0,51,125,1,359.09
+SKU-20005,Store #103 Suburban Plaza,Los Angeles,Home & Kitchen,LuminaHome,233,24,117,0,91.54
+SKU-20006,Store #104 Galleria,Austin,Electronics & Audio,LuminaHome,230,68,72,0,165.47
+SKU-20007,Store #103 Suburban Plaza,New York,Footwear & Apparel,SummitGear,118,69,22,0,32.52
+SKU-20008,Store #104 Galleria,Miami,Home & Kitchen,LuminaHome,131,72,23,0,67.42
+SKU-20009,Store #105 Airport Terminal,Los Angeles,Footwear & Apparel,AuraTech,244,41,47,0,30.37
+SKU-20010,Store #102 Westside Mall,Los Angeles,Health & Beauty,LuminaHome,123,18,88,0,71.73
+SKU-20011,Store #102 Westside Mall,New York,Electronics & Audio,LuminaHome,58,21,77,0,171.46
+SKU-20012,Store #102 Westside Mall,Seattle,Health & Beauty,PureLife,240,46,79,0,21.5
+SKU-20013,Store #103 Suburban Plaza,New York,Electronics & Audio,VelocityAthletics,126,71,44,0,23.77
+SKU-20014,Store #102 Westside Mall,Seattle,Home & Kitchen,VelocityAthletics,170,50,117,0,174.08
+SKU-20015,Store #102 Westside Mall,Austin,Health & Beauty,SummitGear,242,36,101,0,135.18
+SKU-20016,Store #105 Airport Terminal,New York,Electronics & Audio,PureLife,99,69,100,0,160.8
+SKU-20017,Store #104 Galleria,Miami,Health & Beauty,AuraTech,137,24,29,0,138.54
+SKU-20018,Store #101 Downtown,New York,Footwear & Apparel,PureLife,223,30,16,0,17.25
+SKU-20019,Store #101 Downtown,Seattle,Outdoor & Sporting,AuraTech,145,69,92,0,15.33
+SKU-20020,Store #103 Suburban Plaza,Miami,Home & Kitchen,VelocityAthletics,191,79,14,0,150.95
+SKU-20021,Store #103 Suburban Plaza,Seattle,Footwear & Apparel,VelocityAthletics,113,78,83,0,178.67
+SKU-20022,Store #104 Galleria,New York,Footwear & Apparel,SummitGear,153,37,87,0,106.53
+SKU-20023,Store #101 Downtown,Los Angeles,Electronics & Audio,PureLife,171,23,36,0,54.23
+SKU-20024,Store #104 Galleria,Miami,Electronics & Audio,PureLife,237,41,111,0,152.5
+SKU-20025,Store #104 Galleria,Austin,Home & Kitchen,VelocityAthletics,195,77,11,0,129.55
+SKU-20026,Store #105 Airport Terminal,Austin,Footwear & Apparel,PureLife,39,68,22,0,157.91
+SKU-20027,Store #101 Downtown,Los Angeles,Outdoor & Sporting,LuminaHome,22,19,71,0,30.6
+SKU-20028,Store #104 Galleria,Seattle,Home & Kitchen,SummitGear,136,54,113,0,178.06
+SKU-20029,Store #105 Airport Terminal,Miami,Outdoor & Sporting,PureLife,211,38,35,0,76.22
+SKU-20030,Store #101 Downtown,New York,Outdoor & Sporting,AuraTech,173,55,91,0,55.33
+SKU-20031,Store #105 Airport Terminal,Seattle,Outdoor & Sporting,SummitGear,248,76,48,0,176.19
+SKU-20032,Store #103 Suburban Plaza,New York,Health & Beauty,LuminaHome,64,66,59,0,152.76
+SKU-20033,Store #104 Galleria,Seattle,Electronics & Audio,VelocityAthletics,56,48,102,0,168.46
+SKU-20034,Store #101 Downtown,Chicago,Footwear & Apparel,LuminaHome,68,53,85,0,123.95
+SKU-20035,Store #104 Galleria,Chicago,Home & Kitchen,LuminaHome,32,36,73,0,103.79
+SKU-20036,Store #102 Westside Mall,Los Angeles,Outdoor & Sporting,PureLife,217,35,103,0,87.59
+SKU-20037,Store #105 Airport Terminal,New York,Health & Beauty,VelocityAthletics,67,19,49,0,69.84
+SKU-20038,Store #103 Suburban Plaza,Miami,Electronics & Audio,VelocityAthletics,89,28,31,0,24.01
+SKU-20039,Store #103 Suburban Plaza,New York,Home & Kitchen,AuraTech,67,79,59,0,144.43
+SKU-20040,Store #103 Suburban Plaza,Seattle,Home & Kitchen,VelocityAthletics,41,61,54,0,170.72
+SKU-20041,Store #102 Westside Mall,Los Angeles,Footwear & Apparel,PureLife,142,22,77,0,126.11
+SKU-20042,Store #102 Westside Mall,Chicago,Electronics & Audio,PureLife,76,20,108,0,103.82
+SKU-20043,Store #105 Airport Terminal,Seattle,Home & Kitchen,VelocityAthletics,110,44,34,0,116.44
+SKU-20044,Store #104 Galleria,Austin,Home & Kitchen,PureLife,244,15,7,0,161.07
+SKU-20045,Store #102 Westside Mall,Chicago,Electronics & Audio,PureLife,196,70,67,0,21.84
+SKU-20046,Store #105 Airport Terminal,Chicago,Footwear & Apparel,SummitGear,72,78,6,0,62.22
+SKU-20047,Store #104 Galleria,Miami,Health & Beauty,PureLife,46,52,58,0,164.79
+SKU-20048,Store #102 Westside Mall,Miami,Home & Kitchen,LuminaHome,169,37,73,0,133.41
+SKU-20049,Store #103 Suburban Plaza,New York,Health & Beauty,LuminaHome,186,21,57,0,95.01
+SKU-20050,Store #105 Airport Terminal,Chicago,Footwear & Apparel,SummitGear,46,62,60,0,94.38
+SKU-20051,Store #105 Airport Terminal,Seattle,Outdoor & Sporting,AuraTech,48,68,14,0,58.16
+SKU-20052,Store #105 Airport Terminal,Austin,Electronics & Audio,LuminaHome,246,69,55,0,78.95
+SKU-20053,Store #102 Westside Mall,Austin,Footwear & Apparel,VelocityAthletics,232,30,80,0,143.12
+SKU-20054,Store #102 Westside Mall,Chicago,Electronics & Audio,LuminaHome,217,37,89,0,165.84
+SKU-20055,Store #101 Downtown,Chicago,Electronics & Audio,AuraTech,0,76,151,1,253.9
+SKU-20056,Store #104 Galleria,Austin,Home & Kitchen,LuminaHome,130,49,38,0,109.65
+SKU-20057,Store #102 Westside Mall,Austin,Outdoor & Sporting,AuraTech,120,68,29,0,86.95
+SKU-20058,Store #103 Suburban Plaza,New York,Home & Kitchen,VelocityAthletics,181,39,76,0,132.38
+SKU-20059,Store #103 Suburban Plaza,Seattle,Home & Kitchen,AuraTech,108,73,27,0,56.57
+SKU-20060,Store #104 Galleria,Los Angeles,Electronics & Audio,VelocityAthletics,79,18,69,0,68.17
+SKU-20061,Store #102 Westside Mall,Seattle,Footwear & Apparel,VelocityAthletics,224,35,8,0,30.66
+SKU-20062,Store #101 Downtown,Seattle,Footwear & Apparel,VelocityAthletics,155,70,5,0,92.08
+SKU-20063,Store #104 Galleria,Miami,Home & Kitchen,LuminaHome,52,30,53,0,121.72
+SKU-20064,Store #104 Galleria,Miami,Electronics & Audio,VelocityAthletics,124,72,58,0,153.45
+SKU-20065,Store #104 Galleria,Miami,Footwear & Apparel,AuraTech,148,65,107,0,128.47
+SKU-20066,Store #101 Downtown,Seattle,Health & Beauty,AuraTech,144,47,107,0,31.63
+SKU-20067,Store #104 Galleria,New York,Health & Beauty,AuraTech,20,33,22,0,35.27
+SKU-20068,Store #101 Downtown,Seattle,Electronics & Audio,VelocityAthletics,202,58,111,0,49.81
+SKU-20069,Store #105 Airport Terminal,New York,Footwear & Apparel,PureLife,191,65,48,0,64.51
+SKU-20070,Store #104 Galleria,Austin,Electronics & Audio,SummitGear,234,15,31,0,129.13
+SKU-20071,Store #102 Westside Mall,New York,Electronics & Audio,SummitGear,39,18,76,0,72.66
+SKU-20072,Store #104 Galleria,New York,Outdoor & Sporting,LuminaHome,47,29,23,0,70.08
+SKU-20073,Store #102 Westside Mall,Los Angeles,Health & Beauty,VelocityAthletics,29,74,85,0,64.42
+SKU-20074,Store #104 Galleria,Miami,Home & Kitchen,LuminaHome,174,19,79,0,115.24
+SKU-20075,Store #101 Downtown,Austin,Health & Beauty,VelocityAthletics,128,71,74,0,87.69
+SKU-20076,Store #103 Suburban Plaza,Seattle,Home & Kitchen,LuminaHome,55,56,105,0,104.13
+SKU-20077,Store #104 Galleria,Chicago,Home & Kitchen,LuminaHome,109,39,39,0,84.65
+SKU-20078,Store #102 Westside Mall,Miami,Electronics & Audio,AuraTech,73,67,51,0,143.83
+SKU-20079,Store #104 Galleria,Austin,Footwear & Apparel,LuminaHome,135,25,96,0,133.81
+SKU-20080,Store #102 Westside Mall,Miami,Electronics & Audio,VelocityAthletics,216,59,26,0,48.38
+SKU-20081,Store #102 Westside Mall,Miami,Outdoor & Sporting,PureLife,105,33,7,0,115.44
+SKU-20082,Store #104 Galleria,New York,Health & Beauty,SummitGear,20,53,9,0,150.63
+SKU-20083,Store #102 Westside Mall,New York,Health & Beauty,SummitGear,160,61,39,0,70.1
+SKU-20084,Store #104 Galleria,Seattle,Home & Kitchen,VelocityAthletics,183,48,41,0,91.89
+SKU-20085,Store #101 Downtown,Miami,Health & Beauty,VelocityAthletics,228,50,79,0,134.55
+SKU-20086,Store #103 Suburban Plaza,Miami,Electronics & Audio,LuminaHome,128,71,116,0,146.79
+SKU-20087,Store #105 Airport Terminal,Austin,Home & Kitchen,LuminaHome,21,51,28,0,24.02
+SKU-20088,Store #103 Suburban Plaza,Chicago,Health & Beauty,SummitGear,67,75,117,0,105.21
+SKU-20089,Store #101 Downtown,Chicago,Home & Kitchen,AuraTech,158,17,46,0,19.49
+SKU-20090,Store #105 Airport Terminal,Austin,Electronics & Audio,LuminaHome,102,34,111,0,166.98
+SKU-20091,Store #103 Suburban Plaza,Seattle,Footwear & Apparel,VelocityAthletics,71,17,34,0,80.74
+SKU-20092,Store #102 Westside Mall,Austin,Footwear & Apparel,VelocityAthletics,56,21,82,0,152.62
+SKU-20093,Store #101 Downtown,Miami,Electronics & Audio,SummitGear,75,16,54,0,66.18
+SKU-20094,Store #102 Westside Mall,New York,Health & Beauty,PureLife,93,21,113,0,155.5
+SKU-20095,Store #102 Westside Mall,Austin,Health & Beauty,VelocityAthletics,67,77,60,0,161.66
+SKU-20096,Store #101 Downtown,Seattle,Outdoor & Sporting,LuminaHome,15,42,99,0,65.75
+SKU-20097,Store #103 Suburban Plaza,Seattle,Health & Beauty,PureLife,45,47,13,0,132.49
+SKU-20098,Store #101 Downtown,Seattle,Home & Kitchen,VelocityAthletics,34,26,19,0,38.19
+SKU-20099,Store #104 Galleria,Los Angeles,Outdoor & Sporting,PureLife,134,17,24,0,124.76
+SKU-20100,Store #105 Airport Terminal,Miami,Outdoor & Sporting,SummitGear,112,67,19,0,98.33
+SKU-20101,Store #102 Westside Mall,Seattle,Electronics & Audio,SummitGear,190,71,34,0,37.56
+SKU-20102,Store #103 Suburban Plaza,Los Angeles,Home & Kitchen,LuminaHome,35,76,50,0,125.45
+SKU-20103,Store #103 Suburban Plaza,Miami,Electronics & Audio,PureLife,28,44,112,0,29.33
+SKU-20104,Store #101 Downtown,New York,Home & Kitchen,SummitGear,187,22,91,0,41.64
+SKU-20105,Store #105 Airport Terminal,Los Angeles,Health & Beauty,PureLife,83,77,102,0,106.76
+SKU-20106,Store #103 Suburban Plaza,Austin,Electronics & Audio,AuraTech,100,24,42,0,55.68
+SKU-20107,Store #101 Downtown,New York,Footwear & Apparel,PureLife,203,37,117,0,149.03
+SKU-20108,Store #101 Downtown,New York,Footwear & Apparel,SummitGear,218,40,26,0,133.76
+SKU-20109,Store #102 Westside Mall,Chicago,Health & Beauty,LuminaHome,86,23,87,0,113.44
+SKU-20110,Store #101 Downtown,Seattle,Health & Beauty,VelocityAthletics,182,74,21,0,136.12
+SKU-20111,Store #102 Westside Mall,Chicago,Outdoor & Sporting,LuminaHome,230,70,58,0,75.52
+SKU-20112,Store #105 Airport Terminal,Seattle,Footwear & Apparel,SummitGear,118,64,22,0,146.43
+SKU-20113,Store #104 Galleria,Chicago,Electronics & Audio,SummitGear,203,44,9,0,97.45
+SKU-20114,Store #101 Downtown,Austin,Electronics & Audio,VelocityAthletics,247,44,112,0,170.2
+SKU-20115,Store #105 Airport Terminal,New York,Home & Kitchen,AuraTech,239,20,87,0,121.66
+SKU-20116,Store #105 Airport Terminal,Austin,Health & Beauty,VelocityAthletics,80,53,18,0,144.19
+SKU-20117,Store #104 Galleria,Miami,Home & Kitchen,LuminaHome,58,19,109,0,155.22
+SKU-20118,Store #105 Airport Terminal,Miami,Outdoor & Sporting,LuminaHome,23,53,31,0,119.37
+SKU-20119,Store #105 Airport Terminal,Austin,Footwear & Apparel,AuraTech,143,55,80,0,34.41
+SKU-20120,Store #102 Westside Mall,Austin,Health & Beauty,VelocityAthletics,92,43,13,0,30.07
+SKU-20121,Store #102 Westside Mall,Chicago,Outdoor & Sporting,VelocityAthletics,217,50,64,0,67.87
+SKU-20122,Store #103 Suburban Plaza,Chicago,Outdoor & Sporting,AuraTech,191,28,25,0,51.01
+SKU-20123,Store #103 Suburban Plaza,New York,Electronics & Audio,AuraTech,124,52,116,0,110.06
+SKU-20124,Store #104 Galleria,Seattle,Footwear & Apparel,PureLife,211,69,86,0,106.29
+SKU-20125,Store #105 Airport Terminal,Austin,Electronics & Audio,VelocityAthletics,164,47,105,0,149.42
+SKU-20126,Store #103 Suburban Plaza,Los Angeles,Home & Kitchen,AuraTech,149,31,92,0,155.67
+SKU-20127,Store #101 Downtown,Los Angeles,Footwear & Apparel,LuminaHome,61,42,38,0,87.14
+SKU-20128,Store #104 Galleria,Seattle,Electronics & Audio,LuminaHome,143,26,106,0,46.16
+SKU-20129,Store #105 Airport Terminal,Miami,Health & Beauty,VelocityAthletics,147,37,82,0,28.95
+SKU-20130,Store #104 Galleria,Chicago,Home & Kitchen,PureLife,182,51,54,0,106.16
+SKU-20131,Store #105 Airport Terminal,Seattle,Footwear & Apparel,PureLife,131,50,87,0,121.52
+SKU-20132,Store #101 Downtown,Seattle,Outdoor & Sporting,PureLife,240,31,18,0,100.95
+SKU-20133,Store #102 Westside Mall,Austin,Footwear & Apparel,AuraTech,20,19,20,0,21.32
+SKU-20134,Store #103 Suburban Plaza,Los Angeles,Footwear & Apparel,VelocityAthletics,41,48,63,0,33.28
+SKU-20135,Store #101 Downtown,New York,Electronics & Audio,PureLife,114,59,90,0,179.22
+SKU-20136,Store #102 Westside Mall,Chicago,Home & Kitchen,SummitGear,84,75,104,0,120.87
+SKU-20137,Store #105 Airport Terminal,Chicago,Outdoor & Sporting,AuraTech,31,70,45,0,89.47
+SKU-20138,Store #104 Galleria,Miami,Footwear & Apparel,VelocityAthletics,167,64,54,0,152.72
+SKU-20139,Store #102 Westside Mall,New York,Home & Kitchen,SummitGear,177,79,88,0,132.0
+SKU-20140,Store #104 Galleria,Seattle,Home & Kitchen,AuraTech,183,56,49,0,105.06
+SKU-20141,Store #101 Downtown,Seattle,Footwear & Apparel,AuraTech,122,49,70,0,75.59
+SKU-20142,Store #104 Galleria,Chicago,Home & Kitchen,PureLife,92,53,20,0,49.49
+SKU-20143,Store #103 Suburban Plaza,Austin,Health & Beauty,PureLife,230,54,76,0,149.68
+SKU-20144,Store #102 Westside Mall,Miami,Health & Beauty,SummitGear,84,40,110,0,147.76
+SKU-20145,Store #103 Suburban Plaza,Chicago,Health & Beauty,VelocityAthletics,64,33,35,0,62.76
+SKU-20146,Store #101 Downtown,Miami,Footwear & Apparel,PureLife,19,40,90,0,95.01
+SKU-20147,Store #104 Galleria,Austin,Home & Kitchen,SummitGear,249,76,68,0,115.94
+SKU-20148,Store #105 Airport Terminal,Seattle,Home & Kitchen,AuraTech,137,18,64,0,173.86
+SKU-20149,Store #101 Downtown,New York,Home & Kitchen,LuminaHome,61,69,59,0,108.18
+SKU-20150,Store #104 Galleria,New York,Home & Kitchen,VelocityAthletics,94,68,104,0,56.81
+SKU-20151,Store #102 Westside Mall,New York,Footwear & Apparel,VelocityAthletics,181,34,78,0,116.63
+SKU-20152,Store #101 Downtown,Miami,Home & Kitchen,PureLife,249,19,18,0,146.63
+SKU-20153,Store #104 Galleria,Miami,Health & Beauty,VelocityAthletics,182,41,60,0,23.68
+SKU-20154,Store #102 Westside Mall,Austin,Outdoor & Sporting,SummitGear,201,34,61,0,148.98
+SKU-20155,Store #103 Suburban Plaza,Los Angeles,Electronics & Audio,VelocityAthletics,33,32,50,0,140.17
+SKU-20156,Store #102 Westside Mall,Los Angeles,Outdoor & Sporting,AuraTech,135,18,68,0,65.48
+SKU-20157,Store #104 Galleria,Seattle,Home & Kitchen,PureLife,37,38,91,0,138.51
+SKU-20158,Store #102 Westside Mall,Chicago,Footwear & Apparel,SummitGear,121,67,110,0,117.75
+SKU-20159,Store #101 Downtown,New York,Outdoor & Sporting,PureLife,82,44,109,0,63.74
+SKU-20160,Store #103 Suburban Plaza,Miami,Home & Kitchen,SummitGear,148,45,66,0,146.42
+SKU-20161,Store #105 Airport Terminal,Miami,Home & Kitchen,VelocityAthletics,16,56,59,0,22.36
+SKU-20162,Store #101 Downtown,Austin,Footwear & Apparel,PureLife,19,39,80,0,161.57
+SKU-20163,Store #102 Westside Mall,New York,Health & Beauty,VelocityAthletics,141,71,112,0,46.47
+SKU-20164,Store #102 Westside Mall,Los Angeles,Home & Kitchen,PureLife,93,70,11,0,138.16
+SKU-20165,Store #104 Galleria,Chicago,Health & Beauty,AuraTech,63,51,91,0,119.54
+SKU-20166,Store #105 Airport Terminal,New York,Electronics & Audio,AuraTech,209,18,98,0,109.98
+SKU-20167,Store #105 Airport Terminal,Chicago,Health & Beauty,VelocityAthletics,60,67,32,0,78.36
+SKU-20168,Store #105 Airport Terminal,New York,Outdoor & Sporting,VelocityAthletics,76,56,38,0,179.62
+SKU-20169,Store #101 Downtown,Miami,Home & Kitchen,PureLife,74,39,105,0,92.52
+SKU-20170,Store #104 Galleria,Austin,Home & Kitchen,SummitGear,81,31,73,0,134.59
+SKU-20171,Store #104 Galleria,New York,Footwear & Apparel,PureLife,155,66,65,0,172.98
+SKU-20172,Store #104 Galleria,Chicago,Outdoor & Sporting,SummitGear,22,49,8,0,73.82
+SKU-20173,Store #103 Suburban Plaza,New York,Outdoor & Sporting,AuraTech,128,28,108,0,42.61
+SKU-20174,Store #102 Westside Mall,Los Angeles,Footwear & Apparel,SummitGear,59,70,40,0,150.07
+SKU-20175,Store #105 Airport Terminal,Miami,Footwear & Apparel,AuraTech,29,72,93,0,82.35
+SKU-20176,Store #103 Suburban Plaza,Chicago,Electronics & Audio,PureLife,15,70,29,0,74.66
+SKU-20177,Store #103 Suburban Plaza,Los Angeles,Electronics & Audio,AuraTech,102,48,62,0,111.9
+SKU-20178,Store #104 Galleria,New York,Outdoor & Sporting,SummitGear,189,48,32,0,150.12
+SKU-20179,Store #104 Galleria,Austin,Outdoor & Sporting,PureLife,104,64,20,0,125.56
+SKU-20180,Store #102 Westside Mall,Chicago,Electronics & Audio,AuraTech,239,19,79,0,154.4
+SKU-20181,Store #101 Downtown,Chicago,Health & Beauty,VelocityAthletics,226,28,70,0,174.71
+SKU-20182,Store #105 Airport Terminal,New York,Electronics & Audio,LuminaHome,155,55,88,0,167.26
+SKU-20183,Store #103 Suburban Plaza,Austin,Home & Kitchen,PureLife,152,31,115,0,171.77
+SKU-20184,Store #104 Galleria,New York,Health & Beauty,AuraTech,125,68,78,0,176.03
+SKU-20185,Store #103 Suburban Plaza,Miami,Footwear & Apparel,SummitGear,27,20,14,0,96.71
+SKU-20186,Store #101 Downtown,Seattle,Electronics & Audio,SummitGear,51,59,15,0,65.32
+SKU-20187,Store #103 Suburban Plaza,Seattle,Outdoor & Sporting,PureLife,77,16,40,0,160.79
+SKU-20188,Store #105 Airport Terminal,Miami,Health & Beauty,LuminaHome,175,36,45,0,44.11
+SKU-20189,Store #102 Westside Mall,Miami,Outdoor & Sporting,VelocityAthletics,52,34,26,0,126.74
+SKU-20190,Store #104 Galleria,New York,Electronics & Audio,PureLife,133,52,35,0,110.71
+SKU-20191,Store #102 Westside Mall,Miami,Footwear & Apparel,VelocityAthletics,71,77,31,0,15.33
+SKU-20192,Store #104 Galleria,New York,Health & Beauty,VelocityAthletics,70,36,93,0,87.26
+SKU-20193,Store #103 Suburban Plaza,Los Angeles,Home & Kitchen,AuraTech,151,49,70,0,47.58
+SKU-20194,Store #103 Suburban Plaza,Miami,Electronics & Audio,AuraTech,178,40,112,0,94.37
+SKU-20195,Store #105 Airport Terminal,Austin,Outdoor & Sporting,AuraTech,113,41,67,0,59.65
+SKU-20196,Store #103 Suburban Plaza,Chicago,Health & Beauty,PureLife,98,53,64,0,56.8
+SKU-20197,Store #102 Westside Mall,Seattle,Footwear & Apparel,LuminaHome,113,60,102,0,169.16
+SKU-20198,Store #101 Downtown,New York,Electronics & Audio,SummitGear,18,22,10,0,150.47
+SKU-20199,Store #102 Westside Mall,New York,Health & Beauty,VelocityAthletics,61,39,47,0,120.69
+SKU-20200,Store #101 Downtown,New York,Electronics & Audio,AuraTech,0,19,113,1,344.29
+SKU-20201,Store #101 Downtown,Austin,Home & Kitchen,PureLife,137,38,47,0,81.72
+SKU-20202,Store #101 Downtown,Miami,Footwear & Apparel,SummitGear,164,65,107,0,137.86
+SKU-20203,Store #101 Downtown,Miami,Health & Beauty,SummitGear,222,40,18,0,32.13
+SKU-20204,Store #103 Suburban Plaza,Chicago,Footwear & Apparel,SummitGear,19,27,37,0,109.68
+SKU-20205,Store #105 Airport Terminal,Austin,Home & Kitchen,PureLife,98,24,86,0,161.67
+SKU-20206,Store #102 Westside Mall,Seattle,Outdoor & Sporting,SummitGear,28,50,97,0,82.71
+SKU-20207,Store #103 Suburban Plaza,Los Angeles,Home & Kitchen,AuraTech,55,46,19,0,53.12
+SKU-20208,Store #101 Downtown,Miami,Footwear & Apparel,SummitGear,69,52,91,0,159.93
+SKU-20209,Store #104 Galleria,Chicago,Outdoor & Sporting,PureLife,93,35,34,0,85.89
+SKU-20210,Store #105 Airport Terminal,Seattle,Outdoor & Sporting,LuminaHome,169,41,49,0,135.08
+SKU-20211,Store #104 Galleria,New York,Footwear & Apparel,VelocityAthletics,237,68,60,0,30.18
+SKU-20212,Store #101 Downtown,Seattle,Health & Beauty,SummitGear,235,30,104,0,53.02
+SKU-20213,Store #104 Galleria,Seattle,Electronics & Audio,AuraTech,0,77,120,1,389.88
+SKU-20214,Store #101 Downtown,Austin,Footwear & Apparel,SummitGear,16,15,94,0,110.02
+SKU-20215,Store #103 Suburban Plaza,New York,Electronics & Audio,AuraTech,194,19,62,0,63.53
+SKU-20216,Store #104 Galleria,Seattle,Health & Beauty,VelocityAthletics,172,53,33,0,20.9
+SKU-20217,Store #104 Galleria,New York,Outdoor & Sporting,SummitGear,202,45,37,0,66.42
+SKU-20218,Store #103 Suburban Plaza,Miami,Home & Kitchen,AuraTech,47,54,94,0,57.24
+SKU-20219,Store #102 Westside Mall,Chicago,Outdoor & Sporting,PureLife,242,18,87,0,74.35
+SKU-20220,Store #103 Suburban Plaza,Austin,Electronics & Audio,SummitGear,102,38,98,0,120.82
+SKU-20221,Store #104 Galleria,Austin,Home & Kitchen,LuminaHome,121,36,105,0,145.59
+SKU-20222,Store #105 Airport Terminal,New York,Home & Kitchen,SummitGear,22,78,74,0,58.84
+SKU-20223,Store #103 Suburban Plaza,Chicago,Health & Beauty,LuminaHome,187,34,113,0,62.55
+SKU-20224,Store #102 Westside Mall,Austin,Electronics & Audio,SummitGear,114,41,58,0,168.83
+SKU-20225,Store #104 Galleria,Los Angeles,Home & Kitchen,VelocityAthletics,123,70,46,0,33.23
+SKU-20226,Store #105 Airport Terminal,Miami,Health & Beauty,SummitGear,71,74,111,0,132.34
+SKU-20227,Store #104 Galleria,New York,Electronics & Audio,VelocityAthletics,51,48,13,0,160.99
+SKU-20228,Store #101 Downtown,Seattle,Electronics & Audio,PureLife,30,45,47,0,52.33
+SKU-20229,Store #104 Galleria,New York,Electronics & Audio,SummitGear,249,74,24,0,59.79
+SKU-20230,Store #101 Downtown,Austin,Health & Beauty,AuraTech,121,67,80,0,39.39
+SKU-20231,Store #105 Airport Terminal,Chicago,Footwear & Apparel,PureLife,105,55,93,0,175.86
+SKU-20232,Store #103 Suburban Plaza,Miami,Home & Kitchen,PureLife,106,76,63,0,98.88
+SKU-20233,Store #105 Airport Terminal,New York,Home & Kitchen,PureLife,118,79,68,0,160.1
+SKU-20234,Store #104 Galleria,New York,Health & Beauty,PureLife,26,66,87,0,46.88
+SKU-20235,Store #101 Downtown,New York,Outdoor & Sporting,AuraTech,171,23,25,0,127.75
+SKU-20236,Store #102 Westside Mall,Seattle,Electronics & Audio,VelocityAthletics,165,58,109,0,20.2
+SKU-20237,Store #101 Downtown,New York,Home & Kitchen,VelocityAthletics,212,42,31,0,34.59
+SKU-20238,Store #102 Westside Mall,Miami,Electronics & Audio,LuminaHome,241,77,69,0,167.5
+SKU-20239,Store #101 Downtown,Los Angeles,Footwear & Apparel,LuminaHome,17,34,9,0,137.48
+SKU-20240,Store #102 Westside Mall,Los Angeles,Outdoor & Sporting,LuminaHome,232,71,14,0,147.59
+SKU-20241,Store #105 Airport Terminal,Los Angeles,Footwear & Apparel,SummitGear,117,21,6,0,174.88
+SKU-20242,Store #105 Airport Terminal,Miami,Electronics & Audio,PureLife,158,25,76,0,16.12
+SKU-20243,Store #105 Airport Terminal,Los Angeles,Footwear & Apparel,SummitGear,19,44,71,0,90.04
+SKU-20244,Store #103 Suburban Plaza,Miami,Health & Beauty,AuraTech,51,23,32,0,171.9
+SKU-20245,Store #102 Westside Mall,Miami,Home & Kitchen,PureLife,161,21,29,0,94.92
+SKU-20246,Store #102 Westside Mall,Chicago,Footwear & Apparel,VelocityAthletics,109,79,29,0,31.14
+SKU-20247,Store #103 Suburban Plaza,Austin,Home & Kitchen,PureLife,89,56,103,0,137.87
+SKU-20248,Store #104 Galleria,Austin,Footwear & Apparel,AuraTech,221,21,55,0,105.86
+SKU-20249,Store #104 Galleria,Los Angeles,Outdoor & Sporting,VelocityAthletics,221,44,47,0,159.77
+SKU-20250,Store #103 Suburban Plaza,Miami,Health & Beauty,LuminaHome,248,50,76,0,92.22
+SKU-20251,Store #103 Suburban Plaza,Los Angeles,Outdoor & Sporting,PureLife,204,59,92,0,166.2
+SKU-20252,Store #102 Westside Mall,Los Angeles,Electronics & Audio,LuminaHome,138,20,59,0,174.17
+SKU-20253,Store #105 Airport Terminal,Chicago,Outdoor & Sporting,SummitGear,210,54,104,0,48.14
+SKU-20254,Store #104 Galleria,New York,Electronics & Audio,VelocityAthletics,59,23,23,0,130.87
+SKU-20255,Store #105 Airport Terminal,Los Angeles,Footwear & Apparel,PureLife,24,29,83,0,70.91
+SKU-20256,Store #101 Downtown,Seattle,Footwear & Apparel,AuraTech,114,49,30,0,108.76
+SKU-20257,Store #105 Airport Terminal,Miami,Electronics & Audio,PureLife,185,26,6,0,52.48
+SKU-20258,Store #105 Airport Terminal,Austin,Footwear & Apparel,SummitGear,204,57,94,0,16.04
+SKU-20259,Store #103 Suburban Plaza,New York,Health & Beauty,SummitGear,241,62,46,0,107.1
+SKU-20260,Store #103 Suburban Plaza,Los Angeles,Electronics & Audio,AuraTech,88,21,104,0,45.64
+SKU-20261,Store #103 Suburban Plaza,Los Angeles,Health & Beauty,PureLife,13,29,6,0,156.81
+SKU-20262,Store #102 Westside Mall,Austin,Home & Kitchen,SummitGear,24,60,99,0,29.8
+SKU-20263,Store #103 Suburban Plaza,Chicago,Electronics & Audio,SummitGear,84,32,25,0,55.56
+SKU-20264,Store #104 Galleria,Austin,Outdoor & Sporting,PureLife,169,77,12,0,162.71
+SKU-20265,Store #102 Westside Mall,Miami,Footwear & Apparel,AuraTech,222,57,35,0,154.58
+SKU-20266,Store #105 Airport Terminal,Chicago,Health & Beauty,SummitGear,196,63,60,0,115.15
+SKU-20267,Store #103 Suburban Plaza,Los Angeles,Home & Kitchen,SummitGear,62,77,38,0,82.15
+SKU-20268,Store #104 Galleria,Austin,Home & Kitchen,SummitGear,106,71,71,0,86.29
+SKU-20269,Store #103 Suburban Plaza,Austin,Home & Kitchen,AuraTech,75,79,88,0,153.85
+SKU-20270,Store #105 Airport Terminal,Chicago,Electronics & Audio,LuminaHome,127,71,111,0,151.36
+SKU-20271,Store #103 Suburban Plaza,New York,Health & Beauty,AuraTech,175,50,114,0,178.91
+SKU-20272,Store #101 Downtown,Austin,Electronics & Audio,SummitGear,130,79,50,0,82.43
+SKU-20273,Store #102 Westside Mall,New York,Health & Beauty,LuminaHome,43,68,109,0,24.16
+SKU-20274,Store #105 Airport Terminal,Miami,Footwear & Apparel,LuminaHome,24,78,101,0,27.06
+SKU-20275,Store #102 Westside Mall,Seattle,Electronics & Audio,VelocityAthletics,228,61,35,0,50.32
+SKU-20276,Store #104 Galleria,New York,Home & Kitchen,AuraTech,44,34,85,0,102.17
+SKU-20277,Store #104 Galleria,Los Angeles,Outdoor & Sporting,AuraTech,120,49,18,0,67.03
+SKU-20278,Store #101 Downtown,Los Angeles,Footwear & Apparel,PureLife,61,57,54,0,152.23
+SKU-20279,Store #104 Galleria,Austin,Outdoor & Sporting,AuraTech,25,21,114,0,156.97
+SKU-20280,Store #103 Suburban Plaza,Chicago,Footwear & Apparel,LuminaHome,180,15,110,0,150.54
+SKU-20281,Store #103 Suburban Plaza,New York,Health & Beauty,SummitGear,54,17,18,0,128.78
+SKU-20282,Store #103 Suburban Plaza,Miami,Health & Beauty,AuraTech,166,28,20,0,150.77
+SKU-20283,Store #102 Westside Mall,Los Angeles,Outdoor & Sporting,SummitGear,247,34,99,0,116.03
+SKU-20284,Store #101 Downtown,Los Angeles,Footwear & Apparel,AuraTech,196,43,96,0,167.09
+SKU-20285,Store #101 Downtown,New York,Footwear & Apparel,AuraTech,150,67,53,0,155.38
+SKU-20286,Store #101 Downtown,Los Angeles,Home & Kitchen,VelocityAthletics,188,58,58,0,132.78
+SKU-20287,Store #105 Airport Terminal,Seattle,Electronics & Audio,SummitGear,12,41,110,0,64.54
+SKU-20288,Store #101 Downtown,New York,Home & Kitchen,PureLife,58,52,100,0,84.59
+SKU-20289,Store #101 Downtown,Los Angeles,Footwear & Apparel,AuraTech,168,32,43,0,26.6
+SKU-20290,Store #103 Suburban Plaza,Miami,Home & Kitchen,VelocityAthletics,245,60,44,0,66.65
+SKU-20291,Store #102 Westside Mall,Los Angeles,Outdoor & Sporting,VelocityAthletics,41,17,70,0,57.62
+SKU-20292,Store #101 Downtown,Austin,Outdoor & Sporting,VelocityAthletics,73,30,77,0,119.25
+SKU-20293,Store #104 Galleria,Chicago,Home & Kitchen,AuraTech,63,34,20,0,133.07
+SKU-20294,Store #103 Suburban Plaza,Austin,Health & Beauty,VelocityAthletics,43,19,71,0,51.95
+SKU-20295,Store #104 Galleria,Miami,Health & Beauty,VelocityAthletics,36,23,23,0,80.98
+SKU-20296,Store #103 Suburban Plaza,Miami,Health & Beauty,PureLife,240,73,43,0,76.04
+SKU-20297,Store #105 Airport Terminal,Miami,Outdoor & Sporting,VelocityAthletics,140,22,54,0,23.3
+SKU-20298,Store #102 Westside Mall,Chicago,Outdoor & Sporting,AuraTech,208,28,76,0,88.05
+SKU-20299,Store #104 Galleria,Los Angeles,Health & Beauty,LuminaHome,61,17,93,0,171.3
+SKU-20300,Store #105 Airport Terminal,Chicago,Health & Beauty,AuraTech,45,21,80,0,121.92
+SKU-20301,Store #102 Westside Mall,New York,Footwear & Apparel,VelocityAthletics,84,63,79,0,109.12
+SKU-20302,Store #103 Suburban Plaza,Seattle,Footwear & Apparel,AuraTech,30,33,114,0,161.61
+SKU-20303,Store #101 Downtown,Los Angeles,Health & Beauty,PureLife,48,61,59,0,32.42
+SKU-20304,Store #102 Westside Mall,Los Angeles,Electronics & Audio,VelocityAthletics,44,79,6,0,42.72
+SKU-20305,Store #104 Galleria,Miami,Home & Kitchen,LuminaHome,43,79,115,0,152.73
+SKU-20306,Store #101 Downtown,Seattle,Electronics & Audio,LuminaHome,147,57,38,0,54.82
+SKU-20307,Store #102 Westside Mall,New York,Outdoor & Sporting,AuraTech,147,61,49,0,15.75
+SKU-20308,Store #104 Galleria,Chicago,Electronics & Audio,AuraTech,1,17,202,0,381.15
+SKU-20309,Store #102 Westside Mall,Chicago,Health & Beauty,AuraTech,186,57,21,0,71.32
+SKU-20310,Store #103 Suburban Plaza,New York,Footwear & Apparel,PureLife,162,69,64,0,53.79
+SKU-20311,Store #101 Downtown,Miami,Health & Beauty,PureLife,42,52,47,0,30.8
+SKU-20312,Store #101 Downtown,New York,Home & Kitchen,SummitGear,34,29,108,0,134.68
+SKU-20313,Store #103 Suburban Plaza,Austin,Outdoor & Sporting,VelocityAthletics,93,47,100,0,145.2
+SKU-20314,Store #101 Downtown,Los Angeles,Footwear & Apparel,LuminaHome,208,31,118,0,54.39
+SKU-20315,Store #103 Suburban Plaza,Miami,Footwear & Apparel,PureLife,115,56,33,0,89.66
+SKU-20316,Store #103 Suburban Plaza,Seattle,Home & Kitchen,PureLife,176,63,14,0,123.47
+SKU-20317,Store #102 Westside Mall,Chicago,Footwear & Apparel,AuraTech,163,68,5,0,161.43
+SKU-20318,Store #104 Galleria,Chicago,Footwear & Apparel,PureLife,80,55,115,0,163.38
+SKU-20319,Store #102 Westside Mall,New York,Electronics & Audio,SummitGear,249,19,85,0,169.63
+SKU-20320,Store #101 Downtown,Seattle,Electronics & Audio,VelocityAthletics,223,51,95,0,175.1
+SKU-20321,Store #102 Westside Mall,Chicago,Footwear & Apparel,SummitGear,234,68,37,0,172.75
+SKU-20322,Store #102 Westside Mall,Los Angeles,Electronics & Audio,AuraTech,32,63,83,0,126.83
+SKU-20323,Store #105 Airport Terminal,Austin,Home & Kitchen,PureLife,233,66,118,0,70.22
+SKU-20324,Store #102 Westside Mall,Chicago,Home & Kitchen,PureLife,57,37,20,0,142.14
+SKU-20325,Store #101 Downtown,Los Angeles,Health & Beauty,VelocityAthletics,129,57,107,0,53.76
+SKU-20326,Store #103 Suburban Plaza,New York,Electronics & Audio,AuraTech,21,26,84,0,107.5
+SKU-20327,Store #105 Airport Terminal,Los Angeles,Outdoor & Sporting,LuminaHome,57,50,68,0,108.66
+SKU-20328,Store #103 Suburban Plaza,Seattle,Outdoor & Sporting,LuminaHome,99,46,108,0,155.96
+SKU-20329,Store #101 Downtown,New York,Footwear & Apparel,SummitGear,170,53,64,0,81.76
+SKU-20330,Store #101 Downtown,Chicago,Footwear & Apparel,LuminaHome,27,77,90,0,77.54
+SKU-20331,Store #103 Suburban Plaza,New York,Health & Beauty,PureLife,65,18,80,0,161.86
+SKU-20332,Store #105 Airport Terminal,Seattle,Outdoor & Sporting,SummitGear,23,66,52,0,79.2
+SKU-20333,Store #104 Galleria,New York,Outdoor & Sporting,VelocityAthletics,195,69,101,0,158.76
+SKU-20334,Store #102 Westside Mall,New York,Home & Kitchen,VelocityAthletics,188,24,93,0,51.14
+SKU-20335,Store #102 Westside Mall,Los Angeles,Health & Beauty,AuraTech,91,79,110,0,115.81
+SKU-20336,Store #102 Westside Mall,Seattle,Home & Kitchen,LuminaHome,193,24,8,0,62.93
+SKU-20337,Store #101 Downtown,Los Angeles,Health & Beauty,SummitGear,168,25,79,0,36.56
+SKU-20338,Store #101 Downtown,Miami,Electronics & Audio,LuminaHome,94,78,84,0,66.4
+SKU-20339,Store #104 Galleria,Miami,Electronics & Audio,PureLife,73,67,37,0,83.61
+SKU-20340,Store #101 Downtown,New York,Footwear & Apparel,SummitGear,122,53,81,0,171.34
+SKU-20341,Store #101 Downtown,Chicago,Health & Beauty,SummitGear,153,78,117,0,117.76
+SKU-20342,Store #104 Galleria,Seattle,Home & Kitchen,PureLife,164,50,106,0,121.49
+SKU-20343,Store #103 Suburban Plaza,Chicago,Home & Kitchen,AuraTech,59,35,42,0,125.72
+SKU-20344,Store #101 Downtown,Seattle,Footwear & Apparel,VelocityAthletics,248,40,119,0,129.48
+SKU-20345,Store #103 Suburban Plaza,Los Angeles,Electronics & Audio,PureLife,137,49,52,0,172.43
+SKU-20346,Store #101 Downtown,Seattle,Outdoor & Sporting,VelocityAthletics,118,64,109,0,99.88
+SKU-20347,Store #104 Galleria,Austin,Health & Beauty,PureLife,145,66,110,0,114.86
+SKU-20348,Store #104 Galleria,Seattle,Electronics & Audio,AuraTech,0,22,97,1,393.32
+SKU-20349,Store #105 Airport Terminal,Los Angeles,Footwear & Apparel,AuraTech,206,15,35,0,145.15
+SKU-20350,Store #105 Airport Terminal,Chicago,Footwear & Apparel,VelocityAthletics,220,38,119,0,154.46
+SKU-20351,Store #103 Suburban Plaza,Los Angeles,Home & Kitchen,PureLife,189,24,23,0,122.91
+SKU-20352,Store #102 Westside Mall,Chicago,Health & Beauty,PureLife,141,75,51,0,69.22
+SKU-20353,Store #104 Galleria,Los Angeles,Outdoor & Sporting,AuraTech,180,42,64,0,138.84
+SKU-20354,Store #104 Galleria,New York,Footwear & Apparel,SummitGear,39,62,94,0,54.8
+SKU-20355,Store #104 Galleria,Seattle,Health & Beauty,LuminaHome,17,31,96,0,122.42
+SKU-20356,Store #104 Galleria,New York,Health & Beauty,PureLife,22,44,17,0,96.04
+SKU-20357,Store #102 Westside Mall,Chicago,Home & Kitchen,VelocityAthletics,198,61,99,0,113.32
+SKU-20358,Store #101 Downtown,Chicago,Outdoor & Sporting,LuminaHome,95,35,96,0,16.57
+SKU-20359,Store #102 Westside Mall,Austin,Outdoor & Sporting,SummitGear,138,41,87,0,171.7
+SKU-20360,Store #101 Downtown,Miami,Footwear & Apparel,PureLife,223,33,109,0,155.54
+SKU-20361,Store #102 Westside Mall,Austin,Outdoor & Sporting,PureLife,61,17,48,0,93.89
+SKU-20362,Store #104 Galleria,Miami,Home & Kitchen,LuminaHome,164,58,111,0,58.87
+SKU-20363,Store #102 Westside Mall,Seattle,Outdoor & Sporting,AuraTech,179,22,22,0,104.11
+SKU-20364,Store #105 Airport Terminal,Seattle,Health & Beauty,SummitGear,151,52,74,0,147.83
+SKU-20365,Store #102 Westside Mall,Chicago,Health & Beauty,LuminaHome,98,67,107,0,120.58
+SKU-20366,Store #102 Westside Mall,Chicago,Health & Beauty,SummitGear,249,78,68,0,169.72
+SKU-20367,Store #101 Downtown,Chicago,Home & Kitchen,AuraTech,142,32,31,0,122.03
+SKU-20368,Store #102 Westside Mall,Los Angeles,Health & Beauty,SummitGear,83,32,97,0,39.18
+SKU-20369,Store #101 Downtown,Los Angeles,Electronics & Audio,AuraTech,0,56,136,1,303.6
+SKU-20370,Store #103 Suburban Plaza,Los Angeles,Electronics & Audio,PureLife,153,16,31,0,139.47
+SKU-20371,Store #101 Downtown,New York,Footwear & Apparel,VelocityAthletics,209,72,94,0,37.03
+SKU-20372,Store #103 Suburban Plaza,New York,Electronics & Audio,AuraTech,184,33,106,0,70.07
+SKU-20373,Store #102 Westside Mall,Los Angeles,Health & Beauty,SummitGear,121,45,75,0,57.3
+SKU-20374,Store #101 Downtown,Chicago,Footwear & Apparel,SummitGear,240,70,42,0,27.76
+SKU-20375,Store #104 Galleria,Los Angeles,Electronics & Audio,LuminaHome,72,35,36,0,21.61
+SKU-20376,Store #104 Galleria,Austin,Outdoor & Sporting,LuminaHome,10,34,115,0,130.18
+SKU-20377,Store #101 Downtown,Seattle,Footwear & Apparel,LuminaHome,193,77,48,0,22.78
+SKU-20378,Store #103 Suburban Plaza,Seattle,Outdoor & Sporting,VelocityAthletics,36,57,102,0,23.19
+SKU-20379,Store #104 Galleria,New York,Health & Beauty,AuraTech,48,30,115,0,60.29
+SKU-20380,Store #104 Galleria,Austin,Footwear & Apparel,LuminaHome,23,15,27,0,72.45
+SKU-20381,Store #102 Westside Mall,New York,Health & Beauty,SummitGear,125,60,54,0,135.33
+SKU-20382,Store #105 Airport Terminal,Seattle,Footwear & Apparel,LuminaHome,94,67,90,0,107.48
+SKU-20383,Store #105 Airport Terminal,Miami,Footwear & Apparel,VelocityAthletics,174,71,62,0,99.23
+SKU-20384,Store #104 Galleria,New York,Footwear & Apparel,AuraTech,120,65,94,0,106.47
+SKU-20385,Store #105 Airport Terminal,Miami,Home & Kitchen,LuminaHome,133,41,104,0,26.01
+SKU-20386,Store #105 Airport Terminal,Los Angeles,Health & Beauty,LuminaHome,73,42,108,0,84.76
+SKU-20387,Store #105 Airport Terminal,New York,Outdoor & Sporting,AuraTech,111,41,44,0,22.36
+SKU-20388,Store #105 Airport Terminal,Miami,Electronics & Audio,SummitGear,98,53,95,0,131.04
+SKU-20389,Store #105 Airport Terminal,Miami,Outdoor & Sporting,AuraTech,196,45,76,0,93.21
+SKU-20390,Store #101 Downtown,Los Angeles,Footwear & Apparel,VelocityAthletics,223,32,33,0,44.31
+SKU-20391,Store #103 Suburban Plaza,New York,Footwear & Apparel,VelocityAthletics,110,60,36,0,100.88
+SKU-20392,Store #104 Galleria,Seattle,Health & Beauty,PureLife,228,19,24,0,60.14
+SKU-20393,Store #103 Suburban Plaza,Austin,Outdoor & Sporting,SummitGear,178,44,73,0,85.39
+SKU-20394,Store #103 Suburban Plaza,Chicago,Home & Kitchen,PureLife,172,34,102,0,114.74
+SKU-20395,Store #102 Westside Mall,Seattle,Home & Kitchen,VelocityAthletics,146,60,31,0,126.82
+SKU-20396,Store #101 Downtown,Austin,Home & Kitchen,PureLife,220,51,20,0,173.78
+SKU-20397,Store #103 Suburban Plaza,Miami,Electronics & Audio,VelocityAthletics,33,65,58,0,140.66
+SKU-20398,Store #103 Suburban Plaza,Los Angeles,Footwear & Apparel,SummitGear,245,41,119,0,39.49
+SKU-20399,Store #102 Westside Mall,Seattle,Outdoor & Sporting,PureLife,19,52,112,0,24.79
+SKU-20400,Store #104 Galleria,Austin,Electronics & Audio,LuminaHome,74,31,98,0,62.97
+SKU-20401,Store #105 Airport Terminal,Miami,Electronics & Audio,SummitGear,119,63,92,0,99.75
+SKU-20402,Store #101 Downtown,Seattle,Outdoor & Sporting,PureLife,153,53,119,0,31.74
+SKU-20403,Store #103 Suburban Plaza,New York,Footwear & Apparel,SummitGear,79,63,27,0,118.45
+SKU-20404,Store #104 Galleria,New York,Electronics & Audio,SummitGear,164,39,22,0,55.41
+SKU-20405,Store #105 Airport Terminal,Austin,Outdoor & Sporting,VelocityAthletics,65,62,70,0,164.96
+SKU-20406,Store #104 Galleria,Chicago,Electronics & Audio,VelocityAthletics,43,39,31,0,123.6
+SKU-20407,Store #104 Galleria,Seattle,Home & Kitchen,LuminaHome,85,23,23,0,169.05
+SKU-20408,Store #104 Galleria,Austin,Home & Kitchen,VelocityAthletics,175,77,91,0,33.48
+SKU-20409,Store #102 Westside Mall,Seattle,Electronics & Audio,AuraTech,148,36,87,0,169.57
+SKU-20410,Store #102 Westside Mall,Austin,Outdoor & Sporting,AuraTech,149,58,35,0,128.78
+SKU-20411,Store #101 Downtown,Miami,Outdoor & Sporting,VelocityAthletics,34,64,62,0,85.82
+SKU-20412,Store #103 Suburban Plaza,Los Angeles,Health & Beauty,AuraTech,85,46,28,0,102.39
+SKU-20413,Store #103 Suburban Plaza,Chicago,Footwear & Apparel,PureLife,102,52,30,0,118.4
+SKU-20414,Store #104 Galleria,Miami,Outdoor & Sporting,VelocityAthletics,15,76,16,1,123.41
+SKU-20415,Store #105 Airport Terminal,Seattle,Outdoor & Sporting,VelocityAthletics,169,73,76,0,133.06
+SKU-20416,Store #105 Airport Terminal,New York,Footwear & Apparel,PureLife,105,17,75,0,123.71
+SKU-20417,Store #102 Westside Mall,New York,Health & Beauty,AuraTech,24,72,75,0,66.69
+SKU-20418,Store #101 Downtown,New York,Outdoor & Sporting,SummitGear,66,70,113,0,105.7
+SKU-20419,Store #105 Airport Terminal,Seattle,Health & Beauty,VelocityAthletics,208,34,110,0,121.18
+SKU-20420,Store #101 Downtown,Los Angeles,Footwear & Apparel,AuraTech,126,40,108,0,159.99
+SKU-20421,Store #102 Westside Mall,Miami,Outdoor & Sporting,AuraTech,61,42,109,0,115.3
+SKU-20422,Store #102 Westside Mall,Chicago,Outdoor & Sporting,LuminaHome,215,52,32,0,16.49
+SKU-20423,Store #103 Suburban Plaza,New York,Health & Beauty,LuminaHome,23,77,28,0,90.31
+SKU-20424,Store #103 Suburban Plaza,Seattle,Electronics & Audio,LuminaHome,27,27,28,0,118.78
+SKU-20425,Store #101 Downtown,Austin,Home & Kitchen,AuraTech,51,18,14,0,109.77
+SKU-20426,Store #105 Airport Terminal,Seattle,Electronics & Audio,AuraTech,38,45,38,0,73.89
+SKU-20427,Store #101 Downtown,Miami,Home & Kitchen,SummitGear,127,68,106,0,44.17
+SKU-20428,Store #102 Westside Mall,Chicago,Home & Kitchen,LuminaHome,43,63,38,0,148.86
+SKU-20429,Store #103 Suburban Plaza,Seattle,Footwear & Apparel,VelocityAthletics,204,45,33,0,26.08
+SKU-20430,Store #101 Downtown,Miami,Health & Beauty,SummitGear,46,25,87,0,170.99
+SKU-20431,Store #104 Galleria,Austin,Health & Beauty,AuraTech,103,66,32,0,57.94
+SKU-20432,Store #103 Suburban Plaza,Los Angeles,Electronics & Audio,LuminaHome,12,77,98,1,125.52
+SKU-20433,Store #103 Suburban Plaza,Chicago,Electronics & Audio,PureLife,124,74,108,0,120.61
+SKU-20434,Store #102 Westside Mall,New York,Health & Beauty,VelocityAthletics,124,57,94,0,152.82
+SKU-20435,Store #103 Suburban Plaza,Seattle,Electronics & Audio,PureLife,127,62,64,0,103.06
+SKU-20436,Store #103 Suburban Plaza,Chicago,Outdoor & Sporting,VelocityAthletics,202,67,18,0,49.79
+SKU-20437,Store #102 Westside Mall,Chicago,Health & Beauty,LuminaHome,27,30,59,0,129.82
+SKU-20438,Store #105 Airport Terminal,New York,Health & Beauty,PureLife,136,51,87,0,80.23
+SKU-20439,Store #101 Downtown,Los Angeles,Electronics & Audio,VelocityAthletics,96,27,34,0,119.66
+SKU-20440,Store #103 Suburban Plaza,Austin,Electronics & Audio,VelocityAthletics,210,61,11,0,42.9
+SKU-20441,Store #102 Westside Mall,Austin,Electronics & Audio,LuminaHome,166,30,57,0,22.23
+SKU-20442,Store #104 Galleria,Chicago,Electronics & Audio,VelocityAthletics,49,72,21,0,169.06
+SKU-20443,Store #104 Galleria,Miami,Electronics & Audio,PureLife,182,28,98,0,93.86
+SKU-20444,Store #104 Galleria,Los Angeles,Health & Beauty,VelocityAthletics,73,16,98,0,148.73
+SKU-20445,Store #105 Airport Terminal,Seattle,Health & Beauty,VelocityAthletics,20,60,56,0,137.75
+SKU-20446,Store #104 Galleria,Miami,Home & Kitchen,SummitGear,205,59,63,0,45.73
+SKU-20447,Store #103 Suburban Plaza,Los Angeles,Outdoor & Sporting,AuraTech,233,56,75,0,132.03
+SKU-20448,Store #105 Airport Terminal,Los Angeles,Outdoor & Sporting,VelocityAthletics,55,51,35,0,48.68
+SKU-20449,Store #105 Airport Terminal,New York,Electronics & Audio,AuraTech,135,31,70,0,164.57
+SKU-20450,Store #105 Airport Terminal,Seattle,Electronics & Audio,LuminaHome,71,74,24,0,170.1
+SKU-20451,Store #104 Galleria,Austin,Health & Beauty,AuraTech,58,48,46,0,35.12
+SKU-20452,Store #103 Suburban Plaza,Austin,Electronics & Audio,LuminaHome,246,63,11,0,65.66
+SKU-20453,Store #104 Galleria,Miami,Electronics & Audio,SummitGear,90,61,118,0,71.66
+SKU-20454,Store #103 Suburban Plaza,Austin,Footwear & Apparel,LuminaHome,100,69,14,0,179.19
+SKU-20455,Store #102 Westside Mall,Chicago,Home & Kitchen,LuminaHome,200,17,10,0,126.97
+SKU-20456,Store #101 Downtown,New York,Home & Kitchen,SummitGear,52,51,102,0,173.23
+SKU-20457,Store #101 Downtown,Austin,Outdoor & Sporting,PureLife,20,65,76,0,20.51
+SKU-20458,Store #101 Downtown,New York,Outdoor & Sporting,PureLife,46,29,14,0,143.35
+SKU-20459,Store #102 Westside Mall,Los Angeles,Outdoor & Sporting,SummitGear,176,35,34,0,105.57
+SKU-20460,Store #103 Suburban Plaza,Austin,Outdoor & Sporting,AuraTech,238,56,27,0,48.68
+SKU-20461,Store #105 Airport Terminal,New York,Home & Kitchen,PureLife,60,29,26,0,90.97
+SKU-20462,Store #104 Galleria,Austin,Health & Beauty,AuraTech,51,68,56,0,171.95
+SKU-20463,Store #104 Galleria,Seattle,Electronics & Audio,LuminaHome,92,46,107,0,157.23
+SKU-20464,Store #103 Suburban Plaza,Chicago,Electronics & Audio,VelocityAthletics,151,48,38,0,98.8
+SKU-20465,Store #104 Galleria,New York,Footwear & Apparel,LuminaHome,125,33,25,0,106.53
+SKU-20466,Store #103 Suburban Plaza,Austin,Outdoor & Sporting,VelocityAthletics,12,15,14,0,56.62
+SKU-20467,Store #105 Airport Terminal,Austin,Electronics & Audio,AuraTech,138,39,103,0,115.75
+SKU-20468,Store #105 Airport Terminal,Seattle,Health & Beauty,AuraTech,185,37,41,0,146.04
+SKU-20469,Store #104 Galleria,Miami,Outdoor & Sporting,AuraTech,113,66,26,0,30.45
+SKU-20470,Store #105 Airport Terminal,Chicago,Home & Kitchen,VelocityAthletics,196,44,110,0,81.79
+SKU-20471,Store #104 Galleria,New York,Outdoor & Sporting,AuraTech,170,71,94,0,75.47
+SKU-20472,Store #101 Downtown,Austin,Home & Kitchen,AuraTech,50,45,111,0,36.05
+SKU-20473,Store #102 Westside Mall,Chicago,Footwear & Apparel,LuminaHome,158,32,36,0,153.31
+SKU-20474,Store #104 Galleria,Austin,Home & Kitchen,SummitGear,84,25,85,0,98.3
+SKU-20475,Store #102 Westside Mall,Los Angeles,Health & Beauty,AuraTech,90,59,85,0,154.93
+SKU-20476,Store #103 Suburban Plaza,Chicago,Outdoor & Sporting,PureLife,234,74,27,0,30.92
+SKU-20477,Store #105 Airport Terminal,Chicago,Health & Beauty,VelocityAthletics,248,50,7,0,69.4
+SKU-20478,Store #105 Airport Terminal,Seattle,Health & Beauty,VelocityAthletics,201,63,18,0,89.78
+SKU-20479,Store #105 Airport Terminal,Chicago,Footwear & Apparel,PureLife,10,38,52,0,121.12
+SKU-20480,Store #102 Westside Mall,Los Angeles,Outdoor & Sporting,PureLife,167,73,43,0,55.98
+SKU-20481,Store #103 Suburban Plaza,Los Angeles,Outdoor & Sporting,SummitGear,61,51,84,0,113.86
+SKU-20482,Store #105 Airport Terminal,New York,Electronics & Audio,SummitGear,23,64,41,0,89.56
+SKU-20483,Store #103 Suburban Plaza,Los Angeles,Health & Beauty,LuminaHome,225,51,82,0,114.23
+SKU-20484,Store #105 Airport Terminal,Chicago,Home & Kitchen,AuraTech,220,15,55,0,74.79
+SKU-20485,Store #105 Airport Terminal,Miami,Footwear & Apparel,AuraTech,145,66,12,0,33.32
+SKU-20486,Store #103 Suburban Plaza,Seattle,Footwear & Apparel,VelocityAthletics,29,68,50,0,94.08
+SKU-20487,Store #104 Galleria,Los Angeles,Outdoor & Sporting,PureLife,137,55,76,0,146.53
+SKU-20488,Store #104 Galleria,Seattle,Outdoor & Sporting,SummitGear,111,52,53,0,121.73
+SKU-20489,Store #101 Downtown,Chicago,Footwear & Apparel,LuminaHome,206,39,24,0,18.82
+SKU-20490,Store #103 Suburban Plaza,Miami,Health & Beauty,PureLife,231,75,105,0,31.22
+SKU-20491,Store #104 Galleria,Chicago,Electronics & Audio,AuraTech,0,19,139,1,289.85
+SKU-20492,Store #104 Galleria,Los Angeles,Health & Beauty,PureLife,219,39,103,0,101.39
+SKU-20493,Store #104 Galleria,Seattle,Electronics & Audio,VelocityAthletics,197,67,108,0,173.14
+SKU-20494,Store #104 Galleria,Los Angeles,Electronics & Audio,SummitGear,226,16,61,0,51.26
+SKU-20495,Store #104 Galleria,Seattle,Electronics & Audio,PureLife,130,70,49,0,114.96
+SKU-20496,Store #102 Westside Mall,Los Angeles,Health & Beauty,PureLife,202,25,33,0,37.49
+SKU-20497,Store #104 Galleria,Seattle,Footwear & Apparel,VelocityAthletics,121,50,13,0,116.91
+SKU-20498,Store #104 Galleria,New York,Footwear & Apparel,AuraTech,144,39,73,0,58.27
+SKU-20499,Store #105 Airport Terminal,New York,Health & Beauty,LuminaHome,144,76,83,0,38.64
+SKU-20500,Store #102 Westside Mall,Austin,Health & Beauty,AuraTech,48,40,84,0,138.57
+SKU-20501,Store #105 Airport Terminal,New York,Electronics & Audio,LuminaHome,169,47,92,0,73.37
+SKU-20502,Store #105 Airport Terminal,Chicago,Home & Kitchen,LuminaHome,226,75,55,0,33.54
+SKU-20503,Store #102 Westside Mall,New York,Health & Beauty,PureLife,172,69,44,0,148.18
+SKU-20504,Store #101 Downtown,Chicago,Home & Kitchen,VelocityAthletics,104,32,50,0,79.46
+SKU-20505,Store #105 Airport Terminal,Miami,Health & Beauty,PureLife,219,72,32,0,151.2
+SKU-20506,Store #103 Suburban Plaza,Los Angeles,Home & Kitchen,SummitGear,39,40,70,0,160.96
+SKU-20507,Store #105 Airport Terminal,Los Angeles,Home & Kitchen,SummitGear,10,38,100,0,65.47
+SKU-20508,Store #105 Airport Terminal,Seattle,Home & Kitchen,LuminaHome,34,32,6,0,140.76
+SKU-20509,Store #103 Suburban Plaza,Chicago,Footwear & Apparel,VelocityAthletics,248,75,65,0,147.89
+SKU-20510,Store #102 Westside Mall,Seattle,Health & Beauty,LuminaHome,151,37,70,0,95.9
+SKU-20511,Store #103 Suburban Plaza,Seattle,Health & Beauty,AuraTech,40,79,100,0,151.07
+SKU-20512,Store #104 Galleria,Seattle,Footwear & Apparel,LuminaHome,244,34,47,0,35.43
+SKU-20513,Store #104 Galleria,Seattle,Health & Beauty,VelocityAthletics,78,58,104,0,93.57
+SKU-20514,Store #104 Galleria,Miami,Electronics & Audio,LuminaHome,21,67,87,0,54.32
+SKU-20515,Store #105 Airport Terminal,Los Angeles,Electronics & Audio,PureLife,221,30,61,0,34.39
+SKU-20516,Store #101 Downtown,Austin,Outdoor & Sporting,AuraTech,90,25,62,0,92.47
+SKU-20517,Store #104 Galleria,Austin,Footwear & Apparel,SummitGear,219,19,10,0,71.26
+SKU-20518,Store #101 Downtown,Austin,Health & Beauty,VelocityAthletics,12,76,8,1,46.7
+SKU-20519,Store #104 Galleria,New York,Electronics & Audio,PureLife,240,21,5,0,176.7
+SKU-20520,Store #104 Galleria,Miami,Outdoor & Sporting,VelocityAthletics,39,72,52,0,136.18
+SKU-20521,Store #103 Suburban Plaza,New York,Footwear & Apparel,AuraTech,157,24,71,0,62.56
+SKU-20522,Store #103 Suburban Plaza,New York,Health & Beauty,PureLife,86,70,26,0,68.52
+SKU-20523,Store #105 Airport Terminal,Los Angeles,Outdoor & Sporting,LuminaHome,47,51,93,0,177.83
+SKU-20524,Store #101 Downtown,Los Angeles,Health & Beauty,SummitGear,224,29,43,0,160.73
+SKU-20525,Store #102 Westside Mall,Austin,Home & Kitchen,PureLife,151,59,88,0,84.18
+SKU-20526,Store #102 Westside Mall,Chicago,Home & Kitchen,PureLife,58,70,69,0,108.65
+SKU-20527,Store #105 Airport Terminal,Austin,Health & Beauty,PureLife,37,30,51,0,96.69
+SKU-20528,Store #104 Galleria,Austin,Footwear & Apparel,AuraTech,66,17,118,0,76.2
+SKU-20529,Store #103 Suburban Plaza,Austin,Electronics & Audio,SummitGear,35,68,47,0,56.58
+SKU-20530,Store #104 Galleria,Los Angeles,Electronics & Audio,VelocityAthletics,147,34,55,0,62.98
+SKU-20531,Store #104 Galleria,Chicago,Electronics & Audio,PureLife,184,72,18,0,160.78
+SKU-20532,Store #104 Galleria,Miami,Health & Beauty,VelocityAthletics,20,49,45,0,160.29
+SKU-20533,Store #102 Westside Mall,Chicago,Footwear & Apparel,VelocityAthletics,168,71,90,0,82.4
+SKU-20534,Store #104 Galleria,Austin,Electronics & Audio,AuraTech,0,35,100,1,186.31
+SKU-20535,Store #101 Downtown,Miami,Outdoor & Sporting,AuraTech,75,31,79,0,67.8
+SKU-20536,Store #102 Westside Mall,Miami,Home & Kitchen,PureLife,188,34,92,0,127.3
+SKU-20537,Store #105 Airport Terminal,Seattle,Home & Kitchen,SummitGear,90,50,70,0,29.61
+SKU-20538,Store #103 Suburban Plaza,Seattle,Electronics & Audio,SummitGear,225,47,51,0,90.59
+SKU-20539,Store #102 Westside Mall,New York,Outdoor & Sporting,AuraTech,132,47,50,0,65.68
+SKU-20540,Store #103 Suburban Plaza,Chicago,Home & Kitchen,AuraTech,202,31,61,0,122.11
+SKU-20541,Store #103 Suburban Plaza,Seattle,Home & Kitchen,VelocityAthletics,69,59,119,0,95.95
+SKU-20542,Store #105 Airport Terminal,Miami,Electronics & Audio,LuminaHome,102,79,87,0,43.68
+SKU-20543,Store #102 Westside Mall,Austin,Outdoor & Sporting,AuraTech,64,71,64,0,179.37
+SKU-20544,Store #101 Downtown,Austin,Footwear & Apparel,PureLife,25,66,107,0,147.53
+SKU-20545,Store #105 Airport Terminal,Miami,Health & Beauty,LuminaHome,169,49,77,0,133.18
+SKU-20546,Store #105 Airport Terminal,Los Angeles,Electronics & Audio,AuraTech,171,47,114,0,30.12
+SKU-20547,Store #101 Downtown,New York,Footwear & Apparel,AuraTech,79,59,110,0,120.04
+SKU-20548,Store #101 Downtown,Chicago,Electronics & Audio,SummitGear,236,77,67,0,55.57
+SKU-20549,Store #105 Airport Terminal,Austin,Outdoor & Sporting,VelocityAthletics,89,35,47,0,78.84
+SKU-20550,Store #102 Westside Mall,Miami,Outdoor & Sporting,PureLife,13,77,38,1,168.2
+SKU-20551,Store #102 Westside Mall,Chicago,Footwear & Apparel,LuminaHome,49,22,25,0,149.86
+SKU-20552,Store #105 Airport Terminal,New York,Footwear & Apparel,LuminaHome,70,61,67,0,61.95
+SKU-20553,Store #104 Galleria,Miami,Health & Beauty,AuraTech,30,37,46,0,80.77
+SKU-20554,Store #105 Airport Terminal,Chicago,Outdoor & Sporting,LuminaHome,230,40,84,0,62.7
+SKU-20555,Store #105 Airport Terminal,Seattle,Electronics & Audio,VelocityAthletics,201,34,72,0,152.85
+SKU-20556,Store #103 Suburban Plaza,Miami,Health & Beauty,SummitGear,44,19,29,0,138.12
+SKU-20557,Store #102 Westside Mall,Los Angeles,Outdoor & Sporting,LuminaHome,125,20,108,0,30.3
+SKU-20558,Store #101 Downtown,Miami,Health & Beauty,AuraTech,214,47,59,0,78.87
+SKU-20559,Store #103 Suburban Plaza,Austin,Home & Kitchen,SummitGear,70,51,79,0,147.27
+SKU-20560,Store #101 Downtown,Seattle,Outdoor & Sporting,AuraTech,105,54,20,0,93.54
+SKU-20561,Store #105 Airport Terminal,Chicago,Footwear & Apparel,AuraTech,193,59,5,0,137.46
+SKU-20562,Store #104 Galleria,Miami,Outdoor & Sporting,AuraTech,135,23,5,0,132.94
+SKU-20563,Store #102 Westside Mall,New York,Electronics & Audio,VelocityAthletics,54,28,108,0,118.18
+SKU-20564,Store #104 Galleria,Chicago,Home & Kitchen,LuminaHome,105,43,36,0,67.08
+SKU-20565,Store #101 Downtown,Chicago,Footwear & Apparel,VelocityAthletics,132,16,97,0,25.3
+SKU-20566,Store #104 Galleria,Miami,Outdoor & Sporting,AuraTech,228,48,31,0,73.34
+SKU-20567,Store #104 Galleria,Seattle,Home & Kitchen,SummitGear,228,49,90,0,52.25
+SKU-20568,Store #102 Westside Mall,Seattle,Outdoor & Sporting,SummitGear,236,39,105,0,54.43
+SKU-20569,Store #101 Downtown,Los Angeles,Home & Kitchen,SummitGear,167,23,37,0,57.18
+SKU-20570,Store #103 Suburban Plaza,Miami,Home & Kitchen,VelocityAthletics,134,74,52,0,171.1
+SKU-20571,Store #105 Airport Terminal,Miami,Electronics & Audio,SummitGear,236,44,15,0,78.92
+SKU-20572,Store #102 Westside Mall,Miami,Electronics & Audio,SummitGear,130,41,17,0,100.09
+SKU-20573,Store #105 Airport Terminal,Seattle,Health & Beauty,AuraTech,187,68,9,0,119.65
+SKU-20574,Store #103 Suburban Plaza,Austin,Health & Beauty,PureLife,185,30,113,0,68.5
+SKU-20575,Store #102 Westside Mall,Miami,Health & Beauty,PureLife,129,37,12,0,31.64
+SKU-20576,Store #104 Galleria,Los Angeles,Footwear & Apparel,VelocityAthletics,128,30,37,0,25.48
+SKU-20577,Store #105 Airport Terminal,Chicago,Health & Beauty,AuraTech,177,69,17,0,159.0
+SKU-20578,Store #104 Galleria,Austin,Electronics & Audio,LuminaHome,56,31,83,0,133.37
+SKU-20579,Store #101 Downtown,Chicago,Electronics & Audio,PureLife,230,29,75,0,87.21
+SKU-20580,Store #105 Airport Terminal,New York,Health & Beauty,PureLife,188,24,33,0,21.72
+SKU-20581,Store #103 Suburban Plaza,Austin,Electronics & Audio,SummitGear,156,20,65,0,81.46
+SKU-20582,Store #101 Downtown,Seattle,Electronics & Audio,PureLife,28,52,111,0,175.88
+SKU-20583,Store #105 Airport Terminal,New York,Health & Beauty,SummitGear,160,57,76,0,26.36
+SKU-20584,Store #105 Airport Terminal,Los Angeles,Electronics & Audio,SummitGear,179,77,60,0,169.12
+SKU-20585,Store #101 Downtown,Los Angeles,Home & Kitchen,SummitGear,183,27,85,0,158.92
+SKU-20586,Store #101 Downtown,Seattle,Health & Beauty,LuminaHome,216,32,74,0,22.97
+SKU-20587,Store #103 Suburban Plaza,Austin,Home & Kitchen,VelocityAthletics,190,60,87,0,72.37
+SKU-20588,Store #103 Suburban Plaza,New York,Footwear & Apparel,AuraTech,44,52,110,0,67.14
+SKU-20589,Store #103 Suburban Plaza,Chicago,Home & Kitchen,LuminaHome,28,73,71,0,55.88
+SKU-20590,Store #103 Suburban Plaza,Los Angeles,Home & Kitchen,VelocityAthletics,147,69,113,0,65.3
+SKU-20591,Store #104 Galleria,New York,Footwear & Apparel,SummitGear,142,77,79,0,148.85
+SKU-20592,Store #102 Westside Mall,New York,Footwear & Apparel,AuraTech,51,74,113,0,177.54
+SKU-20593,Store #103 Suburban Plaza,Chicago,Footwear & Apparel,VelocityAthletics,46,77,96,0,84.82
+SKU-20594,Store #105 Airport Terminal,Chicago,Home & Kitchen,VelocityAthletics,77,16,14,0,84.23
+SKU-20595,Store #102 Westside Mall,Austin,Outdoor & Sporting,LuminaHome,148,17,82,0,26.99
+SKU-20596,Store #105 Airport Terminal,Miami,Health & Beauty,SummitGear,148,54,97,0,103.61
+SKU-20597,Store #101 Downtown,Chicago,Outdoor & Sporting,SummitGear,151,30,98,0,113.22
+SKU-20598,Store #101 Downtown,New York,Footwear & Apparel,LuminaHome,134,18,95,0,50.79
+SKU-20599,Store #101 Downtown,Miami,Footwear & Apparel,AuraTech,229,16,100,0,133.34
+SKU-20600,Store #105 Airport Terminal,Los Angeles,Electronics & Audio,AuraTech,187,17,80,0,72.05
+SKU-20601,Store #104 Galleria,Seattle,Electronics & Audio,VelocityAthletics,36,18,57,0,72.19
+SKU-20602,Store #105 Airport Terminal,Miami,Electronics & Audio,PureLife,159,36,97,0,48.73
+SKU-20603,Store #101 Downtown,New York,Health & Beauty,AuraTech,126,23,94,0,67.43
+SKU-20604,Store #104 Galleria,New York,Electronics & Audio,PureLife,112,27,108,0,31.22
+SKU-20605,Store #104 Galleria,Austin,Electronics & Audio,VelocityAthletics,82,64,47,0,158.48
+SKU-20606,Store #103 Suburban Plaza,Chicago,Home & Kitchen,AuraTech,242,35,19,0,143.35
+SKU-20607,Store #104 Galleria,Seattle,Health & Beauty,PureLife,185,54,109,0,65.49
+SKU-20608,Store #105 Airport Terminal,New York,Home & Kitchen,VelocityAthletics,115,39,10,0,30.36
+SKU-20609,Store #103 Suburban Plaza,Los Angeles,Footwear & Apparel,LuminaHome,233,77,64,0,127.58
+SKU-20610,Store #104 Galleria,Los Angeles,Health & Beauty,VelocityAthletics,111,37,98,0,122.92
+SKU-20611,Store #105 Airport Terminal,Chicago,Health & Beauty,VelocityAthletics,240,60,114,0,126.04
+SKU-20612,Store #103 Suburban Plaza,Miami,Health & Beauty,AuraTech,77,46,15,0,164.22
+SKU-20613,Store #101 Downtown,Miami,Health & Beauty,LuminaHome,125,57,100,0,22.91
+SKU-20614,Store #102 Westside Mall,Miami,Electronics & Audio,AuraTech,83,16,29,0,76.33
+SKU-20615,Store #103 Suburban Plaza,New York,Footwear & Apparel,AuraTech,13,24,67,0,142.83
+SKU-20616,Store #105 Airport Terminal,Austin,Electronics & Audio,SummitGear,151,67,87,0,168.0
+SKU-20617,Store #103 Suburban Plaza,Chicago,Electronics & Audio,PureLife,41,40,6,0,129.14
+SKU-20618,Store #105 Airport Terminal,Los Angeles,Health & Beauty,LuminaHome,85,49,77,0,67.8
+SKU-20619,Store #103 Suburban Plaza,New York,Health & Beauty,AuraTech,204,53,80,0,81.18
+SKU-20620,Store #103 Suburban Plaza,New York,Outdoor & Sporting,AuraTech,196,32,89,0,85.35
+SKU-20621,Store #104 Galleria,Seattle,Footwear & Apparel,LuminaHome,156,23,69,0,107.2
+SKU-20622,Store #102 Westside Mall,Austin,Outdoor & Sporting,SummitGear,159,74,16,0,100.37
+SKU-20623,Store #101 Downtown,Seattle,Footwear & Apparel,SummitGear,79,43,41,0,149.28
+SKU-20624,Store #103 Suburban Plaza,Chicago,Home & Kitchen,AuraTech,189,73,106,0,41.68
+SKU-20625,Store #101 Downtown,Chicago,Health & Beauty,SummitGear,248,22,99,0,117.36
+SKU-20626,Store #102 Westside Mall,Los Angeles,Home & Kitchen,LuminaHome,84,29,11,0,133.7
+SKU-20627,Store #102 Westside Mall,Los Angeles,Outdoor & Sporting,AuraTech,98,39,30,0,152.37
+SKU-20628,Store #103 Suburban Plaza,Miami,Health & Beauty,AuraTech,201,20,49,0,148.77
+SKU-20629,Store #102 Westside Mall,Seattle,Outdoor & Sporting,VelocityAthletics,58,65,85,0,148.39
+SKU-20630,Store #103 Suburban Plaza,Austin,Electronics & Audio,SummitGear,171,25,23,0,63.74
+SKU-20631,Store #104 Galleria,New York,Health & Beauty,VelocityAthletics,164,75,12,0,59.91
+SKU-20632,Store #104 Galleria,Chicago,Outdoor & Sporting,PureLife,43,37,42,0,47.61
+SKU-20633,Store #104 Galleria,Miami,Electronics & Audio,SummitGear,201,69,14,0,23.25
+SKU-20634,Store #105 Airport Terminal,Los Angeles,Outdoor & Sporting,AuraTech,240,51,56,0,132.41
+SKU-20635,Store #101 Downtown,Los Angeles,Health & Beauty,LuminaHome,180,71,5,0,33.11
+SKU-20636,Store #104 Galleria,New York,Outdoor & Sporting,PureLife,205,42,13,0,62.84
+SKU-20637,Store #101 Downtown,Austin,Health & Beauty,VelocityAthletics,142,74,16,0,51.28
+SKU-20638,Store #101 Downtown,Seattle,Electronics & Audio,LuminaHome,204,28,64,0,91.4
+SKU-20639,Store #103 Suburban Plaza,Chicago,Home & Kitchen,AuraTech,99,35,39,0,19.23
+SKU-20640,Store #102 Westside Mall,Seattle,Home & Kitchen,LuminaHome,189,15,62,0,133.13
+SKU-20641,Store #101 Downtown,Chicago,Electronics & Audio,VelocityAthletics,151,54,20,0,176.62
+SKU-20642,Store #105 Airport Terminal,Austin,Health & Beauty,AuraTech,28,53,118,0,25.9
+SKU-20643,Store #104 Galleria,Chicago,Home & Kitchen,SummitGear,131,69,118,0,173.18
+SKU-20644,Store #103 Suburban Plaza,Seattle,Health & Beauty,AuraTech,94,66,116,0,59.07
+SKU-20645,Store #105 Airport Terminal,Los Angeles,Outdoor & Sporting,LuminaHome,86,62,119,0,119.07
+SKU-20646,Store #101 Downtown,Chicago,Footwear & Apparel,VelocityAthletics,93,16,64,0,46.28
+SKU-20647,Store #104 Galleria,Los Angeles,Electronics & Audio,VelocityAthletics,48,32,73,0,98.2
+SKU-20648,Store #103 Suburban Plaza,New York,Footwear & Apparel,AuraTech,221,27,51,0,171.69
+SKU-20649,Store #105 Airport Terminal,Chicago,Home & Kitchen,SummitGear,153,21,78,0,113.13
+SKU-20650,Store #101 Downtown,New York,Electronics & Audio,SummitGear,206,54,19,0,37.89
+SKU-20651,Store #104 Galleria,Austin,Footwear & Apparel,PureLife,240,72,50,0,21.51
+SKU-20652,Store #102 Westside Mall,Miami,Footwear & Apparel,AuraTech,238,76,98,0,146.98
+SKU-20653,Store #101 Downtown,Los Angeles,Electronics & Audio,AuraTech,2,38,164,0,222.82
+SKU-20654,Store #101 Downtown,Miami,Electronics & Audio,LuminaHome,145,61,9,0,42.27
+SKU-20655,Store #103 Suburban Plaza,Chicago,Electronics & Audio,PureLife,108,39,87,0,23.57
+SKU-20656,Store #103 Suburban Plaza,Seattle,Footwear & Apparel,SummitGear,137,70,59,0,83.3
+SKU-20657,Store #102 Westside Mall,Austin,Outdoor & Sporting,VelocityAthletics,118,15,36,0,166.04
+SKU-20658,Store #105 Airport Terminal,New York,Home & Kitchen,PureLife,236,16,103,0,69.16
+SKU-20659,Store #103 Suburban Plaza,Austin,Electronics & Audio,LuminaHome,143,21,66,0,71.71
+SKU-20660,Store #105 Airport Terminal,Miami,Health & Beauty,SummitGear,238,39,76,0,61.89
+SKU-20661,Store #103 Suburban Plaza,Seattle,Footwear & Apparel,VelocityAthletics,104,59,54,0,82.38
+SKU-20662,Store #103 Suburban Plaza,Los Angeles,Electronics & Audio,LuminaHome,168,41,110,0,174.5
+SKU-20663,Store #104 Galleria,Austin,Home & Kitchen,SummitGear,182,37,22,0,29.89
+SKU-20664,Store #102 Westside Mall,Los Angeles,Electronics & Audio,VelocityAthletics,125,25,8,0,116.35
+SKU-20665,Store #103 Suburban Plaza,New York,Home & Kitchen,SummitGear,238,59,33,0,155.54
+SKU-20666,Store #104 Galleria,Chicago,Home & Kitchen,VelocityAthletics,164,55,51,0,161.69
+SKU-20667,Store #104 Galleria,New York,Health & Beauty,SummitGear,230,55,60,0,36.04
+SKU-20668,Store #105 Airport Terminal,Chicago,Outdoor & Sporting,LuminaHome,200,33,18,0,156.06
+SKU-20669,Store #103 Suburban Plaza,Austin,Home & Kitchen,LuminaHome,131,42,112,0,118.17
+SKU-20670,Store #104 Galleria,Seattle,Home & Kitchen,PureLife,218,62,109,0,62.64
+SKU-20671,Store #103 Suburban Plaza,New York,Electronics & Audio,VelocityAthletics,81,53,65,0,17.9
+SKU-20672,Store #102 Westside Mall,Los Angeles,Footwear & Apparel,VelocityAthletics,12,40,75,0,40.93
+SKU-20673,Store #101 Downtown,Chicago,Footwear & Apparel,VelocityAthletics,116,35,27,0,95.58
+SKU-20674,Store #102 Westside Mall,Seattle,Health & Beauty,VelocityAthletics,24,17,95,0,96.71
+SKU-20675,Store #104 Galleria,Chicago,Electronics & Audio,SummitGear,96,44,35,0,141.35
+SKU-20676,Store #105 Airport Terminal,Los Angeles,Electronics & Audio,LuminaHome,177,58,83,0,96.78
+SKU-20677,Store #102 Westside Mall,Los Angeles,Outdoor & Sporting,SummitGear,205,70,115,0,49.79
+SKU-20678,Store #103 Suburban Plaza,Seattle,Electronics & Audio,PureLife,124,60,17,0,28.35
+SKU-20679,Store #102 Westside Mall,New York,Electronics & Audio,PureLife,10,15,96,0,117.08
+SKU-20680,Store #102 Westside Mall,Los Angeles,Footwear & Apparel,PureLife,34,74,40,0,45.12
+SKU-20681,Store #105 Airport Terminal,Los Angeles,Outdoor & Sporting,SummitGear,170,61,68,0,108.39
+SKU-20682,Store #102 Westside Mall,Miami,Electronics & Audio,VelocityAthletics,43,23,6,0,47.12
+SKU-20683,Store #103 Suburban Plaza,Seattle,Health & Beauty,SummitGear,13,79,64,1,52.81
+SKU-20684,Store #105 Airport Terminal,Chicago,Footwear & Apparel,VelocityAthletics,194,22,83,0,124.28
+SKU-20685,Store #105 Airport Terminal,New York,Footwear & Apparel,AuraTech,149,75,70,0,77.74
+SKU-20686,Store #103 Suburban Plaza,Seattle,Electronics & Audio,AuraTech,245,62,95,0,149.12
+SKU-20687,Store #101 Downtown,Los Angeles,Electronics & Audio,AuraTech,0,16,109,1,312.39
+SKU-20688,Store #103 Suburban Plaza,Austin,Footwear & Apparel,VelocityAthletics,56,39,9,0,73.65
+SKU-20689,Store #104 Galleria,Austin,Footwear & Apparel,AuraTech,76,27,20,0,43.08
+SKU-20690,Store #104 Galleria,New York,Electronics & Audio,AuraTech,0,65,163,1,185.56
+SKU-20691,Store #104 Galleria,Seattle,Outdoor & Sporting,AuraTech,15,67,62,0,141.94
+SKU-20692,Store #104 Galleria,Seattle,Home & Kitchen,VelocityAthletics,236,64,55,0,126.71
+SKU-20693,Store #105 Airport Terminal,Miami,Health & Beauty,PureLife,237,61,10,0,32.29
+SKU-20694,Store #105 Airport Terminal,Chicago,Outdoor & Sporting,AuraTech,239,48,77,0,19.06
+SKU-20695,Store #101 Downtown,New York,Outdoor & Sporting,PureLife,83,42,59,0,23.42
+SKU-20696,Store #104 Galleria,Chicago,Electronics & Audio,PureLife,171,45,85,0,145.01
+SKU-20697,Store #105 Airport Terminal,Seattle,Electronics & Audio,VelocityAthletics,51,36,32,0,131.74
+SKU-20698,Store #103 Suburban Plaza,Seattle,Footwear & Apparel,LuminaHome,63,74,92,0,43.46
+SKU-20699,Store #105 Airport Terminal,New York,Electronics & Audio,LuminaHome,110,65,87,0,92.05
+SKU-20700,Store #102 Westside Mall,Miami,Electronics & Audio,PureLife,236,61,92,0,155.12
+SKU-20701,Store #105 Airport Terminal,Chicago,Electronics & Audio,VelocityAthletics,183,31,44,0,82.63
+SKU-20702,Store #101 Downtown,New York,Footwear & Apparel,LuminaHome,205,74,77,0,164.84
+SKU-20703,Store #102 Westside Mall,Los Angeles,Outdoor & Sporting,PureLife,156,77,87,0,93.93
+SKU-20704,Store #104 Galleria,Los Angeles,Outdoor & Sporting,SummitGear,61,64,33,0,164.02
+SKU-20705,Store #103 Suburban Plaza,Chicago,Home & Kitchen,AuraTech,68,16,84,0,165.72
+SKU-20706,Store #105 Airport Terminal,Chicago,Home & Kitchen,SummitGear,89,64,119,0,67.69
+SKU-20707,Store #101 Downtown,Seattle,Outdoor & Sporting,VelocityAthletics,169,64,45,0,31.14
+SKU-20708,Store #104 Galleria,Los Angeles,Footwear & Apparel,VelocityAthletics,129,16,40,0,140.07
+SKU-20709,Store #102 Westside Mall,New York,Outdoor & Sporting,LuminaHome,136,73,106,0,179.07
+SKU-20710,Store #104 Galleria,Miami,Health & Beauty,SummitGear,31,58,94,0,32.62
+SKU-20711,Store #102 Westside Mall,Austin,Health & Beauty,AuraTech,176,21,94,0,129.53
+SKU-20712,Store #104 Galleria,Miami,Health & Beauty,SummitGear,60,67,62,0,155.46
+SKU-20713,Store #102 Westside Mall,Chicago,Footwear & Apparel,VelocityAthletics,104,50,10,0,99.32
+SKU-20714,Store #101 Downtown,Chicago,Footwear & Apparel,VelocityAthletics,44,48,65,0,126.39
+SKU-20715,Store #104 Galleria,Austin,Footwear & Apparel,VelocityAthletics,162,44,37,0,168.48
+SKU-20716,Store #102 Westside Mall,Chicago,Home & Kitchen,AuraTech,233,31,97,0,103.98
+SKU-20717,Store #105 Airport Terminal,Chicago,Home & Kitchen,AuraTech,68,72,35,0,100.72
+SKU-20718,Store #101 Downtown,Chicago,Home & Kitchen,LuminaHome,242,69,115,0,91.07
+SKU-20719,Store #104 Galleria,New York,Health & Beauty,LuminaHome,234,53,46,0,153.9
+SKU-20720,Store #102 Westside Mall,New York,Footwear & Apparel,VelocityAthletics,228,50,29,0,70.81
+SKU-20721,Store #102 Westside Mall,New York,Health & Beauty,LuminaHome,223,63,105,0,122.12
+SKU-20722,Store #104 Galleria,Austin,Health & Beauty,LuminaHome,184,55,55,0,134.2
+SKU-20723,Store #104 Galleria,Seattle,Home & Kitchen,PureLife,236,18,37,0,75.59
+SKU-20724,Store #104 Galleria,Chicago,Electronics & Audio,PureLife,96,47,29,0,134.43
+SKU-20725,Store #101 Downtown,Miami,Outdoor & Sporting,SummitGear,34,68,43,0,107.02
+SKU-20726,Store #101 Downtown,Austin,Outdoor & Sporting,SummitGear,171,29,14,0,126.63
+SKU-20727,Store #103 Suburban Plaza,Miami,Home & Kitchen,PureLife,68,76,7,0,129.21
+SKU-20728,Store #105 Airport Terminal,Seattle,Home & Kitchen,AuraTech,92,51,6,0,122.71
+SKU-20729,Store #102 Westside Mall,Miami,Home & Kitchen,PureLife,130,50,58,0,156.74
+SKU-20730,Store #103 Suburban Plaza,New York,Electronics & Audio,SummitGear,215,29,44,0,119.84
+SKU-20731,Store #101 Downtown,Seattle,Outdoor & Sporting,LuminaHome,207,15,23,0,96.67
+SKU-20732,Store #105 Airport Terminal,Austin,Outdoor & Sporting,PureLife,156,78,13,0,79.15
+SKU-20733,Store #104 Galleria,Chicago,Health & Beauty,LuminaHome,17,57,113,0,135.72
+SKU-20734,Store #101 Downtown,Austin,Home & Kitchen,AuraTech,23,36,92,0,47.81
+SKU-20735,Store #103 Suburban Plaza,Miami,Health & Beauty,PureLife,138,47,31,0,149.07
+SKU-20736,Store #103 Suburban Plaza,Los Angeles,Home & Kitchen,PureLife,32,72,44,0,177.97
+SKU-20737,Store #102 Westside Mall,New York,Electronics & Audio,AuraTech,184,44,5,0,100.5
+SKU-20738,Store #103 Suburban Plaza,Chicago,Electronics & Audio,PureLife,60,58,39,0,126.39
+SKU-20739,Store #102 Westside Mall,Miami,Footwear & Apparel,LuminaHome,49,70,96,0,174.76
+SKU-20740,Store #102 Westside Mall,Chicago,Home & Kitchen,SummitGear,199,32,63,0,88.07
+SKU-20741,Store #101 Downtown,Miami,Outdoor & Sporting,PureLife,68,19,96,0,118.94
+SKU-20742,Store #105 Airport Terminal,Los Angeles,Outdoor & Sporting,PureLife,113,36,12,0,176.86
+SKU-20743,Store #103 Suburban Plaza,Los Angeles,Electronics & Audio,AuraTech,87,39,70,0,174.41
+SKU-20744,Store #105 Airport Terminal,Seattle,Footwear & Apparel,PureLife,99,30,116,0,35.1
+SKU-20745,Store #101 Downtown,New York,Electronics & Audio,LuminaHome,26,18,74,0,24.92
+SKU-20746,Store #103 Suburban Plaza,Miami,Health & Beauty,AuraTech,86,38,21,0,60.13
+SKU-20747,Store #103 Suburban Plaza,New York,Home & Kitchen,VelocityAthletics,38,77,71,0,132.19
+SKU-20748,Store #105 Airport Terminal,Los Angeles,Footwear & Apparel,SummitGear,178,35,6,0,38.44
+SKU-20749,Store #104 Galleria,Los Angeles,Outdoor & Sporting,VelocityAthletics,73,18,7,0,29.8
+SKU-20750,Store #104 Galleria,New York,Electronics & Audio,PureLife,214,39,31,0,85.67
+SKU-20751,Store #105 Airport Terminal,Miami,Electronics & Audio,LuminaHome,40,29,13,0,39.48
+SKU-20752,Store #101 Downtown,Seattle,Outdoor & Sporting,PureLife,121,58,32,0,27.06
+SKU-20753,Store #103 Suburban Plaza,Austin,Home & Kitchen,LuminaHome,27,74,90,0,111.08
+SKU-20754,Store #105 Airport Terminal,Los Angeles,Home & Kitchen,SummitGear,130,70,51,0,152.64
+SKU-20755,Store #102 Westside Mall,Austin,Home & Kitchen,AuraTech,161,19,105,0,155.07
+SKU-20756,Store #102 Westside Mall,Chicago,Outdoor & Sporting,LuminaHome,188,72,69,0,158.93
+SKU-20757,Store #101 Downtown,Austin,Electronics & Audio,AuraTech,0,72,226,1,266.87
+SKU-20758,Store #104 Galleria,Miami,Home & Kitchen,AuraTech,89,57,21,0,16.52
+SKU-20759,Store #105 Airport Terminal,New York,Outdoor & Sporting,LuminaHome,121,35,81,0,109.27
+SKU-20760,Store #102 Westside Mall,Seattle,Health & Beauty,VelocityAthletics,219,68,107,0,102.34
+SKU-20761,Store #103 Suburban Plaza,New York,Electronics & Audio,AuraTech,108,37,115,0,63.1
+SKU-20762,Store #103 Suburban Plaza,Chicago,Footwear & Apparel,LuminaHome,37,56,101,0,144.61
+SKU-20763,Store #104 Galleria,Miami,Outdoor & Sporting,PureLife,59,73,11,0,86.68
+SKU-20764,Store #104 Galleria,Seattle,Outdoor & Sporting,PureLife,62,25,15,0,67.1
+SKU-20765,Store #103 Suburban Plaza,Austin,Electronics & Audio,PureLife,150,15,43,0,58.71
+SKU-20766,Store #105 Airport Terminal,Los Angeles,Footwear & Apparel,SummitGear,225,77,79,0,88.83
+SKU-20767,Store #103 Suburban Plaza,Seattle,Health & Beauty,LuminaHome,206,35,36,0,87.91
+SKU-20768,Store #101 Downtown,Austin,Health & Beauty,AuraTech,134,48,64,0,138.71
+SKU-20769,Store #102 Westside Mall,New York,Home & Kitchen,VelocityAthletics,164,64,96,0,110.73
+SKU-20770,Store #101 Downtown,Los Angeles,Health & Beauty,AuraTech,241,40,79,0,113.31
+SKU-20771,Store #105 Airport Terminal,New York,Health & Beauty,VelocityAthletics,193,25,90,0,82.55
+SKU-20772,Store #101 Downtown,Los Angeles,Health & Beauty,SummitGear,242,15,31,0,59.29
+SKU-20773,Store #101 Downtown,New York,Outdoor & Sporting,VelocityAthletics,143,61,86,0,157.74
+SKU-20774,Store #104 Galleria,Seattle,Health & Beauty,VelocityAthletics,170,50,89,0,103.04
+SKU-20775,Store #102 Westside Mall,Miami,Outdoor & Sporting,PureLife,22,22,39,0,143.36
+SKU-20776,Store #102 Westside Mall,Seattle,Electronics & Audio,LuminaHome,67,34,49,0,61.72
+SKU-20777,Store #101 Downtown,Chicago,Outdoor & Sporting,VelocityAthletics,30,30,45,0,177.28
+SKU-20778,Store #104 Galleria,Miami,Footwear & Apparel,PureLife,133,63,85,0,123.57
+SKU-20779,Store #101 Downtown,Miami,Electronics & Audio,LuminaHome,64,20,66,0,84.93
+SKU-20780,Store #104 Galleria,Austin,Footwear & Apparel,VelocityAthletics,223,63,69,0,101.22
+SKU-20781,Store #103 Suburban Plaza,Los Angeles,Home & Kitchen,PureLife,72,59,14,0,169.83
+SKU-20782,Store #101 Downtown,Chicago,Footwear & Apparel,PureLife,150,50,29,0,104.77
+SKU-20783,Store #101 Downtown,Chicago,Electronics & Audio,SummitGear,166,75,104,0,93.78
+SKU-20784,Store #103 Suburban Plaza,Miami,Footwear & Apparel,LuminaHome,226,63,117,0,76.76
+SKU-20785,Store #104 Galleria,Chicago,Outdoor & Sporting,AuraTech,223,23,63,0,165.86
+SKU-20786,Store #104 Galleria,New York,Health & Beauty,VelocityAthletics,139,73,47,0,155.19
+SKU-20787,Store #103 Suburban Plaza,Miami,Footwear & Apparel,AuraTech,170,18,69,0,110.51
+SKU-20788,Store #102 Westside Mall,Austin,Outdoor & Sporting,SummitGear,172,34,32,0,88.71
+SKU-20789,Store #101 Downtown,Los Angeles,Outdoor & Sporting,VelocityAthletics,229,46,58,0,109.4
+SKU-20790,Store #105 Airport Terminal,Miami,Health & Beauty,PureLife,241,30,18,0,81.81
+SKU-20791,Store #104 Galleria,New York,Home & Kitchen,SummitGear,41,45,28,0,74.84
+SKU-20792,Store #103 Suburban Plaza,Miami,Electronics & Audio,VelocityAthletics,148,37,31,0,102.94
+SKU-20793,Store #102 Westside Mall,New York,Outdoor & Sporting,SummitGear,214,54,21,0,77.48
+SKU-20794,Store #104 Galleria,Chicago,Electronics & Audio,AuraTech,0,72,160,1,392.61
+SKU-20795,Store #102 Westside Mall,Austin,Footwear & Apparel,VelocityAthletics,79,65,84,0,37.57
+SKU-20796,Store #102 Westside Mall,Seattle,Home & Kitchen,LuminaHome,31,46,41,0,71.77
+SKU-20797,Store #103 Suburban Plaza,Seattle,Electronics & Audio,SummitGear,171,49,28,0,83.36
+SKU-20798,Store #104 Galleria,Los Angeles,Home & Kitchen,PureLife,141,20,89,0,114.83
+SKU-20799,Store #105 Airport Terminal,Los Angeles,Footwear & Apparel,LuminaHome,160,56,102,0,153.44
+SKU-20800,Store #101 Downtown,Seattle,Electronics & Audio,VelocityAthletics,158,73,108,0,61.61
+SKU-20801,Store #102 Westside Mall,Miami,Health & Beauty,AuraTech,32,31,107,0,101.28
+SKU-20802,Store #104 Galleria,Seattle,Home & Kitchen,AuraTech,227,33,26,0,34.84
+SKU-20803,Store #103 Suburban Plaza,Los Angeles,Home & Kitchen,VelocityAthletics,201,69,69,0,106.85
+SKU-20804,Store #105 Airport Terminal,Chicago,Electronics & Audio,SummitGear,216,42,81,0,121.91
+SKU-20805,Store #101 Downtown,Miami,Home & Kitchen,VelocityAthletics,226,67,50,0,177.21
+SKU-20806,Store #102 Westside Mall,Chicago,Footwear & Apparel,VelocityAthletics,202,38,34,0,104.08
+SKU-20807,Store #103 Suburban Plaza,Austin,Footwear & Apparel,VelocityAthletics,65,54,12,0,154.79
+SKU-20808,Store #103 Suburban Plaza,New York,Home & Kitchen,SummitGear,209,47,56,0,24.24
+SKU-20809,Store #101 Downtown,Austin,Footwear & Apparel,SummitGear,230,62,81,0,147.28
+SKU-20810,Store #102 Westside Mall,Seattle,Footwear & Apparel,VelocityAthletics,135,62,34,0,66.02
+SKU-20811,Store #105 Airport Terminal,Seattle,Footwear & Apparel,AuraTech,34,22,36,0,136.48
+SKU-20812,Store #104 Galleria,Miami,Home & Kitchen,PureLife,30,39,81,0,50.42
+SKU-20813,Store #104 Galleria,Austin,Health & Beauty,PureLife,197,65,10,0,45.67
+SKU-20814,Store #105 Airport Terminal,Austin,Health & Beauty,PureLife,187,15,118,0,25.95
+SKU-20815,Store #101 Downtown,New York,Health & Beauty,SummitGear,186,67,37,0,178.15
+SKU-20816,Store #102 Westside Mall,Miami,Outdoor & Sporting,SummitGear,176,54,33,0,41.18
+SKU-20817,Store #104 Galleria,Seattle,Electronics & Audio,VelocityAthletics,154,53,110,0,117.96
+SKU-20818,Store #105 Airport Terminal,Chicago,Outdoor & Sporting,LuminaHome,202,53,48,0,103.33
+SKU-20819,Store #105 Airport Terminal,Miami,Footwear & Apparel,LuminaHome,30,23,118,0,114.85
+SKU-20820,Store #103 Suburban Plaza,New York,Electronics & Audio,LuminaHome,58,57,54,0,96.27
+SKU-20821,Store #101 Downtown,Chicago,Health & Beauty,AuraTech,164,42,89,0,33.66
+SKU-20822,Store #103 Suburban Plaza,Chicago,Electronics & Audio,VelocityAthletics,38,47,39,0,83.49
+SKU-20823,Store #105 Airport Terminal,Seattle,Health & Beauty,SummitGear,39,77,58,0,135.5
+SKU-20824,Store #105 Airport Terminal,Chicago,Outdoor & Sporting,PureLife,38,36,83,0,173.13
+SKU-20825,Store #103 Suburban Plaza,New York,Footwear & Apparel,SummitGear,146,73,107,0,155.02
+SKU-20826,Store #105 Airport Terminal,Chicago,Health & Beauty,PureLife,246,42,48,0,72.15
+SKU-20827,Store #101 Downtown,Miami,Footwear & Apparel,PureLife,197,29,59,0,150.53
+SKU-20828,Store #103 Suburban Plaza,Chicago,Electronics & Audio,SummitGear,201,25,60,0,149.18
+SKU-20829,Store #104 Galleria,Los Angeles,Footwear & Apparel,PureLife,108,71,65,0,18.24
+SKU-20830,Store #102 Westside Mall,Miami,Outdoor & Sporting,SummitGear,39,37,39,0,124.07
+SKU-20831,Store #101 Downtown,Miami,Footwear & Apparel,VelocityAthletics,146,28,82,0,149.05
+SKU-20832,Store #103 Suburban Plaza,Los Angeles,Health & Beauty,PureLife,202,69,44,0,53.47
+SKU-20833,Store #102 Westside Mall,Austin,Outdoor & Sporting,SummitGear,247,77,89,0,178.2
+SKU-20834,Store #101 Downtown,Chicago,Outdoor & Sporting,LuminaHome,152,28,64,0,145.57
+SKU-20835,Store #103 Suburban Plaza,Seattle,Footwear & Apparel,AuraTech,208,63,28,0,103.01
+SKU-20836,Store #101 Downtown,Los Angeles,Electronics & Audio,VelocityAthletics,14,36,63,0,28.95
+SKU-20837,Store #105 Airport Terminal,Miami,Footwear & Apparel,PureLife,128,67,118,0,161.8
+SKU-20838,Store #102 Westside Mall,Miami,Health & Beauty,VelocityAthletics,68,61,60,0,118.6
+SKU-20839,Store #103 Suburban Plaza,New York,Electronics & Audio,SummitGear,81,26,35,0,123.7
+SKU-20840,Store #101 Downtown,Chicago,Health & Beauty,LuminaHome,161,39,50,0,34.15
+SKU-20841,Store #105 Airport Terminal,Austin,Electronics & Audio,VelocityAthletics,162,69,20,0,77.71
+SKU-20842,Store #104 Galleria,Austin,Outdoor & Sporting,VelocityAthletics,105,75,23,0,149.72
+SKU-20843,Store #104 Galleria,Seattle,Outdoor & Sporting,PureLife,115,26,97,0,75.51
+SKU-20844,Store #105 Airport Terminal,Miami,Home & Kitchen,LuminaHome,30,21,85,0,163.35
+SKU-20845,Store #102 Westside Mall,Seattle,Health & Beauty,VelocityAthletics,114,53,36,0,71.13
+SKU-20846,Store #102 Westside Mall,Miami,Home & Kitchen,VelocityAthletics,47,29,71,0,68.91
+SKU-20847,Store #104 Galleria,Austin,Electronics & Audio,LuminaHome,147,64,114,0,45.85
+SKU-20848,Store #103 Suburban Plaza,Los Angeles,Electronics & Audio,PureLife,151,57,53,0,116.64
+SKU-20849,Store #101 Downtown,Austin,Electronics & Audio,AuraTech,0,54,212,1,416.0
+SKU-20850,Store #102 Westside Mall,Austin,Electronics & Audio,AuraTech,193,78,99,0,148.66
+SKU-20851,Store #105 Airport Terminal,Miami,Electronics & Audio,LuminaHome,216,21,60,0,83.43
+SKU-20852,Store #101 Downtown,New York,Home & Kitchen,VelocityAthletics,114,30,106,0,99.35
+SKU-20853,Store #105 Airport Terminal,Los Angeles,Outdoor & Sporting,LuminaHome,92,72,32,0,52.99
+SKU-20854,Store #101 Downtown,Austin,Footwear & Apparel,VelocityAthletics,41,58,61,0,144.25
+SKU-20855,Store #104 Galleria,Miami,Electronics & Audio,VelocityAthletics,28,46,23,0,44.39
+SKU-20856,Store #103 Suburban Plaza,Seattle,Footwear & Apparel,AuraTech,69,45,95,0,136.81
+SKU-20857,Store #103 Suburban Plaza,New York,Electronics & Audio,LuminaHome,83,75,12,0,121.76
+SKU-20858,Store #101 Downtown,Los Angeles,Outdoor & Sporting,SummitGear,41,74,61,0,33.13
+SKU-20859,Store #103 Suburban Plaza,Seattle,Health & Beauty,AuraTech,32,60,82,0,116.84
+SKU-20860,Store #105 Airport Terminal,Miami,Electronics & Audio,VelocityAthletics,104,44,43,0,22.14
+SKU-20861,Store #102 Westside Mall,New York,Electronics & Audio,VelocityAthletics,119,46,46,0,31.4
+SKU-20862,Store #103 Suburban Plaza,Miami,Home & Kitchen,VelocityAthletics,132,19,30,0,88.3
+SKU-20863,Store #102 Westside Mall,Austin,Health & Beauty,LuminaHome,194,53,55,0,143.27
+SKU-20864,Store #104 Galleria,New York,Home & Kitchen,SummitGear,64,52,91,0,156.11
+SKU-20865,Store #101 Downtown,Chicago,Footwear & Apparel,VelocityAthletics,142,30,97,0,159.73
+SKU-20866,Store #102 Westside Mall,Miami,Health & Beauty,AuraTech,138,20,52,0,122.27
+SKU-20867,Store #102 Westside Mall,Miami,Home & Kitchen,AuraTech,220,33,98,0,74.55
+SKU-20868,Store #101 Downtown,Chicago,Health & Beauty,LuminaHome,243,70,50,0,151.14
+SKU-20869,Store #102 Westside Mall,Chicago,Electronics & Audio,LuminaHome,216,21,56,0,95.96
+SKU-20870,Store #103 Suburban Plaza,Austin,Outdoor & Sporting,VelocityAthletics,239,16,16,0,179.23
+SKU-20871,Store #103 Suburban Plaza,Austin,Home & Kitchen,VelocityAthletics,179,30,29,0,46.22
+SKU-20872,Store #101 Downtown,Austin,Outdoor & Sporting,AuraTech,222,36,104,0,33.27
+SKU-20873,Store #105 Airport Terminal,Miami,Health & Beauty,AuraTech,238,33,109,0,87.21
+SKU-20874,Store #102 Westside Mall,Miami,Home & Kitchen,SummitGear,148,23,28,0,102.38
+SKU-20875,Store #104 Galleria,Los Angeles,Home & Kitchen,SummitGear,39,79,48,0,142.87
+SKU-20876,Store #103 Suburban Plaza,Austin,Home & Kitchen,VelocityAthletics,113,78,49,0,61.57
+SKU-20877,Store #101 Downtown,Los Angeles,Footwear & Apparel,PureLife,171,25,5,0,75.04
+SKU-20878,Store #103 Suburban Plaza,New York,Home & Kitchen,LuminaHome,226,43,99,0,15.2
+SKU-20879,Store #101 Downtown,Seattle,Outdoor & Sporting,PureLife,79,34,40,0,101.77
+SKU-20880,Store #101 Downtown,Austin,Electronics & Audio,SummitGear,144,68,91,0,71.9
+SKU-20881,Store #104 Galleria,Seattle,Home & Kitchen,AuraTech,97,55,118,0,24.94
+SKU-20882,Store #104 Galleria,New York,Home & Kitchen,PureLife,85,68,70,0,78.81
+SKU-20883,Store #101 Downtown,Austin,Outdoor & Sporting,LuminaHome,222,36,112,0,65.54
+SKU-20884,Store #101 Downtown,Seattle,Home & Kitchen,LuminaHome,241,57,43,0,15.95
+SKU-20885,Store #104 Galleria,Chicago,Electronics & Audio,LuminaHome,180,73,66,0,46.19
+SKU-20886,Store #102 Westside Mall,Austin,Home & Kitchen,PureLife,173,21,38,0,55.55
+SKU-20887,Store #101 Downtown,Chicago,Health & Beauty,LuminaHome,61,38,53,0,157.23
+SKU-20888,Store #101 Downtown,New York,Outdoor & Sporting,VelocityAthletics,170,17,86,0,118.19
+SKU-20889,Store #102 Westside Mall,Seattle,Footwear & Apparel,SummitGear,162,39,7,0,158.64
+SKU-20890,Store #105 Airport Terminal,Los Angeles,Electronics & Audio,SummitGear,238,62,84,0,152.23
+SKU-20891,Store #102 Westside Mall,Seattle,Outdoor & Sporting,AuraTech,19,71,14,0,112.56
+SKU-20892,Store #103 Suburban Plaza,Seattle,Electronics & Audio,LuminaHome,12,48,113,0,174.6
+SKU-20893,Store #105 Airport Terminal,Chicago,Home & Kitchen,VelocityAthletics,232,36,111,0,101.32
+SKU-20894,Store #104 Galleria,Seattle,Footwear & Apparel,VelocityAthletics,174,25,52,0,123.76
+SKU-20895,Store #105 Airport Terminal,Miami,Outdoor & Sporting,LuminaHome,195,18,117,0,83.53
+SKU-20896,Store #102 Westside Mall,Chicago,Outdoor & Sporting,SummitGear,102,49,38,0,169.61
+SKU-20897,Store #102 Westside Mall,New York,Outdoor & Sporting,SummitGear,98,16,21,0,177.75
+SKU-20898,Store #104 Galleria,Los Angeles,Health & Beauty,SummitGear,146,25,59,0,129.29
+SKU-20899,Store #105 Airport Terminal,Seattle,Electronics & Audio,AuraTech,226,62,42,0,19.04
+SKU-20900,Store #104 Galleria,New York,Home & Kitchen,VelocityAthletics,143,71,76,0,30.64
+SKU-20901,Store #104 Galleria,Austin,Health & Beauty,VelocityAthletics,53,45,64,0,76.61
+SKU-20902,Store #102 Westside Mall,Austin,Health & Beauty,AuraTech,218,66,36,0,67.72
+SKU-20903,Store #104 Galleria,New York,Footwear & Apparel,SummitGear,47,72,117,0,17.07
+SKU-20904,Store #103 Suburban Plaza,Austin,Health & Beauty,AuraTech,241,42,103,0,15.28
+SKU-20905,Store #101 Downtown,Los Angeles,Home & Kitchen,PureLife,44,49,47,0,175.01
+SKU-20906,Store #101 Downtown,Seattle,Home & Kitchen,VelocityAthletics,221,77,13,0,172.83
+SKU-20907,Store #103 Suburban Plaza,New York,Footwear & Apparel,PureLife,160,65,80,0,59.14
+SKU-20908,Store #105 Airport Terminal,Miami,Home & Kitchen,AuraTech,155,51,77,0,86.33
+SKU-20909,Store #102 Westside Mall,New York,Outdoor & Sporting,AuraTech,84,29,68,0,105.48
+SKU-20910,Store #105 Airport Terminal,Los Angeles,Outdoor & Sporting,PureLife,164,44,119,0,123.03
+SKU-20911,Store #101 Downtown,Miami,Footwear & Apparel,LuminaHome,44,38,82,0,170.36
+SKU-20912,Store #102 Westside Mall,Seattle,Outdoor & Sporting,VelocityAthletics,237,56,61,0,178.1
+SKU-20913,Store #102 Westside Mall,New York,Health & Beauty,AuraTech,48,33,13,0,52.34
+SKU-20914,Store #104 Galleria,Chicago,Outdoor & Sporting,SummitGear,39,50,64,0,172.34
+SKU-20915,Store #101 Downtown,Chicago,Health & Beauty,LuminaHome,58,66,23,0,99.06
+SKU-20916,Store #104 Galleria,Seattle,Footwear & Apparel,SummitGear,122,25,17,0,60.74
+SKU-20917,Store #102 Westside Mall,Austin,Electronics & Audio,VelocityAthletics,13,36,27,0,137.86
+SKU-20918,Store #104 Galleria,Chicago,Home & Kitchen,PureLife,200,52,111,0,179.08
+SKU-20919,Store #101 Downtown,Miami,Electronics & Audio,AuraTech,0,76,212,1,288.56
+SKU-20920,Store #103 Suburban Plaza,Chicago,Home & Kitchen,AuraTech,40,41,5,0,64.09
+SKU-20921,Store #104 Galleria,Austin,Electronics & Audio,SummitGear,105,52,40,0,167.01
+SKU-20922,Store #105 Airport Terminal,New York,Home & Kitchen,AuraTech,26,15,110,0,17.12
+SKU-20923,Store #102 Westside Mall,Miami,Health & Beauty,AuraTech,60,47,99,0,78.18
+SKU-20924,Store #105 Airport Terminal,Seattle,Home & Kitchen,SummitGear,75,56,114,0,26.17
+SKU-20925,Store #105 Airport Terminal,Miami,Home & Kitchen,LuminaHome,236,19,91,0,171.9
+SKU-20926,Store #102 Westside Mall,Miami,Footwear & Apparel,SummitGear,64,35,45,0,177.58
+SKU-20927,Store #102 Westside Mall,New York,Outdoor & Sporting,AuraTech,71,21,92,0,69.85
+SKU-20928,Store #101 Downtown,Austin,Footwear & Apparel,PureLife,191,16,85,0,101.18
+SKU-20929,Store #105 Airport Terminal,Seattle,Health & Beauty,LuminaHome,153,77,108,0,164.89
+SKU-20930,Store #102 Westside Mall,Austin,Health & Beauty,SummitGear,171,71,66,0,118.04
+SKU-20931,Store #105 Airport Terminal,Seattle,Footwear & Apparel,SummitGear,217,41,76,0,147.32
+SKU-20932,Store #103 Suburban Plaza,Chicago,Footwear & Apparel,LuminaHome,132,61,59,0,79.95
+SKU-20933,Store #104 Galleria,Seattle,Outdoor & Sporting,AuraTech,117,30,18,0,173.81
+SKU-20934,Store #101 Downtown,Chicago,Footwear & Apparel,LuminaHome,26,32,72,0,88.35
+SKU-20935,Store #103 Suburban Plaza,Seattle,Health & Beauty,SummitGear,130,78,73,0,113.99
+SKU-20936,Store #105 Airport Terminal,Miami,Health & Beauty,LuminaHome,237,37,98,0,75.26
+SKU-20937,Store #105 Airport Terminal,Miami,Outdoor & Sporting,AuraTech,64,68,8,0,146.72
+SKU-20938,Store #101 Downtown,Los Angeles,Health & Beauty,AuraTech,28,78,22,0,71.09
+SKU-20939,Store #102 Westside Mall,Miami,Electronics & Audio,AuraTech,221,64,48,0,91.01
+SKU-20940,Store #104 Galleria,Chicago,Outdoor & Sporting,SummitGear,242,35,64,0,116.06
+SKU-20941,Store #103 Suburban Plaza,Miami,Outdoor & Sporting,SummitGear,25,26,81,0,100.47
+SKU-20942,Store #104 Galleria,Seattle,Home & Kitchen,VelocityAthletics,211,55,63,0,99.68
+SKU-20943,Store #103 Suburban Plaza,Seattle,Home & Kitchen,LuminaHome,132,54,78,0,33.32
+SKU-20944,Store #101 Downtown,Seattle,Electronics & Audio,LuminaHome,60,37,34,0,19.02
+SKU-20945,Store #101 Downtown,Austin,Health & Beauty,LuminaHome,165,22,85,0,128.98
+SKU-20946,Store #102 Westside Mall,Miami,Electronics & Audio,PureLife,22,49,9,0,152.75
+SKU-20947,Store #102 Westside Mall,Seattle,Outdoor & Sporting,AuraTech,228,22,94,0,121.36
+SKU-20948,Store #105 Airport Terminal,Miami,Home & Kitchen,PureLife,111,73,45,0,57.28
+SKU-20949,Store #103 Suburban Plaza,Austin,Outdoor & Sporting,PureLife,32,71,79,0,81.97
+SKU-20950,Store #102 Westside Mall,Miami,Home & Kitchen,VelocityAthletics,71,42,32,0,151.3
+SKU-20951,Store #105 Airport Terminal,Chicago,Home & Kitchen,VelocityAthletics,134,30,118,0,89.52
+SKU-20952,Store #103 Suburban Plaza,Los Angeles,Outdoor & Sporting,AuraTech,113,70,7,0,102.07
+SKU-20953,Store #104 Galleria,Miami,Outdoor & Sporting,VelocityAthletics,172,48,107,0,93.19
+SKU-20954,Store #105 Airport Terminal,Los Angeles,Outdoor & Sporting,SummitGear,54,35,39,0,105.75
+SKU-20955,Store #102 Westside Mall,New York,Health & Beauty,AuraTech,206,44,25,0,70.59
+SKU-20956,Store #101 Downtown,Los Angeles,Outdoor & Sporting,SummitGear,175,78,118,0,127.58
+SKU-20957,Store #103 Suburban Plaza,Miami,Health & Beauty,PureLife,39,26,27,0,171.94
+SKU-20958,Store #105 Airport Terminal,Seattle,Outdoor & Sporting,SummitGear,109,15,83,0,58.8
+SKU-20959,Store #102 Westside Mall,Miami,Outdoor & Sporting,PureLife,149,50,117,0,161.62
+SKU-20960,Store #105 Airport Terminal,Seattle,Home & Kitchen,PureLife,210,27,112,0,80.47
+SKU-20961,Store #102 Westside Mall,Los Angeles,Home & Kitchen,LuminaHome,50,47,26,0,101.21
+SKU-20962,Store #101 Downtown,Austin,Health & Beauty,AuraTech,121,33,106,0,45.81
+SKU-20963,Store #101 Downtown,New York,Home & Kitchen,AuraTech,67,17,5,0,127.31
+SKU-20964,Store #104 Galleria,Seattle,Outdoor & Sporting,LuminaHome,78,63,61,0,156.66
+SKU-20965,Store #101 Downtown,New York,Health & Beauty,VelocityAthletics,147,29,65,0,140.76
+SKU-20966,Store #105 Airport Terminal,Seattle,Outdoor & Sporting,SummitGear,240,66,106,0,157.85
+SKU-20967,Store #103 Suburban Plaza,New York,Home & Kitchen,SummitGear,171,55,46,0,175.99
+SKU-20968,Store #102 Westside Mall,Seattle,Footwear & Apparel,PureLife,67,62,13,0,22.97
+SKU-20969,Store #104 Galleria,Chicago,Electronics & Audio,PureLife,179,19,46,0,57.49
+SKU-20970,Store #101 Downtown,Seattle,Outdoor & Sporting,AuraTech,118,57,107,0,158.89
+SKU-20971,Store #104 Galleria,New York,Electronics & Audio,LuminaHome,90,21,64,0,169.47
+SKU-20972,Store #102 Westside Mall,Seattle,Home & Kitchen,LuminaHome,102,52,61,0,71.01
+SKU-20973,Store #103 Suburban Plaza,Austin,Electronics & Audio,SummitGear,48,53,85,0,67.67
+SKU-20974,Store #102 Westside Mall,Miami,Outdoor & Sporting,VelocityAthletics,95,22,20,0,38.66
+SKU-20975,Store #105 Airport Terminal,New York,Home & Kitchen,PureLife,231,66,53,0,53.27
+SKU-20976,Store #105 Airport Terminal,Austin,Electronics & Audio,VelocityAthletics,39,47,30,0,158.44
+SKU-20977,Store #102 Westside Mall,New York,Health & Beauty,PureLife,190,20,117,0,101.27
+SKU-20978,Store #101 Downtown,Austin,Home & Kitchen,VelocityAthletics,169,65,98,0,67.68
+SKU-20979,Store #105 Airport Terminal,Los Angeles,Footwear & Apparel,PureLife,119,32,116,0,117.19
+SKU-20980,Store #103 Suburban Plaza,Chicago,Home & Kitchen,SummitGear,163,55,31,0,159.12
+SKU-20981,Store #102 Westside Mall,Miami,Home & Kitchen,PureLife,219,41,29,0,158.19
+SKU-20982,Store #104 Galleria,New York,Electronics & Audio,SummitGear,76,67,24,0,143.88
+SKU-20983,Store #101 Downtown,Chicago,Home & Kitchen,LuminaHome,34,42,67,0,84.76
+SKU-20984,Store #103 Suburban Plaza,Chicago,Electronics & Audio,PureLife,32,63,84,0,46.33
+SKU-20985,Store #104 Galleria,Miami,Home & Kitchen,LuminaHome,87,60,14,0,144.39
+SKU-20986,Store #102 Westside Mall,Miami,Outdoor & Sporting,LuminaHome,196,48,87,0,111.4
+SKU-20987,Store #104 Galleria,Chicago,Electronics & Audio,VelocityAthletics,107,61,94,0,90.35
+SKU-20988,Store #103 Suburban Plaza,Miami,Home & Kitchen,LuminaHome,35,57,58,0,63.18
+SKU-20989,Store #101 Downtown,Miami,Home & Kitchen,SummitGear,178,67,65,0,122.33
+SKU-20990,Store #101 Downtown,Los Angeles,Health & Beauty,VelocityAthletics,136,60,8,0,20.08
+SKU-20991,Store #104 Galleria,Austin,Home & Kitchen,VelocityAthletics,236,35,89,0,73.69
+SKU-20992,Store #105 Airport Terminal,Seattle,Home & Kitchen,SummitGear,85,39,76,0,25.13
+SKU-20993,Store #102 Westside Mall,New York,Outdoor & Sporting,PureLife,38,18,33,0,112.1
+SKU-20994,Store #105 Airport Terminal,Miami,Footwear & Apparel,VelocityAthletics,179,69,89,0,114.58
+SKU-20995,Store #103 Suburban Plaza,Los Angeles,Electronics & Audio,PureLife,146,77,37,0,96.65
+SKU-20996,Store #103 Suburban Plaza,Los Angeles,Electronics & Audio,PureLife,234,18,74,0,141.49
+SKU-20997,Store #104 Galleria,New York,Footwear & Apparel,SummitGear,78,57,106,0,35.03
+SKU-20998,Store #101 Downtown,New York,Home & Kitchen,PureLife,37,17,94,0,39.63
+SKU-20999,Store #104 Galleria,Austin,Electronics & Audio,LuminaHome,13,19,22,0,170.53
+SKU-21000,Store #104 Galleria,Seattle,Health & Beauty,SummitGear,179,18,96,0,146.83
+SKU-21001,Store #102 Westside Mall,New York,Outdoor & Sporting,PureLife,53,29,75,0,172.25
+SKU-21002,Store #103 Suburban Plaza,Chicago,Health & Beauty,AuraTech,28,54,37,0,70.1
+SKU-21003,Store #104 Galleria,Los Angeles,Home & Kitchen,LuminaHome,199,48,14,0,176.25
+SKU-21004,Store #103 Suburban Plaza,Chicago,Footwear & Apparel,AuraTech,160,35,104,0,149.54
+SKU-21005,Store #102 Westside Mall,Miami,Home & Kitchen,SummitGear,102,16,95,0,114.6
+SKU-21006,Store #101 Downtown,Chicago,Electronics & Audio,SummitGear,176,44,99,0,113.17
+SKU-21007,Store #102 Westside Mall,Miami,Electronics & Audio,VelocityAthletics,133,28,117,0,101.0
+SKU-21008,Store #101 Downtown,Seattle,Footwear & Apparel,VelocityAthletics,29,44,103,0,65.65
+SKU-21009,Store #103 Suburban Plaza,Miami,Home & Kitchen,VelocityAthletics,191,67,5,0,80.99
+SKU-21010,Store #101 Downtown,Austin,Home & Kitchen,SummitGear,129,20,85,0,28.86
+SKU-21011,Store #101 Downtown,Los Angeles,Footwear & Apparel,PureLife,135,16,107,0,145.64
+SKU-21012,Store #105 Airport Terminal,Chicago,Footwear & Apparel,PureLife,187,67,15,0,42.43
+SKU-21013,Store #105 Airport Terminal,Miami,Footwear & Apparel,VelocityAthletics,221,21,92,0,153.78
+SKU-21014,Store #104 Galleria,Austin,Footwear & Apparel,PureLife,236,49,30,0,36.48
+SKU-21015,Store #102 Westside Mall,Miami,Electronics & Audio,SummitGear,30,20,41,0,43.81
+SKU-21016,Store #105 Airport Terminal,Austin,Footwear & Apparel,AuraTech,100,24,113,0,114.06
+SKU-21017,Store #102 Westside Mall,Miami,Footwear & Apparel,PureLife,217,52,104,0,44.9
+SKU-21018,Store #101 Downtown,Miami,Footwear & Apparel,SummitGear,102,46,20,0,60.1
+SKU-21019,Store #103 Suburban Plaza,Los Angeles,Health & Beauty,PureLife,75,26,24,0,164.48
+SKU-21020,Store #102 Westside Mall,Austin,Footwear & Apparel,SummitGear,18,78,60,0,136.51
+SKU-21021,Store #103 Suburban Plaza,Miami,Footwear & Apparel,PureLife,101,71,10,0,93.43
+SKU-21022,Store #104 Galleria,Los Angeles,Home & Kitchen,VelocityAthletics,32,33,87,0,36.16
+SKU-21023,Store #103 Suburban Plaza,Seattle,Footwear & Apparel,AuraTech,40,73,78,0,68.15
+SKU-21024,Store #102 Westside Mall,Austin,Outdoor & Sporting,VelocityAthletics,24,43,113,0,137.42
+SKU-21025,Store #103 Suburban Plaza,Miami,Health & Beauty,LuminaHome,155,15,31,0,133.79
+SKU-21026,Store #105 Airport Terminal,Seattle,Home & Kitchen,SummitGear,246,60,118,0,138.38
+SKU-21027,Store #104 Galleria,New York,Footwear & Apparel,VelocityAthletics,138,75,27,0,149.29
+SKU-21028,Store #101 Downtown,Chicago,Electronics & Audio,PureLife,121,32,31,0,42.72
+SKU-21029,Store #101 Downtown,Chicago,Outdoor & Sporting,LuminaHome,59,37,52,0,133.44
+SKU-21030,Store #101 Downtown,Austin,Outdoor & Sporting,AuraTech,81,49,12,0,61.1
+SKU-21031,Store #105 Airport Terminal,Chicago,Health & Beauty,VelocityAthletics,70,61,84,0,38.59
+SKU-21032,Store #104 Galleria,Chicago,Health & Beauty,SummitGear,238,63,117,0,29.8
+SKU-21033,Store #102 Westside Mall,Miami,Outdoor & Sporting,SummitGear,59,19,91,0,157.78
+SKU-21034,Store #105 Airport Terminal,Austin,Outdoor & Sporting,LuminaHome,154,57,28,0,70.0
+SKU-21035,Store #101 Downtown,New York,Outdoor & Sporting,VelocityAthletics,159,29,30,0,23.82
+SKU-21036,Store #104 Galleria,Los Angeles,Outdoor & Sporting,SummitGear,38,35,19,0,69.33
+SKU-21037,Store #103 Suburban Plaza,New York,Home & Kitchen,SummitGear,86,37,9,0,138.9
+SKU-21038,Store #103 Suburban Plaza,Los Angeles,Health & Beauty,PureLife,55,76,86,0,108.33
+SKU-21039,Store #105 Airport Terminal,Austin,Footwear & Apparel,AuraTech,125,51,95,0,141.86
+SKU-21040,Store #104 Galleria,New York,Outdoor & Sporting,AuraTech,222,48,109,0,120.21
+SKU-21041,Store #103 Suburban Plaza,Chicago,Outdoor & Sporting,PureLife,183,47,50,0,42.31
+SKU-21042,Store #101 Downtown,Los Angeles,Health & Beauty,PureLife,104,27,57,0,132.08
+SKU-21043,Store #101 Downtown,New York,Health & Beauty,LuminaHome,119,75,50,0,47.9
+SKU-21044,Store #105 Airport Terminal,Chicago,Footwear & Apparel,LuminaHome,53,44,114,0,98.41
+SKU-21045,Store #102 Westside Mall,Miami,Outdoor & Sporting,VelocityAthletics,189,68,99,0,137.05
+SKU-21046,Store #103 Suburban Plaza,Austin,Outdoor & Sporting,PureLife,69,70,88,0,158.49
+SKU-21047,Store #102 Westside Mall,Austin,Footwear & Apparel,PureLife,71,65,95,0,68.6
+SKU-21048,Store #103 Suburban Plaza,New York,Health & Beauty,LuminaHome,203,47,63,0,131.58
+SKU-21049,Store #105 Airport Terminal,Los Angeles,Health & Beauty,VelocityAthletics,58,68,8,0,127.18
+SKU-21050,Store #105 Airport Terminal,New York,Outdoor & Sporting,VelocityAthletics,214,56,106,0,91.13
+SKU-21051,Store #103 Suburban Plaza,Los Angeles,Footwear & Apparel,AuraTech,65,35,35,0,66.15
+SKU-21052,Store #104 Galleria,New York,Electronics & Audio,SummitGear,212,57,100,0,123.17
+SKU-21053,Store #103 Suburban Plaza,Austin,Home & Kitchen,LuminaHome,46,29,96,0,164.79
+SKU-21054,Store #104 Galleria,Austin,Footwear & Apparel,VelocityAthletics,25,16,66,0,50.4
+SKU-21055,Store #103 Suburban Plaza,Miami,Outdoor & Sporting,AuraTech,82,54,20,0,94.71
+SKU-21056,Store #101 Downtown,Seattle,Outdoor & Sporting,VelocityAthletics,161,55,52,0,35.36
+SKU-21057,Store #101 Downtown,Miami,Home & Kitchen,SummitGear,59,77,85,0,178.6
+SKU-21058,Store #104 Galleria,Austin,Health & Beauty,PureLife,206,50,38,0,45.94
+SKU-21059,Store #101 Downtown,New York,Home & Kitchen,SummitGear,155,40,77,0,118.21
+SKU-21060,Store #104 Galleria,Austin,Health & Beauty,PureLife,224,51,44,0,118.91
+SKU-21061,Store #103 Suburban Plaza,Los Angeles,Footwear & Apparel,VelocityAthletics,143,64,27,0,70.35
+SKU-21062,Store #102 Westside Mall,Chicago,Health & Beauty,PureLife,239,33,99,0,53.74
+SKU-21063,Store #104 Galleria,New York,Footwear & Apparel,SummitGear,92,56,66,0,179.38
+SKU-21064,Store #103 Suburban Plaza,New York,Outdoor & Sporting,SummitGear,28,39,55,0,70.54
+SKU-21065,Store #103 Suburban Plaza,Miami,Footwear & Apparel,SummitGear,223,29,34,0,32.65
+SKU-21066,Store #104 Galleria,Austin,Home & Kitchen,PureLife,120,50,108,0,169.05
+SKU-21067,Store #103 Suburban Plaza,Miami,Health & Beauty,AuraTech,71,43,81,0,178.62
+SKU-21068,Store #102 Westside Mall,Seattle,Electronics & Audio,PureLife,75,42,84,0,102.1
+SKU-21069,Store #102 Westside Mall,New York,Footwear & Apparel,LuminaHome,86,75,113,0,15.06
+SKU-21070,Store #101 Downtown,New York,Electronics & Audio,AuraTech,0,24,124,1,396.83
+SKU-21071,Store #101 Downtown,Miami,Electronics & Audio,SummitGear,161,28,78,0,167.41
+SKU-21072,Store #102 Westside Mall,Austin,Footwear & Apparel,PureLife,171,65,94,0,32.46
+SKU-21073,Store #104 Galleria,Seattle,Health & Beauty,VelocityAthletics,197,58,9,0,154.85
+SKU-21074,Store #102 Westside Mall,Seattle,Electronics & Audio,PureLife,183,16,89,0,62.68
+SKU-21075,Store #101 Downtown,Los Angeles,Outdoor & Sporting,SummitGear,145,33,10,0,89.23
+SKU-21076,Store #103 Suburban Plaza,Los Angeles,Health & Beauty,SummitGear,69,27,13,0,96.82
+SKU-21077,Store #105 Airport Terminal,Los Angeles,Home & Kitchen,PureLife,64,60,104,0,151.8
+SKU-21078,Store #102 Westside Mall,Chicago,Outdoor & Sporting,SummitGear,50,73,49,0,127.92
+SKU-21079,Store #104 Galleria,Austin,Health & Beauty,AuraTech,218,21,17,0,126.96
+SKU-21080,Store #101 Downtown,Austin,Footwear & Apparel,LuminaHome,72,16,21,0,126.89
+SKU-21081,Store #105 Airport Terminal,New York,Footwear & Apparel,SummitGear,109,24,7,0,85.76
+SKU-21082,Store #102 Westside Mall,Miami,Electronics & Audio,LuminaHome,37,69,23,0,65.19
+SKU-21083,Store #102 Westside Mall,Los Angeles,Outdoor & Sporting,SummitGear,124,58,106,0,54.35
+SKU-21084,Store #103 Suburban Plaza,Austin,Footwear & Apparel,PureLife,95,46,54,0,88.08
+SKU-21085,Store #101 Downtown,New York,Electronics & Audio,AuraTech,0,37,141,1,201.6
+SKU-21086,Store #101 Downtown,Los Angeles,Home & Kitchen,VelocityAthletics,54,76,14,0,159.51
+SKU-21087,Store #103 Suburban Plaza,Los Angeles,Electronics & Audio,AuraTech,165,44,68,0,111.86
+SKU-21088,Store #105 Airport Terminal,New York,Footwear & Apparel,PureLife,112,79,52,0,144.64
+SKU-21089,Store #104 Galleria,Miami,Outdoor & Sporting,PureLife,249,75,116,0,153.12
+SKU-21090,Store #105 Airport Terminal,Chicago,Health & Beauty,LuminaHome,106,56,11,0,169.95
+SKU-21091,Store #101 Downtown,Los Angeles,Electronics & Audio,SummitGear,18,67,74,0,43.93
+SKU-21092,Store #102 Westside Mall,New York,Health & Beauty,LuminaHome,68,54,16,0,157.52
+SKU-21093,Store #101 Downtown,Austin,Electronics & Audio,VelocityAthletics,228,46,20,0,47.39
+SKU-21094,Store #103 Suburban Plaza,New York,Home & Kitchen,SummitGear,204,36,57,0,40.82
+SKU-21095,Store #104 Galleria,New York,Outdoor & Sporting,PureLife,46,46,54,0,136.24
+SKU-21096,Store #102 Westside Mall,New York,Outdoor & Sporting,PureLife,223,66,101,0,48.79
+SKU-21097,Store #102 Westside Mall,Seattle,Home & Kitchen,SummitGear,163,42,65,0,72.16
+SKU-21098,Store #102 Westside Mall,Austin,Footwear & Apparel,SummitGear,34,79,88,0,152.92
+SKU-21099,Store #104 Galleria,Seattle,Electronics & Audio,SummitGear,33,28,43,0,37.85
+SKU-21100,Store #104 Galleria,Austin,Outdoor & Sporting,LuminaHome,62,69,78,0,162.97
+SKU-21101,Store #104 Galleria,Austin,Health & Beauty,AuraTech,62,58,116,0,38.62
+SKU-21102,Store #101 Downtown,Seattle,Footwear & Apparel,VelocityAthletics,209,23,37,0,145.77
+SKU-21103,Store #103 Suburban Plaza,Seattle,Outdoor & Sporting,AuraTech,206,64,101,0,82.83
+SKU-21104,Store #105 Airport Terminal,Austin,Electronics & Audio,LuminaHome,28,28,15,0,58.7
+SKU-21105,Store #101 Downtown,Austin,Electronics & Audio,VelocityAthletics,184,47,40,0,59.95
+SKU-21106,Store #102 Westside Mall,Chicago,Electronics & Audio,PureLife,202,63,66,0,34.06
+SKU-21107,Store #104 Galleria,Miami,Health & Beauty,VelocityAthletics,70,56,78,0,178.49
+SKU-21108,Store #105 Airport Terminal,Chicago,Footwear & Apparel,SummitGear,24,36,76,0,176.08
+SKU-21109,Store #101 Downtown,New York,Outdoor & Sporting,LuminaHome,165,17,13,0,122.62
+SKU-21110,Store #101 Downtown,Los Angeles,Outdoor & Sporting,AuraTech,87,39,30,0,177.24
+SKU-21111,Store #105 Airport Terminal,New York,Electronics & Audio,SummitGear,144,21,29,0,137.15
+SKU-21112,Store #105 Airport Terminal,New York,Health & Beauty,AuraTech,18,70,65,0,50.03
+SKU-21113,Store #101 Downtown,Los Angeles,Home & Kitchen,LuminaHome,26,28,90,0,132.72
+SKU-21114,Store #105 Airport Terminal,New York,Outdoor & Sporting,AuraTech,81,57,64,0,69.8
+SKU-21115,Store #105 Airport Terminal,Seattle,Health & Beauty,LuminaHome,208,28,118,0,138.6
+SKU-21116,Store #105 Airport Terminal,New York,Electronics & Audio,LuminaHome,189,70,10,0,22.77
+SKU-21117,Store #105 Airport Terminal,Chicago,Home & Kitchen,AuraTech,14,28,87,0,63.74
+SKU-21118,Store #101 Downtown,Chicago,Home & Kitchen,VelocityAthletics,72,77,80,0,81.55
+SKU-21119,Store #102 Westside Mall,New York,Electronics & Audio,VelocityAthletics,242,41,82,0,96.29
+SKU-21120,Store #105 Airport Terminal,Austin,Footwear & Apparel,AuraTech,145,69,81,0,63.13
+SKU-21121,Store #104 Galleria,Austin,Outdoor & Sporting,LuminaHome,103,25,61,0,76.79
+SKU-21122,Store #101 Downtown,Austin,Health & Beauty,SummitGear,230,29,50,0,86.14
+SKU-21123,Store #102 Westside Mall,Miami,Footwear & Apparel,LuminaHome,244,22,84,0,128.11
+SKU-21124,Store #102 Westside Mall,Miami,Home & Kitchen,PureLife,118,73,45,0,43.46
+SKU-21125,Store #102 Westside Mall,Chicago,Electronics & Audio,VelocityAthletics,87,39,76,0,151.12
+SKU-21126,Store #102 Westside Mall,Los Angeles,Outdoor & Sporting,PureLife,40,23,26,0,96.74
+SKU-21127,Store #101 Downtown,Seattle,Home & Kitchen,SummitGear,65,45,93,0,71.64
+SKU-21128,Store #103 Suburban Plaza,New York,Health & Beauty,VelocityAthletics,242,51,17,0,156.64
+SKU-21129,Store #102 Westside Mall,Los Angeles,Home & Kitchen,SummitGear,17,70,29,0,68.09
+SKU-21130,Store #101 Downtown,Los Angeles,Footwear & Apparel,VelocityAthletics,248,64,10,0,113.02
+SKU-21131,Store #102 Westside Mall,Miami,Home & Kitchen,PureLife,189,37,39,0,117.54
+SKU-21132,Store #102 Westside Mall,New York,Footwear & Apparel,VelocityAthletics,192,37,90,0,29.68
+SKU-21133,Store #103 Suburban Plaza,Miami,Health & Beauty,PureLife,124,43,110,0,167.99
+SKU-21134,Store #103 Suburban Plaza,Seattle,Health & Beauty,SummitGear,187,78,58,0,54.4
+SKU-21135,Store #104 Galleria,Seattle,Home & Kitchen,AuraTech,106,74,38,0,32.72
+SKU-21136,Store #104 Galleria,Los Angeles,Health & Beauty,AuraTech,50,56,112,0,17.77
+SKU-21137,Store #105 Airport Terminal,Seattle,Home & Kitchen,PureLife,71,63,73,0,38.08
+SKU-21138,Store #101 Downtown,Seattle,Outdoor & Sporting,PureLife,108,71,71,0,45.98
+SKU-21139,Store #105 Airport Terminal,Miami,Outdoor & Sporting,SummitGear,31,17,86,0,168.0
+SKU-21140,Store #104 Galleria,Chicago,Footwear & Apparel,SummitGear,52,72,76,0,116.27
+SKU-21141,Store #104 Galleria,Seattle,Electronics & Audio,SummitGear,209,29,7,0,103.81
+SKU-21142,Store #103 Suburban Plaza,Seattle,Home & Kitchen,VelocityAthletics,176,18,78,0,34.48
+SKU-21143,Store #105 Airport Terminal,Miami,Footwear & Apparel,PureLife,217,52,7,0,139.36
+SKU-21144,Store #105 Airport Terminal,Seattle,Health & Beauty,LuminaHome,103,40,36,0,133.72
+SKU-21145,Store #105 Airport Terminal,Chicago,Home & Kitchen,PureLife,76,18,9,0,38.8
+SKU-21146,Store #104 Galleria,Austin,Electronics & Audio,PureLife,167,51,53,0,179.57
+SKU-21147,Store #104 Galleria,Chicago,Electronics & Audio,AuraTech,0,25,130,1,365.84
+SKU-21148,Store #104 Galleria,Seattle,Health & Beauty,LuminaHome,209,37,54,0,38.47
+SKU-21149,Store #101 Downtown,Miami,Home & Kitchen,LuminaHome,220,23,32,0,139.66
+SKU-21150,Store #105 Airport Terminal,Seattle,Health & Beauty,LuminaHome,191,40,22,0,96.52
+SKU-21151,Store #102 Westside Mall,Seattle,Outdoor & Sporting,LuminaHome,241,71,38,0,136.22
+SKU-21152,Store #102 Westside Mall,Chicago,Electronics & Audio,LuminaHome,184,32,9,0,111.78
+SKU-21153,Store #105 Airport Terminal,Austin,Outdoor & Sporting,PureLife,240,61,109,0,86.05
+SKU-21154,Store #101 Downtown,New York,Footwear & Apparel,PureLife,181,74,46,0,31.72
+SKU-21155,Store #104 Galleria,Miami,Home & Kitchen,PureLife,116,75,14,0,82.55
+SKU-21156,Store #101 Downtown,Seattle,Home & Kitchen,PureLife,84,49,84,0,105.54
+SKU-21157,Store #103 Suburban Plaza,Seattle,Home & Kitchen,AuraTech,210,65,102,0,64.17
+SKU-21158,Store #101 Downtown,Miami,Outdoor & Sporting,AuraTech,239,54,45,0,83.09
+SKU-21159,Store #104 Galleria,Los Angeles,Electronics & Audio,AuraTech,1,79,198,0,416.11
+SKU-21160,Store #102 Westside Mall,Seattle,Home & Kitchen,LuminaHome,83,23,64,0,81.71
+SKU-21161,Store #104 Galleria,Los Angeles,Outdoor & Sporting,SummitGear,242,19,66,0,172.71
+SKU-21162,Store #105 Airport Terminal,Los Angeles,Outdoor & Sporting,SummitGear,138,57,51,0,36.99
+SKU-21163,Store #104 Galleria,Seattle,Footwear & Apparel,VelocityAthletics,109,64,89,0,52.25
+SKU-21164,Store #102 Westside Mall,New York,Home & Kitchen,LuminaHome,88,57,103,0,158.54
+SKU-21165,Store #101 Downtown,New York,Home & Kitchen,LuminaHome,172,59,68,0,73.12
+SKU-21166,Store #104 Galleria,Austin,Health & Beauty,LuminaHome,189,17,33,0,33.29
+SKU-21167,Store #102 Westside Mall,New York,Outdoor & Sporting,AuraTech,16,51,84,0,125.49
+SKU-21168,Store #101 Downtown,Chicago,Outdoor & Sporting,AuraTech,53,32,107,0,166.29
+SKU-21169,Store #104 Galleria,Miami,Home & Kitchen,LuminaHome,113,63,23,0,146.22
+SKU-21170,Store #101 Downtown,Los Angeles,Electronics & Audio,AuraTech,0,68,141,1,358.35
+SKU-21171,Store #103 Suburban Plaza,Los Angeles,Home & Kitchen,PureLife,180,19,102,0,77.15
+SKU-21172,Store #101 Downtown,Seattle,Outdoor & Sporting,VelocityAthletics,86,18,91,0,169.69
+SKU-21173,Store #104 Galleria,Miami,Health & Beauty,VelocityAthletics,73,71,26,0,34.75
+SKU-21174,Store #104 Galleria,Miami,Outdoor & Sporting,SummitGear,249,74,105,0,144.94
+SKU-21175,Store #104 Galleria,Austin,Electronics & Audio,SummitGear,89,40,18,0,21.67
+SKU-21176,Store #102 Westside Mall,Miami,Outdoor & Sporting,AuraTech,70,52,68,0,34.04
+SKU-21177,Store #102 Westside Mall,Chicago,Electronics & Audio,VelocityAthletics,46,40,42,0,92.75
+SKU-21178,Store #105 Airport Terminal,Seattle,Outdoor & Sporting,VelocityAthletics,98,19,119,0,175.59
+SKU-21179,Store #102 Westside Mall,New York,Health & Beauty,VelocityAthletics,100,30,111,0,122.69
+SKU-21180,Store #102 Westside Mall,Los Angeles,Home & Kitchen,SummitGear,122,38,118,0,60.26
+SKU-21181,Store #102 Westside Mall,Miami,Electronics & Audio,PureLife,120,48,60,0,179.55
+SKU-21182,Store #102 Westside Mall,Austin,Electronics & Audio,VelocityAthletics,92,55,67,0,179.39
+SKU-21183,Store #102 Westside Mall,Austin,Health & Beauty,AuraTech,86,54,82,0,173.69
+SKU-21184,Store #105 Airport Terminal,Seattle,Outdoor & Sporting,PureLife,124,77,82,0,177.99
+SKU-21185,Store #102 Westside Mall,Los Angeles,Health & Beauty,PureLife,100,27,68,0,112.56
+SKU-21186,Store #103 Suburban Plaza,Austin,Footwear & Apparel,VelocityAthletics,188,26,26,0,113.45
+SKU-21187,Store #105 Airport Terminal,Austin,Health & Beauty,LuminaHome,51,33,112,0,88.05
+SKU-21188,Store #102 Westside Mall,New York,Home & Kitchen,LuminaHome,198,49,56,0,67.81
+SKU-21189,Store #102 Westside Mall,New York,Home & Kitchen,LuminaHome,206,72,40,0,20.01
+SKU-21190,Store #102 Westside Mall,New York,Outdoor & Sporting,LuminaHome,34,60,113,0,175.21
+SKU-21191,Store #103 Suburban Plaza,Chicago,Electronics & Audio,LuminaHome,196,53,49,0,100.43
+SKU-21192,Store #102 Westside Mall,Chicago,Outdoor & Sporting,SummitGear,41,74,16,0,86.63
+SKU-21193,Store #101 Downtown,Chicago,Outdoor & Sporting,SummitGear,133,37,66,0,169.38
+SKU-21194,Store #101 Downtown,New York,Footwear & Apparel,PureLife,187,66,95,0,63.98
+SKU-21195,Store #102 Westside Mall,Chicago,Home & Kitchen,AuraTech,156,30,24,0,131.96
+SKU-21196,Store #102 Westside Mall,New York,Health & Beauty,AuraTech,216,35,118,0,146.73
+SKU-21197,Store #104 Galleria,Los Angeles,Home & Kitchen,SummitGear,11,57,108,1,85.97
+SKU-21198,Store #102 Westside Mall,Los Angeles,Electronics & Audio,LuminaHome,81,39,5,0,68.67
+SKU-21199,Store #105 Airport Terminal,Los Angeles,Electronics & Audio,SummitGear,174,76,19,0,100.19
+SKU-21200,Store #105 Airport Terminal,Miami,Home & Kitchen,PureLife,227,33,106,0,23.83
+SKU-21201,Store #102 Westside Mall,Miami,Electronics & Audio,AuraTech,107,36,53,0,130.17
+SKU-21202,Store #105 Airport Terminal,New York,Outdoor & Sporting,AuraTech,65,44,85,0,102.43
+SKU-21203,Store #105 Airport Terminal,Miami,Health & Beauty,VelocityAthletics,247,25,100,0,156.62
+SKU-21204,Store #105 Airport Terminal,Chicago,Home & Kitchen,AuraTech,193,30,52,0,174.72
+SKU-21205,Store #102 Westside Mall,Chicago,Outdoor & Sporting,SummitGear,219,22,11,0,169.12
+SKU-21206,Store #104 Galleria,Seattle,Outdoor & Sporting,PureLife,39,24,31,0,103.5
+SKU-21207,Store #101 Downtown,Chicago,Home & Kitchen,SummitGear,28,56,95,0,131.22
+SKU-21208,Store #102 Westside Mall,Chicago,Health & Beauty,AuraTech,181,64,100,0,20.01
+SKU-21209,Store #105 Airport Terminal,New York,Home & Kitchen,AuraTech,236,27,25,0,94.06
+SKU-21210,Store #105 Airport Terminal,New York,Health & Beauty,SummitGear,105,55,31,0,66.11
+SKU-21211,Store #105 Airport Terminal,Los Angeles,Electronics & Audio,SummitGear,189,73,31,0,47.36
+SKU-21212,Store #101 Downtown,Chicago,Electronics & Audio,SummitGear,36,32,37,0,108.25
+SKU-21213,Store #101 Downtown,Seattle,Home & Kitchen,SummitGear,70,78,39,0,73.5
+SKU-21214,Store #101 Downtown,Chicago,Health & Beauty,PureLife,242,31,5,0,50.38
+SKU-21215,Store #104 Galleria,New York,Home & Kitchen,SummitGear,225,77,35,0,131.92
+SKU-21216,Store #103 Suburban Plaza,Seattle,Outdoor & Sporting,VelocityAthletics,213,72,56,0,26.17
+SKU-21217,Store #103 Suburban Plaza,Austin,Electronics & Audio,AuraTech,49,16,11,0,64.2
+SKU-21218,Store #103 Suburban Plaza,Seattle,Footwear & Apparel,SummitGear,202,57,49,0,88.43
+SKU-21219,Store #104 Galleria,Miami,Home & Kitchen,VelocityAthletics,204,16,43,0,108.5
+SKU-21220,Store #105 Airport Terminal,Los Angeles,Outdoor & Sporting,VelocityAthletics,200,37,96,0,73.35
+SKU-21221,Store #103 Suburban Plaza,Austin,Electronics & Audio,PureLife,84,48,92,0,122.26
+SKU-21222,Store #103 Suburban Plaza,New York,Home & Kitchen,SummitGear,71,63,64,0,34.04
+SKU-21223,Store #103 Suburban Plaza,Austin,Footwear & Apparel,LuminaHome,122,50,49,0,103.69
+SKU-21224,Store #102 Westside Mall,Austin,Footwear & Apparel,SummitGear,45,67,28,0,121.27
+SKU-21225,Store #105 Airport Terminal,Miami,Outdoor & Sporting,LuminaHome,53,44,47,0,20.98
+SKU-21226,Store #102 Westside Mall,Austin,Home & Kitchen,VelocityAthletics,52,21,76,0,74.18
+SKU-21227,Store #101 Downtown,Austin,Electronics & Audio,AuraTech,0,72,133,1,222.73
+SKU-21228,Store #101 Downtown,Los Angeles,Electronics & Audio,PureLife,120,28,66,0,121.75
+SKU-21229,Store #103 Suburban Plaza,Seattle,Electronics & Audio,LuminaHome,184,20,90,0,69.77
+SKU-21230,Store #103 Suburban Plaza,Austin,Electronics & Audio,VelocityAthletics,119,32,84,0,87.1
+SKU-21231,Store #103 Suburban Plaza,Chicago,Electronics & Audio,SummitGear,83,69,58,0,169.0
+SKU-21232,Store #104 Galleria,Chicago,Outdoor & Sporting,SummitGear,123,19,5,0,101.0
+SKU-21233,Store #102 Westside Mall,New York,Health & Beauty,VelocityAthletics,165,44,91,0,155.37
+SKU-21234,Store #104 Galleria,Chicago,Footwear & Apparel,PureLife,24,68,72,0,154.54
+SKU-21235,Store #101 Downtown,Austin,Footwear & Apparel,VelocityAthletics,79,69,114,0,131.75
+SKU-21236,Store #105 Airport Terminal,Austin,Outdoor & Sporting,LuminaHome,144,75,69,0,159.87
+SKU-21237,Store #102 Westside Mall,Seattle,Footwear & Apparel,LuminaHome,205,53,29,0,138.98
+SKU-21238,Store #103 Suburban Plaza,Los Angeles,Health & Beauty,PureLife,17,78,64,0,138.17
+SKU-21239,Store #104 Galleria,Chicago,Electronics & Audio,PureLife,146,45,68,0,101.01
+SKU-21240,Store #101 Downtown,Los Angeles,Outdoor & Sporting,VelocityAthletics,34,41,102,0,99.12
+SKU-21241,Store #103 Suburban Plaza,Miami,Electronics & Audio,SummitGear,178,26,105,0,82.67
+SKU-21242,Store #101 Downtown,Miami,Footwear & Apparel,SummitGear,73,68,28,0,56.13
+SKU-21243,Store #104 Galleria,Seattle,Health & Beauty,PureLife,108,21,19,0,37.04
+SKU-21244,Store #104 Galleria,Miami,Outdoor & Sporting,SummitGear,207,77,53,0,19.81
+SKU-21245,Store #104 Galleria,Austin,Outdoor & Sporting,VelocityAthletics,10,23,115,0,113.07
+SKU-21246,Store #104 Galleria,Miami,Footwear & Apparel,VelocityAthletics,50,34,76,0,174.77
+SKU-21247,Store #103 Suburban Plaza,New York,Footwear & Apparel,AuraTech,46,32,112,0,106.74
+SKU-21248,Store #103 Suburban Plaza,Seattle,Footwear & Apparel,LuminaHome,94,58,107,0,166.18
+SKU-21249,Store #101 Downtown,New York,Footwear & Apparel,AuraTech,81,63,28,0,18.95
+SKU-21250,Store #101 Downtown,Austin,Footwear & Apparel,LuminaHome,160,17,19,0,48.39
+SKU-21251,Store #102 Westside Mall,Los Angeles,Home & Kitchen,PureLife,53,63,102,0,69.17
+SKU-21252,Store #103 Suburban Plaza,Chicago,Footwear & Apparel,AuraTech,73,18,31,0,114.14
+SKU-21253,Store #105 Airport Terminal,Miami,Electronics & Audio,AuraTech,184,72,42,0,74.97
+SKU-21254,Store #104 Galleria,Seattle,Electronics & Audio,LuminaHome,89,44,102,0,109.17
+SKU-21255,Store #104 Galleria,New York,Outdoor & Sporting,LuminaHome,71,24,5,0,44.05
+SKU-21256,Store #102 Westside Mall,Austin,Health & Beauty,VelocityAthletics,182,51,101,0,135.38
+SKU-21257,Store #103 Suburban Plaza,New York,Outdoor & Sporting,LuminaHome,216,47,86,0,89.38
+SKU-21258,Store #102 Westside Mall,Chicago,Electronics & Audio,PureLife,61,50,26,0,111.2
+SKU-21259,Store #102 Westside Mall,Los Angeles,Electronics & Audio,AuraTech,150,27,70,0,46.05
+SKU-21260,Store #105 Airport Terminal,Austin,Footwear & Apparel,AuraTech,65,33,62,0,112.65
+SKU-21261,Store #102 Westside Mall,New York,Health & Beauty,AuraTech,142,48,110,0,72.02
+SKU-21262,Store #101 Downtown,Austin,Health & Beauty,PureLife,176,52,94,0,37.03
+SKU-21263,Store #105 Airport Terminal,Chicago,Outdoor & Sporting,SummitGear,168,67,109,0,75.32
+SKU-21264,Store #105 Airport Terminal,Chicago,Outdoor & Sporting,SummitGear,202,60,89,0,113.4
+SKU-21265,Store #102 Westside Mall,New York,Electronics & Audio,SummitGear,59,37,60,0,36.3
+SKU-21266,Store #102 Westside Mall,Chicago,Home & Kitchen,SummitGear,67,22,82,0,52.35
+SKU-21267,Store #101 Downtown,Chicago,Footwear & Apparel,SummitGear,183,48,74,0,33.0
+SKU-21268,Store #103 Suburban Plaza,Miami,Outdoor & Sporting,LuminaHome,124,65,12,0,35.36
+SKU-21269,Store #101 Downtown,Chicago,Health & Beauty,VelocityAthletics,52,74,37,0,48.65
+SKU-21270,Store #101 Downtown,Chicago,Home & Kitchen,AuraTech,20,37,111,0,143.66
+SKU-21271,Store #104 Galleria,Miami,Health & Beauty,SummitGear,75,39,57,0,128.46
+SKU-21272,Store #103 Suburban Plaza,Austin,Home & Kitchen,AuraTech,24,38,55,0,109.63
+SKU-21273,Store #101 Downtown,Los Angeles,Health & Beauty,LuminaHome,188,47,42,0,99.17
+SKU-21274,Store #104 Galleria,Austin,Health & Beauty,SummitGear,236,75,96,0,170.57
+SKU-21275,Store #105 Airport Terminal,Los Angeles,Health & Beauty,LuminaHome,105,36,16,0,179.25
+SKU-21276,Store #101 Downtown,Austin,Health & Beauty,VelocityAthletics,75,67,59,0,102.72
+SKU-21277,Store #104 Galleria,Austin,Home & Kitchen,PureLife,205,61,17,0,91.47
+SKU-21278,Store #101 Downtown,Miami,Outdoor & Sporting,SummitGear,196,30,11,0,32.75
+SKU-21279,Store #105 Airport Terminal,Los Angeles,Outdoor & Sporting,SummitGear,210,43,28,0,29.22
+SKU-21280,Store #103 Suburban Plaza,Austin,Footwear & Apparel,LuminaHome,85,51,37,0,120.45
+SKU-21281,Store #102 Westside Mall,Austin,Electronics & Audio,SummitGear,241,18,50,0,60.42
+SKU-21282,Store #104 Galleria,Austin,Electronics & Audio,VelocityAthletics,91,56,98,0,67.52
+SKU-21283,Store #103 Suburban Plaza,Miami,Electronics & Audio,SummitGear,30,26,115,0,147.45
+SKU-21284,Store #103 Suburban Plaza,New York,Home & Kitchen,VelocityAthletics,138,47,77,0,177.75
+SKU-21285,Store #103 Suburban Plaza,Los Angeles,Outdoor & Sporting,PureLife,227,45,89,0,156.18
+SKU-21286,Store #104 Galleria,Austin,Health & Beauty,PureLife,119,51,46,0,157.92
+SKU-21287,Store #101 Downtown,New York,Health & Beauty,AuraTech,101,41,71,0,104.46
+SKU-21288,Store #105 Airport Terminal,Miami,Electronics & Audio,SummitGear,211,35,5,0,44.79
+SKU-21289,Store #103 Suburban Plaza,Miami,Outdoor & Sporting,SummitGear,205,72,115,0,127.74
+SKU-21290,Store #104 Galleria,Miami,Health & Beauty,PureLife,198,71,39,0,102.27
+SKU-21291,Store #101 Downtown,Austin,Outdoor & Sporting,SummitGear,68,73,85,0,82.66
+SKU-21292,Store #104 Galleria,Chicago,Electronics & Audio,LuminaHome,149,72,69,0,32.26
+SKU-21293,Store #102 Westside Mall,Seattle,Electronics & Audio,SummitGear,61,18,71,0,61.24
+SKU-21294,Store #101 Downtown,Chicago,Outdoor & Sporting,VelocityAthletics,112,53,17,0,123.91
+SKU-21295,Store #105 Airport Terminal,Los Angeles,Outdoor & Sporting,LuminaHome,78,72,107,0,133.11
+SKU-21296,Store #101 Downtown,Miami,Outdoor & Sporting,SummitGear,215,54,60,0,165.6
+SKU-21297,Store #101 Downtown,Austin,Health & Beauty,PureLife,21,60,104,0,135.02
+SKU-21298,Store #103 Suburban Plaza,Austin,Outdoor & Sporting,PureLife,131,75,56,0,142.01
+SKU-21299,Store #103 Suburban Plaza,New York,Electronics & Audio,VelocityAthletics,113,19,64,0,69.99
+SKU-21300,Store #103 Suburban Plaza,Miami,Outdoor & Sporting,VelocityAthletics,124,55,39,0,28.8
+SKU-21301,Store #102 Westside Mall,Los Angeles,Electronics & Audio,PureLife,225,19,105,0,52.09
+SKU-21302,Store #105 Airport Terminal,Chicago,Footwear & Apparel,VelocityAthletics,108,79,61,0,25.12
+SKU-21303,Store #101 Downtown,New York,Footwear & Apparel,PureLife,173,78,61,0,121.46
+SKU-21304,Store #101 Downtown,Seattle,Home & Kitchen,SummitGear,28,38,28,0,125.92
+SKU-21305,Store #104 Galleria,Chicago,Home & Kitchen,VelocityAthletics,169,59,5,0,27.04
+SKU-21306,Store #105 Airport Terminal,Chicago,Electronics & Audio,SummitGear,172,21,18,0,143.01
+SKU-21307,Store #105 Airport Terminal,Austin,Home & Kitchen,AuraTech,73,34,9,0,129.1
+SKU-21308,Store #104 Galleria,Austin,Health & Beauty,SummitGear,142,40,23,0,44.67
+SKU-21309,Store #104 Galleria,Chicago,Footwear & Apparel,SummitGear,125,70,40,0,100.6
+SKU-21310,Store #104 Galleria,New York,Electronics & Audio,PureLife,133,16,73,0,163.54
+SKU-21311,Store #101 Downtown,Austin,Electronics & Audio,PureLife,147,22,95,0,90.48
+SKU-21312,Store #102 Westside Mall,Austin,Electronics & Audio,AuraTech,130,71,110,0,137.05
+SKU-21313,Store #101 Downtown,Los Angeles,Footwear & Apparel,PureLife,207,78,47,0,78.43
+SKU-21314,Store #103 Suburban Plaza,Chicago,Outdoor & Sporting,SummitGear,93,72,112,0,176.41
+SKU-21315,Store #104 Galleria,Chicago,Outdoor & Sporting,AuraTech,184,25,87,0,68.84
+SKU-21316,Store #104 Galleria,Miami,Outdoor & Sporting,AuraTech,54,74,90,0,103.08
+SKU-21317,Store #102 Westside Mall,Chicago,Electronics & Audio,SummitGear,110,66,101,0,108.56
+SKU-21318,Store #104 Galleria,Austin,Electronics & Audio,SummitGear,194,19,87,0,108.51
+SKU-21319,Store #105 Airport Terminal,New York,Health & Beauty,PureLife,219,46,83,0,54.55
+SKU-21320,Store #103 Suburban Plaza,Seattle,Health & Beauty,AuraTech,43,15,41,0,79.43
+SKU-21321,Store #104 Galleria,Los Angeles,Electronics & Audio,LuminaHome,226,71,49,0,75.22
+SKU-21322,Store #102 Westside Mall,New York,Outdoor & Sporting,AuraTech,242,60,24,0,143.91
+SKU-21323,Store #103 Suburban Plaza,Los Angeles,Electronics & Audio,VelocityAthletics,159,51,75,0,173.32
+SKU-21324,Store #101 Downtown,Los Angeles,Health & Beauty,AuraTech,186,26,105,0,73.95
+SKU-21325,Store #103 Suburban Plaza,Los Angeles,Electronics & Audio,SummitGear,26,22,23,0,24.07
+SKU-21326,Store #101 Downtown,Austin,Outdoor & Sporting,VelocityAthletics,128,78,41,0,20.25
+SKU-21327,Store #103 Suburban Plaza,Seattle,Footwear & Apparel,LuminaHome,118,56,44,0,65.91
+SKU-21328,Store #105 Airport Terminal,Miami,Home & Kitchen,VelocityAthletics,160,77,104,0,160.77
+SKU-21329,Store #104 Galleria,Austin,Electronics & Audio,VelocityAthletics,13,57,67,0,157.16
+SKU-21330,Store #103 Suburban Plaza,Miami,Outdoor & Sporting,SummitGear,59,56,16,0,157.24
+SKU-21331,Store #104 Galleria,Los Angeles,Health & Beauty,LuminaHome,208,20,26,0,37.7
+SKU-21332,Store #105 Airport Terminal,Chicago,Outdoor & Sporting,SummitGear,178,59,77,0,81.52
+SKU-21333,Store #105 Airport Terminal,Chicago,Health & Beauty,VelocityAthletics,63,40,44,0,34.46
+SKU-21334,Store #105 Airport Terminal,Austin,Electronics & Audio,AuraTech,123,29,5,0,34.03
+SKU-21335,Store #102 Westside Mall,Austin,Electronics & Audio,PureLife,151,78,103,0,90.84
+SKU-21336,Store #105 Airport Terminal,Miami,Outdoor & Sporting,PureLife,184,53,99,0,25.87
+SKU-21337,Store #102 Westside Mall,Seattle,Home & Kitchen,SummitGear,219,16,98,0,51.92
+SKU-21338,Store #105 Airport Terminal,Los Angeles,Electronics & Audio,VelocityAthletics,189,59,13,0,149.95
+SKU-21339,Store #105 Airport Terminal,Austin,Health & Beauty,PureLife,243,73,30,0,159.76
+SKU-21340,Store #105 Airport Terminal,Los Angeles,Footwear & Apparel,LuminaHome,44,25,62,0,93.23
+SKU-21341,Store #104 Galleria,Miami,Outdoor & Sporting,LuminaHome,205,72,49,0,169.43
+SKU-21342,Store #102 Westside Mall,Austin,Electronics & Audio,LuminaHome,157,70,95,0,157.21
+SKU-21343,Store #103 Suburban Plaza,Chicago,Footwear & Apparel,VelocityAthletics,116,67,107,0,126.47
+SKU-21344,Store #102 Westside Mall,Los Angeles,Electronics & Audio,AuraTech,67,52,104,0,42.31
+SKU-21345,Store #103 Suburban Plaza,Chicago,Health & Beauty,SummitGear,199,59,110,0,58.5
+SKU-21346,Store #101 Downtown,Miami,Electronics & Audio,SummitGear,206,63,77,0,135.1
+SKU-21347,Store #102 Westside Mall,Miami,Home & Kitchen,SummitGear,41,21,19,0,29.41
+SKU-21348,Store #104 Galleria,Miami,Health & Beauty,LuminaHome,157,43,42,0,142.28
+SKU-21349,Store #104 Galleria,Miami,Footwear & Apparel,VelocityAthletics,185,67,42,0,109.19
+SKU-21350,Store #104 Galleria,Austin,Electronics & Audio,PureLife,245,20,50,0,53.97
+SKU-21351,Store #102 Westside Mall,Los Angeles,Outdoor & Sporting,LuminaHome,206,33,98,0,158.11
+SKU-21352,Store #103 Suburban Plaza,New York,Electronics & Audio,VelocityAthletics,191,76,114,0,155.61
+SKU-21353,Store #103 Suburban Plaza,Los Angeles,Health & Beauty,LuminaHome,32,78,85,0,161.93
+SKU-21354,Store #104 Galleria,New York,Outdoor & Sporting,VelocityAthletics,28,29,100,0,43.13
+SKU-21355,Store #105 Airport Terminal,Chicago,Home & Kitchen,AuraTech,167,22,116,0,102.65
+SKU-21356,Store #101 Downtown,Seattle,Home & Kitchen,SummitGear,220,19,47,0,166.05
+SKU-21357,Store #101 Downtown,New York,Footwear & Apparel,PureLife,229,60,9,0,121.94
+SKU-21358,Store #103 Suburban Plaza,Seattle,Electronics & Audio,LuminaHome,190,18,96,0,161.64
+SKU-21359,Store #102 Westside Mall,Austin,Health & Beauty,LuminaHome,229,42,28,0,91.53
+SKU-21360,Store #101 Downtown,Los Angeles,Footwear & Apparel,LuminaHome,238,71,90,0,117.38
+SKU-21361,Store #104 Galleria,Seattle,Health & Beauty,VelocityAthletics,59,79,75,0,41.55
+SKU-21362,Store #103 Suburban Plaza,Chicago,Home & Kitchen,LuminaHome,75,55,34,0,29.19
+SKU-21363,Store #101 Downtown,Los Angeles,Footwear & Apparel,SummitGear,65,49,51,0,173.63
+SKU-21364,Store #105 Airport Terminal,Miami,Footwear & Apparel,AuraTech,165,29,115,0,82.75
+SKU-21365,Store #101 Downtown,New York,Outdoor & Sporting,LuminaHome,193,79,5,0,74.41
+SKU-21366,Store #101 Downtown,Austin,Home & Kitchen,LuminaHome,36,61,57,0,138.08
+SKU-21367,Store #105 Airport Terminal,Austin,Outdoor & Sporting,PureLife,61,46,114,0,141.87
+SKU-21368,Store #101 Downtown,Miami,Electronics & Audio,AuraTech,0,79,239,1,413.2
+SKU-21369,Store #101 Downtown,New York,Home & Kitchen,PureLife,146,45,24,0,169.59
+SKU-21370,Store #101 Downtown,New York,Home & Kitchen,VelocityAthletics,102,26,98,0,24.79
+SKU-21371,Store #104 Galleria,Miami,Home & Kitchen,SummitGear,189,53,55,0,120.85
+SKU-21372,Store #103 Suburban Plaza,Austin,Health & Beauty,PureLife,29,48,29,0,94.18
+SKU-21373,Store #101 Downtown,Chicago,Footwear & Apparel,SummitGear,71,64,102,0,77.04
+SKU-21374,Store #102 Westside Mall,Seattle,Outdoor & Sporting,AuraTech,83,61,114,0,15.98
+SKU-21375,Store #101 Downtown,Los Angeles,Health & Beauty,VelocityAthletics,177,54,21,0,150.55
+SKU-21376,Store #105 Airport Terminal,Austin,Outdoor & Sporting,SummitGear,155,46,106,0,129.63
+SKU-21377,Store #105 Airport Terminal,Chicago,Footwear & Apparel,AuraTech,212,30,90,0,109.78
+SKU-21378,Store #104 Galleria,Miami,Electronics & Audio,SummitGear,71,16,90,0,33.6
+SKU-21379,Store #103 Suburban Plaza,Miami,Health & Beauty,SummitGear,191,33,50,0,138.15
+SKU-21380,Store #103 Suburban Plaza,Seattle,Home & Kitchen,LuminaHome,103,28,6,0,131.09
+SKU-21381,Store #101 Downtown,New York,Outdoor & Sporting,VelocityAthletics,134,46,63,0,150.73
+SKU-21382,Store #101 Downtown,New York,Outdoor & Sporting,AuraTech,100,64,48,0,59.78
+SKU-21383,Store #104 Galleria,Seattle,Electronics & Audio,LuminaHome,234,30,16,0,71.34
+SKU-21384,Store #103 Suburban Plaza,Austin,Outdoor & Sporting,PureLife,37,78,90,0,110.89
+SKU-21385,Store #101 Downtown,Austin,Health & Beauty,PureLife,85,26,86,0,110.0
+SKU-21386,Store #103 Suburban Plaza,Miami,Home & Kitchen,PureLife,125,52,27,0,69.57
+SKU-21387,Store #101 Downtown,Seattle,Outdoor & Sporting,PureLife,121,79,18,0,138.16
+SKU-21388,Store #101 Downtown,Chicago,Health & Beauty,LuminaHome,152,62,111,0,98.61
+SKU-21389,Store #102 Westside Mall,Seattle,Footwear & Apparel,LuminaHome,117,46,54,0,112.68
+SKU-21390,Store #102 Westside Mall,New York,Health & Beauty,LuminaHome,147,15,49,0,136.24
+SKU-21391,Store #103 Suburban Plaza,Austin,Home & Kitchen,LuminaHome,17,79,38,0,96.04
+SKU-21392,Store #101 Downtown,Miami,Home & Kitchen,AuraTech,234,17,81,0,85.57
+SKU-21393,Store #104 Galleria,Los Angeles,Home & Kitchen,VelocityAthletics,111,48,116,0,67.32
+SKU-21394,Store #103 Suburban Plaza,Los Angeles,Electronics & Audio,SummitGear,184,25,82,0,127.59
+SKU-21395,Store #103 Suburban Plaza,Chicago,Outdoor & Sporting,AuraTech,36,79,60,0,70.04
+SKU-21396,Store #102 Westside Mall,Austin,Electronics & Audio,LuminaHome,230,19,70,0,81.72
+SKU-21397,Store #104 Galleria,New York,Health & Beauty,LuminaHome,248,29,69,0,62.86
+SKU-21398,Store #103 Suburban Plaza,Miami,Footwear & Apparel,AuraTech,58,33,95,0,76.71
+SKU-21399,Store #104 Galleria,Miami,Footwear & Apparel,LuminaHome,90,25,61,0,152.32
+SKU-21400,Store #102 Westside Mall,Los Angeles,Footwear & Apparel,VelocityAthletics,209,49,52,0,58.27
+SKU-21401,Store #103 Suburban Plaza,Chicago,Electronics & Audio,PureLife,42,59,53,0,150.49
+SKU-21402,Store #104 Galleria,Miami,Footwear & Apparel,VelocityAthletics,61,47,26,0,56.62
+SKU-21403,Store #102 Westside Mall,Los Angeles,Health & Beauty,PureLife,240,35,82,0,161.29
+SKU-21404,Store #102 Westside Mall,Seattle,Electronics & Audio,PureLife,53,37,104,0,18.73
+SKU-21405,Store #104 Galleria,Seattle,Outdoor & Sporting,PureLife,126,44,28,0,24.05
+SKU-21406,Store #104 Galleria,Austin,Outdoor & Sporting,LuminaHome,92,23,63,0,86.91
+SKU-21407,Store #105 Airport Terminal,Los Angeles,Footwear & Apparel,LuminaHome,60,64,109,0,117.79
+SKU-21408,Store #104 Galleria,Miami,Home & Kitchen,PureLife,24,37,64,0,22.91
+SKU-21409,Store #101 Downtown,Austin,Footwear & Apparel,VelocityAthletics,199,43,66,0,51.22
+SKU-21410,Store #102 Westside Mall,Seattle,Electronics & Audio,SummitGear,193,45,65,0,79.54
+SKU-21411,Store #101 Downtown,Miami,Health & Beauty,PureLife,230,78,56,0,35.6
+SKU-21412,Store #103 Suburban Plaza,Miami,Health & Beauty,VelocityAthletics,133,28,41,0,21.61
+SKU-21413,Store #102 Westside Mall,Miami,Footwear & Apparel,SummitGear,126,67,43,0,130.51
+SKU-21414,Store #104 Galleria,New York,Outdoor & Sporting,SummitGear,143,62,60,0,100.35
+SKU-21415,Store #103 Suburban Plaza,Miami,Electronics & Audio,PureLife,33,69,27,0,148.18
+SKU-21416,Store #102 Westside Mall,Seattle,Outdoor & Sporting,LuminaHome,181,53,26,0,140.05
+SKU-21417,Store #101 Downtown,Chicago,Home & Kitchen,VelocityAthletics,238,79,46,0,21.05
+SKU-21418,Store #102 Westside Mall,Seattle,Footwear & Apparel,LuminaHome,231,77,24,0,119.01
+SKU-21419,Store #104 Galleria,Seattle,Health & Beauty,LuminaHome,71,58,58,0,179.62
+SKU-21420,Store #102 Westside Mall,New York,Footwear & Apparel,AuraTech,248,38,47,0,42.36
+SKU-21421,Store #102 Westside Mall,Austin,Home & Kitchen,VelocityAthletics,57,54,9,0,126.48
+SKU-21422,Store #102 Westside Mall,Austin,Footwear & Apparel,SummitGear,170,18,92,0,79.44
+SKU-21423,Store #103 Suburban Plaza,Chicago,Health & Beauty,AuraTech,247,51,69,0,159.96
+SKU-21424,Store #104 Galleria,Miami,Home & Kitchen,PureLife,25,65,72,0,177.98
+SKU-21425,Store #105 Airport Terminal,Chicago,Health & Beauty,LuminaHome,109,46,23,0,127.09
+SKU-21426,Store #101 Downtown,Miami,Home & Kitchen,PureLife,112,21,23,0,90.2
+SKU-21427,Store #104 Galleria,Austin,Health & Beauty,AuraTech,98,15,101,0,149.85
+SKU-21428,Store #103 Suburban Plaza,Los Angeles,Health & Beauty,AuraTech,187,25,20,0,100.59
+SKU-21429,Store #104 Galleria,Chicago,Electronics & Audio,PureLife,231,68,34,0,103.03
+SKU-21430,Store #105 Airport Terminal,New York,Home & Kitchen,LuminaHome,129,47,94,0,173.08
+SKU-21431,Store #104 Galleria,Seattle,Outdoor & Sporting,PureLife,147,22,44,0,85.06
+SKU-21432,Store #104 Galleria,Seattle,Health & Beauty,SummitGear,127,78,77,0,87.32
+SKU-21433,Store #103 Suburban Plaza,Seattle,Footwear & Apparel,PureLife,114,29,73,0,36.14
+SKU-21434,Store #101 Downtown,Chicago,Health & Beauty,VelocityAthletics,231,44,49,0,96.89
+SKU-21435,Store #105 Airport Terminal,Los Angeles,Health & Beauty,AuraTech,53,78,73,0,138.09
+SKU-21436,Store #104 Galleria,Los Angeles,Outdoor & Sporting,SummitGear,123,30,69,0,51.33
+SKU-21437,Store #104 Galleria,Los Angeles,Outdoor & Sporting,VelocityAthletics,105,18,117,0,71.27
+SKU-21438,Store #102 Westside Mall,New York,Electronics & Audio,AuraTech,167,32,78,0,31.41
+SKU-21439,Store #105 Airport Terminal,Los Angeles,Electronics & Audio,PureLife,82,73,28,0,48.8
+SKU-21440,Store #103 Suburban Plaza,Los Angeles,Electronics & Audio,LuminaHome,227,79,66,0,46.26
+SKU-21441,Store #103 Suburban Plaza,Austin,Electronics & Audio,SummitGear,199,15,64,0,20.84
+SKU-21442,Store #105 Airport Terminal,Los Angeles,Outdoor & Sporting,AuraTech,105,35,107,0,70.92
+SKU-21443,Store #105 Airport Terminal,New York,Health & Beauty,LuminaHome,185,28,113,0,137.57
+SKU-21444,Store #104 Galleria,Seattle,Outdoor & Sporting,AuraTech,100,47,21,0,29.9
+SKU-21445,Store #102 Westside Mall,Los Angeles,Health & Beauty,AuraTech,105,34,37,0,131.65
+SKU-21446,Store #105 Airport Terminal,Los Angeles,Health & Beauty,VelocityAthletics,242,27,60,0,151.85
+SKU-21447,Store #102 Westside Mall,Miami,Outdoor & Sporting,SummitGear,116,61,71,0,16.88
+SKU-21448,Store #101 Downtown,New York,Electronics & Audio,VelocityAthletics,14,16,62,0,49.21
+SKU-21449,Store #101 Downtown,New York,Home & Kitchen,VelocityAthletics,41,64,91,0,112.24
+SKU-21450,Store #101 Downtown,Chicago,Home & Kitchen,AuraTech,80,27,41,0,72.44
+SKU-21451,Store #103 Suburban Plaza,Los Angeles,Electronics & Audio,PureLife,168,51,41,0,35.73
+SKU-21452,Store #105 Airport Terminal,Miami,Electronics & Audio,SummitGear,81,51,21,0,15.64
+SKU-21453,Store #103 Suburban Plaza,Austin,Outdoor & Sporting,VelocityAthletics,50,79,101,0,113.96
+SKU-21454,Store #102 Westside Mall,New York,Home & Kitchen,PureLife,171,36,66,0,122.04
+SKU-21455,Store #101 Downtown,New York,Electronics & Audio,LuminaHome,94,65,28,0,164.26
+SKU-21456,Store #102 Westside Mall,Miami,Outdoor & Sporting,VelocityAthletics,78,39,16,0,48.41
+SKU-21457,Store #105 Airport Terminal,Los Angeles,Electronics & Audio,VelocityAthletics,248,36,35,0,134.41
+SKU-21458,Store #102 Westside Mall,Los Angeles,Outdoor & Sporting,PureLife,82,69,93,0,152.2
+SKU-21459,Store #105 Airport Terminal,Seattle,Electronics & Audio,AuraTech,26,70,55,0,97.8
+SKU-21460,Store #103 Suburban Plaza,Miami,Home & Kitchen,AuraTech,51,21,100,0,60.65
+SKU-21461,Store #103 Suburban Plaza,Miami,Footwear & Apparel,LuminaHome,144,49,86,0,46.75
+SKU-21462,Store #101 Downtown,New York,Footwear & Apparel,LuminaHome,175,70,63,0,160.95
+SKU-21463,Store #104 Galleria,Seattle,Outdoor & Sporting,AuraTech,84,61,109,0,175.55
+SKU-21464,Store #105 Airport Terminal,Miami,Home & Kitchen,PureLife,138,36,99,0,175.33
+SKU-21465,Store #103 Suburban Plaza,Miami,Outdoor & Sporting,VelocityAthletics,160,21,90,0,119.34
+SKU-21466,Store #101 Downtown,Seattle,Health & Beauty,PureLife,242,25,63,0,101.54
+SKU-21467,Store #103 Suburban Plaza,Miami,Outdoor & Sporting,LuminaHome,140,59,90,0,179.6
+SKU-21468,Store #101 Downtown,Chicago,Home & Kitchen,VelocityAthletics,27,59,19,0,134.51
+SKU-21469,Store #105 Airport Terminal,New York,Outdoor & Sporting,VelocityAthletics,200,64,51,0,54.99
+SKU-21470,Store #105 Airport Terminal,Seattle,Home & Kitchen,AuraTech,244,65,88,0,40.09
+SKU-21471,Store #103 Suburban Plaza,Austin,Health & Beauty,SummitGear,105,21,52,0,140.45
+SKU-21472,Store #105 Airport Terminal,Los Angeles,Health & Beauty,SummitGear,248,79,72,0,122.37
+SKU-21473,Store #104 Galleria,Los Angeles,Home & Kitchen,PureLife,200,49,22,0,175.88
+SKU-21474,Store #105 Airport Terminal,Los Angeles,Home & Kitchen,LuminaHome,56,30,78,0,170.24
+SKU-21475,Store #104 Galleria,New York,Electronics & Audio,PureLife,69,29,112,0,63.25
+SKU-21476,Store #101 Downtown,Chicago,Footwear & Apparel,SummitGear,111,70,30,0,171.42
+SKU-21477,Store #103 Suburban Plaza,Chicago,Electronics & Audio,LuminaHome,229,67,7,0,156.79
+SKU-21478,Store #104 Galleria,Austin,Electronics & Audio,AuraTech,0,57,237,1,366.81
+SKU-21479,Store #101 Downtown,Miami,Footwear & Apparel,PureLife,67,71,91,0,92.27
+SKU-21480,Store #103 Suburban Plaza,Chicago,Outdoor & Sporting,LuminaHome,118,42,83,0,72.27
+SKU-21481,Store #105 Airport Terminal,Seattle,Home & Kitchen,AuraTech,224,64,104,0,69.93
+SKU-21482,Store #101 Downtown,Seattle,Health & Beauty,AuraTech,173,19,6,0,167.27
+SKU-21483,Store #101 Downtown,New York,Home & Kitchen,VelocityAthletics,223,79,40,0,173.57
+SKU-21484,Store #104 Galleria,Los Angeles,Health & Beauty,AuraTech,32,35,9,0,29.22
+SKU-21485,Store #101 Downtown,New York,Electronics & Audio,SummitGear,199,40,30,0,124.98
+SKU-21486,Store #105 Airport Terminal,New York,Home & Kitchen,LuminaHome,124,31,110,0,97.14
+SKU-21487,Store #101 Downtown,Seattle,Outdoor & Sporting,LuminaHome,151,43,75,0,40.39
+SKU-21488,Store #101 Downtown,Austin,Outdoor & Sporting,SummitGear,25,45,115,0,55.94
+SKU-21489,Store #101 Downtown,Chicago,Footwear & Apparel,SummitGear,151,51,83,0,51.02
+SKU-21490,Store #103 Suburban Plaza,Seattle,Home & Kitchen,PureLife,201,20,72,0,18.25
+SKU-21491,Store #105 Airport Terminal,Seattle,Electronics & Audio,VelocityAthletics,202,19,33,0,108.48
+SKU-21492,Store #104 Galleria,Seattle,Footwear & Apparel,AuraTech,224,16,84,0,18.38
+SKU-21493,Store #103 Suburban Plaza,Los Angeles,Electronics & Audio,SummitGear,242,57,57,0,48.83
+SKU-21494,Store #105 Airport Terminal,Austin,Electronics & Audio,AuraTech,51,63,11,0,136.58
+SKU-21495,Store #101 Downtown,Los Angeles,Outdoor & Sporting,VelocityAthletics,52,61,40,0,67.26
+SKU-21496,Store #105 Airport Terminal,Seattle,Outdoor & Sporting,SummitGear,130,31,56,0,105.93
+SKU-21497,Store #105 Airport Terminal,Los Angeles,Footwear & Apparel,LuminaHome,14,28,67,0,115.2
+SKU-21498,Store #104 Galleria,New York,Footwear & Apparel,AuraTech,64,27,39,0,91.61
+SKU-21499,Store #104 Galleria,Austin,Electronics & Audio,VelocityAthletics,230,51,11,0,137.04
+SKU-21500,Store #105 Airport Terminal,Chicago,Electronics & Audio,AuraTech,25,79,116,0,27.36
+SKU-21501,Store #101 Downtown,New York,Electronics & Audio,VelocityAthletics,76,33,66,0,31.45
+SKU-21502,Store #102 Westside Mall,Austin,Outdoor & Sporting,LuminaHome,124,36,36,0,138.2
+SKU-21503,Store #103 Suburban Plaza,Seattle,Footwear & Apparel,SummitGear,68,31,82,0,38.79
+SKU-21504,Store #103 Suburban Plaza,Miami,Outdoor & Sporting,AuraTech,71,46,77,0,116.61
+SKU-21505,Store #102 Westside Mall,Austin,Footwear & Apparel,PureLife,81,48,33,0,110.52
+SKU-21506,Store #104 Galleria,Seattle,Electronics & Audio,LuminaHome,98,78,112,0,69.64
+SKU-21507,Store #105 Airport Terminal,Austin,Electronics & Audio,VelocityAthletics,185,45,15,0,119.69
+SKU-21508,Store #101 Downtown,Chicago,Health & Beauty,SummitGear,179,24,110,0,175.38
+SKU-21509,Store #105 Airport Terminal,New York,Footwear & Apparel,VelocityAthletics,187,27,65,0,166.84
+SKU-21510,Store #103 Suburban Plaza,Chicago,Footwear & Apparel,PureLife,181,19,112,0,157.77
+SKU-21511,Store #101 Downtown,Seattle,Outdoor & Sporting,SummitGear,198,66,5,0,42.24
+SKU-21512,Store #101 Downtown,Miami,Health & Beauty,PureLife,67,33,50,0,100.57
+SKU-21513,Store #104 Galleria,Austin,Footwear & Apparel,AuraTech,229,48,6,0,108.99
+SKU-21514,Store #105 Airport Terminal,Austin,Health & Beauty,LuminaHome,238,21,60,0,93.34
+SKU-21515,Store #104 Galleria,Los Angeles,Home & Kitchen,AuraTech,109,32,87,0,20.8
+SKU-21516,Store #104 Galleria,Chicago,Home & Kitchen,VelocityAthletics,206,66,54,0,162.3
+SKU-21517,Store #105 Airport Terminal,Seattle,Electronics & Audio,AuraTech,191,75,84,0,132.11
+SKU-21518,Store #101 Downtown,Austin,Outdoor & Sporting,SummitGear,116,31,99,0,108.1
+SKU-21519,Store #103 Suburban Plaza,Seattle,Home & Kitchen,LuminaHome,248,24,81,0,128.99
+SKU-21520,Store #103 Suburban Plaza,Miami,Electronics & Audio,SummitGear,85,59,87,0,167.38
+SKU-21521,Store #104 Galleria,Chicago,Electronics & Audio,AuraTech,0,57,230,1,213.79
+SKU-21522,Store #102 Westside Mall,Miami,Outdoor & Sporting,PureLife,23,52,97,0,91.87
+SKU-21523,Store #101 Downtown,Austin,Outdoor & Sporting,PureLife,226,74,82,0,148.8
+SKU-21524,Store #101 Downtown,Chicago,Outdoor & Sporting,VelocityAthletics,70,78,58,0,119.85
+SKU-21525,Store #102 Westside Mall,Los Angeles,Outdoor & Sporting,SummitGear,226,75,109,0,35.08
+SKU-21526,Store #101 Downtown,New York,Electronics & Audio,AuraTech,0,31,161,1,389.63
+SKU-21527,Store #105 Airport Terminal,Miami,Footwear & Apparel,SummitGear,125,73,40,0,32.04
+SKU-21528,Store #101 Downtown,Chicago,Footwear & Apparel,VelocityAthletics,227,66,36,0,115.3
+SKU-21529,Store #103 Suburban Plaza,Austin,Health & Beauty,SummitGear,160,73,58,0,69.44
+SKU-21530,Store #104 Galleria,New York,Electronics & Audio,AuraTech,0,35,199,1,271.36
+SKU-21531,Store #103 Suburban Plaza,Chicago,Footwear & Apparel,PureLife,72,25,74,0,110.02
+SKU-21532,Store #102 Westside Mall,New York,Electronics & Audio,AuraTech,145,49,65,0,147.11
+SKU-21533,Store #103 Suburban Plaza,Austin,Electronics & Audio,VelocityAthletics,187,43,50,0,105.51
+SKU-21534,Store #103 Suburban Plaza,Austin,Home & Kitchen,SummitGear,144,50,99,0,121.31
+SKU-21535,Store #105 Airport Terminal,Seattle,Footwear & Apparel,SummitGear,23,55,35,0,33.44
+SKU-21536,Store #105 Airport Terminal,Los Angeles,Home & Kitchen,LuminaHome,77,48,110,0,28.57
+SKU-21537,Store #105 Airport Terminal,Seattle,Outdoor & Sporting,VelocityAthletics,147,65,81,0,164.91
+SKU-21538,Store #103 Suburban Plaza,Seattle,Home & Kitchen,PureLife,117,45,39,0,100.78
+SKU-21539,Store #105 Airport Terminal,Los Angeles,Home & Kitchen,SummitGear,154,33,105,0,36.23
+SKU-21540,Store #104 Galleria,Los Angeles,Outdoor & Sporting,PureLife,183,49,83,0,179.04
+SKU-21541,Store #103 Suburban Plaza,Miami,Home & Kitchen,VelocityAthletics,133,67,8,0,70.88
+SKU-21542,Store #104 Galleria,Seattle,Home & Kitchen,LuminaHome,243,64,107,0,114.75
+SKU-21543,Store #105 Airport Terminal,Miami,Footwear & Apparel,VelocityAthletics,160,58,38,0,82.55
+SKU-21544,Store #105 Airport Terminal,Miami,Outdoor & Sporting,LuminaHome,83,70,113,0,15.53
+SKU-21545,Store #101 Downtown,Austin,Footwear & Apparel,VelocityAthletics,39,32,117,0,126.2
+SKU-21546,Store #103 Suburban Plaza,Miami,Health & Beauty,VelocityAthletics,206,17,83,0,166.82
+SKU-21547,Store #105 Airport Terminal,Miami,Health & Beauty,LuminaHome,220,34,85,0,174.49
+SKU-21548,Store #103 Suburban Plaza,Austin,Footwear & Apparel,VelocityAthletics,33,31,70,0,76.4
+SKU-21549,Store #102 Westside Mall,Seattle,Health & Beauty,PureLife,193,41,31,0,55.26
+SKU-21550,Store #102 Westside Mall,Seattle,Electronics & Audio,LuminaHome,85,24,42,0,148.14
+SKU-21551,Store #101 Downtown,New York,Health & Beauty,VelocityAthletics,79,69,77,0,166.04
+SKU-21552,Store #104 Galleria,Seattle,Electronics & Audio,LuminaHome,243,77,96,0,110.87
+SKU-21553,Store #102 Westside Mall,Seattle,Home & Kitchen,AuraTech,248,41,15,0,40.78
+SKU-21554,Store #101 Downtown,Los Angeles,Electronics & Audio,AuraTech,0,33,221,1,350.82
+SKU-21555,Store #105 Airport Terminal,Austin,Electronics & Audio,SummitGear,144,47,12,0,67.92
+SKU-21556,Store #101 Downtown,Miami,Home & Kitchen,LuminaHome,97,44,33,0,51.97
+SKU-21557,Store #104 Galleria,Los Angeles,Electronics & Audio,SummitGear,225,62,66,0,42.84
+SKU-21558,Store #105 Airport Terminal,Chicago,Electronics & Audio,LuminaHome,164,16,38,0,18.96
+SKU-21559,Store #103 Suburban Plaza,Miami,Footwear & Apparel,LuminaHome,120,26,116,0,122.43
+SKU-21560,Store #103 Suburban Plaza,Seattle,Footwear & Apparel,LuminaHome,153,32,58,0,38.44
+SKU-21561,Store #105 Airport Terminal,Austin,Electronics & Audio,VelocityAthletics,131,34,23,0,142.37
+SKU-21562,Store #101 Downtown,Los Angeles,Electronics & Audio,LuminaHome,15,37,41,0,145.31
+SKU-21563,Store #103 Suburban Plaza,New York,Footwear & Apparel,SummitGear,43,22,49,0,164.5
+SKU-21564,Store #103 Suburban Plaza,Austin,Health & Beauty,VelocityAthletics,171,50,95,0,79.56
+SKU-21565,Store #104 Galleria,New York,Footwear & Apparel,SummitGear,100,63,33,0,25.26
+SKU-21566,Store #104 Galleria,Los Angeles,Home & Kitchen,AuraTech,164,32,86,0,151.48
+SKU-21567,Store #104 Galleria,Miami,Outdoor & Sporting,VelocityAthletics,23,35,64,0,37.09
+SKU-21568,Store #103 Suburban Plaza,New York,Outdoor & Sporting,VelocityAthletics,218,49,112,0,21.54
+SKU-21569,Store #102 Westside Mall,Los Angeles,Health & Beauty,VelocityAthletics,223,58,49,0,60.75
+SKU-21570,Store #102 Westside Mall,Seattle,Footwear & Apparel,LuminaHome,37,59,83,0,117.47
+SKU-21571,Store #105 Airport Terminal,Austin,Home & Kitchen,AuraTech,238,72,20,0,116.01
+SKU-21572,Store #105 Airport Terminal,Los Angeles,Footwear & Apparel,SummitGear,157,39,26,0,75.57
+SKU-21573,Store #103 Suburban Plaza,Los Angeles,Footwear & Apparel,AuraTech,86,55,54,0,135.0
+SKU-21574,Store #104 Galleria,Austin,Footwear & Apparel,PureLife,32,32,63,0,76.16
+SKU-21575,Store #101 Downtown,Austin,Health & Beauty,AuraTech,148,49,78,0,34.07
+SKU-21576,Store #103 Suburban Plaza,Seattle,Outdoor & Sporting,VelocityAthletics,151,37,65,0,160.75
+SKU-21577,Store #102 Westside Mall,Miami,Footwear & Apparel,PureLife,77,64,61,0,27.65
+SKU-21578,Store #101 Downtown,Seattle,Footwear & Apparel,SummitGear,154,52,68,0,80.4
+SKU-21579,Store #102 Westside Mall,New York,Footwear & Apparel,LuminaHome,12,54,48,0,126.92
+SKU-21580,Store #104 Galleria,Austin,Home & Kitchen,AuraTech,139,56,117,0,171.87
+SKU-21581,Store #102 Westside Mall,Los Angeles,Electronics & Audio,SummitGear,90,61,34,0,130.47
+SKU-21582,Store #105 Airport Terminal,Seattle,Health & Beauty,AuraTech,104,55,31,0,37.65
+SKU-21583,Store #105 Airport Terminal,Los Angeles,Health & Beauty,AuraTech,109,67,39,0,90.28
+SKU-21584,Store #105 Airport Terminal,New York,Health & Beauty,LuminaHome,81,16,106,0,88.77
+SKU-21585,Store #104 Galleria,Miami,Health & Beauty,SummitGear,168,28,34,0,69.45
+SKU-21586,Store #103 Suburban Plaza,Chicago,Electronics & Audio,PureLife,47,20,106,0,133.11
+SKU-21587,Store #101 Downtown,New York,Outdoor & Sporting,VelocityAthletics,112,77,89,0,16.45
+SKU-21588,Store #103 Suburban Plaza,New York,Footwear & Apparel,PureLife,105,39,11,0,62.36
+SKU-21589,Store #104 Galleria,Los Angeles,Home & Kitchen,SummitGear,185,71,106,0,18.55
+SKU-21590,Store #102 Westside Mall,Los Angeles,Home & Kitchen,SummitGear,203,27,15,0,134.81
+SKU-21591,Store #102 Westside Mall,New York,Home & Kitchen,AuraTech,13,28,101,0,38.53
+SKU-21592,Store #105 Airport Terminal,Los Angeles,Home & Kitchen,AuraTech,187,64,38,0,105.19
+SKU-21593,Store #104 Galleria,Chicago,Health & Beauty,VelocityAthletics,248,68,9,0,165.09
+SKU-21594,Store #104 Galleria,New York,Outdoor & Sporting,PureLife,115,43,5,0,79.22
+SKU-21595,Store #105 Airport Terminal,Chicago,Electronics & Audio,PureLife,39,33,40,0,96.31
+SKU-21596,Store #103 Suburban Plaza,Miami,Home & Kitchen,LuminaHome,144,52,45,0,52.91
+SKU-21597,Store #103 Suburban Plaza,Los Angeles,Home & Kitchen,AuraTech,63,16,14,0,45.4
+SKU-21598,Store #102 Westside Mall,Austin,Outdoor & Sporting,PureLife,189,41,76,0,25.44
+SKU-21599,Store #104 Galleria,Chicago,Outdoor & Sporting,LuminaHome,247,25,51,0,151.51
+SKU-21600,Store #104 Galleria,Austin,Home & Kitchen,VelocityAthletics,245,79,77,0,33.6
+SKU-21601,Store #101 Downtown,Chicago,Electronics & Audio,LuminaHome,110,76,55,0,106.4
+SKU-21602,Store #104 Galleria,New York,Home & Kitchen,VelocityAthletics,145,54,89,0,51.24
+SKU-21603,Store #103 Suburban Plaza,New York,Health & Beauty,PureLife,235,36,71,0,71.17
+SKU-21604,Store #105 Airport Terminal,New York,Electronics & Audio,PureLife,91,65,117,0,147.69
+SKU-21605,Store #103 Suburban Plaza,Los Angeles,Footwear & Apparel,SummitGear,242,40,118,0,29.5
+SKU-21606,Store #101 Downtown,Chicago,Electronics & Audio,SummitGear,188,62,89,0,40.89
+SKU-21607,Store #104 Galleria,New York,Health & Beauty,SummitGear,131,64,48,0,179.16
+SKU-21608,Store #101 Downtown,Los Angeles,Outdoor & Sporting,AuraTech,33,62,54,0,87.34
+SKU-21609,Store #105 Airport Terminal,New York,Footwear & Apparel,PureLife,199,18,112,0,41.0
+SKU-21610,Store #102 Westside Mall,Los Angeles,Outdoor & Sporting,AuraTech,127,70,37,0,70.43
+SKU-21611,Store #101 Downtown,Los Angeles,Home & Kitchen,VelocityAthletics,211,32,72,0,147.46
+SKU-21612,Store #105 Airport Terminal,Austin,Electronics & Audio,LuminaHome,107,25,5,0,64.77
+SKU-21613,Store #102 Westside Mall,Miami,Electronics & Audio,SummitGear,133,56,86,0,26.98
+SKU-21614,Store #101 Downtown,Chicago,Outdoor & Sporting,LuminaHome,69,49,30,0,33.66
+SKU-21615,Store #104 Galleria,Chicago,Health & Beauty,PureLife,44,47,87,0,70.22
+SKU-21616,Store #104 Galleria,Chicago,Health & Beauty,PureLife,100,74,108,0,16.93
+SKU-21617,Store #102 Westside Mall,Austin,Outdoor & Sporting,VelocityAthletics,201,50,7,0,84.07
+SKU-21618,Store #102 Westside Mall,Chicago,Health & Beauty,LuminaHome,183,20,71,0,43.36
+SKU-21619,Store #103 Suburban Plaza,New York,Electronics & Audio,VelocityAthletics,166,59,112,0,48.56
+SKU-21620,Store #101 Downtown,Miami,Health & Beauty,VelocityAthletics,204,48,83,0,159.26
+SKU-21621,Store #104 Galleria,New York,Home & Kitchen,VelocityAthletics,201,23,94,0,57.42
+SKU-21622,Store #102 Westside Mall,Austin,Outdoor & Sporting,SummitGear,102,70,5,0,179.27
+SKU-21623,Store #102 Westside Mall,New York,Home & Kitchen,VelocityAthletics,181,44,53,0,38.93
+SKU-21624,Store #103 Suburban Plaza,Chicago,Outdoor & Sporting,SummitGear,132,39,59,0,16.75
+SKU-21625,Store #105 Airport Terminal,Los Angeles,Footwear & Apparel,VelocityAthletics,22,64,47,0,179.56
+SKU-21626,Store #102 Westside Mall,Austin,Outdoor & Sporting,PureLife,196,26,47,0,88.99
+SKU-21627,Store #105 Airport Terminal,Miami,Home & Kitchen,LuminaHome,16,49,84,0,18.18
+SKU-21628,Store #101 Downtown,Miami,Outdoor & Sporting,SummitGear,239,34,68,0,132.81
+SKU-21629,Store #101 Downtown,New York,Footwear & Apparel,SummitGear,155,56,56,0,177.48
+SKU-21630,Store #104 Galleria,Austin,Health & Beauty,PureLife,130,22,75,0,45.88
+SKU-21631,Store #101 Downtown,New York,Home & Kitchen,VelocityAthletics,98,33,41,0,99.8
+SKU-21632,Store #102 Westside Mall,Los Angeles,Electronics & Audio,VelocityAthletics,12,43,80,0,49.95
+SKU-21633,Store #101 Downtown,Chicago,Home & Kitchen,VelocityAthletics,112,74,6,0,93.44
+SKU-21634,Store #102 Westside Mall,Miami,Electronics & Audio,AuraTech,107,37,16,0,68.61
+SKU-21635,Store #103 Suburban Plaza,Miami,Footwear & Apparel,PureLife,58,73,99,0,161.22
+SKU-21636,Store #104 Galleria,New York,Outdoor & Sporting,PureLife,120,70,91,0,57.44
+SKU-21637,Store #101 Downtown,Miami,Footwear & Apparel,SummitGear,66,41,76,0,118.27
+SKU-21638,Store #101 Downtown,Los Angeles,Outdoor & Sporting,SummitGear,164,72,107,0,71.75
+SKU-21639,Store #103 Suburban Plaza,Miami,Electronics & Audio,PureLife,238,31,39,0,40.42
+SKU-21640,Store #105 Airport Terminal,Miami,Outdoor & Sporting,LuminaHome,60,50,34,0,169.48
+SKU-21641,Store #101 Downtown,Chicago,Outdoor & Sporting,LuminaHome,73,50,34,0,137.62
+SKU-21642,Store #103 Suburban Plaza,Seattle,Home & Kitchen,AuraTech,123,63,30,0,57.28
+SKU-21643,Store #101 Downtown,Seattle,Health & Beauty,PureLife,167,30,111,0,22.79
+SKU-21644,Store #104 Galleria,Los Angeles,Outdoor & Sporting,VelocityAthletics,217,56,62,0,70.91
+SKU-21645,Store #103 Suburban Plaza,Chicago,Outdoor & Sporting,PureLife,145,27,29,0,158.9
+SKU-21646,Store #102 Westside Mall,Miami,Health & Beauty,SummitGear,91,76,106,0,38.05
+SKU-21647,Store #101 Downtown,Los Angeles,Home & Kitchen,VelocityAthletics,136,46,58,0,156.02
+SKU-21648,Store #104 Galleria,Chicago,Footwear & Apparel,AuraTech,140,71,60,0,163.73
+SKU-21649,Store #104 Galleria,Seattle,Health & Beauty,SummitGear,48,73,59,0,177.45

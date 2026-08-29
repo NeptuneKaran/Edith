@@ -1,0 +1,865 @@
+posting_date,cost_center,department,expense_category,actual_cost,budget_cost,variance,invoice_count
+2024-01-01,CC-101 Core Engineering,Engineering,Cloud Compute & Hosting,18271.01,19550.4,-1279.39,26
+2024-01-01,CC-101 Core Engineering,Engineering,Personnel Wages,75141.67,74366.41,775.26,19
+2024-01-01,CC-101 Core Engineering,Engineering,External Consulting,72868.84,72091.99,776.86,39
+2024-01-01,CC-101 Core Engineering,Engineering,Travel & Entertainment,49053.41,49159.8,-106.39,14
+2024-01-01,CC-101 Core Engineering,Engineering,Software Licenses,59566.54,61708.24,-2141.69,33
+2024-01-01,CC-101 Core Engineering,Engineering,Office Lease,18206.87,17507.1,699.77,8
+2024-01-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Cloud Compute & Hosting,40455.9,40117.9,338.0,17
+2024-01-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Personnel Wages,15025.27,15329.69,-304.42,9
+2024-01-01,CC-102 Cloud Infrastructure,IT & Infrastructure,External Consulting,13053.64,12479.52,574.12,9
+2024-01-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Travel & Entertainment,64324.93,64366.28,-41.36,32
+2024-01-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Software Licenses,62548.31,63982.79,-1434.49,37
+2024-01-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Office Lease,54954.91,54287.78,667.13,30
+2024-01-01,CC-201 Global Sales,Commercial,Cloud Compute & Hosting,54737.35,54456.32,281.04,31
+2024-01-01,CC-201 Global Sales,Commercial,Personnel Wages,70554.3,67198.36,3355.94,33
+2024-01-01,CC-201 Global Sales,Commercial,External Consulting,55487.02,59106.0,-3618.97,13
+2024-01-01,CC-201 Global Sales,Commercial,Travel & Entertainment,16962.13,17273.81,-311.67,14
+2024-01-01,CC-201 Global Sales,Commercial,Software Licenses,24833.5,25238.93,-405.43,6
+2024-01-01,CC-201 Global Sales,Commercial,Office Lease,72667.06,68630.81,4036.25,25
+2024-01-01,CC-301 Brand Marketing,Marketing,Cloud Compute & Hosting,57990.6,57404.77,585.83,40
+2024-01-01,CC-301 Brand Marketing,Marketing,Personnel Wages,46278.54,46555.34,-276.8,10
+2024-01-01,CC-301 Brand Marketing,Marketing,External Consulting,52129.52,51111.13,1018.39,5
+2024-01-01,CC-301 Brand Marketing,Marketing,Travel & Entertainment,33889.73,36756.96,-2867.23,7
+2024-01-01,CC-301 Brand Marketing,Marketing,Software Licenses,27366.73,27953.84,-587.11,24
+2024-01-01,CC-301 Brand Marketing,Marketing,Office Lease,22540.47,23550.44,-1009.97,5
+2024-01-01,CC-401 Customer Support,Operations,Cloud Compute & Hosting,74151.02,73068.6,1082.42,18
+2024-01-01,CC-401 Customer Support,Operations,Personnel Wages,53467.82,57966.02,-4498.2,16
+2024-01-01,CC-401 Customer Support,Operations,External Consulting,70007.84,69060.48,947.37,27
+2024-01-01,CC-401 Customer Support,Operations,Travel & Entertainment,65395.77,62443.64,2952.13,22
+2024-01-01,CC-401 Customer Support,Operations,Software Licenses,29698.97,28552.04,1146.93,34
+2024-01-01,CC-401 Customer Support,Operations,Office Lease,29819.17,32082.71,-2263.54,26
+2024-01-01,CC-501 Facilities & Admin,General Admin,Cloud Compute & Hosting,45269.59,47489.59,-2219.99,23
+2024-01-01,CC-501 Facilities & Admin,General Admin,Personnel Wages,35206.96,33806.93,1400.03,13
+2024-01-01,CC-501 Facilities & Admin,General Admin,External Consulting,41769.61,44412.61,-2642.99,40
+2024-01-01,CC-501 Facilities & Admin,General Admin,Travel & Entertainment,52437.78,53740.91,-1303.14,44
+2024-01-01,CC-501 Facilities & Admin,General Admin,Software Licenses,20449.57,21870.62,-1421.05,23
+2024-01-01,CC-501 Facilities & Admin,General Admin,Office Lease,54338.84,53989.5,349.34,30
+2024-02-01,CC-101 Core Engineering,Engineering,Cloud Compute & Hosting,28451.99,27655.8,796.19,28
+2024-02-01,CC-101 Core Engineering,Engineering,Personnel Wages,29971.72,31554.81,-1583.09,17
+2024-02-01,CC-101 Core Engineering,Engineering,External Consulting,48609.97,49933.83,-1323.86,34
+2024-02-01,CC-101 Core Engineering,Engineering,Travel & Entertainment,32807.82,33770.28,-962.46,17
+2024-02-01,CC-101 Core Engineering,Engineering,Software Licenses,60568.59,57283.48,3285.11,18
+2024-02-01,CC-101 Core Engineering,Engineering,Office Lease,15748.69,15063.34,685.35,9
+2024-02-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Cloud Compute & Hosting,34989.34,33853.92,1135.42,21
+2024-02-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Personnel Wages,65421.06,63634.55,1786.51,17
+2024-02-01,CC-102 Cloud Infrastructure,IT & Infrastructure,External Consulting,27423.21,29206.0,-1782.79,7
+2024-02-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Travel & Entertainment,64516.34,66154.89,-1638.54,29
+2024-02-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Software Licenses,45314.23,46688.0,-1373.77,28
+2024-02-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Office Lease,50720.83,50207.58,513.25,26
+2024-02-01,CC-201 Global Sales,Commercial,Cloud Compute & Hosting,70298.02,69472.33,825.69,27
+2024-02-01,CC-201 Global Sales,Commercial,Personnel Wages,47099.05,51177.94,-4078.89,34
+2024-02-01,CC-201 Global Sales,Commercial,External Consulting,50258.69,51338.11,-1079.42,25
+2024-02-01,CC-201 Global Sales,Commercial,Travel & Entertainment,67364.82,64736.43,2628.39,32
+2024-02-01,CC-201 Global Sales,Commercial,Software Licenses,23100.87,22474.09,626.78,37
+2024-02-01,CC-201 Global Sales,Commercial,Office Lease,64001.03,63512.94,488.09,5
+2024-02-01,CC-301 Brand Marketing,Marketing,Cloud Compute & Hosting,12167.64,13122.72,-955.07,23
+2024-02-01,CC-301 Brand Marketing,Marketing,Personnel Wages,49148.07,49625.52,-477.44,43
+2024-02-01,CC-301 Brand Marketing,Marketing,External Consulting,75721.82,72649.6,3072.22,13
+2024-02-01,CC-301 Brand Marketing,Marketing,Travel & Entertainment,16908.14,17466.07,-557.93,28
+2024-02-01,CC-301 Brand Marketing,Marketing,Software Licenses,17875.39,18309.29,-433.9,28
+2024-02-01,CC-301 Brand Marketing,Marketing,Office Lease,26131.8,24767.52,1364.28,28
+2024-02-01,CC-401 Customer Support,Operations,Cloud Compute & Hosting,13475.13,13491.68,-16.56,39
+2024-02-01,CC-401 Customer Support,Operations,Personnel Wages,36119.95,34535.18,1584.76,43
+2024-02-01,CC-401 Customer Support,Operations,External Consulting,53206.91,55909.95,-2703.04,19
+2024-02-01,CC-401 Customer Support,Operations,Travel & Entertainment,21461.98,21966.91,-504.93,34
+2024-02-01,CC-401 Customer Support,Operations,Software Licenses,30683.91,32084.11,-1400.2,31
+2024-02-01,CC-401 Customer Support,Operations,Office Lease,75239.4,73884.15,1355.25,34
+2024-02-01,CC-501 Facilities & Admin,General Admin,Cloud Compute & Hosting,48188.05,49100.38,-912.33,7
+2024-02-01,CC-501 Facilities & Admin,General Admin,Personnel Wages,24299.4,23412.6,886.79,17
+2024-02-01,CC-501 Facilities & Admin,General Admin,External Consulting,40252.28,41243.06,-990.78,32
+2024-02-01,CC-501 Facilities & Admin,General Admin,Travel & Entertainment,24113.72,25252.73,-1139.01,18
+2024-02-01,CC-501 Facilities & Admin,General Admin,Software Licenses,69069.9,66070.8,2999.1,9
+2024-02-01,CC-501 Facilities & Admin,General Admin,Office Lease,44470.46,45526.1,-1055.63,16
+2024-03-01,CC-101 Core Engineering,Engineering,Cloud Compute & Hosting,40898.51,38660.1,2238.41,22
+2024-03-01,CC-101 Core Engineering,Engineering,Personnel Wages,57187.76,60188.27,-3000.51,27
+2024-03-01,CC-101 Core Engineering,Engineering,External Consulting,34680.73,34096.94,583.78,9
+2024-03-01,CC-101 Core Engineering,Engineering,Travel & Entertainment,47882.72,51937.27,-4054.54,40
+2024-03-01,CC-101 Core Engineering,Engineering,Software Licenses,40092.4,41223.04,-1130.64,13
+2024-03-01,CC-101 Core Engineering,Engineering,Office Lease,72175.56,68665.21,3510.36,13
+2024-03-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Cloud Compute & Hosting,39473.27,37488.67,1984.6,37
+2024-03-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Personnel Wages,51271.05,51652.06,-381.01,40
+2024-03-01,CC-102 Cloud Infrastructure,IT & Infrastructure,External Consulting,55622.75,57265.89,-1643.14,43
+2024-03-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Travel & Entertainment,46724.46,44367.52,2356.94,32
+2024-03-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Software Licenses,39773.85,41033.83,-1259.99,16
+2024-03-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Office Lease,31008.7,29532.69,1476.0,41
+2024-03-01,CC-201 Global Sales,Commercial,Cloud Compute & Hosting,52305.91,51189.52,1116.38,20
+2024-03-01,CC-201 Global Sales,Commercial,Personnel Wages,72294.76,74935.89,-2641.13,20
+2024-03-01,CC-201 Global Sales,Commercial,External Consulting,17942.92,18649.76,-706.85,6
+2024-03-01,CC-201 Global Sales,Commercial,Travel & Entertainment,31246.87,32753.69,-1506.82,18
+2024-03-01,CC-201 Global Sales,Commercial,Software Licenses,32106.45,33302.83,-1196.38,41
+2024-03-01,CC-201 Global Sales,Commercial,Office Lease,12659.79,12962.21,-302.42,16
+2024-03-01,CC-301 Brand Marketing,Marketing,Cloud Compute & Hosting,23004.1,23995.43,-991.33,38
+2024-03-01,CC-301 Brand Marketing,Marketing,Personnel Wages,62036.3,62374.0,-337.7,29
+2024-03-01,CC-301 Brand Marketing,Marketing,External Consulting,59997.48,58215.74,1781.73,26
+2024-03-01,CC-301 Brand Marketing,Marketing,Travel & Entertainment,59804.69,63727.18,-3922.5,24
+2024-03-01,CC-301 Brand Marketing,Marketing,Software Licenses,54471.57,57799.48,-3327.91,38
+2024-03-01,CC-301 Brand Marketing,Marketing,Office Lease,25063.83,25763.9,-700.06,41
+2024-03-01,CC-401 Customer Support,Operations,Cloud Compute & Hosting,29893.44,28533.7,1359.74,37
+2024-03-01,CC-401 Customer Support,Operations,Personnel Wages,29148.8,31315.71,-2166.91,33
+2024-03-01,CC-401 Customer Support,Operations,External Consulting,19025.99,18803.13,222.87,21
+2024-03-01,CC-401 Customer Support,Operations,Travel & Entertainment,48398.09,49634.39,-1236.31,8
+2024-03-01,CC-401 Customer Support,Operations,Software Licenses,18364.4,18835.45,-471.05,31
+2024-03-01,CC-401 Customer Support,Operations,Office Lease,28214.48,26781.38,1433.1,27
+2024-03-01,CC-501 Facilities & Admin,General Admin,Cloud Compute & Hosting,43794.63,46326.49,-2531.86,20
+2024-03-01,CC-501 Facilities & Admin,General Admin,Personnel Wages,62207.91,60968.21,1239.7,30
+2024-03-01,CC-501 Facilities & Admin,General Admin,External Consulting,21149.48,22237.53,-1088.05,10
+2024-03-01,CC-501 Facilities & Admin,General Admin,Travel & Entertainment,58093.86,55436.55,2657.31,35
+2024-03-01,CC-501 Facilities & Admin,General Admin,Software Licenses,17794.82,17362.29,432.53,15
+2024-03-01,CC-501 Facilities & Admin,General Admin,Office Lease,56214.63,57711.21,-1496.59,22
+2024-04-01,CC-101 Core Engineering,Engineering,Cloud Compute & Hosting,60370.48,65025.99,-4655.51,9
+2024-04-01,CC-101 Core Engineering,Engineering,Personnel Wages,21606.71,21277.65,329.06,12
+2024-04-01,CC-101 Core Engineering,Engineering,External Consulting,56431.44,57872.66,-1441.22,41
+2024-04-01,CC-101 Core Engineering,Engineering,Travel & Entertainment,65854.01,66697.49,-843.47,44
+2024-04-01,CC-101 Core Engineering,Engineering,Software Licenses,14707.23,14783.51,-76.28,26
+2024-04-01,CC-101 Core Engineering,Engineering,Office Lease,27785.78,27087.6,698.18,37
+2024-04-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Cloud Compute & Hosting,49897.1,47285.4,2611.7,22
+2024-04-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Personnel Wages,49517.91,52131.8,-2613.88,44
+2024-04-01,CC-102 Cloud Infrastructure,IT & Infrastructure,External Consulting,41002.39,44305.44,-3303.05,44
+2024-04-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Travel & Entertainment,33288.19,36053.75,-2765.56,23
+2024-04-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Software Licenses,27784.47,28911.54,-1127.07,20
+2024-04-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Office Lease,43521.55,44485.3,-963.76,16
+2024-04-01,CC-201 Global Sales,Commercial,Cloud Compute & Hosting,29468.95,29809.88,-340.93,33
+2024-04-01,CC-201 Global Sales,Commercial,Personnel Wages,55729.44,56188.76,-459.33,5
+2024-04-01,CC-201 Global Sales,Commercial,External Consulting,26305.57,28485.63,-2180.05,29
+2024-04-01,CC-201 Global Sales,Commercial,Travel & Entertainment,65838.89,69830.33,-3991.44,35
+2024-04-01,CC-201 Global Sales,Commercial,Software Licenses,46028.18,47446.16,-1417.98,29
+2024-04-01,CC-201 Global Sales,Commercial,Office Lease,15929.17,15878.65,50.52,40
+2024-04-01,CC-301 Brand Marketing,Marketing,Cloud Compute & Hosting,33221.81,34662.3,-1440.49,15
+2024-04-01,CC-301 Brand Marketing,Marketing,Personnel Wages,42317.46,45255.67,-2938.21,10
+2024-04-01,CC-301 Brand Marketing,Marketing,External Consulting,61920.75,65354.3,-3433.55,15
+2024-04-01,CC-301 Brand Marketing,Marketing,Travel & Entertainment,49886.94,52047.56,-2160.62,36
+2024-04-01,CC-301 Brand Marketing,Marketing,Software Licenses,32180.66,34245.26,-2064.6,38
+2024-04-01,CC-301 Brand Marketing,Marketing,Office Lease,33016.94,34155.09,-1138.15,14
+2024-04-01,CC-401 Customer Support,Operations,Cloud Compute & Hosting,23856.38,24015.11,-158.73,8
+2024-04-01,CC-401 Customer Support,Operations,Personnel Wages,55026.45,56150.79,-1124.34,18
+2024-04-01,CC-401 Customer Support,Operations,External Consulting,66778.77,67856.83,-1078.07,41
+2024-04-01,CC-401 Customer Support,Operations,Travel & Entertainment,51553.97,52916.68,-1362.71,35
+2024-04-01,CC-401 Customer Support,Operations,Software Licenses,63928.68,67699.02,-3770.35,29
+2024-04-01,CC-401 Customer Support,Operations,Office Lease,25694.18,26613.44,-919.26,19
+2024-04-01,CC-501 Facilities & Admin,General Admin,Cloud Compute & Hosting,19618.66,20924.0,-1305.34,43
+2024-04-01,CC-501 Facilities & Admin,General Admin,Personnel Wages,32674.62,31097.55,1577.07,14
+2024-04-01,CC-501 Facilities & Admin,General Admin,External Consulting,17774.71,17114.81,659.9,32
+2024-04-01,CC-501 Facilities & Admin,General Admin,Travel & Entertainment,39318.74,42050.56,-2731.81,44
+2024-04-01,CC-501 Facilities & Admin,General Admin,Software Licenses,62949.94,64762.03,-1812.08,14
+2024-04-01,CC-501 Facilities & Admin,General Admin,Office Lease,51869.15,53927.27,-2058.13,12
+2024-05-01,CC-101 Core Engineering,Engineering,Cloud Compute & Hosting,47184.45,50195.94,-3011.5,12
+2024-05-01,CC-101 Core Engineering,Engineering,Personnel Wages,71045.54,68463.61,2581.92,31
+2024-05-01,CC-101 Core Engineering,Engineering,External Consulting,28255.26,27563.17,692.09,44
+2024-05-01,CC-101 Core Engineering,Engineering,Travel & Entertainment,50245.48,54524.75,-4279.27,19
+2024-05-01,CC-101 Core Engineering,Engineering,Software Licenses,65794.71,67571.85,-1777.13,44
+2024-05-01,CC-101 Core Engineering,Engineering,Office Lease,56920.08,61320.71,-4400.63,35
+2024-05-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Cloud Compute & Hosting,57079.72,58479.17,-1399.45,39
+2024-05-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Personnel Wages,26991.11,27225.99,-234.88,19
+2024-05-01,CC-102 Cloud Infrastructure,IT & Infrastructure,External Consulting,18938.85,18470.58,468.27,32
+2024-05-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Travel & Entertainment,70768.75,72440.25,-1671.49,40
+2024-05-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Software Licenses,22080.25,21417.4,662.85,22
+2024-05-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Office Lease,39058.12,42152.69,-3094.57,29
+2024-05-01,CC-201 Global Sales,Commercial,Cloud Compute & Hosting,62102.79,64496.54,-2393.76,39
+2024-05-01,CC-201 Global Sales,Commercial,Personnel Wages,59932.03,58327.89,1604.14,15
+2024-05-01,CC-201 Global Sales,Commercial,External Consulting,35112.13,37534.37,-2422.24,11
+2024-05-01,CC-201 Global Sales,Commercial,Travel & Entertainment,71610.33,73645.53,-2035.19,35
+2024-05-01,CC-201 Global Sales,Commercial,Software Licenses,28923.72,27560.67,1363.04,25
+2024-05-01,CC-201 Global Sales,Commercial,Office Lease,52975.31,53610.44,-635.13,7
+2024-05-01,CC-301 Brand Marketing,Marketing,Cloud Compute & Hosting,65685.13,64718.54,966.59,40
+2024-05-01,CC-301 Brand Marketing,Marketing,Personnel Wages,36819.26,36601.3,217.96,26
+2024-05-01,CC-301 Brand Marketing,Marketing,External Consulting,61901.86,61067.56,834.3,8
+2024-05-01,CC-301 Brand Marketing,Marketing,Travel & Entertainment,35712.33,34228.38,1483.94,27
+2024-05-01,CC-301 Brand Marketing,Marketing,Software Licenses,48014.66,46481.64,1533.02,37
+2024-05-01,CC-301 Brand Marketing,Marketing,Office Lease,32927.23,34045.04,-1117.81,44
+2024-05-01,CC-401 Customer Support,Operations,Cloud Compute & Hosting,67165.09,65570.53,1594.56,36
+2024-05-01,CC-401 Customer Support,Operations,Personnel Wages,74581.78,70765.87,3815.91,23
+2024-05-01,CC-401 Customer Support,Operations,External Consulting,44652.76,43448.25,1204.51,21
+2024-05-01,CC-401 Customer Support,Operations,Travel & Entertainment,14156.96,15268.43,-1111.47,6
+2024-05-01,CC-401 Customer Support,Operations,Software Licenses,61615.55,61532.07,83.48,43
+2024-05-01,CC-401 Customer Support,Operations,Office Lease,65415.33,70667.2,-5251.86,36
+2024-05-01,CC-501 Facilities & Admin,General Admin,Cloud Compute & Hosting,12016.45,12430.65,-414.2,7
+2024-05-01,CC-501 Facilities & Admin,General Admin,Personnel Wages,68980.89,72738.6,-3757.71,9
+2024-05-01,CC-501 Facilities & Admin,General Admin,External Consulting,68536.87,70396.07,-1859.2,32
+2024-05-01,CC-501 Facilities & Admin,General Admin,Travel & Entertainment,16790.67,16512.75,277.92,39
+2024-05-01,CC-501 Facilities & Admin,General Admin,Software Licenses,64073.34,60946.83,3126.51,44
+2024-05-01,CC-501 Facilities & Admin,General Admin,Office Lease,31742.32,31503.74,238.58,8
+2024-06-01,CC-101 Core Engineering,Engineering,Cloud Compute & Hosting,53611.96,50989.45,2622.51,34
+2024-06-01,CC-101 Core Engineering,Engineering,Personnel Wages,54555.82,52481.3,2074.52,25
+2024-06-01,CC-101 Core Engineering,Engineering,External Consulting,46038.43,43744.94,2293.49,44
+2024-06-01,CC-101 Core Engineering,Engineering,Travel & Entertainment,71863.34,68000.62,3862.72,7
+2024-06-01,CC-101 Core Engineering,Engineering,Software Licenses,63135.3,60001.74,3133.56,38
+2024-06-01,CC-101 Core Engineering,Engineering,Office Lease,16558.99,16540.77,18.22,20
+2024-06-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Cloud Compute & Hosting,51761.65,52694.94,-933.29,6
+2024-06-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Personnel Wages,71394.9,73778.07,-2383.18,43
+2024-06-01,CC-102 Cloud Infrastructure,IT & Infrastructure,External Consulting,30423.83,29548.85,874.98,6
+2024-06-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Travel & Entertainment,38004.45,37768.84,235.61,29
+2024-06-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Software Licenses,67693.87,64359.86,3334.01,17
+2024-06-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Office Lease,68952.19,69897.54,-945.35,37
+2024-06-01,CC-201 Global Sales,Commercial,Cloud Compute & Hosting,35285.37,37219.84,-1934.47,27
+2024-06-01,CC-201 Global Sales,Commercial,Personnel Wages,42012.02,43261.2,-1249.18,5
+2024-06-01,CC-201 Global Sales,Commercial,External Consulting,55837.46,58371.07,-2533.62,9
+2024-06-01,CC-201 Global Sales,Commercial,Travel & Entertainment,45844.02,45501.22,342.8,31
+2024-06-01,CC-201 Global Sales,Commercial,Software Licenses,15035.83,15466.28,-430.45,33
+2024-06-01,CC-201 Global Sales,Commercial,Office Lease,16827.22,17975.98,-1148.77,25
+2024-06-01,CC-301 Brand Marketing,Marketing,Cloud Compute & Hosting,21952.65,22269.02,-316.37,19
+2024-06-01,CC-301 Brand Marketing,Marketing,Personnel Wages,20307.29,19775.96,531.33,20
+2024-06-01,CC-301 Brand Marketing,Marketing,External Consulting,21042.51,20824.01,218.5,20
+2024-06-01,CC-301 Brand Marketing,Marketing,Travel & Entertainment,21183.31,20620.6,562.71,41
+2024-06-01,CC-301 Brand Marketing,Marketing,Software Licenses,43659.19,41678.56,1980.63,20
+2024-06-01,CC-301 Brand Marketing,Marketing,Office Lease,30773.92,32992.38,-2218.46,31
+2024-06-01,CC-401 Customer Support,Operations,Cloud Compute & Hosting,23994.13,23123.46,870.67,24
+2024-06-01,CC-401 Customer Support,Operations,Personnel Wages,58352.87,56966.53,1386.34,19
+2024-06-01,CC-401 Customer Support,Operations,External Consulting,63234.71,64294.88,-1060.17,21
+2024-06-01,CC-401 Customer Support,Operations,Travel & Entertainment,18068.06,17453.95,614.11,31
+2024-06-01,CC-401 Customer Support,Operations,Software Licenses,52451.94,49652.9,2799.05,11
+2024-06-01,CC-401 Customer Support,Operations,Office Lease,59942.04,60815.15,-873.12,43
+2024-06-01,CC-501 Facilities & Admin,General Admin,Cloud Compute & Hosting,68589.97,74529.37,-5939.4,38
+2024-06-01,CC-501 Facilities & Admin,General Admin,Personnel Wages,38610.26,41042.81,-2432.54,10
+2024-06-01,CC-501 Facilities & Admin,General Admin,External Consulting,34388.91,32715.82,1673.09,43
+2024-06-01,CC-501 Facilities & Admin,General Admin,Travel & Entertainment,23215.06,24681.97,-1466.9,32
+2024-06-01,CC-501 Facilities & Admin,General Admin,Software Licenses,63734.97,68773.09,-5038.12,39
+2024-06-01,CC-501 Facilities & Admin,General Admin,Office Lease,71441.29,67667.31,3773.97,41
+2024-07-01,CC-101 Core Engineering,Engineering,Cloud Compute & Hosting,68332.29,65312.64,3019.66,5
+2024-07-01,CC-101 Core Engineering,Engineering,Personnel Wages,13387.23,13561.34,-174.11,20
+2024-07-01,CC-101 Core Engineering,Engineering,External Consulting,27958.23,29382.22,-1423.99,7
+2024-07-01,CC-101 Core Engineering,Engineering,Travel & Entertainment,63783.03,63480.83,302.21,9
+2024-07-01,CC-101 Core Engineering,Engineering,Software Licenses,20369.42,21820.76,-1451.34,20
+2024-07-01,CC-101 Core Engineering,Engineering,Office Lease,45364.14,43330.05,2034.09,13
+2024-07-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Cloud Compute & Hosting,50789.63,53782.46,-2992.84,43
+2024-07-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Personnel Wages,57371.3,54436.82,2934.47,18
+2024-07-01,CC-102 Cloud Infrastructure,IT & Infrastructure,External Consulting,71937.87,71646.66,291.21,24
+2024-07-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Travel & Entertainment,45642.04,43694.51,1947.53,8
+2024-07-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Software Licenses,62159.63,66728.78,-4569.16,35
+2024-07-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Office Lease,61725.59,60870.61,854.98,9
+2024-07-01,CC-201 Global Sales,Commercial,Cloud Compute & Hosting,32412.68,34680.26,-2267.58,10
+2024-07-01,CC-201 Global Sales,Commercial,Personnel Wages,66496.93,65102.36,1394.57,7
+2024-07-01,CC-201 Global Sales,Commercial,External Consulting,27025.95,27496.04,-470.09,20
+2024-07-01,CC-201 Global Sales,Commercial,Travel & Entertainment,45064.05,48071.76,-3007.71,33
+2024-07-01,CC-201 Global Sales,Commercial,Software Licenses,68025.72,70399.99,-2374.27,5
+2024-07-01,CC-201 Global Sales,Commercial,Office Lease,60410.96,57050.35,3360.61,29
+2024-07-01,CC-301 Brand Marketing,Marketing,Cloud Compute & Hosting,33266.5,33943.14,-676.64,12
+2024-07-01,CC-301 Brand Marketing,Marketing,Personnel Wages,57519.77,57121.71,398.06,25
+2024-07-01,CC-301 Brand Marketing,Marketing,External Consulting,25931.82,26545.93,-614.11,33
+2024-07-01,CC-301 Brand Marketing,Marketing,Travel & Entertainment,15853.96,16306.14,-452.19,42
+2024-07-01,CC-301 Brand Marketing,Marketing,Software Licenses,74221.42,74535.19,-313.76,24
+2024-07-01,CC-301 Brand Marketing,Marketing,Office Lease,21525.23,21831.85,-306.62,8
+2024-07-01,CC-401 Customer Support,Operations,Cloud Compute & Hosting,67694.73,66296.33,1398.4,14
+2024-07-01,CC-401 Customer Support,Operations,Personnel Wages,30178.07,29024.62,1153.44,13
+2024-07-01,CC-401 Customer Support,Operations,External Consulting,60665.57,65816.56,-5150.99,14
+2024-07-01,CC-401 Customer Support,Operations,Travel & Entertainment,13072.26,13240.11,-167.85,8
+2024-07-01,CC-401 Customer Support,Operations,Software Licenses,43226.57,40844.9,2381.66,36
+2024-07-01,CC-401 Customer Support,Operations,Office Lease,69162.94,70546.78,-1383.85,9
+2024-07-01,CC-501 Facilities & Admin,General Admin,Cloud Compute & Hosting,75062.23,71932.28,3129.94,11
+2024-07-01,CC-501 Facilities & Admin,General Admin,Personnel Wages,17211.14,18192.01,-980.87,13
+2024-07-01,CC-501 Facilities & Admin,General Admin,External Consulting,60657.58,59763.64,893.94,34
+2024-07-01,CC-501 Facilities & Admin,General Admin,Travel & Entertainment,24267.6,26072.18,-1804.58,28
+2024-07-01,CC-501 Facilities & Admin,General Admin,Software Licenses,29269.33,29245.78,23.55,21
+2024-07-01,CC-501 Facilities & Admin,General Admin,Office Lease,61634.7,58980.0,2654.7,18
+2024-08-01,CC-101 Core Engineering,Engineering,Cloud Compute & Hosting,47342.6,47328.48,14.12,8
+2024-08-01,CC-101 Core Engineering,Engineering,Personnel Wages,65764.1,68589.04,-2824.94,11
+2024-08-01,CC-101 Core Engineering,Engineering,External Consulting,61377.22,60306.72,1070.5,19
+2024-08-01,CC-101 Core Engineering,Engineering,Travel & Entertainment,50667.17,52344.82,-1677.65,16
+2024-08-01,CC-101 Core Engineering,Engineering,Software Licenses,27076.9,29326.11,-2249.2,43
+2024-08-01,CC-101 Core Engineering,Engineering,Office Lease,33875.44,36030.45,-2155.01,20
+2024-08-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Cloud Compute & Hosting,12536.84,13354.25,-817.41,9
+2024-08-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Personnel Wages,45772.77,44818.12,954.65,43
+2024-08-01,CC-102 Cloud Infrastructure,IT & Infrastructure,External Consulting,40992.89,38683.17,2309.72,7
+2024-08-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Travel & Entertainment,75880.96,74570.64,1310.32,24
+2024-08-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Software Licenses,31721.71,31150.7,571.01,26
+2024-08-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Office Lease,21882.95,21405.13,477.82,38
+2024-08-01,CC-201 Global Sales,Commercial,Cloud Compute & Hosting,45696.25,47550.35,-1854.1,19
+2024-08-01,CC-201 Global Sales,Commercial,Personnel Wages,59624.4,59912.48,-288.08,15
+2024-08-01,CC-201 Global Sales,Commercial,External Consulting,23455.57,23298.06,157.51,29
+2024-08-01,CC-201 Global Sales,Commercial,Travel & Entertainment,33160.22,33509.01,-348.79,28
+2024-08-01,CC-201 Global Sales,Commercial,Software Licenses,61970.82,60153.3,1817.53,23
+2024-08-01,CC-201 Global Sales,Commercial,Office Lease,56157.06,60285.72,-4128.66,6
+2024-08-01,CC-301 Brand Marketing,Marketing,Cloud Compute & Hosting,49448.83,48357.56,1091.27,33
+2024-08-01,CC-301 Brand Marketing,Marketing,Personnel Wages,54849.59,56571.59,-1722.0,9
+2024-08-01,CC-301 Brand Marketing,Marketing,External Consulting,50347.62,47855.85,2491.78,6
+2024-08-01,CC-301 Brand Marketing,Marketing,Travel & Entertainment,19847.35,21518.48,-1671.12,37
+2024-08-01,CC-301 Brand Marketing,Marketing,Software Licenses,58223.26,58581.26,-358.0,20
+2024-08-01,CC-301 Brand Marketing,Marketing,Office Lease,32061.23,33601.01,-1539.78,13
+2024-08-01,CC-401 Customer Support,Operations,Cloud Compute & Hosting,64617.97,67671.1,-3053.13,44
+2024-08-01,CC-401 Customer Support,Operations,Personnel Wages,41853.95,39783.57,2070.38,35
+2024-08-01,CC-401 Customer Support,Operations,External Consulting,21049.2,20536.7,512.5,25
+2024-08-01,CC-401 Customer Support,Operations,Travel & Entertainment,31624.22,32279.11,-654.89,44
+2024-08-01,CC-401 Customer Support,Operations,Software Licenses,36418.67,38376.16,-1957.49,39
+2024-08-01,CC-401 Customer Support,Operations,Office Lease,60557.99,57198.32,3359.67,19
+2024-08-01,CC-501 Facilities & Admin,General Admin,Cloud Compute & Hosting,45704.47,44619.61,1084.86,12
+2024-08-01,CC-501 Facilities & Admin,General Admin,Personnel Wages,39164.46,37269.47,1894.99,39
+2024-08-01,CC-501 Facilities & Admin,General Admin,External Consulting,40657.7,40389.39,268.31,10
+2024-08-01,CC-501 Facilities & Admin,General Admin,Travel & Entertainment,58144.89,56828.53,1316.36,5
+2024-08-01,CC-501 Facilities & Admin,General Admin,Software Licenses,21934.85,22562.39,-627.54,44
+2024-08-01,CC-501 Facilities & Admin,General Admin,Office Lease,50574.0,50108.14,465.86,20
+2024-09-01,CC-101 Core Engineering,Engineering,Cloud Compute & Hosting,26802.09,26759.69,42.4,44
+2024-09-01,CC-101 Core Engineering,Engineering,Personnel Wages,65590.24,63466.49,2123.74,18
+2024-09-01,CC-101 Core Engineering,Engineering,External Consulting,41878.63,42467.67,-589.04,39
+2024-09-01,CC-101 Core Engineering,Engineering,Travel & Entertainment,68456.97,68982.16,-525.19,22
+2024-09-01,CC-101 Core Engineering,Engineering,Software Licenses,59569.24,63349.58,-3780.33,29
+2024-09-01,CC-101 Core Engineering,Engineering,Office Lease,26879.55,28280.68,-1401.14,26
+2024-09-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Cloud Compute & Hosting,31073.69,33449.65,-2375.96,28
+2024-09-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Personnel Wages,13647.43,13722.51,-75.07,17
+2024-09-01,CC-102 Cloud Infrastructure,IT & Infrastructure,External Consulting,40529.82,42466.59,-1936.77,20
+2024-09-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Travel & Entertainment,42916.92,42454.25,462.68,34
+2024-09-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Software Licenses,67089.14,72629.74,-5540.6,35
+2024-09-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Office Lease,64688.22,65351.5,-663.29,20
+2024-09-01,CC-201 Global Sales,Commercial,Cloud Compute & Hosting,26387.98,25950.37,437.61,11
+2024-09-01,CC-201 Global Sales,Commercial,Personnel Wages,22371.76,24208.56,-1836.81,43
+2024-09-01,CC-201 Global Sales,Commercial,External Consulting,67085.19,67443.73,-358.54,16
+2024-09-01,CC-201 Global Sales,Commercial,Travel & Entertainment,59423.55,58678.95,744.6,24
+2024-09-01,CC-201 Global Sales,Commercial,Software Licenses,39778.5,42454.75,-2676.26,21
+2024-09-01,CC-201 Global Sales,Commercial,Office Lease,42811.21,46215.45,-3404.24,35
+2024-09-01,CC-301 Brand Marketing,Marketing,Cloud Compute & Hosting,20400.79,19945.87,454.93,10
+2024-09-01,CC-301 Brand Marketing,Marketing,Personnel Wages,21582.39,23278.18,-1695.79,25
+2024-09-01,CC-301 Brand Marketing,Marketing,External Consulting,45843.8,43976.17,1867.63,8
+2024-09-01,CC-301 Brand Marketing,Marketing,Travel & Entertainment,51263.38,50472.3,791.09,25
+2024-09-01,CC-301 Brand Marketing,Marketing,Software Licenses,37091.05,39725.26,-2634.21,14
+2024-09-01,CC-301 Brand Marketing,Marketing,Office Lease,43286.99,42294.7,992.29,8
+2024-09-01,CC-401 Customer Support,Operations,Cloud Compute & Hosting,70006.92,74716.15,-4709.23,5
+2024-09-01,CC-401 Customer Support,Operations,Personnel Wages,50781.64,50463.29,318.35,10
+2024-09-01,CC-401 Customer Support,Operations,External Consulting,69193.76,67779.74,1414.02,25
+2024-09-01,CC-401 Customer Support,Operations,Travel & Entertainment,62010.43,60728.99,1281.44,31
+2024-09-01,CC-401 Customer Support,Operations,Software Licenses,59502.97,56838.81,2664.16,31
+2024-09-01,CC-401 Customer Support,Operations,Office Lease,51032.83,49882.0,1150.82,41
+2024-09-01,CC-501 Facilities & Admin,General Admin,Cloud Compute & Hosting,49136.17,49173.17,-37.01,23
+2024-09-01,CC-501 Facilities & Admin,General Admin,Personnel Wages,48018.69,50928.33,-2909.64,23
+2024-09-01,CC-501 Facilities & Admin,General Admin,External Consulting,68509.47,72741.98,-4232.5,12
+2024-09-01,CC-501 Facilities & Admin,General Admin,Travel & Entertainment,14627.41,13823.82,803.58,10
+2024-09-01,CC-501 Facilities & Admin,General Admin,Software Licenses,33556.42,32715.36,841.06,44
+2024-09-01,CC-501 Facilities & Admin,General Admin,Office Lease,77610.91,73530.22,4080.68,37
+2024-10-01,CC-101 Core Engineering,Engineering,Cloud Compute & Hosting,61325.66,57964.66,3361.01,39
+2024-10-01,CC-101 Core Engineering,Engineering,Personnel Wages,56690.92,59264.95,-2574.03,36
+2024-10-01,CC-101 Core Engineering,Engineering,External Consulting,76758.39,72479.83,4278.56,7
+2024-10-01,CC-101 Core Engineering,Engineering,Travel & Entertainment,41469.15,42308.49,-839.34,6
+2024-10-01,CC-101 Core Engineering,Engineering,Software Licenses,31058.36,31609.64,-551.28,17
+2024-10-01,CC-101 Core Engineering,Engineering,Office Lease,47747.73,51472.1,-3724.36,12
+2024-10-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Cloud Compute & Hosting,36822.53,37020.96,-198.44,5
+2024-10-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Personnel Wages,13973.92,13429.77,544.15,5
+2024-10-01,CC-102 Cloud Infrastructure,IT & Infrastructure,External Consulting,16831.64,16709.07,122.58,21
+2024-10-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Travel & Entertainment,22349.67,23366.99,-1017.32,43
+2024-10-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Software Licenses,39357.97,39692.55,-334.59,10
+2024-10-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Office Lease,29423.14,31423.86,-2000.73,40
+2024-10-01,CC-201 Global Sales,Commercial,Cloud Compute & Hosting,49282.47,50544.51,-1262.03,27
+2024-10-01,CC-201 Global Sales,Commercial,Personnel Wages,76124.95,74833.11,1291.84,29
+2024-10-01,CC-201 Global Sales,Commercial,External Consulting,15902.37,16881.53,-979.16,9
+2024-10-01,CC-201 Global Sales,Commercial,Travel & Entertainment,29109.12,27536.94,1572.18,20
+2024-10-01,CC-201 Global Sales,Commercial,Software Licenses,66575.96,65742.32,833.63,6
+2024-10-01,CC-201 Global Sales,Commercial,Office Lease,64473.97,61083.86,3390.11,41
+2024-10-01,CC-301 Brand Marketing,Marketing,Cloud Compute & Hosting,24144.67,24808.55,-663.88,16
+2024-10-01,CC-301 Brand Marketing,Marketing,Personnel Wages,28954.16,29558.42,-604.26,26
+2024-10-01,CC-301 Brand Marketing,Marketing,External Consulting,46109.73,46011.24,98.48,25
+2024-10-01,CC-301 Brand Marketing,Marketing,Travel & Entertainment,29527.91,30889.09,-1361.18,42
+2024-10-01,CC-301 Brand Marketing,Marketing,Software Licenses,50263.16,48340.6,1922.56,38
+2024-10-01,CC-301 Brand Marketing,Marketing,Office Lease,38783.2,37828.7,954.51,16
+2024-10-01,CC-401 Customer Support,Operations,Cloud Compute & Hosting,53862.09,57738.2,-3876.11,44
+2024-10-01,CC-401 Customer Support,Operations,Personnel Wages,51406.34,49263.82,2142.52,8
+2024-10-01,CC-401 Customer Support,Operations,External Consulting,45656.57,43157.08,2499.49,16
+2024-10-01,CC-401 Customer Support,Operations,Travel & Entertainment,33715.23,35925.37,-2210.13,35
+2024-10-01,CC-401 Customer Support,Operations,Software Licenses,47329.46,45319.53,2009.93,23
+2024-10-01,CC-401 Customer Support,Operations,Office Lease,28587.16,27207.77,1379.38,24
+2024-10-01,CC-501 Facilities & Admin,General Admin,Cloud Compute & Hosting,62098.12,67028.79,-4930.67,34
+2024-10-01,CC-501 Facilities & Admin,General Admin,Personnel Wages,22241.16,21204.76,1036.4,34
+2024-10-01,CC-501 Facilities & Admin,General Admin,External Consulting,46754.66,50578.36,-3823.7,35
+2024-10-01,CC-501 Facilities & Admin,General Admin,Travel & Entertainment,24027.44,23118.55,908.88,23
+2024-10-01,CC-501 Facilities & Admin,General Admin,Software Licenses,14840.25,15550.81,-710.56,27
+2024-10-01,CC-501 Facilities & Admin,General Admin,Office Lease,68703.55,65062.23,3641.32,10
+2024-11-01,CC-101 Core Engineering,Engineering,Cloud Compute & Hosting,70036.47,70634.06,-597.59,19
+2024-11-01,CC-101 Core Engineering,Engineering,Personnel Wages,71368.08,69218.41,2149.68,13
+2024-11-01,CC-101 Core Engineering,Engineering,External Consulting,70786.27,67710.18,3076.09,33
+2024-11-01,CC-101 Core Engineering,Engineering,Travel & Entertainment,37569.35,36725.59,843.77,36
+2024-11-01,CC-101 Core Engineering,Engineering,Software Licenses,62339.33,67420.36,-5081.03,32
+2024-11-01,CC-101 Core Engineering,Engineering,Office Lease,26387.15,28624.31,-2237.16,5
+2024-11-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Cloud Compute & Hosting,69648.76,69200.86,447.9,39
+2024-11-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Personnel Wages,30841.08,32301.8,-1460.73,31
+2024-11-01,CC-102 Cloud Infrastructure,IT & Infrastructure,External Consulting,25347.22,26155.78,-808.56,36
+2024-11-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Travel & Entertainment,59321.39,56996.63,2324.76,14
+2024-11-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Software Licenses,19967.94,19519.18,448.76,26
+2024-11-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Office Lease,51578.67,51300.74,277.93,31
+2024-11-01,CC-201 Global Sales,Commercial,Cloud Compute & Hosting,13294.04,14012.12,-718.08,43
+2024-11-01,CC-201 Global Sales,Commercial,Personnel Wages,21466.56,20831.61,634.95,35
+2024-11-01,CC-201 Global Sales,Commercial,External Consulting,18460.34,19632.2,-1171.86,34
+2024-11-01,CC-201 Global Sales,Commercial,Travel & Entertainment,62118.06,61032.01,1086.05,28
+2024-11-01,CC-201 Global Sales,Commercial,Software Licenses,23358.21,22172.48,1185.73,23
+2024-11-01,CC-201 Global Sales,Commercial,Office Lease,33776.71,35524.28,-1747.57,6
+2024-11-01,CC-301 Brand Marketing,Marketing,Cloud Compute & Hosting,36474.07,35379.25,1094.82,6
+2024-11-01,CC-301 Brand Marketing,Marketing,Personnel Wages,64163.0,69216.83,-5053.83,38
+2024-11-01,CC-301 Brand Marketing,Marketing,External Consulting,60053.95,58382.78,1671.18,27
+2024-11-01,CC-301 Brand Marketing,Marketing,Travel & Entertainment,26188.15,27683.34,-1495.19,44
+2024-11-01,CC-301 Brand Marketing,Marketing,Software Licenses,64308.32,67769.28,-3460.96,32
+2024-11-01,CC-301 Brand Marketing,Marketing,Office Lease,18739.29,19222.29,-483.0,28
+2024-11-01,CC-401 Customer Support,Operations,Cloud Compute & Hosting,46808.56,44879.81,1928.75,36
+2024-11-01,CC-401 Customer Support,Operations,Personnel Wages,42454.11,40125.05,2329.06,15
+2024-11-01,CC-401 Customer Support,Operations,External Consulting,20890.85,21067.78,-176.93,44
+2024-11-01,CC-401 Customer Support,Operations,Travel & Entertainment,22441.3,23941.09,-1499.79,11
+2024-11-01,CC-401 Customer Support,Operations,Software Licenses,65525.52,66262.97,-737.45,5
+2024-11-01,CC-401 Customer Support,Operations,Office Lease,24240.37,24405.86,-165.49,12
+2024-11-01,CC-501 Facilities & Admin,General Admin,Cloud Compute & Hosting,46524.71,46989.55,-464.83,16
+2024-11-01,CC-501 Facilities & Admin,General Admin,Personnel Wages,55040.01,54194.27,845.75,24
+2024-11-01,CC-501 Facilities & Admin,General Admin,External Consulting,32046.22,31817.11,229.1,40
+2024-11-01,CC-501 Facilities & Admin,General Admin,Travel & Entertainment,39749.93,42355.42,-2605.49,21
+2024-11-01,CC-501 Facilities & Admin,General Admin,Software Licenses,36389.95,38964.87,-2574.91,27
+2024-11-01,CC-501 Facilities & Admin,General Admin,Office Lease,48257.17,46412.18,1845.0,44
+2024-12-01,CC-101 Core Engineering,Engineering,Cloud Compute & Hosting,16842.27,17906.53,-1064.27,30
+2024-12-01,CC-101 Core Engineering,Engineering,Personnel Wages,75806.29,72067.19,3739.09,11
+2024-12-01,CC-101 Core Engineering,Engineering,External Consulting,33277.13,33073.59,203.54,39
+2024-12-01,CC-101 Core Engineering,Engineering,Travel & Entertainment,74001.68,72902.43,1099.25,32
+2024-12-01,CC-101 Core Engineering,Engineering,Software Licenses,34648.15,37010.49,-2362.34,31
+2024-12-01,CC-101 Core Engineering,Engineering,Office Lease,40622.89,40919.34,-296.46,28
+2024-12-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Cloud Compute & Hosting,19539.98,19226.36,313.62,19
+2024-12-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Personnel Wages,61333.35,58820.8,2512.55,27
+2024-12-01,CC-102 Cloud Infrastructure,IT & Infrastructure,External Consulting,23740.39,22567.99,1172.4,23
+2024-12-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Travel & Entertainment,48919.51,52862.51,-3943.0,10
+2024-12-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Software Licenses,23284.75,24068.45,-783.7,18
+2024-12-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Office Lease,17958.12,17582.59,375.54,11
+2024-12-01,CC-201 Global Sales,Commercial,Cloud Compute & Hosting,76251.61,72615.06,3636.55,40
+2024-12-01,CC-201 Global Sales,Commercial,Personnel Wages,36572.17,36994.54,-422.38,13
+2024-12-01,CC-201 Global Sales,Commercial,External Consulting,61957.39,63424.91,-1467.52,22
+2024-12-01,CC-201 Global Sales,Commercial,Travel & Entertainment,24325.75,24004.38,321.37,20
+2024-12-01,CC-201 Global Sales,Commercial,Software Licenses,29300.41,28938.1,362.31,15
+2024-12-01,CC-201 Global Sales,Commercial,Office Lease,66664.5,69833.82,-3169.32,41
+2024-12-01,CC-301 Brand Marketing,Marketing,Cloud Compute & Hosting,74653.23,71418.75,3234.48,37
+2024-12-01,CC-301 Brand Marketing,Marketing,Personnel Wages,17964.29,17871.84,92.45,12
+2024-12-01,CC-301 Brand Marketing,Marketing,External Consulting,60397.14,57943.83,2453.31,6
+2024-12-01,CC-301 Brand Marketing,Marketing,Travel & Entertainment,20861.18,22034.0,-1172.82,19
+2024-12-01,CC-301 Brand Marketing,Marketing,Software Licenses,66425.88,68229.59,-1803.71,5
+2024-12-01,CC-301 Brand Marketing,Marketing,Office Lease,57530.07,62391.38,-4861.31,9
+2024-12-01,CC-401 Customer Support,Operations,Cloud Compute & Hosting,49082.16,48887.0,195.16,18
+2024-12-01,CC-401 Customer Support,Operations,Personnel Wages,44874.16,44261.95,612.21,44
+2024-12-01,CC-401 Customer Support,Operations,External Consulting,61875.14,66865.93,-4990.79,40
+2024-12-01,CC-401 Customer Support,Operations,Travel & Entertainment,34789.23,37185.89,-2396.66,28
+2024-12-01,CC-401 Customer Support,Operations,Software Licenses,50897.23,52869.45,-1972.22,5
+2024-12-01,CC-401 Customer Support,Operations,Office Lease,16184.92,15868.04,316.88,17
+2024-12-01,CC-501 Facilities & Admin,General Admin,Cloud Compute & Hosting,27591.81,26730.93,860.88,34
+2024-12-01,CC-501 Facilities & Admin,General Admin,Personnel Wages,20424.2,20091.88,332.32,19
+2024-12-01,CC-501 Facilities & Admin,General Admin,External Consulting,28872.67,28251.78,620.89,29
+2024-12-01,CC-501 Facilities & Admin,General Admin,Travel & Entertainment,52209.32,53991.93,-1782.61,24
+2024-12-01,CC-501 Facilities & Admin,General Admin,Software Licenses,39107.0,41635.61,-2528.61,23
+2024-12-01,CC-501 Facilities & Admin,General Admin,Office Lease,37445.73,37506.69,-60.95,6
+2025-01-01,CC-101 Core Engineering,Engineering,Cloud Compute & Hosting,32832.28,34685.66,-1853.39,37
+2025-01-01,CC-101 Core Engineering,Engineering,Personnel Wages,21664.8,22661.82,-997.02,25
+2025-01-01,CC-101 Core Engineering,Engineering,External Consulting,60252.06,60913.81,-661.75,20
+2025-01-01,CC-101 Core Engineering,Engineering,Travel & Entertainment,68098.33,72214.35,-4116.03,27
+2025-01-01,CC-101 Core Engineering,Engineering,Software Licenses,71208.09,74555.71,-3347.62,29
+2025-01-01,CC-101 Core Engineering,Engineering,Office Lease,30464.21,32744.84,-2280.62,27
+2025-01-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Cloud Compute & Hosting,70369.56,40385.68,29983.88,56
+2025-01-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Personnel Wages,51737.94,49285.65,2452.29,38
+2025-01-01,CC-102 Cloud Infrastructure,IT & Infrastructure,External Consulting,22442.34,24009.12,-1566.77,26
+2025-01-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Travel & Entertainment,66185.8,62641.16,3544.64,9
+2025-01-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Software Licenses,16282.4,16795.88,-513.48,16
+2025-01-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Office Lease,36026.42,34687.93,1338.5,12
+2025-01-01,CC-201 Global Sales,Commercial,Cloud Compute & Hosting,39766.63,38519.75,1246.89,17
+2025-01-01,CC-201 Global Sales,Commercial,Personnel Wages,38313.45,41371.06,-3057.61,39
+2025-01-01,CC-201 Global Sales,Commercial,External Consulting,65741.89,70543.5,-4801.61,14
+2025-01-01,CC-201 Global Sales,Commercial,Travel & Entertainment,48113.68,46353.98,1759.7,11
+2025-01-01,CC-201 Global Sales,Commercial,Software Licenses,57645.75,60364.22,-2718.46,30
+2025-01-01,CC-201 Global Sales,Commercial,Office Lease,22229.65,22491.74,-262.09,24
+2025-01-01,CC-301 Brand Marketing,Marketing,Cloud Compute & Hosting,60685.88,61354.71,-668.83,33
+2025-01-01,CC-301 Brand Marketing,Marketing,Personnel Wages,24182.89,24878.92,-696.03,33
+2025-01-01,CC-301 Brand Marketing,Marketing,External Consulting,42512.35,46119.53,-3607.18,26
+2025-01-01,CC-301 Brand Marketing,Marketing,Travel & Entertainment,51359.56,54493.17,-3133.61,34
+2025-01-01,CC-301 Brand Marketing,Marketing,Software Licenses,59371.94,58258.91,1113.03,39
+2025-01-01,CC-301 Brand Marketing,Marketing,Office Lease,12843.69,12766.82,76.87,18
+2025-01-01,CC-401 Customer Support,Operations,Cloud Compute & Hosting,18393.04,19539.22,-1146.19,5
+2025-01-01,CC-401 Customer Support,Operations,Personnel Wages,51830.82,53886.67,-2055.85,6
+2025-01-01,CC-401 Customer Support,Operations,External Consulting,39117.3,36957.22,2160.08,9
+2025-01-01,CC-401 Customer Support,Operations,Travel & Entertainment,58444.23,59507.92,-1063.69,36
+2025-01-01,CC-401 Customer Support,Operations,Software Licenses,40434.47,43389.54,-2955.08,35
+2025-01-01,CC-401 Customer Support,Operations,Office Lease,47186.39,47876.53,-690.14,15
+2025-01-01,CC-501 Facilities & Admin,General Admin,Cloud Compute & Hosting,67156.46,68255.17,-1098.71,25
+2025-01-01,CC-501 Facilities & Admin,General Admin,Personnel Wages,21011.46,21279.69,-268.23,42
+2025-01-01,CC-501 Facilities & Admin,General Admin,External Consulting,67585.87,64152.47,3433.4,39
+2025-01-01,CC-501 Facilities & Admin,General Admin,Travel & Entertainment,48185.0,46436.82,1748.18,8
+2025-01-01,CC-501 Facilities & Admin,General Admin,Software Licenses,14327.48,15094.0,-766.52,11
+2025-01-01,CC-501 Facilities & Admin,General Admin,Office Lease,31219.16,31337.52,-118.36,5
+2025-02-01,CC-101 Core Engineering,Engineering,Cloud Compute & Hosting,69233.55,67703.77,1529.78,36
+2025-02-01,CC-101 Core Engineering,Engineering,Personnel Wages,16858.51,17921.92,-1063.41,8
+2025-02-01,CC-101 Core Engineering,Engineering,External Consulting,26806.36,28419.82,-1613.46,16
+2025-02-01,CC-101 Core Engineering,Engineering,Travel & Entertainment,73838.36,74477.57,-639.21,36
+2025-02-01,CC-101 Core Engineering,Engineering,Software Licenses,16344.94,15824.41,520.53,16
+2025-02-01,CC-101 Core Engineering,Engineering,Office Lease,55316.02,54854.35,461.67,29
+2025-02-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Cloud Compute & Hosting,41662.57,21532.0,20130.57,22
+2025-02-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Personnel Wages,52750.87,51600.56,1150.31,27
+2025-02-01,CC-102 Cloud Infrastructure,IT & Infrastructure,External Consulting,36118.02,35521.1,596.92,39
+2025-02-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Travel & Entertainment,72393.09,68353.01,4040.08,22
+2025-02-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Software Licenses,40013.98,39456.21,557.77,11
+2025-02-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Office Lease,49241.95,50173.32,-931.37,22
+2025-02-01,CC-201 Global Sales,Commercial,Cloud Compute & Hosting,20180.87,20888.06,-707.18,43
+2025-02-01,CC-201 Global Sales,Commercial,Personnel Wages,58431.87,59944.93,-1513.06,20
+2025-02-01,CC-201 Global Sales,Commercial,External Consulting,51023.89,52817.01,-1793.12,23
+2025-02-01,CC-201 Global Sales,Commercial,Travel & Entertainment,55913.12,57660.03,-1746.91,42
+2025-02-01,CC-201 Global Sales,Commercial,Software Licenses,38120.69,40252.86,-2132.17,5
+2025-02-01,CC-201 Global Sales,Commercial,Office Lease,69112.7,68362.72,749.98,22
+2025-02-01,CC-301 Brand Marketing,Marketing,Cloud Compute & Hosting,53583.83,53358.69,225.14,20
+2025-02-01,CC-301 Brand Marketing,Marketing,Personnel Wages,25135.37,24457.11,678.26,15
+2025-02-01,CC-301 Brand Marketing,Marketing,External Consulting,15489.24,15547.64,-58.4,18
+2025-02-01,CC-301 Brand Marketing,Marketing,Travel & Entertainment,31553.18,30442.76,1110.42,18
+2025-02-01,CC-301 Brand Marketing,Marketing,Software Licenses,39120.78,37722.04,1398.73,22
+2025-02-01,CC-301 Brand Marketing,Marketing,Office Lease,68019.26,65830.05,2189.21,11
+2025-02-01,CC-401 Customer Support,Operations,Cloud Compute & Hosting,32031.66,33793.87,-1762.2,19
+2025-02-01,CC-401 Customer Support,Operations,Personnel Wages,39680.89,40442.74,-761.85,8
+2025-02-01,CC-401 Customer Support,Operations,External Consulting,68470.36,68072.73,397.63,38
+2025-02-01,CC-401 Customer Support,Operations,Travel & Entertainment,22158.3,21332.76,825.54,31
+2025-02-01,CC-401 Customer Support,Operations,Software Licenses,22412.53,22482.73,-70.2,32
+2025-02-01,CC-401 Customer Support,Operations,Office Lease,50912.61,50068.62,843.99,5
+2025-02-01,CC-501 Facilities & Admin,General Admin,Cloud Compute & Hosting,41576.52,44638.31,-3061.79,29
+2025-02-01,CC-501 Facilities & Admin,General Admin,Personnel Wages,59852.84,61743.93,-1891.09,6
+2025-02-01,CC-501 Facilities & Admin,General Admin,External Consulting,35432.42,33623.68,1808.74,25
+2025-02-01,CC-501 Facilities & Admin,General Admin,Travel & Entertainment,73830.6,70371.17,3459.44,33
+2025-02-01,CC-501 Facilities & Admin,General Admin,Software Licenses,29539.68,29405.68,134.0,11
+2025-02-01,CC-501 Facilities & Admin,General Admin,Office Lease,31479.75,30870.3,609.45,18
+2025-03-01,CC-101 Core Engineering,Engineering,Cloud Compute & Hosting,20200.53,20448.17,-247.64,32
+2025-03-01,CC-101 Core Engineering,Engineering,Personnel Wages,69207.18,65790.9,3416.28,12
+2025-03-01,CC-101 Core Engineering,Engineering,External Consulting,17571.29,16742.58,828.7,23
+2025-03-01,CC-101 Core Engineering,Engineering,Travel & Entertainment,55310.57,55904.2,-593.63,31
+2025-03-01,CC-101 Core Engineering,Engineering,Software Licenses,11550.34,12266.78,-716.44,35
+2025-03-01,CC-101 Core Engineering,Engineering,Office Lease,47550.46,44925.56,2624.9,35
+2025-03-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Cloud Compute & Hosting,105899.66,56123.08,49776.58,10
+2025-03-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Personnel Wages,16495.06,15852.56,642.5,43
+2025-03-01,CC-102 Cloud Infrastructure,IT & Infrastructure,External Consulting,18431.92,19785.89,-1353.98,34
+2025-03-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Travel & Entertainment,75908.38,74523.93,1384.45,35
+2025-03-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Software Licenses,15841.04,16116.25,-275.22,9
+2025-03-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Office Lease,61301.52,60879.0,422.53,24
+2025-03-01,CC-201 Global Sales,Commercial,Cloud Compute & Hosting,31531.06,32637.23,-1106.17,36
+2025-03-01,CC-201 Global Sales,Commercial,Personnel Wages,57981.54,60649.29,-2667.75,6
+2025-03-01,CC-201 Global Sales,Commercial,External Consulting,36678.93,36656.74,22.19,14
+2025-03-01,CC-201 Global Sales,Commercial,Travel & Entertainment,63967.89,67969.84,-4001.95,32
+2025-03-01,CC-201 Global Sales,Commercial,Software Licenses,37608.13,35841.46,1766.67,43
+2025-03-01,CC-201 Global Sales,Commercial,Office Lease,63444.75,63467.06,-22.31,42
+2025-03-01,CC-301 Brand Marketing,Marketing,Cloud Compute & Hosting,57586.66,57976.79,-390.14,29
+2025-03-01,CC-301 Brand Marketing,Marketing,Personnel Wages,51959.0,49165.21,2793.8,26
+2025-03-01,CC-301 Brand Marketing,Marketing,External Consulting,46927.01,50980.34,-4053.34,21
+2025-03-01,CC-301 Brand Marketing,Marketing,Travel & Entertainment,69232.79,65378.51,3854.28,40
+2025-03-01,CC-301 Brand Marketing,Marketing,Software Licenses,58992.16,61694.41,-2702.25,16
+2025-03-01,CC-301 Brand Marketing,Marketing,Office Lease,53970.96,52183.07,1787.89,42
+2025-03-01,CC-401 Customer Support,Operations,Cloud Compute & Hosting,54113.79,52071.49,2042.3,33
+2025-03-01,CC-401 Customer Support,Operations,Personnel Wages,40599.28,42731.56,-2132.28,14
+2025-03-01,CC-401 Customer Support,Operations,External Consulting,44372.48,44488.89,-116.41,37
+2025-03-01,CC-401 Customer Support,Operations,Travel & Entertainment,34216.15,33619.06,597.09,12
+2025-03-01,CC-401 Customer Support,Operations,Software Licenses,14686.19,13868.31,817.87,34
+2025-03-01,CC-401 Customer Support,Operations,Office Lease,56145.31,59389.59,-3244.28,38
+2025-03-01,CC-501 Facilities & Admin,General Admin,Cloud Compute & Hosting,34067.6,32935.48,1132.12,9
+2025-03-01,CC-501 Facilities & Admin,General Admin,Personnel Wages,42090.27,45390.85,-3300.58,23
+2025-03-01,CC-501 Facilities & Admin,General Admin,External Consulting,63253.23,65744.24,-2491.01,30
+2025-03-01,CC-501 Facilities & Admin,General Admin,Travel & Entertainment,54812.13,58903.03,-4090.89,14
+2025-03-01,CC-501 Facilities & Admin,General Admin,Software Licenses,43405.26,42325.12,1080.14,32
+2025-03-01,CC-501 Facilities & Admin,General Admin,Office Lease,13272.99,13683.69,-410.7,35
+2025-04-01,CC-101 Core Engineering,Engineering,Cloud Compute & Hosting,74229.06,70629.94,3599.12,13
+2025-04-01,CC-101 Core Engineering,Engineering,Personnel Wages,61777.83,59786.15,1991.68,17
+2025-04-01,CC-101 Core Engineering,Engineering,External Consulting,22966.92,21977.43,989.49,34
+2025-04-01,CC-101 Core Engineering,Engineering,Travel & Entertainment,62921.61,59738.71,3182.91,34
+2025-04-01,CC-101 Core Engineering,Engineering,Software Licenses,66096.35,69087.05,-2990.71,28
+2025-04-01,CC-101 Core Engineering,Engineering,Office Lease,21945.59,22785.1,-839.52,21
+2025-04-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Cloud Compute & Hosting,80656.92,43246.47,37410.45,52
+2025-04-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Personnel Wages,36218.22,38484.4,-2266.18,23
+2025-04-01,CC-102 Cloud Infrastructure,IT & Infrastructure,External Consulting,72097.84,70182.69,1915.15,26
+2025-04-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Travel & Entertainment,60959.11,60793.73,165.37,43
+2025-04-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Software Licenses,68650.74,74532.65,-5881.91,39
+2025-04-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Office Lease,26673.88,26947.47,-273.59,11
+2025-04-01,CC-201 Global Sales,Commercial,Cloud Compute & Hosting,12977.08,13683.12,-706.04,19
+2025-04-01,CC-201 Global Sales,Commercial,Personnel Wages,21145.58,21475.17,-329.6,8
+2025-04-01,CC-201 Global Sales,Commercial,External Consulting,76472.71,74375.98,2096.73,40
+2025-04-01,CC-201 Global Sales,Commercial,Travel & Entertainment,19237.47,18992.13,245.34,32
+2025-04-01,CC-201 Global Sales,Commercial,Software Licenses,33515.91,33780.0,-264.08,26
+2025-04-01,CC-201 Global Sales,Commercial,Office Lease,59082.57,57785.38,1297.19,20
+2025-04-01,CC-301 Brand Marketing,Marketing,Cloud Compute & Hosting,28221.32,29128.62,-907.3,19
+2025-04-01,CC-301 Brand Marketing,Marketing,Personnel Wages,61030.93,63028.45,-1997.52,9
+2025-04-01,CC-301 Brand Marketing,Marketing,External Consulting,68251.13,67169.15,1081.98,9
+2025-04-01,CC-301 Brand Marketing,Marketing,Travel & Entertainment,46914.92,49091.16,-2176.24,8
+2025-04-01,CC-301 Brand Marketing,Marketing,Software Licenses,60920.36,62638.66,-1718.3,27
+2025-04-01,CC-301 Brand Marketing,Marketing,Office Lease,16279.02,15696.96,582.06,9
+2025-04-01,CC-401 Customer Support,Operations,Cloud Compute & Hosting,28925.81,28836.57,89.25,19
+2025-04-01,CC-401 Customer Support,Operations,Personnel Wages,16118.97,15437.37,681.6,38
+2025-04-01,CC-401 Customer Support,Operations,External Consulting,42799.19,43095.46,-296.27,13
+2025-04-01,CC-401 Customer Support,Operations,Travel & Entertainment,12338.57,12273.19,65.38,12
+2025-04-01,CC-401 Customer Support,Operations,Software Licenses,57242.97,60168.44,-2925.48,12
+2025-04-01,CC-401 Customer Support,Operations,Office Lease,52016.4,49734.49,2281.91,29
+2025-04-01,CC-501 Facilities & Admin,General Admin,Cloud Compute & Hosting,35614.99,34928.18,686.81,38
+2025-04-01,CC-501 Facilities & Admin,General Admin,Personnel Wages,56846.16,55277.68,1568.48,23
+2025-04-01,CC-501 Facilities & Admin,General Admin,External Consulting,40744.88,42062.69,-1317.8,6
+2025-04-01,CC-501 Facilities & Admin,General Admin,Travel & Entertainment,15962.16,15062.04,900.12,9
+2025-04-01,CC-501 Facilities & Admin,General Admin,Software Licenses,49496.26,46740.21,2756.05,23
+2025-04-01,CC-501 Facilities & Admin,General Admin,Office Lease,57306.67,60390.76,-3084.09,38
+2025-05-01,CC-101 Core Engineering,Engineering,Cloud Compute & Hosting,15042.82,14546.97,495.84,6
+2025-05-01,CC-101 Core Engineering,Engineering,Personnel Wages,35620.82,38704.2,-3083.39,11
+2025-05-01,CC-101 Core Engineering,Engineering,External Consulting,33258.09,34517.79,-1259.7,44
+2025-05-01,CC-101 Core Engineering,Engineering,Travel & Entertainment,48681.77,47896.56,785.2,31
+2025-05-01,CC-101 Core Engineering,Engineering,Software Licenses,59112.51,63285.28,-4172.77,42
+2025-05-01,CC-101 Core Engineering,Engineering,Office Lease,76265.14,72302.23,3962.91,26
+2025-05-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Cloud Compute & Hosting,144808.53,70587.32,74221.21,23
+2025-05-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Personnel Wages,27880.71,29678.4,-1797.69,9
+2025-05-01,CC-102 Cloud Infrastructure,IT & Infrastructure,External Consulting,67854.57,66404.17,1450.4,22
+2025-05-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Travel & Entertainment,55343.08,58664.13,-3321.05,18
+2025-05-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Software Licenses,39806.95,41479.8,-1672.85,10
+2025-05-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Office Lease,72143.41,68907.79,3235.62,10
+2025-05-01,CC-201 Global Sales,Commercial,Cloud Compute & Hosting,57438.65,61614.49,-4175.85,25
+2025-05-01,CC-201 Global Sales,Commercial,Personnel Wages,66969.24,68658.0,-1688.76,25
+2025-05-01,CC-201 Global Sales,Commercial,External Consulting,25534.78,25091.13,443.66,16
+2025-05-01,CC-201 Global Sales,Commercial,Travel & Entertainment,17528.94,16634.49,894.46,15
+2025-05-01,CC-201 Global Sales,Commercial,Software Licenses,38389.8,40560.06,-2170.26,39
+2025-05-01,CC-201 Global Sales,Commercial,Office Lease,53377.86,51844.36,1533.51,41
+2025-05-01,CC-301 Brand Marketing,Marketing,Cloud Compute & Hosting,18287.9,19827.39,-1539.49,6
+2025-05-01,CC-301 Brand Marketing,Marketing,Personnel Wages,39307.83,39730.07,-422.24,44
+2025-05-01,CC-301 Brand Marketing,Marketing,External Consulting,13559.13,14209.2,-650.07,30
+2025-05-01,CC-301 Brand Marketing,Marketing,Travel & Entertainment,46769.73,46641.91,127.82,43
+2025-05-01,CC-301 Brand Marketing,Marketing,Software Licenses,18794.31,18541.94,252.37,33
+2025-05-01,CC-301 Brand Marketing,Marketing,Office Lease,24161.82,25893.11,-1731.29,21
+2025-05-01,CC-401 Customer Support,Operations,Cloud Compute & Hosting,33559.67,34671.05,-1111.38,17
+2025-05-01,CC-401 Customer Support,Operations,Personnel Wages,31984.95,32991.01,-1006.05,31
+2025-05-01,CC-401 Customer Support,Operations,External Consulting,30346.18,32817.37,-2471.19,7
+2025-05-01,CC-401 Customer Support,Operations,Travel & Entertainment,28391.29,27533.08,858.21,43
+2025-05-01,CC-401 Customer Support,Operations,Software Licenses,31666.36,33685.75,-2019.39,7
+2025-05-01,CC-401 Customer Support,Operations,Office Lease,55843.58,57453.79,-1610.21,10
+2025-05-01,CC-501 Facilities & Admin,General Admin,Cloud Compute & Hosting,31940.69,30675.31,1265.38,7
+2025-05-01,CC-501 Facilities & Admin,General Admin,Personnel Wages,51732.28,51325.5,406.78,41
+2025-05-01,CC-501 Facilities & Admin,General Admin,External Consulting,61914.02,62815.59,-901.57,44
+2025-05-01,CC-501 Facilities & Admin,General Admin,Travel & Entertainment,53266.08,54426.03,-1159.95,32
+2025-05-01,CC-501 Facilities & Admin,General Admin,Software Licenses,33632.14,31743.25,1888.89,32
+2025-05-01,CC-501 Facilities & Admin,General Admin,Office Lease,78229.86,74815.36,3414.49,21
+2025-06-01,CC-101 Core Engineering,Engineering,Cloud Compute & Hosting,66853.65,68513.19,-1659.54,23
+2025-06-01,CC-101 Core Engineering,Engineering,Personnel Wages,63789.53,62362.16,1427.38,35
+2025-06-01,CC-101 Core Engineering,Engineering,External Consulting,27815.21,27612.42,202.79,26
+2025-06-01,CC-101 Core Engineering,Engineering,Travel & Entertainment,38228.14,39673.27,-1445.13,34
+2025-06-01,CC-101 Core Engineering,Engineering,Software Licenses,20657.73,22240.79,-1583.06,21
+2025-06-01,CC-101 Core Engineering,Engineering,Office Lease,16536.71,17034.86,-498.15,15
+2025-06-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Cloud Compute & Hosting,111650.85,43349.61,68301.25,46
+2025-06-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Personnel Wages,71227.23,74164.06,-2936.83,21
+2025-06-01,CC-102 Cloud Infrastructure,IT & Infrastructure,External Consulting,56473.39,56365.76,107.63,35
+2025-06-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Travel & Entertainment,17922.92,17774.01,148.91,16
+2025-06-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Software Licenses,22671.58,22387.08,284.5,10
+2025-06-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Office Lease,42208.49,43696.57,-1488.08,25
+2025-06-01,CC-201 Global Sales,Commercial,Cloud Compute & Hosting,73328.43,71021.19,2307.23,7
+2025-06-01,CC-201 Global Sales,Commercial,Personnel Wages,67569.69,66651.23,918.46,13
+2025-06-01,CC-201 Global Sales,Commercial,External Consulting,28401.68,26938.88,1462.8,11
+2025-06-01,CC-201 Global Sales,Commercial,Travel & Entertainment,66346.21,63115.95,3230.26,17
+2025-06-01,CC-201 Global Sales,Commercial,Software Licenses,77137.85,73722.34,3415.52,29
+2025-06-01,CC-201 Global Sales,Commercial,Office Lease,63687.67,67291.88,-3604.21,13
+2025-06-01,CC-301 Brand Marketing,Marketing,Cloud Compute & Hosting,48641.35,47091.97,1549.38,39
+2025-06-01,CC-301 Brand Marketing,Marketing,Personnel Wages,33883.1,34792.94,-909.84,10
+2025-06-01,CC-301 Brand Marketing,Marketing,External Consulting,34527.82,33514.59,1013.23,13
+2025-06-01,CC-301 Brand Marketing,Marketing,Travel & Entertainment,26857.43,27727.49,-870.06,10
+2025-06-01,CC-301 Brand Marketing,Marketing,Software Licenses,58284.66,61326.96,-3042.3,25
+2025-06-01,CC-301 Brand Marketing,Marketing,Office Lease,39680.36,37664.73,2015.63,23
+2025-06-01,CC-401 Customer Support,Operations,Cloud Compute & Hosting,19019.54,18701.39,318.15,25
+2025-06-01,CC-401 Customer Support,Operations,Personnel Wages,19950.27,19937.87,12.39,8
+2025-06-01,CC-401 Customer Support,Operations,External Consulting,55303.79,57638.46,-2334.67,30
+2025-06-01,CC-401 Customer Support,Operations,Travel & Entertainment,33057.86,34456.52,-1398.66,8
+2025-06-01,CC-401 Customer Support,Operations,Software Licenses,13065.23,13390.69,-325.47,44
+2025-06-01,CC-401 Customer Support,Operations,Office Lease,22818.94,24032.56,-1213.63,22
+2025-06-01,CC-501 Facilities & Admin,General Admin,Cloud Compute & Hosting,60331.31,59853.33,477.98,33
+2025-06-01,CC-501 Facilities & Admin,General Admin,Personnel Wages,31307.5,30319.34,988.16,21
+2025-06-01,CC-501 Facilities & Admin,General Admin,External Consulting,30597.7,32258.86,-1661.16,42
+2025-06-01,CC-501 Facilities & Admin,General Admin,Travel & Entertainment,44262.82,43889.3,373.52,24
+2025-06-01,CC-501 Facilities & Admin,General Admin,Software Licenses,42958.31,45904.61,-2946.3,26
+2025-06-01,CC-501 Facilities & Admin,General Admin,Office Lease,46974.94,49627.82,-2652.88,19
+2025-07-01,CC-101 Core Engineering,Engineering,Cloud Compute & Hosting,16309.01,16728.15,-419.14,32
+2025-07-01,CC-101 Core Engineering,Engineering,Personnel Wages,16115.07,16399.07,-284.01,28
+2025-07-01,CC-101 Core Engineering,Engineering,External Consulting,48779.56,50141.38,-1361.82,13
+2025-07-01,CC-101 Core Engineering,Engineering,Travel & Entertainment,27519.53,27800.5,-280.97,33
+2025-07-01,CC-101 Core Engineering,Engineering,Software Licenses,16580.92,16117.69,463.23,43
+2025-07-01,CC-101 Core Engineering,Engineering,Office Lease,40053.48,38934.41,1119.07,44
+2025-07-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Cloud Compute & Hosting,33377.55,13703.84,19673.71,64
+2025-07-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Personnel Wages,46804.69,47114.13,-309.44,5
+2025-07-01,CC-102 Cloud Infrastructure,IT & Infrastructure,External Consulting,15853.78,15938.05,-84.27,39
+2025-07-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Travel & Entertainment,17086.65,16534.91,551.74,31
+2025-07-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Software Licenses,49122.31,50754.37,-1632.07,42
+2025-07-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Office Lease,40380.96,38457.91,1923.05,24
+2025-07-01,CC-201 Global Sales,Commercial,Cloud Compute & Hosting,78355.25,74094.12,4261.14,29
+2025-07-01,CC-201 Global Sales,Commercial,Personnel Wages,12190.83,12467.29,-276.45,9
+2025-07-01,CC-201 Global Sales,Commercial,External Consulting,19235.1,18881.12,353.98,8
+2025-07-01,CC-201 Global Sales,Commercial,Travel & Entertainment,17946.13,18619.85,-673.72,7
+2025-07-01,CC-201 Global Sales,Commercial,Software Licenses,28694.26,28237.81,456.45,27
+2025-07-01,CC-201 Global Sales,Commercial,Office Lease,44429.3,42000.33,2428.97,13
+2025-07-01,CC-301 Brand Marketing,Marketing,Cloud Compute & Hosting,54139.51,53369.9,769.61,25
+2025-07-01,CC-301 Brand Marketing,Marketing,Personnel Wages,41462.57,40128.34,1334.23,5
+2025-07-01,CC-301 Brand Marketing,Marketing,External Consulting,67450.87,65684.18,1766.7,16
+2025-07-01,CC-301 Brand Marketing,Marketing,Travel & Entertainment,31207.81,33552.47,-2344.66,30
+2025-07-01,CC-301 Brand Marketing,Marketing,Software Licenses,33420.35,33118.77,301.57,16
+2025-07-01,CC-301 Brand Marketing,Marketing,Office Lease,34550.43,32766.5,1783.93,35
+2025-07-01,CC-401 Customer Support,Operations,Cloud Compute & Hosting,30474.46,29216.55,1257.92,40
+2025-07-01,CC-401 Customer Support,Operations,Personnel Wages,44382.39,46738.14,-2355.75,37
+2025-07-01,CC-401 Customer Support,Operations,External Consulting,24685.36,24375.77,309.59,34
+2025-07-01,CC-401 Customer Support,Operations,Travel & Entertainment,70368.2,67826.96,2541.25,34
+2025-07-01,CC-401 Customer Support,Operations,Software Licenses,25211.71,25692.86,-481.16,35
+2025-07-01,CC-401 Customer Support,Operations,Office Lease,22235.1,22981.81,-746.71,16
+2025-07-01,CC-501 Facilities & Admin,General Admin,Cloud Compute & Hosting,30702.1,32033.58,-1331.48,37
+2025-07-01,CC-501 Facilities & Admin,General Admin,Personnel Wages,30158.35,32772.28,-2613.92,39
+2025-07-01,CC-501 Facilities & Admin,General Admin,External Consulting,57092.02,55266.14,1825.88,7
+2025-07-01,CC-501 Facilities & Admin,General Admin,Travel & Entertainment,15957.56,16198.2,-240.64,32
+2025-07-01,CC-501 Facilities & Admin,General Admin,Software Licenses,25811.88,26946.59,-1134.71,8
+2025-07-01,CC-501 Facilities & Admin,General Admin,Office Lease,52473.52,49640.99,2832.53,19
+2025-08-01,CC-101 Core Engineering,Engineering,Cloud Compute & Hosting,51855.96,49973.36,1882.6,5
+2025-08-01,CC-101 Core Engineering,Engineering,Personnel Wages,22176.85,23872.14,-1695.28,42
+2025-08-01,CC-101 Core Engineering,Engineering,External Consulting,51332.57,53581.16,-2248.59,24
+2025-08-01,CC-101 Core Engineering,Engineering,Travel & Entertainment,22159.85,21367.2,792.65,41
+2025-08-01,CC-101 Core Engineering,Engineering,Software Licenses,19087.28,19856.23,-768.95,10
+2025-08-01,CC-101 Core Engineering,Engineering,Office Lease,29115.54,27647.0,1468.54,35
+2025-08-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Cloud Compute & Hosting,97384.68,35858.43,61526.25,54
+2025-08-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Personnel Wages,64003.36,65638.72,-1635.37,5
+2025-08-01,CC-102 Cloud Infrastructure,IT & Infrastructure,External Consulting,72605.85,70544.87,2060.98,7
+2025-08-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Travel & Entertainment,71714.23,68788.48,2925.75,10
+2025-08-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Software Licenses,57676.17,62427.48,-4751.31,6
+2025-08-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Office Lease,44748.85,42355.58,2393.27,7
+2025-08-01,CC-201 Global Sales,Commercial,Cloud Compute & Hosting,15486.3,15865.64,-379.34,12
+2025-08-01,CC-201 Global Sales,Commercial,Personnel Wages,61287.52,58429.36,2858.16,20
+2025-08-01,CC-201 Global Sales,Commercial,External Consulting,56835.32,58865.78,-2030.46,11
+2025-08-01,CC-201 Global Sales,Commercial,Travel & Entertainment,70355.48,70035.26,320.22,15
+2025-08-01,CC-201 Global Sales,Commercial,Software Licenses,34737.42,34528.02,209.4,29
+2025-08-01,CC-201 Global Sales,Commercial,Office Lease,21617.32,21123.09,494.23,16
+2025-08-01,CC-301 Brand Marketing,Marketing,Cloud Compute & Hosting,19360.57,20471.36,-1110.79,19
+2025-08-01,CC-301 Brand Marketing,Marketing,Personnel Wages,66767.18,67090.47,-323.29,14
+2025-08-01,CC-301 Brand Marketing,Marketing,External Consulting,13642.71,13012.34,630.37,31
+2025-08-01,CC-301 Brand Marketing,Marketing,Travel & Entertainment,23446.17,24656.82,-1210.65,14
+2025-08-01,CC-301 Brand Marketing,Marketing,Software Licenses,70686.79,69623.25,1063.53,34
+2025-08-01,CC-301 Brand Marketing,Marketing,Office Lease,56380.38,58192.95,-1812.58,22
+2025-08-01,CC-401 Customer Support,Operations,Cloud Compute & Hosting,14748.94,15910.45,-1161.51,22
+2025-08-01,CC-401 Customer Support,Operations,Personnel Wages,61752.41,61753.07,-0.66,8
+2025-08-01,CC-401 Customer Support,Operations,External Consulting,46147.82,44411.89,1735.93,10
+2025-08-01,CC-401 Customer Support,Operations,Travel & Entertainment,46275.2,43889.04,2386.17,21
+2025-08-01,CC-401 Customer Support,Operations,Software Licenses,39686.96,41068.47,-1381.51,30
+2025-08-01,CC-401 Customer Support,Operations,Office Lease,34137.39,35503.4,-1366.01,31
+2025-08-01,CC-501 Facilities & Admin,General Admin,Cloud Compute & Hosting,68486.54,69744.97,-1258.43,34
+2025-08-01,CC-501 Facilities & Admin,General Admin,Personnel Wages,23327.29,22517.19,810.09,42
+2025-08-01,CC-501 Facilities & Admin,General Admin,External Consulting,32694.21,32495.76,198.45,13
+2025-08-01,CC-501 Facilities & Admin,General Admin,Travel & Entertainment,54660.98,57707.28,-3046.3,24
+2025-08-01,CC-501 Facilities & Admin,General Admin,Software Licenses,70045.88,70430.08,-384.2,44
+2025-08-01,CC-501 Facilities & Admin,General Admin,Office Lease,50702.4,53735.96,-3033.56,42
+2025-09-01,CC-101 Core Engineering,Engineering,Cloud Compute & Hosting,49040.8,49541.47,-500.67,31
+2025-09-01,CC-101 Core Engineering,Engineering,Personnel Wages,43307.75,45848.0,-2540.25,19
+2025-09-01,CC-101 Core Engineering,Engineering,External Consulting,64628.6,64055.48,573.12,21
+2025-09-01,CC-101 Core Engineering,Engineering,Travel & Entertainment,22639.16,21466.63,1172.53,40
+2025-09-01,CC-101 Core Engineering,Engineering,Software Licenses,25159.69,24838.61,321.08,29
+2025-09-01,CC-101 Core Engineering,Engineering,Office Lease,20218.9,19565.99,652.91,32
+2025-09-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Cloud Compute & Hosting,149763.05,52029.19,97733.86,77
+2025-09-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Personnel Wages,45587.88,43208.35,2379.54,18
+2025-09-01,CC-102 Cloud Infrastructure,IT & Infrastructure,External Consulting,26453.95,27919.89,-1465.93,38
+2025-09-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Travel & Entertainment,47885.76,51972.63,-4086.87,13
+2025-09-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Software Licenses,67380.23,67080.58,299.65,39
+2025-09-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Office Lease,25805.77,24970.13,835.64,34
+2025-09-01,CC-201 Global Sales,Commercial,Cloud Compute & Hosting,41121.67,41060.27,61.4,42
+2025-09-01,CC-201 Global Sales,Commercial,Personnel Wages,38776.47,39901.44,-1124.98,35
+2025-09-01,CC-201 Global Sales,Commercial,External Consulting,52282.96,51192.45,1090.51,39
+2025-09-01,CC-201 Global Sales,Commercial,Travel & Entertainment,54427.36,57953.84,-3526.48,42
+2025-09-01,CC-201 Global Sales,Commercial,Software Licenses,72351.17,71646.66,704.52,41
+2025-09-01,CC-201 Global Sales,Commercial,Office Lease,50315.1,49987.63,327.47,11
+2025-09-01,CC-301 Brand Marketing,Marketing,Cloud Compute & Hosting,38382.03,39845.17,-1463.14,16
+2025-09-01,CC-301 Brand Marketing,Marketing,Personnel Wages,65698.73,63140.34,2558.39,40
+2025-09-01,CC-301 Brand Marketing,Marketing,External Consulting,52946.15,55552.74,-2606.59,11
+2025-09-01,CC-301 Brand Marketing,Marketing,Travel & Entertainment,61984.66,62068.41,-83.75,11
+2025-09-01,CC-301 Brand Marketing,Marketing,Software Licenses,41218.02,39568.77,1649.25,16
+2025-09-01,CC-301 Brand Marketing,Marketing,Office Lease,48397.75,51489.03,-3091.28,33
+2025-09-01,CC-401 Customer Support,Operations,Cloud Compute & Hosting,56261.39,54631.44,1629.95,22
+2025-09-01,CC-401 Customer Support,Operations,Personnel Wages,23967.05,25037.87,-1070.82,11
+2025-09-01,CC-401 Customer Support,Operations,External Consulting,41151.44,42079.48,-928.04,17
+2025-09-01,CC-401 Customer Support,Operations,Travel & Entertainment,47009.72,44977.46,2032.27,20
+2025-09-01,CC-401 Customer Support,Operations,Software Licenses,45934.28,43977.32,1956.96,34
+2025-09-01,CC-401 Customer Support,Operations,Office Lease,16188.39,16141.82,46.56,39
+2025-09-01,CC-501 Facilities & Admin,General Admin,Cloud Compute & Hosting,36012.75,37836.21,-1823.46,22
+2025-09-01,CC-501 Facilities & Admin,General Admin,Personnel Wages,51595.3,51172.13,423.17,41
+2025-09-01,CC-501 Facilities & Admin,General Admin,External Consulting,52153.68,50088.08,2065.6,14
+2025-09-01,CC-501 Facilities & Admin,General Admin,Travel & Entertainment,71460.42,71499.58,-39.17,16
+2025-09-01,CC-501 Facilities & Admin,General Admin,Software Licenses,23141.33,25097.04,-1955.71,24
+2025-09-01,CC-501 Facilities & Admin,General Admin,Office Lease,73928.26,70303.07,3625.19,13
+2025-10-01,CC-101 Core Engineering,Engineering,Cloud Compute & Hosting,24787.24,25535.29,-748.05,14
+2025-10-01,CC-101 Core Engineering,Engineering,Personnel Wages,43495.59,42524.24,971.35,35
+2025-10-01,CC-101 Core Engineering,Engineering,External Consulting,12486.39,13550.11,-1063.72,26
+2025-10-01,CC-101 Core Engineering,Engineering,Travel & Entertainment,23435.92,24538.02,-1102.09,5
+2025-10-01,CC-101 Core Engineering,Engineering,Software Licenses,17472.0,18059.66,-587.66,6
+2025-10-01,CC-101 Core Engineering,Engineering,Office Lease,28492.23,27124.78,1367.45,10
+2025-10-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Cloud Compute & Hosting,92564.37,31720.53,60843.84,72
+2025-10-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Personnel Wages,68826.91,69070.46,-243.54,17
+2025-10-01,CC-102 Cloud Infrastructure,IT & Infrastructure,External Consulting,21882.89,23351.85,-1468.95,42
+2025-10-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Travel & Entertainment,59809.13,62265.98,-2456.85,37
+2025-10-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Software Licenses,16913.06,16575.94,337.11,6
+2025-10-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Office Lease,33130.04,31753.11,1376.94,33
+2025-10-01,CC-201 Global Sales,Commercial,Cloud Compute & Hosting,44822.17,43390.67,1431.51,34
+2025-10-01,CC-201 Global Sales,Commercial,Personnel Wages,55076.02,58569.72,-3493.7,5
+2025-10-01,CC-201 Global Sales,Commercial,External Consulting,76350.52,74905.39,1445.13,25
+2025-10-01,CC-201 Global Sales,Commercial,Travel & Entertainment,65025.58,65396.06,-370.47,31
+2025-10-01,CC-201 Global Sales,Commercial,Software Licenses,33475.85,33897.99,-422.14,37
+2025-10-01,CC-201 Global Sales,Commercial,Office Lease,71763.33,74981.32,-3218.0,27
+2025-10-01,CC-301 Brand Marketing,Marketing,Cloud Compute & Hosting,61360.69,60964.02,396.67,43
+2025-10-01,CC-301 Brand Marketing,Marketing,Personnel Wages,54335.04,51685.68,2649.36,10
+2025-10-01,CC-301 Brand Marketing,Marketing,External Consulting,67928.17,68458.23,-530.06,15
+2025-10-01,CC-301 Brand Marketing,Marketing,Travel & Entertainment,14019.23,14116.55,-97.32,28
+2025-10-01,CC-301 Brand Marketing,Marketing,Software Licenses,24952.67,25214.81,-262.14,6
+2025-10-01,CC-301 Brand Marketing,Marketing,Office Lease,56319.86,57673.44,-1353.57,39
+2025-10-01,CC-401 Customer Support,Operations,Cloud Compute & Hosting,17350.12,16590.33,759.8,37
+2025-10-01,CC-401 Customer Support,Operations,Personnel Wages,21773.48,22976.88,-1203.41,40
+2025-10-01,CC-401 Customer Support,Operations,External Consulting,51951.0,52318.3,-367.31,39
+2025-10-01,CC-401 Customer Support,Operations,Travel & Entertainment,38744.29,37366.64,1377.65,7
+2025-10-01,CC-401 Customer Support,Operations,Software Licenses,35451.09,38275.81,-2824.72,28
+2025-10-01,CC-401 Customer Support,Operations,Office Lease,52699.07,56998.48,-4299.41,28
+2025-10-01,CC-501 Facilities & Admin,General Admin,Cloud Compute & Hosting,21292.94,21445.74,-152.8,31
+2025-10-01,CC-501 Facilities & Admin,General Admin,Personnel Wages,20485.38,21658.64,-1173.27,44
+2025-10-01,CC-501 Facilities & Admin,General Admin,External Consulting,45477.03,45480.99,-3.96,10
+2025-10-01,CC-501 Facilities & Admin,General Admin,Travel & Entertainment,30727.86,31822.25,-1094.39,40
+2025-10-01,CC-501 Facilities & Admin,General Admin,Software Licenses,41506.49,39236.65,2269.84,21
+2025-10-01,CC-501 Facilities & Admin,General Admin,Office Lease,58220.57,59703.76,-1483.19,44
+2025-11-01,CC-101 Core Engineering,Engineering,Cloud Compute & Hosting,56178.72,59596.95,-3418.24,39
+2025-11-01,CC-101 Core Engineering,Engineering,Personnel Wages,65245.72,65802.53,-556.81,6
+2025-11-01,CC-101 Core Engineering,Engineering,External Consulting,54210.3,55676.18,-1465.88,23
+2025-11-01,CC-101 Core Engineering,Engineering,Travel & Entertainment,49159.07,47744.32,1414.75,39
+2025-11-01,CC-101 Core Engineering,Engineering,Software Licenses,14280.0,14115.54,164.46,6
+2025-11-01,CC-101 Core Engineering,Engineering,Office Lease,25470.26,25314.85,155.41,33
+2025-11-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Cloud Compute & Hosting,185178.5,58897.57,126280.94,30
+2025-11-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Personnel Wages,20148.14,20830.86,-682.71,36
+2025-11-01,CC-102 Cloud Infrastructure,IT & Infrastructure,External Consulting,65226.4,65548.24,-321.84,9
+2025-11-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Travel & Entertainment,14406.05,14024.16,381.89,31
+2025-11-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Software Licenses,24669.24,24523.63,145.61,32
+2025-11-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Office Lease,30491.2,30832.22,-341.02,40
+2025-11-01,CC-201 Global Sales,Commercial,Cloud Compute & Hosting,61713.33,63035.56,-1322.23,15
+2025-11-01,CC-201 Global Sales,Commercial,Personnel Wages,76043.07,74129.87,1913.2,39
+2025-11-01,CC-201 Global Sales,Commercial,External Consulting,29709.84,29070.02,639.81,31
+2025-11-01,CC-201 Global Sales,Commercial,Travel & Entertainment,33889.02,33705.97,183.05,31
+2025-11-01,CC-201 Global Sales,Commercial,Software Licenses,39875.83,43295.33,-3419.49,29
+2025-11-01,CC-201 Global Sales,Commercial,Office Lease,21134.22,22649.09,-1514.87,23
+2025-11-01,CC-301 Brand Marketing,Marketing,Cloud Compute & Hosting,39320.11,37354.31,1965.8,19
+2025-11-01,CC-301 Brand Marketing,Marketing,Personnel Wages,24413.49,23083.57,1329.93,21
+2025-11-01,CC-301 Brand Marketing,Marketing,External Consulting,58773.67,60691.44,-1917.78,10
+2025-11-01,CC-301 Brand Marketing,Marketing,Travel & Entertainment,71518.55,68418.46,3100.09,40
+2025-11-01,CC-301 Brand Marketing,Marketing,Software Licenses,15213.25,14587.47,625.78,33
+2025-11-01,CC-301 Brand Marketing,Marketing,Office Lease,13545.84,13173.46,372.38,6
+2025-11-01,CC-401 Customer Support,Operations,Cloud Compute & Hosting,18129.59,18887.54,-757.95,32
+2025-11-01,CC-401 Customer Support,Operations,Personnel Wages,21136.01,22443.43,-1307.42,8
+2025-11-01,CC-401 Customer Support,Operations,External Consulting,49819.18,47661.19,2157.99,33
+2025-11-01,CC-401 Customer Support,Operations,Travel & Entertainment,41409.68,40712.48,697.2,12
+2025-11-01,CC-401 Customer Support,Operations,Software Licenses,51170.93,52131.95,-961.03,14
+2025-11-01,CC-401 Customer Support,Operations,Office Lease,39995.92,41129.11,-1133.19,24
+2025-11-01,CC-501 Facilities & Admin,General Admin,Cloud Compute & Hosting,69139.51,66432.34,2707.17,10
+2025-11-01,CC-501 Facilities & Admin,General Admin,Personnel Wages,27783.34,29124.58,-1341.24,22
+2025-11-01,CC-501 Facilities & Admin,General Admin,External Consulting,60695.69,58180.44,2515.26,10
+2025-11-01,CC-501 Facilities & Admin,General Admin,Travel & Entertainment,56527.61,55585.63,941.98,26
+2025-11-01,CC-501 Facilities & Admin,General Admin,Software Licenses,48780.6,51903.28,-3122.68,39
+2025-11-01,CC-501 Facilities & Admin,General Admin,Office Lease,74037.46,70077.71,3959.75,13
+2025-12-01,CC-101 Core Engineering,Engineering,Cloud Compute & Hosting,64922.45,65347.22,-424.77,27
+2025-12-01,CC-101 Core Engineering,Engineering,Personnel Wages,33214.24,34318.76,-1104.52,24
+2025-12-01,CC-101 Core Engineering,Engineering,External Consulting,38638.65,40982.39,-2343.74,33
+2025-12-01,CC-101 Core Engineering,Engineering,Travel & Entertainment,42314.21,45775.16,-3460.95,13
+2025-12-01,CC-101 Core Engineering,Engineering,Software Licenses,12689.74,12620.91,68.84,17
+2025-12-01,CC-101 Core Engineering,Engineering,Office Lease,62986.86,63312.23,-325.36,30
+2025-12-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Cloud Compute & Hosting,91217.98,27146.62,64071.37,78
+2025-12-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Personnel Wages,22793.38,23383.53,-590.14,15
+2025-12-01,CC-102 Cloud Infrastructure,IT & Infrastructure,External Consulting,14830.74,14995.34,-164.6,43
+2025-12-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Travel & Entertainment,54417.04,54439.27,-22.24,40
+2025-12-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Software Licenses,65398.6,63220.61,2177.99,14
+2025-12-01,CC-102 Cloud Infrastructure,IT & Infrastructure,Office Lease,30119.51,29469.23,650.28,32
+2025-12-01,CC-201 Global Sales,Commercial,Cloud Compute & Hosting,54481.67,52500.52,1981.15,13
+2025-12-01,CC-201 Global Sales,Commercial,Personnel Wages,62528.63,66490.11,-3961.47,34
+2025-12-01,CC-201 Global Sales,Commercial,External Consulting,13655.01,14493.22,-838.21,30
+2025-12-01,CC-201 Global Sales,Commercial,Travel & Entertainment,12590.12,12420.54,169.58,14
+2025-12-01,CC-201 Global Sales,Commercial,Software Licenses,20677.85,22272.19,-1594.34,27
+2025-12-01,CC-201 Global Sales,Commercial,Office Lease,69983.8,74840.85,-4857.05,8
+2025-12-01,CC-301 Brand Marketing,Marketing,Cloud Compute & Hosting,32620.95,31238.31,1382.64,15
+2025-12-01,CC-301 Brand Marketing,Marketing,Personnel Wages,63339.46,64385.67,-1046.2,19
+2025-12-01,CC-301 Brand Marketing,Marketing,External Consulting,68555.09,73802.0,-5246.91,37
+2025-12-01,CC-301 Brand Marketing,Marketing,Travel & Entertainment,15407.75,16071.66,-663.91,24
+2025-12-01,CC-301 Brand Marketing,Marketing,Software Licenses,18984.38,18794.72,189.66,25
+2025-12-01,CC-301 Brand Marketing,Marketing,Office Lease,28061.22,27703.6,357.62,21
+2025-12-01,CC-401 Customer Support,Operations,Cloud Compute & Hosting,16693.14,16561.06,132.08,13
+2025-12-01,CC-401 Customer Support,Operations,Personnel Wages,18361.77,18045.66,316.11,36
+2025-12-01,CC-401 Customer Support,Operations,External Consulting,59037.42,58390.55,646.87,19
+2025-12-01,CC-401 Customer Support,Operations,Travel & Entertainment,62127.78,61678.8,448.97,33
+2025-12-01,CC-401 Customer Support,Operations,Software Licenses,26715.91,28267.48,-1551.58,30
+2025-12-01,CC-401 Customer Support,Operations,Office Lease,14976.38,14236.94,739.44,31
+2025-12-01,CC-501 Facilities & Admin,General Admin,Cloud Compute & Hosting,48827.78,50916.78,-2088.99,31
+2025-12-01,CC-501 Facilities & Admin,General Admin,Personnel Wages,16357.35,15958.88,398.47,9
+2025-12-01,CC-501 Facilities & Admin,General Admin,External Consulting,46525.69,50391.15,-3865.46,31
+2025-12-01,CC-501 Facilities & Admin,General Admin,Travel & Entertainment,22126.56,22409.66,-283.1,15
+2025-12-01,CC-501 Facilities & Admin,General Admin,Software Licenses,39316.07,42164.31,-2848.24,10
+2025-12-01,CC-501 Facilities & Admin,General Admin,Office Lease,35130.61,35409.48,-278.87,17
