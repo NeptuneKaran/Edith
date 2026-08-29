@@ -783,11 +783,12 @@
                 <div class="w-7 h-7 rounded-lg flex items-center justify-center font-bold text-xs text-white shrink-0"
                      :class="msg.role === 'user' ? 'bg-slate-700' : 'bg-indigo-600'"
                      x-text="msg.role === 'user' ? 'U' : 'E'"></div>
-                <div class="rounded-2xl p-3.5 text-xs max-w-xl whitespace-pre-line leading-relaxed"
+                <div class="rounded-2xl p-3.5 text-xs max-w-xl leading-relaxed space-y-1"
                      :class="msg.role === 'user' ? 'bg-indigo-600 text-white rounded-tr-none' : 'bg-slate-900 border border-slate-800 text-slate-200 rounded-tl-none'"
-                     x-text="msg.content"></div>
+                     x-html="formatMarkdown(msg.content)"></div>
               </div>
             </template>
+
 
             <div x-show="chatLoading" class="flex items-start space-x-3">
               <div class="w-7 h-7 rounded-lg bg-indigo-600 flex items-center justify-center font-bold text-xs text-white shrink-0">E</div>
@@ -1272,10 +1273,25 @@
             return `${num.toFixed(1)}%`;
           }
           return `${num.toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 1 })} ${unit}`.trim();
+        },
+
+        formatMarkdown(text) {
+          if (!text) return '';
+          let safe = text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+          safe = safe.replace(/^### (.*$)/gim, '<div class="font-bold text-slate-100 text-xs mt-2 mb-1">$1</div>');
+          safe = safe.replace(/^## (.*$)/gim, '<div class="font-bold text-slate-100 text-sm mt-2 mb-1">$1</div>');
+          safe = safe.replace(/\*\*(.*?)\*\*/g, '<strong class="text-slate-100 font-semibold">$1</strong>');
+          safe = safe.replace(/\*([^\*]+)\*/g, '<em class="text-slate-300 italic">$1</em>');
+          safe = safe.replace(/`([^`]+)`/g, '<code class="px-1 py-0.5 rounded bg-slate-800 text-indigo-300 font-mono text-[11px]">$1</code>');
+          safe = safe.replace(/^\s*-\s+(.*$)/gim, '<div class="flex items-start gap-1.5 ml-1 my-0.5"><span class="text-indigo-400 font-bold">•</span><span>$1</span></div>');
+          safe = safe.replace(/\n\n/g, '<div class="h-1.5"></div>');
+          safe = safe.replace(/\n/g, '<br/>');
+          return safe;
         }
 
       };
     }
+
   </script>
 </body>
 </html>
