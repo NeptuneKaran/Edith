@@ -1,26 +1,35 @@
 <!DOCTYPE html>
-<html lang="en" class="h-full bg-slate-900 text-slate-100">
+<html lang="en" class="h-full bg-[#F8F8F8] text-[#171717]">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EDITH | Decision Intelligence Platform</title>
+  <title>EDITH | Enterprise Decision Intelligence Platform</title>
   
+  <!-- Inter Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
   <!-- Tailwind CSS via CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
-      darkMode: 'class',
       theme: {
         extend: {
+          fontFamily: {
+            sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+            mono: ['JetBrains Mono', 'Menlo', 'Monaco', 'Courier New', 'monospace']
+          },
           colors: {
             brand: {
-              50: '#eef2ff',
-              100: '#e0e7ff',
-              400: '#818cf8',
-              500: '#6366f1',
-              600: '#4f46e5',
-              700: '#4338ca',
-              900: '#312e81'
+              50: '#FAF5FF',
+              100: '#F5E8FF',
+              200: '#E9D5FF',
+              500: '#A100FF',
+              600: '#8B00DC',
+              700: '#6F00B5',
+              800: '#55008C',
+              900: '#4B0082'
             }
           }
         }
@@ -28,7 +37,7 @@
     }
   </script>
   
-  <!-- Plotly.js for Rich Analytics Charts -->
+  <!-- Plotly.js for Charts -->
   <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
   
   <!-- Alpine.js via CDN -->
@@ -36,43 +45,43 @@
 
   <style>
     [x-cloak] { display: none !important; }
-    /* Custom subtle scrollbar */
-    ::-webkit-scrollbar { width: 6px; height: 6px; }
-    ::-webkit-scrollbar-track { background: #0f172a; }
-    ::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
-    ::-webkit-scrollbar-thumb:hover { background: #475569; }
+    /* Enterprise restrained scrollbar */
+    ::-webkit-scrollbar { width: 5px; height: 5px; }
+    ::-webkit-scrollbar-track { background: #F5F5F5; }
+    ::-webkit-scrollbar-thumb { background: #D4D4D4; border-radius: 2px; }
+    ::-webkit-scrollbar-thumb:hover { background: #A3A3A3; }
   </style>
 </head>
-<body class="h-full flex flex-col font-sans antialiased bg-slate-950 text-slate-100" x-data="edithApp()" x-init="initApp()" x-cloak>
+<body class="h-full flex flex-col font-sans antialiased bg-[#F8F8F8] text-[#171717]" x-data="edithApp()" x-init="initApp()" x-cloak>
 
   <!-- Top Global Header -->
-  <header class="bg-slate-900/90 backdrop-blur border-b border-slate-800 sticky top-0 z-40 px-6 py-3.5 flex items-center justify-between shadow-lg">
-    <div class="flex items-center space-x-3">
-      <div class="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center font-bold text-white shadow-indigo-500/20 shadow-md">
+  <header class="bg-white border-b border-[#E5E5E5] sticky top-0 z-40 px-6 py-3 flex items-center justify-between">
+    <div class="flex items-center space-x-3.5">
+      <!-- Purple Geometric Logo Mark -->
+      <div class="w-7 h-7 rounded bg-[#A100FF] flex items-center justify-center font-bold text-white text-xs tracking-wider">
         E
       </div>
-      <div>
-        <h1 class="text-base font-bold text-slate-100 tracking-tight flex items-center gap-2">
-          EDITH
-          <span class="text-xs font-semibold px-2 py-0.5 rounded bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">Decision Intelligence</span>
-        </h1>
-        <p class="text-xs text-slate-400">Empirical Diagnostic & Tactical Decision Platform</p>
+      <div class="flex items-center space-x-2.5">
+        <span class="text-sm font-bold text-[#171717] tracking-tight">EDITH</span>
+        <span class="text-[#E5E5E5]">|</span>
+        <span class="text-xs font-semibold text-[#6F00B5] bg-[#F5E8FF] px-2 py-0.5 rounded">Decision Intelligence</span>
       </div>
     </div>
 
-    <!-- Active Dataset Badge & Global Controls -->
-    <div class="flex items-center space-x-4">
-      <div class="hidden sm:flex items-center space-x-2 bg-slate-800/80 px-3 py-1.5 rounded-lg border border-slate-700/60">
-        <span class="w-2 h-2 rounded-full" :class="sourceInfo.is_demo ? 'bg-emerald-400 animate-pulse' : 'bg-indigo-400'"></span>
-        <span class="text-xs text-slate-300 font-medium" x-text="sourceInfo.name || 'Loading...'"></span>
-        <span class="text-[10px] px-1.5 py-0.5 rounded font-semibold uppercase tracking-wider" 
-              :class="sourceInfo.is_demo ? 'bg-emerald-950/80 text-emerald-300 border border-emerald-800/50' : 'bg-indigo-950/80 text-indigo-300 border border-indigo-800/50'"
+    <!-- Active Dataset Badge & Global Reset -->
+    <div class="flex items-center space-x-3">
+      <div class="flex items-center space-x-2 bg-[#F8F8F8] px-2.5 py-1 rounded border border-[#E5E5E5] text-xs">
+        <span class="w-2 h-2 rounded-full" :class="sourceInfo.is_demo ? 'bg-[#16803C]' : 'bg-[#A100FF]'"></span>
+        <span class="text-[#555555] font-medium" x-text="sourceInfo.name || 'Loading...'"></span>
+        <span class="text-[10px] px-1.5 py-0.2 rounded font-semibold uppercase tracking-wider" 
+              :class="sourceInfo.is_demo ? 'bg-[#EDF7ED] text-[#16803C]' : 'bg-[#F5E8FF] text-[#6F00B5]'"
               x-text="sourceInfo.is_demo ? 'Benchmark' : 'Observational'"></span>
       </div>
 
       <button @click="resetToDemo()" 
-              class="text-xs font-medium px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition flex items-center gap-1.5">
-        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+              title="Restore built-in B2B SaaS benchmark dataset"
+              class="text-xs font-medium px-2.5 py-1 rounded bg-white hover:bg-[#F5F5F5] text-[#555555] hover:text-[#171717] border border-[#E5E5E5] transition flex items-center gap-1.5">
+        <svg class="w-3.5 h-3.5 text-[#737373]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
         Reset to Demo
       </button>
     </div>
@@ -82,149 +91,162 @@
   <div class="flex-1 flex overflow-hidden">
     
     <!-- Sidebar Navigation -->
-    <aside class="w-64 bg-slate-900 border-r border-slate-800 flex flex-col justify-between shrink-0">
-      <nav class="p-4 space-y-1.5">
-        <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider px-3 mb-2">Workflow Screens</div>
+    <aside class="w-60 bg-white border-r border-[#E5E5E5] flex flex-col justify-between shrink-0">
+      <nav class="p-3 space-y-1">
+        <div class="text-[10px] font-semibold text-[#737373] uppercase tracking-wider px-3 pt-2 pb-1.5">Workflow</div>
         
         <button @click="switchTab('sources')" 
-                :class="activeTab === 'sources' ? 'bg-indigo-600 text-white shadow-indigo-600/30 shadow-md font-semibold' : 'text-slate-400 hover:bg-slate-800/60 hover:text-slate-200'"
-                class="w-full flex items-center space-x-3 px-3 py-2.5 rounded-lg text-xs transition">
-          <span>📂</span>
-          <span>0. Data Sources & Intake</span>
+                :class="activeTab === 'sources' ? 'bg-[#F5E8FF] text-[#6F00B5] font-semibold border-l-[3px] border-[#A100FF]' : 'text-[#555555] hover:bg-[#F8F8F8] hover:text-[#171717] font-normal'"
+                class="w-full flex items-center justify-between px-3 py-2 rounded-r text-xs transition text-left">
+          <div class="flex items-center space-x-2.5">
+            <span class="font-mono text-[11px] text-[#737373]">00</span>
+            <span>Data Sources</span>
+          </div>
         </button>
 
         <button @click="switchTab('overview')" 
-                :class="activeTab === 'overview' ? 'bg-indigo-600 text-white shadow-indigo-600/30 shadow-md font-semibold' : 'text-slate-400 hover:bg-slate-800/60 hover:text-slate-200'"
-                class="w-full flex items-center space-x-3 px-3 py-2.5 rounded-lg text-xs transition">
-          <span>📊</span>
-          <span>1. Executive Overview</span>
+                :class="activeTab === 'overview' ? 'bg-[#F5E8FF] text-[#6F00B5] font-semibold border-l-[3px] border-[#A100FF]' : 'text-[#555555] hover:bg-[#F8F8F8] hover:text-[#171717] font-normal'"
+                class="w-full flex items-center justify-between px-3 py-2 rounded-r text-xs transition text-left">
+          <div class="flex items-center space-x-2.5">
+            <span class="font-mono text-[11px] text-[#737373]">01</span>
+            <span>Executive Overview</span>
+          </div>
         </button>
 
         <button @click="switchTab('diagnostic')" 
-                :class="activeTab === 'diagnostic' ? 'bg-indigo-600 text-white shadow-indigo-600/30 shadow-md font-semibold' : 'text-slate-400 hover:bg-slate-800/60 hover:text-slate-200'"
-                class="w-full flex items-center space-x-3 px-3 py-2.5 rounded-lg text-xs transition">
-          <span>🔍</span>
-          <span>2. Diagnostic Decomposition</span>
+                :class="activeTab === 'diagnostic' ? 'bg-[#F5E8FF] text-[#6F00B5] font-semibold border-l-[3px] border-[#A100FF]' : 'text-[#555555] hover:bg-[#F8F8F8] hover:text-[#171717] font-normal'"
+                class="w-full flex items-center justify-between px-3 py-2 rounded-r text-xs transition text-left">
+          <div class="flex items-center space-x-2.5">
+            <span class="font-mono text-[11px] text-[#737373]">02</span>
+            <span>Diagnostics</span>
+          </div>
         </button>
 
         <button @click="switchTab('workspace')" 
-                :class="activeTab === 'workspace' ? 'bg-indigo-600 text-white shadow-indigo-600/30 shadow-md font-semibold' : 'text-slate-400 hover:bg-slate-800/60 hover:text-slate-200'"
-                class="w-full flex items-center space-x-3 px-3 py-2.5 rounded-lg text-xs transition">
-          <span>🔬</span>
-          <span>3. Investigation Workspace</span>
+                :class="activeTab === 'workspace' ? 'bg-[#F5E8FF] text-[#6F00B5] font-semibold border-l-[3px] border-[#A100FF]' : 'text-[#555555] hover:bg-[#F8F8F8] hover:text-[#171717] font-normal'"
+                class="w-full flex items-center justify-between px-3 py-2 rounded-r text-xs transition text-left">
+          <div class="flex items-center space-x-2.5">
+            <span class="font-mono text-[11px] text-[#737373]">03</span>
+            <span>Investigation</span>
+          </div>
         </button>
 
         <button @click="switchTab('simulation')" 
-                :class="activeTab === 'simulation' ? 'bg-indigo-600 text-white shadow-indigo-600/30 shadow-md font-semibold' : 'text-slate-400 hover:bg-slate-800/60 hover:text-slate-200'"
-                class="w-full flex items-center space-x-3 px-3 py-2.5 rounded-lg text-xs transition">
-          <span>🎯</span>
-          <span>4. Policy Simulator</span>
+                :class="activeTab === 'simulation' ? 'bg-[#F5E8FF] text-[#6F00B5] font-semibold border-l-[3px] border-[#A100FF]' : 'text-[#555555] hover:bg-[#F8F8F8] hover:text-[#171717] font-normal'"
+                class="w-full flex items-center justify-between px-3 py-2 rounded-r text-xs transition text-left">
+          <div class="flex items-center space-x-2.5">
+            <span class="font-mono text-[11px] text-[#737373]">04</span>
+            <span>Policy Simulator</span>
+          </div>
         </button>
 
         <button @click="switchTab('console')" 
-                :class="activeTab === 'console' ? 'bg-indigo-600 text-white shadow-indigo-600/30 shadow-md font-semibold' : 'text-slate-400 hover:bg-slate-800/60 hover:text-slate-200'"
-                class="w-full flex items-center space-x-3 px-3 py-2.5 rounded-lg text-xs transition">
-          <span>💬</span>
-          <span>5. EDITH Console</span>
+                :class="activeTab === 'console' ? 'bg-[#F5E8FF] text-[#6F00B5] font-semibold border-l-[3px] border-[#A100FF]' : 'text-[#555555] hover:bg-[#F8F8F8] hover:text-[#171717] font-normal'"
+                class="w-full flex items-center justify-between px-3 py-2 rounded-r text-xs transition text-left">
+          <div class="flex items-center space-x-2.5">
+            <span class="font-mono text-[11px] text-[#737373]">05</span>
+            <span>EDITH Console</span>
+          </div>
         </button>
       </nav>
 
       <!-- System Status Footer -->
-      <div class="p-4 border-t border-slate-800/80 bg-slate-950/40 text-[11px] text-slate-400 space-y-1">
+      <div class="p-3.5 border-t border-[#E5E5E5] bg-[#F8F8F8] text-[11px] text-[#737373] space-y-1.5">
         <div class="flex items-center justify-between">
-          <span>Backend Status:</span>
-          <span class="text-emerald-400 font-semibold flex items-center gap-1">
-            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> FastAPI Ready
+          <span>Backend:</span>
+          <span class="text-[#16803C] font-medium flex items-center gap-1.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#16803C]"></span> FastAPI Ready
           </span>
         </div>
         <div class="flex items-center justify-between">
-          <span>Reasoning Engine:</span>
-          <span class="text-slate-300 font-medium">Deterministic / Grounded</span>
+          <span>Engine:</span>
+          <span class="text-[#555555] font-medium">Grounded / Empirical</span>
         </div>
       </div>
     </aside>
 
     <!-- Main Content Area -->
-    <main class="flex-1 overflow-y-auto p-6 bg-slate-950 space-y-6">
+    <main class="flex-1 overflow-y-auto p-6 bg-[#F8F8F8] space-y-5">
 
       <!-- Dynamic Alert Banner -->
-      <div x-show="alertMsg" x-transition class="p-4 rounded-xl text-xs font-medium border flex items-start justify-between"
-           :class="alertType === 'error' ? 'bg-rose-950/80 text-rose-300 border-rose-800' : 'bg-emerald-950/80 text-emerald-300 border-emerald-800'">
+      <div x-show="alertMsg" x-transition class="px-4 py-3 rounded text-xs font-medium border flex items-center justify-between"
+           :class="alertType === 'error' ? 'bg-[#FFEBEE] text-[#C62828] border-[#FFCDD2]' : 'bg-[#EDF7ED] text-[#16803C] border-[#C8E6C9]'">
         <div class="flex items-center gap-2">
-          <span x-text="alertType === 'error' ? '⚠️' : '✅'"></span>
+          <span class="font-bold" x-text="alertType === 'error' ? 'Error:' : 'Status:'"></span>
           <span x-text="alertMsg"></span>
         </div>
-        <button @click="alertMsg = ''" class="text-slate-400 hover:text-slate-200 font-bold ml-4">✕</button>
+        <button @click="alertMsg = ''" class="text-[#737373] hover:text-[#171717] font-bold text-sm ml-4">&times;</button>
       </div>
 
       <!-- =================================================================== -->
       <!-- SCREEN 0: DATA SOURCES & INTAKE -->
       <!-- =================================================================== -->
-      <div x-show="activeTab === 'sources'" class="space-y-6">
+      <div x-show="activeTab === 'sources'" class="space-y-5">
         
-        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl">
-          <h2 class="text-lg font-bold text-slate-100 flex items-center gap-2">
-            <span>📂</span> Structured Business Dataset Intake & Profiling
-          </h2>
-          <p class="text-xs text-slate-400 mt-1">
-            Upload arbitrary CSV, Excel, or SQLite business datasets (Finance, HR, Operations, Marketing, Healthcare, Support). 
-            EDITH automatically profiles schemas, validates data types, and assists with semantic mapping.
-          </p>
+        <div>
+          <h2 class="text-xl font-bold text-[#171717] tracking-tight">Data Sources & Ingestion</h2>
+          <p class="text-xs text-[#555555] mt-1">Upload arbitrary structured business datasets for empirical profiling, semantic normalization, and causal reasoning.</p>
+        </div>
 
+        <div class="bg-white border border-[#E5E5E5] rounded-lg p-5">
           <!-- Upload Dropzone -->
-          <div class="mt-5 border-2 border-dashed border-slate-700 hover:border-indigo-500 rounded-xl p-8 text-center bg-slate-950/50 transition cursor-pointer"
+          <div class="border-2 border-dashed border-[#D4D4D4] hover:border-[#A100FF] rounded-lg p-8 text-center bg-[#FAFAFA] transition cursor-pointer"
                @dragover.prevent="" @drop.prevent="handleFileDrop($event)">
             <input type="file" id="fileUploadInput" class="hidden" accept=".csv,.xlsx,.xls,.sqlite,.db" @change="handleFileSelect($event)" />
             <label for="fileUploadInput" class="cursor-pointer block">
-              <div class="text-3xl mb-2">📄</div>
-              <div class="text-sm font-semibold text-slate-200">Click to browse or drag & drop business data</div>
-              <div class="text-xs text-slate-500 mt-1">Supports CSV, Excel (.xlsx, .xls), and SQLite (.db, .sqlite) files</div>
+              <div class="w-9 h-9 mx-auto mb-2.5 rounded-full bg-[#F5E8FF] flex items-center justify-center text-[#A100FF]">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
+              </div>
+              <div class="text-sm font-semibold text-[#171717]">Upload dataset</div>
+              <div class="text-xs text-[#555555] mt-1">Drag and drop a file here, or browse from your computer.</div>
+              <div class="text-[11px] text-[#737373] mt-2 font-medium">CSV &middot; Excel (.xlsx, .xls) &middot; SQLite (.db, .sqlite)</div>
             </label>
-            <div x-show="uploading" class="mt-4 text-xs text-indigo-400 font-medium flex items-center justify-center gap-2">
-              <svg class="animate-spin h-4 w-4 text-indigo-400" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path></svg>
-              Profiling dataset schema and calculating data health...
+            <div x-show="uploading" class="mt-4 text-xs text-[#6F00B5] font-medium flex items-center justify-center gap-2">
+              <svg class="animate-spin h-3.5 w-3.5 text-[#A100FF]" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path></svg>
+              Profiling schema and validating data health...
             </div>
           </div>
         </div>
 
-        <!-- Profiler & Semantic Configuration Section (Shown when file uploaded) -->
-        <div x-show="uploadData" class="space-y-6">
+        <!-- Profiler & Semantic Configuration Section -->
+        <div x-show="uploadData" class="space-y-5">
           
-          <!-- 1. Automated Profile Table -->
-          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-4">
-            <div class="flex items-center justify-between">
-              <h3 class="text-sm font-bold text-slate-200 uppercase tracking-wider flex items-center gap-2">
-                <span>📋</span> Automated Data Profile & Role Heuristics
-              </h3>
-              <span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded-lg border border-slate-700"
-                    x-text="`${uploadData?.total_rows || 0} rows | ${uploadData?.total_columns || 0} columns`"></span>
+          <!-- 1. Profile Table -->
+          <div class="bg-white border border-[#E5E5E5] rounded-lg p-5 space-y-4">
+            <div class="flex items-center justify-between pb-2 border-b border-[#E5E5E5]">
+              <div>
+                <h3 class="text-sm font-semibold text-[#171717]">Automated Data Profile</h3>
+                <p class="text-xs text-[#737373]">Schema inference and column statistics.</p>
+              </div>
+              <span class="text-xs bg-[#F8F8F8] text-[#555555] font-mono px-2.5 py-1 rounded border border-[#E5E5E5]"
+                    x-text="`${(uploadData?.total_rows || 0).toLocaleString()} rows &middot; ${uploadData?.total_columns || 0} columns`"></span>
             </div>
 
-            <div class="overflow-x-auto border border-slate-800 rounded-xl">
-              <table class="w-full text-left text-xs text-slate-300">
-                <thead class="bg-slate-800/80 text-[11px] uppercase tracking-wider text-slate-400 border-b border-slate-700">
+            <div class="overflow-x-auto border border-[#E5E5E5] rounded">
+              <table class="w-full text-left text-xs">
+                <thead class="bg-[#F8F8F8] text-[11px] font-semibold text-[#555555] border-b border-[#E5E5E5]">
                   <tr>
-                    <th class="p-3">Column Name</th>
-                    <th class="p-3">Inferred Type</th>
-                    <th class="p-3">Null %</th>
-                    <th class="p-3">Unique Values</th>
-                    <th class="p-3">Semantic Guess</th>
-                    <th class="p-3">Sample Values</th>
+                    <th class="p-2.5">Column Name</th>
+                    <th class="p-2.5">Inferred Type</th>
+                    <th class="p-2.5">Null %</th>
+                    <th class="p-2.5">Unique Values</th>
+                    <th class="p-2.5">Suggested Role</th>
+                    <th class="p-2.5">Sample Values</th>
                   </tr>
                 </thead>
-                <tbody class="divide-y divide-slate-800/60 bg-slate-900/60 font-mono">
+                <tbody class="divide-y divide-[#EEEEEE] text-[#171717]">
                   <template x-for="col in uploadData?.profiles || []" :key="col.column_name">
-                    <tr class="hover:bg-slate-800/40 transition">
-                      <td class="p-3 font-semibold text-indigo-300" x-text="col.column_name"></td>
-                      <td class="p-3 text-slate-300" x-text="col.inferred_type"></td>
-                      <td class="p-3" :class="col.null_pct > 10 ? 'text-rose-400 font-bold' : 'text-slate-400'" x-text="`${col.null_pct}%`"></td>
-                      <td class="p-3 text-slate-400" x-text="col.unique_count"></td>
-                      <td class="p-3">
-                        <span class="px-2 py-0.5 rounded text-[10px] font-sans font-bold"
-                              :class="col.semantic_guess === 'NUMERIC_MEASURE' ? 'bg-blue-950 text-blue-300 border border-blue-800' : (col.semantic_guess === 'DATE' ? 'bg-purple-950 text-purple-300 border border-purple-800' : 'bg-slate-800 text-slate-300')"
+                    <tr class="hover:bg-[#FAF5FF] transition">
+                      <td class="p-2.5 font-medium font-mono text-[#6F00B5]" x-text="col.column_name"></td>
+                      <td class="p-2.5 text-[#555555]" x-text="col.inferred_type"></td>
+                      <td class="p-2.5" :class="col.null_pct > 10 ? 'text-[#C62828] font-bold' : 'text-[#737373]'" x-text="`${col.null_pct}%`"></td>
+                      <td class="p-2.5 text-[#555555] font-mono" x-text="col.unique_count"></td>
+                      <td class="p-2.5">
+                        <span class="px-2 py-0.5 rounded text-[10px] font-semibold"
+                              :class="col.semantic_guess === 'NUMERIC_MEASURE' ? 'bg-[#F5E8FF] text-[#6F00B5]' : (col.semantic_guess === 'DATE' ? 'bg-[#EDF7ED] text-[#16803C]' : 'bg-[#F0F0F0] text-[#555555]')"
                               x-text="col.suggested_role"></span>
                       </td>
-                      <td class="p-3 text-slate-500 truncate max-w-xs text-[11px]" x-text="col.sample_values.join(', ')"></td>
+                      <td class="p-2.5 text-[#737373] font-mono truncate max-w-xs text-[11px]" x-text="col.sample_values.join(', ')"></td>
                     </tr>
                   </template>
                 </tbody>
@@ -232,24 +254,25 @@
             </div>
           </div>
 
-          <!-- 2. Semantic Model Configuration Form -->
-          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-6">
-            <h3 class="text-sm font-bold text-slate-200 uppercase tracking-wider flex items-center gap-2">
-              <span>📐</span> Define Dataset Meaning & Semantic Roles
-            </h3>
+          <!-- 2. Semantic Configuration Form -->
+          <div class="bg-white border border-[#E5E5E5] rounded-lg p-5 space-y-5">
+            <div class="pb-2 border-b border-[#E5E5E5]">
+              <h3 class="text-sm font-semibold text-[#171717]">Semantic Model Configuration</h3>
+              <p class="text-xs text-[#737373]">Configure dimensions, primary metrics, and analytical grain.</p>
+            </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 text-xs">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
               
               <!-- Dataset Name -->
               <div>
-                <label class="block font-semibold text-slate-300 mb-1.5">Dataset Display Name</label>
-                <input type="text" x-model="configForm.dataset_name" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-slate-100 focus:border-indigo-500 focus:outline-none" />
+                <label class="block font-medium text-[#555555] mb-1">Dataset Display Name</label>
+                <input type="text" x-model="configForm.dataset_name" class="w-full bg-white border border-[#D5D5D5] rounded px-3 py-2 text-[#171717] focus:border-[#A100FF] focus:ring-1 focus:ring-[#A100FF] outline-none" />
               </div>
 
               <!-- Analysis Grain -->
               <div>
-                <label class="block font-semibold text-slate-300 mb-1.5">Analysis Grain & Structure</label>
-                <select x-model="configForm.analysis_grain" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-slate-100 focus:border-indigo-500 focus:outline-none">
+                <label class="block font-medium text-[#555555] mb-1">Analysis Grain</label>
+                <select x-model="configForm.analysis_grain" class="w-full bg-white border border-[#D5D5D5] rounded px-3 py-2 text-[#171717] focus:border-[#A100FF] focus:ring-1 focus:ring-[#A100FF] outline-none">
                   <option value="Time Series (Weekly / Monthly / Daily)">Time Series (Weekly / Monthly / Daily)</option>
                   <option value="Cross-Sectional Snapshot">Cross-Sectional Snapshot (Non-Temporal)</option>
                   <option value="Record-Level Event Log">Record-Level Event Log</option>
@@ -258,19 +281,18 @@
 
               <!-- Primary Measure -->
               <div>
-                <label class="block font-semibold text-slate-300 mb-1.5">Primary Quantitative Measure <span class="text-rose-400">*</span></label>
-                <select x-model="configForm.primary_measure" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-slate-100 focus:border-indigo-500 focus:outline-none">
+                <label class="block font-medium text-[#555555] mb-1">Primary Quantitative Measure <span class="text-[#C62828]">*</span></label>
+                <select x-model="configForm.primary_measure" class="w-full bg-white border border-[#D5D5D5] rounded px-3 py-2 text-[#171717] focus:border-[#A100FF] focus:ring-1 focus:ring-[#A100FF] outline-none">
                   <template x-for="col in uploadData?.valid_numeric_columns || []" :key="col">
                     <option :value="col" x-text="col"></option>
                   </template>
                 </select>
-                <span class="text-[11px] text-slate-500 mt-1 block">Filtered to strictly numeric quantitative columns.</span>
               </div>
 
               <!-- Aggregation Method -->
               <div>
-                <label class="block font-semibold text-slate-300 mb-1.5">Aggregation Function</label>
-                <select x-model="configForm.aggregation_type" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-slate-100 focus:border-indigo-500 focus:outline-none">
+                <label class="block font-medium text-[#555555] mb-1">Aggregation Function</label>
+                <select x-model="configForm.aggregation_type" class="w-full bg-white border border-[#D5D5D5] rounded px-3 py-2 text-[#171717] focus:border-[#A100FF] focus:ring-1 focus:ring-[#A100FF] outline-none">
                   <option value="sum">Sum (Totals)</option>
                   <option value="mean">Mean / Average</option>
                   <option value="distinct_count">Distinct Count (Unique Entities)</option>
@@ -281,9 +303,9 @@
               </div>
 
               <!-- Distinct Entity (shown if distinct_count) -->
-              <div x-show="configForm.aggregation_type === 'distinct_count'" class="md:col-span-2 bg-slate-950/60 p-4 rounded-xl border border-indigo-900/60">
-                <label class="block font-semibold text-indigo-300 mb-1.5">Distinct Entity / ID Column to Count</label>
-                <select x-model="configForm.distinct_entity_column" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-slate-100 focus:border-indigo-500 focus:outline-none">
+              <div x-show="configForm.aggregation_type === 'distinct_count'" class="md:col-span-2 bg-[#F8F8F8] p-3.5 rounded border border-[#E5E5E5]">
+                <label class="block font-medium text-[#6F00B5] mb-1">Distinct Entity / ID Column to Count</label>
+                <select x-model="configForm.distinct_entity_column" class="w-full bg-white border border-[#D5D5D5] rounded px-3 py-2 text-[#171717] focus:border-[#A100FF] focus:ring-1 focus:ring-[#A100FF] outline-none">
                   <template x-for="col in uploadData?.columns || []" :key="col">
                     <option :value="col" x-text="col"></option>
                   </template>
@@ -292,33 +314,33 @@
 
               <!-- Measure Label & Unit -->
               <div>
-                <label class="block font-semibold text-slate-300 mb-1.5">Measure Label</label>
-                <input type="text" x-model="configForm.primary_measure_label" placeholder="e.g. Total Defect Count" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-slate-100 focus:border-indigo-500 focus:outline-none" />
+                <label class="block font-medium text-[#555555] mb-1">Measure Label</label>
+                <input type="text" x-model="configForm.primary_measure_label" placeholder="e.g. Total Defect Count" class="w-full bg-white border border-[#D5D5D5] rounded px-3 py-2 text-[#171717] focus:border-[#A100FF] focus:ring-1 focus:ring-[#A100FF] outline-none" />
               </div>
 
               <div>
-                <label class="block font-semibold text-slate-300 mb-1.5">Measure Unit</label>
-                <input type="text" x-model="configForm.primary_measure_unit" placeholder="e.g. $, %, Units, Defects, Hours" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-slate-100 focus:border-indigo-500 focus:outline-none" />
+                <label class="block font-medium text-[#555555] mb-1">Measure Unit</label>
+                <input type="text" x-model="configForm.primary_measure_unit" placeholder="e.g. $, %, Units, Defects, Hours" class="w-full bg-white border border-[#D5D5D5] rounded px-3 py-2 text-[#171717] focus:border-[#A100FF] focus:ring-1 focus:ring-[#A100FF] outline-none" />
               </div>
 
               <!-- Date Column -->
-              <div>
-                <label class="block font-semibold text-slate-300 mb-1.5">Date / Timestamp Column</label>
-                <select x-model="configForm.date_column" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-slate-100 focus:border-indigo-500 focus:outline-none">
-                  <option value="None (Snapshot)">None (Snapshot / No Date)</option>
+              <div class="md:col-span-2">
+                <label class="block font-medium text-[#555555] mb-1">Date / Timestamp Column</label>
+                <select x-model="configForm.date_column" class="w-full bg-white border border-[#D5D5D5] rounded px-3 py-2 text-[#171717] focus:border-[#A100FF] focus:ring-1 focus:ring-[#A100FF] outline-none">
+                  <option value="None (Snapshot)">None (Snapshot / Non-Temporal)</option>
                   <template x-for="col in uploadData?.valid_date_columns || []" :key="col">
                     <option :value="col" x-text="col"></option>
                   </template>
                 </select>
               </div>
 
-              <!-- Categorical Dimensions (Multi-select check boxes) -->
+              <!-- Categorical Dimensions -->
               <div class="md:col-span-2">
-                <label class="block font-semibold text-slate-300 mb-1.5">Primary Categorical Dimensions</label>
-                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 bg-slate-950 p-3 rounded-xl border border-slate-800 max-h-40 overflow-y-auto">
+                <label class="block font-medium text-[#555555] mb-1">Categorical Dimensions</label>
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 bg-[#FAFAFA] p-3 rounded border border-[#E5E5E5] max-h-36 overflow-y-auto">
                   <template x-for="col in uploadData?.columns || []" :key="col">
-                    <label class="flex items-center space-x-2 text-xs text-slate-300 cursor-pointer">
-                      <input type="checkbox" :value="col" x-model="configForm.dimension_columns" class="rounded bg-slate-800 border-slate-700 text-indigo-600 focus:ring-0" />
+                    <label class="flex items-center space-x-2 text-xs text-[#171717] cursor-pointer">
+                      <input type="checkbox" :value="col" x-model="configForm.dimension_columns" class="rounded border-[#D5D5D5] text-[#A100FF] focus:ring-0" />
                       <span class="truncate" x-text="col"></span>
                     </label>
                   </template>
@@ -327,34 +349,34 @@
 
               <!-- Explanatory Numeric Drivers -->
               <div class="md:col-span-2">
-                <label class="block font-semibold text-slate-300 mb-1.5">Explanatory Numeric Drivers</label>
-                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 bg-slate-950 p-3 rounded-xl border border-slate-800 max-h-40 overflow-y-auto">
+                <label class="block font-medium text-[#555555] mb-1">Explanatory Numeric Drivers</label>
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 bg-[#FAFAFA] p-3 rounded border border-[#E5E5E5] max-h-36 overflow-y-auto">
                   <template x-for="col in uploadData?.valid_numeric_columns || []" :key="col">
-                    <label class="flex items-center space-x-2 text-xs text-slate-300 cursor-pointer">
-                      <input type="checkbox" :value="col" x-model="configForm.driver_columns" class="rounded bg-slate-800 border-slate-700 text-indigo-600 focus:ring-0" />
+                    <label class="flex items-center space-x-2 text-xs text-[#171717] cursor-pointer">
+                      <input type="checkbox" :value="col" x-model="configForm.driver_columns" class="rounded border-[#D5D5D5] text-[#A100FF] focus:ring-0" />
                       <span class="truncate" x-text="col"></span>
                     </label>
                   </template>
                 </div>
               </div>
 
-              <!-- Cleaning option -->
-              <div class="md:col-span-2 flex items-center space-x-3 bg-slate-950/60 p-3.5 rounded-xl border border-slate-800">
-                <input type="checkbox" id="dropInvalidCheck" x-model="configForm.drop_invalid_rows" class="rounded bg-slate-800 border-slate-700 text-indigo-600 focus:ring-0" />
-                <label for="dropInvalidCheck" class="text-xs text-slate-300 cursor-pointer">
-                  <span class="font-semibold text-slate-200">Drop invalid/unparseable rows</span> — Safely removes corrupt date strings or non-numeric values while preserving overall data integrity.
+              <!-- Drop invalid option -->
+              <div class="md:col-span-2 flex items-center space-x-2.5 pt-1">
+                <input type="checkbox" id="dropInvalidCheck" x-model="configForm.drop_invalid_rows" class="rounded border-[#D5D5D5] text-[#A100FF] focus:ring-0" />
+                <label for="dropInvalidCheck" class="text-xs text-[#555555] cursor-pointer">
+                  Drop invalid/unparseable rows (automatically sanitizes invalid dates and corrupted numbers)
                 </label>
               </div>
 
             </div>
 
             <!-- Apply and Ingest Action -->
-            <div class="pt-3 flex justify-end">
+            <div class="pt-3 flex justify-end border-t border-[#E5E5E5]">
               <button @click="submitSemanticConfiguration()" 
                       :disabled="configuring"
-                      class="px-6 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold shadow-lg shadow-indigo-600/30 transition flex items-center gap-2 disabled:opacity-50">
-                <span x-show="!configuring">🚀 Apply Semantic Model & Ingest Dataset</span>
-                <span x-show="configuring">Validating and Transforming...</span>
+                      class="px-5 py-2 rounded bg-[#A100FF] hover:bg-[#6F00B5] text-white text-xs font-semibold transition flex items-center gap-2 disabled:opacity-50">
+                <span x-show="!configuring">Apply Semantic Model & Ingest</span>
+                <span x-show="configuring">Validating and Ingesting...</span>
               </button>
             </div>
 
@@ -367,116 +389,111 @@
       <!-- =================================================================== -->
       <!-- SCREEN 1: EXECUTIVE OVERVIEW -->
       <!-- =================================================================== -->
-      <div x-show="activeTab === 'overview'" class="space-y-6">
+      <div x-show="activeTab === 'overview'" class="space-y-5">
         
         <!-- Header Banner -->
-        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-1">
           <div>
-            <div class="flex items-center gap-2">
-              <h2 class="text-xl font-bold text-slate-100" x-text="overviewData.dataset_name"></h2>
-              <span class="text-xs px-2 py-0.5 rounded-full font-bold uppercase"
-                    :class="overviewData.kpi_metrics?.is_anomaly ? 'bg-rose-950 text-rose-300 border border-rose-800' : 'bg-emerald-950 text-emerald-300 border border-emerald-800'"
+            <div class="flex items-center gap-2.5">
+              <h2 class="text-xl font-bold text-[#171717] tracking-tight" x-text="overviewData.dataset_name"></h2>
+              <span class="text-xs px-2 py-0.5 rounded font-semibold uppercase"
+                    :class="overviewData.kpi_metrics?.is_anomaly ? 'bg-[#FFEBEE] text-[#C62828] border border-[#FFCDD2]' : 'bg-[#EDF7ED] text-[#16803C] border border-[#C8E6C9]'"
                     x-text="overviewData.kpi_metrics?.status_label || 'Active'"></span>
             </div>
-            <p class="text-xs text-slate-400 mt-1" x-text="`Target Measure: ${overviewData.primary_measure_label} (${overviewData.primary_measure_unit}) | Total Records: ${(overviewData.total_records || 0).toLocaleString()}`"></p>
+            <p class="text-xs text-[#737373] mt-0.5" x-text="`Target Measure: ${overviewData.primary_measure_label} (${overviewData.primary_measure_unit}) &middot; ${(overviewData.total_records || 0).toLocaleString()} Records`"></p>
           </div>
 
-          <div class="flex items-center gap-4">
-            <div class="bg-slate-950 px-4 py-2 rounded-xl border border-slate-800 text-right">
-              <div class="text-[11px] text-slate-500 font-semibold uppercase">Data Health Score</div>
-              <div class="text-base font-extrabold text-emerald-400" x-text="`${overviewData.data_quality_score || 100}%`"></div>
+          <div class="flex items-center gap-3">
+            <div class="bg-white px-3 py-1.5 rounded border border-[#E5E5E5] text-right">
+              <div class="text-[10px] text-[#737373] font-semibold uppercase tracking-wider">Data Health Score</div>
+              <div class="text-sm font-bold text-[#16803C]" x-text="`${overviewData.data_quality_score || 100}%`"></div>
             </div>
           </div>
         </div>
 
         <!-- 4 Primary KPI Summary Cards -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 shadow">
-            <div class="text-xs text-slate-400 font-medium">Observed Value</div>
-            <div class="text-2xl font-bold text-slate-100 mt-1" x-text="formatNumber(overviewData.kpi_metrics?.current_value, overviewData.primary_measure_unit)"></div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
+          <div class="bg-white border border-[#E5E5E5] rounded-lg p-4">
+            <div class="text-xs text-[#737373] font-medium">Observed Value</div>
+            <div class="text-xl font-bold text-[#171717] mt-1" x-text="formatNumber(overviewData.kpi_metrics?.current_value, overviewData.primary_measure_unit)"></div>
           </div>
 
-          <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 shadow">
-            <div class="text-xs text-slate-400 font-medium">Expected Baseline</div>
-            <div class="text-2xl font-bold text-slate-100 mt-1" x-text="formatNumber(overviewData.kpi_metrics?.baseline_value, overviewData.primary_measure_unit)"></div>
+          <div class="bg-white border border-[#E5E5E5] rounded-lg p-4">
+            <div class="text-xs text-[#737373] font-medium">Expected Baseline</div>
+            <div class="text-xl font-bold text-[#171717] mt-1" x-text="formatNumber(overviewData.kpi_metrics?.baseline_value, overviewData.primary_measure_unit)"></div>
           </div>
 
-          <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 shadow">
-            <div class="text-xs text-slate-400 font-medium">Variance / Deficit</div>
-            <div class="text-2xl font-bold mt-1" 
-                 :class="(overviewData.kpi_metrics?.delta_value || 0) < 0 ? 'text-rose-400' : 'text-emerald-400'"
+          <div class="bg-white border border-[#E5E5E5] rounded-lg p-4">
+            <div class="text-xs text-[#737373] font-medium">Variance / Deficit</div>
+            <div class="text-xl font-bold mt-1" 
+                 :class="(overviewData.kpi_metrics?.delta_value || 0) < 0 ? 'text-[#C62828]' : 'text-[#16803C]'"
                  x-text="`${formatNumber(overviewData.kpi_metrics?.delta_value, overviewData.primary_measure_unit)} (${(overviewData.kpi_metrics?.delta_pct || 0) > 0 ? '+' : ''}${(overviewData.kpi_metrics?.delta_pct || 0).toFixed(1)}%)`"></div>
           </div>
 
-          <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 shadow">
-            <div class="text-xs text-slate-400 font-medium">Corridor Z-Score</div>
-            <div class="text-2xl font-bold text-slate-100 mt-1" x-text="(overviewData.kpi_metrics?.z_score || 0).toFixed(2)"></div>
+          <div class="bg-white border border-[#E5E5E5] rounded-lg p-4">
+            <div class="text-xs text-[#737373] font-medium">Corridor Z-Score</div>
+            <div class="text-xl font-bold text-[#171717] mt-1 font-mono" x-text="(overviewData.kpi_metrics?.z_score || 0).toFixed(2)"></div>
           </div>
         </div>
 
         <!-- Main Trajectory Corridor or Snapshot View -->
-        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-4">
-          <div class="flex items-center justify-between">
-            <h3 class="text-sm font-bold text-slate-200 uppercase tracking-wider flex items-center gap-2">
-              <span x-text="overviewData.is_temporal ? '📈 Historical Trajectory & 2σ Corridor' : '📊 Cross-Sectional Distribution Summary'"></span>
-            </h3>
-            <span class="text-xs text-slate-400" x-text="overviewData.analysis_grain"></span>
+        <div class="bg-white border border-[#E5E5E5] rounded-lg p-5 space-y-4">
+          <div class="flex items-center justify-between pb-2 border-b border-[#E5E5E5]">
+            <div>
+              <h3 class="text-sm font-semibold text-[#171717]" x-text="overviewData.is_temporal ? 'Historical Performance & 2σ Confidence Corridor' : 'Cross-Sectional Distribution Summary'"></h3>
+              <p class="text-xs text-[#737373]" x-text="overviewData.analysis_grain"></p>
+            </div>
           </div>
 
           <!-- Temporal Plotly Chart -->
           <div x-show="overviewData.is_temporal" id="overviewCorridorChart" class="w-full h-80"></div>
 
-          <!-- Non-Temporal Hero Summary Card -->
-          <div x-show="!overviewData.is_temporal" class="bg-slate-950 p-6 rounded-xl border border-slate-800 text-center space-y-3">
-            <div class="text-3xl">📊</div>
-            <h4 class="text-base font-bold text-slate-200">Cross-Sectional Snapshot Dataset Active</h4>
-            <p class="text-xs text-slate-400 max-w-lg mx-auto">
-              This dataset is configured as a non-temporal snapshot. Sequential time-series corridors are disabled to preserve analysis integrity. 
-              Visit <strong class="text-indigo-400">Diagnostic Decomposition</strong> to view distribution statistics, outlier boundaries ($1.5 	imes 	ext{IQR}$), and dimensional concentrations.
+          <!-- Non-Temporal Summary Card -->
+          <div x-show="!overviewData.is_temporal" class="bg-[#FAFAFA] p-6 rounded border border-[#E5E5E5] text-center space-y-2">
+            <h4 class="text-sm font-semibold text-[#171717]">Cross-Sectional Snapshot Dataset Active</h4>
+            <p class="text-xs text-[#555555] max-w-lg mx-auto">
+              This dataset is configured as a non-temporal cross-sectional snapshot. Sequential time-series corridors are disabled to ensure mathematical rigor. 
+              View distribution statistics, outlier boundaries ($1.5 \times \text{IQR}$), and dimensional concentrations in <strong>Diagnostics</strong>.
             </p>
           </div>
         </div>
 
         <!-- Primary Concentration & Top Driver Cards -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           
-          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow">
-            <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-2 mb-3">
-              <span>🎯</span> Primary Segment Concentration
-            </h4>
+          <div class="bg-white border border-[#E5E5E5] rounded-lg p-4">
+            <div class="text-xs font-semibold uppercase tracking-wider text-[#737373] mb-2.5">Primary Segment Concentration</div>
             <template x-if="overviewData.primary_concentration">
               <div class="space-y-2">
-                <div class="flex items-center justify-between text-sm font-semibold text-slate-200">
+                <div class="flex items-center justify-between text-xs font-semibold text-[#171717]">
                   <span x-text="`${overviewData.primary_concentration.dimension}: ${overviewData.primary_concentration.segment}`"></span>
-                  <span class="text-indigo-400 font-bold" x-text="`${overviewData.primary_concentration.share_pct.toFixed(1)}% Share`"></span>
+                  <span class="text-[#6F00B5] font-bold" x-text="`${overviewData.primary_concentration.share_pct.toFixed(1)}% Share`"></span>
                 </div>
-                <div class="w-full bg-slate-950 rounded-full h-2 overflow-hidden border border-slate-800">
-                  <div class="bg-indigo-500 h-full rounded-full" :style="`width: ${Math.min(100, overviewData.primary_concentration.share_pct)}%`"></div>
+                <div class="w-full bg-[#F0F0F0] rounded-full h-2 overflow-hidden">
+                  <div class="bg-[#A100FF] h-full rounded-full" :style="`width: ${Math.min(100, overviewData.primary_concentration.share_pct)}%`"></div>
                 </div>
               </div>
             </template>
             <template x-if="!overviewData.primary_concentration">
-              <div class="text-xs text-slate-500">No dimensional concentration detected.</div>
+              <div class="text-xs text-[#737373]">No dimensional concentration detected.</div>
             </template>
           </div>
 
-          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow">
-            <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-2 mb-3">
-              <span>🔗</span> Top Numeric Driver Association
-            </h4>
+          <div class="bg-white border border-[#E5E5E5] rounded-lg p-4">
+            <div class="text-xs font-semibold uppercase tracking-wider text-[#737373] mb-2.5">Top Explanatory Driver Association</div>
             <template x-if="overviewData.top_driver">
               <div class="space-y-1 text-xs">
-                <div class="flex items-center justify-between text-sm font-semibold text-slate-200">
+                <div class="flex items-center justify-between font-semibold text-[#171717]">
                   <span x-text="overviewData.top_driver.name"></span>
                   <span class="font-mono font-bold" 
-                        :class="overviewData.top_driver.pearson_r < 0 ? 'text-rose-400' : 'text-emerald-400'"
+                        :class="overviewData.top_driver.pearson_r < 0 ? 'text-[#C62828]' : 'text-[#16803C]'"
                         x-text="`r = ${overviewData.top_driver.pearson_r.toFixed(3)}`"></span>
                 </div>
-                <div class="text-slate-400 text-[11px]" x-text="`${overviewData.top_driver.strength} ${overviewData.top_driver.direction} empirical correlation.`"></div>
+                <div class="text-[#737373] text-[11px]" x-text="`${overviewData.top_driver.strength} ${overviewData.top_driver.direction} empirical correlation.`"></div>
               </div>
             </template>
             <template x-if="!overviewData.top_driver">
-              <div class="text-xs text-slate-500">No numeric driver correlations configured.</div>
+              <div class="text-xs text-[#737373]">No numeric driver correlations configured.</div>
             </template>
           </div>
 
@@ -487,75 +504,79 @@
       <!-- =================================================================== -->
       <!-- SCREEN 2: DIAGNOSTIC DECOMPOSITION -->
       <!-- =================================================================== -->
-      <div x-show="activeTab === 'diagnostic'" class="space-y-6">
+      <div x-show="activeTab === 'diagnostic'" class="space-y-5">
         
-        <!-- Snapshot Distribution & Outliers (for non-temporal) -->
-        <div x-show="!diagnosticData.is_temporal" class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-4">
-          <h3 class="text-sm font-bold text-slate-200 uppercase tracking-wider flex items-center gap-2">
-            <span>📦</span> Distribution Profile & Outlier Audit ($1.5 	imes 	ext{IQR}$)
-          </h3>
+        <div>
+          <h2 class="text-xl font-bold text-[#171717] tracking-tight">Diagnostic Decomposition</h2>
+          <p class="text-xs text-[#555555] mt-1">Multi-dimensional variance localization, segment contribution rankings, and driver correlation matrices.</p>
+        </div>
 
-          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
-            <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
-              <div class="text-xs text-slate-400">Median (P50)</div>
-              <div class="text-xl font-bold text-slate-100 mt-1" x-text="formatNumber(diagnosticData.distribution_stats?.p50, diagnosticData.primary_measure_unit)"></div>
+        <!-- Snapshot Distribution & Outliers (for non-temporal) -->
+        <div x-show="!diagnosticData.is_temporal" class="bg-white border border-[#E5E5E5] rounded-lg p-5 space-y-3.5">
+          <h3 class="text-sm font-semibold text-[#171717]">Distribution Profile & Outlier Audit (1.5 &times; IQR)</h3>
+
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <div class="bg-[#FAFAFA] p-3.5 rounded border border-[#E5E5E5]">
+              <div class="text-xs text-[#737373]">Median (P50)</div>
+              <div class="text-lg font-bold text-[#171717] mt-0.5" x-text="formatNumber(diagnosticData.distribution_stats?.p50, diagnosticData.primary_measure_unit)"></div>
             </div>
-            <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
-              <div class="text-xs text-slate-400">IQR (P75 - P25)</div>
-              <div class="text-xl font-bold text-slate-100 mt-1" x-text="formatNumber(diagnosticData.distribution_stats?.iqr, diagnosticData.primary_measure_unit)"></div>
+            <div class="bg-[#FAFAFA] p-3.5 rounded border border-[#E5E5E5]">
+              <div class="text-xs text-[#737373]">IQR (P75 - P25)</div>
+              <div class="text-lg font-bold text-[#171717] mt-0.5" x-text="formatNumber(diagnosticData.distribution_stats?.iqr, diagnosticData.primary_measure_unit)"></div>
             </div>
-            <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
-              <div class="text-xs text-slate-400">Skewness</div>
-              <div class="text-xl font-bold text-slate-100 mt-1" x-text="(diagnosticData.distribution_stats?.skewness || 0).toFixed(2)"></div>
+            <div class="bg-[#FAFAFA] p-3.5 rounded border border-[#E5E5E5]">
+              <div class="text-xs text-[#737373]">Skewness</div>
+              <div class="text-lg font-bold text-[#171717] mt-0.5 font-mono" x-text="(diagnosticData.distribution_stats?.skewness || 0).toFixed(2)"></div>
             </div>
-            <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
-              <div class="text-xs text-slate-400">Outliers Count</div>
-              <div class="text-xl font-bold text-amber-400 mt-1" x-text="diagnosticData.distribution_stats?.outlier_count || 0"></div>
+            <div class="bg-[#FAFAFA] p-3.5 rounded border border-[#E5E5E5]">
+              <div class="text-xs text-[#737373]">Outliers Count</div>
+              <div class="text-lg font-bold text-[#A15C00] mt-0.5 font-mono" x-text="diagnosticData.distribution_stats?.outlier_count || 0"></div>
             </div>
           </div>
         </div>
 
         <!-- Multi-Dimensional Breakdown Tabs -->
-        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-5">
-          <div class="flex items-center justify-between">
-            <h3 class="text-sm font-bold text-slate-200 uppercase tracking-wider flex items-center gap-2">
-              <span>📊</span> Multi-Dimensional Variance & Concentration
-            </h3>
+        <div class="bg-white border border-[#E5E5E5] rounded-lg p-5 space-y-4">
+          <div class="flex items-center justify-between pb-2 border-b border-[#E5E5E5]">
+            <div>
+              <h3 class="text-sm font-semibold text-[#171717]">Dimensional Variance & Contribution Breakdown</h3>
+              <p class="text-xs text-[#737373]">Inspect variance attribution across operational categories.</p>
+            </div>
           </div>
 
           <!-- Dimension Selector Buttons -->
-          <div class="flex flex-wrap gap-2 border-b border-slate-800 pb-3">
+          <div class="flex flex-wrap gap-1.5 pb-2">
             <template x-for="(rows, dim) in diagnosticData.breakdowns || {}" :key="dim">
               <button @click="activeDimension = dim; renderDiagnosticDimensionChart()" 
-                      :class="activeDimension === dim ? 'bg-indigo-600 text-white font-bold' : 'bg-slate-800 text-slate-300 hover:bg-slate-700'"
-                      class="px-3.5 py-1.5 rounded-lg text-xs transition capitalize" 
+                      :class="activeDimension === dim ? 'bg-[#F5E8FF] text-[#6F00B5] border-[#A100FF] font-semibold' : 'bg-white text-[#555555] border-[#E5E5E5] hover:bg-[#F8F8F8]'"
+                      class="px-3 py-1 rounded text-xs border transition capitalize" 
                       x-text="dim.replace('_', ' ')"></button>
             </template>
           </div>
 
           <!-- Dimension Chart -->
-          <div id="diagnosticDimChart" class="w-full h-72"></div>
+          <div id="diagnosticDimChart" class="w-full h-64"></div>
 
           <!-- Dimension Data Table -->
-          <div class="overflow-x-auto border border-slate-800 rounded-xl">
-            <table class="w-full text-left text-xs text-slate-300">
-              <thead class="bg-slate-800/80 text-[11px] uppercase tracking-wider text-slate-400 border-b border-slate-700">
+          <div class="overflow-x-auto border border-[#E5E5E5] rounded">
+            <table class="w-full text-left text-xs">
+              <thead class="bg-[#F8F8F8] text-[11px] font-semibold text-[#555555] border-b border-[#E5E5E5]">
                 <tr>
-                  <th class="p-3 capitalize" x-text="activeDimension.replace('_', ' ')"></th>
-                  <th class="p-3 text-right">Current Value</th>
-                  <th class="p-3 text-right">Prior Baseline</th>
-                  <th class="p-3 text-right">Net Delta</th>
-                  <th class="p-3 text-right">Contribution / Share %</th>
+                  <th class="p-2.5 capitalize" x-text="activeDimension.replace('_', ' ')"></th>
+                  <th class="p-2.5 text-right">Current Value</th>
+                  <th class="p-2.5 text-right">Prior Baseline</th>
+                  <th class="p-2.5 text-right">Net Delta</th>
+                  <th class="p-2.5 text-right">Contribution Share %</th>
                 </tr>
               </thead>
-              <tbody class="divide-y divide-slate-800/60 font-mono">
+              <tbody class="divide-y divide-[#EEEEEE] font-mono">
                 <template x-for="row in (diagnosticData.breakdowns?.[activeDimension] || [])" :key="row[activeDimension]">
-                  <tr class="hover:bg-slate-800/40 transition">
-                    <td class="p-3 font-semibold font-sans text-slate-200" x-text="row[activeDimension]"></td>
-                    <td class="p-3 text-right" x-text="formatNumber(row.curr_value, diagnosticData.primary_measure_unit)"></td>
-                    <td class="p-3 text-right text-slate-400" x-text="formatNumber(row.prev_value, diagnosticData.primary_measure_unit)"></td>
-                    <td class="p-3 text-right" :class="row.delta_value < 0 ? 'text-rose-400' : 'text-emerald-400'" x-text="formatNumber(row.delta_value, diagnosticData.primary_measure_unit)"></td>
-                    <td class="p-3 text-right font-bold text-indigo-400" x-text="`${(row.contribution_pct || 0).toFixed(1)}%`"></td>
+                  <tr class="hover:bg-[#FAF5FF] transition">
+                    <td class="p-2.5 font-medium font-sans text-[#171717]" x-text="row[activeDimension]"></td>
+                    <td class="p-2.5 text-right text-[#171717]" x-text="formatNumber(row.curr_value, diagnosticData.primary_measure_unit)"></td>
+                    <td class="p-2.5 text-right text-[#737373]" x-text="formatNumber(row.prev_value, diagnosticData.primary_measure_unit)"></td>
+                    <td class="p-2.5 text-right font-semibold" :class="row.delta_value < 0 ? 'text-[#C62828]' : 'text-[#16803C]'" x-text="formatNumber(row.delta_value, diagnosticData.primary_measure_unit)"></td>
+                    <td class="p-2.5 text-right font-bold text-[#6F00B5]" x-text="`${(row.contribution_pct || 0).toFixed(1)}%`"></td>
                   </tr>
                 </template>
               </tbody>
@@ -565,36 +586,37 @@
         </div>
 
         <!-- Driver Correlation Ranking Matrix -->
-        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-4">
-          <h3 class="text-sm font-bold text-slate-200 uppercase tracking-wider flex items-center gap-2">
-            <span>📈</span> Explanatory Driver Correlation Rankings
-          </h3>
+        <div class="bg-white border border-[#E5E5E5] rounded-lg p-5 space-y-4">
+          <div class="pb-2 border-b border-[#E5E5E5]">
+            <h3 class="text-sm font-semibold text-[#171717]">Explanatory Driver Correlation Rankings</h3>
+            <p class="text-xs text-[#737373]">Linear (Pearson r) and rank-order (Spearman r_s) statistical association coefficients.</p>
+          </div>
 
-          <div class="overflow-x-auto border border-slate-800 rounded-xl">
-            <table class="w-full text-left text-xs text-slate-300">
-              <thead class="bg-slate-800/80 text-[11px] uppercase tracking-wider text-slate-400 border-b border-slate-700">
+          <div class="overflow-x-auto border border-[#E5E5E5] rounded">
+            <table class="w-full text-left text-xs">
+              <thead class="bg-[#F8F8F8] text-[11px] font-semibold text-[#555555] border-b border-[#E5E5E5]">
                 <tr>
-                  <th class="p-3">Explanatory Driver Field</th>
-                  <th class="p-3 text-right">Pearson Correlation ($r$)</th>
-                  <th class="p-3 text-right">Spearman Rank ($r_s$)</th>
-                  <th class="p-3">Association Direction</th>
-                  <th class="p-3">Strength Band</th>
+                  <th class="p-2.5">Driver Name</th>
+                  <th class="p-2.5 text-right">Pearson Correlation (r)</th>
+                  <th class="p-2.5 text-right">Spearman Rank (r_s)</th>
+                  <th class="p-2.5">Direction</th>
+                  <th class="p-2.5">Strength Band</th>
                 </tr>
               </thead>
-              <tbody class="divide-y divide-slate-800/60 font-mono">
+              <tbody class="divide-y divide-[#EEEEEE] font-mono">
                 <template x-for="drv in diagnosticData.driver_correlations || []" :key="drv.column">
-                  <tr class="hover:bg-slate-800/40 transition">
-                    <td class="p-3 font-semibold font-sans text-slate-200" x-text="drv.label"></td>
-                    <td class="p-3 text-right font-bold" :class="drv.pearson_r < 0 ? 'text-rose-400' : 'text-emerald-400'" x-text="drv.pearson_r.toFixed(3)"></td>
-                    <td class="p-3 text-right text-slate-400" x-text="drv.spearman_r.toFixed(3)"></td>
-                    <td class="p-3 text-slate-300 font-sans" x-text="drv.direction"></td>
-                    <td class="p-3 font-sans">
-                      <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-800 text-slate-300" x-text="drv.strength"></span>
+                  <tr class="hover:bg-[#FAF5FF] transition">
+                    <td class="p-2.5 font-medium font-sans text-[#171717]" x-text="drv.label"></td>
+                    <td class="p-2.5 text-right font-bold" :class="drv.pearson_r < 0 ? 'text-[#C62828]' : 'text-[#16803C]'" x-text="drv.pearson_r.toFixed(3)"></td>
+                    <td class="p-2.5 text-right text-[#737373]" x-text="drv.spearman_r.toFixed(3)"></td>
+                    <td class="p-2.5 text-[#555555] font-sans" x-text="drv.direction"></td>
+                    <td class="p-2.5 font-sans">
+                      <span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-[#F5E8FF] text-[#6F00B5]" x-text="drv.strength"></span>
                     </td>
                   </tr>
                 </template>
                 <template x-if="!(diagnosticData.driver_correlations?.length)">
-                  <tr><td colspan="5" class="p-4 text-center text-slate-500 font-sans">No numeric drivers selected during ingestion.</td></tr>
+                  <tr><td colspan="5" class="p-4 text-center text-[#737373] font-sans">No numeric drivers selected during ingestion.</td></tr>
                 </template>
               </tbody>
             </table>
@@ -606,55 +628,57 @@
       <!-- =================================================================== -->
       <!-- SCREEN 3: INVESTIGATION WORKSPACE -->
       <!-- =================================================================== -->
-      <div x-show="activeTab === 'workspace'" class="space-y-6">
+      <div x-show="activeTab === 'workspace'" class="space-y-5">
         
-        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-4">
-          <div class="flex items-center justify-between">
-            <h2 class="text-base font-bold text-slate-100 flex items-center gap-2">
-              <span>🔬</span>
-              <span x-text="workspaceData.is_demo ? 'Ranked Causal Hypotheses & DAG Evidence' : 'Observational Patterns & Empirical Findings'"></span>
-            </h2>
-            <span class="text-xs px-2.5 py-1 rounded bg-slate-800 text-slate-300 border border-slate-700"
-                  x-text="`${workspaceData.findings?.length || 0} Findings Evaluated`"></span>
+        <div>
+          <h2 class="text-xl font-bold text-[#171717] tracking-tight">Investigation Workspace</h2>
+          <p class="text-xs text-[#555555] mt-1">Causal hypothesis ranking, empirical evidence chains, and DAG structure.</p>
+        </div>
+
+        <div class="bg-white border border-[#E5E5E5] rounded-lg p-5 space-y-4">
+          <div class="flex items-center justify-between pb-2 border-b border-[#E5E5E5]">
+            <h3 class="text-sm font-semibold text-[#171717]" x-text="workspaceData.is_demo ? 'Ranked Causal Hypotheses & Evaluated Evidence' : 'Observational Patterns & Empirical Findings'"></h3>
+            <span class="text-xs px-2 py-0.5 rounded bg-[#F8F8F8] text-[#555555] border border-[#E5E5E5] font-medium"
+                  x-text="`${workspaceData.findings?.length || 0} Hypotheses Evaluated`"></span>
           </div>
 
           <!-- Observational Notice for custom data -->
-          <div x-show="!workspaceData.is_demo" class="bg-indigo-950/40 border border-indigo-800/60 p-4 rounded-xl text-xs text-indigo-300 flex items-start gap-3">
-            <span class="text-base">ℹ️</span>
-            <div>
-              <div class="font-bold">Observational Integrity Safeguard:</div>
-              <div>For custom datasets, EDITH evaluates statistical associations, driver correlations, and segment concentrations. Correlation does not imply causation; structural causal DAGs require controlled experimental data.</div>
-            </div>
+          <div x-show="!workspaceData.is_demo" class="bg-[#F5E8FF] border border-[#E9D5FF] p-3.5 rounded text-xs text-[#4B0082] flex items-start gap-2.5">
+            <div class="font-semibold shrink-0">Note:</div>
+            <div>For custom datasets, EDITH evaluates statistical associations and segment contributions. Controlled experiments are required to prove causal directionality.</div>
           </div>
 
           <!-- Findings List -->
-          <div class="space-y-4">
+          <div class="space-y-3.5">
             <template x-for="(finding, idx) in workspaceData.findings || []" :key="finding.id || idx">
-              <div class="bg-slate-950 p-5 rounded-xl border border-slate-800 space-y-3">
+              <div class="bg-white p-4 rounded-lg border border-[#E5E5E5] space-y-3 hover:border-[#D4D4D4] transition">
                 <div class="flex items-start justify-between">
                   <div>
                     <div class="flex items-center gap-2">
-                      <span class="text-xs font-bold text-slate-400 font-mono" x-text="`#${idx + 1}`"></span>
-                      <h4 class="text-sm font-bold text-slate-200" x-text="finding.name"></h4>
-                      <span class="text-[10px] px-2 py-0.5 rounded font-bold uppercase"
-                            :class="finding.cause_score_100 > 75 ? 'bg-rose-950 text-rose-300 border border-rose-800' : (finding.cause_score_100 > 40 ? 'bg-amber-950 text-amber-300 border border-amber-800' : 'bg-slate-800 text-slate-400')"
+                      <span class="text-xs font-bold text-[#737373] font-mono" x-text="`#${idx + 1}`"></span>
+                      <h4 class="text-sm font-bold text-[#171717]" x-text="finding.name"></h4>
+                      <span class="text-[10px] px-2 py-0.5 rounded font-semibold uppercase"
+                            :class="finding.cause_score_100 > 75 ? 'bg-[#F5E8FF] text-[#6F00B5] border border-[#E9D5FF]' : (finding.cause_score_100 > 40 ? 'bg-[#FFF8E1] text-[#A15C00] border border-[#FFE082]' : 'bg-[#F5F5F5] text-[#737373]')"
                             x-text="finding.confidence_classification || finding.dependency_role"></span>
                     </div>
-                    <p class="text-xs text-slate-400 mt-1" x-text="finding.summary"></p>
+                    <p class="text-xs text-[#555555] mt-1" x-text="finding.summary"></p>
                   </div>
 
                   <div class="text-right shrink-0">
-                    <div class="text-xs text-slate-500 font-semibold">Evidence Score</div>
-                    <div class="text-lg font-extrabold text-indigo-400" x-text="`${(finding.cause_score_100 || 0).toFixed(1)}/100`"></div>
+                    <div class="text-[10px] text-[#737373] font-semibold uppercase">Evidence Score</div>
+                    <div class="text-base font-bold text-[#6F00B5] font-mono" x-text="`${(finding.cause_score_100 || 0).toFixed(1)}/100`"></div>
                   </div>
                 </div>
 
                 <!-- Evidence Chains -->
-                <div class="bg-slate-900/80 p-3.5 rounded-lg border border-slate-800/80 text-xs space-y-1.5">
-                  <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Supporting Empirical Evidence</div>
-                  <ul class="list-disc list-inside space-y-1 text-slate-300 text-[11px]">
+                <div class="bg-[#FAFAFA] p-3 rounded border border-[#EEEEEE] text-xs space-y-1.5">
+                  <div class="text-[10px] font-semibold text-[#737373] uppercase tracking-wider">Empirical Evidence Items</div>
+                  <ul class="space-y-1 text-[#333333] text-xs">
                     <template x-for="ev in finding.supporting_evidence || []" :key="ev">
-                      <li x-text="ev"></li>
+                      <li class="flex items-start gap-1.5">
+                        <span class="text-[#A100FF] font-bold">&bull;</span>
+                        <span x-text="ev"></span>
+                      </li>
                     </template>
                   </ul>
                 </div>
@@ -669,60 +693,62 @@
       <!-- =================================================================== -->
       <!-- SCREEN 4: POLICY SIMULATOR -->
       <!-- =================================================================== -->
-      <div x-show="activeTab === 'simulation'" class="space-y-6">
+      <div x-show="activeTab === 'simulation'" class="space-y-5">
         
+        <div>
+          <h2 class="text-xl font-bold text-[#171717] tracking-tight">Policy Simulator</h2>
+          <p class="text-xs text-[#555555] mt-1">Simulate multi-lever recovery trajectories and model counterfactual policy interventions.</p>
+        </div>
+
         <!-- Custom data unavailable card -->
-        <div x-show="!simulationData.available" class="bg-slate-900 border border-slate-800 rounded-2xl p-8 shadow-xl text-center space-y-4">
-          <div class="text-4xl">🎯</div>
-          <h3 class="text-base font-bold text-slate-200">Counterfactual Simulation Unavailable</h3>
-          <p class="text-xs text-slate-400 max-w-lg mx-auto" x-text="simulationData.reason"></p>
-          <button @click="resetToDemo()" class="mt-4 px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold transition">
+        <div x-show="!simulationData.available" class="bg-white border border-[#E5E5E5] rounded-lg p-8 text-center space-y-3">
+          <h3 class="text-sm font-semibold text-[#171717]">Counterfactual Simulation Unavailable</h3>
+          <p class="text-xs text-[#555555] max-w-lg mx-auto" x-text="simulationData.reason"></p>
+          <button @click="resetToDemo()" class="mt-2 px-4 py-2 rounded bg-[#A100FF] hover:bg-[#6F00B5] text-white text-xs font-semibold transition">
             Switch to Built-in Demo Benchmark to Explore Simulation
           </button>
         </div>
 
         <!-- Demo Benchmark Simulation Workbench -->
-        <div x-show="simulationData.available" class="space-y-6">
-          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-6">
-            <div>
-              <h2 class="text-base font-bold text-slate-100 flex items-center gap-2">
-                <span>🎯</span> Counterfactual Policy Intervention Simulator
-              </h2>
-              <p class="text-xs text-slate-400 mt-1">Simulate multi-lever recovery trajectories for B2B SaaS revenue restoration over an 8-week horizon.</p>
+        <div x-show="simulationData.available" class="space-y-5">
+          <div class="bg-white border border-[#E5E5E5] rounded-lg p-5 space-y-5">
+            <div class="pb-2 border-b border-[#E5E5E5]">
+              <h3 class="text-sm font-semibold text-[#171717]">Intervention Levers & Counterfactual Modeling</h3>
+              <p class="text-xs text-[#737373]">Adjust policy sliders to model 8-week revenue recovery trajectories.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 bg-slate-950 p-5 rounded-xl border border-slate-800 text-xs">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 bg-[#FAFAFA] p-4 rounded border border-[#E5E5E5] text-xs">
               
               <!-- Lever 1 -->
-              <div class="space-y-2">
-                <div class="flex justify-between font-semibold">
-                  <span class="text-slate-300">Price Rollback</span>
-                  <span class="text-indigo-400 font-bold" x-text="`-${simLevers.price_rollback_pct}%`"></span>
+              <div class="space-y-1.5">
+                <div class="flex justify-between font-medium">
+                  <span class="text-[#555555]">Price Rollback</span>
+                  <span class="text-[#6F00B5] font-bold font-mono" x-text="`-${simLevers.price_rollback_pct}%`"></span>
                 </div>
-                <input type="range" min="0" max="15" step="1" x-model.number="simLevers.price_rollback_pct" @input="updateSimulationLevers()" class="w-full accent-indigo-500" />
-                <span class="text-[11px] text-slate-500 block">Mitigates price elasticity resistance.</span>
+                <input type="range" min="0" max="15" step="1" x-model.number="simLevers.price_rollback_pct" @input="updateSimulationLevers()" class="w-full accent-[#A100FF]" />
+                <span class="text-[11px] text-[#737373] block">Mitigates price elasticity resistance.</span>
               </div>
 
               <!-- Lever 2 -->
-              <div class="space-y-2">
-                <div class="flex justify-between font-semibold">
-                  <span class="text-slate-300">Regional Co-Op Fund</span>
-                  <span class="text-indigo-400 font-bold" x-text="`$${simLevers.promo_fund_k}k`"></span>
+              <div class="space-y-1.5">
+                <div class="flex justify-between font-medium">
+                  <span class="text-[#555555]">Regional Co-Op Fund</span>
+                  <span class="text-[#6F00B5] font-bold font-mono" x-text="`$${simLevers.promo_fund_k}k`"></span>
                 </div>
-                <input type="range" min="0" max="50" step="5" x-model.number="simLevers.promo_fund_k" @input="updateSimulationLevers()" class="w-full accent-indigo-500" />
-                <span class="text-[11px] text-slate-500 block">Counters competitor marketing pressure.</span>
+                <input type="range" min="0" max="50" step="5" x-model.number="simLevers.promo_fund_k" @input="updateSimulationLevers()" class="w-full accent-[#A100FF]" />
+                <span class="text-[11px] text-[#737373] block">Counters competitor promotional pressure.</span>
               </div>
 
               <!-- Lever 3 -->
-              <div class="space-y-2">
-                <div class="flex justify-between font-semibold">
-                  <span class="text-slate-300">VIP Retention Guard</span>
-                  <span class="text-indigo-400 font-bold" x-text="simLevers.churn_mitigation ? 'Active' : 'Disabled'"></span>
+              <div class="space-y-1.5">
+                <div class="flex justify-between font-medium">
+                  <span class="text-[#555555]">VIP Retention Guard</span>
+                  <span class="text-[#6F00B5] font-bold" x-text="simLevers.churn_mitigation ? 'Active' : 'Disabled'"></span>
                 </div>
                 <div class="pt-2">
                   <label class="flex items-center space-x-2 cursor-pointer">
-                    <input type="checkbox" x-model="simLevers.churn_mitigation" @change="updateSimulationLevers()" class="rounded bg-slate-800 border-slate-700 text-indigo-600 focus:ring-0" />
-                    <span class="text-slate-300">Enable proactive account CSM outreach</span>
+                    <input type="checkbox" x-model="simLevers.churn_mitigation" @change="updateSimulationLevers()" class="rounded border-[#D5D5D5] text-[#A100FF] focus:ring-0" />
+                    <span class="text-[#333333]">Proactive CSM outreach</span>
                   </label>
                 </div>
               </div>
@@ -730,9 +756,9 @@
             </div>
 
             <!-- Simulation Trajectory Chart -->
-            <div class="space-y-3">
-              <h3 class="text-xs font-bold text-slate-300 uppercase tracking-wider">8-Week Projected Revenue Recovery Path</h3>
-              <div id="simTrajectoryChart" class="w-full h-80"></div>
+            <div class="space-y-2">
+              <h4 class="text-xs font-semibold text-[#555555] uppercase tracking-wider">8-Week Projected Revenue Recovery Path</h4>
+              <div id="simTrajectoryChart" class="w-full h-72"></div>
             </div>
 
           </div>
@@ -743,79 +769,75 @@
       <!-- =================================================================== -->
       <!-- SCREEN 5: EDITH CONSOLE (AI CHAT) -->
       <!-- =================================================================== -->
-      <div x-show="activeTab === 'console'" class="space-y-6">
+      <div x-show="activeTab === 'console'" class="space-y-5">
         
-        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-4">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-2 border-b border-slate-800/80">
-            <div>
-              <h2 class="text-base font-bold text-slate-100 flex items-center gap-2">
-                <span>💬</span> EDITH Grounded Decision Assistant
-              </h2>
-              <p class="text-xs text-slate-400 mt-1">Ask questions about observed metric changes, dimensional concentrations, driver correlations, or data quality.</p>
-            </div>
+        <div>
+          <h2 class="text-xl font-bold text-[#171717] tracking-tight">EDITH Console</h2>
+          <p class="text-xs text-[#555555] mt-1">Ask natural-language questions about metric deficits, causal evidence, dimensional concentrations, or policy recommendations.</p>
+        </div>
+
+        <div class="bg-white border border-[#E5E5E5] rounded-lg p-5 space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-[#E5E5E5]">
+            <div class="text-xs font-semibold text-[#171717]">Analytical Decision Assistant</div>
             
             <!-- Real-Time AI Status Badge & Actions -->
-            <div class="flex items-center gap-2 self-start sm:self-auto shrink-0">
+            <div class="flex items-center gap-2">
               <button @click="resetChat()" 
                       title="Clear chat history and reset session"
-                      class="px-2.5 py-1.5 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-slate-200 border border-slate-700/60 text-[11px] font-medium transition cursor-pointer flex items-center gap-1">
-                <span>🔄</span> Clear
+                      class="px-2.5 py-1 rounded bg-white hover:bg-[#F5F5F5] text-[#555555] hover:text-[#171717] border border-[#E5E5E5] text-xs font-medium transition cursor-pointer flex items-center gap-1">
+                Clear
               </button>
               <button @click="showApiKeyModal = true" 
-                      title="Click to configure or test your Gemini API Key"
-                      class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-semibold border transition hover:brightness-110 cursor-pointer shadow"
-                      :class="aiStatus.is_live ? 'bg-emerald-950/70 text-emerald-300 border-emerald-500/50' : 'bg-indigo-950/70 text-indigo-300 border-indigo-500/50'">
-                <span class="w-2 h-2 rounded-full" :class="aiStatus.is_live ? 'bg-emerald-400 animate-pulse' : 'bg-indigo-400'"></span>
+                      title="Configure Google Gemini API Key"
+                      class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded text-xs font-semibold border transition cursor-pointer"
+                      :class="aiStatus.is_live ? 'bg-[#EDF7ED] text-[#16803C] border-[#C8E6C9]' : 'bg-[#F5E8FF] text-[#6F00B5] border-[#E9D5FF]'">
+                <span class="w-2 h-2 rounded-full" :class="aiStatus.is_live ? 'bg-[#16803C]' : 'bg-[#A100FF]'"></span>
                 <span x-text="aiStatus.badge_text || 'Deterministic Offline Mode'"></span>
-                <span class="text-[10px] text-slate-400 ml-1">⚙️ Key</span>
+                <span class="text-[10px] text-[#737373] ml-0.5">Key</span>
               </button>
             </div>
           </div>
 
-
-
-
           <!-- Suggested Starter Chips -->
-          <div class="space-y-2">
-            <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Suggested Probes</div>
-            <div class="flex flex-wrap gap-2">
+          <div class="space-y-1.5">
+            <div class="text-[10px] font-semibold text-[#737373] uppercase tracking-wider">Suggested Probes</div>
+            <div class="flex flex-wrap gap-1.5">
               <template x-for="q in getStarterQuestions()" :key="q">
                 <button @click="sendStarterQuery(q)" 
-                        class="text-xs px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700/60 transition"
+                        class="text-xs px-2.5 py-1 rounded bg-[#F8F8F8] hover:bg-[#F5E8FF] text-[#555555] hover:text-[#6F00B5] border border-[#E5E5E5] transition"
                         x-text="q"></button>
               </template>
             </div>
           </div>
 
           <!-- Chat History Stream -->
-          <div class="bg-slate-950 rounded-xl border border-slate-800 p-4 h-96 overflow-y-auto space-y-4" id="chatStreamBox">
+          <div class="bg-[#FAFAFA] rounded border border-[#E5E5E5] p-4 h-96 overflow-y-auto space-y-3.5" id="chatStreamBox">
             
             <!-- Default Welcome Bubble -->
-            <div class="flex items-start space-x-3">
-              <div class="w-7 h-7 rounded-lg bg-indigo-600 flex items-center justify-center font-bold text-xs text-white shrink-0">E</div>
-              <div class="bg-slate-900 border border-slate-800 rounded-2xl rounded-tl-none p-3.5 text-xs text-slate-200 max-w-xl space-y-2">
-                <div>Hello! I am <strong>EDITH</strong>, your Decision Intelligence Assistant. I am actively grounded in the current dataset.</div>
-                <div>You can ask me about metric deficits, dimensional concentrations, statistical driver associations, or data-quality health scores.</div>
+            <div class="flex items-start space-x-2.5">
+              <div class="w-6 h-6 rounded bg-[#A100FF] flex items-center justify-center font-bold text-xs text-white shrink-0">E</div>
+              <div class="bg-white border border-[#E5E5E5] rounded-lg rounded-tl-none p-3 text-xs text-[#171717] max-w-xl space-y-1.5">
+                <div class="font-semibold text-[#6F00B5]">EDITH Decision Assistant</div>
+                <div class="text-[#555555]">I am actively grounded in the current dataset. You can ask me about metric deficits, dimensional concentrations, statistical driver associations, or policy simulations.</div>
               </div>
             </div>
 
             <!-- Dialogue Turns -->
             <template x-for="(msg, i) in chatHistory" :key="i">
-              <div class="flex items-start space-x-3" :class="msg.role === 'user' ? 'flex-row-reverse space-x-reverse' : ''">
-                <div class="w-7 h-7 rounded-lg flex items-center justify-center font-bold text-xs text-white shrink-0"
-                     :class="msg.role === 'user' ? 'bg-slate-700' : 'bg-indigo-600'"
+              <div class="flex items-start space-x-2.5" :class="msg.role === 'user' ? 'flex-row-reverse space-x-reverse' : ''">
+                <div class="w-6 h-6 rounded flex items-center justify-center font-bold text-xs shrink-0"
+                     :class="msg.role === 'user' ? 'bg-[#E5E5E5] text-[#4B0082]' : 'bg-[#A100FF] text-white'"
                      x-text="msg.role === 'user' ? 'U' : 'E'"></div>
-                <div class="rounded-2xl p-3.5 text-xs max-w-xl leading-relaxed space-y-1"
-                     :class="msg.role === 'user' ? 'bg-indigo-600 text-white rounded-tr-none' : 'bg-slate-900 border border-slate-800 text-slate-200 rounded-tl-none'"
+                <div class="rounded-lg p-3 text-xs max-w-xl leading-relaxed space-y-1"
+                     :class="msg.role === 'user' ? 'bg-[#F5E8FF] text-[#4B0082] rounded-tr-none' : 'bg-white border border-[#E5E5E5] text-[#171717] rounded-tl-none'"
                      x-html="formatMarkdown(msg.content)"></div>
               </div>
             </template>
 
-
-            <div x-show="chatLoading" class="flex items-start space-x-3">
-              <div class="w-7 h-7 rounded-lg bg-indigo-600 flex items-center justify-center font-bold text-xs text-white shrink-0">E</div>
-              <div class="bg-slate-900 border border-slate-800 rounded-2xl rounded-tl-none p-3.5 text-xs text-slate-400 flex items-center gap-2">
-                <svg class="animate-spin h-3.5 w-3.5 text-indigo-400" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path></svg>
+            <div x-show="chatLoading" class="flex items-start space-x-2.5">
+              <div class="w-6 h-6 rounded bg-[#A100FF] flex items-center justify-center font-bold text-xs text-white shrink-0">E</div>
+              <div class="bg-white border border-[#E5E5E5] rounded-lg rounded-tl-none p-3 text-xs text-[#737373] flex items-center gap-2">
+                <svg class="animate-spin h-3.5 w-3.5 text-[#A100FF]" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path></svg>
                 Evaluating evidence from verified data...
               </div>
             </div>
@@ -825,9 +847,9 @@
           <!-- Input Bar -->
           <form @submit.prevent="submitChat()" class="flex gap-2">
             <input type="text" x-model="chatQuery" placeholder="Ask a question about the active investigation..." 
-                   class="flex-1 bg-slate-950 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-slate-100 focus:border-indigo-500 focus:outline-none" />
+                   class="flex-1 bg-white border border-[#D5D5D5] rounded px-3 py-2 text-xs text-[#171717] focus:border-[#A100FF] focus:ring-1 focus:ring-[#A100FF] outline-none" />
             <button type="submit" :disabled="chatLoading || !chatQuery.trim()" 
-                    class="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold shadow-lg shadow-indigo-600/20 transition disabled:opacity-50">
+                    class="px-4 py-2 rounded bg-[#A100FF] hover:bg-[#6F00B5] text-white text-xs font-semibold transition disabled:opacity-50">
               Send
             </button>
           </form>
@@ -838,41 +860,39 @@
 
       <!-- API Key Setup Modal -->
       <div x-show="showApiKeyModal" x-cloak 
-           class="fixed inset-0 z-50 flex items-center justify-center bg-black/75 backdrop-blur-sm p-4">
+           class="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-xs p-4">
         <div @click.away="showApiKeyModal = false" 
-             class="bg-slate-900 border border-slate-700/80 rounded-2xl max-w-md w-full p-6 shadow-2xl space-y-4 animate-in fade-in zoom-in-95 duration-150">
-          <div class="flex items-center justify-between border-b border-slate-800 pb-3">
-            <h3 class="text-sm font-bold text-slate-100 flex items-center gap-2">
-              <span>✨</span> Connect Google Gemini AI Agent
-            </h3>
-            <button @click="showApiKeyModal = false" class="text-slate-400 hover:text-white text-lg font-bold">&times;</button>
+             class="bg-white border border-[#E5E5E5] rounded-lg max-w-md w-full p-5 space-y-3.5">
+          <div class="flex items-center justify-between border-b border-[#E5E5E5] pb-2.5">
+            <h3 class="text-sm font-bold text-[#171717]">Connect Google Gemini AI Agent</h3>
+            <button @click="showApiKeyModal = false" class="text-[#737373] hover:text-[#171717] text-lg font-bold">&times;</button>
           </div>
 
-          <p class="text-xs text-slate-300 leading-relaxed">
-            Enter your <strong>Google Gemini API Key</strong> to unlock free-form conversational reasoning, adaptive executive dialogue, and autonomous tool calling.
+          <p class="text-xs text-[#555555] leading-relaxed">
+            Enter your Google Gemini API Key to enable multi-turn conversational reasoning, adaptive executive dialogue, and autonomous tool calling.
           </p>
 
-          <div class="space-y-1.5">
-            <label class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Gemini API Key</label>
-            <input type="password" x-model="apiKeyInput" placeholder="Paste your AIzaSy... key here" 
-                   class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2 text-xs text-slate-100 focus:border-indigo-500 focus:outline-none" />
-            <div class="flex items-center justify-between text-[11px] text-slate-400 pt-1">
-              <span>Don't have a key?</span>
-              <a href="https://aistudio.google.com/" target="_blank" class="text-indigo-400 hover:text-indigo-300 font-semibold underline">
+          <div class="space-y-1">
+            <label class="text-[10px] font-semibold text-[#737373] uppercase tracking-wider">Gemini API Key</label>
+            <input type="password" x-model="apiKeyInput" placeholder="AIzaSy..." 
+                   class="w-full bg-white border border-[#D5D5D5] rounded px-3 py-2 text-xs text-[#171717] focus:border-[#A100FF] focus:ring-1 focus:ring-[#A100FF] outline-none" />
+            <div class="flex items-center justify-between text-[11px] text-[#737373] pt-1">
+              <span>Need a key?</span>
+              <a href="https://aistudio.google.com/" target="_blank" class="text-[#6F00B5] hover:underline font-semibold">
                 Get free key from Google AI Studio &rarr;
               </a>
             </div>
           </div>
 
-          <div class="flex items-center justify-end gap-2 pt-3 border-t border-slate-800">
+          <div class="flex items-center justify-end gap-2 pt-2.5 border-t border-[#E5E5E5]">
             <button type="button" @click="saveApiKey(true)" :disabled="savingApiKey"
-                    class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold transition">
+                    class="px-3 py-1.5 rounded bg-white hover:bg-[#F5F5F5] text-[#555555] border border-[#D5D5D5] text-xs font-semibold transition">
               Use Offline Mode
             </button>
             <button type="button" @click="saveApiKey(false)" :disabled="savingApiKey || !apiKeyInput.trim()"
-                    class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold shadow-lg shadow-indigo-600/20 transition disabled:opacity-50 flex items-center gap-1.5">
-              <span x-show="savingApiKey" class="animate-spin text-xs">⏳</span>
-              <span x-text="savingApiKey ? 'Verifying Key...' : 'Activate Live Gemini AI'"></span>
+                    class="px-3.5 py-1.5 rounded bg-[#A100FF] hover:bg-[#6F00B5] text-white text-xs font-bold transition disabled:opacity-50 flex items-center gap-1.5">
+              <span x-show="savingApiKey" class="animate-spin text-xs">...</span>
+              <span x-text="savingApiKey ? 'Verifying...' : 'Activate Live Gemini AI'"></span>
             </button>
           </div>
         </div>
@@ -930,7 +950,6 @@
         savingApiKey: false,
 
         // Alerts
-
         alertMsg: '',
         alertType: 'success',
 
@@ -942,7 +961,6 @@
           await this.loadSimulation();
           await this.fetchAiStatus();
         },
-
 
         switchTab(tab) {
           this.activeTab = tab;
@@ -1006,7 +1024,6 @@
             if (!res.ok) throw new Error(data.detail || 'Upload failed');
 
             this.uploadData = data;
-            // Pre-populate semantic configuration form with sensible defaults
             this.configForm.dataset_name = file.name.replace(/\.[^/.]+$/, '').replace(/_/g, ' ').toUpperCase();
             this.configForm.primary_measure = data.valid_numeric_columns[0] || '';
             this.configForm.primary_measure_label = this.configForm.primary_measure.replace(/_/g, ' ').toUpperCase();
@@ -1017,7 +1034,7 @@
             this.configForm.driver_columns = data.valid_numeric_columns.filter(c => c !== this.configForm.primary_measure).slice(0, 3);
             this.configForm.distinct_entity_column = data.columns[0] || '';
 
-            this.showAlert(`File '${file.name}' profiled successfully (${data.total_rows.toLocaleString()} rows). Review and apply semantic model below.`, 'success');
+            this.showAlert(`File '${file.name}' profiled (${data.total_rows.toLocaleString()} rows). Review and apply semantic configuration below.`, 'success');
           } catch (e) {
             this.showAlert(e.message, 'error');
           } finally {
@@ -1093,7 +1110,7 @@
               y: upperBounds,
               type: 'scatter',
               mode: 'lines',
-              line: { color: 'rgba(99, 102, 241, 0.15)', width: 1 },
+              line: { color: 'rgba(161, 0, 255, 0.15)', width: 1 },
               name: 'Upper Corridor (+2σ)',
               showlegend: false
             },
@@ -1103,8 +1120,8 @@
               type: 'scatter',
               mode: 'lines',
               fill: 'tonexty',
-              fillcolor: 'rgba(99, 102, 241, 0.08)',
-              line: { color: 'rgba(99, 102, 241, 0.15)', width: 1 },
+              fillcolor: 'rgba(161, 0, 255, 0.06)',
+              line: { color: 'rgba(161, 0, 255, 0.15)', width: 1 },
               name: 'Corridor (±2σ)',
               showlegend: true
             },
@@ -1113,7 +1130,7 @@
               y: baselines,
               type: 'scatter',
               mode: 'lines',
-              line: { color: '#94a3b8', width: 1.5, dash: 'dash' },
+              line: { color: '#737373', width: 1.5, dash: 'dash' },
               name: 'Expected Baseline'
             },
             {
@@ -1121,19 +1138,20 @@
               y: actualVals,
               type: 'scatter',
               mode: 'lines+markers',
-              line: { color: '#6366f1', width: 2.5 },
-              marker: { color: '#818cf8', size: 6 },
+              line: { color: '#A100FF', width: 2.5 },
+              marker: { color: '#6F00B5', size: 6 },
               name: `Observed ${this.overviewData.primary_measure_label}`
             }
           ];
 
           const layout = {
-            paper_bgcolor: 'transparent',
-            plot_bgcolor: 'transparent',
+            paper_bgcolor: '#FFFFFF',
+            plot_bgcolor: '#FFFFFF',
             margin: { l: 60, r: 20, t: 20, b: 40 },
-            xaxis: { color: '#94a3b8', gridcolor: '#1e293b' },
-            yaxis: { color: '#94a3b8', gridcolor: '#1e293b' },
-            legend: { orientation: 'h', y: 1.15, font: { color: '#cbd5e1', size: 11 } }
+            font: { family: 'Inter, sans-serif', color: '#555555', size: 11 },
+            xaxis: { color: '#555555', gridcolor: '#EAEAEA', zerolinecolor: '#EAEAEA' },
+            yaxis: { color: '#555555', gridcolor: '#EAEAEA', zerolinecolor: '#EAEAEA' },
+            legend: { orientation: 'h', y: 1.15, font: { color: '#555555', size: 11 } }
           };
 
           Plotly.newPlot(elem, traces, layout, { responsive: true, displayModeBar: false });
@@ -1170,17 +1188,18 @@
             y: yValues,
             type: 'bar',
             marker: {
-              color: '#6366f1',
-              line: { color: '#818cf8', width: 1 }
+              color: '#A100FF',
+              line: { color: '#6F00B5', width: 1 }
             }
           };
 
           const layout = {
-            paper_bgcolor: 'transparent',
-            plot_bgcolor: 'transparent',
-            margin: { l: 60, r: 20, t: 10, b: 60 },
-            xaxis: { color: '#94a3b8', gridcolor: '#1e293b' },
-            yaxis: { color: '#94a3b8', gridcolor: '#1e293b' }
+            paper_bgcolor: '#FFFFFF',
+            plot_bgcolor: '#FFFFFF',
+            margin: { l: 60, r: 20, t: 10, b: 50 },
+            font: { family: 'Inter, sans-serif', color: '#555555', size: 11 },
+            xaxis: { color: '#555555', gridcolor: '#EAEAEA', zerolinecolor: '#EAEAEA' },
+            yaxis: { color: '#555555', gridcolor: '#EAEAEA', zerolinecolor: '#EAEAEA' }
           };
 
           Plotly.newPlot(elem, [trace], layout, { responsive: true, displayModeBar: false });
@@ -1243,7 +1262,7 @@
               y: doNothing,
               type: 'scatter',
               mode: 'lines+markers',
-              line: { color: '#f43f5e', dash: 'dash', width: 2 },
+              line: { color: '#737373', dash: 'dash', width: 2 },
               name: 'Status Quo (No Action)'
             },
             {
@@ -1251,18 +1270,20 @@
               y: simulated,
               type: 'scatter',
               mode: 'lines+markers',
-              line: { color: '#10b981', width: 2.5 },
+              line: { color: '#A100FF', width: 2.5 },
+              marker: { color: '#6F00B5', size: 6 },
               name: 'Simulated Policy Recovery'
             }
           ];
 
           const layout = {
-            paper_bgcolor: 'transparent',
-            plot_bgcolor: 'transparent',
+            paper_bgcolor: '#FFFFFF',
+            plot_bgcolor: '#FFFFFF',
             margin: { l: 60, r: 20, t: 20, b: 40 },
-            xaxis: { color: '#94a3b8', gridcolor: '#1e293b' },
-            yaxis: { color: '#94a3b8', gridcolor: '#1e293b' },
-            legend: { orientation: 'h', y: 1.15, font: { color: '#cbd5e1', size: 11 } }
+            font: { family: 'Inter, sans-serif', color: '#555555', size: 11 },
+            xaxis: { color: '#555555', gridcolor: '#EAEAEA', zerolinecolor: '#EAEAEA' },
+            yaxis: { color: '#555555', gridcolor: '#EAEAEA', zerolinecolor: '#EAEAEA' },
+            legend: { orientation: 'h', y: 1.15, font: { color: '#555555', size: 11 } }
           };
 
           Plotly.newPlot(elem, traces, layout, { responsive: true, displayModeBar: false });
@@ -1323,12 +1344,11 @@
 
             this.chatHistory.push({ role: 'assistant', content: data.answer });
           } catch (e) {
-            this.chatHistory.push({ role: 'assistant', content: `⚠️ ${e.message}` });
+            this.chatHistory.push({ role: 'assistant', content: `Error: ${e.message}` });
           } finally {
             this.chatLoading = false;
             this.scrollToBottom();
           }
-
         },
 
         scrollToBottom() {
@@ -1404,17 +1424,15 @@
           }
         },
 
-
-
         formatMarkdown(text) {
           if (!text) return '';
           let safe = text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-          safe = safe.replace(/^### (.*$)/gim, '<div class="font-bold text-slate-100 text-xs mt-2 mb-1">$1</div>');
-          safe = safe.replace(/^## (.*$)/gim, '<div class="font-bold text-slate-100 text-sm mt-2 mb-1">$1</div>');
-          safe = safe.replace(/\*\*(.*?)\*\*/g, '<strong class="text-slate-100 font-semibold">$1</strong>');
-          safe = safe.replace(/\*([^\*]+)\*/g, '<em class="text-slate-300 italic">$1</em>');
-          safe = safe.replace(/`([^`]+)`/g, '<code class="px-1 py-0.5 rounded bg-slate-800 text-indigo-300 font-mono text-[11px]">$1</code>');
-          safe = safe.replace(/^\s*-\s+(.*$)/gim, '<div class="flex items-start gap-1.5 ml-1 my-0.5"><span class="text-indigo-400 font-bold">•</span><span>$1</span></div>');
+          safe = safe.replace(/^### (.*$)/gim, '<div class="font-bold text-[#171717] text-xs mt-2 mb-1">$1</div>');
+          safe = safe.replace(/^## (.*$)/gim, '<div class="font-bold text-[#171717] text-sm mt-2 mb-1">$1</div>');
+          safe = safe.replace(/\*\*(.*?)\*\*/g, '<strong class="text-[#171717] font-semibold">$1</strong>');
+          safe = safe.replace(/\*([^\*]+)\*/g, '<em class="text-[#555555] italic">$1</em>');
+          safe = safe.replace(/`([^`]+)`/g, '<code class="px-1 py-0.5 rounded bg-[#F5E8FF] text-[#6F00B5] font-mono text-[11px]">$1</code>');
+          safe = safe.replace(/^\s*-\s+(.*$)/gim, '<div class="flex items-start gap-1.5 ml-1 my-0.5"><span class="text-[#A100FF] font-bold">&bull;</span><span>$1</span></div>');
           safe = safe.replace(/\n\n/g, '<div class="h-1.5"></div>');
           safe = safe.replace(/\n/g, '<br/>');
           return safe;
@@ -1422,8 +1440,6 @@
 
       };
     }
-
-
   </script>
 </body>
 </html>
