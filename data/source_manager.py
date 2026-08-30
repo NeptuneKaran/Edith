@@ -56,6 +56,21 @@ class SemanticDataModel:
 class DataProfiler:
     """Generic data profiler inspecting every column in raw structured business datasets."""
 
+    STRONG_KPI_KEYWORDS = {
+        "revenue", "sales", "mrr", "arr", "churn_rate", "churn", "retention_rate",
+        "retention", "gross_margin", "yield_pct", "yield", "profit", "net_income",
+        "conversion_rate", "nps", "ltv", "gmv", "bookings", "ebitda"
+    }
+    DRIVER_KEYWORDS = {
+        "spend", "cost", "budget", "clicks", "impressions", "cpl", "cac", "discount",
+        "hours", "headcount", "salary", "wage", "reopen_count", "inventory_count",
+        "tickets", "downtime", "duration", "delay"
+    }
+    NEUTRAL_KPI_KEYWORDS = {
+        "amount", "value", "volume", "units", "rate", "score", "variance", "total",
+        "count", "quantity"
+    }
+
     @staticmethod
     def is_reliably_numeric(series: pd.Series) -> Tuple[bool, int, float]:
         """
@@ -217,12 +232,15 @@ class DataProfiler:
                     stats = {"unique_ratio": round(uniq_cnt / max(1, n_rows), 3)}
                 else:
                     semantic_guess = "NUMERIC_MEASURE"
-                    if any(kw in col_lower for kw in [
-                        "revenue", "sales", "gross", "net", "cost", "spend", "loss", "profit",
-                        "amount", "attrition", "defect", "downtime", "hours", "headcount",
-                        "tickets", "rate", "churn", "volume", "units", "score", "value", "mrr",
-                        "arr", "variance", "budget", "salary", "wage", "conversions", "clicks", "cpl"
-                    ]):
+                    tokens = set(t for t in re.sub(r'[^a-zA-Z0-9_]', '_', col_lower).split('_') if t)
+                    matched_strong = [kw for kw in cls.STRONG_KPI_KEYWORDS if kw in tokens or f"_{kw}_" in f"_{col_lower}_" or col_lower.startswith(f"{kw}_") or col_lower.endswith(f"_{kw}")]
+                    matched_driver = [kw for kw in cls.DRIVER_KEYWORDS if kw in tokens or f"_{kw}_" in f"_{col_lower}_" or col_lower.startswith(f"{kw}_") or col_lower.endswith(f"_{kw}")]
+                    
+                    if matched_strong:
+                        suggested_role = "Primary Measure"
+                    elif matched_driver:
+                        suggested_role = "Numeric Driver"
+                    elif any(kw in col_lower for kw in cls.NEUTRAL_KPI_KEYWORDS):
                         suggested_role = "Primary Measure"
                     else:
                         suggested_role = "Numeric Driver"
@@ -274,7 +292,114 @@ class DataProfiler:
         return profiles
 
     @classmethod
-    def profile_dataset(cls, df: pd.DataFrame) -> Dict[str, Any]:
+    def rank_kpi_candidates(
+        cls,
+        profiles: List[Dict[str, Any]],
+        dataset_name: str = "",
+        df: Optional[pd.DataFrame] = None,
+        valid_date_columns: Optional[List[str]] = None
+    ) -> List[Dict[str, Any]]:
+        """
+        Ranks candidate primary measures using a multi-signal explainable scoring model:
+        1. Tiered keyword matching (strong KPI vs neutral vs driver penalties)
+        2. Dataset name token overlap
+        3. Row null coverage
+        4. Time-series lag-1 autocorrelation coherence (when date column is present)
+        5. Scale magnitude tiebreaker
+        """
+        candidates = []
+        import re
+        ds_tokens = set(re.findall(r'[a-zA-Z0-9]+', dataset_name.lower())) - {
+            'data', 'dataset', 'table', 'file', 'csv', 'xlsx', 'performance', 'report', 'analytics'
+        } if dataset_name else set()
+        
+        for p in profiles:
+            if p.get("semantic_guess") != "NUMERIC_MEASURE":
+                continue
+            col = p["column_name"]
+            col_clean = re.sub(r'[^a-zA-Z0-9_]', '_', str(col).lower())
+            tokens = set(t for t in col_clean.split('_') if t)
+            
+            score = 0.0
+            rationale_parts = []
+            
+            # 1. Tiered keyword match
+            matched_strong = [kw for kw in cls.STRONG_KPI_KEYWORDS if kw in tokens or f"_{kw}_" in f"_{col_clean}_" or col_clean.startswith(f"{kw}_") or col_clean.endswith(f"_{kw}")]
+            matched_driver = [kw for kw in cls.DRIVER_KEYWORDS if kw in tokens or f"_{kw}_" in f"_{col_clean}_" or col_clean.startswith(f"{kw}_") or col_clean.endswith(f"_{kw}")]
+            matched_neutral = [kw for kw in cls.NEUTRAL_KPI_KEYWORDS if kw in tokens or f"_{kw}_" in f"_{col_clean}_" or col_clean.startswith(f"{kw}_") or col_clean.endswith(f"_{kw}")]
+            
+            if matched_strong:
+                score += 50.0
+                rationale_parts.append(f"Strong KPI keyword match ({matched_strong[0]})")
+            elif matched_driver:
+                score -= 30.0
+                rationale_parts.append(f"Driver/input keyword match ({matched_driver[0]})")
+            elif matched_neutral:
+                score += 15.0
+                rationale_parts.append(f"General measure keyword ({matched_neutral[0]})")
+                
+            # 2. Dataset name token overlap
+            if ds_tokens:
+                overlap = tokens.intersection(ds_tokens)
+                if overlap:
+                    score += 25.0 * len(overlap)
+                    rationale_parts.append(f"Matches dataset name ({', '.join(sorted(overlap))})")
+                    
+            # 3. Null coverage
+            null_pct = float(p.get("null_pct", 0.0))
+            coverage_score = round((1.0 - (null_pct / 100.0)) * 15.0, 2)
+            score += coverage_score
+            if null_pct < 5.0:
+                rationale_parts.append(f"{100.0 - null_pct:.1f}% row coverage")
+            elif null_pct > 20.0:
+                rationale_parts.append(f"{null_pct:.1f}% null rate penalty")
+                
+            # 4. Time-series coherence (lag-1 autocorrelation)
+            if df is not None and valid_date_columns and len(valid_date_columns) > 0:
+                date_col = valid_date_columns[0]
+                if date_col in df.columns and col in df.columns:
+                    try:
+                        temp = df[[date_col, col]].dropna()
+                        if len(temp) >= 5:
+                            temp[date_col] = pd.to_datetime(temp[date_col], errors="coerce")
+                            temp = temp.dropna().sort_values(date_col)
+                            num_s = cls.clean_numeric_series(temp[col]).dropna()
+                            if len(num_s) >= 5:
+                                ac = float(num_s.autocorr(lag=1))
+                                if not np.isnan(ac) and ac > 0.0:
+                                    coherence_score = round(ac * 15.0, 2)
+                                    score += coherence_score
+                                    if ac >= 0.4:
+                                        rationale_parts.append(f"Smooth temporal trend (lag-1 r={ac:.2f})")
+                                    else:
+                                        rationale_parts.append(f"Temporal trend (lag-1 r={ac:.2f})")
+                    except Exception:
+                        pass
+                        
+            # 5. Scale / Magnitude tiebreaker
+            stats = p.get("stats", {})
+            magnitude = float(stats.get("median", stats.get("mean", 0.0)))
+            
+            rationale = "; ".join(rationale_parts) if rationale_parts else "Standard numeric measure"
+            candidates.append({
+                "column_name": col,
+                "score": score,
+                "magnitude": magnitude,
+                "rationale": rationale
+            })
+            
+        candidates.sort(key=lambda c: (round(c["score"] / 2.0) * 2.0, c["score"], c["magnitude"]), reverse=True)
+        return [
+            {
+                "column_name": c["column_name"],
+                "score": round(c["score"], 1),
+                "rationale": c["rationale"]
+            }
+            for c in candidates[:3]
+        ]
+
+    @classmethod
+    def profile_dataset(cls, df: pd.DataFrame, dataset_name: str = "") -> Dict[str, Any]:
         """Inspects and returns a complete structural and statistical profile of a dataset."""
         profiles = cls.profile_dataframe(df)
         valid_num = cls.get_valid_numeric_columns(df)
@@ -283,11 +408,18 @@ class DataProfiler:
             p["column_name"] for p in profiles 
             if p["column_name"] not in valid_num and p["column_name"] not in valid_dates
         ]
+        kpi_candidates = cls.rank_kpi_candidates(
+            profiles=profiles,
+            dataset_name=dataset_name,
+            df=df,
+            valid_date_columns=valid_dates
+        )
         return {
             "profiles": profiles,
             "valid_numeric_columns": valid_num,
             "valid_date_columns": valid_dates,
             "valid_dimension_columns": valid_dims,
+            "kpi_candidates": kpi_candidates,
             "total_rows": len(df),
             "total_columns": len(df.columns)
         }

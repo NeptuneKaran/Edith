@@ -127,6 +127,33 @@ class TestGenericDataSources(unittest.TestCase):
         self.assertGreater(col_dict["average_salary"]["stats"]["mean"], 0)
         self.assertEqual(col_dict["turnover_rate"]["null_pct"], 0.0)
 
+    def test_01b_kpi_candidate_ranking(self):
+        """Verifies multi-signal KPI candidate ranking accurately prioritizes true outcome metrics over drivers."""
+        df = pd.DataFrame({
+            "employee_id": [101, 102, 103, 104, 105, 106, 107],
+            "units_sold": [100, 105, 110, 95, 120, 115, 130],
+            "discount_pct": [0.1, 0.1, 0.15, 0.2, 0.1, 0.1, 0.05],
+            "marketing_spend": [5000, 5200, 6000, 5800, 7000, 6500, 7200],
+            "gross_revenue_usd": [10000, 10500, 11000, 9500, 12000, 11500, 13000],
+            "region": ["North"] * 7,
+            "date": pd.date_range("2026-01-01", periods=7, freq="D")
+        })
+        profile = DataProfiler.profile_dataset(df, dataset_name="Regional Sales Performance")
+        kpi_cands = profile.get("kpi_candidates", [])
+        self.assertGreater(len(kpi_cands), 0)
+        
+        # gross_revenue_usd must rank #1 over units_sold and marketing_spend
+        self.assertEqual(kpi_cands[0]["column_name"], "gross_revenue_usd")
+        self.assertIn("revenue", kpi_cands[0]["rationale"].lower())
+        
+        # marketing_spend must have lower score than gross_revenue_usd and units_sold
+        cand_map = {c["column_name"]: c for c in kpi_cands}
+        if "marketing_spend" in cand_map:
+            self.assertLess(cand_map["marketing_spend"]["score"], kpi_cands[0]["score"])
+            
+        # employee_id must NOT be in kpi_candidates
+        self.assertNotIn("employee_id", cand_map)
+
     def test_02_feasibility_time_series(self):
         """Verifies feasibility checks for a time-series dataset."""
         model = SemanticDataModel(

@@ -273,13 +273,36 @@
 
           <form @submit.prevent="submitSemanticConfiguration()" class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
             
-            <div class="space-y-1">
+            <div class="space-y-1 md:col-span-1">
               <label class="font-semibold text-[#555555]">Primary Measure Column</label>
-              <select x-model="configForm.primary_measure" class="w-full bg-[#FAFAFA] border border-[#D5D5D5] rounded px-3 py-2 text-xs">
+              <select x-model="configForm.primary_measure" @change="selectKpiCandidate(configForm.primary_measure)" class="w-full bg-[#FAFAFA] border border-[#D5D5D5] rounded px-3 py-2 text-xs">
                 <template x-for="col in uploadData?.valid_numeric_columns || []" :key="col">
                   <option :value="col" x-text="col"></option>
                 </template>
               </select>
+
+              <!-- Explainable KPI Candidate Suggestions -->
+              <div x-show="uploadData?.kpi_candidates && uploadData.kpi_candidates.length > 0" class="pt-1.5 space-y-1">
+                <div class="text-[10px] text-[#737373] font-semibold flex items-center gap-1 uppercase tracking-wider">
+                  <span class="text-[#A100FF]">★</span> Suggested KPI Candidates:
+                </div>
+                <div class="flex flex-wrap gap-1.5">
+                  <template x-for="cand in uploadData?.kpi_candidates || []" :key="cand.column_name">
+                    <button type="button" @click="selectKpiCandidate(cand.column_name)"
+                            :class="configForm.primary_measure === cand.column_name ? 'bg-[#F5E8FF] text-[#6F00B5] border-[#A100FF] font-bold shadow-2xs' : 'bg-[#FAFAFA] text-[#555555] border-[#E5E5E5] hover:bg-[#F5F5F5]'"
+                            :title="cand.rationale"
+                            class="px-2 py-1 rounded border text-[11px] transition flex items-center gap-1 cursor-pointer">
+                      <span x-text="cand.column_name"></span>
+                      <span class="text-[9px] opacity-75" x-text="'(' + cand.score + ' pts)'"></span>
+                    </button>
+                  </template>
+                </div>
+                <template x-for="cand in (uploadData?.kpi_candidates || []).filter(c => c.column_name === configForm.primary_measure)" :key="cand.column_name">
+                  <div class="text-[10px] text-[#6F00B5] bg-[#FAF5FF] border border-[#F3E8FF] rounded p-1.5 mt-1 leading-snug">
+                    <strong class="font-semibold">Why this was suggested:</strong> <span x-text="cand.rationale"></span>
+                  </div>
+                </template>
+              </div>
             </div>
 
             <div class="space-y-1">

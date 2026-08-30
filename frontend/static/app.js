@@ -251,7 +251,7 @@ function edithApp(activePage = 'overview', sessionPersonaId = 'executive') {
         if (!res.ok) throw new Error(data.detail || 'Upload failed');
         
         if (data.files && data.files.length > 1) {
-          this.uploadedFiles = data.files.map(f => ({...f, role: f.suggested_role || 'dimension'}));
+          this.uploadedFiles = data.files.map(f => ({...f, role: 'dimension'}));
           this.detectedRelationships = data.relationships || [];
           // Auto-mark the first file with most numeric columns as fact
           const factFile = this.uploadedFiles.reduce((a, b) => (a.valid_numeric_columns?.length || 0) >= (b.valid_numeric_columns?.length || 0) ? a : b);
@@ -262,7 +262,8 @@ function edithApp(activePage = 'overview', sessionPersonaId = 'executive') {
           this.uploadData = data.files ? data.files[0] : data;
           const file = files[0];
           this.configForm.dataset_name = file.name.replace(/\.[^/.]+$/, '').replace(/_/g, ' ').toUpperCase();
-          this.configForm.primary_measure = (this.uploadData.valid_numeric_columns || [])[0] || '';
+          const topKpi = (this.uploadData.kpi_candidates || [])[0]?.column_name;
+          this.configForm.primary_measure = topKpi || (this.uploadData.valid_numeric_columns || [])[0] || '';
           this.configForm.primary_measure_label = this.configForm.primary_measure.replace(/_/g, ' ').toUpperCase();
           this.configForm.primary_measure_unit = 'Units';
           this.configForm.date_column = (this.uploadData.valid_date_columns || [])[0] || 'None (Snapshot)';
@@ -278,6 +279,13 @@ function edithApp(activePage = 'overview', sessionPersonaId = 'executive') {
       }
     },
 
+    selectKpiCandidate(colName) {
+      if (!colName) return;
+      this.configForm.primary_measure = colName;
+      this.configForm.primary_measure_label = colName.replace(/_/g, ' ').toUpperCase();
+      this.configForm.driver_columns = (this.uploadData?.valid_numeric_columns || []).filter(c => c !== colName).slice(0, 3);
+    },
+
     confirmRelationships() {
       const factFile = this.uploadedFiles.find(f => f.role === 'fact');
       if (!factFile) {
@@ -286,7 +294,8 @@ function edithApp(activePage = 'overview', sessionPersonaId = 'executive') {
       }
       this.uploadData = factFile;
       this.configForm.dataset_name = factFile.filename.replace(/\.[^/.]+$/, '').replace(/_/g, ' ').toUpperCase();
-      this.configForm.primary_measure = (factFile.valid_numeric_columns || [])[0] || '';
+      const topKpi = (factFile.kpi_candidates || [])[0]?.column_name;
+      this.configForm.primary_measure = topKpi || (factFile.valid_numeric_columns || [])[0] || '';
       this.configForm.primary_measure_label = this.configForm.primary_measure.replace(/_/g, ' ').toUpperCase();
       this.configForm.primary_measure_unit = 'Units';
       this.configForm.date_column = (factFile.valid_date_columns || [])[0] || 'None (Snapshot)';

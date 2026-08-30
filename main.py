@@ -429,6 +429,7 @@ async def upload_dataset_files(
             "valid_numeric_columns": profile["valid_numeric_columns"],
             "valid_date_columns": profile["valid_date_columns"],
             "valid_dimension_columns": profile["valid_dimension_columns"],
+            "kpi_candidates": profile.get("kpi_candidates", []),
             "profiles": profile["profiles"],
             "grain": grain,
             "preview": preview_rows
@@ -480,6 +481,7 @@ async def upload_dataset_files(
             "valid_numeric_columns": first_resp["valid_numeric_columns"],
             "valid_date_columns": first_resp["valid_date_columns"],
             "valid_dimension_columns": first_resp["valid_dimension_columns"],
+            "kpi_candidates": first_resp.get("kpi_candidates", []),
             "profiles": first_resp["profiles"],
             "preview": first_resp["preview"],
             "message": f"Successfully parsed and profiled {first_resp['filename']} ({first_resp['total_rows']} rows, {first_resp['total_columns']} columns)"
