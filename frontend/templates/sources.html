@@ -3,10 +3,123 @@
 {% block content %}
 <!-- SCREEN 0: DATA SOURCES & INTAKE -->
       <!-- =================================================================== -->
-      <div class="space-y-5">
-        <div>
-          <h2 class="text-xl font-bold text-[#171717] tracking-tight">Data Sources & Semantic Modeling</h2>
-          <p class="text-xs text-[#555555] mt-1">Connect, profile, and calibrate arbitrary business datasets with deterministic semantic governance.</p>
+      <div class="space-y-6">
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 class="text-xl font-bold text-[#171717] tracking-tight">Data Sources & Benchmark Management</h2>
+            <p class="text-xs text-[#555555] mt-1">Switch between 3 calibrated enterprise benchmarks or upload and calibrate custom business datasets.</p>
+          </div>
+        </div>
+
+        <!-- 3 Calibrated Benchmarks Selection Matrix -->
+        <div class="space-y-3">
+          <div class="flex items-center justify-between">
+            <h3 class="text-sm font-bold text-[#171717] flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-[#A100FF]"></span>
+              Calibrated Structural Enterprise Benchmarks
+            </h3>
+            <span class="text-[11px] text-[#737373]">Grounded in deterministic causal engines & semantic contracts</span>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            
+            <!-- Benchmark 1: B2B SaaS Pricing -->
+            <div class="border rounded-lg p-4 space-y-3 transition flex flex-col justify-between"
+                 :class="sourceInfo.benchmark_id === 'b2b_saas_pricing' && sourceInfo.is_demo ? 'bg-[#FAF5FF] border-[#A100FF] shadow-sm ring-1 ring-[#A100FF]' : 'bg-white border-[#E5E5E5] hover:border-[#D4D4D4]'">
+              <div class="space-y-2">
+                <div class="flex items-center justify-between">
+                  <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded"
+                        :class="sourceInfo.benchmark_id === 'b2b_saas_pricing' && sourceInfo.is_demo ? 'bg-[#A100FF] text-white' : 'bg-[#F5F5F5] text-[#555555]'">
+                    Benchmark 01
+                  </span>
+                  <span class="text-[11px] font-semibold text-[#16803C]">Single-Grain (Weekly)</span>
+                </div>
+                <h4 class="text-sm font-bold text-[#171717]">B2B SaaS Commercial Ledger</h4>
+                <p class="text-[11px] text-[#555555] leading-relaxed">
+                  52-week commercial ledger. Focuses on a <strong>+12% pricing elasticity shock</strong> on Enterprise contracts in Region B vs ApexTech competitor promotions.
+                </p>
+                <div class="space-y-1 text-[11px] text-[#737373] pt-1">
+                  <div><strong>Primary Metric:</strong> Gross Sales Revenue ($)</div>
+                  <div><strong>Root Cause:</strong> Pricing Elasticity (H1, 91.2 pts)</div>
+                  <div><strong>Refuted Driver:</strong> Inventory Fill Rate (99.4%)</div>
+                </div>
+              </div>
+
+              <div class="pt-2">
+                <button type="button" @click="switchBenchmark('b2b_saas_pricing')"
+                        :disabled="sourceInfo.benchmark_id === 'b2b_saas_pricing' && sourceInfo.is_demo"
+                        class="w-full py-2 px-3 rounded text-xs font-bold transition flex items-center justify-center gap-1.5 cursor-pointer"
+                        :class="sourceInfo.benchmark_id === 'b2b_saas_pricing' && sourceInfo.is_demo ? 'bg-[#E9D5FF] text-[#6F00B5] cursor-default' : 'bg-[#A100FF] hover:bg-[#6F00B5] text-white shadow-xs'">
+                  <span x-text="sourceInfo.benchmark_id === 'b2b_saas_pricing' && sourceInfo.is_demo ? '✓ Active Benchmark' : 'Activate Benchmark 01'"></span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Benchmark 2: Subscription Growth & Retention -->
+            <div class="border rounded-lg p-4 space-y-3 transition flex flex-col justify-between"
+                 :class="sourceInfo.benchmark_id === 'saas_churn_roas' ? 'bg-[#FAF5FF] border-[#A100FF] shadow-sm ring-1 ring-[#A100FF]' : 'bg-white border-[#E5E5E5] hover:border-[#D4D4D4]'">
+              <div class="space-y-2">
+                <div class="flex items-center justify-between">
+                  <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded"
+                        :class="sourceInfo.benchmark_id === 'saas_churn_roas' ? 'bg-[#A100FF] text-white' : 'bg-[#F5F5F5] text-[#555555]'">
+                    Benchmark 02
+                  </span>
+                  <span class="text-[11px] font-semibold text-[#6F00B5]">Multi-Cadence & Text</span>
+                </div>
+                <h4 class="text-sm font-bold text-[#171717]">Subscription Growth & Retention</h4>
+                <p class="text-[11px] text-[#555555] leading-relaxed">
+                  Weekly subscriptions, daily ad spend, monthly tickets, and CS call notes. Onboarding wizard revamp causes <strong>churn surge (2.1% &rarr; 8.6%)</strong>; separates marketing confounder.
+                </p>
+                <div class="space-y-1 text-[11px] text-[#737373] pt-1">
+                  <div><strong>Primary Metric:</strong> Customer Churn Rate (%)</div>
+                  <div><strong>Root Cause:</strong> Onboarding Redesign (S1, 88.5 pts)</div>
+                  <div><strong>Key Feature:</strong> Sparse History on AI Beta tier</div>
+                </div>
+              </div>
+
+              <div class="pt-2">
+                <button type="button" @click="switchBenchmark('saas_churn_roas')"
+                        :disabled="sourceInfo.benchmark_id === 'saas_churn_roas'"
+                        class="w-full py-2 px-3 rounded text-xs font-bold transition flex items-center justify-center gap-1.5 cursor-pointer"
+                        :class="sourceInfo.benchmark_id === 'saas_churn_roas' ? 'bg-[#E9D5FF] text-[#6F00B5] cursor-default' : 'bg-[#A100FF] hover:bg-[#6F00B5] text-white shadow-xs'">
+                  <span x-text="sourceInfo.benchmark_id === 'saas_churn_roas' ? '✓ Active Benchmark' : 'Activate Benchmark 02'"></span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Benchmark 3: Retail Fulfillment & Demand -->
+            <div class="border rounded-lg p-4 space-y-3 transition flex flex-col justify-between"
+                 :class="sourceInfo.benchmark_id === 'retail_fulfillment' ? 'bg-[#FAF5FF] border-[#A100FF] shadow-sm ring-1 ring-[#A100FF]' : 'bg-white border-[#E5E5E5] hover:border-[#D4D4D4]'">
+              <div class="space-y-2">
+                <div class="flex items-center justify-between">
+                  <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded"
+                        :class="sourceInfo.benchmark_id === 'retail_fulfillment' ? 'bg-[#A100FF] text-white' : 'bg-[#F5F5F5] text-[#555555]'">
+                    Benchmark 03
+                  </span>
+                  <span class="text-[11px] font-semibold text-[#D97706]">Ambiguous Near-Tied Pair</span>
+                </div>
+                <h4 class="text-sm font-bold text-[#171717]">Regional Retail & Fulfillment</h4>
+                <p class="text-[11px] text-[#555555] leading-relaxed">
+                  Weekly sales, daily inventory, irregular shipment logs, and supplier emails. Features a <strong>genuinely ambiguous pair:</strong> 48% stockout vs severe blizzard foot-traffic dip.
+                </p>
+                <div class="space-y-1 text-[11px] text-[#737373] pt-1">
+                  <div><strong>Primary Metric:</strong> Weekly Store Revenue ($)</div>
+                  <div><strong>Ambiguous Pair:</strong> Stockout (58.2) vs Blizzard (54.0)</div>
+                  <div><strong>Refuted Driver:</strong> Retail Pricing ($0 delta)</div>
+                </div>
+              </div>
+
+              <div class="pt-2">
+                <button type="button" @click="switchBenchmark('retail_fulfillment')"
+                        :disabled="sourceInfo.benchmark_id === 'retail_fulfillment'"
+                        class="w-full py-2 px-3 rounded text-xs font-bold transition flex items-center justify-center gap-1.5 cursor-pointer"
+                        :class="sourceInfo.benchmark_id === 'retail_fulfillment' ? 'bg-[#E9D5FF] text-[#6F00B5] cursor-default' : 'bg-[#A100FF] hover:bg-[#6F00B5] text-white shadow-xs'">
+                  <span x-text="sourceInfo.benchmark_id === 'retail_fulfillment' ? '✓ Active Benchmark' : 'Activate Benchmark 03'"></span>
+                </button>
+              </div>
+            </div>
+
+          </div>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">

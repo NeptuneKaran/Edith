@@ -214,6 +214,39 @@ def get_data_quality_report() -> Dict[str, Any]:
     repo = DataRepository.get_instance()
     return repo.get_data_quality_report()
 
+
+def search_unstructured_evidence(query: str, source: Optional[str] = None) -> List[Dict[str, Any]]:
+    """
+    Searches unstructured free-text tables (CS call notes, cancellation surveys, supplier emails, reviews, CRM notes)
+    for relevant qualitative evidence, customer quotes, and operational commentary matching query themes.
+    """
+    repo = DataRepository.get_instance()
+    records = repo.get_unstructured_records(table_name=source)
+    if not records:
+        return []
+        
+    query_words = [w.lower() for w in query.split() if len(w) > 2]
+    matches = []
+    
+    for r in records:
+        text_fields = [str(v) for k, v in r.items() if "text" in k or "reason" in k or "note" in k or "comment" in k]
+        full_text = " ".join(text_fields)
+        
+        hit_words = [w for w in query_words if w in full_text.lower()]
+        if hit_words or not query_words:
+            matches.append({
+                "source_table": r.get("_source_table", "unstructured_feed"),
+                "record_id": r.get("note_id") or r.get("response_id") or r.get("email_id") or r.get("review_id") or "N/A",
+                "date": r.get("date", "N/A"),
+                "region": r.get("region", "Global"),
+                "segment_or_category": r.get("customer_tier") or r.get("sku_category") or r.get("store_category") or "All",
+                "quoted_text": full_text.strip(),
+                "matching_keywords": hit_words
+            })
+            
+    matches.sort(key=lambda m: len(m["matching_keywords"]), reverse=True)
+    return matches[:10]
+
 # =============================================================================
 # 2. TOOL DECLARATIONS & DISPATCHER
 # =============================================================================
@@ -232,7 +265,8 @@ AVAILABLE_TOOLS = [
     get_data_source_metadata,
     get_driver_correlations,
     get_distribution_summary,
-    get_data_quality_report
+    get_data_quality_report,
+    search_unstructured_evidence
 ]
 
 TOOL_REGISTRY = {
@@ -249,7 +283,8 @@ TOOL_REGISTRY = {
     "get_data_source_metadata": get_data_source_metadata,
     "get_driver_correlations": get_driver_correlations,
     "get_distribution_summary": get_distribution_summary,
-    "get_data_quality_report": get_data_quality_report
+    "get_data_quality_report": get_data_quality_report,
+    "search_unstructured_evidence": search_unstructured_evidence
 }
 
 def execute_tool_call(tool_name: str, args: Dict[str, Any], persona_id: Optional[str] = None) -> Any:

@@ -1,10 +1,14 @@
 """
 config/semantic_contracts.py
-Governed KPI definitions, metric dependency definitions, dimension metadata, and candidate driver catalog.
+Governed KPI definitions, metric dependency definitions, dimension metadata, and candidate driver catalogs
+for all 3 calibrated enterprise benchmarks:
+1. B2B SaaS Sales Pricing Incident (b2b_saas_pricing)
+2. Subscription Growth & Retention (saas_churn_roas)
+3. Regional Retail Demand & Fulfillment (retail_fulfillment)
 """
 from typing import Dict, List, Any
 
-# Governed KPI definitions
+# Governed KPI definitions across all benchmarks
 KPIS: Dict[str, Dict[str, Any]] = {
     "kpi_b2b_sales": {
         "id": "kpi_b2b_sales",
@@ -37,10 +41,10 @@ KPIS: Dict[str, Dict[str, Any]] = {
         "unit": "%",
         "format": "{:.2f}%",
         "target": 2.10,
-        "description": "Annualized percentage of active recurring contract value lost due to cancellations.",
-        "primary_dimensions": ["region", "customer_tier"],
-        "source_systems": ["Customer Success Hub"],
-        "refresh_cadence": "Weekly Grain"
+        "description": "Annualized percentage of active recurring subscriptions lost due to cancellations.",
+        "primary_dimensions": ["region", "customer_tier", "product_tier"],
+        "source_systems": ["Subscription Billing Ledger", "Support Ticket Mart", "CS Call Notes"],
+        "refresh_cadence": "Multi-Cadence (Weekly / Monthly / Free-text)"
     },
     "kpi_marketing_roas": {
         "id": "kpi_marketing_roas",
@@ -49,10 +53,34 @@ KPIS: Dict[str, Dict[str, Any]] = {
         "unit": "x",
         "format": "{:.2f}x",
         "target": 4.20,
-        "description": "Return on ad spend across digital acquisition, search, and regional field events.",
+        "description": "Return on ad spend across Search, Social, Email, and Partner acquisition channels.",
         "primary_dimensions": ["channel", "region"],
-        "source_systems": ["AdOps Engine"],
+        "source_systems": ["AdOps Engine Daily Feeds"],
         "refresh_cadence": "Daily Grain"
+    },
+    "kpi_retail_sales": {
+        "id": "kpi_retail_sales",
+        "name": "Weekly Store Revenue",
+        "category": "Retail Commercial",
+        "unit": "$",
+        "format": "${:,.0f}",
+        "target": 210_000,
+        "description": "Weekly store sales revenue across Apparel, Electronics, Groceries, and Home departments.",
+        "primary_dimensions": ["region", "store_category"],
+        "source_systems": ["POS Store Ledgers", "Supplier Logistics", "Customer Reviews"],
+        "refresh_cadence": "Multi-Cadence (Weekly / Daily / Irregular)"
+    },
+    "kpi_stockout_rate": {
+        "id": "kpi_stockout_rate",
+        "name": "Store Stockout Rate",
+        "category": "Supply Chain & Fulfillment",
+        "unit": "%",
+        "format": "{:.1f}%",
+        "target": 2.0,
+        "description": "Percentage of daily active SKU inventory out of stock on store shelves.",
+        "primary_dimensions": ["region", "sku_category"],
+        "source_systems": ["WMS Inventory Daily Logs", "Supplier Shipment Manifests"],
+        "refresh_cadence": "Daily / Event-based Grain"
     }
 }
 
@@ -64,14 +92,17 @@ METRIC_DEFINITIONS: Dict[str, Dict[str, Any]] = {
         "category": "Revenue & Commercial",
         "unit": "$",
         "role": "TARGET",
-        "upstream_drivers": ["units_sold", "unit_price", "pricing_complaints", "competitor_activity"],
-        "downstream_effects": ["gross_margin", "net_profit"],
+        "upstream_drivers": ["units_sold", "unit_price", "pricing_complaints", "competitor_activity", "cancellations", "foot_traffic", "stockout_flag"],
+        "downstream_effects": ["gross_margin", "net_profit", "mrr"],
         "decomposition_formula": "units_sold * unit_price",
         "expected_direction": {
-            "units_sold": "+", # Units sold down -> Revenue down
-            "unit_price": "-", # Price up -> Demand volume down (elasticity)
-            "pricing_complaints": "-", # Complaints up -> Deal closure down
-            "competitor_activity": "-" # Competitor discount up -> Win rate down
+            "units_sold": "+",
+            "unit_price": "-",
+            "pricing_complaints": "-",
+            "competitor_activity": "-",
+            "cancellations": "-",
+            "foot_traffic": "+",
+            "stockout_flag": "-"
         }
     },
     "units_sold": {
@@ -151,15 +182,45 @@ METRIC_DEFINITIONS: Dict[str, Dict[str, Any]] = {
         "name": "Customer Churn Rate",
         "category": "Customer Retention",
         "unit": "%",
-        "role": "DOWNSTREAM_EFFECT",
-        "parent_metric": "gross_revenue",
-        "upstream_drivers": [],
-        "downstream_effects": ["gross_revenue"]
+        "role": "TARGET",
+        "upstream_drivers": ["onboarding_tickets", "cs_call_friction", "exit_surveys"],
+        "downstream_effects": ["mrr", "gross_revenue"]
+    },
+    "marketing_roas": {
+        "id": "marketing_roas",
+        "name": "Marketing ROAS",
+        "category": "Marketing Acquisition",
+        "unit": "x",
+        "role": "UPSTREAM_INDIRECT",
+        "upstream_drivers": ["channel_spend", "conversion_rate"],
+        "downstream_effects": ["new_subscriptions"]
+    },
+    "stockout_flag": {
+        "id": "stockout_flag",
+        "name": "Store Shelf Stockouts",
+        "category": "Supply Chain",
+        "unit": "Stockout Rate %",
+        "role": "UPSTREAM_DIRECT",
+        "upstream_drivers": ["supplier_delays"],
+        "downstream_effects": ["store_sales_weekly"]
+    },
+    "foot_traffic": {
+        "id": "foot_traffic",
+        "name": "Retail Store Foot Traffic",
+        "category": "Customer Demand",
+        "unit": "Shoppers/wk",
+        "role": "EXTERNAL_FACTOR",
+        "upstream_drivers": ["weather_severity"],
+        "downstream_effects": ["store_sales_weekly"]
     }
 }
 
-# Structured Candidate Hypotheses Catalog
-CANDIDATE_DRIVERS = [
+# ==============================================================================
+# CANDIDATE HYPOTHESIS CATALOGS BY BENCHMARK
+# ==============================================================================
+
+# Catalog 1: B2B SaaS Sales Pricing Incident (Original Benchmark)
+CANDIDATE_DRIVERS_PRICING = [
     {
         "id": "H1_PRICING_PRESSURE",
         "name": "Pricing Elasticity & Plan Hike",
@@ -201,12 +262,12 @@ CANDIDATE_DRIVERS = [
     },
     {
         "id": "H4_CUSTOMER_CHURN",
-        "name": "Customer Retention & Logo Churn",
+        "name": "Account Cancellation Wave",
         "category": "Customer Retention",
-        "description": "Elevated customer contract cancellations or early terminations depleted active recurring base.",
-        "expected_lead_time_weeks": [0, 2],
+        "description": "Elevated customer contract churn and mid-cycle subscription cancellations drained recurring revenue baseline.",
+        "expected_lead_time_weeks": [1, 3],
         "controllable": True,
-        "lever_type": "customer_success_intervention",
+        "lever_type": "csm_intervention",
         "telemetry_available": True,
         "metric_node": "customer_churn",
         "dependency_role": "DOWNSTREAM_EFFECT",
@@ -214,12 +275,12 @@ CANDIDATE_DRIVERS = [
     },
     {
         "id": "H5_PRODUCT_DEFECT",
-        "name": "Product Quality & SLA Defect",
+        "name": "Core Platform Outage / Defect",
         "category": "Product / Engineering",
-        "description": "Critical software service outages or SLA defects triggered customer payment withholding.",
+        "description": "Unresolved Sev-1 software bugs and platform downtime degraded user experience, driving buyer dissatisfaction.",
         "expected_lead_time_weeks": [0, 2],
         "controllable": True,
-        "lever_type": "engineering_hotfix",
+        "lever_type": "qa_remediation",
         "telemetry_available": True,
         "metric_node": "service_defect_complaints",
         "dependency_role": "UPSTREAM_INDIRECT",
@@ -227,25 +288,25 @@ CANDIDATE_DRIVERS = [
     },
     {
         "id": "H6_CHANNEL_EXECUTION",
-        "name": "Sales Channel / Partner Friction",
-        "category": "Sales Operations",
-        "description": "Partner network commission tier restructuring disincentivized regional reseller distribution.",
-        "expected_lead_time_weeks": [1, 4],
+        "name": "Partner Channel Commission Friction",
+        "category": "Partner Operations",
+        "description": "Restructuring of regional reseller commission splits disincentivized tier-1 channel partners.",
+        "expected_lead_time_weeks": [2, 4],
         "controllable": True,
-        "lever_type": "channel_incentive_restructure",
-        "telemetry_available": False,
-        "metric_node": "channel_friction",
+        "lever_type": "commission_realignment",
+        "telemetry_available": False, # Intentionally missing to demonstrate NOT_TESTABLE
+        "metric_node": "channel_commissions",
         "dependency_role": "UPSTREAM_INDIRECT",
         "required_tables": ["partner_commissions"]
     },
     {
         "id": "H7_REGIONAL_SHOCK",
-        "name": "Regional Geographic Shock",
-        "category": "Regional Market",
-        "description": "Region-specific regulatory or macroeconomic disruption impacted all commercial commerce in Region B.",
+        "name": "Localized Regulatory / Tax Event",
+        "category": "Macro Environment",
+        "description": "Sudden localized corporate compliance mandates in Region B delayed enterprise procurement sign-offs.",
         "expected_lead_time_weeks": [1, 4],
         "controllable": False,
-        "lever_type": "regional_allocation",
+        "lever_type": "legal_structuring",
         "telemetry_available": True,
         "metric_node": "gross_revenue",
         "dependency_role": "EXTERNAL_FACTOR",
@@ -253,15 +314,138 @@ CANDIDATE_DRIVERS = [
     },
     {
         "id": "H8_SUPPLY_CONSTRAINT",
-        "name": "Supply & Fulfillment Bottleneck",
-        "category": "Supply Chain / Fulfillment",
-        "description": "Deployment hardware appliance shortages or warehouse logistics backorders constrained delivery.",
+        "name": "Hardware Fulfillment / Inventory Outage",
+        "category": "Supply Chain",
+        "description": "Severe supply chain stockouts prevented customer onboarding and hardware token delivery.",
         "expected_lead_time_weeks": [0, 2],
         "controllable": True,
-        "lever_type": "expedited_fulfillment",
+        "lever_type": "inventory_reallocation",
         "telemetry_available": True,
         "metric_node": "inventory_fill_rate",
         "dependency_role": "UPSTREAM_INDIRECT",
         "required_tables": ["inventory"]
     }
 ]
+
+# Catalog 2: Subscription Growth & Retention (saas_churn_roas)
+CANDIDATE_DRIVERS_SUBSCRIPTIONS = [
+    {
+        "id": "S1_ONBOARDING_FLOW_CHANGE",
+        "name": "Self-Serve Onboarding Flow Redesign",
+        "category": "Product Experience",
+        "description": "New self-serve onboarding wizard launched in Week 48 created user confusion and silent setup abandonment, driving a sharp surge in cancellations 2 weeks later.",
+        "expected_lead_time_weeks": [2, 3],
+        "controllable": True,
+        "lever_type": "onboarding_rollback",
+        "telemetry_available": True,
+        "metric_node": "customer_churn",
+        "dependency_role": "UPSTREAM_DIRECT",
+        "required_tables": ["subscriptions_weekly", "support_tickets_monthly", "cs_call_notes", "exit_survey_comments"]
+    },
+    {
+        "id": "S2_MARKETING_REALLOCATION",
+        "name": "Acquisition Channel Budget Shift",
+        "category": "Marketing Operations",
+        "description": "Reallocating ad spend from high-intent Search to broad Social in Week 48 degraded inbound lead conversion and depressed Marketing ROAS (Confounder against Churn).",
+        "expected_lead_time_weeks": [0, 2],
+        "controllable": True,
+        "lever_type": "channel_rebalance",
+        "telemetry_available": True,
+        "metric_node": "marketing_roas",
+        "dependency_role": "UPSTREAM_INDIRECT",
+        "required_tables": ["marketing_spend_daily"]
+    },
+    {
+        "id": "S3_MRR_CONTRACTION",
+        "name": "Monthly Recurring Revenue (MRR) Contraction",
+        "category": "Financial Impact",
+        "description": "Loss of active subscription cohorts directly eroded monthly recurring revenue (MRR) baseline in Region B.",
+        "expected_lead_time_weeks": [0, 1],
+        "controllable": False,
+        "lever_type": "financial_hedging",
+        "telemetry_available": True,
+        "metric_node": "gross_revenue",
+        "dependency_role": "DOWNSTREAM_EFFECT",
+        "required_tables": ["subscriptions_weekly"]
+    },
+    {
+        "id": "S4_COMPETITOR_POACHING",
+        "name": "Competitor Head-Hunting & Poaching",
+        "category": "External Market",
+        "description": "Competitor targeted mid-market active logos with free migration credits and custom buyout incentives.",
+        "expected_lead_time_weeks": [1, 4],
+        "controllable": False,
+        "lever_type": "contract_lockin",
+        "telemetry_available": False, # Intentionally missing to demonstrate NOT_TESTABLE
+        "metric_node": "competitor_poaching_feed",
+        "dependency_role": "EXTERNAL_FACTOR",
+        "required_tables": ["competitor_intel_feed"]
+    }
+]
+
+# Catalog 3: Regional Retail Demand & Fulfillment (retail_fulfillment)
+CANDIDATE_DRIVERS_RETAIL = [
+    {
+        "id": "R1_SUPPLIER_STOCKOUT",
+        "name": "Port Freight Delays & In-Store Stockouts",
+        "category": "Supply Chain & Logistics",
+        "description": "Customs clearance bottlenecks at the Seattle container terminal triggered 9-12 day shipment delays and empty apparel shelves (48% stockout rate in Region North).",
+        "expected_lead_time_weeks": [1, 2],
+        "controllable": True,
+        "lever_type": "expedite_supplier",
+        "telemetry_available": True,
+        "metric_node": "stockout_flag",
+        "dependency_role": "UPSTREAM_DIRECT",
+        "required_tables": ["inventory_daily", "supplier_shipment_logs", "supplier_emails", "customer_reviews"]
+    },
+    {
+        "id": "R2_REGIONAL_WEATHER_EVENT",
+        "name": "Extreme Winter Storm & Foot Traffic Dip",
+        "category": "External Environment",
+        "description": "Historic blizzard conditions in Region North suppressed retail store foot traffic by -34% during the exact same February window (Competing Ambiguous Driver).",
+        "expected_lead_time_weeks": [0, 1],
+        "controllable": False,
+        "lever_type": "omnichannel_fulfillment",
+        "telemetry_available": True,
+        "metric_node": "foot_traffic",
+        "dependency_role": "EXTERNAL_FACTOR",
+        "required_tables": ["regional_events_monthly", "store_sales_weekly"]
+    },
+    {
+        "id": "R3_PRICING_CHANGE",
+        "name": "Store List Price Adjustments",
+        "category": "Commercial Strategy",
+        "description": "Retail price adjustments on core apparel and home goods categories dampened customer purchasing volume.",
+        "expected_lead_time_weeks": [1, 3],
+        "controllable": True,
+        "lever_type": "price_adjustment",
+        "telemetry_available": True,
+        "metric_node": "unit_price",
+        "dependency_role": "UPSTREAM_DIRECT",
+        "required_tables": ["store_sales_weekly"]
+    },
+    {
+        "id": "R4_COMPETITOR_STORE_OPENING",
+        "name": "Competitor Superstore Grand Opening",
+        "category": "External Market",
+        "description": "Adjacent discount supercenter opened 2 miles from flagship store, cannibalizing local shopper footfall.",
+        "expected_lead_time_weeks": [2, 6],
+        "controllable": False,
+        "lever_type": "loyalty_incentives",
+        "telemetry_available": False, # Intentionally missing to demonstrate NOT_TESTABLE
+        "metric_node": "competitor_permits",
+        "dependency_role": "EXTERNAL_FACTOR",
+        "required_tables": ["competitor_permits"]
+    }
+]
+
+# Backwards compatibility default alias
+CANDIDATE_DRIVERS = CANDIDATE_DRIVERS_PRICING
+
+def get_candidate_drivers(benchmark_id: str = "b2b_saas_pricing") -> List[Dict[str, Any]]:
+    """Returns candidate drivers tailored to the active calibrated benchmark."""
+    if benchmark_id == "saas_churn_roas":
+        return CANDIDATE_DRIVERS_SUBSCRIPTIONS
+    elif benchmark_id == "retail_fulfillment":
+        return CANDIDATE_DRIVERS_RETAIL
+    return CANDIDATE_DRIVERS_PRICING

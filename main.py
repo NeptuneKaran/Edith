@@ -111,6 +111,9 @@ _ACTIVE_SIM_LEVERS: Dict[str, Any] = {
 # DATA MODELS & SCHEMAS
 # ==============================================================================
 
+class SwitchBenchmarkRequest(BaseModel):
+    benchmark_id: str = Field("b2b_saas_pricing", description="b2b_saas_pricing, saas_churn_roas, or retail_fulfillment")
+
 class SemanticConfigRequest(BaseModel):
     dataset_name: Optional[str] = Field("Custom Ingested Dataset", description="Display name for the dataset")
     analysis_grain: Optional[str] = Field("Time Series (Weekly / Monthly / Daily)", description="Temporal or Snapshot grain")
@@ -451,6 +454,25 @@ async def configure_semantic_model(config: SemanticConfigRequest):
     }
 
 
+@app.post("/api/data/switch-benchmark")
+async def switch_calibrated_benchmark(req: SwitchBenchmarkRequest):
+    """Switches the active dataset to one of the 3 calibrated structural benchmarks."""
+    valid_benchmarks = ["b2b_saas_pricing", "saas_churn_roas", "retail_fulfillment"]
+    if req.benchmark_id not in valid_benchmarks:
+        raise HTTPException(status_code=400, detail=f"Invalid benchmark_id '{req.benchmark_id}'. Must be one of: {valid_benchmarks}")
+    
+    _UPLOAD_CACHE.clear()
+    repo = DataRepository.get_instance()
+    repo.switch_benchmark(req.benchmark_id)
+    return {
+        "success": True,
+        "status": "SUCCESS",
+        "message": f"Successfully activated benchmark '{repo.active_source_info.get('name')}'",
+        "benchmark_id": req.benchmark_id,
+        "source_info": repo.active_source_info,
+        "is_demo": True
+    }
+
 @app.post("/api/data/reset-demo")
 async def reset_to_benchmark():
     """Restores the built-in B2B SaaS benchmark dataset in DataRepository."""
@@ -713,8 +735,9 @@ async def get_simulation(request: Request, persona: Optional[str] = None):
     
     res = SimulationEngine.simulate_lever_impact(
         price_rollback_pct=-abs(_ACTIVE_SIM_LEVERS["price_rollback_pct"]),
-        marketing_boost_usd=_ACTIVE_SIM_LEVERS["promo_fund_k"] * 1000.0,
-        competitor_retaliation=_ACTIVE_SIM_LEVERS["churn_mitigation"]
+        promo_fund_k=_ACTIVE_SIM_LEVERS["promo_fund_k"],
+        churn_mitigation=_ACTIVE_SIM_LEVERS["churn_mitigation"],
+        benchmark_id=repo.active_benchmark_id
     )
     traj_df = res.get("trajectory_df", pd.DataFrame())
     trajectory = []
@@ -738,6 +761,8 @@ async def get_simulation(request: Request, persona: Optional[str] = None):
         "available": True,
         "levers": _ACTIVE_SIM_LEVERS,
         "trajectory": trajectory,
+        "metric_label": res.get("metric_label", "Gross Revenue ($)"),
+        "recovery_pct": float(res.get("recovery_pct", 0.0)),
         "summary": summary
     }
     
@@ -766,8 +791,9 @@ async def update_simulation(request: Request, levers: SimulationLeversRequest, p
     
     res = SimulationEngine.simulate_lever_impact(
         price_rollback_pct=-abs(levers.price_rollback_pct),
-        marketing_boost_usd=levers.promo_fund_k * 1000.0,
-        competitor_retaliation=levers.churn_mitigation
+        promo_fund_k=levers.promo_fund_k,
+        churn_mitigation=levers.churn_mitigation,
+        benchmark_id=repo.active_benchmark_id
     )
     traj_df = res.get("trajectory_df", pd.DataFrame())
     trajectory = []
@@ -791,6 +817,8 @@ async def update_simulation(request: Request, levers: SimulationLeversRequest, p
         "available": True,
         "levers": _ACTIVE_SIM_LEVERS,
         "trajectory": trajectory,
+        "metric_label": res.get("metric_label", "Gross Revenue ($)"),
+        "recovery_pct": float(res.get("recovery_pct", 0.0)),
         "summary": summary
     }
     

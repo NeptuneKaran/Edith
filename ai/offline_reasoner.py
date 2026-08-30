@@ -175,7 +175,79 @@ class OfflineEdithReasoner:
 **3. Decision Guidance & Observational Integrity:**
 - All reported signals represent empirical concentrations and statistical correlations to direct operational investigation, not unverified causal claims."""
 
-        # 2. Built-in B2B SaaS demo briefing
+        # 2. Benchmark 2: Subscription Growth & Retention (saas_churn_roas)
+        if repo.active_benchmark_id == "saas_churn_roas":
+            top_h = hypotheses[0] if hypotheses else {}
+            if pid == "general_user":
+                return """### 💡 Plain-Language Summary: Why Customer Churn Increased
+
+**1. The Big Picture:**
+- **What Changed:** Customer churn in our **Self-Serve Starter** tier surged from a healthy **2.1%** up to **8.6%** in **Region B**.
+- **Impact on Revenue:** Monthly Recurring Revenue (MRR) dropped by about **-$78,000** as cancellations rose to ~40 accounts per week.
+
+**2. The Real Cause:**
+- **The Confusing Onboarding Redesign:** In Week 48, we launched a redesigned self-serve signup flow. Customer call notes confirm users found the new setup wizard confusing and abandoned setup before completing onboarding.
+- **Quasi-Experiment Proof:** In Region A (where the old onboarding flow was kept), churn stayed at a steady 2.0%. This confirms the new onboarding flow caused the churn.
+
+**3. What About the Marketing Drop? (A False Alarm):**
+- That same week, marketing shifted ad spend from Search to Social, which lowered Marketing ROAS. However, this only affected new ad traffic—it had zero effect on existing customer cancellations.
+
+**4. Sparse History Alert:**
+- The new **AI Add-on Beta** product only has 4 weeks of recording, so automated expected ranges are disabled for that tier until 8 weeks of data are collected."""
+
+            return """### 📋 Executive Incident Briefing: Customer Churn & Retention Analysis
+
+**1. Incident Scale & Metric Anomaly:**
+- **Primary Incident:** Annualized **Customer Churn Rate** in **Region B | Self-Serve Starter** surged from **2.10% baseline to 8.60%** (Z = +3.10 sigma, P1 Severity).
+- **Financial Downstream Impact:** Monthly Recurring Revenue (MRR) contracted by **-$78,000/mo** ($420k -> $342k).
+
+**2. Verified Root Cause (#1 High-Confidence Driver):**
+- **Self-Serve Onboarding Flow Redesign (Cause Score: 88.5/100):**
+  * Temporal Precedence: Redesign launched in Week 48 preceded the churn spike by tau = 2 weeks.
+  * Difference-in-Differences: Region A unexposed control cohort maintained 2.0% churn (**52.1% net causal divergence**).
+  * Qualitative Telemetry: Verbatim CS call notes and exit surveys confirm users stalled on the automated workspace provisioning wizard.
+
+**3. Confounder Isolation (Marketing Budget Reallocation):**
+  * Marketing shifted $850/day from Search to Social in Week 48, degrading lead quality and depressing Marketing ROAS from 4.2x to 2.4x.
+  * Statistical correlation with customer churn is near zero (r = 0.08), proving this is an acquisition confounder, not the churn cause.
+
+**4. Sparse History Telemetry Flag:**
+  * **AI Add-on Beta** tier has only 4 weeks of history recorded (minimum 8 required). Expected corridor is disabled to prevent false confidence."""
+
+        # 3. Benchmark 3: Regional Retail Demand & Fulfillment (retail_fulfillment)
+        if repo.active_benchmark_id == "retail_fulfillment":
+            if pid == "general_user":
+                return """### 💡 Plain-Language Summary: Store Sales Decline in Region North
+
+**1. The Big Picture:**
+- **What Changed:** Weekly store sales in **Region North (Apparel & Home)** dropped sharply from **$210,000 to $118,000** (-43.8%).
+- **Why This Is Ambiguous:** Two major events happened in Region North at the exact same time, and both explain the drop:
+  1. **Empty Shelves (Supplier Delay):** A 12-day container customs delay caused 48% of apparel items to go out of stock.
+  2. **Severe Winter Blizzard:** A massive regional storm cut store foot traffic by 34%.
+
+**2. Honest Uncertainty:**
+- Because both events happened simultaneously, our systems cannot definitively declare one single root cause without aisle-level foot traffic sensors.
+
+**3. What We Ruled Out:**
+- **Pricing:** Store prices remained constant at $45.00 throughout all 52 weeks (0% price change), completely ruling out pricing pushback."""
+
+            return """### 📋 Executive Incident Briefing: Regional Retail Fulfillment & Demand
+
+**1. Incident Scale & Deficit:**
+- **Primary KPI:** **Weekly Store Revenue** in **Region North | Apparel & Home** declined from **$210,000 to $118,000** (-$92,000 / -43.8% deficit, Z = -2.85 sigma).
+
+**2. Genuinely Ambiguous Competing Drivers (Near-Tied Pair):**
+- **#1 Supplier Port Delays & Stockouts (Cause Score: 58.2 / 100):**
+  * Cargo container SHP-8801 delayed 12 days at customs, creating a **48.0% in-store stockout rate**.
+  * Supplier correspondence confirms regional distribution terminal freeze.
+- **#2 Extreme Winter Blizzard Event (Cause Score: 54.0 / 100):**
+  * Historic regional blizzard (Weather Severity 8.7/10.0) caused a **-34.0% contraction in shopper foot traffic**.
+- **Decision Uncertainty Notice:** Score difference (|Delta| = 4.2 pts) is within empirical ambiguity boundaries. Telemetry cannot separate fulfillment failure from footfall suppression.
+
+**3. Refuted Hypotheses:**
+- **Store Pricing Changes (Cause Score: 12.0 / 100, Refuted):** POS rate cards confirm $0.00 price variance."""
+
+        # 4. Built-in B2B SaaS demo briefing (b2b_saas_pricing)
         top_h = hypotheses[0] if hypotheses else {}
         second_h = hypotheses[1] if len(hypotheses) > 1 else {}
         refuted_h = next((h for h in hypotheses if h["id"] in ["H8_SUPPLY_CONSTRAINT", "H3_INVENTORY_CONSTRAINT"]), {})
@@ -249,15 +321,20 @@ class OfflineEdithReasoner:
     @staticmethod
     def answer_query(
         query: str,
-        anomaly_context: Dict[str, Any],
-        selected_hypothesis: Dict[str, Any],
+        anomaly_context: Optional[Dict[str, Any]] = None,
+        selected_hypothesis: Optional[Dict[str, Any]] = None,
         all_hypotheses: Optional[List[Dict[str, Any]]] = None,
         chat_history: Optional[List[Dict[str, Any]]] = None,
         simulation_levers: Optional[Dict[str, Any]] = None,
         persona: str = "executive",
+        persona_id: Optional[str] = None,
         response_style: str = "concise",
         **kwargs
     ) -> str:
+        if anomaly_context is None:
+            anomaly_context = {}
+        if persona_id:
+            persona = persona_id
         """Answers user queries in natural, conversational language with strict empirical grounding."""
         from data.repository import DataRepository
         repo = DataRepository.get_instance()
@@ -501,8 +578,79 @@ Based on our analysis of the active dataset across **{dq.get('total_rows', 0):,}
             return OfflineEdithReasoner.generate_investigation_briefing(anomaly_context, all_hypotheses or [], response_style="concise", persona=persona)
 
         # ==============================================================================
-        # 4. BUILT-IN DEMO BENCHMARK: TARGETED ANALYTICAL QUERIES
+        # 4. BUILT-IN CALIBRATED BENCHMARKS: TARGETED ANALYTICAL QUERIES
         # ==============================================================================
+        
+        # 4-A. BENCHMARK 2: SUBSCRIPTION GROWTH & RETENTION (saas_churn_roas)
+        if repo.active_benchmark_id == "saas_churn_roas":
+            # Onboarding flow / churn cause
+            if any(k in q_clean for k in ["onboarding", "flow", "wizard", "churn", "cancellation", "cancellations", "abandon", "why did churn", "why churn"]):
+                if pid == "general_user":
+                    return """**Why Customer Churn Increased in Region B:**
+
+1. **The Confusing Onboarding Wizard:** In Week 48, we launched a redesigned self-serve onboarding flow. 
+2. **Customer Feedback:** CS call transcripts show users found the new step-by-step setup confusing and abandoned provisioning before completing activation.
+3. **Quasi-Experiment (DiD):** In Region A (which kept the old onboarding checklist), customer churn remained completely flat at 2.0%, proving the redesign caused the churn surge (52.1% divergence)."""
+
+                return """**Quasi-Experimental Causal Evaluation of Customer Churn:**
+
+- **Primary Driver (#1 S1):** Self-Serve Onboarding Flow Redesign (**Cause Score: 88.5 / 100**, High Confidence).
+- **Temporal Sequence:** Launch in Week 48 preceded the churn spike by tau = 2 weeks.
+- **Difference-in-Differences:** 52.1% causal divergence vs Region A control cohort (pre-trend r = 0.96).
+- **Unstructured Corroboration:** Verbatim customer success notes (CS-101) confirm users abandoned automated provisioning."""
+
+            # Marketing ROAS / Confounder
+            if any(k in q_clean for k in ["marketing", "roas", "ad spend", "search", "social", "confounder", "budget"]):
+                if pid == "general_user":
+                    return """**What Happened to Marketing ROAS (And Why It Did Not Cause Churn):**
+
+- **The Ad Shift:** Marketing shifted ad budget from Search to Social in Week 48.
+- **Lower Quality Leads:** Social traffic converted at only 1.6% (vs 4.8% on Search), which dropped Marketing ROAS from 4.2x to 2.4x.
+- **Not Connected to Churn:** This ad change only affected new visitor acquisition. It had zero impact on existing customer renewals (correlation r = 0.08)."""
+
+                return """**Confounder Analysis: Marketing Budget Reallocation vs Churn:**
+
+- **Acquisition Channel Impact:** Shifting $850/day from Search to Social in Week 48 depressed Marketing ROAS from 4.2x to 2.4x.
+- **Confounder Isolation:** Statistical correlation with existing customer cancellations is r = 0.08 (near zero).
+- **Classification:** Validated as an acquisition confounder (Score 52.0, Correlated Signal), correctly separated from the onboarding churn driver."""
+
+            # Sparse history / AI Add-on Beta
+            if any(k in q_clean for k in ["ai beta", "ai add-on", "sparse", "sparse history", "newly launched", "4 weeks"]):
+                return """**Sparse History Diagnostic: AI Add-on Beta Tier:**
+
+- **History Recorded:** Only 4 weekly data points (Weeks 49 to 52).
+- **Statistical Safety Rule:** Robust +/-2.0 sigma corridor calculation requires a minimum of 8 historical periods.
+- **Engine Action:** Expected baseline corridor is explicitly disabled for this segment to prevent false-confidence anomaly alerts."""
+
+        # 4-B. BENCHMARK 3: REGIONAL RETAIL DEMAND & FULFILLMENT (retail_fulfillment)
+        if repo.active_benchmark_id == "retail_fulfillment":
+            # Ambiguity / Stockout vs Weather
+            if any(k in q_clean for k in ["why", "cause", "supplier", "stockout", "weather", "blizzard", "ambiguous", "ambiguity", "uncertain", "drop", "sales"]):
+                if pid == "general_user":
+                    return """**Why Store Sales Dropped (And Why It Is Genuinely Ambiguous):**
+
+Weekly store revenue in Region North dropped from $210k to $118k due to two simultaneous events:
+1. **48% Store Stockouts:** A 12-day container port delay left store shelves empty in Apparel & Home.
+2. **Extreme Winter Blizzard:** A severe regional storm cut shopper foot traffic by 34%.
+
+**Why We Cannot Pick Just One:**
+Both shocks occurred in the exact same February window. Without in-store aisle traffic sensors, our system cannot definitively separate how much was lost to empty shelves versus freezing roads."""
+
+                return """**Genuinely Ambiguous Root-Cause Evaluation (Retail Fulfillment vs Storm):**
+
+- **Competing Hypothesis #1:** Supplier Port Delay & 48% Stockout Rate (**Cause Score: 58.2 / 100**).
+- **Competing Hypothesis #2:** Extreme Regional Blizzard & 34% Foot Traffic Contraction (**Cause Score: 54.0 / 100**).
+- **Score Delta:** |Delta| = 4.2 points (within empirical ambiguity threshold of <= 6.0 pts).
+- **Uncertainty Finding:** Telemetry confirms both shocks occurred concurrently in Week 50-51. System cannot separate fulfillment failure from footfall suppression without aisle-level sensor telemetry."""
+
+            # Pricing refutation
+            if "pricing" in q_clean or "price" in q_clean:
+                return """**Pricing Hypothesis Falsification (Refuted by Data):**
+
+- **Empirical Rate Card Finding:** Store list prices remained unchanged at $45.00/unit across all 52 weeks (0.0% variance).
+- **Classification:** **REFUTED BY DATA** (Score: 12.0 / 100)."""
+
+        # 4-C. BENCHMARK 1: B2B SAAS PRICING INCIDENT (b2b_saas_pricing)
         price_h = next((h for h in (all_hypotheses or []) if h["id"] == "H1_PRICING_PRESSURE"), {})
         comp_h = next((h for h in (all_hypotheses or []) if h["id"] == "H2_COMPETITOR_CAMPAIGN"), {})
         inv_h = next((h for h in (all_hypotheses or []) if h["id"] in ["H8_SUPPLY_CONSTRAINT", "H3_INVENTORY_CONSTRAINT"]), {})

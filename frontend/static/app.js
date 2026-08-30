@@ -160,6 +160,32 @@ function edithApp(activePage = 'overview', sessionPersonaId = 'executive') {
       }
     },
 
+    async switchBenchmark(benchmarkId) {
+      try {
+        const res = await fetch('/api/data/switch-benchmark', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ benchmark_id: benchmarkId })
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.detail || 'Failed to switch benchmark');
+
+        this.sourceInfo = data.source_info || this.sourceInfo;
+        this.chatHistory = [];
+        this.saveSessionState();
+        this.showAlert(data.message, 'success');
+        
+        // Reload current active screen
+        if (this.activePage === 'overview') await this.loadOverview();
+        else if (this.activePage === 'diagnostic') await this.loadDiagnostic();
+        else if (this.activePage === 'workspace') await this.loadWorkspace();
+        else if (this.activePage === 'simulation') await this.loadSimulation();
+        else if (this.activePage === 'console') await this.loadBriefing();
+      } catch (e) {
+        this.showAlert(e.message, 'error');
+      }
+    },
+
     async resetToDemo() {
       try {
         const res = await fetch('/api/data/reset-demo', { method: 'POST' });

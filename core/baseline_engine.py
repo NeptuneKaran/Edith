@@ -1,7 +1,8 @@
 """
 core/baseline_engine.py
 Deterministic Baseline & Anomaly Detection Engine for EDITH.
-Calculates rolling robust baselines, dynamic ±2σ expected corridors, Z-scores, and materiality filters.
+Calculates rolling robust baselines, dynamic +/-2sigma expected corridors, Z-scores, materiality filters,
+and detects sparse-history / newly launched metrics (< 8 periods).
 """
 import pandas as pd
 import numpy as np
@@ -14,7 +15,7 @@ class AnomalyEngine:
     @staticmethod
     def calculate_baseline_and_corridor(df: pd.DataFrame, window: int = 8, z_multiplier: float = 2.0) -> pd.DataFrame:
         """
-        Computes rolling robust median baseline and dynamic ±k*sigma expected corridor using IQR scaling.
+        Computes rolling robust median baseline and dynamic +/-k*sigma expected corridor using IQR scaling.
         Ensures expected corridor is purely data-derived and statistically valid.
         """
         df = df.copy().sort_values("week_idx")
@@ -48,8 +49,8 @@ class AnomalyEngine:
             curr_val = values[i]
             z_scores[i] = (curr_val - median_val) / robust_sigma
             
-            # Anomaly condition: outside corridor
-            if curr_val < lower_bounds[i] or curr_val > upper_bounds[i]:
+            # Anomaly condition: outside corridor (only valid if at least 8 history points)
+            if n >= window and (curr_val < lower_bounds[i] or curr_val > upper_bounds[i]):
                 is_anomaly[i] = True
                 
         df["baseline"] = baselines
@@ -57,6 +58,7 @@ class AnomalyEngine:
         df["lower_corridor"] = lower_bounds
         df["z_score"] = z_scores
         df["is_anomaly"] = is_anomaly
+        df["insufficient_history"] = (n < window)
         
         return df
 
@@ -80,6 +82,7 @@ class AnomalyEngine:
                 "is_p1_material": False,
                 "is_persistent": False,
                 "is_temporal": False,
+                "insufficient_history": False,
                 "status_label": "No Data",
                 "current_week_label": "N/A",
                 "current_week_date": "N/A"
@@ -102,6 +105,7 @@ class AnomalyEngine:
                 "is_p1_material": False,
                 "is_persistent": False,
                 "is_temporal": False,
+                "insufficient_history": False,
                 "status_label": "Cross-Sectional Snapshot",
                 "current_week_label": str(curr.get("week_label", "Snapshot")),
                 "current_week_date": str(curr.get("week_date", "Snapshot"))
@@ -120,7 +124,30 @@ class AnomalyEngine:
         delta_pct = (delta_val / baseline_val * 100.0) if baseline_val != 0 else 0.0
         z_score = float(curr["z_score"])
         
-        # Check persistence (did anomaly occur in previous period as well?)
+        # Check for sparse history (< 8 data points)
+        n_points = len(df_analyzed)
+        if n_points < 8:
+            return {
+                "kpi_name": kpi_name,
+                "current_value": curr_val,
+                "baseline_value": baseline_val,
+                "delta_value": delta_val,
+                "delta_pct": delta_pct,
+                "z_score": z_score,
+                "upper_corridor": float(curr["upper_corridor"]),
+                "lower_corridor": float(curr["lower_corridor"]),
+                "is_anomaly": False,
+                "is_p1_material": False,
+                "is_persistent": False,
+                "is_temporal": True,
+                "insufficient_history": True,
+                "status_label": f"INSUFFICIENT_HISTORY (Sparse History - {n_points} Periods Recorded)",
+                "history_warning": f"Segment has only {n_points} historical periods (minimum 8 required for robust +/-2.0 sigma corridor). Expected corridor is disabled to prevent false confidence.",
+                "current_week_label": str(curr["week_label"]),
+                "current_week_date": str(curr["week_date"])
+            }
+
+        # Check persistence
         is_persistent = bool(curr["is_anomaly"] and prev["is_anomaly"])
         
         # Tri-partite Materiality Evaluation:
@@ -148,6 +175,8 @@ class AnomalyEngine:
             "is_anomaly": bool(curr["is_anomaly"]),
             "is_p1_material": is_p1_anomaly,
             "is_persistent": is_persistent,
+            "is_temporal": True,
+            "insufficient_history": False,
             "status_label": status_label,
             "current_week_label": str(curr["week_label"]),
             "current_week_date": str(curr["week_date"])
