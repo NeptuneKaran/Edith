@@ -125,10 +125,13 @@
             <div class="flex items-center justify-between pb-3 border-b border-[#E5E5E5]">
               <div class="flex items-center gap-2">
                 <div class="text-xs font-semibold text-[#171717]">Interactive Causal Dialogue</div>
-                <span x-show="aiStatus && aiStatus.live_gemini_active" class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
-                  ● Live Gemini (<span x-text="aiStatus?.model_name || 'gemini-2.0-flash'"></span>)
+                <span x-show="aiStatus && aiStatus.key_configured && aiStatus.key_valid" class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                  ● Live Gemini (<span x-text="aiStatus?.model || aiStatus?.model_name || 'gemini-2.0-flash'"></span>)
                 </span>
-                <span x-show="!aiStatus || !aiStatus.live_gemini_active" class="px-2 py-0.5 rounded text-[10px] font-semibold bg-neutral-100 text-neutral-600 border border-neutral-200" title="Running in Deterministic Zero-Key Mode. Add GEMINI_API_KEY to activate Live Gemini.">
+                <span x-show="aiStatus && aiStatus.key_configured && !aiStatus.key_valid" class="px-2 py-0.5 rounded text-[10px] font-semibold bg-amber-50 text-amber-700 border border-amber-200" :title="aiStatus?.error_message || 'API key failed'">
+                  ⚠ <span x-text="aiStatus?.badge_text || 'Gemini Key Error'"></span> (Offline Fallback)
+                </span>
+                <span x-show="!aiStatus || !aiStatus.key_configured" class="px-2 py-0.5 rounded text-[10px] font-semibold bg-neutral-100 text-neutral-600 border border-neutral-200" title="Running in Deterministic Zero-Key Mode. Add GEMINI_API_KEY to activate Live Gemini.">
                   ● Deterministic Offline Engine
                 </span>
               </div>
@@ -165,13 +168,25 @@
 
               <!-- Dialogue Turns -->
               <template x-for="(msg, i) in chatHistory" :key="i">
-                <div class="flex items-start space-x-2.5" :class="msg.role === 'user' ? 'flex-row-reverse space-x-reverse' : ''">
-                  <div class="w-6 h-6 rounded flex items-center justify-center font-bold text-xs shrink-0"
-                       :class="msg.role === 'user' ? 'bg-[#E5E5E5] text-[#4B0082]' : 'bg-[#A100FF] text-white'"
-                       x-text="msg.role === 'user' ? 'U' : 'E'"></div>
-                  <div class="rounded-lg p-3 text-xs max-w-xl leading-relaxed space-y-1 shadow-2xs"
-                       :class="msg.role === 'user' ? 'bg-[#F5E8FF] text-[#4B0082] rounded-tr-none' : 'bg-white border border-[#E5E5E5] text-[#171717] rounded-tl-none'"
-                       x-html="formatMarkdown(msg.content)"></div>
+                <div class="space-y-1">
+                  <div class="flex items-start space-x-2.5" :class="msg.role === 'user' ? 'flex-row-reverse space-x-reverse' : ''">
+                    <div class="w-6 h-6 rounded flex items-center justify-center font-bold text-xs shrink-0"
+                         :class="msg.role === 'user' ? 'bg-[#E5E5E5] text-[#4B0082]' : 'bg-[#A100FF] text-white'"
+                         x-text="msg.role === 'user' ? 'U' : 'E'"></div>
+                    <div class="rounded-lg p-3 text-xs max-w-xl leading-relaxed space-y-1 shadow-2xs"
+                         :class="msg.role === 'user' ? 'bg-[#F5E8FF] text-[#4B0082] rounded-tr-none' : 'bg-white border border-[#E5E5E5] text-[#171717] rounded-tl-none'"
+                         x-html="formatMarkdown(msg.content)"></div>
+                  </div>
+                  <!-- Inline notice if live model call failed for this turn -->
+                  <div x-show="msg.role === 'assistant' && msg.metadata?.error_type && !msg._notice_dismissed" class="ml-8 max-w-xl">
+                    <div class="flex items-center justify-between text-[11px] bg-amber-50 text-amber-800 border border-amber-200 rounded px-2.5 py-1">
+                      <div class="flex items-center gap-1.5">
+                        <span>⚠</span>
+                        <span>Live Gemini call failed (<span class="font-semibold font-mono" x-text="msg.metadata?.error_type"></span>). Grounded offline analysis provided.</span>
+                      </div>
+                      <button @click="msg._notice_dismissed = true" class="text-amber-600 hover:text-amber-900 ml-2 font-bold cursor-pointer" title="Dismiss">&times;</button>
+                    </div>
+                  </div>
                 </div>
               </template>
 

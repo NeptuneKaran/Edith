@@ -1120,6 +1120,8 @@ async def chat_with_edith(request: Request, req: ChatRequest):
         )
     except Exception as e:
         print(f"[LLM Client Error]: {e}. Falling back to Offline Reasoner.")
+        from ai.llm_client import _classify_gemini_error
+        err_type = _classify_gemini_error(e)
         answer_text = OfflineEdithReasoner.answer_conversational_query(
             query=req.query,
             anomaly_context=anom_ctx,
@@ -1132,9 +1134,12 @@ async def chat_with_edith(request: Request, req: ChatRequest):
         metadata = {
             "provider": "Deterministic Analytical Engine",
             "model": "OfflineEdithReasoner v2.0",
-            "mode": "Deterministic Offline Mode (Zero-Key)",
+            "mode": "Deterministic Offline Mode (Zero-Key)" if not client.api_key else f"Offline Fallback ({err_type}: {str(e)[:35]})",
             "latency_sec": 0.01,
-            "status": "Fallback Successful"
+            "status": "Fallback Successful",
+            "error_type": err_type if client.api_key else None,
+            "error_message": str(e) if client.api_key else None,
+            "key_configured": bool(client.api_key)
         }
 
     log_access(
@@ -1156,16 +1161,41 @@ async def chat_with_edith(request: Request, req: ChatRequest):
 
 @app.get("/api/ai/status")
 async def get_ai_status():
-    """Returns real-time AI engine status (Live Gemini Agent vs. Offline Reasoner)."""
+    """Returns real-time AI engine status (Live Gemini Agent vs. Offline Reasoner vs. Key Error)."""
     client = EdithLLMClient()
-    has_key = bool(client.api_key and client.client)
+    val = client.validate_key()
+    key_configured = bool(client.api_key)
+    key_valid = val.get("valid", False)
+    error_type = val.get("error_type")
+    error_message = val.get("error_message")
+    
+    if key_configured and key_valid:
+        badge_text = f"Live Gemini AI ({client.primary_model})"
+        mode_text = f"Live Gemini Agent ({client.primary_model})"
+        provider = "Google Gemini"
+    elif key_configured and not key_valid:
+        reason = "API key rejected" if error_type == "auth" else ("Quota exceeded" if error_type == "quota" else ("Connection error" if error_type == "network" else "Check API key"))
+        badge_text = f"Gemini Error ({reason})"
+        mode_text = f"Offline Fallback ({error_type or 'error'}: {reason})"
+        provider = "Deterministic Analytical Engine (Fallback)"
+    else:
+        badge_text = "Deterministic Offline Mode"
+        mode_text = "Deterministic Offline Mode (Zero-Key)"
+        provider = "Deterministic Analytical Engine"
+        
     return {
-        "has_api_key": has_key,
-        "provider": "Google Gemini" if has_key else "Deterministic Analytical Engine",
-        "model": client.primary_model if has_key else "OfflineEdithReasoner v2.0",
-        "mode": f"Live Gemini Agent ({client.primary_model})" if has_key else "Deterministic Offline Mode (Zero-Key)",
-        "badge_text": f"Live Gemini AI ({client.primary_model})" if has_key else "Deterministic Offline Mode",
-        "is_live": has_key
+        "key_configured": key_configured,
+        "key_valid": key_valid,
+        "error_type": error_type,
+        "error_message": error_message,
+        "last_checked": val.get("checked_at"),
+        "has_api_key": key_configured,
+        "provider": provider,
+        "model": client.primary_model if (key_configured and key_valid) else "OfflineEdithReasoner v2.0",
+        "mode": mode_text,
+        "badge_text": badge_text,
+        "is_live": key_configured and key_valid,
+        "live_gemini_active": key_configured and key_valid
     }
 
 @app.get("/api/telemetry")
@@ -1187,41 +1217,43 @@ async def set_api_key(req: SetApiKeyRequest):
         return {
             "success": True,
             "message": "Switched back to Deterministic Offline Mode.",
-            "is_live": False
+            "is_live": False,
+            "key_configured": False,
+            "key_valid": False
         }
     
-    try:
-        from google import genai
-        test_client = genai.Client(api_key=clean_key)
-        try:
-            test_client.models.generate_content(
-                model="gemini-2.0-flash",
-                contents="Ping"
-            )
-        except Exception:
-            pass
-            
-        os.environ["GEMINI_API_KEY"] = clean_key
-        return {
-            "success": True,
-            "message": "Google Gemini API Key verified and activated successfully!",
-            "is_live": True,
-            "model": "gemini-2.0-flash",
-            "provider": "Google Gemini"
-        }
-    except Exception as e:
-        err_msg = str(e)
-        if "API_KEY_INVALID" in err_msg or "not valid" in err_msg.lower():
-            raise HTTPException(status_code=400, detail="The provided Google Gemini API key is invalid. Please check your key from Google AI Studio.")
+    os.environ["GEMINI_API_KEY"] = clean_key
+    client = EdithLLMClient(api_key=clean_key)
+    val = client.validate_key(force=True)
+    
+    if not val.get("valid", False):
+        err_type = val.get("error_type")
+        err_msg = val.get("error_message", "Unknown error")
+        if err_type == "auth":
+            os.environ.pop("GEMINI_API_KEY", None)
+            raise HTTPException(status_code=400, detail=f"The provided Google Gemini API key was rejected by Google AI ({err_msg}). Please check your key.")
         
-        os.environ["GEMINI_API_KEY"] = clean_key
         return {
             "success": True,
-            "message": "API Key saved successfully.",
-            "is_live": True,
-            "model": "gemini-2.0-flash",
+            "message": f"API Key saved with warning ({err_type or 'transient'}: {err_msg}).",
+            "is_live": False,
+            "key_configured": True,
+            "key_valid": False,
+            "error_type": err_type,
+            "error_message": err_msg,
+            "model": client.primary_model,
             "provider": "Google Gemini"
         }
+        
+    return {
+        "success": True,
+        "message": "Google Gemini API Key verified and activated successfully!",
+        "is_live": True,
+        "key_configured": True,
+        "key_valid": True,
+        "model": client.primary_model,
+        "provider": "Google Gemini"
+    }
 
 
 # ==============================================================================

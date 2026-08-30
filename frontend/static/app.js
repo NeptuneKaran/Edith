@@ -59,7 +59,16 @@ function edithApp(activePage = 'overview', sessionPersonaId = 'executive') {
     chatHistory: [],
     chatQuery: '',
     chatLoading: false,
-    aiStatus: { is_live: false, badge_text: 'Deterministic Offline Mode', provider: 'Deterministic Analytical Engine' },
+    aiStatus: {
+      is_live: false,
+      live_gemini_active: false,
+      key_configured: false,
+      key_valid: false,
+      error_type: null,
+      error_message: null,
+      badge_text: 'Deterministic Offline Mode',
+      provider: 'Deterministic Analytical Engine'
+    },
     showApiKeyModal: false,
     apiKeyInput: '',
     savingApiKey: false,
@@ -735,10 +744,18 @@ function edithApp(activePage = 'overview', sessionPersonaId = 'executive') {
 
         if (!res.ok) throw new Error(data.detail || data.message || 'Failed to get answer');
 
-        this.chatHistory.push({ role: 'assistant', content: data.answer });
+        this.chatHistory.push({
+          role: 'assistant',
+          content: data.answer,
+          metadata: data.metadata || null
+        });
         this.saveSessionState();
       } catch (e) {
-        this.chatHistory.push({ role: 'assistant', content: `Error: ${e.message}` });
+        this.chatHistory.push({
+          role: 'assistant',
+          content: `Error: ${e.message}`,
+          metadata: { error_type: 'network', error_message: e.message }
+        });
         this.saveSessionState();
       } finally {
         this.chatLoading = false;

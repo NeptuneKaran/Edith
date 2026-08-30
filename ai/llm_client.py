@@ -6,6 +6,7 @@ Executes Gemini with safe read-only analytical tools and automatic fallback to O
 import os
 import time
 import re
+from datetime import datetime, timezone
 from typing import Dict, List, Any, Tuple, Optional
 from ai.prompts import EDITH_SYSTEM_PROMPT, get_persona_prompt_addendum, classify_user_intent
 from ai.tools import AVAILABLE_TOOLS, execute_tool_call
@@ -20,6 +21,44 @@ def _sanitize_log_message(msg: str, key: str = "") -> str:
     # Also strip common API key patterns
     msg = re.sub(r'AIzaSy[A-Za-z0-9_-]{33}', '[REDACTED_API_KEY]', msg)
     return msg
+
+def _classify_gemini_error(exc: Optional[Exception]) -> str:
+    """
+    Classifies a Gemini API exception into structured error categories:
+    - 'auth': 401, 403, API_KEY_INVALID, PERMISSION_DENIED, UNAUTHENTICATED, API key not valid
+    - 'quota': 429, RESOURCE_EXHAUSTED, rate limit, quota exceeded
+    - 'network': timeout, ConnectionError, SSLError, connection refused, DNS, unreachable
+    - 'unknown': any other unexpected error
+    """
+    if exc is None:
+        return "unknown"
+    msg = str(exc).lower()
+    exc_type = type(exc).__name__.lower()
+    
+    # Auth errors
+    auth_patterns = [
+        "api_key_invalid", "api key not valid", "permission_denied", "unauthenticated",
+        "forbidden", "401", "403", "invalid api key", "unauthorized", "api_key_expired"
+    ]
+    if any(p in msg for p in auth_patterns) or "auth" in exc_type:
+        return "auth"
+        
+    # Quota / Rate limit errors
+    quota_patterns = [
+        "resource_exhausted", "429", "quota", "rate limit", "rate_limit", "exhausted", "too many requests"
+    ]
+    if any(p in msg for p in quota_patterns):
+        return "quota"
+        
+    # Network errors
+    network_patterns = [
+        "timeout", "timed out", "connection", "connect", "dns", "ssl", "network", "socket",
+        "unreachable", "econnreset", "econnrefused"
+    ]
+    if any(p in msg for p in network_patterns) or any(t in exc_type for t in ["timeout", "connection", "network", "ssl"]):
+        return "network"
+        
+    return "unknown"
 
 def _build_gemini_contents(initial_prompt: str, chat_history: Optional[List[Dict[str, Any]]] = None) -> List[Any]:
     """
@@ -110,6 +149,9 @@ class EdithLLMClient:
         self.client = None
         self.primary_model = DEFAULT_GEMINI_MODEL
         self.fallback_model = FALLBACK_GEMINI_MODEL
+        self._key_validation_cache: Optional[Dict[str, Any]] = None
+        self._key_validation_ts: float = 0.0
+        self._validated_key_value: Optional[str] = None
         
         if self.api_key:
             try:
@@ -124,6 +166,66 @@ class EdithLLMClient:
         else:
             print("[LLM Gateway] No GEMINI_API_KEY / GOOGLE_API_KEY found. Operating in 100% Deterministic Offline Mode.")
 
+    def validate_key(self, force: bool = False) -> Dict[str, Any]:
+        """
+        Validates the configured Gemini API key via a lightweight models.list call.
+        Results are cached with a 5-minute (300-second) TTL.
+        Returns:
+            Dict containing:
+                valid: bool
+                error_type: Optional[str] ("auth" | "quota" | "network" | "unknown" | None)
+                error_message: Optional[str]
+                checked_at: str (ISO-8601 timestamp)
+        """
+        now = time.time()
+        # Invalidate cache if key changed
+        if getattr(self, "_validated_key_value", None) != self.api_key:
+            self._key_validation_cache = None
+            self._key_validation_ts = 0.0
+
+        if not force and self._key_validation_cache is not None:
+            if (now - self._key_validation_ts) < 300.0:
+                return dict(self._key_validation_cache)
+
+        checked_at = datetime.now(timezone.utc).isoformat()
+
+        if not self.api_key or not self.client:
+            res = {
+                "valid": False,
+                "error_type": None,
+                "error_message": "No API key configured",
+                "checked_at": checked_at
+            }
+            self._key_validation_cache = res
+            self._key_validation_ts = now
+            self._validated_key_value = self.api_key
+            return res
+
+        try:
+            # Trigger real lightweight network call to list models (first item only)
+            for _ in self.client.models.list():
+                break
+            res = {
+                "valid": True,
+                "error_type": None,
+                "error_message": None,
+                "checked_at": checked_at
+            }
+        except Exception as exc:
+            err_type = _classify_gemini_error(exc)
+            safe_msg = _sanitize_log_message(str(exc), self.api_key)
+            res = {
+                "valid": False,
+                "error_type": err_type,
+                "error_message": safe_msg,
+                "checked_at": checked_at
+            }
+
+        self._key_validation_cache = res
+        self._key_validation_ts = now
+        self._validated_key_value = self.api_key
+        return res
+
 
 
     def generate_briefing(
@@ -135,6 +237,7 @@ class EdithLLMClient:
         """Generates the primary executive briefing using tool-grounded Gemini or deterministic fallback."""
         start_time = time.time()
         last_error = ""
+        error_type = None
         
         if self.client:
             prompt = f"Synthesize an executive diagnostic briefing for the active anomaly ({anomaly_context.get('kpi_name', 'Monthly B2B Sales')}). Style: {response_style}."
@@ -168,7 +271,10 @@ class EdithLLMClient:
                         return text, metadata
                 except Exception as e:
                     last_error = _sanitize_log_message(str(e), self.api_key)
-                    print(f"[LLM Gateway] Briefing failed on {model_name}: {last_error}")
+                    error_type = _classify_gemini_error(e)
+                    print(f"[LLM Gateway] Briefing failed on {model_name} (error_type={error_type}): {last_error}")
+                    if error_type == "auth":
+                        break
 
         # Fallback to Deterministic Reasoner
         fallback_text = OfflineEdithReasoner.generate_investigation_briefing(anomaly_context, hypotheses, response_style=response_style)
@@ -181,14 +287,23 @@ class EdithLLMClient:
             prompt_tokens=0,
             completion_tokens=0
         )
-        fallback_mode = "Deterministic Offline Mode (Zero-Key)" if not self.api_key else f"Offline Fallback (Gemini Error: {last_error[:40]})"
+        if not self.api_key:
+            fallback_mode = "Deterministic Offline Fallback (100% Grounded)"
+        elif error_type:
+            fallback_mode = f"Offline Fallback ({error_type}: {last_error[:35]})"
+        else:
+            fallback_mode = f"Offline Fallback (Gemini Error: {last_error[:40]})"
+
         metadata = {
             "provider": "Deterministic Analytical Engine",
             "model": "OfflineEdithReasoner v2.0",
             "latency_sec": latency,
             "mode": fallback_mode,
             "status": "Active (Offline Mode)",
-            "error_detail": last_error if last_error else None
+            "error_detail": last_error if last_error else None,
+            "error_type": error_type if self.api_key else None,
+            "error_message": last_error if self.api_key and last_error else None,
+            "key_configured": bool(self.api_key)
         }
         return fallback_text, metadata
 
@@ -197,88 +312,106 @@ class EdithLLMClient:
         start_time = time.time()
         intent = classify_user_intent(query)
         last_error = ""
+        error_type = None
         
         if self.client:
             styled_query = f"{query}\n\n(Style: {response_style})"
             for model_name in [self.primary_model, self.fallback_model]:
-                try:
-                    text, tools_called, prompt_tokens, completion_tokens = self._execute_tool_calling_loop(
-                        model_name=model_name,
-                        initial_prompt=styled_query,
-                        chat_history=chat_history,
-                        persona_id=persona
-                    )
-                    if not text:
-                        text = self._execute_direct_generation(
+                max_attempts = 2  # Allows 1 retry for quota/network errors
+                for attempt in range(max_attempts):
+                    try:
+                        text, tools_called, prompt_tokens, completion_tokens = self._execute_tool_calling_loop(
                             model_name=model_name,
-                            prompt=styled_query,
+                            initial_prompt=styled_query,
                             chat_history=chat_history,
                             persona_id=persona
                         )
-                        tools_called = ["direct_prompt_generation"]
-                        # Just log 0 tokens for direct generation fallback if it happens
-                        prompt_tokens = 0
-                        completion_tokens = 0
-                    
-                    latency = round(time.time() - start_time, 2)
-                    record_telemetry(
-                        endpoint="answer_question",
-                        provider="Google Gemini" if self.api_key else "Deterministic Offline",
-                        latency_ms=latency * 1000,
-                        model_calls=len(tools_called) if tools_called and tools_called != ["direct_prompt_generation"] else 1,
-                        prompt_tokens=prompt_tokens,
-                        completion_tokens=completion_tokens
-                    )
-                    if text:
-                        metadata = {
-                            "provider": "Google Gemini",
-                            "model": model_name,
-                            "latency_sec": latency,
-                            "mode": f"Live Gemini Agent ({model_name})",
-                            "intent": intent,
-                            "tools_called": tools_called,
-                            "status": "Success",
-                            "prompt_tokens": prompt_tokens,
-                            "completion_tokens": completion_tokens
-                        }
-                        return text, metadata
-                except Exception as e:
-                    last_error = _sanitize_log_message(str(e), self.api_key)
-                    print(f"[LLM Gateway] Query failed on {model_name}: {last_error}")
-                    try:
-                        # Try direct generation without tools as second line of defense
-                        text = self._execute_direct_generation(
-                            model_name=model_name,
-                            prompt=styled_query,
-                            chat_history=chat_history,
-                            persona_id=persona
+                        if not text:
+                            text = self._execute_direct_generation(
+                                model_name=model_name,
+                                prompt=styled_query,
+                                chat_history=chat_history,
+                                persona_id=persona
+                            )
+                            tools_called = ["direct_prompt_generation"]
+                            prompt_tokens = 0
+                            completion_tokens = 0
+                        
+                        latency = round(time.time() - start_time, 2)
+                        record_telemetry(
+                            endpoint="answer_question",
+                            provider="Google Gemini" if self.api_key else "Deterministic Offline",
+                            latency_ms=latency * 1000,
+                            model_calls=len(tools_called) if tools_called and tools_called != ["direct_prompt_generation"] else 1,
+                            prompt_tokens=prompt_tokens,
+                            completion_tokens=completion_tokens
                         )
                         if text:
-                            latency = round(time.time() - start_time, 2)
-                            record_telemetry(
-                                endpoint="answer_question",
-                                provider="Google Gemini" if self.api_key else "Deterministic Offline",
-                                latency_ms=latency * 1000,
-                                model_calls=1,
-                                prompt_tokens=0,
-                                completion_tokens=0
-                            )
                             metadata = {
                                 "provider": "Google Gemini",
                                 "model": model_name,
                                 "latency_sec": latency,
                                 "mode": f"Live Gemini Agent ({model_name})",
                                 "intent": intent,
-                                "tools_called": ["direct_generation_fallback"],
+                                "tools_called": tools_called,
                                 "status": "Success",
-                                "prompt_tokens": 0,
-                                "completion_tokens": 0
+                                "prompt_tokens": prompt_tokens,
+                                "completion_tokens": completion_tokens
                             }
                             return text, metadata
-                    except Exception as e2:
-                        last_error = _sanitize_log_message(str(e2), self.api_key)
-                        print(f"[LLM Gateway] Direct generation failed on {model_name}: {last_error}")
-
+                    except Exception as e:
+                        last_error = _sanitize_log_message(str(e), self.api_key)
+                        error_type = _classify_gemini_error(e)
+                        print(f"[LLM Gateway] Query failed on {model_name} (attempt {attempt+1}, error_type={error_type}): {last_error}")
+                        
+                        # If auth error, skip model and fallback model immediately
+                        if error_type == "auth":
+                            break
+                            
+                        # If quota or network error and on first attempt, retry after brief backoff
+                        if error_type in ["quota", "network"] and attempt == 0:
+                            time.sleep(1.0)
+                            continue
+                            
+                        # Try direct generation without tools as second line of defense on non-auth error
+                        try:
+                            text = self._execute_direct_generation(
+                                model_name=model_name,
+                                prompt=styled_query,
+                                chat_history=chat_history,
+                                persona_id=persona
+                            )
+                            if text:
+                                latency = round(time.time() - start_time, 2)
+                                record_telemetry(
+                                    endpoint="answer_question",
+                                    provider="Google Gemini" if self.api_key else "Deterministic Offline",
+                                    latency_ms=latency * 1000,
+                                    model_calls=1,
+                                    prompt_tokens=0,
+                                    completion_tokens=0
+                                )
+                                metadata = {
+                                    "provider": "Google Gemini",
+                                    "model": model_name,
+                                    "latency_sec": latency,
+                                    "mode": f"Live Gemini Agent ({model_name})",
+                                    "intent": intent,
+                                    "tools_called": ["direct_generation_fallback"],
+                                    "status": "Success",
+                                    "prompt_tokens": 0,
+                                    "completion_tokens": 0
+                                }
+                                return text, metadata
+                        except Exception as e2:
+                            last_error = _sanitize_log_message(str(e2), self.api_key)
+                            error_type = _classify_gemini_error(e2)
+                            print(f"[LLM Gateway] Direct generation failed on {model_name}: {last_error}")
+                            
+                        break  # Move to next model if attempt failed
+                        
+                if error_type == "auth":
+                    break  # Skip fallback model too
 
         # Fallback to Conversational Offline Reasoner
         fallback_text = OfflineEdithReasoner.answer_conversational_query(
@@ -300,7 +433,13 @@ class EdithLLMClient:
             prompt_tokens=0,
             completion_tokens=0
         )
-        fallback_mode = "Offline Evidence Mode (Zero-Key)" if not self.api_key else f"Offline Fallback ({last_error[:40]})"
+        if not self.api_key:
+            fallback_mode = "Deterministic Offline Mode (Zero-Key)"
+        elif error_type:
+            fallback_mode = f"Offline Fallback ({error_type}: {last_error[:35]})"
+        else:
+            fallback_mode = f"Offline Fallback ({last_error[:40]})"
+
         metadata = {
             "provider": "Deterministic Analytical Engine",
             "model": "OfflineEdithReasoner v2.0",
@@ -309,7 +448,10 @@ class EdithLLMClient:
             "intent": intent,
             "tools_called": ["offline_deterministic_lookup"],
             "status": "Active (Offline Mode)",
-            "error_detail": last_error if last_error else None
+            "error_detail": last_error if last_error else None,
+            "error_type": error_type if self.api_key else None,
+            "error_message": last_error if self.api_key and last_error else None,
+            "key_configured": bool(self.api_key)
         }
         return fallback_text, metadata
 
