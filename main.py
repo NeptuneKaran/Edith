@@ -562,7 +562,10 @@ async def configure_semantic_model(config: SemanticConfigRequest):
                 )
                 continue
                 
-            tables["sales"] = merge_tables_with_grain(tables["sales"], supp_df, join_keys)
+            fact_d_col = config.date_column if (config.date_column and config.date_column != "None (Snapshot)") else None
+            tables["sales"] = merge_tables_with_grain(
+                tables["sales"], supp_df, join_keys, fact_date_col=fact_d_col
+            )
             
         raw_df = tables["sales"]
                     

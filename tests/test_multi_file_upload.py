@@ -219,5 +219,71 @@ class TestMultiFileUpload(unittest.TestCase):
         has_warning = any("unrelated.csv" in w and "no compatible shared join keys" in w for w in warnings)
         self.assertTrue(has_warning, f"Expected warning about unjoinable table in warnings list: {warnings}")
 
+    def test_mismatched_date_column_names_no_row_duplication(self):
+        # 1. Fact table with 14 daily rows (named 'date') across regions A and B
+        fact_rows = ["date,region,sales_usd"]
+        for day in range(1, 15):
+            d_str = f"2026-01-{day:02d}"
+            r = "A" if day % 2 == 1 else "B"
+            fact_rows.append(f"{d_str},{r},{day * 10}")
+        fact_csv = "\n".join(fact_rows)
+
+        # 2. Supporting table with 4 weekly rows with date column named 'week_start' (different name!)
+        # Only 'region' will match as exact column name
+        supp_csv = "week_start,region,stock_level\n2026-01-01,A,100\n2026-01-08,A,120\n2026-01-01,B,200\n2026-01-08,B,210"
+
+        upload_res = self.client.post(
+            "/api/data/upload",
+            files=[
+                ("files", ("fact.csv", io.BytesIO(fact_csv.encode("utf-8")), "text/csv")),
+                ("files", ("supp.csv", io.BytesIO(supp_csv.encode("utf-8")), "text/csv"))
+            ]
+        )
+        self.assertEqual(upload_res.status_code, 200)
+
+        config_payload = {
+            "dataset_name": "Date Column Mismatch Test",
+            "analysis_grain": "Time Series (Weekly / Monthly / Daily)",
+            "primary_measure": "sales_usd",
+            "date_column": "date",
+            "dimension_columns": ["region"],
+            "driver_columns": ["stock_level"],
+            "file_roles": [
+                {"filename": "fact.csv", "role": "fact", "join_keys": []},
+                {"filename": "supp.csv", "role": "dimension", "join_keys": []}
+            ]
+        }
+
+        conf_res = self.client.post("/api/data/configure", json=config_payload)
+        self.assertEqual(conf_res.status_code, 200)
+
+        sales_df = self.repo.tables["sales"]
+        # CRITICAL ASSERTION 1: Row count must exactly match original 14 fact rows (NO DUPLICATION)
+        self.assertEqual(len(sales_df), 14, f"Row count must be preserved: expected 14, got {len(sales_df)}")
+
+        # CRITICAL ASSERTION 2: Supporting column is present
+        self.assertIn("stock_level", sales_df.columns)
+
+        # CRITICAL ASSERTION 3: As-of temporal alignment verified for specific dates
+        # Region A on Jan 03 (before Jan 08) should get Jan 01's stock_level (100)
+        row_jan03_a = sales_df[(sales_df["date"] == "2026-01-03") & (sales_df["region"] == "A")]
+        self.assertEqual(len(row_jan03_a), 1)
+        self.assertEqual(row_jan03_a["stock_level"].iloc[0], 100)
+
+        # Region A on Jan 11 (after Jan 08) should get Jan 08's stock_level (120)
+        row_jan11_a = sales_df[(sales_df["date"] == "2026-01-11") & (sales_df["region"] == "A")]
+        self.assertEqual(len(row_jan11_a), 1)
+        self.assertEqual(row_jan11_a["stock_level"].iloc[0], 120)
+
+        # Region B on Jan 04 (before Jan 08) should get Jan 01's stock_level (200)
+        row_jan04_b = sales_df[(sales_df["date"] == "2026-01-04") & (sales_df["region"] == "B")]
+        self.assertEqual(len(row_jan04_b), 1)
+        self.assertEqual(row_jan04_b["stock_level"].iloc[0], 200)
+
+        # Region B on Jan 12 (after Jan 08) should get Jan 08's stock_level (210)
+        row_jan12_b = sales_df[(sales_df["date"] == "2026-01-12") & (sales_df["region"] == "B")]
+        self.assertEqual(len(row_jan12_b), 1)
+        self.assertEqual(row_jan12_b["stock_level"].iloc[0], 210)
+
 if __name__ == "__main__":
     unittest.main()
