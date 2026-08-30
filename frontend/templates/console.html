@@ -123,7 +123,15 @@
           <div class="bg-white border border-[#E5E5E5] rounded-lg p-5 space-y-4 shadow-xs">
             
             <div class="flex items-center justify-between pb-3 border-b border-[#E5E5E5]">
-              <div class="text-xs font-semibold text-[#171717]">Interactive Causal Dialogue</div>
+              <div class="flex items-center gap-2">
+                <div class="text-xs font-semibold text-[#171717]">Interactive Causal Dialogue</div>
+                <span x-show="aiStatus && aiStatus.live_gemini_active" class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                  ● Live Gemini (<span x-text="aiStatus?.model_name || 'gemini-2.0-flash'"></span>)
+                </span>
+                <span x-show="!aiStatus || !aiStatus.live_gemini_active" class="px-2 py-0.5 rounded text-[10px] font-semibold bg-neutral-100 text-neutral-600 border border-neutral-200" title="Running in Deterministic Zero-Key Mode. Add GEMINI_API_KEY to activate Live Gemini.">
+                  ● Deterministic Offline Engine
+                </span>
+              </div>
               <button @click="resetChat()" 
                       title="Clear chat history and reset session"
                       class="px-2.5 py-1 rounded bg-white hover:bg-[#F5F5F5] text-[#555555] hover:text-[#171717] border border-[#E5E5E5] text-xs font-medium transition cursor-pointer">

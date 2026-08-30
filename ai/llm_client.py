@@ -381,16 +381,37 @@ class EdithLLMClient:
                         response={"result": tool_result}
                     ))
                     
-                # Append function responses as user/tool role content
-                contents.append(types.Content(role="user", parts=fn_response_parts))
+                # Append function responses as tool role content (required by Google GenAI API)
+                contents.append(types.Content(role="tool", parts=fn_response_parts))
                 continue
                 
             # Case B: Model returned direct text response
-            final_text = response.text if hasattr(response, "text") and response.text else ""
+            final_text = self._safe_extract_text(response)
             if final_text:
                 return final_text, tools_called, prompt_tokens, completion_tokens
                 
         return "", tools_called, prompt_tokens, completion_tokens
+
+    def _safe_extract_text(self, response: Any) -> str:
+        """Safely extracts text from Gemini response without throwing on empty candidates."""
+        if not response:
+            return ""
+        try:
+            if hasattr(response, "text") and response.text:
+                return response.text.strip()
+        except Exception:
+            pass
+        try:
+            candidates = getattr(response, "candidates", []) or []
+            for cand in candidates:
+                content = getattr(cand, "content", None)
+                if content and hasattr(content, "parts"):
+                    parts_text = [p.text for p in content.parts if hasattr(p, "text") and p.text]
+                    if parts_text:
+                        return "\n".join(parts_text).strip()
+        except Exception:
+            pass
+        return ""
 
     def _execute_direct_generation(self, model_name: str, prompt: str, chat_history: Optional[List[Dict[str, Any]]] = None, persona_id: Optional[str] = None) -> str:
         """Direct prompt generation without function calling as a resilient fallback."""
@@ -406,7 +427,7 @@ class EdithLLMClient:
             contents=contents,
             config=config
         )
-        return response.text if hasattr(response, "text") and response.text else ""
+        return self._safe_extract_text(response)
 
 
 

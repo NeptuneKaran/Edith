@@ -311,6 +311,36 @@ Observational Findings: Analysis of {kpi_name} reveals an aggregate observed lev
         comp_h = next((h for h in (all_hypotheses or []) if h["id"] == "H2_COMPETITOR_CAMPAIGN"), {})
         inv_h = next((h for h in (all_hypotheses or []) if h["id"] in ["H8_SUPPLY_CONSTRAINT", "H3_INVENTORY_CONSTRAINT"]), {})
 
+        # Factors / Drivers / Explanatory Signals
+        if any(k in q_clean for k in ["factors", "factor", "driver", "drivers", "telemetry", "signals", "correlation", "correlations", "association", "variables", "what factors", "what are we looking at"]):
+            if pid == "general_user":
+                return "We are investigating 4 key business factors for the sales drop: 1) The 12% price increase on Enterprise Suite Alpha (primary cause, 21 lost renewals), 2) Competitor ApexTech's 15% discount campaign (secondary cause that worsened deal slippage), 3) Warehouse and shipping operations (refuted: 99.4% on-time delivery with zero stockouts), and 4) Customer support latency (refuted: tickets resolved under 4 hours). The strongest numeric factor tied to the revenue drop is lost deal volume (Units Sold, correlation r = -0.92)."
+            return "Our causal investigation tracks four candidate drivers: 1) Pricing Pressure & Elasticity (H1, Cause Score 88.0/100, High Confidence) — +12% price hike on Enterprise Suite Alpha in Week 06, 2) Competitor Promotional Campaign (H2, Cause Score 60.4/100, Possible Driver) — ApexTech 15% discount campaign launched in Week 07, 3) Logistics & Warehouse Constraints (H8, Cause Score 0.0/100, Refuted by Data) — 99.4% warehouse fill rate with 0 stockouts, and 4) Customer Support Latency (H7, Cause Score 0.0/100, Refuted by Data) — steady under 4 hours. The primary explanatory correlation is with Units Sold (Pearson r = -0.92)."
+
+        # Other Regions / Geographic Comparisons (Region A, C, D)
+        if any(k in q_clean for k in ["other region", "other regions", "regions other", "region a", "region c", "region d", "outside region b", "rest of the country", "other territories", "geography"]):
+            if pid == "general_user":
+                return "All other regions are performing normally and meeting their targets: Region A generated $485,000 (just 1% variance), Region C generated $258,200 (1.3% variance), and Region D generated $110,400 (1.4% variance). The entire sales problem is localized in Region B Enterprise accounts, where sales dropped by -$168,700 (97.4% of company-wide variance)."
+            return "Outside of Region B, all geographic territories are performing steadily within statistical baseline corridors: Region A recorded $485,000 (Baseline $490,000, -1.0% variance), Region C recorded $258,200 (Baseline $261,700, -1.3% variance), and Region D recorded $110,400 (Baseline $112,000, -1.4% variance). The net -$147,700 company-wide revenue deficit is 97.4% concentrated in Region B (-$168,700 net variance), confirming this is an isolated regional commercial anomaly rather than a systemic market downturn."
+
+        # Product Lines / Products
+        if any(k in q_clean for k in ["product", "products", "suite alpha", "suite beta", "suite gamma", "product line", "product lines"]):
+            if pid == "general_user":
+                return "The revenue drop is entirely centered on Product Suite Alpha (-$169,900 deficit, accounting for 99.9% of product-level decline). Our other two product lines met expectations: Product Suite Beta brought in $83,200 and Product Suite Gamma brought in $81,600."
+            return "Product breakdown confirms that the revenue deficit is strictly localized to Product Suite Alpha (-$169,900 deficit, 99.9% contribution). Product Suite Beta ($83,200 actual vs $83,500 baseline) and Product Suite Gamma ($81,600 actual vs $81,800 baseline) tracked their historical baselines with negligible variance."
+
+        # Customer Tiers / Mid-Market vs Enterprise
+        if any(k in q_clean for k in ["tier", "tiers", "mid-market", "enterprise", "customer segment"]):
+            if pid == "general_user":
+                return "The sales decline is concentrated in Enterprise accounts, which lost -$165,325 (96.4% of total variance) due to pushback on the price increase. In contrast, Mid-Market accounts only had a minor -$6,250 (-1.8%) variance, demonstrating that smaller accounts were far less sensitive to market shifts."
+            return "Dimensional segmentation reveals that Enterprise accounts drove 96.4% of the net deficit (-$165,325 drop, delta = -16.8%). The Mid-Market tier experienced only a minor -$6,250 (-1.8%) variance, serving as a clean unexposed quasi-experimental control cohort."
+
+        # Timeline / Chronology
+        if any(k in q_clean for k in ["when", "timeline", "chronology", "dates", "week 6", "week 7", "week 8", "lead time", "how long"]):
+            if pid == "general_user":
+                return "The timeline unfolded over three weeks: In Week 6, we raised Enterprise prices by 12%. Two weeks later in Week 8, renewals stalled, losing 21 enterprise deals (-$210,000). Meanwhile in Week 7, competitor ApexTech launched a 15% discount campaign that made deal recovery much harder."
+            return "Event timeline and lead-lag chronology: In Week 06 (2026-01-11), internal price adjustments took effect (+12% on Enterprise Suite Alpha). In Week 07 (2026-01-18), competitor ApexTech launched a 15% aggressive discount campaign. In Week 08 (2026-02-22), the combined effects peaked, creating a -$147,700 (-10.5%, -2.30 sigma) material anomaly."
+
         if any(k in q_clean for k in ["decomposition", "math", "volume effect", "price effect", "volume vs price", "price vs volume", "volume and price", "formula", "identity", "revenue identity"]):
             if pid == "general_user":
                 return "When we raised enterprise prices, the 18 accounts that accepted the higher rate brought in an extra $21,600 in revenue. However, 21 other accounts paused their renewals, causing a $210,000 loss in deal volume. Because the lost volume was much larger than the extra price gain, sales in Region B suffered a net drop of -$188,400."
