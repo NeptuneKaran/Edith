@@ -498,6 +498,13 @@ function edithApp(activePage = 'overview', sessionPersonaId = 'executive') {
       }
     },
 
+    get isDemo() {
+      if (this.sourceInfo && typeof this.sourceInfo.is_demo === 'boolean') {
+        return this.sourceInfo.is_demo;
+      }
+      return true;
+    },
+
     getWelcomeMessage() {
       if (this.personaId === 'general_user') {
         return "I am active in Business User (Plain Language) mode. Ask me in everyday language about metric trends, which groups had the biggest impact, or what the team is doing next.";
