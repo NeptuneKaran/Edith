@@ -424,13 +424,18 @@ function edithApp(activePage = 'overview', sessionPersonaId = 'executive') {
       this.renderDriverCorrelationChart();
     },
 
+    renderDiagnosticDimensionChart() {
+      this.renderDimensionBarChart();
+    },
+
     renderDimensionBarChart() {
-      const elem = document.getElementById('dimContributionChart');
+      const elem = document.getElementById('diagnosticDimChart') || document.getElementById('dimContributionChart');
       if (!elem || !this.diagnosticData.breakdowns || !this.activeDimension) return;
 
       const rows = this.diagnosticData.breakdowns[this.activeDimension] || [];
       const xLabels = rows.map(r => r[this.activeDimension] || 'Unknown');
-      const yValues = rows.map(r => r.curr_value !== null ? r.curr_value : 0);
+      const yValues = rows.map(r => r.curr_value !== null && r.curr_value !== undefined ? r.curr_value : (r.current_value !== null ? r.current_value : 0));
+      const unit = this.diagnosticData.primary_measure_unit || '';
 
       const trace = {
         x: xLabels,
@@ -439,7 +444,8 @@ function edithApp(activePage = 'overview', sessionPersonaId = 'executive') {
         marker: {
           color: '#A100FF',
           line: { color: '#6F00B5', width: 1 }
-        }
+        },
+        hovertemplate: `%{x}: %{y}${unit}<extra></extra>`
       };
 
       const layout = {
@@ -448,7 +454,12 @@ function edithApp(activePage = 'overview', sessionPersonaId = 'executive') {
         margin: { l: 60, r: 20, t: 10, b: 50 },
         font: { family: 'Inter, sans-serif', color: '#555555', size: 11 },
         xaxis: { color: '#555555', gridcolor: '#EAEAEA', zerolinecolor: '#EAEAEA' },
-        yaxis: { color: '#555555', gridcolor: '#EAEAEA', zerolinecolor: '#EAEAEA' }
+        yaxis: { 
+          color: '#555555', 
+          gridcolor: '#EAEAEA', 
+          zerolinecolor: '#EAEAEA',
+          ticksuffix: unit === '%' ? '%' : ''
+        }
       };
 
       Plotly.newPlot(elem, [trace], layout, { responsive: true, displayModeBar: false });

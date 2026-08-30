@@ -309,6 +309,15 @@ class DataRepository:
             return self.tables.get("subscriptions_weekly", pd.DataFrame())
         elif self.active_benchmark_id == "retail_fulfillment":
             return self.tables.get("store_sales_weekly", pd.DataFrame())
+        elif self.active_benchmark_id == "manufacturing_quality":
+            df = self.tables.get("production_output_daily", pd.DataFrame()).copy()
+            if not df.empty and "week_idx" not in df.columns:
+                sorted_weeks = sorted(df["iso_week"].unique())
+                week_map = {w: i for i, w in enumerate(sorted_weeks)}
+                df["week_idx"] = df["iso_week"].map(week_map)
+                df["week_label"] = df["iso_week"]
+                df["week_date"] = df["date"]
+            return df
         return self.tables.get("sales", pd.DataFrame())
 
     def get_pricing_logs(self) -> pd.DataFrame:
@@ -387,7 +396,7 @@ class DataRepository:
         if region and "region" in df_sales.columns:
             df_sales = df_sales[df_sales["region"] == region]
             
-        target_col = "gross_revenue" if "gross_revenue" in df_sales.columns else ("mrr" if "mrr" in df_sales.columns else ("sales_usd" if "sales_usd" in df_sales.columns else df_sales.select_dtypes(include=[np.number]).columns[0]))
+        target_col = "yield_pct" if "yield_pct" in df_sales.columns else ("gross_revenue" if "gross_revenue" in df_sales.columns else ("mrr" if "mrr" in df_sales.columns else ("sales_usd" if "sales_usd" in df_sales.columns else df_sales.select_dtypes(include=[np.number]).columns[0])))
         
         # Check aggregation type
         is_distinct = False
@@ -401,6 +410,9 @@ class DataRepository:
             if "distinct" in self.active_source_info["feature_status"]["aggregation_type"].lower():
                 is_distinct = True
                 distinct_col = target_col
+
+        # Check if metric is a percentage / rate (e.g. yield_pct, margin, churn_rate)
+        is_rate_metric = ("yield" in target_col.lower() or "rate" in target_col.lower() or "pct" in target_col.lower() or "margin" in target_col.lower() or self.active_source_info.get("primary_measure_unit") == "%" or (self.semantic_model and getattr(self.semantic_model, "aggregation_type", "") == "mean"))
 
         # Identify categorical dimensions
         dim_candidates = []
@@ -430,7 +442,10 @@ class DataRepository:
                 grouped = grouped.sort_values("current_value", ascending=False)
                 breakdowns[dim] = grouped
             elif is_snapshot:
-                grouped = df_sales.groupby(dim)[target_col].sum().reset_index()
+                if is_rate_metric:
+                    grouped = df_sales.groupby(dim)[target_col].mean().reset_index()
+                else:
+                    grouped = df_sales.groupby(dim)[target_col].sum().reset_index()
                 total_val = grouped[target_col].sum()
                 grouped["baseline_value"] = grouped[target_col]
                 grouped["base_value"] = grouped[target_col]
@@ -447,8 +462,12 @@ class DataRepository:
                 base_slice = df_sales[df_sales["week_idx"] <= 48] if w_max >= 48 else df_sales[df_sales["week_idx"] < w_max]
                 
                 n_base_weeks = 48.0 if w_max >= 48 else max(1.0, float(w_max - 1))
-                curr_grp = curr_slice.groupby(dim)[target_col].sum()
-                base_grp = base_slice.groupby(dim)[target_col].sum() / n_base_weeks
+                if is_rate_metric:
+                    curr_grp = curr_slice.groupby(dim)[target_col].mean()
+                    base_grp = base_slice.groupby(dim)[target_col].mean()
+                else:
+                    curr_grp = curr_slice.groupby(dim)[target_col].sum()
+                    base_grp = base_slice.groupby(dim)[target_col].sum() / n_base_weeks
                 
                 all_keys = list(set(curr_grp.index).union(set(base_grp.index)))
                 rows = []
@@ -470,7 +489,11 @@ class DataRepository:
                     
                 df_dim = pd.DataFrame(rows)
                 if not df_dim.empty:
-                    df_dim["contribution_pct"] = (df_dim["delta_value"] / (total_delta if abs(total_delta) > 0 else 1.0)) * 100.0
+                    total_neg = sum(r["delta_value"] for r in rows if r["delta_value"] < 0)
+                    if total_neg < 0:
+                        df_dim["contribution_pct"] = df_dim["delta_value"].apply(lambda d: round((d / total_neg) * 100.0, 1) if d < 0 else 0.0)
+                    else:
+                        df_dim["contribution_pct"] = (df_dim["delta_value"] / (total_delta if abs(total_delta) > 0 else 1.0)) * 100.0
                     df_dim["impact_share_pct"] = df_dim["contribution_pct"]
                     df_dim = df_dim.sort_values("delta_value", key=abs, ascending=False)
                 breakdowns[dim] = df_dim

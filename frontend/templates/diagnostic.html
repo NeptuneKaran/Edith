@@ -35,7 +35,7 @@
                   <th class="p-2.5" x-text="activeDimension.replace(/_/g, ' ')"></th>
                   <th class="p-2.5 text-right">Current Level</th>
                   <th class="p-2.5 text-right">Previous Level</th>
-                  <th class="p-2.5 text-right">Delta ($)</th>
+                  <th class="p-2.5 text-right" x-text="diagnosticData.primary_measure_unit ? 'Delta (' + diagnosticData.primary_measure_unit + ')' : 'Delta ($)'"></th>
                   <th class="p-2.5 text-right">Contribution %</th>
                 </tr>
               </thead>
