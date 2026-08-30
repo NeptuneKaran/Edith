@@ -23,8 +23,51 @@ class OfflineEdithReasoner:
         simulation_levers: Optional[Dict[str, Any]] = None
     ) -> str:
         """Returns structured recommended actions and policy intervention strategy."""
+        from data.repository import DataRepository
+        repo = DataRepository.get_instance()
+        is_demo = repo.active_source_info.get("is_demo", True)
+        kpi_name = (anomaly_context or {}).get("kpi_name", repo.active_source_info.get("primary_measure_label", "Primary Measure"))
         pid = (persona_id or "executive").lower().strip()
         
+        # 1. Custom generic dataset recommendations
+        if not is_demo:
+            breakdowns = repo.get_dimensional_breakdown()
+            drvs = repo.get_driver_correlations().get("correlations", {})
+            dist = repo.get_distribution_statistics()
+            
+            top_dim_summary = []
+            for dim, df_dim in list(breakdowns.items())[:2]:
+                if not df_dim.empty:
+                    top_row = df_dim.iloc[0]
+                    top_dim_summary.append(f"`{top_row[dim]}` in {dim.replace('_', ' ').title()}")
+            dim_target = top_dim_summary[0] if top_dim_summary else "the highest concentration segment"
+            
+            top_drv = list(drvs.keys())[0] if drvs else "mapped operational drivers"
+            
+            if pid == "general_user":
+                return f"""**Recommended Next Steps for {kpi_name}:**
+
+1. **Focus on the Highest Impact Group ({dim_target}):**
+   - Direct immediate operational reviews toward {dim_target}, which accounts for the largest share of {kpi_name}.
+
+2. **Investigate the Key Influencing Factor ({top_drv.replace('_', ' ').title()}):**
+   - Review operational policies and processes related to {top_drv.replace('_', ' ').title()} to identify optimization opportunities.
+
+3. **Review Unusual Data Points:**
+   - Audit the {dist.get('outlier_count', 0)} outlier records identified in the data to ensure data accuracy and address specific anomalies."""
+
+            return f"""### 🎯 Recommended Operational Action Plan for {kpi_name}
+
+1. **Target Highest-Variance Concentration ({dim_target}):**
+   - Prioritize operational intervention and resource allocation toward **{dim_target}**, the dominant variance epicenter.
+
+2. **Optimize Key Correlated Driver ({top_drv.replace('_', ' ').title()}):**
+   - Calibrate operational parameters linked to **{top_drv.replace('_', ' ').title()}**, which exhibits the strongest empirical association with {kpi_name}.
+
+3. **Data Quality & Outlier Remediation:**
+   - Audit and validate the **{dist.get('outlier_count', 0)} outlier records ({dist.get('outlier_pct', 0.0):.1f}%)** to prevent operational skew."""
+
+        # 2. Built-in B2B SaaS demo recommendations
         if pid == "general_user":
             return """**Here is what the team is planning to do next to recover sales:**
 
@@ -79,12 +122,67 @@ class OfflineEdithReasoner:
         from data.repository import DataRepository
         repo = DataRepository.get_instance()
         is_demo = repo.active_source_info.get("is_demo", True)
-        kpi_name = anomaly_context.get("kpi_name", "Primary Measure")
+        kpi_name = anomaly_context.get("kpi_name", repo.active_source_info.get("primary_measure_label", "Primary Measure"))
         current_val = anomaly_context.get("current_value", 0.0)
         baseline_val = anomaly_context.get("baseline_value", 0.0)
         delta_pct = anomaly_context.get("delta_pct", 0.0)
         z_score = anomaly_context.get("z_score", 0.0)
         pid = (persona or "executive").lower().strip()
+        
+        # 1. Custom generic dataset briefing
+        if not is_demo or (hypotheses and hypotheses[0].get("id", "").startswith("GEN_")):
+            dq = repo.get_data_quality_report()
+            dist = repo.get_distribution_statistics()
+            drvs = repo.get_driver_correlations().get("correlations", {})
+            breakdowns = repo.get_dimensional_breakdown()
+            
+            top_drv_name = list(drvs.keys())[0] if drvs else "None"
+            top_drv_r = drvs[top_drv_name]["pearson_r"] if drvs else 0.0
+            
+            top_dim_summary = []
+            for dim, df_dim in list(breakdowns.items())[:2]:
+                if not df_dim.empty:
+                    top_row = df_dim.iloc[0]
+                    top_dim_summary.append(f"`{top_row[dim]}` in {dim.replace('_', ' ').title()} ({abs(top_row.get('contribution_pct', 0.0)):.1f}%)")
+            dim_text = ", ".join(top_dim_summary) if top_dim_summary else "Evenly distributed"
+
+            if pid == "general_user":
+                return f"""### 💡 Plain-Language Summary: What the Data Shows for {kpi_name}
+
+**1. The Overview:**
+- **Primary Metric Analyzed:** **{kpi_name}** with an aggregate total of **{current_val:,.1f}** across **{dq.get('total_rows', 0):,} records**.
+- **Data Completeness:** High quality data with **{dq.get('data_quality_score', 100.0):.1f}% Health Score**.
+
+**2. Key Patterns Found in the Data:**
+- **Highest Concentration:** The highest values are concentrated in {dim_text}.
+- **Strongest Factor:** **{top_drv_name.replace('_', ' ').title()}** shows the strongest statistical link with {kpi_name} (correlation: {top_drv_r:+.2f}).
+- **Data Spread:** Middle value is **{dist.get('percentiles', {}).get('P50_median', 0.0):,.1f}**, with **{dist.get('outlier_count', 0)} unusual data points** flagged.
+
+**3. Recommended Next Step:**
+- Focus operational reviews on {dim_text} and explore factors influencing {top_drv_name.replace('_', ' ').title()}."""
+
+            return f"""### 📋 Executive Investigation Briefing: {kpi_name} Analysis
+
+**1. Incident Overview & Scale:**
+- **Primary Focus Metric:** **{kpi_name}** with an aggregate observed level of **{current_val:,.1f}** across **{dq.get('total_rows', 0):,} records**.
+- **Operational Grain:** {anomaly_context.get('status_label', 'Cross-Sectional Snapshot')}.
+
+**2. Observational Findings & Empirical Concentrations:**
+- **Segment Epicenter:** Heaviest concentration observed in {dim_text}.
+- **Explanatory Driver Correlation:** **{top_drv_name.replace('_', ' ').title()}** shows the strongest statistical association with r = {top_drv_r:+.2f} (Pearson).
+- **Distribution Profile:** Median: **{dist.get('percentiles', {}).get('P50_median', 0.0):,.1f}** | IQR: **{dist.get('iqr', 0.0):.2f}** | Outliers: **{dist.get('outlier_count', 0)} items ({dist.get('outlier_pct', 0.0):.1f}%)**.
+
+**3. Decision Guidance & Observational Integrity:**
+- All reported signals represent empirical concentrations and statistical correlations to direct operational investigation, not unverified causal claims."""
+
+        # 2. Built-in B2B SaaS demo briefing
+        top_h = hypotheses[0] if hypotheses else {}
+        second_h = hypotheses[1] if len(hypotheses) > 1 else {}
+        refuted_h = next((h for h in hypotheses if h["id"] in ["H8_SUPPLY_CONSTRAINT", "H3_INVENTORY_CONSTRAINT"]), {})
+        ctrl = top_h.get("control_group_analysis", {})
+        ctrl_cohort = ctrl.get("control_cohort", "Mid-Market Alpha")
+        did_gap = ctrl.get("did_divergence_pct", 48.3)
+        math_d = top_h.get("mathematical_decomposition", {})
         
         # General User briefing (100% plain language)
         if pid == "general_user":
@@ -102,45 +200,6 @@ class OfflineEdithReasoner:
 **3. What the Team Plans to Do Next:**
 - Roll back half of the price increase on Enterprise plans in Region B (setting the price to $10,528), provide $15,000 in local partner marketing support, and assign dedicated account managers to at-risk renewals."""
 
-        # Custom generic dataset briefing
-        if not is_demo or (hypotheses and hypotheses[0].get("id", "").startswith("GEN_")):
-            dq = repo.get_data_quality_report()
-            dist = repo.get_distribution_statistics()
-            drvs = repo.get_driver_correlations().get("correlations", {})
-            breakdowns = repo.get_dimensional_breakdown()
-            
-            top_drv_name = list(drvs.keys())[0] if drvs else "None"
-            top_drv_r = drvs[top_drv_name]["pearson_r"] if drvs else 0.0
-            
-            top_dim_summary = []
-            for dim, df_dim in list(breakdowns.items())[:2]:
-                if not df_dim.empty:
-                    top_row = df_dim.iloc[0]
-                    top_dim_summary.append(f"`{top_row[dim]}` ({top_row.get('contribution_pct', 0.0):.1f}% of {dim.replace('_', ' ').title()})")
-            dim_text = ", ".join(top_dim_summary) if top_dim_summary else "Evenly distributed"
-
-            return f"""### 📋 Executive Investigation Briefing: {kpi_name} Analysis
-
-**1. Incident Overview & Scale:**
-- **Primary Focus Metric:** **{kpi_name}** with an aggregate observed level of **{current_val:,.1f}** across **{dq.get('total_rows', 0):,} records**.
-- **Operational Grain:** {anomaly_context.get('status_label', 'Cross-Sectional Snapshot')}.
-
-**2. Observational Findings & Empirical Concentrations:**
-- **Segment Epicenter:** Heaviest concentration observed in {dim_text}.
-- **Explanatory Driver Correlation:** **{top_drv_name.replace('_', ' ').title()}** shows the strongest statistical association with r = {top_drv_r:+.2f} (Pearson).
-- **Distribution Profile:** Median: **{dist.get('percentiles', {}).get('P50_median', 0.0):,.1f}** | IQR: **{dist.get('iqr', 0.0):.2f}** | Outliers: **{dist.get('outlier_count', 0)} items ({dist.get('outlier_pct', 0.0):.1f}%)**.
-
-**3. Decision Guidance & Observational Integrity:**
-- All reported signals represent empirical concentrations and statistical correlations to direct operational investigation, not unverified causal claims."""
-
-        top_h = hypotheses[0] if hypotheses else {}
-        second_h = hypotheses[1] if len(hypotheses) > 1 else {}
-        refuted_h = next((h for h in hypotheses if h["id"] in ["H8_SUPPLY_CONSTRAINT", "H3_INVENTORY_CONSTRAINT"]), {})
-        ctrl = top_h.get("control_group_analysis", {})
-        ctrl_cohort = ctrl.get("control_cohort", "Mid-Market Alpha")
-        did_gap = ctrl.get("did_divergence_pct", 48.3)
-        math_d = top_h.get("mathematical_decomposition", {})
-        
         if response_style == "concise":
             return f"""### 🔍 Executive Incident Briefing: {kpi_name} Anomaly
 
@@ -178,18 +237,20 @@ class OfflineEdithReasoner:
   - *Customer Telemetry:* Pricing complaints surged to 38/week in CRM logs.
 - **#2 Aggressive Competitor Campaign (Score: {second_h.get('cause_score_100', 60.4):.1f}/100 | {second_h.get('confidence_classification', 'POSSIBLE DRIVER')}):**
   - *Competitor Action:* ApexTech launched 15% discount in Week 07.
-  - *Temporal Lag:* τ = 1 week lead-lag alignment with mid-tier contract churn (|r| = 0.850).
-- **#3 Supply Chain / Inventory (Score: 0.0/100 | REFUTED):**
-  - *Refutation Fact:* Fill rate remained at 99.4% with zero recorded stockout days.
+  - *Empirical Signal:* CRM win/loss mentions surged 4.8x baseline.
+  - *Lead-Time Lag:* Coincident 1-week response lag (τ = 1 week).
+- **#8 Supply Chain / Inventory Constraints (Score: 0.0/100 | REFUTED):**
+  - *Refutation Evidence:* Logistics logs confirm 99.4% warehouse fill rate with 0 stockout days.
 
-**3. Policy Intervention & Simulation Recommendation:**
-- **Counterfactual Action:** Enact a **-6% pricing rollback** on Enterprise Product Suite Alpha combined with a **$15k regional co-op promotion fund** to recover 78.2% of lost volume."""
+**3. Recommended Counterfactual Decision Trajectory:**
+- Execute -6% price rollback on Enterprise Suite Alpha in Region B ($10,528/unit) combined with $15,000 regional partner co-op fund.
+- Projected 8-week recovery: **+$20,067/week** net recovery, stabilizing gross margin at **70.2%**."""
 
     @staticmethod
     def answer_query(
         query: str,
         anomaly_context: Dict[str, Any],
-        selected_hypothesis: Optional[Dict[str, Any]] = None,
+        selected_hypothesis: Dict[str, Any],
         all_hypotheses: Optional[List[Dict[str, Any]]] = None,
         chat_history: Optional[List[Dict[str, Any]]] = None,
         simulation_levers: Optional[Dict[str, Any]] = None,
@@ -214,8 +275,9 @@ class OfflineEdithReasoner:
         elif selected_hypothesis is None:
             selected_hypothesis = {}
         
-        kpi_name = anomaly_context.get("kpi_name", "Primary Measure")
+        kpi_name = anomaly_context.get("kpi_name", repo.active_source_info.get("primary_measure_label", "Primary Measure"))
         current_val = anomaly_context.get("current_value", 0.0)
+        baseline_val = anomaly_context.get("baseline_value", 0.0)
         delta_pct = anomaly_context.get("delta_pct", 0.0)
         z_score = anomaly_context.get("z_score", 0.0)
         
@@ -226,6 +288,17 @@ class OfflineEdithReasoner:
         if any(q_clean == g or q_clean.startswith(g + " ") for g in greetings):
             dataset_name = repo.active_source_info.get("name", "Active Dataset")
             if pid == "general_user":
+                if not is_demo:
+                    return f"""Hello! I'm **EDITH**, your AI business intelligence assistant.
+
+I'm currently connected to **{dataset_name}** analyzing **{kpi_name}**. Here are a few ways we can explore:
+
+- **Understand Key Drivers:** Ask *"What factors affect {kpi_name}?"*
+- **Explore Categories:** Ask *"Which groups have the highest {kpi_name}?"*
+- **Check Data Spread:** Ask *"Are there any outliers in this file?"*
+
+How can I help you today?"""
+
                 return f"""Hello! I'm **EDITH**, your AI business intelligence assistant.
 
 I'm currently connected to **{dataset_name}**. Here are a few ways we can explore what's happening:
@@ -240,10 +313,10 @@ How can I help you today?"""
 
 I'm currently connected to **{dataset_name}**. Here are a few ways we can dive into the data together:
 
-- **Explore Concentrations:** Ask *"Which segments or stores have the highest variance?"*
+- **Explore Concentrations:** Ask *"Which segments or categories have the highest variance?"*
 - **Analyze Drivers:** Ask *"What drivers correlate most strongly with {kpi_name}?"*
 - **Inspect Quality & Distribution:** Ask *"Are there any outliers or missing values in this file?"*
-- **Root Cause & What-Ifs:** Ask *"Why did performance shift?"* or *"What decision should we approve first?"*
+- **Root Cause & Guidance:** Ask *"What factors affect performance?"* or *"What actions are recommended?"*
 
 What would you like to examine first?"""
 
@@ -255,20 +328,20 @@ What would you like to examine first?"""
                 return f"""I am **EDITH**, an AI business intelligence assistant built to help everyone understand the real story behind business numbers.
 
 **Here is what I can do for you:**
-1. **Explain Metric Drops Simply:** Explain why sales or other key numbers changed in plain, everyday language.
-2. **Find the Exact Problem Area:** Pinpoint which region, product, or customer segment had the biggest impact.
-3. **Verify What Was Ruled Out:** Confirm whether operational issues like inventory stockouts or website downtime played a role.
-4. **Walk Through Next Steps:** Explain the team's planned recovery actions and how they help.
+1. **Explain Metrics Simply:** Explain changes and trends in plain, everyday language.
+2. **Find the Exact Epicenter:** Pinpoint which categories or segments have the biggest impact.
+3. **Analyze Influencing Factors:** Identify which operational factors are most linked to your numbers.
+4. **Walk Through Next Steps:** Provide practical recommendations on what to investigate next.
 
 Feel free to ask me anything about **{kpi_name}** or the active business data!"""
 
-            return f"""I am **EDITH (Executive Decision Intelligence & Tactical Hypothesis)**, an AI-assisted analytics partner engineered to uncover the empirical drivers behind business performance.
+            return f"""I am **EDITH (Executive Decision Intelligence & Tactical Hypothesis)**, an AI-assisted analytics partner engineered to uncover empirical drivers behind business performance.
 
 **Here is how I assist decision-makers:**
 1. **Anomaly & Outlier Detection:** Pinpointing statistically significant deviations (±2.0σ) and IQR-based distribution outliers.
 2. **Dimensional Variance Localization:** Breaking down performance across categories, regions, tiers, and channels to isolate the exact epicenter.
-3. **Driver Correlation & Association:** Measuring linear (Pearson r) and rank-order (Spearman rₛ) relationships with explanatory factors.
-4. **Counterfactual What-If Simulation:** Modeling policy adjustments (e.g. price rollbacks and promo boosts) on calibrated economic models.
+3. **Driver Correlation & Association:** Measuring linear (Pearson r) and rank-order (Spearman r) relationships with explanatory factors.
+4. **Counterfactual What-If Simulation:** Modeling policy adjustments on calibrated economic models.
 5. **Grounded Natural Q&A:** Answering your specific inquiries directly using verified calculations.
 
 Feel free to ask me anything about **{kpi_name}** or the active data!"""
@@ -282,7 +355,17 @@ Feel free to ask me anything about **{kpi_name}** or the active data!"""
             dq = repo.get_data_quality_report()
             dist = repo.get_distribution_statistics()
             
-            # Starter probe: What changed in the selected metric?
+            top_dim_summary = []
+            for dim, df_dim in list(breakdowns.items())[:2]:
+                if not df_dim.empty:
+                    top_row = df_dim.iloc[0]
+                    top_dim_summary.append(f"`{top_row[dim]}` in {dim.replace('_', ' ').title()} ({abs(top_row.get('contribution_pct', 0.0)):.1f}%)")
+            dim_text = ", ".join(top_dim_summary) if top_dim_summary else "Evenly distributed across categories"
+            
+            top_drv_name = list(drvs.keys())[0] if drvs else "None"
+            top_drv_r = drvs[top_drv_name]["pearson_r"] if drvs else 0.0
+
+            # 3A. Starter probe: What changed in the selected metric?
             if any(k in q_clean for k in ["what changed in the selected metric", "what changed", "metric movement", "tell me what changed"]):
                 top_name = selected_hypothesis.get('name', 'Segment Concentration') if selected_hypothesis else 'Segment Concentration'
                 top_sum = selected_hypothesis.get('summary', '') if selected_hypothesis else ''
@@ -291,7 +374,11 @@ Feel free to ask me anything about **{kpi_name}** or the active data!"""
 - **Primary Epicenter:** {top_name} ({top_sum})
 - **Data Quality:** {dq.get('data_quality_score', 100.0):.1f}% Health Score across {dq.get('total_rows', 0):,} rows."""
 
-            # Check if query matches specific category/dimension values in dataset
+            # 3B. Action / Next steps / What to do queries
+            if any(k in q_clean for k in ["action", "do", "fix", "next", "recommend", "solution", "strategy", "roadmap", "plan", "step", "approve", "priority"]):
+                return OfflineEdithReasoner._get_recommended_action_response(persona, anomaly_context, simulation_levers)
+
+            # 3C. Check if query matches specific category/dimension values in dataset
             matched_entity = None
             matched_dim = None
             for dim, df_dim in breakdowns.items():
@@ -310,7 +397,7 @@ Feel free to ask me anything about **{kpi_name}** or the active data!"""
                 entity_rows = df_dim[df_dim[matched_dim].astype(str) == matched_entity]
                 if not entity_rows.empty:
                     er = entity_rows.iloc[0]
-                    share_pct = er.get("contribution_pct", 0.0)
+                    share_pct = abs(er.get("contribution_pct", 0.0))
                     total_val = er.get("sum", er.get("count", er.get(kpi_name, 0.0)))
                     avg_val = er.get("mean", 0.0)
                     return f"""Based on the data for **{matched_dim.replace('_', ' ').title()}: `{matched_entity}`**:
@@ -320,32 +407,75 @@ Feel free to ask me anything about **{kpi_name}** or the active data!"""
 - **Average per Record:** **{avg_val:,.1f}**
 - **Category Ranking:** Ranks #{int(entity_rows.index[0]) + 1} across all {len(df_dim)} groups in `{matched_dim}`.
 
-Would you like to see how `{matched_entity}` compares across other dimensions or numeric drivers?"""
+Would you like to explore how `{matched_entity}` compares across other dimensions or numeric drivers?"""
 
-            # Specific question about concentrations / biggest contributors
+            # 3D. Specific question about concentrations / biggest contributors
             if any(k in q_clean for k in ["concentration", "highest", "biggest", "top group", "worst", "lowest", "which store", "which brand", "which department", "breakdown", "segments", "which groups show the greatest concentration"]):
                 lines = []
                 for dim, df_dim in breakdowns.items():
                     if not df_dim.empty:
                         top_row = df_dim.iloc[0]
                         bottom_row = df_dim.iloc[-1] if len(df_dim) > 1 else top_row
-                        lines.append(f"- **{dim.replace('_', ' ').title()}:** Top is `{top_row[dim]}` (**{top_row.get('contribution_pct', 0.0):.1f}%** share); lowest is `{bottom_row[dim]}` (**{bottom_row.get('contribution_pct', 0.0):.1f}%** share).")
+                        lines.append(f"- **{dim.replace('_', ' ').title()}:** Top is `{top_row[dim]}` (**{abs(top_row.get('contribution_pct', 0.0)):.1f}%** share); lowest is `{bottom_row[dim]}` (**{abs(bottom_row.get('contribution_pct', 0.0)):.1f}%** share).")
+                summary_body = "\n".join(lines)
                 return f"""**Dimensional Concentration Analysis for {kpi_name}:**
 
-""" + "\n".join(lines) + "\n\n*This breakdown reveals where metric values are concentrated across your business segments.*"
+{summary_body}
 
-            # Specific question about drivers / correlations
-            if any(k in q_clean for k in ["driver", "correlation", "correlate", "association", "relationship", "factors", "relate", "which numeric fields have the strongest observed association"]):
+*This breakdown reveals where metric values are concentrated across your business segments.*"""
+
+            # 3E. Specific question about drivers / correlations / what affected / influence / why
+            if any(k in q_clean for k in ["driver", "correlation", "correlate", "association", "relationship", "factors", "relate", "affect", "affected", "influence", "influenced", "impact", "impacted", "cause", "caused", "why", "which numeric fields have the strongest observed association"]):
                 if drvs:
                     lines = []
                     for drv_name, stats in drvs.items():
-                        lines.append(f"- **{drv_name.replace('_', ' ').title()}:** Pearson r = {stats.get('pearson_r', 0.0):+.2f} ({stats.get('relationship_type', 'Association')}) | Spearman rₛ = {stats.get('spearman_rs', 0.0):+.2f}.")
+                        r_val = stats.get('pearson_r', 0.0)
+                        rel_desc = "Strong Positive" if r_val > 0.6 else ("Strong Negative" if r_val < -0.6 else ("Moderate Positive" if r_val > 0.3 else ("Moderate Negative" if r_val < -0.3 else "Weak / Neutral")))
+                        if pid == "general_user":
+                            lines.append(f"- **{drv_name.replace('_', ' ').title()}:** {rel_desc} link with {kpi_name} (relationship score: {r_val:+.2f}).")
+                        else:
+                            lines.append(f"- **{drv_name.replace('_', ' ').title()}:** Pearson r = {r_val:+.2f} ({rel_desc}) | Spearman r = {stats.get('spearman_rs', 0.0):+.2f}.")
+                    
+                    driver_body = "\n".join(lines)
+                    if pid == "general_user":
+                        return f"""**What Influences {kpi_name}:**
+
+Based on our analysis of the active dataset across **{dq.get('total_rows', 0):,} records**:
+
+**1. Primary Influencing Factors:**
+{driver_body}
+
+**2. Where It Is Centered:**
+- Values are most concentrated in {dim_text}.
+
+*(These relationships show which operational factors have the strongest link to {kpi_name}.)*"""
+
                     return f"""**Numeric Driver Associations with {kpi_name}:**
 
-""" + "\n".join(lines) + "\n\n*Strong positive or negative correlations highlight drivers worth investigating operationally.*"
-                return "No numeric driver columns were mapped for correlation analysis in this dataset."
+**1. Statistical Driver Correlations (Pearson & Spearman):**
+{driver_body}
 
-            # Specific question about data quality / outliers / distributions
+**2. Dimensional Variance Localization:**
+- Heaviest empirical concentration: {dim_text}.
+
+**3. Observational Integrity Notice:**
+- Identified associations represent statistical correlations across observational data to guide root-cause investigation."""
+                
+                # If no drivers are mapped, explain dimensional breakdown
+                if pid == "general_user":
+                    return f"""**What We Know About {kpi_name}:**
+
+- **Total Observed Level:** **{current_val:,.1f}** across **{dq.get('total_rows', 0):,} records**.
+- **Category Breakdown:** Values are most concentrated in {dim_text}.
+- *Note:* No numerical driver columns were mapped for correlation testing in this dataset."""
+
+                return f"""**Analysis of Factors Affecting {kpi_name}:**
+
+- **Observed Metric:** **{kpi_name}** ({current_val:,.1f} across {dq.get('total_rows', 0):,} rows).
+- **Concentration Epicenter:** {dim_text}.
+- *Note:* Correlation analysis requires numeric driver columns. Review dimensional breakdowns for category contributions."""
+
+            # 3F. Specific question about data quality / outliers / distributions
             if any(k in q_clean for k in ["quality", "null", "missing", "outlier", "distribution", "skew", "iqr", "median", "duplicates", "summarize dataquality issues", "summarize data quality issues"]):
                 col_nulls = dq.get("column_null_percentages", {})
                 null_str = ", ".join([f"`{c}` ({p}%)" for c, p in col_nulls.items() if p > 0]) or "None"
@@ -357,9 +487,18 @@ Would you like to see how `{matched_entity}` compares across other dimensions or
 - **Distribution Profile:** Median = **{dist.get('percentiles', {}).get('P50_median', 0.0):,.1f}**, IQR = **{dist.get('iqr', 0.0):.2f}**, Mean = **{dist.get('mean', 0.0):,.1f}**
 - **Outliers:** **{dist.get('outlier_count', 0)} records** ({dist.get('outlier_pct', 0.0):.1f}%) fall beyond 1.5 × IQR."""
 
-            # General question on custom dataset
-            if any(k in q_clean for k in ["why", "what happened", "summarize", "tell me about", "overview", "what do you think", "summary", "explain"]):
-                return OfflineEdithReasoner.generate_investigation_briefing(anomaly_context, all_hypotheses or [], response_style="concise", persona=persona)
+            # 3G. General question / overview on custom dataset
+            if pid == "general_user":
+                return f"""**Key Takeaway for {kpi_name}:**
+
+- **Overall Summary:** We analyzed **{kpi_name}** (observed total: **{current_val:,.1f}**) across **{dq.get('total_rows', 0):,} records**.
+- **Highest Category:** The greatest concentration is in {dim_text}.
+- **Key Driver:** **{top_drv_name.replace('_', ' ').title()}** shows the strongest statistical link to {kpi_name} (correlation: {top_drv_r:+.2f}).
+- **Data Spread:** Median value is **{dist.get('percentiles', {}).get('P50_median', 0.0):,.1f}** with **{dist.get('outlier_count', 0)} unusual data points** identified.
+
+*(You can ask: "Which category has the highest {kpi_name}?", "What drivers correlate with {kpi_name}?", or "Are there any outliers in this file?".)*"""
+
+            return OfflineEdithReasoner.generate_investigation_briefing(anomaly_context, all_hypotheses or [], response_style="concise", persona=persona)
 
         # ==============================================================================
         # 4. BUILT-IN DEMO BENCHMARK: TARGETED ANALYTICAL QUERIES
@@ -431,7 +570,7 @@ When we raised prices on our Enterprise software plan:
 - **Stockouts:** Exactly **0 stockout days** were recorded in SAP S/4HANA inventory logs.
 - **Conclusion:** Physical product delivery was 100% unimpaired; the issue is commercial demand elasticity."""
 
-        # 4D. Difference-in-Differences Proof (carefully avoid matching English verb 'did')
+        # 4D. Difference-in-Differences Proof
         if "difference in differences" in q_clean or "difference-in-differences" in q_lower or "did divergence" in q_clean or "did analysis" in q_clean or "did method" in q_clean or "parallel trend" in q_clean or "parallel trends" in q_clean or ("did" in q.split() and any(w in q.split() for w in ["DiD", "DID", "D-i-D"])):
             if pid == "general_user":
                 return """**How We Proved the Price Increase Was the Cause:**
@@ -511,7 +650,7 @@ Measures demand responsiveness to pricing changes (εₚ = %ΔQuantity / %ΔPric
    - Head to **Screen 4 (Policy Simulator)** to test this policy trajectory, projected to recover **78.2% of lost volume** within 8 weeks and stabilize gross margin at **70.2%**."""
 
         # ==============================================================================
-        # 5. DECISION / ACTION / APPROVAL BRANCH (BUG 2 FIX)
+        # 5. DECISION / ACTION / APPROVAL BRANCH (FOR DEMO)
         # ==============================================================================
         decision_keywords = [
             "decision", "approve", "approval", "prioritize", "priority", 
@@ -525,14 +664,14 @@ Measures demand responsiveness to pricing changes (εₚ = %ΔQuantity / %ΔPric
             return OfflineEdithReasoner._get_recommended_action_response(persona, anomaly_context, simulation_levers)
 
         # ==============================================================================
-        # 6. SMART GENERAL FALLBACK (BUG 2 FIX)
+        # 6. SMART GENERAL FALLBACK (FOR DEMO)
         # ==============================================================================
         # Check if user query is action/next-step oriented
         if any(w in q_clean for w in ["do", "fix", "action", "next", "help", "solve", "recover", "plan", "step"]):
             return OfflineEdithReasoner._get_recommended_action_response(persona, anomaly_context, simulation_levers)
         
         # Check if user query is why/cause oriented
-        if any(w in q_clean for w in ["why", "cause", "reason", "driver", "drop", "down", "fell", "loss"]):
+        if any(w in q_clean for w in ["why", "cause", "reason", "driver", "drop", "down", "fell", "loss", "affect", "affected", "influence", "impact"]):
             return OfflineEdithReasoner.generate_investigation_briefing(anomaly_context, all_hypotheses or [], response_style="concise", persona=persona)
 
         # General structured response with key findings
@@ -626,7 +765,7 @@ Sales experienced a noticeable drop of roughly {abs(delta_pct):.1f}%, almost ent
             anomaly_context = AnomalyEngine.evaluate_current_anomaly(ts)
             
         top_h = hypotheses[0] if hypotheses else {}
-        kpi_name = anomaly_context.get("kpi_name", "Monthly B2B Sales")
+        kpi_name = anomaly_context.get("kpi_name", repo.active_source_info.get("primary_measure_label", "Primary Measure"))
         curr_val = anomaly_context.get("current_value", 1253600.0)
         base_val = anomaly_context.get("baseline_value", 1401300.0)
         delta_val = anomaly_context.get("delta_value", -147700.0)
@@ -634,8 +773,123 @@ Sales experienced a noticeable drop of roughly {abs(delta_pct):.1f}%, almost ent
         z_score = anomaly_context.get("z_score", -2.30)
         
         now_str = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+
+        # ==============================================================================
+        # 1. CUSTOM DATASET EXECUTIVE BRIEFINGS
+        # ==============================================================================
+        if not is_demo:
+            dq = repo.get_data_quality_report()
+            dist = repo.get_distribution_statistics()
+            drvs = repo.get_driver_correlations().get("correlations", {})
+            breakdowns = repo.get_dimensional_breakdown()
+            
+            top_drv_name = list(drvs.keys())[0] if drvs else "None"
+            top_drv_r = drvs[top_drv_name]["pearson_r"] if drvs else 0.0
+            
+            top_dim_summary = []
+            for dim, df_dim in list(breakdowns.items())[:2]:
+                if not df_dim.empty:
+                    top_row = df_dim.iloc[0]
+                    top_dim_summary.append(f"`{top_row[dim]}` in {dim.replace('_', ' ').title()} ({abs(top_row.get('contribution_pct', 0.0)):.1f}%)")
+            dim_text = ", ".join(top_dim_summary) if top_dim_summary else "Evenly distributed"
+
+            headline = f"Executive Investigation Briefing: {kpi_name} Analysis"
+            
+            if pid == "general_user":
+                headline = f"Business Update: Overview of {kpi_name} Data"
+                narrative = f"""### 💡 Plain-Language Business Update — {kpi_name} Analysis
+**Generated:** {now_str} &middot; **Audience:** General Business Team &middot; **Style:** Plain Language (Zero Jargon)
+
+---
+
+#### 1. The Big Picture: What the Data Shows
+- **Primary Metric:** **{kpi_name}** with an aggregate observed level of **{curr_val:,.1f}** across **{dq.get('total_rows', 0):,} records**.
+- **Data Quality:** Excellent data health score of **{dq.get('data_quality_score', 100.0):.1f}%**.
+- **Main Area of Concentration:** The heaviest concentration is in **{dim_text}**.
+
+---
+
+#### 2. Key Influencing Factors
+- **Strongest Correlated Factor:** **{top_drv_name.replace('_', ' ').title()}** shows the strongest statistical link with {kpi_name} (relationship: {top_drv_r:+.2f}).
+- **Data Spread:** Middle value is **{dist.get('percentiles', {}).get('P50_median', 0.0):,.1f}**, with **{dist.get('outlier_count', 0)} unusual data points** identified.
+
+---
+
+#### 3. Recommended Operational Focus
+1. **Target Highest Impact Group:** Direct operational review toward {dim_text}.
+2. **Review Influencing Drivers:** Evaluate operational levers tied to {top_drv_name.replace('_', ' ').title()}.
+3. **Audit Outliers:** Inspect the {dist.get('outlier_count', 0)} outlier records to ensure data consistency.
+"""
+            else:
+                narrative = f"""### 📋 Executive Investigation Briefing: {kpi_name} Analysis
+**Generated:** {now_str} &middot; **Audience:** {p_meta['name']} &middot; **Focus:** Observational Evidence & Governance
+
+---
+
+#### 1. Incident Overview & Scale
+- **Primary Focus Metric:** **{kpi_name}** with an aggregate observed level of **{curr_val:,.1f}** across **{dq.get('total_rows', 0):,} records**.
+- **Operational Grain:** {anomaly_context.get('status_label', 'Cross-Sectional Snapshot')}.
+- **Data Quality:** {dq.get('data_quality_score', 100.0):.1f}% Health Score across {dq.get('total_rows', 0):,} rows.
+
+---
+
+#### 2. Observational Findings & Empirical Concentrations
+- **Segment Epicenter:** Heaviest concentration observed in **{dim_text}**.
+- **Explanatory Driver Correlation:** **{top_drv_name.replace('_', ' ').title()}** shows the strongest statistical association with r = {top_drv_r:+.2f} (Pearson).
+- **Distribution Profile:** Median: **{dist.get('percentiles', {}).get('P50_median', 0.0):,.1f}** | IQR: **{dist.get('iqr', 0.0):.2f}** | Outliers: **{dist.get('outlier_count', 0)} items ({dist.get('outlier_pct', 0.0):.1f}%)**.
+
+---
+
+#### 3. Decision Guidance & Observational Integrity
+- All reported signals represent empirical concentrations and statistical correlations to direct operational investigation, not unverified causal claims.
+"""
+            actions = [
+                {
+                    "driver": f"Concentration in {dim_text}",
+                    "lever": "Operational Focus",
+                    "action": f"Direct operational review toward {dim_text}",
+                    "expected_impact": "Identifies localized efficiency opportunities",
+                    "owner": "Operations / Segment Lead",
+                    "confidence": "High",
+                    "status": "Recommended"
+                },
+                {
+                    "driver": f"Association with {top_drv_name.replace('_', ' ').title()}",
+                    "lever": "Process Optimization",
+                    "action": f"Optimize workflow parameters linked to {top_drv_name.replace('_', ' ').title()}",
+                    "expected_impact": "Improves metric correlation efficiency",
+                    "owner": "Process Lead",
+                    "confidence": "Moderate",
+                    "status": "Recommended"
+                }
+            ]
+            return {
+                "persona_id": pid,
+                "persona_name": p_meta["name"],
+                "role_title": p_meta["role_title"],
+                "depth": p_meta["depth"],
+                "headline": headline,
+                "narrative_markdown": narrative,
+                "primary_root_cause": {
+                    "id": "GEN_OBSERVATIONAL_CONCENTRATION",
+                    "name": f"Concentration in {dim_text}",
+                    "cause_score_100": 75.0,
+                    "evidence_score": 0.75,
+                    "classification": "Empirical Association"
+                },
+                "recommended_actions": actions,
+                "metadata": {
+                    "engine": "OfflineEdithReasoner",
+                    "generated_at": now_str,
+                    "dataset": repo.active_source_info.get("name", "Custom Dataset")
+                }
+            }
         
-        # 1. GENERAL USER BRIEFING (100% PLAIN LANGUAGE, ZERO JARGON)
+        # ==============================================================================
+        # 2. BUILT-IN DEMO BENCHMARK EXECUTIVE BRIEFINGS
+        # ==============================================================================
+        
+        # 2A. GENERAL USER BRIEFING (100% PLAIN LANGUAGE, ZERO JARGON)
         if pid == "general_user":
             headline = "Business Update: Why Sales Dropped in Region B and What We Are Doing Next"
             narrative = f"""### 💡 Plain-Language Business Update — What Happened to Our Sales?
@@ -679,174 +933,175 @@ Sales experienced a noticeable drop of roughly {abs(delta_pct):.1f}%, almost ent
                     "status": "Planned for Implementation"
                 },
                 {
-                    "driver": "Competitor discount campaign",
-                    "lever": "Partner Marketing Fund ($15k)",
-                    "action": "Deploy $15,000 in regional partner co-op marketing in Region B",
-                    "expected_impact": "Accelerates deal closings against competitor promotions",
-                    "owner": "Field Marketing Team",
+                    "driver": "Competitor ApexTech discount campaign",
+                    "lever": "Partner Marketing Support ($15k)",
+                    "action": "Provide $15,000 in regional partner support in Region B",
+                    "expected_impact": "Helps sales partners win back deals from competitor",
+                    "owner": "Regional Field Sales Team",
                     "confidence": "Moderate",
                     "status": "Planned for Implementation"
                 },
                 {
-                    "driver": "Account renewal support",
-                    "lever": "Dedicated Customer Care",
-                    "action": "Provide high-touch customer support to 12 key renewal accounts",
-                    "expected_impact": "Protects existing customer relationships and prevents cancellations",
+                    "driver": "Customer retention in key accounts",
+                    "lever": "Key Account Care",
+                    "action": "Assign dedicated customer success managers to 12 at-risk accounts",
+                    "expected_impact": "Protects recurring customer relationships and prevents future cancellations",
                     "owner": "Customer Success Team",
                     "confidence": "High",
-                    "status": "In Progress"
+                    "status": "Underway"
                 }
             ]
 
-        # 2. REGIONAL LEAD BRIEFING
+        # 2B. REGIONAL SALES LEAD BRIEFING (OPERATIONAL SCOPE + RESTRICTIONS)
         elif pid == "regional_lead":
-            headline = "Region B Operational Briefing: -$182.2k (-30.3%) Deficit in Enterprise Suite Alpha"
-            narrative = f"""### 📋 Executive Briefing — Regional Sales Lead (Region B)
-**Generated:** {now_str} &middot; **Scope:** Region B Operational &middot; **Classification:** Role-Restricted
+            headline = "Operational Incident Report: Region B Revenue Deficit & Authorized Field Strategy"
+            narrative = f"""### 📍 Operational Incident Report: Region B Performance Deficit
+**Generated:** {now_str} &middot; **Audience:** Regional Sales Lead (Region B) &middot; **Scope:** Region B Operational Boundaries
 
 ---
 
-#### 1. Executive Summary & Localized Incident
-- **Operational Epicenter:** **Region B** experienced an aggregate revenue deficit of **-$182,200** (**-30.3%** below historical baseline) in the Enterprise account tier.
-- **Product Localization:** 100% of the regional shortfall is concentrated in **Product Suite Alpha** renewals and new expansion deals.
-- **Corridor Breach:** Local performance breached the 2-sigma variance threshold (Z = -2.85), confirming an operational incident rather than baseline noise.
+#### 1. Region B Incident Status & Magnitude
+- **Region B Current Revenue:** **${anomaly_context.get('current_value', 420000):,.0f}** vs **${anomaly_context.get('baseline_value', 602200):,.0f}** expected (**-30.3% / -$182,200 deficit**).
+- **Concentration:** Deficit is isolated exclusively to **Enterprise Suite Alpha renewals** within Region B. Mid-Market and SMB tiers in Region B remain on target.
+- *Company-wide totals and cross-region control metrics are restricted for this role.*
 
 ---
 
-#### 2. Primary Root-Cause Diagnosis
-- **Primary Driver:** **Pricing Elasticity Resistance (#1 Ranked Cause, Score 88.0/100)**.
-  - Enterprise deal volume contracted by **48.3%** following the recent list price adjustment.
-  - Enterprise renewal velocity stalled as field reps faced unexpected buyer pushback on un-negotiated standard pricing.
-- **Security Scoping Notice:** Detailed competitor campaign telemetry (pricing discount index) and cross-region comparative control cohorts are restricted for the Regional Lead role (available in Executive & Analyst views).
+#### 2. Root Cause Analysis (Region B Context)
+- **Primary Operational Driver:** Internal +12% price hike on Enterprise Suite Alpha ($10,000 → $11,200) triggered renewal hesitation across 21 regional accounts.
+- **Physical Fulfillment Status:** SAP logistics confirm **99.4% warehouse fill rate with 0 stockout days** in Region B. Delivery pipelines are completely healthy.
+- *Detailed competitor campaign intelligence is restricted (requires Executive or Analyst access).*
 
 ---
 
-#### 3. Authorized Field Actions & Recommendations
-1. **Deploy Regional Co-Op Partner Marketing Fund ($15,000):**
-   - *Authority:* **Authorized for Regional Lead**
-   - *Action:* Release localized partner co-op funding across key Region B system integrators to counter competitive deal pressure.
-   - *Expected Impact:* **+$1,667/week** in accelerated deal velocity.
-2. **Activate VIP Retention Guard (Dedicated CSM Outreach):**
-   - *Authority:* **Authorized for Regional Lead**
-   - *Action:* Assign proactive dedicated CSMs to the top 12 at-risk Enterprise renewal accounts in Region B.
-   - *Expected Impact:* Protects against compounding multi-quarter logo churn.
-3. **Price Rollback Governance:**
-   - *Authority:* **Requires Executive CRO Authorization**
-   - *Status:* A -6% list price rollback recommendation has been submitted to the Executive Pricing Committee for corporate sign-off.
+#### 3. Authorized Field Actions & Pending Escalations
+1. **Immediate Authorized Field Deployment:**
+   - **Deploy $15k Regional Partner Co-Op Fund:** Incentivize regional partners to accelerate deal closings (expected impact: +$1,667/wk).
+   - **VIP Retention Guard:** Deploy dedicated CSM coverage to the 12 at-risk Enterprise renewals in Region B to protect recurring ARR.
+2. **Pending Executive Sign-Off:**
+   - A recommendation to roll back pricing to $10,528/unit has been submitted to the CRO and Pricing Committee.
 """
             actions = [
                 {
-                    "driver": "Competitive deal pressure in Region B",
-                    "lever": "Regional Co-Op Fund ($15k)",
-                    "action": "Deploy localized partner co-op marketing incentives in Region B",
-                    "expected_impact": "+$1,667/week accelerated deal velocity",
+                    "driver": "Region B Enterprise Renewal Pushback",
+                    "lever": "Regional Co-Op Marketing ($15k)",
+                    "action": "Deploy $15,000 partner marketing incentives across Region B accounts",
+                    "expected_impact": "+$1,667/week deal velocity acceleration",
                     "owner": "Regional Sales Lead (Region B)",
                     "confidence": "Moderate (60.4/100)",
-                    "status": "Authorized for Field Deployment"
+                    "status": "Authorized for Deployment"
                 },
                 {
-                    "driver": "Enterprise renewal friction",
+                    "driver": "At-Risk Enterprise Accounts",
                     "lever": "VIP Retention Guard",
-                    "action": "Assign dedicated proactive CSMs to top 12 at-risk renewal accounts",
-                    "expected_impact": "Prevents compounding logo churn and protects recurring base",
+                    "action": "Deploy dedicated CSM coverage to top 12 at-risk renewal accounts",
+                    "expected_impact": "Guards recurring regional ARR and prevents cancellations",
                     "owner": "Regional Customer Success Team",
-                    "confidence": "High (88.0/100)",
-                    "status": "Authorized for Field Deployment"
+                    "confidence": "High",
+                    "status": "Authorized for Deployment"
                 },
                 {
-                    "driver": "Price elasticity resistance",
+                    "driver": "Pricing Elasticity Contraction",
                     "lever": "Price Rollback (-6%)",
-                    "action": "Adjust Enterprise list price from $11,200 to $10,528",
-                    "expected_impact": "+$18,400/week volume recovery",
-                    "owner": "Chief Revenue Officer / Pricing Committee",
+                    "action": "[Restricted to Executive] Adjust Enterprise unit price to $10,528",
+                    "expected_impact": "+$18,400/week volume recovery with +$528/unit margin preservation",
+                    "owner": "Chief Revenue Officer (Pending Authorization)",
                     "confidence": "High (88.0/100)",
-                    "status": "Restricted: Requires Executive CRO Sign-Off"
+                    "status": "Escalated to Executive (Restricted)"
                 }
             ]
-            
-        # 3. ANALYST BRIEFING
+
+        # 2C. ANALYST / REVOPS BRIEFING (FULL ECONOMETRIC LEDGER & PROOFS)
         elif pid == "analyst":
-            headline = "Full Econometric & Causal Diagnostic Ledger: Multi-Hypothesis Lineage"
-            narrative = f"""### 🔬 Full Causal Diagnostic Ledger — Senior RevOps Analyst
-**Generated:** {now_str} &middot; **Scope:** Company-Wide &middot; **Depth:** Full Econometric Ledger
+            decomp = top_h.get("mathematical_decomposition", {})
+            ctrl = top_h.get("control_group_analysis", {})
+            headline = f"Econometric Investigation Ledger: {kpi_name} Anomaly Proofs & Causal Lineage"
+            narrative = rf"""### 🔬 Econometric Investigation Ledger: {kpi_name} Empirical Proofs
+**Generated:** {now_str} &middot; **Audience:** RevOps & Financial Analysts &middot; **Depth:** Full Econometric Proofs
 
 ---
 
-#### 1. Statistical Anomaly Quantification
-- **Target Measure:** {kpi_name} (Fiscal Q1 2026, Week 08)
-- **Observed:** ${curr_val:,.0f} vs Baseline ${base_val:,.0f} (Variance: **{delta_pct:+.1f}%**, ${delta_val:+,.0f})
-- **Corridor Threshold:** Lower: $1,272,908 | Upper: $1,529,692 (Z-Score: **{z_score:.2f}**, Persistent 2-week breach)
-- **Data Lineage:** Aggregated from 5,616 production sales transaction logs across 4 geographical operating theaters.
+#### 1. Statistical Anomaly & Multi-Horizon Baseline
+- **Observed:** ${curr_val:,.0f} vs Baseline ${base_val:,.0f} (Variance: **{delta_pct:+.1f}%**, ${delta_val:+,.0f}).
+- **Corridor Threshold:** Lower boundary $1,272,908 | Upper boundary $1,529,692 (Z = {z_score:.2f}, Material Anomaly).
+- **Concentration:** 97.3% of deficit is concentrated in Region B Enterprise Suite Alpha.
 
 ---
 
-#### 2. Multi-Hypothesis Causal Reasoning Breakdown
-| Rank | Candidate Hypothesis | Cause Score | Evidence Index | Classification | Mathematical / Empirical Finding |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| **#1** | **Pricing Elasticity (H1)** | **88.0 / 100** | **0.88 / 1.00** | High Confidence | ΔQ = -21 units (-$210k volume loss), cushioned by +$21.6k price realization. τ = 2 weeks lag. |
-| **#2** | **Competitor Campaign (H2)** | **60.4 / 100** | **0.60 / 1.00** | Moderate Contributor | ApexTech 15% discount in W07 amplified enterprise deal hesitation. |
-| **#3** | **Demand Contraction (H3)** | **4.2 / 100** | **0.04 / 1.00** | Ruled Out | Organic macro search queries and top-of-funnel inbound leads remained flat (0.0% macro shift). |
-| **#4** | **Supply / Logistics (H8)** | **0.0 / 100** | **0.00 / 1.00** | Refuted | Warehouse fill rate verified at 99.4% with 0 stockout incidents in SAP logs. |
+#### 2. Exact Revenue Identity Decomposition
+$$\Delta\text{{Revenue}} = \Delta\text{{Units}} 	imes P_{{\text{{pre}}}} + \text{{Units}}_{{\text{{post}}}} 	imes \Delta P$$
+- **Gross Volume Effect:** -21 units $	imes$ \$10,000/unit = **-\$210,000** (111.5% of gross decline).
+- **Price Realization Cushion:** 18 units $	imes$ +\$1,200/unit = **+\$21,600** (-11.5% price offset).
+- **Net Reconciled Deficit:** **-\$188,400** (Exact reconciliation, 0.0% residual error).
 
 ---
 
-#### 3. Econometric Proof & Difference-in-Differences (DiD)
-- **Treated Group:** Enterprise Tier (received +12% price adjustment in W06)
-- **Control Group:** Mid-Market Tier (un-hiked price baseline)
-- **Empirical Causal Divergence:** **48.3% DiD parallel-trend divergence**, confirming price shock as the primary root cause (p < 0.01).
+#### 3. Difference-in-Differences Quasi-Experiment
+$$\text{{DiD}} = (Y_{{\text{{treated,post}}}} - Y_{{\text{{treated,pre}}}}) - (Y_{{\text{{control,post}}}} - Y_{{\text{{control,pre}}}})$$
+- **Treated Cohort (Region B Enterprise Alpha):** Dropped -52.6% (38 units $ightarrow$ 18 units).
+- **Optimal Control Cohort ({ctrl.get('control_cohort', 'Mid-Market Alpha')}):** Parallel pre-trend correlation $r = {ctrl.get('pre_trend_correlation', 0.88):.2f}$; delta: {ctrl.get('control_delta_pct', -4.3):+.1f}%.
+- **Empirical DiD Gap:** **{ctrl.get('did_divergence_pct', 48.3):.1f}% causal divergence**.
 
 ---
 
-#### 4. Econometric Policy Recovery Matrix
-- **Simulated Lever Strategy:** -6% Price Adjustment + $15k Co-Op Marketing + VIP Retention Guard.
-- **Projected Trajectory:** Recovers **78.2% of lost volume** over 8 weeks, stabilizing gross margin at **70.2%** (Net delta: +$20,067/week).
+#### 4. Competing Causal Hypotheses & Evidence Scores
+| Hypothesis | Role | Evidence Score | Cause Score | Status |
+| :--- | :--- | :--- | :--- | :--- |
+| **#1 Pricing Elasticity** | Upstream Direct | 0.88 / 1.00 | **88.0 / 100** | High-Confidence Root Cause |
+| **#2 Competitor Campaign** | Compounding Shock | 0.60 / 1.00 | **60.4 / 100** | Possible Driver |
+| **#8 Supply Bottleneck** | Physical Logistics | 0.00 / 1.00 | **0.0 / 100** | Empirically Refuted |
+
+---
+
+#### 5. Data Lineage & Freshness Audit
+- Primary Ledgers: SAP S/4HANA (Freshness: 2.1h) &middot; Salesforce CRM (Freshness: 45m) &middot; Competitor Telemetry Feed (Freshness: 1.2h).
 """
             actions = [
                 {
-                    "driver": "Pricing Elasticity (H1)",
-                    "lever": "Targeted Rollback (-6%)",
-                    "action": "Reset Enterprise tier to $10,528/unit (+$528 net over prior base)",
-                    "expected_impact": "+$18,400/week volume stabilization",
-                    "owner": "Pricing Committee & CRO",
+                    "driver": "Pricing Elasticity Contraction",
+                    "lever": "Price Rollback (-6%)",
+                    "action": "Execute -6% price adjustment on Enterprise Suite Alpha in Region B ($10,528/unit)",
+                    "expected_impact": "+$18,400/week volume recovery with +$528/unit net margin preservation",
+                    "owner": "Pricing Committee & RevOps",
                     "confidence": "High (88.0/100)",
-                    "status": "Actionable"
+                    "status": "Recommended for Approval"
                 },
                 {
-                    "driver": "ApexTech Competitor Campaign (H2)",
-                    "lever": "Co-Op Fund ($15k)",
-                    "action": "Deploy localized partner incentives to counter 15% competitor discount",
-                    "expected_impact": "+$1,667/week win-back velocity",
-                    "owner": "Regional Field Marketing",
+                    "driver": "Competitor ApexTech Campaign",
+                    "lever": "Regional Co-Op Marketing ($15k)",
+                    "action": "Authorize $15,000 regional partner co-op incentives in Region B",
+                    "expected_impact": "+$1,667/week deal velocity acceleration",
+                    "owner": "Field Marketing",
                     "confidence": "Moderate (60.4/100)",
-                    "status": "Actionable"
+                    "status": "Recommended for Approval"
                 },
                 {
-                    "driver": "Account Retention",
+                    "driver": "Account Churn Risk",
                     "lever": "VIP Retention Guard",
-                    "action": "Monitor churn probability and trigger high-touch CSM coverage",
-                    "expected_impact": "Reduces downstream churn risk from 2.8% to 2.1%",
-                    "owner": "Customer Success Ops",
-                    "confidence": "High (88.0/100)",
-                    "status": "Actionable"
+                    "action": "Deploy dedicated CSM outreach to 12 at-risk Enterprise renewal accounts",
+                    "expected_impact": "Guards recurring ARR and eliminates downstream churn compounding",
+                    "owner": "Customer Success",
+                    "confidence": "High",
+                    "status": "Recommended for Immediate Execution"
                 }
             ]
 
-        # 4. EXECUTIVE / CRO BRIEFING (DEFAULT)
+        # 2D. EXECUTIVE / CRO BRIEFING (STRATEGIC SYNTHESIS)
         else:
-            headline = f"Executive Decision Briefing: {delta_pct:+.1f}% Revenue Deficit Isolated to Enterprise Tier Post-Price Increase"
-            narrative = f"""### 🎯 Executive Decision Briefing — Chief Revenue Officer
-**Generated:** {now_str} &middot; **Scope:** Company-Wide &middot; **Depth:** Strategic Executive Summary
+            headline = f"Executive Incident Synthesis: {kpi_name} Deficit & Recommended Action Plan"
+            narrative = f"""### 📊 Executive Incident Briefing: {kpi_name} Deficit & Action Plan
+**Generated:** {now_str} &middot; **Audience:** Chief Revenue Officer & Executive Committee &middot; **Focus:** Strategic Action
 
 ---
 
 #### 1. Strategic Incident Overview
-- **Observed Performance:** **{kpi_name}** contracted by **{delta_pct:+.1f}%** (${base_val:,.0f} → ${curr_val:,.0f}), creating a **${abs(delta_val):,.0f} net weekly revenue deficit**.
-- **Materiality:** Corridor breach (Z = {z_score:.2f}) confirmed across consecutive weeks (P1 Material Incident).
-- **Incident Localization:** **97.3% of the deficit** is isolated to **Enterprise accounts in Region B** on **Product Suite Alpha**. Mid-Market and SMB segments remain healthy.
+- **Metric Deficit:** **{kpi_name}** dropped by **{abs(delta_pct):.1f}%** (${curr_val:,.0f} vs ${base_val:,.0f} baseline, -$147.7k total variance).
+- **Concentration:** **97.3% of the deficit** is isolated to **Region B Enterprise** accounts on **Product Suite Alpha**.
+- **Corridor Breach:** Breached the ±2.0σ expected band (Z = {z_score:.2f}, 2 consecutive weeks).
 
 ---
 
-#### 2. Root Cause & Empirical Evidence
+#### 2. Empirical Root Cause Breakdown
 - **Primary Root Cause:** **Pricing Elasticity & Plan Hike (#1 Cause, Score 88.0/100)**.
   - A +12% price hike instituted in Week 06 triggered a **48.3% volume contraction** in Enterprise renewals.
   - While price realization added +$21.6k, lost deal volume created a -$210.0k drag, yielding a net -$188.4k shortfall.

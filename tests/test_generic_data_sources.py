@@ -38,6 +38,7 @@ from data.source_manager import (
 from data.repository import DataRepository
 from core.contribution_engine import ContributionEngine
 from core.evidence_engine import EvidenceEngine
+from ai.offline_reasoner import OfflineEdithReasoner
 
 
 class TestGenericDataSources(unittest.TestCase):
@@ -593,6 +594,69 @@ class TestGenericDataSources(unittest.TestCase):
         self.assertIn("Data Quality Audit Report", resp_q4)
         self.assertIn("Overall Data Quality Score", resp_q4)
 
+    def test_13_what_affected_custom_metric_plain_language(self):
+        """
+        Verifies that querying 'WHAT AFFECTED ATTRITION RATE' or similar factor questions
+        on custom datasets returns grounded explanations without hallucinating demo sales/Region B facts.
+        """
+        import io
+        hr_csv = """date,department,location,avg_salary,headcount,attrition_rate
+2025-01-01,Engineering,US,120000,50,0.02
+2025-01-08,Engineering,US,120000,52,0.01
+2025-01-01,Sales,EU,90000,30,0.05
+2025-01-08,Sales,EU,90000,28,0.07
+"""
+        df_hr = pd.read_csv(io.StringIO(hr_csv))
+        model = SemanticDataModel(
+            dataset_name="HR Workforce Analytics",
+            primary_measure="attrition_rate",
+            primary_measure_label="Attrition Rate",
+            primary_measure_unit="%",
+            aggregation_type="mean",
+            date_column="date",
+            dimension_columns=["department", "location"],
+            driver_columns=["avg_salary", "headcount"],
+            is_demo=False
+        )
+        tables, feat_status, _ = ColumnMapper.transform_generic_dataset(df_hr, model)
+        repo = DataRepository.get_instance()
+        repo.set_custom_data(
+            tables=tables,
+            source_info={"name": "HR Workforce Analytics", "is_demo": False, "row_count": len(df_hr), "primary_measure_label": "Attrition Rate"},
+            semantic_model=model
+        )
+        
+        anom_ctx = {
+            "kpi_name": "Attrition Rate",
+            "current_value": 0.04,
+            "baseline_value": 0.03,
+            "delta_pct": 33.3,
+            "z_score": 1.5,
+            "status_label": "Cross-Sectional Snapshot"
+        }
+        
+        # Test Plain Language / Business User mode
+        resp_gu = OfflineEdithReasoner.answer_query(
+            "WHAT AFFECTED ATTRITION RATE",
+            anom_ctx, {}, [], persona="general_user"
+        )
+        self.assertIn("Attrition Rate", resp_gu)
+        self.assertIn("Avg Salary", resp_gu)
+        self.assertNotIn("Enterprise Suite Alpha", resp_gu)
+        self.assertNotIn("Region B", resp_gu)
+        self.assertNotIn("warehouse", resp_gu.lower())
+        self.assertNotIn("sales experienced a noticeable drop", resp_gu.lower())
+        
+        # Test Executive mode
+        resp_exec = OfflineEdithReasoner.answer_query(
+            "What factors drive attrition rate?",
+            anom_ctx, {}, [], persona="executive"
+        )
+        self.assertIn("Attrition Rate", resp_exec)
+        self.assertIn("Pearson", resp_exec)
+        self.assertNotIn("ApexTech", resp_exec)
+        self.assertNotIn("price hike", resp_exec.lower())
+
     def tearDown(self):
         """Reset repository to demo dataset benchmark after tests."""
         repo = DataRepository.get_instance()
@@ -601,4 +665,5 @@ class TestGenericDataSources(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
 

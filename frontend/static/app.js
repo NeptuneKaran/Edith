@@ -498,7 +498,44 @@ function edithApp(activePage = 'overview', sessionPersonaId = 'executive') {
       }
     },
 
+    getWelcomeMessage() {
+      if (this.personaId === 'general_user') {
+        return "I am active in Business User (Plain Language) mode. Ask me in everyday language about metric trends, which groups had the biggest impact, or what the team is doing next.";
+      }
+      if (this.personaId === 'regional_lead') {
+        return "I am active in Regional Sales Lead (Region B) mode. Ask me about regional performance, authorized field actions, and localized customer trends.";
+      }
+      if (this.personaId === 'analyst') {
+        return "I am active in Analyst / RevOps mode. Ask me about econometric decompositions, Difference-in-Differences proofs, and causal lineage.";
+      }
+      return "I am active in Executive / CRO mode. Ask me about high-level incident scale, verified root causes, and strategic decision trade-offs.";
+    },
+
     getStarterQuestions() {
+      if (!this.isDemo) {
+        if (this.personaId === 'general_user') {
+          return [
+            'What factors affect this metric?',
+            'Which category has the highest concentration?',
+            'What are the key takeaways from this data?',
+            'Are there any unusual outliers in this file?'
+          ];
+        }
+        if (this.personaId === 'analyst') {
+          return [
+            'Show the numeric driver correlations',
+            'Break down variance across all dimensions',
+            'Display IQR and distribution quantiles',
+            'Summarize data quality and null percentages'
+          ];
+        }
+        return [
+          'What factors affect the active metric?',
+          'Which segments show the greatest concentration?',
+          'Which drivers have the strongest correlation?',
+          'What operational actions are recommended?'
+        ];
+      }
       if (this.personaId === 'general_user') {
         return [
           'Why did sales drop?',
