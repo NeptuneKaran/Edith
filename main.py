@@ -445,6 +445,7 @@ async def upload_dataset_files(
     # Detect relationships if multiple files
     relationships = []
     if len(all_files) > 1:
+        from core.data_reconciliation import detect_join_keys
         stems = list(cache_entry.keys())
         for i in range(len(stems)):
             for j in range(i + 1, len(stems)):
@@ -452,18 +453,7 @@ async def upload_dataset_files(
                 file1 = cache_entry[stem1]
                 file2 = cache_entry[stem2]
                 
-                cols1 = set(c["column_name"] for c in file1["profile"]["profiles"])
-                cols2 = set(c["column_name"] for c in file2["profile"]["profiles"])
-                
-                shared_cols = cols1.intersection(cols2)
-                join_keys = []
-                for col in shared_cols:
-                    type1 = next((c.get("dtype", c.get("data_type", "")) for c in file1["profile"]["profiles"] if c["column_name"] == col), "")
-                    type2 = next((c.get("dtype", c.get("data_type", "")) for c in file2["profile"]["profiles"] if c["column_name"] == col), "")
-                    
-                    if type1 == type2 or ("object" in type1 and "object" in type2):
-                        join_keys.append(col)
-                        
+                join_keys = detect_join_keys(file1["df"], file2["df"])
                 if join_keys:
                     relationships.append({
                         "left_file": file1["filename"],
@@ -503,6 +493,7 @@ async def upload_dataset_files(
 @app.post("/api/data/configure")
 async def configure_semantic_model(config: SemanticConfigRequest):
     """Applies user semantic mapping to transform and ingest custom dataset."""
+    merge_warnings = []
     if config.file_roles:
         if "files" not in _UPLOAD_CACHE:
             raise HTTPException(status_code=400, detail="No datasets uploaded in current session.")
@@ -520,18 +511,60 @@ async def configure_semantic_model(config: SemanticConfigRequest):
         if fact_stem not in files_cache:
             raise HTTPException(status_code=400, detail=f"Fact table {fact_filename} not found in cache.")
             
-        raw_df = files_cache[fact_stem]["df"]
+        fact_df = files_cache[fact_stem]["df"].copy()
+        tables["sales"] = fact_df
         
         for role_req in config.file_roles:
             role = role_req["role"]
             fname = role_req["filename"]
             stem = os.path.splitext(fname)[0]
-            if stem in files_cache:
-                df = files_cache[stem]["df"]
-                if role == "fact":
-                    tables["sales"] = df
+            if stem in files_cache and role != "fact":
+                tables[stem] = files_cache[stem]["df"].copy()
+                
+        # Perform actual merge of supporting tables into tables["sales"]
+        from core.data_reconciliation import detect_join_keys, merge_tables_with_grain
+        confirmed_rels = config.confirmed_relationships
+        
+        for role_req in config.file_roles:
+            role = role_req["role"]
+            fname = role_req["filename"]
+            stem = os.path.splitext(fname)[0]
+            if role == "fact" or stem not in files_cache:
+                continue
+                
+            supp_df = files_cache[stem]["df"]
+            
+            # Check if this relationship is confirmed
+            should_join = True
+            join_keys = None
+            
+            if confirmed_rels is not None:
+                matching_rel = next((
+                    rel for rel in confirmed_rels
+                    if (rel.get("left_file") in [fact_filename, fname] and rel.get("right_file") in [fact_filename, fname])
+                    or (rel.get("left_file") in [fact_stem, stem] and rel.get("right_file") in [fact_stem, stem])
+                ), None)
+                
+                if matching_rel is None:
+                    should_join = False
                 else:
-                    tables[stem] = df
+                    join_keys = matching_rel.get("join_keys")
+                    
+            if not should_join:
+                continue
+                
+            if not join_keys:
+                join_keys = detect_join_keys(tables["sales"], supp_df)
+                
+            if not join_keys:
+                merge_warnings.append(
+                    f"Could not join supporting table '{fname}' to fact table '{fact_filename}': no compatible shared join keys found."
+                )
+                continue
+                
+            tables["sales"] = merge_tables_with_grain(tables["sales"], supp_df, join_keys)
+            
+        raw_df = tables["sales"]
                     
     else:
         if "raw_df" not in _UPLOAD_CACHE:
@@ -579,6 +612,8 @@ async def configure_semantic_model(config: SemanticConfigRequest):
             semantic_model, 
             drop_invalid_rows=config.drop_invalid_rows if config.drop_invalid_rows is not None else True
         )
+        if merge_warnings:
+            warnings.extend(merge_warnings)
         final_tables = {"sales": norm_tables.get("sales", tables["sales"])}
         for k, v in tables.items():
             if k != "sales":
@@ -622,7 +657,8 @@ async def configure_semantic_model(config: SemanticConfigRequest):
         "dimensions": config.dimension_columns,
         "drivers": config.driver_columns,
         "source_info": repo.active_source_info,
-        "row_count": len(clean_df)
+        "row_count": len(clean_df),
+        "warnings": warnings
     }
 
 

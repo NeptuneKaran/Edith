@@ -16,16 +16,13 @@ Executes a 10-stage rigorous investigative reasoning pipeline:
 """
 import pandas as pd
 import numpy as np
-
 from datetime import datetime, timezone
-import pandas as pd
-
-now = datetime.now(timezone.utc)
 
 def compute_freshness(df, date_col="date"):
-    if df.empty or date_col not in df.columns:
+    if df is None or df.empty or date_col not in df.columns:
         return "Unknown"
     try:
+        now = datetime.now(timezone.utc)
         max_date = pd.to_datetime(df[date_col]).max()
         if pd.isna(max_date):
             return "Unknown"
@@ -265,26 +262,38 @@ class EvidenceEngine:
     def evaluate_all_hypotheses(self, kpi_id: str = "kpi_b2b_sales") -> List[Dict[str, Any]]:
         """
         Evaluates candidate hypotheses or empirical patterns against active dataset tables.
-        Supports all 3 calibrated benchmarks:
-        - b2b_saas_pricing (8 hypotheses: H1-H8)
-        - saas_churn_roas (4 hypotheses: S1-S4)
-        - retail_fulfillment (4 hypotheses: R1-R4, with ambiguous competing pair)
-        For custom user data: generates observational investigation patterns.
+        Supports all calibrated benchmarks and custom user data.
         """
+        import time
+        from core.telemetry import record_event
+        start_time = time.time()
+
         if not self.repo.active_source_info.get("is_demo", True):
-            return self._evaluate_generic_patterns()
+            results = self._evaluate_generic_patterns()
+        else:
+            benchmark_id = self.repo.active_benchmark_id
+            if benchmark_id == "saas_churn_roas":
+                results = self._evaluate_subscription_hypotheses()
+            elif benchmark_id == "retail_fulfillment":
+                results = self._evaluate_retail_hypotheses()
+            elif benchmark_id == "manufacturing_quality":
+                results = self._evaluate_manufacturing_hypotheses()
+            else:
+                results = self._evaluate_b2b_hypotheses(kpi_id)
 
-        benchmark_id = self.repo.active_benchmark_id
-        if benchmark_id == "saas_churn_roas":
-            return self._evaluate_subscription_hypotheses()
-        elif benchmark_id == "retail_fulfillment":
-            return self._evaluate_retail_hypotheses()
-        elif benchmark_id == "manufacturing_quality":
-            return self._evaluate_manufacturing_hypotheses()
+        latency_ms = (time.time() - start_time) * 1000.0
+        bm = self.repo.active_benchmark_id if self.repo.active_source_info.get("is_demo", True) else "custom"
+        record_event(
+            endpoint="evaluate_all_hypotheses",
+            provider="Deterministic Engine",
+            latency_ms=latency_ms,
+            details={"benchmark_id": bm, "hypothesis_count": len(results)}
+        )
+        return results
 
+    def _evaluate_b2b_hypotheses(self, kpi_id: str = "kpi_b2b_sales") -> List[Dict[str, Any]]:
         results = []
 
-        
         # Load empirical tables
         df_pricing = self.repo.get_pricing_logs()
         df_comp = self.repo.get_competitor_signals()
@@ -293,7 +302,6 @@ class EvidenceEngine:
         df_sales = self.repo.tables["sales"]
         df_segments = self.repo.get_all_segment_time_series()
 
-        
         # Historical target series (Region B Enterprise Alpha gross revenue across weeks 1 to 48)
         reg_b_ent = df_sales[(df_sales["region"] == "Region B") & (df_sales["customer_tier"] == "Enterprise") & (df_sales["product_line"] == "Product Suite Alpha")]
         target_pre_series = reg_b_ent[reg_b_ent["week_idx"] <= 48].groupby("week_idx")["gross_revenue"].sum().values

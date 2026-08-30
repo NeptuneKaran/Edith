@@ -34,13 +34,27 @@ class SimulationEngine:
         p_fund = promo_fund_k if promo_fund_k is not None else ((marketing_boost_usd / 1000.0) if marketing_boost_usd is not None else 15.0)
         c_mit = churn_mitigation if churn_mitigation is not None else (competitor_retaliation if competitor_retaliation is not None else True)
         
+        import time
+        from core.telemetry import record_event
+        start = time.time()
+        
         if active_bm == "saas_churn_roas":
-            return SimulationEngine._simulate_subscription_growth(price_rollback_pct, p_fund, c_mit)
+            res = SimulationEngine._simulate_subscription_growth(price_rollback_pct, p_fund, c_mit)
         elif active_bm == "retail_fulfillment":
-            return SimulationEngine._simulate_retail_fulfillment(price_rollback_pct, p_fund, c_mit)
+            res = SimulationEngine._simulate_retail_fulfillment(price_rollback_pct, p_fund, c_mit)
         elif active_bm == "manufacturing_quality":
-            return SimulationEngine._simulate_manufacturing_quality(price_rollback_pct, p_fund, c_mit)
-        return SimulationEngine._simulate_b2b_pricing(price_rollback_pct, p_fund, c_mit)
+            res = SimulationEngine._simulate_manufacturing_quality(price_rollback_pct, p_fund, c_mit)
+        else:
+            res = SimulationEngine._simulate_b2b_pricing(price_rollback_pct, p_fund, c_mit)
+            
+        latency_ms = (time.time() - start) * 1000.0
+        record_event(
+            endpoint="simulate_lever_impact",
+            provider="Deterministic Engine",
+            latency_ms=latency_ms,
+            details={"benchmark_id": active_bm}
+        )
+        return res
 
     @staticmethod
     def _simulate_b2b_pricing(

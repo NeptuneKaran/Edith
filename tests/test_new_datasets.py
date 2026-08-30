@@ -236,6 +236,26 @@ class TestNewDatasets(unittest.TestCase):
         # Reset repository to Benchmark 1
         repo.switch_benchmark("b2b_saas_pricing")
 
+    def test_dynamic_freshness_computation(self):
+        """Validates that compute_freshness recomputes relative to current execution time."""
+        from datetime import datetime, timezone, timedelta
+        from core.evidence_engine import compute_freshness
+        
+        now = datetime.now(timezone.utc)
+        
+        # Test 2 hours ago
+        df_2h = pd.DataFrame({"date": [now - timedelta(hours=2)]})
+        freshness_2h = compute_freshness(df_2h)
+        self.assertEqual(freshness_2h, "2 hours ago")
+        
+        # Test 5 days ago
+        df_5d = pd.DataFrame({"date": [now - timedelta(days=5)]})
+        freshness_5d = compute_freshness(df_5d)
+        self.assertEqual(freshness_5d, "5 days ago")
+        
+        # Test empty or invalid
+        self.assertEqual(compute_freshness(pd.DataFrame()), "Unknown")
+
 
 if __name__ == "__main__":
     unittest.main()

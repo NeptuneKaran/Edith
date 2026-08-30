@@ -32,7 +32,37 @@ class TestTelemetry(unittest.TestCase):
         self.assertEqual(rollup["live_call_count"], 1)
         self.assertEqual(rollup["offline_call_count"], 1)
         self.assertEqual(rollup["engine_call_count"], 1)
-        self.assertGreater(rollup["avg_latency_ms"], 0)
+    def test_deterministic_engine_automatic_timing(self):
+        from data.repository import DataRepository
+        from core.evidence_engine import EvidenceEngine
+        from core.simulation_engine import SimulationEngine
+        
+        repo = DataRepository.get_instance()
+        repo.reset_to_demo()
+        clear_telemetry()
+        
+        # 1. Trigger EvidenceEngine evaluation
+        engine = EvidenceEngine(repo)
+        hypotheses = engine.evaluate_all_hypotheses()
+        self.assertTrue(len(hypotheses) > 0)
+        
+        events = get_telemetry()
+        self.assertEqual(len(events), 1)
+        self.assertEqual(events[0]["provider"], "Deterministic Engine")
+        self.assertEqual(events[0]["endpoint"], "evaluate_all_hypotheses")
+        self.assertGreater(events[0]["latency_ms"], 0.0)
+        self.assertEqual(events[0]["estimated_cost_usd"], 0.0)
+        
+        # 2. Trigger SimulationEngine simulation
+        sim_res = SimulationEngine.simulate_lever_impact()
+        self.assertIn("simulated_revenue", sim_res)
+        
+        events_after = get_telemetry()
+        self.assertEqual(len(events_after), 2)
+        sim_event = events_after[0]
+        self.assertEqual(sim_event["provider"], "Deterministic Engine")
+        self.assertEqual(sim_event["endpoint"], "simulate_lever_impact")
+        self.assertEqual(sim_event["estimated_cost_usd"], 0.0)
 
 if __name__ == "__main__":
     unittest.main()
