@@ -35,7 +35,7 @@
               <div class="space-y-1.5 p-2 rounded" :class="simulationData.levers_access?.price_rollback?.restricted ? 'bg-[#FFF8E1] border border-[#FFE082]' : ''">
                 <div class="flex justify-between font-medium">
                   <span class="text-[#555555]"
-                        x-text="sourceInfo.benchmark_id === 'saas_churn_roas' ? 'Onboarding Wizard Rollback' : (sourceInfo.benchmark_id === 'retail_fulfillment' ? 'Substitute SKU Rate' : 'Price Rollback')"></span>
+                        x-text="sourceInfo.benchmark_id === 'saas_churn_roas' ? 'Onboarding Wizard Rollback' : (sourceInfo.benchmark_id === 'retail_fulfillment' ? 'Substitute SKU Rate' : (sourceInfo.benchmark_id === 'manufacturing_quality' ? 'Recalibration Coverage (%)' : 'Price Rollback'))"></span>
                   <span class="font-bold font-mono" :class="simulationData.levers_access?.price_rollback?.restricted ? 'text-amber-800' : 'text-[#6F00B5]'" x-text="`-${simLevers.price_rollback_pct}%`"></span>
                 </div>
                 <input type="range" min="0" max="15" step="1" 
@@ -47,7 +47,7 @@
                 </template>
                 <template x-if="!simulationData.levers_access?.price_rollback?.restricted">
                   <span class="text-[11px] text-[#737373] block"
-                        x-text="sourceInfo.benchmark_id === 'saas_churn_roas' ? 'Reverts confusing wizard to restore activation.' : (sourceInfo.benchmark_id === 'retail_fulfillment' ? 'Deploys alternative SKUs to alleviate empty shelves.' : 'Mitigates price elasticity pushback.')"></span>
+                        x-text="sourceInfo.benchmark_id === 'saas_churn_roas' ? 'Reverts confusing wizard to restore activation.' : (sourceInfo.benchmark_id === 'retail_fulfillment' ? 'Deploys alternative SKUs to alleviate empty shelves.' : (sourceInfo.benchmark_id === 'manufacturing_quality' ? 'Emergency M-07 recalibration schedule coverage.' : 'Mitigates price elasticity pushback.'))"></span>
                 </template>
               </div>
 
@@ -55,26 +55,26 @@
               <div class="space-y-1.5 p-2">
                 <div class="flex justify-between font-medium">
                   <span class="text-[#555555]"
-                        x-text="sourceInfo.benchmark_id === 'saas_churn_roas' ? 'Search Budget Rebalance' : (sourceInfo.benchmark_id === 'retail_fulfillment' ? 'Expedited Air Freight' : 'Regional Co-Op Fund')"></span>
+                        x-text="sourceInfo.benchmark_id === 'saas_churn_roas' ? 'Search Budget Rebalance' : (sourceInfo.benchmark_id === 'retail_fulfillment' ? 'Expedited Air Freight' : (sourceInfo.benchmark_id === 'manufacturing_quality' ? 'Reject Batch Cost ($k)' : 'Regional Co-Op Fund'))"></span>
                   <span class="text-[#6F00B5] font-bold font-mono" x-text="`$${simLevers.promo_fund_k}k`"></span>
                 </div>
                 <input type="range" min="0" max="50" step="5" x-model.number="simLevers.promo_fund_k" @input="updateSimulationLevers()" class="w-full accent-[#A100FF]" />
                 <span class="text-[11px] text-[#737373] block"
-                      x-text="sourceInfo.benchmark_id === 'saas_churn_roas' ? 'Restores high-intent search acquisition budget.' : (sourceInfo.benchmark_id === 'retail_fulfillment' ? 'Bypasses container port customs bottleneck.' : 'Authorized for Regional Field Marketing.')"></span>
+                      x-text="sourceInfo.benchmark_id === 'saas_churn_roas' ? 'Restores high-intent search acquisition budget.' : (sourceInfo.benchmark_id === 'retail_fulfillment' ? 'Bypasses container port customs bottleneck.' : (sourceInfo.benchmark_id === 'manufacturing_quality' ? 'Cost of rejecting current SUP-03 material batch.' : 'Authorized for Regional Field Marketing.'))"></span>
               </div>
 
               <!-- Lever 3: Targeted Protective Mitigation -->
               <div class="space-y-1.5 p-2">
                 <div class="flex justify-between font-medium">
                   <span class="text-[#555555]"
-                        x-text="sourceInfo.benchmark_id === 'saas_churn_roas' ? 'CSM Onboarding Outreach' : (sourceInfo.benchmark_id === 'retail_fulfillment' ? 'Omnichannel Warehouse Rerouting' : 'VIP Retention Guard')"></span>
+                        x-text="sourceInfo.benchmark_id === 'saas_churn_roas' ? 'CSM Onboarding Outreach' : (sourceInfo.benchmark_id === 'retail_fulfillment' ? 'Omnichannel Warehouse Rerouting' : (sourceInfo.benchmark_id === 'manufacturing_quality' ? 'Add Inline QC Checkpoint' : 'VIP Retention Guard'))"></span>
                   <span class="text-[#6F00B5] font-bold" x-text="simLevers.churn_mitigation ? 'Active' : 'Disabled'"></span>
                 </div>
                 <div class="pt-2">
                   <label class="flex items-center space-x-2 cursor-pointer">
                     <input type="checkbox" x-model="simLevers.churn_mitigation" @change="updateSimulationLevers()" class="rounded border-[#D5D5D5] text-[#A100FF] focus:ring-0" />
                     <span class="text-[#333333]"
-                          x-text="sourceInfo.benchmark_id === 'saas_churn_roas' ? 'Dedicated setup assistance for stalling trials' : (sourceInfo.benchmark_id === 'retail_fulfillment' ? 'Direct fulfillment from South distribution hub' : 'Proactive CSM outreach for top 12 accounts')"></span>
+                          x-text="sourceInfo.benchmark_id === 'saas_churn_roas' ? 'Dedicated setup assistance for stalling trials' : (sourceInfo.benchmark_id === 'retail_fulfillment' ? 'Direct fulfillment from South distribution hub' : (sourceInfo.benchmark_id === 'manufacturing_quality' ? 'Install secondary visual inspection after M-07' : 'Proactive CSM outreach for top 12 accounts'))"></span>
                   </label>
                 </div>
               </div>

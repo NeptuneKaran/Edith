@@ -22,9 +22,17 @@ function edithApp(activePage = 'overview', sessionPersonaId = 'executive') {
     showAuditModal: false,
     accessLogEvents: [],
 
+    showTelemetryModal: false,
+    telemetryData: { events: [], rollup: {} },
+
+    showOverrideInput: null,
+    overrideReason: '',
+
     uploadData: null,
     uploading: false,
     configuring: false,
+    uploadedFiles: [],
+    detectedRelationships: [],
     configForm: {
       dataset_name: '',
       analysis_grain: 'Time Series (Weekly / Monthly / Daily)',
@@ -37,7 +45,9 @@ function edithApp(activePage = 'overview', sessionPersonaId = 'executive') {
       dimension_columns: [],
       driver_columns: [],
       identifier_columns: [],
-      drop_invalid_rows: true
+      drop_invalid_rows: true,
+      file_roles: null,
+      confirmed_relationships: null
     },
 
     simLevers: {
@@ -149,6 +159,22 @@ function edithApp(activePage = 'overview', sessionPersonaId = 'executive') {
       }
     },
 
+    async openTelemetryModal() {
+      await this.loadTelemetry();
+      this.showTelemetryModal = true;
+    },
+
+    async loadTelemetry() {
+      try {
+        const res = await fetch('/api/telemetry?limit=50');
+        if (res.ok) {
+          this.telemetryData = await res.json();
+        }
+      } catch (e) {
+        console.error('Failed to load telemetry:', e);
+      }
+    },
+
     async loadActiveSource() {
       try {
         const res = await fetch('/api/data/source');
@@ -200,21 +226,22 @@ function edithApp(activePage = 'overview', sessionPersonaId = 'executive') {
     },
 
     async handleFileSelect(event) {
-      const file = event.target.files[0];
-      if (file) await this.uploadFile(file);
+      const files = event.target.files;
+      if (files && files.length > 0) await this.uploadFiles(files);
     },
 
     async handleFileDrop(event) {
-      const file = event.dataTransfer.files[0];
-      if (file) await this.uploadFile(file);
+      const files = event.dataTransfer.files;
+      if (files && files.length > 0) await this.uploadFiles(files);
     },
 
-    async uploadFile(file) {
+    async uploadFiles(files) {
       this.uploading = true;
       this.alertMsg = '';
       const formData = new FormData();
-      formData.append('file', file);
-
+      for (const file of files) {
+        formData.append('files', file);
+      }
       try {
         const res = await fetch('/api/data/upload', {
           method: 'POST',
@@ -222,24 +249,52 @@ function edithApp(activePage = 'overview', sessionPersonaId = 'executive') {
         });
         const data = await res.json();
         if (!res.ok) throw new Error(data.detail || 'Upload failed');
-
-        this.uploadData = data;
-        this.configForm.dataset_name = file.name.replace(/\.[^/.]+$/, '').replace(/_/g, ' ').toUpperCase();
-        this.configForm.primary_measure = data.valid_numeric_columns[0] || '';
-        this.configForm.primary_measure_label = this.configForm.primary_measure.replace(/_/g, ' ').toUpperCase();
-        this.configForm.primary_measure_unit = 'Units';
-        this.configForm.date_column = data.valid_date_columns[0] || 'None (Snapshot)';
-        this.configForm.analysis_grain = (data.valid_date_columns.length > 0) ? 'Time Series (Weekly / Monthly / Daily)' : 'Cross-Sectional Snapshot';
-        this.configForm.dimension_columns = data.columns.filter(c => !data.valid_numeric_columns.includes(c) && !data.valid_date_columns.includes(c)).slice(0, 4);
-        this.configForm.driver_columns = data.valid_numeric_columns.filter(c => c !== this.configForm.primary_measure).slice(0, 3);
-        this.configForm.distinct_entity_column = data.columns[0] || '';
-
-        this.showAlert(`File '${file.name}' profiled (${data.total_rows.toLocaleString()} rows). Review and apply configuration below.`, 'success');
+        
+        if (data.files && data.files.length > 1) {
+          this.uploadedFiles = data.files.map(f => ({...f, role: f.suggested_role || 'dimension'}));
+          this.detectedRelationships = data.relationships || [];
+          // Auto-mark the first file with most numeric columns as fact
+          const factFile = this.uploadedFiles.reduce((a, b) => (a.valid_numeric_columns?.length || 0) >= (b.valid_numeric_columns?.length || 0) ? a : b);
+          factFile.role = 'fact';
+          this.showAlert(`${data.files.length} files profiled. Review relationships below.`, 'success');
+        } else {
+          // Single file — backward compatible
+          this.uploadData = data.files ? data.files[0] : data;
+          const file = files[0];
+          this.configForm.dataset_name = file.name.replace(/\.[^/.]+$/, '').replace(/_/g, ' ').toUpperCase();
+          this.configForm.primary_measure = (this.uploadData.valid_numeric_columns || [])[0] || '';
+          this.configForm.primary_measure_label = this.configForm.primary_measure.replace(/_/g, ' ').toUpperCase();
+          this.configForm.primary_measure_unit = 'Units';
+          this.configForm.date_column = (this.uploadData.valid_date_columns || [])[0] || 'None (Snapshot)';
+          this.configForm.analysis_grain = (this.uploadData.valid_date_columns || []).length > 0 ? 'Time Series (Weekly / Monthly / Daily)' : 'Cross-Sectional Snapshot';
+          this.configForm.dimension_columns = (this.uploadData.columns || []).filter(c => !(this.uploadData.valid_numeric_columns || []).includes(c) && !(this.uploadData.valid_date_columns || []).includes(c)).slice(0, 4);
+          this.configForm.driver_columns = (this.uploadData.valid_numeric_columns || []).filter(c => c !== this.configForm.primary_measure).slice(0, 3);
+          this.showAlert(`File profiled (${this.uploadData.total_rows?.toLocaleString()} rows). Review configuration below.`, 'success');
+        }
       } catch (e) {
         this.showAlert(e.message, 'error');
       } finally {
         this.uploading = false;
       }
+    },
+
+    confirmRelationships() {
+      const factFile = this.uploadedFiles.find(f => f.role === 'fact');
+      if (!factFile) {
+        this.showAlert('Please designate one file as the Primary Fact Table.', 'error');
+        return;
+      }
+      this.uploadData = factFile;
+      this.configForm.dataset_name = factFile.filename.replace(/\.[^/.]+$/, '').replace(/_/g, ' ').toUpperCase();
+      this.configForm.primary_measure = (factFile.valid_numeric_columns || [])[0] || '';
+      this.configForm.primary_measure_label = this.configForm.primary_measure.replace(/_/g, ' ').toUpperCase();
+      this.configForm.primary_measure_unit = 'Units';
+      this.configForm.date_column = (factFile.valid_date_columns || [])[0] || 'None (Snapshot)';
+      this.configForm.analysis_grain = (factFile.valid_date_columns || []).length > 0 ? 'Time Series (Weekly / Monthly / Daily)' : 'Cross-Sectional Snapshot';
+      this.configForm.dimension_columns = (factFile.columns || []).filter(c => !(factFile.valid_numeric_columns || []).includes(c) && !(factFile.valid_date_columns || []).includes(c)).slice(0, 4);
+      this.configForm.driver_columns = (factFile.valid_numeric_columns || []).filter(c => c !== this.configForm.primary_measure).slice(0, 3);
+      this.configForm.file_roles = this.uploadedFiles.map(f => ({filename: f.filename, role: f.role, join_keys: []}));
+      this.configForm.confirmed_relationships = this.detectedRelationships;
     },
 
     async submitSemanticConfiguration() {
@@ -257,7 +312,9 @@ function edithApp(activePage = 'overview', sessionPersonaId = 'executive') {
           dimension_columns: this.configForm.dimension_columns,
           driver_columns: this.configForm.driver_columns,
           identifier_columns: this.configForm.identifier_columns,
-          drop_invalid_rows: this.configForm.drop_invalid_rows
+          drop_invalid_rows: this.configForm.drop_invalid_rows,
+          file_roles: this.configForm.file_roles,
+          confirmed_relationships: this.configForm.confirmed_relationships
         };
 
         const res = await fetch('/api/data/configure', {
@@ -425,6 +482,26 @@ function edithApp(activePage = 'overview', sessionPersonaId = 'executive') {
       };
 
       Plotly.newPlot(elem, [trace], layout, { responsive: true, displayModeBar: false });
+    },
+
+    async submitHypothesisFeedback(hypothesisId, action, reason = '') {
+      try {
+        const res = await fetch('/api/feedback/hypothesis', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ hypothesis_id: hypothesisId, action: action, reason: reason })
+        });
+        if (res.ok) {
+          // Mark as submitted in local state
+          const finding = (this.workspaceData.findings || []).find(f => f.id === hypothesisId);
+          if (finding) finding.feedback_submitted = true;
+          this.showAlert(`Feedback recorded: ${action} for ${hypothesisId}`, 'success');
+          // Reload workspace to get updated annotations
+          await this.loadWorkspace();
+        }
+      } catch (e) {
+        this.showAlert('Failed to submit feedback: ' + e.message, 'error');
+      }
     },
 
     async loadWorkspace() {

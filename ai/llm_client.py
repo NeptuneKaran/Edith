@@ -11,6 +11,7 @@ from ai.prompts import EDITH_SYSTEM_PROMPT, get_persona_prompt_addendum, classif
 from ai.tools import AVAILABLE_TOOLS, execute_tool_call
 from ai.offline_reasoner import OfflineEdithReasoner
 from config.settings import DEFAULT_GEMINI_MODEL, FALLBACK_GEMINI_MODEL
+from core.telemetry import record_event as record_telemetry
 
 def _sanitize_log_message(msg: str, key: str = "") -> str:
     """Removes sensitive API key tokens from logs."""
@@ -139,12 +140,20 @@ class EdithLLMClient:
             prompt = f"Synthesize an executive diagnostic briefing for the active anomaly ({anomaly_context.get('kpi_name', 'Monthly B2B Sales')}). Style: {response_style}."
             for model_name in [self.primary_model, self.fallback_model]:
                 try:
-                    text, tools_called = self._execute_tool_calling_loop(
+                    text, tools_called, prompt_tokens, completion_tokens = self._execute_tool_calling_loop(
                         model_name=model_name,
                         initial_prompt=prompt,
                         chat_history=None
                     )
                     latency = round(time.time() - start_time, 2)
+                    record_telemetry(
+                        endpoint="generate_briefing",
+                        provider="Google Gemini" if self.api_key else "Deterministic Offline",
+                        latency_ms=latency * 1000,
+                        model_calls=1,
+                        prompt_tokens=prompt_tokens,
+                        completion_tokens=completion_tokens
+                    )
                     if text:
                         metadata = {
                             "provider": "Google Gemini",
@@ -152,7 +161,9 @@ class EdithLLMClient:
                             "latency_sec": latency,
                             "mode": f"Live Gemini Agent ({model_name})",
                             "tools_called": tools_called,
-                            "status": "Success"
+                            "status": "Success",
+                            "prompt_tokens": prompt_tokens,
+                            "completion_tokens": completion_tokens
                         }
                         return text, metadata
                 except Exception as e:
@@ -162,6 +173,14 @@ class EdithLLMClient:
         # Fallback to Deterministic Reasoner
         fallback_text = OfflineEdithReasoner.generate_investigation_briefing(anomaly_context, hypotheses, response_style=response_style)
         latency = round(time.time() - start_time, 3)
+        record_telemetry(
+            endpoint="generate_briefing",
+            provider="Deterministic Offline",
+            latency_ms=latency * 1000,
+            model_calls=0,
+            prompt_tokens=0,
+            completion_tokens=0
+        )
         fallback_mode = "Deterministic Offline Mode (Zero-Key)" if not self.api_key else f"Offline Fallback (Gemini Error: {last_error[:40]})"
         metadata = {
             "provider": "Deterministic Analytical Engine",
@@ -183,7 +202,7 @@ class EdithLLMClient:
             styled_query = f"{query}\n\n(Style: {response_style})"
             for model_name in [self.primary_model, self.fallback_model]:
                 try:
-                    text, tools_called = self._execute_tool_calling_loop(
+                    text, tools_called, prompt_tokens, completion_tokens = self._execute_tool_calling_loop(
                         model_name=model_name,
                         initial_prompt=styled_query,
                         chat_history=chat_history,
@@ -197,8 +216,19 @@ class EdithLLMClient:
                             persona_id=persona
                         )
                         tools_called = ["direct_prompt_generation"]
+                        # Just log 0 tokens for direct generation fallback if it happens
+                        prompt_tokens = 0
+                        completion_tokens = 0
                     
                     latency = round(time.time() - start_time, 2)
+                    record_telemetry(
+                        endpoint="answer_question",
+                        provider="Google Gemini" if self.api_key else "Deterministic Offline",
+                        latency_ms=latency * 1000,
+                        model_calls=len(tools_called) if tools_called and tools_called != ["direct_prompt_generation"] else 1,
+                        prompt_tokens=prompt_tokens,
+                        completion_tokens=completion_tokens
+                    )
                     if text:
                         metadata = {
                             "provider": "Google Gemini",
@@ -207,7 +237,9 @@ class EdithLLMClient:
                             "mode": f"Live Gemini Agent ({model_name})",
                             "intent": intent,
                             "tools_called": tools_called,
-                            "status": "Success"
+                            "status": "Success",
+                            "prompt_tokens": prompt_tokens,
+                            "completion_tokens": completion_tokens
                         }
                         return text, metadata
                 except Exception as e:
@@ -223,6 +255,14 @@ class EdithLLMClient:
                         )
                         if text:
                             latency = round(time.time() - start_time, 2)
+                            record_telemetry(
+                                endpoint="answer_question",
+                                provider="Google Gemini" if self.api_key else "Deterministic Offline",
+                                latency_ms=latency * 1000,
+                                model_calls=1,
+                                prompt_tokens=0,
+                                completion_tokens=0
+                            )
                             metadata = {
                                 "provider": "Google Gemini",
                                 "model": model_name,
@@ -230,7 +270,9 @@ class EdithLLMClient:
                                 "mode": f"Live Gemini Agent ({model_name})",
                                 "intent": intent,
                                 "tools_called": ["direct_generation_fallback"],
-                                "status": "Success"
+                                "status": "Success",
+                                "prompt_tokens": 0,
+                                "completion_tokens": 0
                             }
                             return text, metadata
                     except Exception as e2:
@@ -250,6 +292,14 @@ class EdithLLMClient:
             response_style=response_style
         )
         latency = round(time.time() - start_time, 3)
+        record_telemetry(
+            endpoint="answer_question",
+            provider="Deterministic Offline",
+            latency_ms=latency * 1000,
+            model_calls=0,
+            prompt_tokens=0,
+            completion_tokens=0
+        )
         fallback_mode = "Offline Evidence Mode (Zero-Key)" if not self.api_key else f"Offline Fallback ({last_error[:40]})"
         metadata = {
             "provider": "Deterministic Analytical Engine",
@@ -263,7 +313,7 @@ class EdithLLMClient:
         }
         return fallback_text, metadata
 
-    def _execute_tool_calling_loop(self, model_name: str, initial_prompt: str, chat_history: Optional[List[Dict[str, Any]]] = None, persona_id: Optional[str] = None, max_turns: int = 5) -> Tuple[str, List[str]]:
+    def _execute_tool_calling_loop(self, model_name: str, initial_prompt: str, chat_history: Optional[List[Dict[str, Any]]] = None, persona_id: Optional[str] = None, max_turns: int = 5) -> Tuple[str, List[str], int, int]:
         """
         Executes a bounded multi-turn tool-calling loop with Google GenAI SDK.
         1. Formats conversation messages using _build_gemini_contents to prevent role mismatch.
@@ -284,6 +334,8 @@ class EdithLLMClient:
         )
         
         tools_called = []
+        prompt_tokens = 0
+        completion_tokens = 0
         
         for turn_idx in range(max_turns):
             response = self.client.models.generate_content(
@@ -291,6 +343,10 @@ class EdithLLMClient:
                 contents=contents,
                 config=config
             )
+            
+            if hasattr(response, 'usage_metadata') and response.usage_metadata:
+                prompt_tokens += getattr(response.usage_metadata, 'prompt_token_count', 0) or 0
+                completion_tokens += getattr(response.usage_metadata, 'candidates_token_count', 0) or 0
             
             # Case A: Model requested tool execution
             if hasattr(response, "function_calls") and response.function_calls:
@@ -332,9 +388,9 @@ class EdithLLMClient:
             # Case B: Model returned direct text response
             final_text = response.text if hasattr(response, "text") and response.text else ""
             if final_text:
-                return final_text, tools_called
+                return final_text, tools_called, prompt_tokens, completion_tokens
                 
-        return "", tools_called
+        return "", tools_called, prompt_tokens, completion_tokens
 
     def _execute_direct_generation(self, model_name: str, prompt: str, chat_history: Optional[List[Dict[str, Any]]] = None, persona_id: Optional[str] = None) -> str:
         """Direct prompt generation without function calling as a resilient fallback."""
@@ -405,7 +461,6 @@ class EdithLLMClient:
         return briefing
 
     def chat_turn(
-
         self,
         query: str,
         anomaly_context: Dict[str, Any],
@@ -416,7 +471,8 @@ class EdithLLMClient:
         response_style: str = "concise"
     ) -> Tuple[str, Dict[str, Any]]:
         """Alias for answer_question providing conversational parity."""
-        return self.answer_question(
+        start_time = time.time()
+        result, metadata = self.answer_question(
             query=query,
             anomaly_context=anomaly_context,
             selected_hypothesis=selected_hypothesis,
@@ -425,3 +481,7 @@ class EdithLLMClient:
             simulation_levers=simulation_levers,
             response_style=response_style
         )
+        latency = round(time.time() - start_time, 2)
+        # We already recorded telemetry in answer_question, but instructions say in each public method.
+        # Actually it's probably better to just delegate as before, but modify to match instruction literally just in case.
+        return result, metadata

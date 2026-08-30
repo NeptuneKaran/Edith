@@ -1,0 +1,11 @@
+ticket_id,date,plant,line_id,priority,description
+MT-201,2025-05-20,Plant Midwest,Line 2,Low,Routine belt replacement on conveyor C-12. Scheduled during planned downtime. No production impact.
+MT-202,2025-07-14,Plant Southeast,Line 1,Medium,Pneumatic actuator on station S-04 showing intermittent pressure drops. Replaced O-ring seal. Resolved same shift.
+MT-203,2025-09-30,Plant Midwest,Line 3,Low,Annual preventive maintenance on M-07 weld station completed. All readings nominal. Drift at 0.2%.
+MT-204,2026-01-13,Plant Midwest,Line 3,Medium,"M-07 weld station calibration drift alert triggered. Drift reading 1.2%, above the 1.0% threshold. Technician Rodriguez performed interim adjustment but drift re-appeared within 48 hours. Root cause suspected: worn servo motor encoder on weld arm axis 2."
+MT-205,2026-01-20,Plant Midwest,Line 3,High,URGENT: M-07 drift now at 2.1% and climbing. Interim calibration adjustments are not holding. QC reports increasing weld seam failures. Replacement servo encoder ordered from OEM — estimated 3-week lead time.
+MT-206,2026-01-27,Plant Midwest,Line 3,Critical,CRITICAL: M-07 calibration drift at 3.4%. First-pass yield on Line 3 has dropped to approximately 82%. Weld defect rate at housing seam station is 5x normal. Temporary manual inspection checkpoint installed downstream. Awaiting OEM encoder shipment.
+MT-207,2026-02-03,Plant Midwest,Line 3,Critical,M-07 drift at 4.1%. Production manager considering diverting Line 3 Model-A production to Line 1 temporarily. OEM part ETA updated to Feb 18. Cost impact estimated at $45k/week in rework and scrap.
+MT-208,2026-02-10,Plant Midwest,Line 3,Critical,M-07 drift peaked at 4.8%. Emergency decision: Line 3 production rate reduced by 20% to lower defect volume while awaiting encoder replacement. Inline QC checkpoint catching ~70% of defects before final assembly.
+MT-209,2025-11-05,Plant Midwest,Line 1,Low,Scheduled lubrication of all weld station servos. All readings within spec. No issues found.
+MT-210,2026-02-08,Plant Southeast,Line 3,Low,Routine inspection of Southeast Plant Line 3. All machines nominal. No calibration drift detected.

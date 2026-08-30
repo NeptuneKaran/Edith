@@ -66,6 +66,45 @@ class DataRepository:
                 "primary_measure_unit": "$",
                 "description": "Retail commercial dataset with competing near-tied hypotheses: supplier container freight customs delay vs extreme regional blizzard foot-traffic contraction."
             }
+        elif benchmark_id == "manufacturing_quality":
+            import os
+            import pandas as pd
+            base_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'benchmark_datasets', 'manufacturing_quality')
+            
+            df_prod = pd.read_csv(os.path.join(base_dir, "production_output_daily.csv"))
+            df_cal = pd.read_csv(os.path.join(base_dir, "machine_calibration_logs.csv"))
+            df_mat = pd.read_csv(os.path.join(base_dir, "supplier_material_certs_weekly.csv"))
+            df_roster = pd.read_csv(os.path.join(base_dir, "shift_roster_monthly.csv"))
+            df_qc = pd.read_csv(os.path.join(base_dir, "qc_inspector_notes.csv"))
+            df_maint = pd.read_csv(os.path.join(base_dir, "maintenance_tickets.csv"))
+            
+            self.tables = {
+                "production_output_daily": df_prod,
+                "machine_calibration_logs": df_cal,
+                "supplier_material_certs_weekly": df_mat,
+                "shift_roster_monthly": df_roster,
+                "qc_inspector_notes": df_qc,
+                "maintenance_tickets": df_maint,
+                "sales": df_prod
+            }
+            
+            self.active_source_info = {
+                "source_type": "Calibrated Structural Benchmark",
+                "name": "Manufacturing Quality & Supply Chain",
+                "is_demo": True,
+                "row_count": len(df_prod),
+                "primary_measure_label": "First-Pass Yield (%)",
+                "primary_measure_unit": "%",
+                "analysis_grain": "Multi-Cadence (Daily / Weekly-Fiscal / Monthly / Event)",
+                "benchmark_id": "manufacturing_quality",
+                "feature_status": {
+                    "is_temporal": True,
+                    "has_multi_cadence": True,
+                    "has_unstructured": True,
+                    "has_fiscal_calendar": True,
+                    "aggregation_type": "mean"
+                }
+            }
         else:
             self.active_benchmark_id = "b2b_saas_pricing"
             self.tables = generate_enterprise_dataset(seed=seed)
@@ -216,7 +255,30 @@ class DataRepository:
             ).reset_index().sort_values("week_idx")
             return ts
 
-        # 4. Benchmark 1: b2b_saas_pricing
+        # 4. Benchmark 4: manufacturing_quality
+        elif self.active_benchmark_id == "manufacturing_quality":
+            df_prod = self.tables.get("production_output_daily", pd.DataFrame())
+            if df_prod.empty:
+                return pd.DataFrame(columns=["week_idx", "week_label", "week_date", "value"])
+            if region and "plant" in df_prod.columns:
+                df_prod = df_prod[df_prod["plant"] == region]
+            
+            # Aggregate weekly yield
+            df_prod_copy = df_prod.copy()
+            sorted_weeks = sorted(df_prod_copy["iso_week"].unique())
+            week_map = {w: i for i, w in enumerate(sorted_weeks)}
+            df_prod_copy["week_idx"] = df_prod_copy["iso_week"].map(week_map)
+            df_prod_copy["week_label"] = df_prod_copy["iso_week"]
+            
+            ts = df_prod_copy.groupby(["week_idx", "week_label"]).agg(
+                units_p=("units_produced", "sum"),
+                units_qc=("units_passed_qc", "sum"),
+                week_date=("date", "max")
+            ).reset_index().sort_values("week_idx")
+            ts["value"] = (ts["units_qc"] / np.maximum(ts["units_p"], 1.0)) * 100.0
+            return ts[["week_idx", "week_label", "week_date", "value"]]
+
+        # 5. Benchmark 1: b2b_saas_pricing
         df_sales = self.tables.get("sales", pd.DataFrame())
         if df_sales.empty:
             return pd.DataFrame(columns=["week_idx", "week_label", "week_date", "value"])

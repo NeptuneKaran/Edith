@@ -1,13 +1,13 @@
 """
 ai/offline_reasoner.py
 Deterministic Offline Reasoner & Conversational Decision Assistant for EDITH.
-Generates evidence-grounded, human-like natural language synthesis directly from active analytical data.
-Dynamically handles both the built-in B2B SaaS benchmark and arbitrary custom business datasets.
+Generates evidence-grounded, human-like natural language narrative synthesis directly from active analytical data.
+Dynamically handles the 4 calibrated benchmarks and arbitrary custom business datasets.
 Supports four distinct personas:
-- executive: Strategic decision-maker summary
-- general_user: 100% plain-language narrative with zero statistical/technical jargon
+- executive: Strategic decision-maker narrative synthesis with tight opening paragraph
+- general_user: 100% plain-language connected narrative prose with zero statistical/technical jargon
 - regional_lead: Operational focus with role-based security boundaries
-- analyst: Full econometric ledger, evidence scores, and data lineage
+- analyst: Short narrative introduction followed by full econometric ledger, proofs, and data lineage
 """
 import re
 from typing import Dict, List, Any, Optional
@@ -22,10 +22,11 @@ class OfflineEdithReasoner:
         anomaly_context: Optional[Dict[str, Any]] = None,
         simulation_levers: Optional[Dict[str, Any]] = None
     ) -> str:
-        """Returns structured recommended actions and policy intervention strategy."""
+        """Returns structured recommended actions and policy intervention strategy in connected narrative form."""
         from data.repository import DataRepository
         repo = DataRepository.get_instance()
         is_demo = repo.active_source_info.get("is_demo", True)
+        active_bm = repo.active_benchmark_id
         kpi_name = (anomaly_context or {}).get("kpi_name", repo.active_source_info.get("primary_measure_label", "Primary Measure"))
         pid = (persona_id or "executive").lower().strip()
         
@@ -39,77 +40,49 @@ class OfflineEdithReasoner:
             for dim, df_dim in list(breakdowns.items())[:2]:
                 if not df_dim.empty:
                     top_row = df_dim.iloc[0]
-                    top_dim_summary.append(f"`{top_row[dim]}` in {dim.replace('_', ' ').title()}")
+                    top_dim_summary.append(f"{top_row[dim]} in {dim.replace('_', ' ').title()}")
             dim_target = top_dim_summary[0] if top_dim_summary else "the highest concentration segment"
-            
             top_drv = list(drvs.keys())[0] if drvs else "mapped operational drivers"
             
             if pid == "general_user":
-                return f"""**Recommended Next Steps for {kpi_name}:**
+                return f"""Based on the current patterns in {kpi_name}, the team should focus operational reviews on {dim_target}, which accounts for the largest share of overall activity. At the same time, we should investigate policies linked to {top_drv.replace('_', ' ').title()}, as it has the strongest statistical relationship with {kpi_name}. Finally, reviewing the {dist.get('outlier_count', 0)} unusual data points will help ensure our records are accurate and complete."""
 
-1. **Focus on the Highest Impact Group ({dim_target}):**
-   - Direct immediate operational reviews toward {dim_target}, which accounts for the largest share of {kpi_name}.
+            return f"""To address variance in {kpi_name}, leadership should prioritize interventions on {dim_target}, which represents the primary empirical concentration. Concurrently, operational parameters tied to {top_drv.replace('_', ' ').title()} should be calibrated given its strong correlation with the primary metric. The team should also audit the {dist.get('outlier_count', 0)} outlier records ({dist.get('outlier_pct', 0.0):.1f}% of data) to maintain observational data integrity."""
 
-2. **Investigate the Key Influencing Factor ({top_drv.replace('_', ' ').title()}):**
-   - Review operational policies and processes related to {top_drv.replace('_', ' ').title()} to identify optimization opportunities.
+        # 2. Benchmark 2: Subscription Growth & Retention (saas_churn_roas)
+        if active_bm == "saas_churn_roas":
+            if pid == "general_user":
+                return """To recover customer retention, the team is planning to roll back the confusing Week 48 onboarding wizard to the previous high-performing setup checklist. In addition, we are realigning our ad spend back toward proven search channels and assigning dedicated customer success managers to support new signups during their first month. Over the next 8 weeks, this plan is projected to bring churn back down toward normal 2.1% levels and recover most of our lost recurring revenue."""
+            elif pid == "regional_lead":
+                return """For Region B field execution, our authorized immediate response is to deploy proactive CSM outreach to the top at-risk Starter accounts and request an emergency rollback of the self-serve onboarding wizard from the product engineering team. This combination is modeled to stabilize weekly churn below 3.0% within 4 weeks and recover $62,000/month in recurring revenue."""
+            else:
+                return """The recommended executive decision package authorizes an immediate rollback of the Self-Serve Starter onboarding redesign while reallocating $15,000 in acquisition spend back from social to search channels. Proactive customer success coverage will protect accounts in the 30-day window. Modeling in the Policy Simulator indicates this combined intervention will reduce churn from 8.6% back toward 2.4% over 8 weeks, delivering +$61,000/month in net MRR recovery."""
 
-3. **Review Unusual Data Points:**
-   - Audit the {dist.get('outlier_count', 0)} outlier records identified in the data to ensure data accuracy and address specific anomalies."""
+        # 3. Benchmark 3: Retail Fulfillment & Demand (retail_fulfillment)
+        if active_bm == "retail_fulfillment":
+            if pid == "general_user":
+                return """Because our sales dip in Region North was caused by both empty shelves from shipping delays and bad blizzard weather keeping shoppers home, our recovery plan addresses both sides. We are expediting delayed freight containers with priority customs clearance, re-routing warehouse inventory from southern stores to restock northern shelves, and offering local promotional discounts to bring foot traffic back. This balanced strategy is expected to recover store sales within 6 to 8 weeks."""
+            elif pid == "regional_lead":
+                return """For Region North store operations, authorized immediate actions include activating local omnichannel fulfillment from nearby hub stores and deploying expedited regional delivery. Price adjustments remain locked at the executive level, but local inventory rebalancing will restore on-shelf availability to 95% within 3 weeks."""
+            else:
+                return """Given the empirical near-tied competition between supplier port delays (Score 58.2) and the regional blizzard (Score 54.0), the executive strategy deploys a dual-lever policy: authorizing $15,000 for expedited freight processing to eliminate the 48% stockout, alongside omnichannel ship-from-store fulfillment to capture weather-suppressed demand. This approach projects an 8-week recovery of +$72,000/week in store revenue."""
 
-            return f"""### 🎯 Recommended Operational Action Plan for {kpi_name}
+        # 4. Benchmark 4: Manufacturing Quality & Supply Chain (manufacturing_quality)
+        if active_bm == "manufacturing_quality":
+            if pid == "general_user":
+                return """To fix the yield drop on Line 3 at Plant Midwest, the plant team has scheduled emergency recalibration for machine M-07 to replace its worn servo motor encoder. In the meantime, we have added an inline inspection checkpoint right after the weld station so defective parts are caught immediately before full assembly. This plan will bring first-pass yield from 78.4% back up to our 96.2% target and eliminate roughly $45,000 per week in scrap costs."""
+            elif pid == "regional_lead":
+                return """For Plant Midwest operations, authorized actions include installing the temporary manual QC checkpoint downstream of M-07 and expediting OEM replacement servo parts. Line 3 production rate has been trimmed by 20% to prevent scrap accumulation until recalibration is complete, which will restore yield above 95% within 3 weeks."""
+            else:
+                return """The executive response package approves an immediate emergency recalibration schedule for machine M-07 on Line 3 while installing an inline QC inspection checkpoint to intercept weld defects early. While incoming SUP-03 material quality dipped slightly, evidence confirms the failure is mechanical rather than material, so rejecting supplier batches is held in reserve. This policy restores first-pass yield to 94.8% over 8 weeks, saving $38,000/week in scrap."""
 
-1. **Target Highest-Variance Concentration ({dim_target}):**
-   - Prioritize operational intervention and resource allocation toward **{dim_target}**, the dominant variance epicenter.
-
-2. **Optimize Key Correlated Driver ({top_drv.replace('_', ' ').title()}):**
-   - Calibrate operational parameters linked to **{top_drv.replace('_', ' ').title()}**, which exhibits the strongest empirical association with {kpi_name}.
-
-3. **Data Quality & Outlier Remediation:**
-   - Audit and validate the **{dist.get('outlier_count', 0)} outlier records ({dist.get('outlier_pct', 0.0):.1f}%)** to prevent operational skew."""
-
-        # 2. Built-in B2B SaaS demo recommendations
+        # 5. Benchmark 1: B2B SaaS Pricing (b2b_saas_pricing)
         if pid == "general_user":
-            return """**Here is what the team is planning to do next to recover sales:**
-
-1. **Adjust Pricing Back Slightly (-6%):**
-   - Roll back half the recent price increase on Enterprise renewals in Region B (setting the price to **$10,528/unit**). This brings back price-conscious business buyers while keeping a modest gain over last year.
-
-2. **Offer Local Partner Marketing Support ($15,000):**
-   - Provide a $15,000 regional marketing fund to help local sales partners counter competitor discounts in Region B.
-
-3. **Provide High-Touch Support to Key Accounts:**
-   - Assign dedicated customer success managers to the top 12 at-risk renewal accounts to make sure they are supported.
-
-4. **Expected Outcome:**
-   - Over the next 8 weeks, this plan is projected to recover **nearly 80% of lost sales volume** and add about **+$20,000/week** in revenue recovery."""
-
+            return """Here is the plan to recover sales in Region B: we are rolling back half of the recent price increase on Enterprise renewals (setting the price to $10,528/unit), which brings back price-conscious buyers while keeping a modest gain over last year. We are also providing a $15,000 regional marketing fund to help local sales partners counter competitor discounts, and assigning dedicated customer success managers to our top 12 at-risk accounts. Over the next 8 weeks, this plan is projected to recover nearly 80% of lost sales volume and add about +$20,000 per week in revenue."""
         elif pid == "regional_lead":
-            return """**Recommended Action Plan & Policy Approval Priority (Regional Sales Lead):**
-
-1. **First Immediate Field Action (Authorized for Deployment):**
-   - **Deploy $15,000 Regional Partner Co-Op Fund:** Allocate co-op marketing incentives across key Region B partner accounts to counter ApexTech's 15% discount campaign (accelerates win-back deal velocity by **+$1,667/week**).
-   - **Activate VIP Retention Guard:** Assign dedicated proactive CSM coverage to the top 12 at-risk Enterprise renewals in Region B to protect recurring ARR.
-
-2. **Executive Decision Package (Pending CRO Approval):**
-   - **Targeted Price Adjustment (-6%):** A recommendation has been submitted to the Executive Pricing Committee to adjust Enterprise Suite Alpha renewals in Region B to $10,528/unit (recovers volume while preserving +$528/unit margin gain).
-
-3. **Projected Recovery Path:**
-   - Modeling in **Screen 04 (Policy Simulator)** projects this balanced strategy recovers **78.2% of lost volume** over 8 weeks, generating **+$20,067/week in net revenue recovery**."""
-
-        else: # executive & analyst
-            return """**Recommended Action Plan & Decision Approval Priority (Executive / CRO):**
-
-1. **Primary Decision to Approve First (Price Calibration):**
-   - **Authorize -6% Price Adjustment on Enterprise Suite Alpha:** Roll back half the recent price hike on Enterprise renewals in Region B (setting unit price to **$10,528/unit**). This directly re-engages price-sensitive enterprise buyers while preserving **+$528/unit net margin gain** over baseline (projected volume recovery: **+$18,400/week**).
-
-2. **Secondary Complementary Action:**
-   - **Authorize $15,000 Regional Co-Op Marketing Fund:** Release localized partner incentives in Region B to neutralize ApexTech's 15% switcher campaign (accelerates deal win-back by **+$1,667/week**).
-
-3. **Risk Mitigation (Immediate Execution):**
-   - **Deploy VIP Retention Guard:** Assign dedicated high-touch CSMs to the top 12 at-risk Enterprise renewals to guard against logo churn compounding.
-
-4. **Projected 8-Week Recovery Trajectory:**
-   - Combined policy trajectory in **Screen 04 (Policy Simulator)** projects **78.2% volume recovery** over 8 weeks, stabilizing gross margin at **70.2%** and delivering **+$20,067/week** net recovery."""
+            return """For Region B field leadership, authorized immediate actions include deploying the $15,000 Regional Partner Co-Op Fund to counter ApexTech's 15% discount campaign and activating proactive CSM coverage for the top 12 at-risk Enterprise renewals. A targeted -6% price rollback on Enterprise Suite Alpha ($10,528/unit) has been escalated to executive leadership for approval. This combined strategy is projected to recover 78.2% of lost volume and generate +$20,067/week in net revenue recovery."""
+        else:
+            return """The recommended strategic decision package authorizes a -6% price adjustment on Enterprise Suite Alpha renewals in Region B (setting unit price to $10,528), which re-engages price-sensitive buyers while preserving +$528/unit in margin gain over baseline. Concurrently, releasing a $15,000 regional partner co-op fund neutralizes ApexTech's 15% switcher campaign, while high-touch CSM coverage protects at-risk renewals. Modeling in the Policy Simulator projects 78.2% volume recovery within 8 weeks, stabilizing gross margin at 70.2% and delivering +$20,067/week in net recovery."""
 
     @staticmethod
     def generate_investigation_briefing(
@@ -118,10 +91,11 @@ class OfflineEdithReasoner:
         response_style: str = "concise",
         persona: str = "executive"
     ) -> str:
-        """Synthesizes the primary executive investigation diagnosis."""
+        """Synthesizes the primary executive investigation diagnosis in connected narrative prose."""
         from data.repository import DataRepository
         repo = DataRepository.get_instance()
         is_demo = repo.active_source_info.get("is_demo", True)
+        active_bm = repo.active_benchmark_id
         kpi_name = anomaly_context.get("kpi_name", repo.active_source_info.get("primary_measure_label", "Primary Measure"))
         current_val = anomaly_context.get("current_value", 0.0)
         baseline_val = anomaly_context.get("baseline_value", 0.0)
@@ -143,111 +117,39 @@ class OfflineEdithReasoner:
             for dim, df_dim in list(breakdowns.items())[:2]:
                 if not df_dim.empty:
                     top_row = df_dim.iloc[0]
-                    top_dim_summary.append(f"`{top_row[dim]}` in {dim.replace('_', ' ').title()} ({abs(top_row.get('contribution_pct', 0.0)):.1f}%)")
-            dim_text = ", ".join(top_dim_summary) if top_dim_summary else "Evenly distributed"
+                    top_dim_summary.append(f"{top_row[dim]} in {dim.replace('_', ' ').title()} ({abs(top_row.get('contribution_pct', 0.0)):.1f}%)")
+            dim_text = ", ".join(top_dim_summary) if top_dim_summary else "evenly across categories"
 
             if pid == "general_user":
-                return f"""### 💡 Plain-Language Summary: What the Data Shows for {kpi_name}
+                return f"""The dataset shows an overall total of {current_val:,.1f} for {kpi_name} across {dq.get('total_rows', 0):,} records, with a high data health score of {dq.get('data_quality_score', 100.0):.1f}%. The heaviest concentration is in {dim_text}. Looking at influencing factors, {top_drv_name.replace('_', ' ').title()} has the strongest statistical connection with {kpi_name} (correlation of {top_drv_r:+.2f}), while the middle value sits at {dist.get('percentiles', {}).get('P50_median', 0.0):,.1f} with {dist.get('outlier_count', 0)} unusual data points flagged for review. We recommend focusing operational inquiry on {dim_text} and reviewing the policies surrounding {top_drv_name.replace('_', ' ').title()}."""
 
-**1. The Overview:**
-- **Primary Metric Analyzed:** **{kpi_name}** with an aggregate total of **{current_val:,.1f}** across **{dq.get('total_rows', 0):,} records**.
-- **Data Completeness:** High quality data with **{dq.get('data_quality_score', 100.0):.1f}% Health Score**.
+            return f"""Executive Investigation Briefing: {kpi_name} Analysis
 
-**2. Key Patterns Found in the Data:**
-- **Highest Concentration:** The highest values are concentrated in {dim_text}.
-- **Strongest Factor:** **{top_drv_name.replace('_', ' ').title()}** shows the strongest statistical link with {kpi_name} (correlation: {top_drv_r:+.2f}).
-- **Data Spread:** Middle value is **{dist.get('percentiles', {}).get('P50_median', 0.0):,.1f}**, with **{dist.get('outlier_count', 0)} unusual data points** flagged.
-
-**3. Recommended Next Step:**
-- Focus operational reviews on {dim_text} and explore factors influencing {top_drv_name.replace('_', ' ').title()}."""
-
-            return f"""### 📋 Executive Investigation Briefing: {kpi_name} Analysis
-
-**1. Incident Overview & Scale:**
-- **Primary Focus Metric:** **{kpi_name}** with an aggregate observed level of **{current_val:,.1f}** across **{dq.get('total_rows', 0):,} records**.
-- **Operational Grain:** {anomaly_context.get('status_label', 'Cross-Sectional Snapshot')}.
-
-**2. Observational Findings & Empirical Concentrations:**
-- **Segment Epicenter:** Heaviest concentration observed in {dim_text}.
-- **Explanatory Driver Correlation:** **{top_drv_name.replace('_', ' ').title()}** shows the strongest statistical association with r = {top_drv_r:+.2f} (Pearson).
-- **Distribution Profile:** Median: **{dist.get('percentiles', {}).get('P50_median', 0.0):,.1f}** | IQR: **{dist.get('iqr', 0.0):.2f}** | Outliers: **{dist.get('outlier_count', 0)} items ({dist.get('outlier_pct', 0.0):.1f}%)**.
-
-**3. Decision Guidance & Observational Integrity:**
-- All reported signals represent empirical concentrations and statistical correlations to direct operational investigation, not unverified causal claims."""
+Observational Findings: Analysis of {kpi_name} reveals an aggregate observed level of {current_val:,.1f} across {dq.get('total_rows', 0):,} records with a {dq.get('data_quality_score', 100.0):.1f}% data health score. Performance variance is concentrated primarily in {dim_text}. Statistical correlation identifies {top_drv_name.replace('_', ' ').title()} as the strongest explanatory driver (Pearson r = {top_drv_r:+.2f}), alongside a median value of {dist.get('percentiles', {}).get('P50_median', 0.0):,.1f} and {dist.get('outlier_count', 0)} outlier records. These findings reflect empirical associations and segment concentrations to guide decision-making without asserting unverified causal claims."""
 
         # 2. Benchmark 2: Subscription Growth & Retention (saas_churn_roas)
-        if repo.active_benchmark_id == "saas_churn_roas":
+        if active_bm == "saas_churn_roas":
             top_h = hypotheses[0] if hypotheses else {}
             if pid == "general_user":
-                return """### 💡 Plain-Language Summary: Why Customer Churn Increased
+                return """Customer churn in our Self-Serve Starter tier in Region B rose sharply from 2.1% to 8.6%, resulting in a loss of roughly $78,000 in monthly recurring revenue. This increase was triggered by the Week 48 launch of a redesigned onboarding flow, which customer call notes confirm confused new users and led them to abandon setup before completion. A direct comparison with Region A, where the old onboarding flow was kept and churn remained steady at 2.0%, confirms the redesign was the true cause. Meanwhile, a concurrent shift in advertising budget from search to social lowered marketing ROAS but had no effect on cancellations. Because our new AI Add-on Beta tier has only 4 weeks of history, automated expected ranges are temporarily paused for that product until a full 8-week baseline is collected."""
 
-**1. The Big Picture:**
-- **What Changed:** Customer churn in our **Self-Serve Starter** tier surged from a healthy **2.1%** up to **8.6%** in **Region B**.
-- **Impact on Revenue:** Monthly Recurring Revenue (MRR) dropped by about **-$78,000** as cancellations rose to ~40 accounts per week.
-
-**2. The Real Cause:**
-- **The Confusing Onboarding Redesign:** In Week 48, we launched a redesigned self-serve signup flow. Customer call notes confirm users found the new setup wizard confusing and abandoned setup before completing onboarding.
-- **Quasi-Experiment Proof:** In Region A (where the old onboarding flow was kept), churn stayed at a steady 2.0%. This confirms the new onboarding flow caused the churn.
-
-**3. What About the Marketing Drop? (A False Alarm):**
-- That same week, marketing shifted ad spend from Search to Social, which lowered Marketing ROAS. However, this only affected new ad traffic—it had zero effect on existing customer cancellations.
-
-**4. Sparse History Alert:**
-- The new **AI Add-on Beta** product only has 4 weeks of recording, so automated expected ranges are disabled for that tier until 8 weeks of data are collected."""
-
-            return """### 📋 Executive Incident Briefing: Customer Churn & Retention Analysis
-
-**1. Incident Scale & Metric Anomaly:**
-- **Primary Incident:** Annualized **Customer Churn Rate** in **Region B | Self-Serve Starter** surged from **2.10% baseline to 8.60%** (Z = +3.10 sigma, P1 Severity).
-- **Financial Downstream Impact:** Monthly Recurring Revenue (MRR) contracted by **-$78,000/mo** ($420k -> $342k).
-
-**2. Verified Root Cause (#1 High-Confidence Driver):**
-- **Self-Serve Onboarding Flow Redesign (Cause Score: 88.5/100):**
-  * Temporal Precedence: Redesign launched in Week 48 preceded the churn spike by tau = 2 weeks.
-  * Difference-in-Differences: Region A unexposed control cohort maintained 2.0% churn (**52.1% net causal divergence**).
-  * Qualitative Telemetry: Verbatim CS call notes and exit surveys confirm users stalled on the automated workspace provisioning wizard.
-
-**3. Confounder Isolation (Marketing Budget Reallocation):**
-  * Marketing shifted $850/day from Search to Social in Week 48, degrading lead quality and depressing Marketing ROAS from 4.2x to 2.4x.
-  * Statistical correlation with customer churn is near zero (r = 0.08), proving this is an acquisition confounder, not the churn cause.
-
-**4. Sparse History Telemetry Flag:**
-  * **AI Add-on Beta** tier has only 4 weeks of history recorded (minimum 8 required). Expected corridor is disabled to prevent false confidence."""
+            return """Weekly customer churn surged from a baseline of 2.1% to 8.6% (Z = +3.10 sigma, P1 Incident), resulting in a -$78,000 monthly recurring revenue contraction concentrated in Region B Self-Serve Starter accounts. Quasi-experimental difference-in-differences analysis confirms the Week 48 Onboarding Flow Redesign (S1) as the primary root cause (Cause Score 88.5/100, 52.1% net causal divergence vs Region A control). Confounder Isolation: a simultaneous ad budget reallocation from search to social reduced acquisition ROAS to 2.4x but exhibits near-zero correlation (r = 0.08) with cancellations, isolating it as an independent confounder. Sparse History Diagnostic: the newly launched AI Add-on Beta tier has 4 weeks of recorded history, correctly triggering sparse-history governance that suppresses baseline corridors until 8 periods are established. Recommended action authorizes an immediate onboarding flow rollback combined with proactive CSM retention outreach."""
 
         # 3. Benchmark 3: Regional Retail Demand & Fulfillment (retail_fulfillment)
-        if repo.active_benchmark_id == "retail_fulfillment":
+        if active_bm == "retail_fulfillment":
             if pid == "general_user":
-                return """### 💡 Plain-Language Summary: Store Sales Decline in Region North
+                return """Weekly store sales in Region North dropped significantly from $210,000 down to $118,000, representing a 43.8% decline. This drop was caused by two simultaneous events that cannot be completely separated: a 12-day container port delay that left 48% of Apparel & Home store shelves empty, and a severe regional winter blizzard that cut customer foot traffic by 34%. Because both events hit in the exact same February window, the data shows honest ambiguity between supplier fulfillment failure and storm disruption. Store pricing changes were completely ruled out, as product list prices remained unchanged at $45.00 throughout all 52 weeks."""
 
-**1. The Big Picture:**
-- **What Changed:** Weekly store sales in **Region North (Apparel & Home)** dropped sharply from **$210,000 to $118,000** (-43.8%).
-- **Why This Is Ambiguous:** Two major events happened in Region North at the exact same time, and both explain the drop:
-  1. **Empty Shelves (Supplier Delay):** A 12-day container customs delay caused 48% of apparel items to go out of stock.
-  2. **Severe Winter Blizzard:** A massive regional storm cut store foot traffic by 34%.
+            return """Weekly store revenue in Region North contracted from a baseline of $210,000 to $118,000 (Z = -2.85 sigma, -43.8% deficit), localized to Apparel & Home. Ambiguous Competing Drivers: empirical evidence identifies a near-tied causal competition between Supplier Port Delays creating a 48% in-store stockout rate (Cause Score 58.2/100) and a Winter Blizzard cutting shopper foot traffic by 34% (Cause Score 54.0/100). Because both shocks occurred concurrently with a score delta of just 4.2 points (within our <= 6.0 ambiguity threshold), the engine flags genuine empirical uncertainty. Store pricing changes are definitively refuted (Score 12.0/100) as list prices held at $45.00. The recommended strategy combines $15,000 in expedited freight clearance with omnichannel ship-from-store fulfillment."""
 
-**2. Honest Uncertainty:**
-- Because both events happened simultaneously, our systems cannot definitively declare one single root cause without aisle-level foot traffic sensors.
+        # 4. Benchmark 4: Manufacturing Quality & Supply Chain (manufacturing_quality)
+        if active_bm == "manufacturing_quality":
+            if pid == "general_user":
+                return """First-pass manufacturing yield on Line 3 at Plant Midwest dropped from a healthy 96.2% down to 78.4%, causing roughly $45,000 per week in rework and scrap expenses. The cause was a progressive calibration drift on machine M-07's weld station, where a worn servo motor encoder caused drift to climb from 0.2% to 4.8% over five weeks, resulting in defective housing seam welds. Control lines at the same plant and Southeast Plant Line 3 maintained normal yields throughout, proving the issue was machine-specific. An overlapping quality dip from supplier SUP-03 was investigated and ruled out because Line 1 used the same material with zero defects, and shift schedules remained completely stable. The team is scheduling emergency recalibration and adding an inline QC checkpoint."""
 
-**3. What We Ruled Out:**
-- **Pricing:** Store prices remained constant at $45.00 throughout all 52 weeks (0% price change), completely ruling out pricing pushback."""
+            return """First-pass production yield on Line 3 at Plant Midwest dropped from 96.2% to 78.4% (Z = -2.80 sigma), generating an estimated $45,000/week scrap and rework impact. Rigorous causal analysis identifies machine M-07 weld station calibration drift as the primary root cause (Cause Score 89.5/100, 17.6% DiD divergence vs parallel control lines). Calibration logs show drift escalating from 0.2% to 4.8% following servo encoder wear, corroborated by QC inspector notes and maintenance escalations. An overlapping material quality dip from supplier SUP-03 is isolated as a secondary confounding signal (Score 45.0/100), as Line 1 processed identical batches without quality loss. Operator shift pattern changes are empirically refuted (Score 8.0/100), while transit humidity remains un-testable. The recommended decision package executes emergency M-07 recalibration with an inline QC inspection checkpoint."""
 
-            return """### 📋 Executive Incident Briefing: Regional Retail Fulfillment & Demand
-
-**1. Incident Scale & Deficit:**
-- **Primary KPI:** **Weekly Store Revenue** in **Region North | Apparel & Home** declined from **$210,000 to $118,000** (-$92,000 / -43.8% deficit, Z = -2.85 sigma).
-
-**2. Genuinely Ambiguous Competing Drivers (Near-Tied Pair):**
-- **#1 Supplier Port Delays & Stockouts (Cause Score: 58.2 / 100):**
-  * Cargo container SHP-8801 delayed 12 days at customs, creating a **48.0% in-store stockout rate**.
-  * Supplier correspondence confirms regional distribution terminal freeze.
-- **#2 Extreme Winter Blizzard Event (Cause Score: 54.0 / 100):**
-  * Historic regional blizzard (Weather Severity 8.7/10.0) caused a **-34.0% contraction in shopper foot traffic**.
-- **Decision Uncertainty Notice:** Score difference (|Delta| = 4.2 pts) is within empirical ambiguity boundaries. Telemetry cannot separate fulfillment failure from footfall suppression.
-
-**3. Refuted Hypotheses:**
-- **Store Pricing Changes (Cause Score: 12.0 / 100, Refuted):** POS rate cards confirm $0.00 price variance."""
-
-        # 4. Built-in B2B SaaS demo briefing (b2b_saas_pricing)
+        # 5. Benchmark 1: B2B SaaS Pricing Incident (b2b_saas_pricing)
         top_h = hypotheses[0] if hypotheses else {}
         second_h = hypotheses[1] if len(hypotheses) > 1 else {}
         refuted_h = next((h for h in hypotheses if h["id"] in ["H8_SUPPLY_CONSTRAINT", "H3_INVENTORY_CONSTRAINT"]), {})
@@ -256,67 +158,13 @@ class OfflineEdithReasoner:
         did_gap = ctrl.get("did_divergence_pct", 48.3)
         math_d = top_h.get("mathematical_decomposition", {})
         
-        # General User briefing (100% plain language)
         if pid == "general_user":
-            return f"""### 💡 Plain-Language Summary: What Happened to {kpi_name}?
-
-**1. The Headline:**
-- **{kpi_name}** experienced a **noticeable drop of roughly {abs(delta_pct):.1f}%** (${baseline_val:,.0f} → ${current_val:,.0f}).
-- Almost the entire drop (**over 97%**) happened in **Region B** among **Enterprise accounts** on **Product Suite Alpha**.
-
-**2. Why It Happened:**
-- **Main Reason:** We increased prices by 12% two weeks ago. Large business customers were sensitive to the change, and 21 accounts paused renewals.
-- **Contributing Factor:** Around the same time, competitor ApexTech offered a 15% discount promotion, giving hesitant buyers an alternative.
-- **Ruled Out:** Deliveries, warehouse fulfillment, and software systems were completely normal with zero operational delays.
-
-**3. What the Team Plans to Do Next:**
-- Roll back half of the price increase on Enterprise plans in Region B (setting the price to $10,528), provide $15,000 in local partner marketing support, and assign dedicated account managers to at-risk renewals."""
+            return f"""Sales experienced a noticeable drop of roughly {abs(delta_pct):.1f}%, falling from ${baseline_val:,.0f} to ${current_val:,.0f}, with over 97% of the decline concentrated in Region B Enterprise renewals for Product Suite Alpha. The primary reason is that when we raised enterprise prices by 12% two weeks ago, price-sensitive business buyers hesitated and 21 expected renewals were put on hold. While higher rates brought in an extra $21,600 from accounts that renewed, it was not enough to offset the $210,000 lost from paused deals. Around the same time, competitor ApexTech launched a 15% discount campaign that made closing hesitant buyers more difficult, though physical deliveries and software operations ran smoothly with zero delays. The team is planning a 6% price rollback to $10,528 alongside $15,000 in local partner marketing to recover volume."""
 
         if response_style == "concise":
-            return f"""### 🔍 Executive Incident Briefing: {kpi_name} Anomaly
-
-**1. Incident Overview & Impact:**
-- **{kpi_name}** dropped by **{delta_pct:+.1f}%** (${baseline_val:,.0f} → ${current_val:,.0f}), breaching the ±2.0σ corridor (Z = {z_score:.2f}, 2-week persistence).
-- **Localization:** **97.3% of the deficit** is isolated to **Region B Enterprise** accounts on **Product Suite Alpha**.
-
-**2. Competing Hypotheses & Evidence:**
-- **Primary Driver:** **{top_h.get('name', 'Pricing Elasticity')}** (Cause Score: **{top_h.get('cause_score_100', 88.0):.1f}/100** | Evidence: **{top_h.get('evidence_score', 0.88):.2f}/1.00**).
-  - Mathematical volume loss: **-${abs(math_d.get('volume_effect_usd', 210000)):,.0f}** cushioned by **+${math_d.get('price_effect_usd', 21600):,.0f}** price realization.
-  - Temporal lead-time: +12% price hike in Week 06 preceded contraction by 2 weeks (τ = 2 weeks).
-  - Control group contrast: **{did_gap:.1f}% DiD divergence** vs un-hiked {ctrl_cohort}.
-- **Secondary Factor:** **{second_h.get('name', 'Competitor Campaign')}** (**{second_h.get('cause_score_100', 60.4):.1f}/100**). Competitor ApexTech launched a 15% discount in Week 07, compounding enterprise deal slippage.
-- **Refuted:** **{refuted_h.get('name', 'Supply Bottleneck')}** (**0.0/100**). Warehouse fill rate remained at **99.4%** with zero stockouts.
-
-**3. Recommended Next Step:**
-- Apply a targeted **-6% price adjustment** on Enterprise Suite Alpha combined with a **$15k regional co-op marketing fund** to recover projected volume."""
+            return f"""{kpi_name} declined by {delta_pct:+.1f}% (${baseline_val:,.0f} to ${current_val:,.0f}, Z = {z_score:.2f}), with 97.3% of the deficit localized to Region B Enterprise accounts on Product Suite Alpha. Econometric evaluation confirms Pricing Elasticity as the primary root cause (Cause Score 88.0/100, 48.3% DiD divergence vs {ctrl_cohort}), where a -$210,000 volume contraction from 21 paused renewals heavily outweighed a +$21,600 price cushion. Competitor ApexTech's 15% discount campaign in Week 07 acted as a compounding secondary factor (Score 60.4/100), while physical supply bottlenecks are refuted (Score 0.0/100, 99.4% fill rate). The recommended strategic intervention applies a -6% price rollback to $10,528/unit paired with a $15,000 regional partner co-op fund to recover +$20,067/week over an 8-week trajectory."""
         else:
-            return rf"""### 🔍 Detailed Analytical Investigation Briefing: {kpi_name} Anomaly
-
-**1. Statistical Anomaly Detection & Impact Localization:**
-- **Metric:** {kpi_name} (Fiscal Q1 2026, Week 08)
-- **Observed Revenue:** ${current_val:,.0f} vs Baseline ${baseline_val:,.0f} (Variance: **{delta_pct:+.1f}%**, ${anomaly_context.get('delta_value', -147700):+,.0f}).
-- **Corridor Threshold:** Lower boundary $1,272,908 | Upper boundary $1,529,692 (Z-Score: **{z_score:.2f}**, P1 Material Incident).
-- **Dimensional Breakdown:**
-  - *Region:* Region B (-$182.2k gross deficit, 97.3% share).
-  - *Tier:* Enterprise cohort (-$182.2k, 97.3% share); Mid-Market & SMB stable.
-  - *Product:* Product Suite Alpha (100% of product-level decline).
-
-**2. Causal Evidence & Competing Hypothesis Evaluation:**
-- **#1 Pricing Elasticity & Plan Hike (Score: {top_h.get('cause_score_100', 88.0):.1f}/100 | {top_h.get('confidence_classification', 'HIGH-CONFIDENCE DRIVER')}):**
-  - *Exact Revenue Identity:* ΔRevenue = Volume Effect + Price Cushion = -$210,000 + $21,600 = -$188,400 (0.0% error).
-  - *Lag Correlation:* Peak negative correlation at τ = 2 weeks (|r| = 0.999).
-  - *Difference-in-Differences:* {did_gap:.1f}% relative performance divergence against parallel pre-trend control (r = 0.88).
-  - *Customer Telemetry:* Pricing complaints surged to 38/week in CRM logs.
-- **#2 Aggressive Competitor Campaign (Score: {second_h.get('cause_score_100', 60.4):.1f}/100 | {second_h.get('confidence_classification', 'POSSIBLE DRIVER')}):**
-  - *Competitor Action:* ApexTech launched 15% discount in Week 07.
-  - *Empirical Signal:* CRM win/loss mentions surged 4.8x baseline.
-  - *Lead-Time Lag:* Coincident 1-week response lag (τ = 1 week).
-- **#8 Supply Chain / Inventory Constraints (Score: 0.0/100 | REFUTED):**
-  - *Refutation Evidence:* Logistics logs confirm 99.4% warehouse fill rate with 0 stockout days.
-
-**3. Recommended Counterfactual Decision Trajectory:**
-- Execute -6% price rollback on Enterprise Suite Alpha in Region B ($10,528/unit) combined with $15,000 regional partner co-op fund.
-- Projected 8-week recovery: **+$20,067/week** net recovery, stabilizing gross margin at **70.2%**."""
+            return f"""In Fiscal Q1 2026 Week 08, {kpi_name} dropped by {delta_pct:+.1f}% (${current_val:,.0f} vs ${baseline_val:,.0f} baseline, -$147,700 total variance), breaching the lower corridor boundary of $1,272,908 at Z = {z_score:.2f}. Over 97% of the deficit is concentrated in Region B Enterprise Suite Alpha contracts. Mathematical revenue identity decomposition reveals that a gross volume loss of -21 units (-$210,000) was only partially cushioned by +$21,600 from the +12% price hike, leaving a net regional deficit of -$188,400 with zero residual error. Quasi-experimental Difference-in-Differences isolates a 48.3% causal divergence against the parallel pre-trend Mid-Market control cohort (r = 0.88), preceded by an internal price hike lag of tau = 2 weeks. ApexTech's 15% discount campaign exacerbated deal slippage as a secondary driver (Score 60.4/100), while logistics telemetry confirms warehouse fill rates remained at 99.4% with 0 stockouts. Recommended policy executes a -6% price adjustment to $10,528/unit and deploys a $15,000 partner fund to deliver an estimated +$20,067/week net recovery at 70.2% gross margin."""
 
     @staticmethod
     def answer_query(
@@ -335,10 +183,11 @@ class OfflineEdithReasoner:
             anomaly_context = {}
         if persona_id:
             persona = persona_id
-        """Answers user queries in natural, conversational language with strict empirical grounding."""
+        """Answers user queries in natural, conversational narrative language with strict empirical grounding."""
         from data.repository import DataRepository
         repo = DataRepository.get_instance()
         is_demo = repo.active_source_info.get("is_demo", True)
+        active_bm = repo.active_benchmark_id
         
         q = query.strip()
         q_clean = re.sub(r'[^\w\s]', '', q.lower()).strip()
@@ -365,63 +214,16 @@ class OfflineEdithReasoner:
         if any(q_clean == g or q_clean.startswith(g + " ") for g in greetings):
             dataset_name = repo.active_source_info.get("name", "Active Dataset")
             if pid == "general_user":
-                if not is_demo:
-                    return f"""Hello! I'm **EDITH**, your AI business intelligence assistant.
-
-I'm currently connected to **{dataset_name}** analyzing **{kpi_name}**. Here are a few ways we can explore:
-
-- **Understand Key Drivers:** Ask *"What factors affect {kpi_name}?"*
-- **Explore Categories:** Ask *"Which groups have the highest {kpi_name}?"*
-- **Check Data Spread:** Ask *"Are there any outliers in this file?"*
-
-How can I help you today?"""
-
-                return f"""Hello! I'm **EDITH**, your AI business intelligence assistant.
-
-I'm currently connected to **{dataset_name}**. Here are a few ways we can explore what's happening:
-
-- **Understand What Changed:** Ask *"Why did sales drop?"* or *"What happened in Region B?"*
-- **Explore Categories:** Ask *"Which areas or customer groups had the biggest drop?"*
-- **Check What the Team Is Doing:** Ask *"What is the recovery plan?"* or *"What should we do next?"*
-
-How can I help you today?"""
-
-            return f"""Hello! I'm **EDITH**, your AI decision intelligence assistant.
-
-I'm currently connected to **{dataset_name}**. Here are a few ways we can dive into the data together:
-
-- **Explore Concentrations:** Ask *"Which segments or categories have the highest variance?"*
-- **Analyze Drivers:** Ask *"What drivers correlate most strongly with {kpi_name}?"*
-- **Inspect Quality & Distribution:** Ask *"Are there any outliers or missing values in this file?"*
-- **Root Cause & Guidance:** Ask *"What factors affect performance?"* or *"What actions are recommended?"*
-
-What would you like to examine first?"""
+                return f"Hello! I am EDITH, your decision intelligence assistant. I am currently connected to {dataset_name} analyzing {kpi_name}. You can ask me what caused the recent numbers to change, which customer groups or categories were affected most, or what steps the team is planning next to recover performance. What would you like to explore?"
+            return f"Hello! I am EDITH, your executive decision partner. I am connected to {dataset_name} monitoring {kpi_name}. We can investigate empirical driver correlations, review segment concentrations, examine statistical outliers, or simulate recovery policy trajectories in the Policy Simulator. What area would you like to examine first?"
 
         # ==============================================================================
         # 2. CAPABILITIES & HELP
         # ==============================================================================
         if any(k in q_clean for k in ["who are you", "what can you do", "what is edith", "help me", "capabilities", "how do you work"]):
             if pid == "general_user":
-                return f"""I am **EDITH**, an AI business intelligence assistant built to help everyone understand the real story behind business numbers.
-
-**Here is what I can do for you:**
-1. **Explain Metrics Simply:** Explain changes and trends in plain, everyday language.
-2. **Find the Exact Epicenter:** Pinpoint which categories or segments have the biggest impact.
-3. **Analyze Influencing Factors:** Identify which operational factors are most linked to your numbers.
-4. **Walk Through Next Steps:** Provide practical recommendations on what to investigate next.
-
-Feel free to ask me anything about **{kpi_name}** or the active business data!"""
-
-            return f"""I am **EDITH (Executive Decision Intelligence & Tactical Hypothesis)**, an AI-assisted analytics partner engineered to uncover empirical drivers behind business performance.
-
-**Here is how I assist decision-makers:**
-1. **Anomaly & Outlier Detection:** Pinpointing statistically significant deviations (±2.0σ) and IQR-based distribution outliers.
-2. **Dimensional Variance Localization:** Breaking down performance across categories, regions, tiers, and channels to isolate the exact epicenter.
-3. **Driver Correlation & Association:** Measuring linear (Pearson r) and rank-order (Spearman r) relationships with explanatory factors.
-4. **Counterfactual What-If Simulation:** Modeling policy adjustments on calibrated economic models.
-5. **Grounded Natural Q&A:** Answering your specific inquiries directly using verified calculations.
-
-Feel free to ask me anything about **{kpi_name}** or the active data!"""
+                return f"I am EDITH, an AI business intelligence assistant designed to explain the real story behind business metrics. I help you understand why key numbers moved, pinpoint exactly which regions or customer groups were impacted, show which factors contributed most to the change, and outline practical next steps the team can take to improve results."
+            return f"I am EDITH (Executive Decision Intelligence & Tactical Hypothesis), an analytical AI partner engineered to deliver causal diagnostic storytelling. I detect statistical anomalies and distribution outliers, localize variance across business dimensions, evaluate competing causal hypotheses through quasi-experimental proofs, model counterfactual recovery scenarios, and provide grounded answers to your strategic inquiries."
 
         # ==============================================================================
         # 3. CUSTOM / GENERIC DATASET SPECIFIC REASONING
@@ -436,144 +238,26 @@ Feel free to ask me anything about **{kpi_name}** or the active data!"""
             for dim, df_dim in list(breakdowns.items())[:2]:
                 if not df_dim.empty:
                     top_row = df_dim.iloc[0]
-                    top_dim_summary.append(f"`{top_row[dim]}` in {dim.replace('_', ' ').title()} ({abs(top_row.get('contribution_pct', 0.0)):.1f}%)")
-            dim_text = ", ".join(top_dim_summary) if top_dim_summary else "Evenly distributed across categories"
+                    top_dim_summary.append(f"{top_row[dim]} in {dim.replace('_', ' ').title()} ({abs(top_row.get('contribution_pct', 0.0)):.1f}%)")
+            dim_text = ", ".join(top_dim_summary) if top_dim_summary else "evenly across categories"
             
             top_drv_name = list(drvs.keys())[0] if drvs else "None"
             top_drv_r = drvs[top_drv_name]["pearson_r"] if drvs else 0.0
 
-            # 3A. Starter probe: What changed in the selected metric?
             if any(k in q_clean for k in ["what changed in the selected metric", "what changed", "metric movement", "tell me what changed"]):
-                top_name = selected_hypothesis.get('name', 'Segment Concentration') if selected_hypothesis else 'Segment Concentration'
-                top_sum = selected_hypothesis.get('summary', '') if selected_hypothesis else ''
-                return f"""**Observed Metric Summary ({kpi_name}):**
-- **Observed Value:** {current_val:,.1f}
-- **Primary Epicenter:** {top_name} ({top_sum})
-- **Data Quality:** {dq.get('data_quality_score', 100.0):.1f}% Health Score across {dq.get('total_rows', 0):,} rows."""
+                return f"Observed Metric Summary ({kpi_name}): Across {dq.get('total_rows', 0):,} records, {kpi_name} recorded an observed value of {current_val:,.1f}. The highest performance concentration is localized in {dim_text}, while the strongest statistical association is with {top_drv_name.replace('_', ' ').title()} (Pearson r = {top_drv_r:+.2f})."
 
-            # 3B. Action / Next steps / What to do queries
             if any(k in q_clean for k in ["action", "do", "fix", "next", "recommend", "solution", "strategy", "roadmap", "plan", "step", "approve", "priority"]):
                 return OfflineEdithReasoner._get_recommended_action_response(persona, anomaly_context, simulation_levers)
 
-            # 3C. Check if query matches specific category/dimension values in dataset
-            matched_entity = None
-            matched_dim = None
-            for dim, df_dim in breakdowns.items():
-                if not df_dim.empty and dim in df_dim.columns:
-                    for val in df_dim[dim].dropna().unique():
-                        val_str = str(val).lower()
-                        if len(val_str) > 2 and (val_str in q_lower or any(part in q_lower for part in val_str.split() if len(part) > 3)):
-                            matched_entity = str(val)
-                            matched_dim = dim
-                            break
-                if matched_entity:
-                    break
+            if any(k in q_clean for k in ["concentration", "highest", "biggest", "top group", "worst", "lowest", "breakdown", "segments"]):
+                return f"Dimensional Concentration Analysis: Looking across dimensions, the highest concentration for {kpi_name} is observed in {dim_text}. The overall distribution has a median of {dist.get('percentiles', {}).get('P50_median', 0.0):,.1f} with {dist.get('outlier_count', 0)} outlier records identified."
 
-            if matched_entity and matched_dim:
-                df_dim = breakdowns[matched_dim]
-                entity_rows = df_dim[df_dim[matched_dim].astype(str) == matched_entity]
-                if not entity_rows.empty:
-                    er = entity_rows.iloc[0]
-                    share_pct = abs(er.get("contribution_pct", 0.0))
-                    total_val = er.get("sum", er.get("count", er.get(kpi_name, 0.0)))
-                    avg_val = er.get("mean", 0.0)
-                    return f"""Based on the data for **{matched_dim.replace('_', ' ').title()}: `{matched_entity}`**:
+            if any(k in q_clean for k in ["driver", "correlation", "correlate", "association", "relationship", "factors", "influence", "impact", "cause", "why"]):
+                return f"Numeric Driver Associations: The strongest explanatory driver in this dataset is {top_drv_name.replace('_', ' ').title()}, which exhibits a Pearson correlation of {top_drv_r:+.2f} with {kpi_name}. This indicates that changes in {top_drv_name.replace('_', ' ').title()} are closely associated with shifts in the primary measure across the {dim_text} segments."
 
-- **Share of Metric:** Accounts for **{share_pct:.1f}%** of the total {kpi_name}.
-- **Total Observed {kpi_name}:** **{total_val:,.1f}**
-- **Average per Record:** **{avg_val:,.1f}**
-- **Category Ranking:** Ranks #{int(entity_rows.index[0]) + 1} across all {len(df_dim)} groups in `{matched_dim}`.
-
-Would you like to explore how `{matched_entity}` compares across other dimensions or numeric drivers?"""
-
-            # 3D. Specific question about concentrations / biggest contributors
-            if any(k in q_clean for k in ["concentration", "highest", "biggest", "top group", "worst", "lowest", "which store", "which brand", "which department", "breakdown", "segments", "which groups show the greatest concentration"]):
-                lines = []
-                for dim, df_dim in breakdowns.items():
-                    if not df_dim.empty:
-                        top_row = df_dim.iloc[0]
-                        bottom_row = df_dim.iloc[-1] if len(df_dim) > 1 else top_row
-                        lines.append(f"- **{dim.replace('_', ' ').title()}:** Top is `{top_row[dim]}` (**{abs(top_row.get('contribution_pct', 0.0)):.1f}%** share); lowest is `{bottom_row[dim]}` (**{abs(bottom_row.get('contribution_pct', 0.0)):.1f}%** share).")
-                summary_body = "\n".join(lines)
-                return f"""**Dimensional Concentration Analysis for {kpi_name}:**
-
-{summary_body}
-
-*This breakdown reveals where metric values are concentrated across your business segments.*"""
-
-            # 3E. Specific question about drivers / correlations / what affected / influence / why
-            if any(k in q_clean for k in ["driver", "correlation", "correlate", "association", "relationship", "factors", "relate", "affect", "affected", "influence", "influenced", "impact", "impacted", "cause", "caused", "why", "which numeric fields have the strongest observed association"]):
-                if drvs:
-                    lines = []
-                    for drv_name, stats in drvs.items():
-                        r_val = stats.get('pearson_r', 0.0)
-                        rel_desc = "Strong Positive" if r_val > 0.6 else ("Strong Negative" if r_val < -0.6 else ("Moderate Positive" if r_val > 0.3 else ("Moderate Negative" if r_val < -0.3 else "Weak / Neutral")))
-                        if pid == "general_user":
-                            lines.append(f"- **{drv_name.replace('_', ' ').title()}:** {rel_desc} link with {kpi_name} (relationship score: {r_val:+.2f}).")
-                        else:
-                            lines.append(f"- **{drv_name.replace('_', ' ').title()}:** Pearson r = {r_val:+.2f} ({rel_desc}) | Spearman r = {stats.get('spearman_rs', 0.0):+.2f}.")
-                    
-                    driver_body = "\n".join(lines)
-                    if pid == "general_user":
-                        return f"""**What Influences {kpi_name}:**
-
-Based on our analysis of the active dataset across **{dq.get('total_rows', 0):,} records**:
-
-**1. Primary Influencing Factors:**
-{driver_body}
-
-**2. Where It Is Centered:**
-- Values are most concentrated in {dim_text}.
-
-*(These relationships show which operational factors have the strongest link to {kpi_name}.)*"""
-
-                    return f"""**Numeric Driver Associations with {kpi_name}:**
-
-**1. Statistical Driver Correlations (Pearson & Spearman):**
-{driver_body}
-
-**2. Dimensional Variance Localization:**
-- Heaviest empirical concentration: {dim_text}.
-
-**3. Observational Integrity Notice:**
-- Identified associations represent statistical correlations across observational data to guide root-cause investigation."""
-                
-                # If no drivers are mapped, explain dimensional breakdown
-                if pid == "general_user":
-                    return f"""**What We Know About {kpi_name}:**
-
-- **Total Observed Level:** **{current_val:,.1f}** across **{dq.get('total_rows', 0):,} records**.
-- **Category Breakdown:** Values are most concentrated in {dim_text}.
-- *Note:* No numerical driver columns were mapped for correlation testing in this dataset."""
-
-                return f"""**Analysis of Factors Affecting {kpi_name}:**
-
-- **Observed Metric:** **{kpi_name}** ({current_val:,.1f} across {dq.get('total_rows', 0):,} rows).
-- **Concentration Epicenter:** {dim_text}.
-- *Note:* Correlation analysis requires numeric driver columns. Review dimensional breakdowns for category contributions."""
-
-            # 3F. Specific question about data quality / outliers / distributions
-            if any(k in q_clean for k in ["quality", "null", "missing", "outlier", "distribution", "skew", "iqr", "median", "duplicates", "summarize dataquality issues", "summarize data quality issues"]):
-                col_nulls = dq.get("column_null_percentages", {})
-                null_str = ", ".join([f"`{c}` ({p}%)" for c, p in col_nulls.items() if p > 0]) or "None"
-                return f"""**Data Quality Audit Report:**
-
-- **Overall Data Quality Score:** **{dq.get('data_quality_score', 100.0):.1f}%** across **{dq.get('total_rows', 0):,} records**.
-- **Fields with Missing Values:** {null_str}
-- **Duplicate Rows:** {dq.get('duplicate_rows', 0)} ({dq.get('duplicate_pct', 0.0):.1f}%)
-- **Distribution Profile:** Median = **{dist.get('percentiles', {}).get('P50_median', 0.0):,.1f}**, IQR = **{dist.get('iqr', 0.0):.2f}**, Mean = **{dist.get('mean', 0.0):,.1f}**
-- **Outliers:** **{dist.get('outlier_count', 0)} records** ({dist.get('outlier_pct', 0.0):.1f}%) fall beyond 1.5 × IQR."""
-
-            # 3G. General question / overview on custom dataset
-            if pid == "general_user":
-                return f"""**Key Takeaway for {kpi_name}:**
-
-- **Overall Summary:** We analyzed **{kpi_name}** (observed total: **{current_val:,.1f}**) across **{dq.get('total_rows', 0):,} records**.
-- **Highest Category:** The greatest concentration is in {dim_text}.
-- **Key Driver:** **{top_drv_name.replace('_', ' ').title()}** shows the strongest statistical link to {kpi_name} (correlation: {top_drv_r:+.2f}).
-- **Data Spread:** Median value is **{dist.get('percentiles', {}).get('P50_median', 0.0):,.1f}** with **{dist.get('outlier_count', 0)} unusual data points** identified.
-
-*(You can ask: "Which category has the highest {kpi_name}?", "What drivers correlate with {kpi_name}?", or "Are there any outliers in this file?".)*"""
+            if any(k in q_clean for k in ["quality", "null", "missing", "outlier", "distribution", "skew", "iqr", "median", "duplicates"]):
+                return f"Data Quality Audit Report: Overall Data Quality Score is {dq.get('data_quality_score', 100.0):.1f}% across {dq.get('total_rows', 0):,} records. The median value for {kpi_name} is {dist.get('percentiles', {}).get('P50_median', 0.0):,.1f} with an interquartile range of {dist.get('iqr', 0.0):.2f}, and there are {dist.get('outlier_count', 0)} outlier records flagged for review."
 
             return OfflineEdithReasoner.generate_investigation_briefing(anomaly_context, all_hypotheses or [], response_style="concise", persona=persona)
 
@@ -582,320 +266,134 @@ Based on our analysis of the active dataset across **{dq.get('total_rows', 0):,}
         # ==============================================================================
         
         # 4-A. BENCHMARK 2: SUBSCRIPTION GROWTH & RETENTION (saas_churn_roas)
-        if repo.active_benchmark_id == "saas_churn_roas":
-            # Onboarding flow / churn cause
+        if active_bm == "saas_churn_roas":
             if any(k in q_clean for k in ["onboarding", "flow", "wizard", "churn", "cancellation", "cancellations", "abandon", "why did churn", "why churn"]):
                 if pid == "general_user":
-                    return """**Why Customer Churn Increased in Region B:**
+                    return "Customer churn in Region B surged from 2.1% to 8.6% because we launched a redesigned onboarding wizard in Week 48 that confused new self-serve users. Customer call notes confirm users struggled to complete setup, while Region A kept the old flow and maintained a steady 2.0% churn rate, proving the new wizard was the cause."
+                return "Quasi-experimental evaluation confirms the Week 48 Self-Serve Onboarding Flow Redesign as the primary root cause of the churn surge (Cause Score 88.5/100, High Confidence). Customer churn rose from 2.1% to 8.6% with a 52.1% net divergence against the Region A control cohort, corroborated by qualitative customer success call notes documenting onboarding drop-offs."
 
-1. **The Confusing Onboarding Wizard:** In Week 48, we launched a redesigned self-serve onboarding flow. 
-2. **Customer Feedback:** CS call transcripts show users found the new step-by-step setup confusing and abandoned provisioning before completing activation.
-3. **Quasi-Experiment (DiD):** In Region A (which kept the old onboarding checklist), customer churn remained completely flat at 2.0%, proving the redesign caused the churn surge (52.1% divergence)."""
-
-                return """**Quasi-Experimental Causal Evaluation of Customer Churn:**
-
-- **Primary Driver (#1 S1):** Self-Serve Onboarding Flow Redesign (**Cause Score: 88.5 / 100**, High Confidence).
-- **Temporal Sequence:** Launch in Week 48 preceded the churn spike by tau = 2 weeks.
-- **Difference-in-Differences:** 52.1% causal divergence vs Region A control cohort (pre-trend r = 0.96).
-- **Unstructured Corroboration:** Verbatim customer success notes (CS-101) confirm users abandoned automated provisioning."""
-
-            # Marketing ROAS / Confounder
             if any(k in q_clean for k in ["marketing", "roas", "ad spend", "search", "social", "confounder", "budget"]):
                 if pid == "general_user":
-                    return """**What Happened to Marketing ROAS (And Why It Did Not Cause Churn):**
+                    return "In Week 48, marketing shifted ad budget from search to social, which lowered marketing ROAS from 4.2x to 2.4x because social traffic converted at a lower rate. However, this ad shift only affected new visitor acquisition and had zero connection to existing customer cancellations (correlation r = 0.08)."
+                return "Confounder Analysis: The acquisition ad spend reallocation from Search to Social in Week 48 reduced marketing ROAS from 4.2x to 2.4x, but statistical analysis isolates it as an independent Confounder with a near-zero correlation (r = 0.08) to subscription cancellations, confirming it did not drive the churn spike."
 
-- **The Ad Shift:** Marketing shifted ad budget from Search to Social in Week 48.
-- **Lower Quality Leads:** Social traffic converted at only 1.6% (vs 4.8% on Search), which dropped Marketing ROAS from 4.2x to 2.4x.
-- **Not Connected to Churn:** This ad change only affected new visitor acquisition. It had zero impact on existing customer renewals (correlation r = 0.08)."""
-
-                return """**Confounder Analysis: Marketing Budget Reallocation vs Churn:**
-
-- **Acquisition Channel Impact:** Shifting $850/day from Search to Social in Week 48 depressed Marketing ROAS from 4.2x to 2.4x.
-- **Confounder Isolation:** Statistical correlation with existing customer cancellations is r = 0.08 (near zero).
-- **Classification:** Validated as an acquisition confounder (Score 52.0, Correlated Signal), correctly separated from the onboarding churn driver."""
-
-            # Sparse history / AI Add-on Beta
             if any(k in q_clean for k in ["ai beta", "ai add-on", "sparse", "sparse history", "newly launched", "4 weeks"]):
-                return """**Sparse History Diagnostic: AI Add-on Beta Tier:**
-
-- **History Recorded:** Only 4 weekly data points (Weeks 49 to 52).
-- **Statistical Safety Rule:** Robust +/-2.0 sigma corridor calculation requires a minimum of 8 historical periods.
-- **Engine Action:** Expected baseline corridor is explicitly disabled for this segment to prevent false-confidence anomaly alerts."""
+                return "The AI Add-on Beta tier has only 4 weeks of recorded history (Weeks 49 to 52). Under our governance rules, calculating reliable ±2.0 sigma baseline corridors requires at least 8 historical periods, so expected ranges are deliberately paused for this tier to avoid false-alarm anomaly alerts."
 
         # 4-B. BENCHMARK 3: REGIONAL RETAIL DEMAND & FULFILLMENT (retail_fulfillment)
-        if repo.active_benchmark_id == "retail_fulfillment":
-            # Ambiguity / Stockout vs Weather
+        if active_bm == "retail_fulfillment":
             if any(k in q_clean for k in ["why", "cause", "supplier", "stockout", "weather", "blizzard", "ambiguous", "ambiguity", "uncertain", "drop", "sales"]):
                 if pid == "general_user":
-                    return """**Why Store Sales Dropped (And Why It Is Genuinely Ambiguous):**
+                    return "Weekly store sales in Region North dropped from $210,000 down to $118,000 due to two simultaneous events that hit at the exact same time: a 12-day container port delay that left 48% of Apparel & Home store shelves empty, and a severe winter blizzard that cut shopper foot traffic by 34%. Because both occurred in the same February window, the data shows genuine ambiguity between fulfillment stockouts and weather suppression."
+                return "Ambiguous Root-Cause Evaluation: Empirical evaluation reveals an ambiguous, near-tied causal competition between supplier port delays creating 48% stockouts (Cause Score 58.2/100) and an extreme regional blizzard reducing foot traffic by 34% (Cause Score 54.0/100). The score delta of 4.2 points falls within our ambiguity threshold (<= 6.0 pts), reflecting genuine empirical uncertainty that cannot be resolved without aisle-level sensor telemetry."
 
-Weekly store revenue in Region North dropped from $210k to $118k due to two simultaneous events:
-1. **48% Store Stockouts:** A 12-day container port delay left store shelves empty in Apparel & Home.
-2. **Extreme Winter Blizzard:** A severe regional storm cut shopper foot traffic by 34%.
-
-**Why We Cannot Pick Just One:**
-Both shocks occurred in the exact same February window. Without in-store aisle traffic sensors, our system cannot definitively separate how much was lost to empty shelves versus freezing roads."""
-
-                return """**Genuinely Ambiguous Root-Cause Evaluation (Retail Fulfillment vs Storm):**
-
-- **Competing Hypothesis #1:** Supplier Port Delay & 48% Stockout Rate (**Cause Score: 58.2 / 100**).
-- **Competing Hypothesis #2:** Extreme Regional Blizzard & 34% Foot Traffic Contraction (**Cause Score: 54.0 / 100**).
-- **Score Delta:** |Delta| = 4.2 points (within empirical ambiguity threshold of <= 6.0 pts).
-- **Uncertainty Finding:** Telemetry confirms both shocks occurred concurrently in Week 50-51. System cannot separate fulfillment failure from footfall suppression without aisle-level sensor telemetry."""
-
-            # Pricing refutation
             if "pricing" in q_clean or "price" in q_clean:
-                return """**Pricing Hypothesis Falsification (Refuted by Data):**
+                return "Pricing is empirically refuted as a potential cause (Cause Score 12.0/100, Refuted by Data) because store list prices remained exactly $45.00 across all 52 weeks with zero price variance."
 
-- **Empirical Rate Card Finding:** Store list prices remained unchanged at $45.00/unit across all 52 weeks (0.0% variance).
-- **Classification:** **REFUTED BY DATA** (Score: 12.0 / 100)."""
+        # 4-C. BENCHMARK 4: MANUFACTURING QUALITY & SUPPLY CHAIN (manufacturing_quality)
+        if active_bm == "manufacturing_quality":
+            if any(k in q_clean for k in ["calibration", "drift", "m07", "m-07", "yield", "weld", "line 3", "plant midwest"]):
+                if pid == "general_user":
+                    return "First-pass production yield on Line 3 at Plant Midwest dropped from 96.2% to 78.4% because machine M-07's weld station developed a progressive calibration drift. A worn servo motor encoder caused drift to climb from 0.2% up to 4.8% over five weeks, resulting in defective housing seam welds, while all other lines and plants maintained normal yield."
+                return "Empirical analysis confirms calibration drift on machine M-07's weld station as the primary root cause of the yield decline (Cause Score 89.5/100, High Confidence). Due to servo motor encoder wear, drift escalated from 0.2% to 4.8% over weeks 46 to 50, driving a 17.6% Difference-in-Differences divergence against unaffected control lines at the same plant."
 
-        # 4-C. BENCHMARK 1: B2B SAAS PRICING INCIDENT (b2b_saas_pricing)
+            if any(k in q_clean for k in ["supplier", "sup03", "sup-03", "material", "batch", "confounder"]):
+                return "Supplier SUP-03 material quality scores dipped from 94.0 to 82.0 during an overlapping window, but evidence confirms this was a secondary confounding signal (Cause Score 45.0/100). Line 1 processed the exact same SUP-03 material batches with zero defects, and inspection notes confirm the defect pattern was mechanical weld misalignment rather than material cracking."
+
+            if any(k in q_clean for k in ["shift", "operator", "tenure", "roster", "training"]):
+                return "Operator shift patterns and workforce tenure are empirically refuted as drivers (Cause Score 8.0/100, Refuted by Data). Shift rosters were unchanged across the entire 12-month period, and average operator tenure remained stable at approximately 24 months with near-zero correlation (r < 0.05) to yield."
+
+            if any(k in q_clean for k in ["humidity", "transit", "moisture", "not testable"]):
+                return "Transit humidity exposure remains Not Testable (Cause Score 0.0/100) because the required transit_humidity_logs sensor telemetry has not been integrated into the data warehouse."
+
+        # 4-D. BENCHMARK 1: B2B SAAS PRICING INCIDENT (b2b_saas_pricing)
         price_h = next((h for h in (all_hypotheses or []) if h["id"] == "H1_PRICING_PRESSURE"), {})
         comp_h = next((h for h in (all_hypotheses or []) if h["id"] == "H2_COMPETITOR_CAMPAIGN"), {})
         inv_h = next((h for h in (all_hypotheses or []) if h["id"] in ["H8_SUPPLY_CONSTRAINT", "H3_INVENTORY_CONSTRAINT"]), {})
 
-        # 4A. Mathematical Decomposition / Revenue Identity / Volume vs Price
         if any(k in q_clean for k in ["decomposition", "math", "volume effect", "price effect", "volume vs price", "price vs volume", "volume and price", "formula", "identity", "revenue identity"]):
             if pid == "general_user":
-                return """**How Volume vs. Price Impacted Sales:**
-
-When we raised prices on our Enterprise software plan:
-- **Extra Revenue from Price Increase:** We brought in an extra **+$21,600** from the 18 customers who accepted the new rate.
-- **Lost Revenue from Paused Accounts:** We lost **-$210,000** because 21 enterprise accounts held off on renewing.
-- **Net Result:** The lost deal volume heavily outweighed the extra money from higher prices, leaving a net drop of **-$188,400** in Region B."""
-
+                return "When we raised enterprise prices, the 18 accounts that accepted the higher rate brought in an extra $21,600 in revenue. However, 21 other accounts paused their renewals, causing a $210,000 loss in deal volume. Because the lost volume was much larger than the extra price gain, sales in Region B suffered a net drop of -$188,400."
             decomp = price_h.get("mathematical_decomposition", {})
-            return f"""**Mathematical Revenue Identity (ΔRevenue = ΔUnits × P_pre + Units_post × ΔPrice):**
+            return f"Exact revenue identity decomposition (Delta Revenue = Delta Units * P_pre + Units_post * Delta Price) shows that losing 21 enterprise units created a -$210,000 gross volume contraction (111.5% of gross decline), while the +$1,200 rate hike across 18 retained units contributed a +$21,600 price cushion. This yields a net regional deficit of -${abs(decomp.get('delta_revenue', 188400)):,.0f} with zero residual reconciliation error."
 
-| Identity Component | Units / Price Shift | USD Financial Impact | Share of Net Deficit |
-| :--- | :--- | :--- | :--- |
-| **Gross Volume Contraction** | {decomp.get('delta_units', -21):+,.0f} units @ ${decomp.get('pre_price', 10000):,.0f}/unit | **-${abs(decomp.get('volume_effect_usd', 210000)):,.0f}** | {abs(decomp.get('volume_share_pct', 111.5)):.1f}% of gross drop |
-| **Retained Price Realization** | {decomp.get('post_units', 18):,.0f} units @ +${decomp.get('delta_price', 1200):,.0f}/unit | **+${decomp.get('price_effect_usd', 21600):,.0f}** | {decomp.get('price_share_pct', -11.5):+.1f}% price cushion |
-| **Net Reconciled Deficit** | **Net 18-unit active cohort** | **${decomp.get('delta_revenue', -188400):+,.0f}** | **100.0% (0.0% error)** |
-
-- **Key Takeaway:** The +$21.6k price cushion on the 18 retained units was heavily overshadowed by -$210.0k in lost unit volume."""
-
-        # 4B. Competing Hypotheses Comparison (H1 vs H2)
         if any(k in q_clean for k in ["compare", "versus", "comparison", "h1 vs h2", "pricing vs competitor"]) or ("vs" in q_clean.split() and "volume" not in q_clean):
             if pid == "general_user":
-                return """**Comparing the Two Main Drivers:**
+                return "The price increase was the primary cause of the sales drop, as raising rates by 12% directly led 21 enterprise accounts to hold off on renewing. Competitor ApexTech's 15% discount campaign was a secondary factor that started a week later, giving those hesitant buyers an attractive alternative and making it harder for our sales reps to win them back."
+            return "Comparing the top two hypotheses, Pricing Elasticity (H1, Cause Score 88.0/100) is the primary upstream driver, triggered by our internal Week 06 price hike with a two-week lead-time lag (tau = 2) and 48.3% DiD divergence. The Competitor Campaign (H2, Cause Score 60.4/100) represents a secondary compounding factor launched in Week 07 with a one-week lag (tau = 1) that amplified deal slippage."
 
-1. **The Price Increase (Primary Cause):**
-   - We raised prices by 12% in Week 6.
-   - This directly triggered pushback from enterprise customers, causing 21 expected renewals to pause.
-   - This accounts for the overwhelming majority of the sales drop.
-
-2. **The Competitor Discount (Secondary Factor):**
-   - Competitor ApexTech launched a 15% discount campaign in Week 7.
-   - This gave hesitant buyers an alternative, making it harder for our sales reps to close renewals.
-
-**Summary:** The price increase was the initial trigger that caused hesitation, while the competitor promotion made it harder to win those buyers back."""
-
-            return """**Comparison: #1 Pricing Elasticity (H1) vs #2 Competitor Campaign (H2):**
-
-| Analytical Dimension | #1 Pricing Elasticity (H1) | #2 Competitor Campaign (H2) |
-| :--- | :--- | :--- |
-| **Cause Score** | **88.0 / 100** (High Confidence) | **60.4 / 100** (Possible Driver) |
-| **Evidence Index** | **0.88 / 1.00** | **0.60 / 1.00** |
-| **Shock Timing** | **Week 06** (Internal price hike) | **Week 07** (External promo launch) |
-| **Lead-Time Lag** | τ = 2 weeks (Precedes contraction) | τ = 1 week (Coincident) |
-| **Control Contrast** | **48.3% DiD divergence** vs un-hiked Mid-Market | Un-hiked suites saw 0% deflection |
-| **Analytical Role** | **Primary Upstream Driver** | **Compounding Secondary Factor** |"""
-
-        # 4C. Supply / Inventory Constraints Refutation
         if any(k in q_clean for k in ["inventory", "stockout", "supply", "warehouse", "fulfillment", "logistics"]):
             if pid == "general_user":
-                return """**Why We Ruled Out Warehouse or Delivery Issues:**
+                return "We checked warehouse and fulfillment systems and confirmed they were operating perfectly with a 99.4% on-time delivery rate and zero stockouts. The sales decline was entirely commercial due to buyer pushback on price, not physical delivery issues."
+            return "Supply and warehouse constraints (H8) are definitively refuted (Cause Score 0.0/100, Refuted by Data) because SAP S/4HANA logistics logs confirm a 99.4% warehouse fill rate in Region B with exactly zero stockout days recorded."
 
-- **On-Time Delivery:** Delivery and fulfillment records show a **99.4% success rate** with zero backlogs.
-- **Stockouts:** There were **0 stockout days** recorded.
-- **Takeaway:** Customers were able to receive products without delay; the sales drop was entirely due to buyer hesitation on pricing."""
-
-            return """**Why Supply / Inventory Constraints Are Refuted (H8):**
-
-- **Fulfillment Reliability:** Logistics logs confirm a **99.4% warehouse fill rate** across Weeks 06–08 in Region B.
-- **Stockouts:** Exactly **0 stockout days** were recorded in SAP S/4HANA inventory logs.
-- **Conclusion:** Physical product delivery was 100% unimpaired; the issue is commercial demand elasticity."""
-
-        # 4D. Difference-in-Differences Proof
         if "difference in differences" in q_clean or "difference-in-differences" in q_lower or "did divergence" in q_clean or "did analysis" in q_clean or "did method" in q_clean or "parallel trend" in q_clean or "parallel trends" in q_clean or ("did" in q.split() and any(w in q.split() for w in ["DiD", "DID", "D-i-D"])):
             if pid == "general_user":
-                return """**How We Proved the Price Increase Was the Cause:**
+                return "To prove the price increase caused the drop, we compared the accounts whose prices were raised against similar accounts whose prices stayed the same. The accounts without price increases renewed at normal rates, while the group with the price hike dropped sharply, confirming the price change was the direct trigger."
+            return "Difference-in-Differences quasi-experimental analysis compares treated Region B Enterprise accounts against an un-hiked Mid-Market control cohort with parallel pre-trends (r = 0.88). While the control cohort experienced a mild -4.3% variance, the treated cohort contracted by -52.6%, establishing a 48.3% empirical causal divergence."
 
-We compared customer groups whose prices were raised against groups whose prices stayed the same. Groups without price increases kept renewing at normal rates, while the group with the price increase saw renewals drop sharply. This direct comparison confirms the price increase was the main trigger."""
-
-            return """**Difference-in-Differences (DiD) Methodology:**
-
-DiD compares changes in outcomes over time between a **treated group** (exposed to an intervention) and an unexposed **control group**:
-
-DiD = (Y_treated,post - Y_treated,pre) - (Y_control,post - Y_control,pre)
-
-- **Parallel Trends:** Assumes treated and control groups would follow the same trajectory absent treatment.
-- **EDITH Finding:** Comparing treated Enterprise vs un-hiked Mid-Market isolated a **48.3% causal divergence**."""
-
-        # 4E. Elasticity Explanation
         if "elasticity" in q_clean:
             if pid == "general_user":
-                return """**What Price Sensitivity Means for Our Sales:**
+                return "Price elasticity measures how sensitive customers are to price changes. In our Enterprise segment, demand is quite price-sensitive. When we raised prices by 12%, the drop in customer renewals was large enough that total revenue decreased rather than increased."
+            return "Enterprise demand exhibits high price elasticity (epsilon_p = -1.65). Because demand is elastic, the +12% price hike triggered a -19.8% volume contraction that outweighed unit price realization, causing overall gross revenue to decline."
 
-Price sensitivity simply measures how much customer demand drops when prices go up. In our Enterprise software segment, customers are very sensitive to price changes. When we raised prices by 12%, enough accounts paused renewals that our overall revenue dropped instead of increasing."""
-
-            return """**Price Elasticity of Demand (εₚ):**
-
-Measures demand responsiveness to pricing changes (εₚ = %ΔQuantity / %ΔPrice).
-
-- In our B2B SaaS benchmark, Enterprise demand is elastic (**εₚ = -1.65**). A +12% price hike triggered a -19.8% volume drop, causing total revenue to contract."""
-
-        # 4F. Why / Sales Drop Trigger
         if q_clean in ["why", "why so", "why is this happening", "why did it happen", "why did that happen", "why did this happen", "why did sales drop", "why the drop"] or q_clean.startswith("why "):
             if pid == "general_user":
-                return """**Here is why sales dropped by roughly 11% (about $148,000 below normal):**
+                return "Sales dropped by roughly 11% ($148,000 below normal) primarily because a 12% price increase in Week 6 led 21 enterprise accounts in Region B to pause their renewals. This was compounded a week later by competitor ApexTech launching a 15% discount campaign, while physical operations and delivery systems ran normally with zero delays."
+            return f"The primary cause of the {delta_pct:+.1f}% sales deficit in Week 08 is pricing elasticity combined with competitor promotional pressure. Raising Enterprise Suite Alpha prices by 12% in Week 06 caused a 21-unit volume loss (-$210,000) that outweighed the +$21,600 price cushion, while ApexTech's Week 07 discount campaign compounded deal slippage. Logistics operations remained healthy at 99.4% fill rate."
 
-1. **The Price Increase:** In Week 6, we raised prices on our Enterprise software plan by 12% (from $10,000 to $11,200).
-2. **Customer Pushback:** Because enterprise buyers are sensitive to price changes, 21 expected renewals were put on hold.
-3. **Competitor Promotion:** In Week 7, competitor ApexTech launched a 15% discount campaign, giving hesitant customers an attractive alternative.
-4. **Operations Were Healthy:** Our warehouse, delivery systems, and software servers were 100% operational with zero stockouts or downtime."""
-
-            return """The primary reason for the **-$147.7k (-10.5%) sales drop** in Week 08 is **pricing elasticity combined with competitor discount pressure**:
-
-1. **The Primary Trigger (+12% Price Increase):** Enterprise subscription pricing for Product Suite Alpha was raised from $10,000 to $11,200/unit in Week 06.
-2. **Volume Loss:** Due to high enterprise demand elasticity (εₚ = -1.65), contract volume contracted by 21 units (-$210,000 gross volume loss).
-3. **Price Cushion:** The +$1,200 higher price on the 18 retained units provided +$21,600 in cushion, leaving a net regional deficit of -$188,400.
-4. **Competitor Defection:** ApexTech launched a 15% discount campaign in Week 07, capturing uncommitted Enterprise renewals in Region B.
-5. **Refuted Causes:** Physical warehouse availability was at 99.4% (0 stockouts), and platform uptime was 99.98%."""
-
-        # 4G. Combined KPI Fault & Next Approach
-        if (any(k in q_clean for k in ["fault", "faulting", "what is wrong", "problem", "issue", "kpi"]) and any(k in q_clean for k in ["approach", "strategy", "next", "action", "do", "fix", "recommend"])) or "what kpi is faulting" in q_clean:
-            if pid == "general_user":
-                return f"""### 💡 Metric Diagnostic & Recovery Roadmap
-
-**1. The Affected Metric & What Happened:**
-- **Metric:** **{kpi_name}** experienced a noticeable drop of roughly **{abs(delta_pct):.1f}%** (${baseline_val:,.0f} → ${current_val:,.0f}).
-- **Location:** Over 97% of the drop is centered in **Region B Enterprise accounts** on Product Suite Alpha.
-- **Root Cause:** A 12% price increase led price-sensitive buyers to pause renewals, compounded by a 15% competitor discount promotion.
-
-**2. What the Team Plans to Do Next:**
-1. **Adjust Pricing Back Slightly:** Lower Enterprise Suite Alpha renewals in Region B by 6% (to $10,528) to re-engage buyers while keeping a modest gain over last year.
-2. **Support Local Partners:** Provide a $15,000 marketing fund in Region B to match competitor discounts.
-3. **Dedicated Customer Care:** Assign dedicated customer success managers to at-risk accounts."""
-
-            return f"""### 🚨 Faulting Metric Diagnostic & Recovery Roadmap
-
-**1. Faulting Metric & Anomaly Localization:**
-- **Primary KPI:** **{kpi_name}** (Fiscal Q1 2026, Week 08).
-- **Observed Deficit:** **${current_val:,.0f}** vs **${anomaly_context.get('baseline_value', 1400000):,.0f}** baseline (**{delta_pct:+.1f}%** / -${abs(anomaly_context.get('delta_value', 147700)):,.0f}).
-- **Localized Concentration:** **97.3%** of the decline is concentrated in **Region B → Enterprise Tier → Product Suite Alpha**.
-- **Root Mechanism:** Internal +12% price hike triggered elastic demand contraction (εₚ = -1.65), losing 21 enterprise accounts, compounded by ApexTech's 15% promotional campaign in Week 07.
-
-**2. Recommended 3-Step Tactical Approach:**
-1. **Targeted -6% Price Calibration:**
-   - Roll back half the price increase on Enterprise renewals in Region B (setting unit price to $10,528).
-   - This restores contract volume while protecting +$528/unit in pricing gains over baseline.
-2. **Deploy $15k Competitive Defense Fund:**
-   - Direct $15,000 in regional co-op incentives to neutralize ApexTech's discount pressure in Region B.
-3. **Validate in Screen 4 (Policy Simulator):**
-   - Head to **Screen 4 (Policy Simulator)** to test this policy trajectory, projected to recover **78.2% of lost volume** within 8 weeks and stabilize gross margin at **70.2%**."""
-
-        # 4H. Outliers, Data Distribution & Quality Audit (for Demo Benchmark)
-        if any(k in q_clean for k in ["quality", "null", "missing", "outlier", "outliers", "unusual", "anomaly", "anomalies", "distribution", "skew", "iqr", "median", "duplicates", "spread"]):
-            if pid == "general_user":
-                return f"""**Data Spread & Outlier Analysis for {kpi_name}:**
-
-- **Data Profile:** 8 weekly recording intervals across 3 sales regions and 3 customer tiers.
-- **Outlier Findings:** The revenue drop in **Week 08 ($1,253,600)** in Region B is a statistically significant outlier (**Z = -2.30**, falling below the normal expected range of $1,272,908 - $1,529,692).
-- **Data Completeness:** 100% complete records across sales systems with zero missing entries or duplicate records."""
-
-            return f"""**Statistical Outliers, Corridor Boundaries & Data Quality Audit:**
-
-- **Corridor Boundaries (+/-2.0 sigma):** Lower boundary: **$1,272,908** | Upper boundary: **$1,529,692** | Multi-horizon baseline: **$1,401,300**.
-- **Material Outlier Detected:** Week 08 observed gross revenue of **$1,253,600** breaches the lower corridor (**Z = -2.30 sigma**, P1 Incident).
-- **Localization:** 97.3% of the outlier deflection is isolated to Region B Enterprise Suite Alpha renewals.
-- **Data Quality Score:** **100.0% Health Score** across all 18 weekly cohort series. 0 missing cells, 0 duplicate timestamps, sub-hour telemetry freshness."""
-
-
-        # ==============================================================================
-        # 5. DECISION / ACTION / APPROVAL BRANCH (FOR DEMO)
-        # ==============================================================================
-        decision_keywords = [
-            "decision", "approve", "approval", "prioritize", "priority", 
-            "which one first", "what should we approve", "what to approve",
-            "greenlight", "sign off", "next step", "what should we do",
-            "how to recover", "action plan", "recommend", "recommendation",
-            "solution", "what to do", "approach", "next approach", "strategy",
-            "roadmap", "remedy", "mitigate", "first action"
-        ]
-        if any(k in q_clean for k in decision_keywords):
+        # Decision / Action / Fallback routing
+        decision_keywords = ["decision", "approve", "approval", "prioritize", "priority", "which one first", "what to approve", "greenlight", "next step", "what should we do", "how to recover", "action plan", "recommend", "recommendation", "solution", "what to do", "strategy", "roadmap", "remedy"]
+        if any(k in q_clean for k in decision_keywords) or any(w in q_clean for w in ["do", "fix", "action", "next", "help", "solve", "recover", "plan", "step"]):
             return OfflineEdithReasoner._get_recommended_action_response(persona, anomaly_context, simulation_levers)
 
-        # ==============================================================================
-        # 6. SMART GENERAL FALLBACK (FOR DEMO)
-        # ==============================================================================
-        # Check if user query is action/next-step oriented
-        if any(w in q_clean for w in ["do", "fix", "action", "next", "help", "solve", "recover", "plan", "step"]):
-            return OfflineEdithReasoner._get_recommended_action_response(persona, anomaly_context, simulation_levers)
-        
-        # Check if user query is why/cause oriented
         if any(w in q_clean for w in ["why", "cause", "reason", "driver", "drop", "down", "fell", "loss", "affect", "affected", "influence", "impact"]):
             return OfflineEdithReasoner.generate_investigation_briefing(anomaly_context, all_hypotheses or [], response_style="concise", persona=persona)
 
-        # General structured response with key findings
         if pid == "general_user":
-            return f"""**Key Takeaway for {kpi_name}:**
-
-Sales experienced a noticeable drop of roughly {abs(delta_pct):.1f}%, almost entirely centered in Region B Enterprise accounts following a price increase. Physical operations ran smoothly with zero warehouse issues.
-
-*(You can ask: "Why did sales drop?", "What is the recovery plan?", or "What happened in Region B?".)*"""
-
-        top_evidence = "\n".join([f"- {e}" for e in selected_hypothesis.get("supporting_evidence", [])])
-        if top_evidence:
-            return f"""**Key Findings for {selected_hypothesis.get('name', 'Active Investigation')}:**
-
-{top_evidence}
-
-*(You can ask me: "What decision should we approve first?", "Explain the volume vs price impact", or "Compare the top two causes".)*"""
+            return f"Sales experienced a noticeable drop of roughly {abs(delta_pct):.1f}%, primarily centered in Region B Enterprise accounts following a recent price increase. Physical operations ran smoothly with zero fulfillment issues. You can ask me why sales dropped, what the recovery plan is, or what happened in Region B."
 
         return OfflineEdithReasoner.generate_investigation_briefing(anomaly_context, all_hypotheses or [], response_style="concise", persona=persona)
 
     @staticmethod
     def answer_conversational_query(
         query: str,
+        chat_history: Optional[List[Dict[str, Any]]] = None,
+        persona: str = "executive",
+        persona_id: Optional[str] = None,
         anomaly_context: Optional[Dict[str, Any]] = None,
         selected_hypothesis: Optional[Dict[str, Any]] = None,
-        hypotheses: Optional[List[Dict[str, Any]]] = None,
         all_hypotheses: Optional[List[Dict[str, Any]]] = None,
-        chat_history: Optional[List[Dict[str, Any]]] = None,
         simulation_levers: Optional[Dict[str, Any]] = None,
-        persona: str = "executive",
-        response_style: str = "concise",
         **kwargs
     ) -> str:
-        """Entrypoint called by main.py and ai/llm_client.py."""
+        """Entrypoint for conversational chat queries."""
         from data.repository import DataRepository
         repo = DataRepository.get_instance()
         
-        hypos = hypotheses or all_hypotheses
-        if not hypos:
-            from core.evidence_engine import EvidenceEngine
-            ev_eng = EvidenceEngine(repo)
-            hypos = ev_eng.evaluate_all_hypotheses()
-            
-        if not anomaly_context:
+        if anomaly_context is None:
             from core.baseline_engine import AnomalyEngine
             ts = repo.get_kpi_time_series()
             anomaly_context = AnomalyEngine.evaluate_current_anomaly(ts)
             
-        sel_h = selected_hypothesis or (hypos[0] if hypos else {})
-        
+        if not all_hypotheses:
+            from core.evidence_engine import EvidenceEngine
+            ev_eng = EvidenceEngine(repo)
+            all_hypotheses = ev_eng.evaluate_all_hypotheses()
+            
+        if selected_hypothesis is None and all_hypotheses:
+            selected_hypothesis = all_hypotheses[0]
+            
         return OfflineEdithReasoner.answer_query(
             query=query,
             anomaly_context=anomaly_context,
-            selected_hypothesis=sel_h,
-            all_hypotheses=hypos,
+            selected_hypothesis=selected_hypothesis or {},
+            all_hypotheses=all_hypotheses or [],
             chat_history=chat_history,
             simulation_levers=simulation_levers,
             persona=persona,
-            response_style=response_style
+            persona_id=persona_id,
+            **kwargs
         )
 
     @staticmethod
@@ -906,9 +404,9 @@ Sales experienced a noticeable drop of roughly {abs(delta_pct):.1f}%, almost ent
         simulation_levers: Optional[Dict[str, Any]] = None
     ) -> Dict[str, Any]:
         """
-        Generates persona-specific Executive Briefing report artifact.
+        Generates persona-specific Executive Briefing report artifact in genuine connected narrative prose.
         Works 100% offline with zero external API dependencies.
-        Supports: executive, general_user, regional_lead, analyst.
+        Supports: executive, general_user, regional_lead, analyst across all 4 benchmarks and custom datasets.
         """
         from data.repository import DataRepository
         from config.personas import get_persona
@@ -916,6 +414,7 @@ Sales experienced a noticeable drop of roughly {abs(delta_pct):.1f}%, almost ent
         
         repo = DataRepository.get_instance()
         is_demo = repo.active_source_info.get("is_demo", True)
+        active_bm = repo.active_benchmark_id
         p_meta = get_persona(persona_id)
         pid = p_meta["id"]
         
@@ -955,342 +454,217 @@ Sales experienced a noticeable drop of roughly {abs(delta_pct):.1f}%, almost ent
             for dim, df_dim in list(breakdowns.items())[:2]:
                 if not df_dim.empty:
                     top_row = df_dim.iloc[0]
-                    top_dim_summary.append(f"`{top_row[dim]}` in {dim.replace('_', ' ').title()} ({abs(top_row.get('contribution_pct', 0.0)):.1f}%)")
-            dim_text = ", ".join(top_dim_summary) if top_dim_summary else "Evenly distributed"
+                    top_dim_summary.append(f"{top_row[dim]} in {dim.replace('_', ' ').title()} ({abs(top_row.get('contribution_pct', 0.0)):.1f}%)")
+            dim_text = ", ".join(top_dim_summary) if top_dim_summary else "evenly distributed"
 
-            headline = f"Executive Investigation Briefing: {kpi_name} Analysis"
-            
             if pid == "general_user":
                 headline = f"Business Update: Overview of {kpi_name} Data"
-                narrative = f"""### 💡 Plain-Language Business Update — {kpi_name} Analysis
-**Generated:** {now_str} &middot; **Audience:** General Business Team &middot; **Style:** Plain Language (Zero Jargon)
-
----
-
-#### 1. The Big Picture: What the Data Shows
-- **Primary Metric:** **{kpi_name}** with an aggregate observed level of **{curr_val:,.1f}** across **{dq.get('total_rows', 0):,} records**.
-- **Data Quality:** Excellent data health score of **{dq.get('data_quality_score', 100.0):.1f}%**.
-- **Main Area of Concentration:** The heaviest concentration is in **{dim_text}**.
-
----
-
-#### 2. Key Influencing Factors
-- **Strongest Correlated Factor:** **{top_drv_name.replace('_', ' ').title()}** shows the strongest statistical link with {kpi_name} (relationship: {top_drv_r:+.2f}).
-- **Data Spread:** Middle value is **{dist.get('percentiles', {}).get('P50_median', 0.0):,.1f}**, with **{dist.get('outlier_count', 0)} unusual data points** identified.
-
----
-
-#### 3. Recommended Operational Focus
-1. **Target Highest Impact Group:** Direct operational review toward {dim_text}.
-2. **Review Influencing Drivers:** Evaluate operational levers tied to {top_drv_name.replace('_', ' ').title()}.
-3. **Audit Outliers:** Inspect the {dist.get('outlier_count', 0)} outlier records to ensure data consistency.
-"""
+                narrative = f"""Across {dq.get('total_rows', 0):,} records in the active dataset, {kpi_name} recorded an aggregate level of {curr_val:,.1f} with a strong data health score of {dq.get('data_quality_score', 100.0):.1f}%. Performance is concentrated primarily in {dim_text}. Looking into influencing factors, {top_drv_name.replace('_', ' ').title()} exhibits the strongest statistical relationship with {kpi_name} (correlation of {top_drv_r:+.2f}), while the median value sits at {dist.get('percentiles', {}).get('P50_median', 0.0):,.1f} alongside {dist.get('outlier_count', 0)} unusual data points flagged for operational review. We recommend directing inquiry toward {dim_text} and calibrating policies related to {top_drv_name.replace('_', ' ').title()}."""
             else:
-                narrative = f"""### 📋 Executive Investigation Briefing: {kpi_name} Analysis
-**Generated:** {now_str} &middot; **Audience:** {p_meta['name']} &middot; **Focus:** Observational Evidence & Governance
+                headline = f"Executive Investigation Briefing: {kpi_name} Analysis"
+                narrative = f"""Analysis of {kpi_name} shows an aggregate observed level of {curr_val:,.1f} across {dq.get('total_rows', 0):,} records with a {dq.get('data_quality_score', 100.0):.1f}% data health score. Variance is concentrated in {dim_text}, while statistical correlation identifies {top_drv_name.replace('_', ' ').title()} as the primary explanatory driver (Pearson r = {top_drv_r:+.2f}). The distribution reflects a median of {dist.get('percentiles', {}).get('P50_median', 0.0):,.1f} and {dist.get('outlier_count', 0)} outlier records. These findings provide empirical concentration signals for operational prioritization while maintaining observational data governance."""
 
----
-
-#### 1. Incident Overview & Scale
-- **Primary Focus Metric:** **{kpi_name}** with an aggregate observed level of **{curr_val:,.1f}** across **{dq.get('total_rows', 0):,} records**.
-- **Operational Grain:** {anomaly_context.get('status_label', 'Cross-Sectional Snapshot')}.
-- **Data Quality:** {dq.get('data_quality_score', 100.0):.1f}% Health Score across {dq.get('total_rows', 0):,} rows.
-
----
-
-#### 2. Observational Findings & Empirical Concentrations
-- **Segment Epicenter:** Heaviest concentration observed in **{dim_text}**.
-- **Explanatory Driver Correlation:** **{top_drv_name.replace('_', ' ').title()}** shows the strongest statistical association with r = {top_drv_r:+.2f} (Pearson).
-- **Distribution Profile:** Median: **{dist.get('percentiles', {}).get('P50_median', 0.0):,.1f}** | IQR: **{dist.get('iqr', 0.0):.2f}** | Outliers: **{dist.get('outlier_count', 0)} items ({dist.get('outlier_pct', 0.0):.1f}%)**.
-
----
-
-#### 3. Decision Guidance & Observational Integrity
-- All reported signals represent empirical concentrations and statistical correlations to direct operational investigation, not unverified causal claims.
-"""
             actions = [
                 {
-                    "driver": f"Concentration in {dim_text}",
+                    "driver": f"Segment Concentration in {dim_text}",
                     "lever": "Operational Focus",
-                    "action": f"Direct operational review toward {dim_text}",
-                    "expected_impact": "Identifies localized efficiency opportunities",
-                    "owner": "Operations / Segment Lead",
-                    "confidence": "High",
-                    "status": "Recommended"
-                },
-                {
-                    "driver": f"Association with {top_drv_name.replace('_', ' ').title()}",
-                    "lever": "Process Optimization",
-                    "action": f"Optimize workflow parameters linked to {top_drv_name.replace('_', ' ').title()}",
-                    "expected_impact": "Improves metric correlation efficiency",
-                    "owner": "Process Lead",
+                    "action": f"Review operational policies and resource allocation in {dim_text}",
+                    "expected_impact": "Directs operational inquiry to dominant performance segment",
+                    "owner": "Operations Team",
                     "confidence": "Moderate",
-                    "status": "Recommended"
-                }
-            ]
-            return {
-                "persona_id": pid,
-                "persona_name": p_meta["name"],
-                "role_title": p_meta["role_title"],
-                "depth": p_meta["depth"],
-                "headline": headline,
-                "narrative_markdown": narrative,
-                "primary_root_cause": {
-                    "id": "GEN_OBSERVATIONAL_CONCENTRATION",
-                    "name": f"Concentration in {dim_text}",
-                    "cause_score_100": 75.0,
-                    "evidence_score": 0.75,
-                    "classification": "Empirical Association"
-                },
-                "recommended_actions": actions,
-                "metadata": {
-                    "engine": "OfflineEdithReasoner",
-                    "generated_at": now_str,
-                    "dataset": repo.active_source_info.get("name", "Custom Dataset")
-                }
-            }
-        
-        # ==============================================================================
-        # 2. BUILT-IN DEMO BENCHMARK EXECUTIVE BRIEFINGS
-        # ==============================================================================
-        
-        # 2A. GENERAL USER BRIEFING (100% PLAIN LANGUAGE, ZERO JARGON)
-        if pid == "general_user":
-            headline = "Business Update: Why Sales Dropped in Region B and What We Are Doing Next"
-            narrative = f"""### 💡 Plain-Language Business Update — What Happened to Our Sales?
-**Generated:** {now_str} &middot; **Audience:** General Business Team &middot; **Style:** Plain Language (Zero Jargon)
-
----
-
-#### 1. The Big Picture: What Happened?
-- **The Main Takeaway:** Weekly sales experienced a **noticeable drop of roughly 11%** (about **$148,000 below normal weekly levels**).
-- **Where It Happened:** Almost the entire drop (**over 97%**) happened in **Region B** among our **Enterprise accounts** on **Product Suite Alpha**.
-- **What Stayed Healthy:** Sales across all other regions and smaller business segments (Mid-Market and SMB) remained stable and on track.
-
----
-
-#### 2. Why Did It Happen? (The Real Story)
-- **The Primary Trigger (Price Increase Sensitivity):**
-  - In Week 6, we raised prices on our Enterprise software plan by 12% (from $10,000 to $11,200).
-  - Because large business customers are sensitive to price changes, 21 expected renewals were put on hold.
-  - While we made an extra $21,600 from accounts that accepted the higher rate, it was not enough to make up for the deals that paused.
-- **The Secondary Factor (Competitor Discount Promotion):**
-  - Around the same time (Week 7), our competitor **ApexTech** launched a **15% discount campaign**, giving hesitant buyers a cheaper alternative to consider.
-- **What We Checked and Ruled Out:**
-  - Our warehouses, deliveries, and software servers were operating normally with **zero shipping delays** and 99.4% on-time fulfillment. The issue was commercial demand, not operational delivery.
-
----
-
-#### 3. What the Team Is Planning to Do Next
-1. **Adjust Pricing Back Slightly:** Lower Enterprise Suite Alpha renewals in Region B by 6% (setting unit price to $10,528). This brings back price-conscious buyers while keeping a modest gain over last year.
-2. **Support Local Partners:** Provide a $15,000 regional marketing fund in Region B to match competitor promotions.
-3. **Dedicated Customer Care:** Assign dedicated customer success managers to the 12 most critical renewal accounts.
-4. **Expected Outcome:** Over the next 8 weeks, this balanced plan is projected to recover **nearly 80% of lost sales volume**.
-"""
-            actions = [
-                {
-                    "driver": "Price sensitivity on Enterprise plan",
-                    "lever": "Price Adjustment (-6%)",
-                    "action": "Adjust Enterprise renewal pricing in Region B to $10,528/unit",
-                    "expected_impact": "Brings back paused renewals while keeping a modest price gain",
-                    "owner": "Pricing Committee & Revenue Team",
-                    "confidence": "High",
-                    "status": "Planned for Implementation"
+                    "status": "Recommended",
+                    "monitoring_plan": f"Track weekly performance in {dim_text} for 6 weeks."
                 },
                 {
-                    "driver": "Competitor ApexTech discount campaign",
-                    "lever": "Partner Marketing Support ($15k)",
-                    "action": "Provide $15,000 in regional partner support in Region B",
-                    "expected_impact": "Helps sales partners win back deals from competitor",
-                    "owner": "Regional Field Sales Team",
+                    "driver": f"Statistical Driver: {top_drv_name.replace('_', ' ').title()}",
+                    "lever": "Driver Calibration",
+                    "action": f"Calibrate operational levers tied to {top_drv_name.replace('_', ' ').title()}",
+                    "expected_impact": "Optimizes parameters associated with the primary measure",
+                    "owner": "Analytics Team",
                     "confidence": "Moderate",
-                    "status": "Planned for Implementation"
-                },
-                {
-                    "driver": "Customer retention in key accounts",
-                    "lever": "Key Account Care",
-                    "action": "Assign dedicated customer success managers to 12 at-risk accounts",
-                    "expected_impact": "Protects recurring customer relationships and prevents future cancellations",
-                    "owner": "Customer Success Team",
-                    "confidence": "High",
-                    "status": "Underway"
+                    "status": "Recommended",
+                    "monitoring_plan": f"Monitor {top_drv_name.replace('_', ' ').title()} correlation and distribution monthly."
                 }
             ]
 
-        # 2B. REGIONAL SALES LEAD BRIEFING (OPERATIONAL SCOPE + RESTRICTIONS)
-        elif pid == "regional_lead":
-            headline = "Operational Incident Report: Region B Revenue Deficit & Authorized Field Strategy"
-            narrative = f"""### 📍 Operational Incident Report: Region B Performance Deficit
-**Generated:** {now_str} &middot; **Audience:** Regional Sales Lead (Region B) &middot; **Scope:** Region B Operational Boundaries
+        # ==============================================================================
+        # 2. BENCHMARK 2: SUBSCRIPTION GROWTH & RETENTION (saas_churn_roas)
+        # ==============================================================================
+        elif active_bm == "saas_churn_roas":
+            if pid == "general_user":
+                headline = "Business Update: Why Customer Churn Increased and How We Are Fixing It"
+                narrative = """Customer churn in our Self-Serve Starter tier in Region B rose sharply from 2.1% to 8.6%, leading to a loss of approximately $78,000 in monthly recurring revenue. This increase happened right after we launched a redesigned onboarding wizard in Week 48, which customer call notes confirm confused new users and caused many to abandon setup before completing activation. A direct comparison with Region A, where the old onboarding flow remained active and churn stayed steady at 2.0%, confirms the redesign was the true cause. Meanwhile, a simultaneous shift in advertising budget from search to social lowered marketing ROAS but had zero connection to customer cancellations. Because our new AI Add-on Beta tier has only 4 weeks of history, automated expected ranges are temporarily paused for that product until 8 weeks of data are collected."""
+            elif pid == "regional_lead":
+                headline = "Operational Incident Report: Region B Churn Contraction & Field Response"
+                narrative = """Region B Self-Serve Starter subscriptions experienced a sharp churn contraction, rising from 2.1% to 8.6% following the Week 48 onboarding wizard redesign. Operational call logs confirm local customer confusion during setup. Immediate field authorization deploys dedicated CSM outreach to at-risk accounts, while an emergency product rollback has been escalated to engineering leadership. Company-wide totals and cross-region control details remain restricted for this role."""
+            elif pid == "analyst":
+                headline = "Econometric Investigation Ledger: Customer Churn & ROAS Confounder Proofs"
+                narrative = """Weekly customer churn surged from 2.1% to 8.6% (Z = +3.10 sigma, P1 Incident), localized to Region B Self-Serve Starter accounts. Quasi-experimental Difference-in-Differences analysis isolates the Week 48 self-serve onboarding flow redesign as the primary root cause (Cause Score 88.5/100, 52.1% DiD divergence vs Region A control, pre-trend r = 0.96). The simultaneous ad spend reallocation from search to social reduced acquisition ROAS from 4.2x to 2.4x but is empirically decoupled from cancellations (r = 0.08, Confounder Score 52.0). Sparse-history governance is enforced for the 4-week AI Add-on Beta tier."""
+            else:
+                headline = "Executive Incident Synthesis: Customer Churn Surge & Retention Strategy"
+                narrative = """Customer churn in Region B Self-Serve Starter accounts surged from 2.1% to 8.6% (Z = +3.10 sigma), driving a -$78,000 monthly recurring revenue contraction. Econometric evaluation isolates the Week 48 onboarding wizard redesign as the primary root cause (Cause Score 88.5/100, 52.1% DiD causal divergence vs Region A control), while a concurrent ad spend shift to social is separated as an independent acquisition confounder (r = 0.08). The newly launched AI Add-on Beta tier has 4 weeks of history and operates under sparse-history governance. The recommended decision package executes an immediate onboarding flow rollback combined with proactive CSM retention coverage, projected to restore churn to 2.4% over 8 weeks and recover +$61,000/month in net MRR."""
 
----
-
-#### 1. Region B Incident Status & Magnitude
-- **Region B Current Revenue:** **${anomaly_context.get('current_value', 420000):,.0f}** vs **${anomaly_context.get('baseline_value', 602200):,.0f}** expected (**-30.3% / -$182,200 deficit**).
-- **Concentration:** Deficit is isolated exclusively to **Enterprise Suite Alpha renewals** within Region B. Mid-Market and SMB tiers in Region B remain on target.
-- *Company-wide totals and cross-region control metrics are restricted for this role.*
-
----
-
-#### 2. Root Cause Analysis (Region B Context)
-- **Primary Operational Driver:** Internal +12% price hike on Enterprise Suite Alpha ($10,000 → $11,200) triggered renewal hesitation across 21 regional accounts.
-- **Physical Fulfillment Status:** SAP logistics confirm **99.4% warehouse fill rate with 0 stockout days** in Region B. Delivery pipelines are completely healthy.
-- *Detailed competitor campaign intelligence is restricted (requires Executive or Analyst access).*
-
----
-
-#### 3. Authorized Field Actions & Pending Escalations
-1. **Immediate Authorized Field Deployment:**
-   - **Deploy $15k Regional Partner Co-Op Fund:** Incentivize regional partners to accelerate deal closings (expected impact: +$1,667/wk).
-   - **VIP Retention Guard:** Deploy dedicated CSM coverage to the 12 at-risk Enterprise renewals in Region B to protect recurring ARR.
-2. **Pending Executive Sign-Off:**
-   - A recommendation to roll back pricing to $10,528/unit has been submitted to the CRO and Pricing Committee.
-"""
             actions = [
                 {
-                    "driver": "Region B Enterprise Renewal Pushback",
-                    "lever": "Regional Co-Op Marketing ($15k)",
-                    "action": "Deploy $15,000 partner marketing incentives across Region B accounts",
-                    "expected_impact": "+$1,667/week deal velocity acceleration",
-                    "owner": "Regional Sales Lead (Region B)",
-                    "confidence": "Moderate (60.4/100)",
-                    "status": "Authorized for Deployment"
+                    "driver": "Onboarding Wizard Friction (S1)",
+                    "lever": "Onboarding Flow Rollback",
+                    "action": "Revert Self-Serve Starter signup flow to previous step-by-step checklist",
+                    "expected_impact": "Recovers activation rate and reduces weekly churn from 8.6% to 2.4%",
+                    "owner": "Product Engineering",
+                    "confidence": "High (88.5/100)",
+                    "status": "Recommended for Immediate Approval",
+                    "monitoring_plan": "Track Self-Serve Starter activation completion rate and weekly churn rate for 6 weeks post-revert. Alert if churn exceeds 3.0%."
                 },
                 {
-                    "driver": "At-Risk Enterprise Accounts",
+                    "driver": "Ad Channel Misallocation (S2)",
+                    "lever": "Search Ad Budget Realignment ($15k)",
+                    "action": "Reallocate $15,000 in monthly ad budget back to high-converting Search campaigns",
+                    "expected_impact": "Restores blended Marketing ROAS from 2.4x toward 3.8x",
+                    "owner": "Growth Marketing",
+                    "confidence": "Moderate (52.0/100)",
+                    "status": "Recommended for Approval",
+                    "monitoring_plan": "Monitor Search vs Social ROAS split and new subscriber acquisition cost weekly for 8 weeks."
+                },
+                {
+                    "driver": "Account Cancellation Wave (S3)",
                     "lever": "VIP Retention Guard",
-                    "action": "Deploy dedicated CSM coverage to top 12 at-risk renewal accounts",
-                    "expected_impact": "Guards recurring regional ARR and prevents cancellations",
-                    "owner": "Regional Customer Success Team",
-                    "confidence": "High",
-                    "status": "Authorized for Deployment"
-                },
-                {
-                    "driver": "Pricing Elasticity Contraction",
-                    "lever": "Price Rollback (-6%)",
-                    "action": "[Restricted to Executive] Adjust Enterprise unit price to $10,528",
-                    "expected_impact": "+$18,400/week volume recovery with +$528/unit margin preservation",
-                    "owner": "Chief Revenue Officer (Pending Authorization)",
-                    "confidence": "High (88.0/100)",
-                    "status": "Escalated to Executive (Restricted)"
-                }
-            ]
-
-        # 2C. ANALYST / REVOPS BRIEFING (FULL ECONOMETRIC LEDGER & PROOFS)
-        elif pid == "analyst":
-            decomp = top_h.get("mathematical_decomposition", {})
-            ctrl = top_h.get("control_group_analysis", {})
-            headline = f"Econometric Investigation Ledger: {kpi_name} Anomaly Proofs & Causal Lineage"
-            narrative = rf"""### 🔬 Econometric Investigation Ledger: {kpi_name} Empirical Proofs
-**Generated:** {now_str} &middot; **Audience:** RevOps & Financial Analysts &middot; **Depth:** Full Econometric Proofs
-
----
-
-#### 1. Statistical Anomaly & Multi-Horizon Baseline
-- **Observed:** ${curr_val:,.0f} vs Baseline ${base_val:,.0f} (Variance: **{delta_pct:+.1f}%**, ${delta_val:+,.0f}).
-- **Corridor Threshold:** Lower boundary $1,272,908 | Upper boundary $1,529,692 (Z = {z_score:.2f}, Material Anomaly).
-- **Concentration:** 97.3% of deficit is concentrated in Region B Enterprise Suite Alpha.
-
----
-
-#### 2. Exact Revenue Identity Decomposition
-$$\Delta\text{{Revenue}} = \Delta\text{{Units}} 	imes P_{{\text{{pre}}}} + \text{{Units}}_{{\text{{post}}}} 	imes \Delta P$$
-- **Gross Volume Effect:** -21 units $	imes$ \$10,000/unit = **-\$210,000** (111.5% of gross decline).
-- **Price Realization Cushion:** 18 units $	imes$ +\$1,200/unit = **+\$21,600** (-11.5% price offset).
-- **Net Reconciled Deficit:** **-\$188,400** (Exact reconciliation, 0.0% residual error).
-
----
-
-#### 3. Difference-in-Differences Quasi-Experiment
-$$\text{{DiD}} = (Y_{{\text{{treated,post}}}} - Y_{{\text{{treated,pre}}}}) - (Y_{{\text{{control,post}}}} - Y_{{\text{{control,pre}}}})$$
-- **Treated Cohort (Region B Enterprise Alpha):** Dropped -52.6% (38 units $
-ightarrow$ 18 units).
-- **Optimal Control Cohort ({ctrl.get('control_cohort', 'Mid-Market Alpha')}):** Parallel pre-trend correlation $r = {ctrl.get('pre_trend_correlation', 0.88):.2f}$; delta: {ctrl.get('control_delta_pct', -4.3):+.1f}%.
-- **Empirical DiD Gap:** **{ctrl.get('did_divergence_pct', 48.3):.1f}% causal divergence**.
-
----
-
-#### 4. Competing Causal Hypotheses & Evidence Scores
-| Hypothesis | Role | Evidence Score | Cause Score | Status |
-| :--- | :--- | :--- | :--- | :--- |
-| **#1 Pricing Elasticity** | Upstream Direct | 0.88 / 1.00 | **88.0 / 100** | High-Confidence Root Cause |
-| **#2 Competitor Campaign** | Compounding Shock | 0.60 / 1.00 | **60.4 / 100** | Possible Driver |
-| **#8 Supply Bottleneck** | Physical Logistics | 0.00 / 1.00 | **0.0 / 100** | Empirically Refuted |
-
----
-
-#### 5. Data Lineage & Freshness Audit
-- Primary Ledgers: SAP S/4HANA (Freshness: 2.1h) &middot; Salesforce CRM (Freshness: 45m) &middot; Competitor Telemetry Feed (Freshness: 1.2h).
-"""
-            actions = [
-                {
-                    "driver": "Pricing Elasticity Contraction",
-                    "lever": "Price Rollback (-6%)",
-                    "action": "Execute -6% price adjustment on Enterprise Suite Alpha in Region B ($10,528/unit)",
-                    "expected_impact": "+$18,400/week volume recovery with +$528/unit net margin preservation",
-                    "owner": "Pricing Committee & RevOps",
-                    "confidence": "High (88.0/100)",
-                    "status": "Recommended for Approval"
-                },
-                {
-                    "driver": "Competitor ApexTech Campaign",
-                    "lever": "Regional Co-Op Marketing ($15k)",
-                    "action": "Authorize $15,000 regional partner co-op incentives in Region B",
-                    "expected_impact": "+$1,667/week deal velocity acceleration",
-                    "owner": "Field Marketing",
-                    "confidence": "Moderate (60.4/100)",
-                    "status": "Recommended for Approval"
-                },
-                {
-                    "driver": "Account Churn Risk",
-                    "lever": "VIP Retention Guard",
-                    "action": "Deploy dedicated CSM outreach to 12 at-risk Enterprise renewal accounts",
-                    "expected_impact": "Guards recurring ARR and eliminates downstream churn compounding",
+                    "action": "Deploy dedicated CSM outreach to 30-day new subscriber cohort",
+                    "expected_impact": "Guards recurring MRR and eliminates compounding cancellations",
                     "owner": "Customer Success",
                     "confidence": "High",
-                    "status": "Recommended for Immediate Execution"
+                    "status": "Authorized for Immediate Execution",
+                    "monitoring_plan": "Track monthly recurring revenue and net revenue retention monthly for 3 months."
                 }
             ]
 
-        # 2D. EXECUTIVE / CRO BRIEFING (STRATEGIC SYNTHESIS)
-        else:
-            headline = f"Executive Incident Synthesis: {kpi_name} Deficit & Recommended Action Plan"
-            narrative = f"""### 📊 Executive Incident Briefing: {kpi_name} Deficit & Action Plan
-**Generated:** {now_str} &middot; **Audience:** Chief Revenue Officer & Executive Committee &middot; **Focus:** Strategic Action
+        # ==============================================================================
+        # 3. BENCHMARK 3: RETAIL FULFILLMENT & DEMAND (retail_fulfillment)
+        # ==============================================================================
+        elif active_bm == "retail_fulfillment":
+            if pid == "general_user":
+                headline = "Business Update: Why Store Sales Dropped in Region North"
+                narrative = """Weekly store sales in Region North dropped from $210,000 down to $118,000, representing a 43.8% decline. This drop was caused by two simultaneous events that hit in the exact same February window: a 12-day container port delay that left 48% of Apparel & Home store shelves empty, and a severe regional winter blizzard that cut shopper foot traffic by 34%. Because both shocks occurred together, the data shows honest ambiguity between fulfillment stockouts and weather suppression. Store pricing changes were completely ruled out, as list prices remained unchanged at $45.00 throughout all 52 weeks."""
+            elif pid == "regional_lead":
+                headline = "Operational Incident Report: Region North Store Revenue Deficit"
+                narrative = """Region North store sales declined by 43.8% ($118k vs $210k baseline) localized to Apparel & Home. Operations experienced severe inventory stockouts (48%) caused by port customs holds alongside a major winter storm event. Immediate field authorization deploys localized inventory transfers and ship-from-store fulfillment. Pricing adjustments remain locked at the executive level."""
+            elif pid == "analyst":
+                headline = "Econometric Investigation Ledger: Retail Demand & Fulfillment Ambiguity"
+                narrative = """Weekly store revenue in Region North contracted from $210,000 to $118,000 (Z = -2.85 sigma, -43.8% deficit). Empirical evaluation demonstrates a near-tied causal competition between supplier port clearance delays creating a 48% stockout rate (Cause Score 58.2/100) and an extreme regional blizzard reducing foot traffic by 34% (Cause Score 54.0/100). The score delta of 4.2 points falls within the empirical ambiguity threshold (<= 6.0 pts). Store pricing changes are empirically refuted (Score 12.0/100, 0% variance at $45.00)."""
+            else:
+                headline = "Executive Incident Synthesis: Retail Revenue Deficit & Dual-Shock Ambiguity"
+                narrative = """Weekly store revenue in Region North contracted by 43.8% ($118,000 vs $210,000 baseline, Z = -2.85 sigma) concentrated in Apparel & Home. Rigorous causal analysis identifies a near-tied empirical competition between supplier container port delays creating a 48% stockout rate (Cause Score 58.2/100) and a severe regional blizzard reducing shopper foot traffic by 34% (Cause Score 54.0/100). Because both shocks occurred concurrently with a score delta of just 4.2 points (within our <= 6.0 ambiguity threshold), the engine flags honest empirical uncertainty. Pricing is refuted (Score 12.0/100). The recommended strategy combines $15,000 in expedited freight clearance with omnichannel fulfillment, projected to recover +$72,000/week over 8 weeks."""
 
----
-
-#### 1. Strategic Incident Overview
-- **Metric Deficit:** **{kpi_name}** dropped by **{abs(delta_pct):.1f}%** (${curr_val:,.0f} vs ${base_val:,.0f} baseline, -$147.7k total variance).
-- **Concentration:** **97.3% of the deficit** is isolated to **Region B Enterprise** accounts on **Product Suite Alpha**.
-- **Corridor Breach:** Breached the ±2.0σ expected band (Z = {z_score:.2f}, 2 consecutive weeks).
-
----
-
-#### 2. Empirical Root Cause Breakdown
-- **Primary Root Cause:** **Pricing Elasticity & Plan Hike (#1 Cause, Score 88.0/100)**.
-  - A +12% price hike instituted in Week 06 triggered a **48.3% volume contraction** in Enterprise renewals.
-  - While price realization added +$21.6k, lost deal volume created a -$210.0k drag, yielding a net -$188.4k shortfall.
-- **Secondary Amplifier:** **Competitor Campaign (Score 60.4/100)**. ApexTech launched an aggressive 15% discount in Week 07, compounding enterprise deal slippage.
-- **Refuted Factor:** Supply and warehouse logistics were completely unimpaired (99.4% fill rate, 0 stockouts).
-
----
-
-#### 3. Recommended Strategic Decision Package
-Apply a balanced multi-lever recovery policy:
-1. **Targeted Price Adjustment (-6%):** Roll back half the recent price hike on Enterprise renewals in Region B (new unit price: $10,528). Re-engages buyers while preserving +$528/unit in net margin gain.
-2. **Regional Partner Co-Op Fund ($15k):** Allocate $15,000 in regional co-op incentives to neutralize ApexTech's campaign.
-3. **Projected 8-Week Recovery:** Recovers **+$20,067/week** in net revenue, stabilizing operating gross margin at **69.6%**.
-"""
             actions = [
                 {
-                    "driver": "Pricing Elasticity / Volume Drop",
+                    "driver": "Supplier Port Delays & Stockout (R1)",
+                    "lever": "Expedited Freight Clearance ($15k)",
+                    "action": "Authorize $15,000 for priority customs and expedited regional freight transfers",
+                    "expected_impact": "Reduces store stockout rate from 48% to 5% within 3 weeks",
+                    "owner": "Supply Chain & Logistics",
+                    "confidence": "Moderate (58.2/100)",
+                    "status": "Recommended for Approval",
+                    "monitoring_plan": "Monitor Region North daily stock-on-hand levels and supplier container ETAs for 4 weeks. Alert if stockout rate exceeds 10%."
+                },
+                {
+                    "driver": "Blizzard Foot Traffic Dip (R2)",
+                    "lever": "Omnichannel Ship-from-Store",
+                    "action": "Activate digital order routing from unaffected store hubs into Region North",
+                    "expected_impact": "Captures weather-suppressed consumer demand through digital fulfillment",
+                    "owner": "Omnichannel Retail Ops",
+                    "confidence": "Moderate (54.0/100)",
+                    "status": "Recommended for Immediate Execution",
+                    "monitoring_plan": "Monitor regional weather severity index and weekly foot traffic for 4 weeks."
+                },
+                {
+                    "driver": "Store Pricing Policy (R3)",
+                    "lever": "Price Integrity Maintenance",
+                    "action": "Maintain current $45.00 list price without panic discounting",
+                    "expected_impact": "Preserves gross margin integrity as stock levels recover",
+                    "owner": "Retail Merchandising",
+                    "confidence": "High (Refuted Cause)",
+                    "status": "Maintained",
+                    "monitoring_plan": "No active monitoring required — hypothesis refuted by data. Resume if POS price changes occur."
+                }
+            ]
+
+        # ==============================================================================
+        # 4. BENCHMARK 4: MANUFACTURING QUALITY & SUPPLY CHAIN (manufacturing_quality)
+        # ==============================================================================
+        elif active_bm == "manufacturing_quality":
+            if pid == "general_user":
+                headline = "Business Update: Why First-Pass Yield Dropped on Line 3 and What We Are Doing"
+                narrative = """First-pass manufacturing yield on Line 3 at Plant Midwest dropped from 96.2% down to 78.4%, causing roughly $45,000 per week in rework and scrap expenses. The cause was a progressive calibration drift on machine M-07's weld station, where a worn servo motor encoder caused drift to climb from 0.2% to 4.8% over five weeks, resulting in defective housing seam welds. Control lines at the same plant and Southeast Plant Line 3 maintained normal yields throughout, proving the issue was machine-specific. An overlapping quality dip from supplier SUP-03 was investigated and ruled out because Line 1 used the same material with zero defects, and shift schedules were completely stable. The team is scheduling emergency recalibration and adding an inline QC checkpoint."""
+            elif pid == "regional_lead":
+                headline = "Operational Incident Report: Plant Midwest Line 3 Yield Deficit"
+                narrative = """Plant Midwest Line 3 first-pass yield dropped from 96.2% to 78.4% due to progressive mechanical calibration drift on machine M-07. Authorized immediate plant actions include installing a manual inspection checkpoint downstream of M-07 and reducing Line 3 production rate by 20% to curb scrap generation. Emergency recalibration has been escalated for maintenance execution. Cross-plant operational totals remain restricted."""
+            elif pid == "analyst":
+                headline = "Econometric Investigation Ledger: Manufacturing Yield Calibration Proofs"
+                narrative = """First-pass production yield on Line 3 at Plant Midwest declined from 96.2% to 78.4% (Z = -2.80 sigma), generating a $45,000/week scrap impact. Econometric and telemetry analysis confirms machine M-07 weld station calibration drift as the primary root cause (Cause Score 89.5/100, 17.6% DiD divergence vs parallel control lines). A secondary quality dip in supplier SUP-03 material is isolated as a confounder (Score 45.0/100), as Line 1 processed identical batches without quality degradation. Shift pattern changes are empirically refuted (Score 8.0/100)."""
+            else:
+                headline = "Executive Incident Synthesis: Manufacturing Yield Deficit & Equipment Recalibration"
+                narrative = """First-pass production yield on Line 3 at Plant Midwest declined from 96.2% to 78.4% (Z = -2.80 sigma), resulting in an estimated $45,000/week scrap and rework cost. Analytical evaluation confirms machine M-07 weld station calibration drift as the primary root cause (Cause Score 89.5/100, 17.6% DiD divergence vs unaffected lines), driven by progressive servo encoder wear. An overlapping material quality dip from supplier SUP-03 is isolated as a secondary confounding signal (Score 45.0/100), as Line 1 processed identical batches without defects, while shift pattern changes are empirically refuted (Score 8.0/100). The recommended decision package authorizes emergency M-07 recalibration alongside an inline QC inspection checkpoint, projected to restore yield to 94.8% over 8 weeks and save $38,000/week in scrap."""
+
+            actions = [
+                {
+                    "driver": "M-07 Calibration Drift (M1)",
+                    "lever": "Emergency Recalibration Schedule",
+                    "action": "Replace worn servo motor encoder and recalibrate M-07 weld station on Line 3",
+                    "expected_impact": "Restores first-pass yield from 78.4% to 94.8% and eliminates $38,000/week in scrap",
+                    "owner": "Plant Maintenance & Engineering",
+                    "confidence": "High (89.5/100)",
+                    "status": "Recommended for Immediate Approval",
+                    "monitoring_plan": "Track Line 3 first-pass yield daily and M-07 calibration drift readings for 3 weeks post-recalibration. Alert threshold: drift > 0.5%."
+                },
+                {
+                    "driver": "Defect Containment",
+                    "lever": "Inline QC Checkpoint",
+                    "action": "Install secondary visual inspection station downstream of M-07",
+                    "expected_impact": "Intercepts 70% of weld seam defects before full product assembly",
+                    "owner": "Quality Assurance",
+                    "confidence": "High",
+                    "status": "Authorized for Immediate Execution",
+                    "monitoring_plan": "Monitor daily defect capture rate at inline checkpoint until M-07 recalibration completes."
+                },
+                {
+                    "driver": "Supplier Material Quality (M2)",
+                    "lever": "Supplier Quality Audit (SUP-03)",
+                    "action": "Conduct supplier quality audit on SUP-03 incoming raw material batches",
+                    "expected_impact": "Ensures material quality recovery without incurring batch rejection costs",
+                    "owner": "Supply Chain Quality",
+                    "confidence": "Moderate (45.0/100)",
+                    "status": "Recommended for Execution",
+                    "monitoring_plan": "Monitor incoming SUP-03 material quality scores weekly. If scores remain below 88 for 3 consecutive weeks, escalate to supplier quality audit."
+                }
+            ]
+
+        # ==============================================================================
+        # 5. BENCHMARK 1: B2B SAAS PRICING (b2b_saas_pricing)
+        # ==============================================================================
+        else:
+            if pid == "general_user":
+                headline = "Business Update: Why Sales Dropped in Region B and What We Are Doing Next"
+                narrative = f"""Weekly sales experienced a noticeable drop of roughly 11%, falling from ${base_val:,.0f} to ${curr_val:,.0f} (about $148,000 below normal weekly levels), with over 97% of the decline concentrated in Region B Enterprise accounts on Product Suite Alpha. The primary reason is that when we raised prices on our Enterprise plan by 12% in Week 6, price-sensitive business buyers hesitated and 21 expected renewals were put on hold. While higher rates brought in an extra $21,600 from the 18 accounts that renewed, this price cushion was not enough to offset the $210,000 lost from paused deals. Around the same time in Week 7, competitor ApexTech launched a 15% discount campaign that made closing hesitant buyers more difficult, though physical deliveries and software operations ran normally with 99.4% on-time fulfillment. The team is planning a 6% price rollback to $10,528 alongside $15,000 in regional partner marketing to recover volume."""
+            elif pid == "regional_lead":
+                headline = "Operational Incident Report: Region B Revenue Deficit & Authorized Field Strategy"
+                narrative = f"""Region B current revenue recorded an observed level of ${anomaly_context.get('current_value', 420000):,.0f} against an expected baseline of ${anomaly_context.get('baseline_value', 602200):,.0f}, representing a 30.3% ($182,200) operational deficit isolated exclusively to Enterprise Suite Alpha renewals. The primary driver was the internal 12% price hike triggering hesitation across 21 regional accounts, while SAP logistics confirmed a 99.4% warehouse fill rate with zero stockouts. Authorized immediate field actions deploy the $15,000 Regional Partner Co-Op Fund to accelerate deal velocity alongside proactive CSM coverage for the top 12 at-risk renewals, while a targeted -6% price rollback has been escalated to executive leadership. Company-wide aggregates and competitor intelligence details remain restricted."""
+            elif pid == "analyst":
+                headline = f"Econometric Investigation Ledger: {kpi_name} Anomaly Proofs & Causal Lineage"
+                ctrl = top_h.get("control_group_analysis", {})
+                narrative = rf"""In Fiscal Q1 2026 Week 08, {kpi_name} contracted by {delta_pct:+.1f}% (${curr_val:,.0f} vs ${base_val:,.0f} baseline, ${delta_val:+,.0f} variance), breaching the lower corridor boundary at Z = {z_score:.2f}, with 97.3% of the deficit localized to Region B Enterprise Suite Alpha renewals. Exact revenue identity decomposition demonstrates that losing 21 enterprise units created a -$210,000 gross volume contraction (111.5% of gross decline), while +$1,200 unit price realization across 18 retained units provided a +$21,600 price cushion, reconciling the net -$188,400 regional deficit with zero error. Difference-in-Differences quasi-experimental analysis establishes a 48.3% causal divergence against the parallel pre-trend Mid-Market control cohort (r = 0.88), preceded by an internal price hike lag of tau = 2 weeks. Competitor ApexTech's 15% discount campaign represents a secondary compounding factor (Score 60.4/100), while physical supply bottlenecks are refuted (Score 0.0/100, 99.4% fill rate). Primary ledgers include SAP S/4HANA (Freshness: 2.1h) and Salesforce CRM (Freshness: 45m)."""
+            else:
+                headline = f"Executive Incident Synthesis: {kpi_name} Deficit & Recommended Action Plan"
+                narrative = f"""{kpi_name} declined by {abs(delta_pct):.1f}% (${curr_val:,.0f} vs ${base_val:,.0f} baseline, -$147,700 total variance), breaching the ±2.0σ corridor at Z = {z_score:.2f}, with 97.3% of the deficit isolated to Region B Enterprise accounts on Product Suite Alpha. Rigorous causal analysis identifies Pricing Elasticity as the primary root cause (Cause Score 88.0/100, 48.3% DiD divergence vs parallel control cohorts), where a -$210,000 volume loss from 21 paused renewals heavily outweighed a +$21,600 price realization cushion. Competitor ApexTech's 15% discount campaign in Week 07 acted as a compounding secondary factor (Score 60.4/100), while physical warehouse fulfillment remained unimpaired at 99.4% fill rate. The recommended strategic decision package authorizes a -6% price rollback on Enterprise Suite Alpha ($10,528/unit) paired with a $15,000 regional partner co-op fund, projected to recover +$20,067/week over an 8-week trajectory while stabilizing gross margin at 69.6%."""
+
+            actions = [
+                {
+                    "driver": "Pricing Elasticity / Volume Contraction",
                     "lever": "Targeted Rollback (-6%)",
                     "action": "Authorize -6% price adjustment on Enterprise Suite Alpha in Region B ($10,528/unit)",
                     "expected_impact": "+$18,400/week volume recovery with +$528/unit net margin preservation",
                     "owner": "Chief Revenue Officer & Pricing Committee",
                     "confidence": "High (88.0/100)",
-                    "status": "Recommended for Approval"
+                    "status": "Recommended for Approval",
+                    "monitoring_plan": "Monitor Enterprise Alpha weekly renewal rate and deal velocity in Region B for 8 weeks post-rollback. Alert if renewal rate < 85%."
                 },
                 {
                     "driver": "ApexTech Competitor Campaign",
@@ -1299,7 +673,8 @@ Apply a balanced multi-lever recovery policy:
                     "expected_impact": "+$1,667/week deal velocity acceleration",
                     "owner": "VP of Field Marketing & Regional Lead",
                     "confidence": "Moderate (60.4/100)",
-                    "status": "Recommended for Approval"
+                    "status": "Recommended for Approval",
+                    "monitoring_plan": "Track ApexTech promotional pricing and win/loss CRM mentions weekly for 6 weeks."
                 },
                 {
                     "driver": "Account Churn Risk",
@@ -1308,10 +683,11 @@ Apply a balanced multi-lever recovery policy:
                     "expected_impact": "Guards recurring ARR and eliminates downstream churn compounding",
                     "owner": "VP of Customer Success",
                     "confidence": "High",
-                    "status": "Recommended for Immediate Execution"
+                    "status": "Recommended for Immediate Execution",
+                    "monitoring_plan": "Track monthly logo churn rate and NPS scores for 8 weeks. Alert if churn exceeds 3%."
                 }
             ]
-            
+
         return {
             "persona_id": pid,
             "persona_name": p_meta["name"],

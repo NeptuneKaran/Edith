@@ -1,0 +1,15 @@
+note_id,date,plant,line_id,inspector,note_text
+QC-001,2025-06-15,Plant Midwest,Line 1,J. Kim,Routine inspection passed. All weld seams within tolerance. No defect clusters observed.
+QC-002,2025-08-22,Plant Southeast,Line 2,R. Gomez,"Minor cosmetic blemish on batch BT-4412 housing, within acceptable limits. Passed QC."
+QC-003,2025-10-10,Plant Midwest,Line 3,J. Kim,Standard calibration check on M-07 completed. Drift within normal range (0.3%). All units passed.
+QC-004,2025-11-18,Plant Midwest,Line 1,S. Okafor,Full batch inspection of Model-B run. Zero defects detected. Excellent weld consistency.
+QC-005,2026-01-14,Plant Midwest,Line 3,J. Kim,Noticed slight misalignment on housing seam welds for Model-A units. M-07 calibration drift may be starting to affect output. Flagged for maintenance review.
+QC-006,2026-01-21,Plant Midwest,Line 3,J. Kim,Defect clustering on housing seam weld is getting worse this week. Almost 1 in 5 units failing first-pass QC. M-07 drift observed again this shift — technician Rodriguez confirmed drift at 2.1% which is above our 1.0% action threshold.
+QC-007,2026-01-28,Plant Midwest,Line 3,S. Okafor,Line 3 yield continues to deteriorate. Housing seam weld failures now account for 60% of all rejects. M-07 calibration drift is clearly the root cause — drift reading at 3.4% as of this morning. Recommend emergency recalibration.
+QC-008,2026-02-03,Plant Midwest,Line 3,J. Kim,Worst week yet for Line 3. First-pass yield dropped below 80%. All failures trace back to M-07 weld station. Drift now at 4.1%. Production manager escalated to plant director.
+QC-009,2026-02-10,Plant Midwest,Line 3,J. Kim,"M-07 drift measured at 4.8%. Emergency recalibration request submitted but waiting on parts. Meanwhile, secondary visual inspection checkpoint added after M-07 station to catch defects before final assembly."
+QC-010,2026-01-15,Plant Midwest,Line 2,R. Gomez,Line 2 running smoothly. All machines within calibration spec. Yield steady at 96.5%.
+QC-011,2026-01-22,Plant Southeast,Line 3,R. Gomez,Southeast Plant Line 3 is fine — yield at 95.8%. No calibration issues. This is only a Midwest Plant problem.
+QC-012,2026-02-05,Plant Midwest,Line 3,S. Okafor,"Received a batch from SUP-03 with lower material quality score than usual. However, the defect pattern on Line 3 is clearly mechanical (weld seam) not material (no surface cracking or brittleness). M-07 drift remains the primary issue."
+QC-013,2026-02-12,Plant Midwest,Line 1,J. Kim,"Line 1 continues excellent performance. Same SUP-03 material batch used here with zero quality issues, confirming the problem is machine-specific, not material-specific."
+QC-014,2026-02-15,Plant Southeast,Line 1,R. Gomez,All Southeast lines performing within expected parameters. No yield deviation observed.

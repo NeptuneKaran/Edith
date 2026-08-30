@@ -105,6 +105,14 @@
         <span>Audit Trail</span>
       </button>
 
+      <!-- Live Runtime Telemetry Button (Requirement D) -->
+      <button @click="openTelemetryModal()" 
+              title="View Live Runtime Telemetry, Token Usage & Cost Tracking"
+              class="text-xs font-medium px-2.5 py-1 rounded bg-white hover:bg-[#F5F5F5] text-[#555555] hover:text-[#171717] border border-[#E5E5E5] transition flex items-center gap-1.5 cursor-pointer shadow-xs">
+        <svg class="w-3.5 h-3.5 text-[#16803C]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+        <span>Telemetry</span>
+      </button>
+
       <!-- Active Dataset Badge -->
       <div class="hidden sm:flex items-center space-x-2 bg-[#F8F8F8] px-2.5 py-1 rounded border border-[#E5E5E5] text-xs">
         <span class="w-2 h-2 rounded-full" :class="sourceInfo.is_demo ? 'bg-[#16803C]' : 'bg-[#A100FF]'"></span>
@@ -276,6 +284,85 @@
         </button>
         <button @click="showAuditModal = false" class="px-3 py-1.5 rounded bg-[#171717] text-white text-xs font-semibold hover:bg-black transition cursor-pointer">
           Close
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =================================================================== -->
+  <!-- RUNTIME TELEMETRY & COST TRACKING MODAL -->
+  <!-- =================================================================== -->
+  <div x-show="showTelemetryModal" 
+       class="fixed inset-0 z-50 overflow-y-auto bg-black/40 flex items-center justify-center p-4 backdrop-blur-2xs" 
+       x-cloak>
+    <div @click.away="showTelemetryModal = false" class="bg-white rounded-lg border border-[#E5E5E5] max-w-2xl w-full p-5 space-y-4 shadow-xl max-h-[85vh] flex flex-col">
+      <div class="flex items-center justify-between border-b border-[#E5E5E5] pb-3 shrink-0">
+        <div>
+          <h3 class="text-sm font-bold text-[#171717]">Runtime Telemetry & Cost Accounting</h3>
+          <p class="text-xs text-[#737373]">Live metrics on latency, token usage, model dispatches, and inference cost.</p>
+        </div>
+        <button @click="showTelemetryModal = false" class="text-[#737373] hover:text-[#171717] font-bold text-base cursor-pointer">&times;</button>
+      </div>
+
+      <!-- Rollup Metrics Summary Grid -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs shrink-0">
+        <div class="bg-[#FAFAFA] border border-[#EEEEEE] rounded p-3 text-center">
+          <div class="text-[10px] text-[#737373] uppercase font-bold">Avg Latency</div>
+          <div class="text-base font-bold text-[#171717] mt-0.5" x-text="telemetryData.rollup?.avg_latency_ms ? (telemetryData.rollup.avg_latency_ms + ' ms') : '0 ms'"></div>
+        </div>
+        <div class="bg-[#FAFAFA] border border-[#EEEEEE] rounded p-3 text-center">
+          <div class="text-[10px] text-[#737373] uppercase font-bold">Total Events</div>
+          <div class="text-base font-bold text-[#6F00B5] mt-0.5" x-text="telemetryData.rollup?.total_events || 0"></div>
+        </div>
+        <div class="bg-[#FAFAFA] border border-[#EEEEEE] rounded p-3 text-center">
+          <div class="text-[10px] text-[#737373] uppercase font-bold">Total Tokens</div>
+          <div class="text-base font-bold text-[#171717] mt-0.5" x-text="(telemetryData.rollup?.total_tokens || 0).toLocaleString()"></div>
+        </div>
+        <div class="bg-[#EDF7ED] border border-[#C8E6C9] rounded p-3 text-center">
+          <div class="text-[10px] text-[#16803C] uppercase font-bold">Est. Cost</div>
+          <div class="text-base font-bold text-[#16803C] mt-0.5" x-text="'$' + (telemetryData.rollup?.total_estimated_cost_usd || 0).toFixed(6)"></div>
+        </div>
+      </div>
+
+      <!-- Recent Telemetry Events Table -->
+      <div class="overflow-y-auto flex-1 border border-[#E5E5E5] rounded">
+        <table class="w-full text-xs text-left">
+          <thead class="bg-[#FAFAFA] text-[#737373] uppercase font-semibold border-b border-[#E5E5E5] sticky top-0">
+            <tr>
+              <th class="p-2.5">Endpoint</th>
+              <th class="p-2.5">Provider / Mode</th>
+              <th class="p-2.5">Latency</th>
+              <th class="p-2.5">Tokens</th>
+              <th class="p-2.5 text-right">Cost (USD)</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-[#EEEEEE]">
+            <template x-for="ev in telemetryData.events || []" :key="ev.id">
+              <tr class="hover:bg-[#FAFAFA]">
+                <td class="p-2.5 font-mono text-[11px] font-medium text-[#171717]" x-text="ev.endpoint"></td>
+                <td class="p-2.5">
+                  <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold"
+                        :class="ev.provider === 'Google Gemini' ? 'bg-[#EDF7ED] text-[#16803C]' : 'bg-[#F5E8FF] text-[#6F00B5]'"
+                        x-text="ev.provider"></span>
+                </td>
+                <td class="p-2.5 text-[#555555]" x-text="ev.latency_ms + ' ms'"></td>
+                <td class="p-2.5 text-[#555555]" x-text="ev.total_tokens ? ev.total_tokens.toLocaleString() : '0'"></td>
+                <td class="p-2.5 text-right font-mono font-semibold"
+                    :class="ev.estimated_cost_usd === 0 ? 'text-[#737373]' : 'text-[#16803C]'"
+                    x-text="'$' + ev.estimated_cost_usd.toFixed(6)"></td>
+              </tr>
+            </template>
+            <tr x-show="!telemetryData.events || telemetryData.events.length === 0">
+              <td colspan="5" class="p-4 text-center text-xs text-[#737373]">No telemetry events recorded yet.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="flex items-center justify-between border-t border-[#E5E5E5] pt-3 shrink-0">
+        <span class="text-[11px] text-[#737373]">Live vs Offline Ratio: <span class="font-semibold" x-text="telemetryData.rollup?.live_vs_offline_ratio || 'N/A'"></span></span>
+        <button @click="loadTelemetry()" class="px-3 py-1.5 rounded bg-[#F5E8FF] hover:bg-[#E9D5FF] text-[#6F00B5] text-xs font-semibold cursor-pointer">
+          Refresh Metrics
         </button>
       </div>
     </div>

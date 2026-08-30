@@ -13,7 +13,8 @@
         <div class="space-y-4">
           
           <template x-for="(finding, idx) in workspaceData.findings || []" :key="finding.id || idx">
-            <div class="bg-white p-5 rounded-lg border border-[#E5E5E5] space-y-3.5 shadow-xs hover:border-[#D4D4D4] transition">
+            <div class="bg-white p-5 rounded-lg border border-[#E5E5E5] space-y-3.5 shadow-xs hover:border-[#D4D4D4] transition"
+                 :class="{'opacity-60': finding.feedback_annotations?.override_count > 0}">
               <div class="flex items-start justify-between">
                 <div>
                   <div class="flex items-center gap-2">
@@ -52,6 +53,45 @@
                     </li>
                   </template>
                 </ul>
+              </div>
+
+              <!-- Analyst Feedback Controls -->
+              <div class="flex items-center gap-2 pt-3 border-t border-[#EEEEEE]">
+                <button @click="submitHypothesisFeedback(finding.id, 'confirmed')" 
+                        class="px-3 py-1.5 text-xs font-semibold rounded bg-emerald-50 text-emerald-700 border border-emerald-200 hover:bg-emerald-100 transition cursor-pointer"
+                        :disabled="finding.feedback_submitted"
+                        x-show="!finding.feedback_submitted">
+                  ✓ Confirm
+                </button>
+                <button @click="showOverrideInput = finding.id" 
+                        class="px-3 py-1.5 text-xs font-semibold rounded bg-amber-50 text-amber-700 border border-amber-200 hover:bg-amber-100 transition cursor-pointer"
+                        x-show="!finding.feedback_submitted && showOverrideInput !== finding.id">
+                  ✗ Override
+                </button>
+                <div x-show="showOverrideInput === finding.id" class="flex items-center gap-2 flex-1">
+                  <input type="text" x-model="overrideReason" placeholder="Reason for override..." 
+                         class="flex-1 text-xs border border-[#D4D4D4] rounded px-2 py-1.5 bg-[#FAFAFA]" />
+                  <button @click="submitHypothesisFeedback(finding.id, 'overridden', overrideReason); showOverrideInput = null; overrideReason = ''" 
+                          class="px-3 py-1.5 text-xs font-semibold rounded bg-red-50 text-red-700 border border-red-200 hover:bg-red-100 transition cursor-pointer">
+                    Submit Override
+                  </button>
+                  <button @click="showOverrideInput = null; overrideReason = ''" class="text-xs text-[#737373] hover:text-[#171717] cursor-pointer">Cancel</button>
+                </div>
+                <span x-show="finding.feedback_submitted" class="text-xs text-emerald-600 font-semibold">✓ Feedback Recorded</span>
+              </div>
+
+              <!-- Feedback Annotations -->
+              <div x-show="finding.feedback_annotations && (finding.feedback_annotations.confirmation_count > 0 || finding.feedback_annotations.override_count > 0)" 
+                   class="mt-2 space-y-1">
+                <div x-show="finding.feedback_annotations?.confirmation_count > 0" 
+                     class="text-xs text-emerald-700 bg-emerald-50 border border-emerald-200 rounded px-2.5 py-1.5">
+                  <span class="font-semibold">✓ Corroborated</span> by <span x-text="finding.feedback_annotations?.confirmation_count"></span> prior analyst confirmation(s)
+                </div>
+                <template x-for="ovr in finding.feedback_annotations?.overrides || []" :key="ovr.timestamp">
+                  <div class="text-xs text-amber-800 bg-amber-50 border border-amber-200 rounded px-2.5 py-1.5">
+                    <span class="font-semibold">⚠ Overridden</span> by <span x-text="ovr.persona"></span> on <span x-text="new Date(ovr.timestamp).toLocaleDateString()"></span>: <span x-text="ovr.reason" class="italic"></span>
+                  </div>
+                </template>
               </div>
 
               <!-- Verbatim Unstructured Free-Text Quotes -->

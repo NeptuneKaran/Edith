@@ -38,6 +38,8 @@ class SimulationEngine:
             return SimulationEngine._simulate_subscription_growth(price_rollback_pct, p_fund, c_mit)
         elif active_bm == "retail_fulfillment":
             return SimulationEngine._simulate_retail_fulfillment(price_rollback_pct, p_fund, c_mit)
+        elif active_bm == "manufacturing_quality":
+            return SimulationEngine._simulate_manufacturing_quality(price_rollback_pct, p_fund, c_mit)
         return SimulationEngine._simulate_b2b_pricing(price_rollback_pct, p_fund, c_mit)
 
     @staticmethod
@@ -199,6 +201,56 @@ class SimulationEngine:
                 "substitute_sku_pct": substitute_sku_pct,
                 "expedite_freight_k": expedite_freight_k,
                 "omnichannel_routing": omnichannel_routing
+            },
+            "trajectory_df": trajectory_df
+        }
+
+    @staticmethod
+    def _simulate_manufacturing_quality(
+        recalibration_coverage_pct: float = -6.0,
+        reject_batch_cost_k: float = 15.0,
+        add_qc_checkpoint: bool = True
+    ) -> Dict[str, Any]:
+        """Simulation model for Benchmark 4: Manufacturing Quality & Supply Chain."""
+        baseline_yield = 96.2
+        current_yield = 78.4
+        
+        recal_eff = min(1.0, abs(recalibration_coverage_pct) / 10.0) * 0.60
+        batch_eff = min(1.0, reject_batch_cost_k / 25.0) * 0.20
+        qc_eff = 0.20 if add_qc_checkpoint else 0.0
+        
+        total_strength = recal_eff + batch_eff + qc_eff
+        simulated_yield = current_yield + (baseline_yield - current_yield) * total_strength
+        recovery_pct = min(100.0, total_strength * 100.0)
+        
+        # Scrap cost reduction
+        baseline_scrap_cost = 0.0  # No scrap at baseline
+        current_scrap_cost = 45000.0  # $45k/week from maintenance tickets
+        simulated_scrap_cost = max(0.0, current_scrap_cost * (1.0 - total_strength))
+        
+        weeks_proj = [f"+W{i+1}" for i in range(8)]
+        s_curve = 1.0 / (1.0 + np.exp(-1.3 * (np.arange(8) - 2.5)))
+        
+        trajectory_df = pd.DataFrame({
+            "projection_week": weeks_proj,
+            "Baseline Target": [baseline_yield for _ in range(8)],
+            "Do-Nothing Outlook": [current_yield for _ in range(8)],
+            "Simulated Scenario": [current_yield + (simulated_yield - current_yield) * s for s in s_curve]
+        })
+        
+        return {
+            "benchmark_id": "manufacturing_quality",
+            "metric_label": "First-Pass Yield (%)",
+            "simulated_revenue": simulated_yield,  # Using yield as the primary metric
+            "simulated_yield_pct": round(simulated_yield, 1),
+            "simulated_scrap_cost": round(simulated_scrap_cost, 0),
+            "simulated_margin_pct": round(88.0 + (total_strength * 4.0), 1),  # Manufacturing margin improves with yield
+            "recovery_pct": round(recovery_pct, 1),
+            "net_revenue_delta": round(simulated_yield - current_yield, 1),
+            "levers_applied": {
+                "recalibration_coverage_pct": recalibration_coverage_pct,
+                "reject_batch_cost_k": reject_batch_cost_k,
+                "add_qc_checkpoint": add_qc_checkpoint
             },
             "trajectory_df": trajectory_df
         }

@@ -442,10 +442,67 @@ CANDIDATE_DRIVERS_RETAIL = [
 # Backwards compatibility default alias
 CANDIDATE_DRIVERS = CANDIDATE_DRIVERS_PRICING
 
+CANDIDATE_DRIVERS_MANUFACTURING = [
+    {
+        "id": "M1_CALIBRATION_DRIFT",
+        "name": "Machine Calibration Drift (M-07 Weld Station)",
+        "category": "Equipment & Maintenance",
+        "description": "Worn servo motor encoder on M-07 weld station (Line 3, Plant Midwest) causing progressive calibration drift from 0.2% to 4.8%, degrading first-pass yield on housing seam welds.",
+        "expected_lead_time_weeks": [1, 3],
+        "controllable": True,
+        "lever_type": "emergency_recalibration",
+        "telemetry_available": True,
+        "metric_node": "first_pass_yield",
+        "dependency_role": "UPSTREAM_DIRECT",
+        "required_tables": ["production_output_daily", "machine_calibration_logs", "qc_inspector_notes", "maintenance_tickets"]
+    },
+    {
+        "id": "M2_SUPPLIER_MATERIAL_QUALITY",
+        "name": "Incoming Material Quality Degradation (SUP-03)",
+        "category": "Supply Chain & Materials",
+        "description": "Supplier SUP-03 material quality scores dipped from 94 to 82 on an overlapping but not identical window, creating a confounding secondary signal.",
+        "expected_lead_time_weeks": [2, 4],
+        "controllable": True,
+        "lever_type": "reject_supplier_batch",
+        "telemetry_available": True,
+        "metric_node": "material_quality",
+        "dependency_role": "UPSTREAM_INDIRECT",
+        "required_tables": ["supplier_material_certs_weekly"]
+    },
+    {
+        "id": "M3_OPERATOR_SHIFT_CHANGE",
+        "name": "Shift Pattern & Operator Tenure Change",
+        "category": "Workforce & Operations",
+        "description": "Changes in shift schedule or operator experience levels potentially degrading quality through human factors.",
+        "expected_lead_time_weeks": [1, 4],
+        "controllable": True,
+        "lever_type": "operator_training",
+        "telemetry_available": True,
+        "metric_node": "operator_performance",
+        "dependency_role": "UPSTREAM_INDIRECT",
+        "required_tables": ["shift_roster_monthly"]
+    },
+    {
+        "id": "M4_HUMIDITY_TRANSIT_EXPOSURE",
+        "name": "Raw Material Humidity Exposure During Transit",
+        "category": "Logistics & Environment",
+        "description": "Potential moisture exposure during raw material transportation causing material property degradation. No transit environment monitoring telemetry exists.",
+        "expected_lead_time_weeks": [2, 6],
+        "controllable": False,
+        "lever_type": "none",
+        "telemetry_available": False,
+        "metric_node": "transit_environment",
+        "dependency_role": "EXTERNAL_FACTOR",
+        "required_tables": ["transit_humidity_logs"]
+    }
+]
+
 def get_candidate_drivers(benchmark_id: str = "b2b_saas_pricing") -> List[Dict[str, Any]]:
     """Returns candidate drivers tailored to the active calibrated benchmark."""
     if benchmark_id == "saas_churn_roas":
         return CANDIDATE_DRIVERS_SUBSCRIPTIONS
     elif benchmark_id == "retail_fulfillment":
         return CANDIDATE_DRIVERS_RETAIL
+    elif benchmark_id == "manufacturing_quality":
+        return CANDIDATE_DRIVERS_MANUFACTURING
     return CANDIDATE_DRIVERS_PRICING

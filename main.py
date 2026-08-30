@@ -127,6 +127,8 @@ class SemanticConfigRequest(BaseModel):
     driver_columns: Optional[List[str]] = Field(default_factory=list, description="Numeric driver columns")
     identifier_columns: Optional[List[str]] = Field(default_factory=list, description="Ignored identifier columns")
     drop_invalid_rows: Optional[bool] = Field(True, description="Drop null/invalid rows during ingestion")
+    file_roles: Optional[List[Dict[str, Any]]] = Field(default=None, description="Per-file role assignments: [{filename, role: fact|dimension|unstructured, join_keys: [...]}]")
+    confirmed_relationships: Optional[List[Dict[str, Any]]] = Field(default=None, description="User-confirmed cross-file relationships")
 
 
 class SimulationLeversRequest(BaseModel):
@@ -152,6 +154,16 @@ class LogEventRequest(BaseModel):
     action: str = Field("GATE_SELECTION", description="Action name")
     endpoint: Optional[str] = "persona_gate"
     details: Optional[Dict[str, Any]] = None
+
+
+class HypothesisFeedbackRequest(BaseModel):
+    hypothesis_id: str
+    action: str  # "confirmed" or "overridden"
+    reason: Optional[str] = ""
+
+class ActionRatingRequest(BaseModel):
+    action_id: str
+    rating: str  # "helpful" or "not_helpful"
 
 
 # Helper for JSON serialization
@@ -322,56 +334,211 @@ async def get_access_audit_log(limit: int = 50):
     })
 
 
+@app.post("/api/feedback/hypothesis")
+async def submit_hypothesis_feedback_endpoint(request: Request, req: HypothesisFeedbackRequest):
+    from core.feedback import submit_hypothesis_feedback
+    persona_id = request.session.get("persona_id") or "anonymous"
+    result = submit_hypothesis_feedback(req.hypothesis_id, req.action, req.reason or "", persona_id)
+    return {"success": True, "feedback": result}
+
+@app.post("/api/feedback/action")
+async def submit_action_rating_endpoint(request: Request, req: ActionRatingRequest):
+    from core.feedback import submit_action_rating
+    persona_id = request.session.get("persona_id") or "anonymous"
+    result = submit_action_rating(req.action_id, req.rating, persona_id)
+    return {"success": True, "feedback": result}
+
+@app.get("/api/feedback-log")
+async def get_feedback_log_endpoint(limit: int = 50):
+    from core.feedback import get_feedback_log
+    return {"feedback": get_feedback_log(limit)}
+
+
 # ==============================================================================
 # DATA INTAKE & SOURCE MANAGEMENT REST APIS
 # ==============================================================================
 
 @app.post("/api/data/upload")
-async def upload_dataset_file(file: UploadFile = File(...)):
-    """Uploads and profiles an external CSV dataset."""
-    filename = file.filename or "uploaded_data.csv"
-    if not filename.lower().endswith(".csv"):
-        raise HTTPException(status_code=400, detail="Invalid file type. Only CSV files are supported.")
+async def upload_dataset_files(
+    files: Optional[List[UploadFile]] = File(None),
+    file: Optional[UploadFile] = File(None)
+):
+    """Uploads and profiles external CSV/Excel datasets."""
+    all_files = []
+    if files:
+        all_files.extend(files)
+    if file:
+        all_files.append(file)
+        
+    if not all_files:
+        raise HTTPException(status_code=400, detail="No files uploaded.")
+        
+    responses = []
+    cache_entry = {}
     
-    try:
-        content = await file.read()
-        df = pd.read_csv(io.BytesIO(content))
-    except Exception as e:
-        raise HTTPException(status_code=400, detail=f"Failed to parse CSV file: {str(e)}")
+    for f in all_files:
+        filename = f.filename or "uploaded_data.csv"
+        try:
+            content = await f.read()
+            if filename.lower().endswith(".csv"):
+                df = pd.read_csv(io.BytesIO(content))
+            elif filename.lower().endswith((".xlsx", ".xls")):
+                df = pd.read_excel(io.BytesIO(content))
+            else:
+                raise HTTPException(status_code=400, detail=f"Invalid file type for {filename}. Only CSV and Excel files are supported.")
+        except Exception as e:
+            raise HTTPException(status_code=400, detail=f"Failed to parse file {filename}: {str(e)}")
 
-    if df.empty:
-        raise HTTPException(status_code=400, detail="Uploaded CSV file is empty.")
+        if df.empty:
+            raise HTTPException(status_code=400, detail=f"Uploaded file {filename} is empty.")
 
-    profile = DataProfiler.profile_dataset(df)
-
-    _UPLOAD_CACHE["raw_df"] = df
-    _UPLOAD_CACHE["profile"] = profile
-    _UPLOAD_CACHE["filename"] = filename
-
-    preview_rows = df.head(10).fillna("").to_dict(orient="records")
-    return {
+        profile = DataProfiler.profile_dataset(df)
+        
+        date_cols = profile.get("valid_date_columns", [])
+        grain = "Snapshot"
+        if date_cols:
+            try:
+                date_s = pd.to_datetime(df[date_cols[0]], errors="coerce").dropna()
+                if len(date_s) > 1:
+                    diffs = date_s.sort_values().diff().dropna().mode()
+                    if not diffs.empty:
+                        d_days = diffs.iloc[0].days
+                        if d_days == 1:
+                            grain = "Daily"
+                        elif 6 <= d_days <= 8:
+                            grain = "Weekly"
+                        elif 28 <= d_days <= 32:
+                            grain = "Monthly"
+                        else:
+                            grain = f"{d_days} Days"
+            except:
+                pass
+        
+        profile["filename"] = filename
+        profile["grain"] = grain
+        
+        stem = os.path.splitext(filename)[0]
+        cache_entry[stem] = {"df": df, "profile": profile, "filename": filename}
+        
+        preview_rows = df.head(10).fillna("").to_dict(orient="records")
+        responses.append({
+            "filename": filename,
+            "total_rows": profile["total_rows"],
+            "total_columns": profile["total_columns"],
+            "columns": [p["column_name"] for p in profile["profiles"]],
+            "valid_numeric_columns": profile["valid_numeric_columns"],
+            "valid_date_columns": profile["valid_date_columns"],
+            "valid_dimension_columns": profile["valid_dimension_columns"],
+            "profiles": profile["profiles"],
+            "grain": grain,
+            "preview": preview_rows
+        })
+        
+    _UPLOAD_CACHE["files"] = cache_entry
+    
+    # Backward compatibility for single file
+    first_item = list(cache_entry.values())[0]
+    _UPLOAD_CACHE["raw_df"] = first_item["df"]
+    _UPLOAD_CACHE["profile"] = first_item["profile"]
+    _UPLOAD_CACHE["filename"] = first_item["filename"]
+    
+    # Detect relationships if multiple files
+    relationships = []
+    if len(all_files) > 1:
+        stems = list(cache_entry.keys())
+        for i in range(len(stems)):
+            for j in range(i + 1, len(stems)):
+                stem1, stem2 = stems[i], stems[j]
+                file1 = cache_entry[stem1]
+                file2 = cache_entry[stem2]
+                
+                cols1 = set(c["column_name"] for c in file1["profile"]["profiles"])
+                cols2 = set(c["column_name"] for c in file2["profile"]["profiles"])
+                
+                shared_cols = cols1.intersection(cols2)
+                join_keys = []
+                for col in shared_cols:
+                    type1 = next((c.get("dtype", c.get("data_type", "")) for c in file1["profile"]["profiles"] if c["column_name"] == col), "")
+                    type2 = next((c.get("dtype", c.get("data_type", "")) for c in file2["profile"]["profiles"] if c["column_name"] == col), "")
+                    
+                    if type1 == type2 or ("object" in type1 and "object" in type2):
+                        join_keys.append(col)
+                        
+                if join_keys:
+                    relationships.append({
+                        "left_file": file1["filename"],
+                        "right_file": file2["filename"],
+                        "join_keys": join_keys,
+                        "grain_left": file1["profile"]["grain"],
+                        "grain_right": file2["profile"]["grain"]
+                    })
+                    
+    res_dict = {
         "success": True,
-        "filename": filename,
-        "message": f"Successfully parsed and profiled {filename} ({profile['total_rows']} rows, {profile['total_columns']} columns)",
-        "total_rows": profile["total_rows"],
-        "total_columns": profile["total_columns"],
-        "columns": [p["column_name"] for p in profile["profiles"]],
-        "valid_numeric_columns": profile["valid_numeric_columns"],
-        "valid_date_columns": profile["valid_date_columns"],
-        "valid_dimension_columns": profile["valid_dimension_columns"],
-        "profiles": profile["profiles"],
-        "preview": preview_rows
+        "files": responses,
+        "relationships": relationships
     }
+    
+    # Merge first file's fields at top level for backward compatibility
+    if responses:
+        first_resp = responses[0]
+        res_dict.update({
+            "filename": first_resp["filename"],
+            "total_rows": first_resp["total_rows"],
+            "total_columns": first_resp["total_columns"],
+            "columns": first_resp["columns"],
+            "valid_numeric_columns": first_resp["valid_numeric_columns"],
+            "valid_date_columns": first_resp["valid_date_columns"],
+            "valid_dimension_columns": first_resp["valid_dimension_columns"],
+            "profiles": first_resp["profiles"],
+            "preview": first_resp["preview"],
+            "message": f"Successfully parsed and profiled {first_resp['filename']} ({first_resp['total_rows']} rows, {first_resp['total_columns']} columns)"
+        })
+        
+    return res_dict
+
+
 
 
 @app.post("/api/data/configure")
 async def configure_semantic_model(config: SemanticConfigRequest):
     """Applies user semantic mapping to transform and ingest custom dataset."""
-    if "raw_df" not in _UPLOAD_CACHE:
-        raise HTTPException(status_code=400, detail="No dataset uploaded in current session. Please upload a CSV first.")
+    if config.file_roles:
+        if "files" not in _UPLOAD_CACHE:
+            raise HTTPException(status_code=400, detail="No datasets uploaded in current session.")
+            
+        files_cache = _UPLOAD_CACHE["files"]
+        tables = {}
+        
+        fact_file_req = next((f for f in config.file_roles if f["role"] == "fact"), None)
+        if not fact_file_req:
+            raise HTTPException(status_code=400, detail="Must designate one file as the 'fact' table.")
+            
+        fact_filename = fact_file_req["filename"]
+        fact_stem = os.path.splitext(fact_filename)[0]
+        
+        if fact_stem not in files_cache:
+            raise HTTPException(status_code=400, detail=f"Fact table {fact_filename} not found in cache.")
+            
+        raw_df = files_cache[fact_stem]["df"]
+        
+        for role_req in config.file_roles:
+            role = role_req["role"]
+            fname = role_req["filename"]
+            stem = os.path.splitext(fname)[0]
+            if stem in files_cache:
+                df = files_cache[stem]["df"]
+                if role == "fact":
+                    tables["sales"] = df
+                else:
+                    tables[stem] = df
+                    
+    else:
+        if "raw_df" not in _UPLOAD_CACHE:
+            raise HTTPException(status_code=400, detail="No dataset uploaded in current session. Please upload a CSV first.")
+        raw_df = _UPLOAD_CACHE["raw_df"]
+        tables = {"sales": raw_df}
 
-    raw_df = _UPLOAD_CACHE["raw_df"]
-    
     if config.primary_measure not in raw_df.columns:
         raise HTTPException(status_code=400, detail=f"Primary measure '{config.primary_measure}' does not exist in dataset.")
     
@@ -408,11 +575,16 @@ async def configure_semantic_model(config: SemanticConfigRequest):
 
     try:
         norm_tables, feat_status, warnings = ColumnMapper.transform_generic_dataset(
-            raw_df, 
+            tables["sales"], 
             semantic_model, 
             drop_invalid_rows=config.drop_invalid_rows if config.drop_invalid_rows is not None else True
         )
-        clean_df = norm_tables.get("sales", raw_df)
+        final_tables = {"sales": norm_tables.get("sales", tables["sales"])}
+        for k, v in tables.items():
+            if k != "sales":
+                final_tables[k] = v
+                
+        clean_df = final_tables["sales"]
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"Data transformation failed: {str(e)}")
 
@@ -420,7 +592,7 @@ async def configure_semantic_model(config: SemanticConfigRequest):
     
     repo = DataRepository.get_instance()
     repo.set_custom_data(
-        tables=norm_tables,
+        tables=final_tables,
         source_info={
             "source_type": "Custom CSV Ingestion",
             "name": config.dataset_name,
@@ -612,8 +784,8 @@ async def get_overview(request: Request, persona: Optional[str] = None):
         "total_records": int(repo.active_source_info.get("row_count", len(ts)))
     }
     
-    # Priority: Session cookie persona -> Query parameter -> Unscoped
-    active_p = request.session.get("persona_id") or persona
+    # Priority: Session cookie persona
+    active_p = request.session.get("persona_id")
     if active_p:
         res_payload = scope_overview(res_payload, active_p, repo)
         
@@ -679,7 +851,7 @@ async def get_diagnostic(request: Request, persona: Optional[str] = None):
         "variance_decomposition": decomp
     }
     
-    active_p = request.session.get("persona_id") or persona
+    active_p = request.session.get("persona_id")
     if active_p:
         res_payload = scope_diagnostic(res_payload, active_p, repo)
         
@@ -698,6 +870,8 @@ async def get_investigation_workspace(request: Request, persona: Optional[str] =
     
     ev_engine = EvidenceEngine(repo)
     findings = ev_engine.evaluate_all_hypotheses()
+    from core.feedback import annotate_hypotheses
+    findings = annotate_hypotheses(findings)
     
     decomp = ContributionEngine.calculate_variance_decomposition(repo)
     
@@ -708,7 +882,7 @@ async def get_investigation_workspace(request: Request, persona: Optional[str] =
         "disclaimer": "" if is_demo else "Observational Integrity Notice: For custom uploaded datasets, results represent empirical concentrations, statistical associations, and distribution patterns—not confirmed causal hypotheses."
     }
     
-    active_p = request.session.get("persona_id") or persona
+    active_p = request.session.get("persona_id")
     if active_p:
         res_payload = scope_workspace(res_payload, active_p, repo)
         
@@ -766,7 +940,7 @@ async def get_simulation(request: Request, persona: Optional[str] = None):
         "summary": summary
     }
     
-    active_p = request.session.get("persona_id") or persona
+    active_p = request.session.get("persona_id")
     if active_p:
         res_payload = scope_simulation(res_payload, active_p)
         
@@ -822,7 +996,7 @@ async def update_simulation(request: Request, levers: SimulationLeversRequest, p
         "summary": summary
     }
     
-    active_p = request.session.get("persona_id") or persona
+    active_p = request.session.get("persona_id")
     if active_p:
         res_payload = scope_simulation(res_payload, active_p, is_update=True, requested_levers=dict(levers))
         
@@ -835,8 +1009,8 @@ async def get_executive_briefing(request: Request, persona: Optional[str] = None
     Generates persona-specific standing Executive Briefing report artifact.
     Works 100% offline with zero API key requirement.
     """
-    active_p = request.session.get("persona_id") or persona or DEFAULT_PERSONA
-    p_meta = get_persona(active_p)
+    active_p = request.session.get("persona_id")
+    p_meta = get_persona(active_p or DEFAULT_PERSONA)
     p_id = p_meta["id"]
     
     repo = DataRepository.get_instance()
@@ -879,8 +1053,8 @@ async def chat_with_edith(request: Request, req: ChatRequest):
     is_demo = repo.active_source_info.get("is_demo", True)
     label = repo.active_source_info.get("primary_measure_label", "Gross Revenue" if is_demo else "Primary Measure")
     
-    active_p = request.session.get("persona_id") or req.persona or "executive"
-    p_meta = get_persona(active_p)
+    active_p = request.session.get("persona_id")
+    p_meta = get_persona(active_p or "executive")
     p_id = p_meta["id"]
 
     ts = repo.get_kpi_time_series(region="Region B" if p_id == "regional_lead" else None)
@@ -952,6 +1126,11 @@ async def get_ai_status():
         "badge_text": f"Live Gemini AI ({client.primary_model})" if has_key else "Deterministic Offline Mode",
         "is_live": has_key
     }
+
+@app.get("/api/telemetry")
+async def get_telemetry_data(limit: int = 50):
+    from core.telemetry import get_telemetry, get_rollup
+    return {"events": get_telemetry(limit), "rollup": get_rollup()}
 
 
 @app.post("/api/ai/key")
