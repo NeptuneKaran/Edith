@@ -173,17 +173,14 @@ def _to_json_safe(obj: Any) -> Any:
 # ==============================================================================
 
 @app.get("/")
+@app.get("/gate")
 async def root_persona_gate(request: Request):
     """
     Persona Gate Landing Screen (Requirement B).
-    If persona_id is already in session, redirect to /overview.
-    Otherwise, render gate.html with the 4 persona cards.
+    Renders gate.html with the 4 persona cards so the user chooses their enterprise role.
     """
-    persona_id = request.session.get("persona_id")
-    if persona_id and persona_id in PERSONAS:
-        return RedirectResponse(url="/overview", status_code=303)
-    
     return templates.TemplateResponse(request=request, name="gate.html", context={"personas": get_personas()})
+
 
 
 @app.post("/session/select-persona")
