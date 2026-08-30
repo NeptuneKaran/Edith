@@ -28,6 +28,11 @@ class SemanticDataModel:
     identifier_columns: List[str] = field(default_factory=list) # Record IDs, ticket IDs, employee IDs
     target_column: Optional[str] = None
     is_demo: bool = False
+    drop_invalid_rows: bool = True
+
+    @property
+    def is_temporal(self) -> bool:
+        return bool(self.date_column and self.date_column != "None (Snapshot)")
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -43,7 +48,9 @@ class SemanticDataModel:
             "driver_columns": self.driver_columns,
             "identifier_columns": self.identifier_columns,
             "target_column": self.target_column,
-            "is_demo": self.is_demo
+            "is_demo": self.is_demo,
+            "is_temporal": self.is_temporal,
+            "drop_invalid_rows": self.drop_invalid_rows
         }
 
 class DataProfiler:
@@ -265,6 +272,25 @@ class DataProfiler:
             })
             
         return profiles
+
+    @classmethod
+    def profile_dataset(cls, df: pd.DataFrame) -> Dict[str, Any]:
+        """Inspects and returns a complete structural and statistical profile of a dataset."""
+        profiles = cls.profile_dataframe(df)
+        valid_num = cls.get_valid_numeric_columns(df)
+        valid_dates = cls.get_valid_date_columns(df)
+        valid_dims = [
+            p["column_name"] for p in profiles 
+            if p["column_name"] not in valid_num and p["column_name"] not in valid_dates
+        ]
+        return {
+            "profiles": profiles,
+            "valid_numeric_columns": valid_num,
+            "valid_date_columns": valid_dates,
+            "valid_dimension_columns": valid_dims,
+            "total_rows": len(df),
+            "total_columns": len(df.columns)
+        }
 
 
 class AnalysisFeasibilityChecker:

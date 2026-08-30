@@ -1,15 +1,18 @@
 """
 main.py - EDITH (Executive Decision Intelligence & Tactical Hypothesis)
-Production FastAPI Application & REST API Gateway
+Production Multi-Page FastAPI Application & REST API Gateway
 
-Provides high-performance, asynchronous REST endpoints for generic data ingestion,
-automated profiling, semantic modeling, diagnostic decomposition, observational evidence,
-and grounded conversational intelligence.
+Delivers:
+1. True Multi-Page Architecture with Jinja2 Templates (Base Shell + Screen Templates).
+2. Server-Enforced Persona Gate with signed session cookies (SessionMiddleware).
+3. Centralized Role-Based Access Control (RBAC), Data Scoping & Audit Logging.
+4. Deterministic Analytics Core with Grounded Conversational & Briefing Intelligence.
 """
 import os
 import io
 import sqlite3
 import tempfile
+import time
 from typing import List, Dict, Any, Optional
 import pandas as pd
 import numpy as np
@@ -20,11 +23,12 @@ try:
 except ImportError:
     pass
 
-from fastapi import FastAPI, UploadFile, File, HTTPException, Body
-
+from fastapi import FastAPI, UploadFile, File, HTTPException, Body, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse, JSONResponse
+from fastapi.responses import FileResponse, JSONResponse, RedirectResponse
+from fastapi.templating import Jinja2Templates
+from starlette.middleware.sessions import SessionMiddleware
 from pydantic import BaseModel, Field
 
 # Core EDITH Analytics and AI Modules
@@ -37,12 +41,11 @@ from data.source_manager import (
 )
 from core.baseline_engine import AnomalyEngine
 from core.contribution_engine import ContributionEngine
-
 from core.evidence_engine import EvidenceEngine
 from core.simulation_engine import SimulationEngine
 from ai.llm_client import EdithLLMClient
 from ai.offline_reasoner import OfflineEdithReasoner
-from config.personas import get_personas, get_persona, DEFAULT_PERSONA
+from config.personas import PERSONAS, get_personas, get_persona, DEFAULT_PERSONA
 from core.access_control import (
     scope_overview,
     scope_diagnostic,
@@ -54,16 +57,16 @@ from core.access_control import (
 )
 
 
-
 # ==============================================================================
 # FASTAPI APPLICATION INITIALIZATION
 # ==============================================================================
 app = FastAPI(
     title="EDITH Decision Intelligence Platform",
-    description="Generic Business Dataset Ingestion, Empirical Root-Cause Diagnostic & Decision Assistant",
-    version="2.0.0"
+    description="Enterprise Decision Intelligence, Multi-Hypothesis Causal Decomposition & Scenario Simulation",
+    version="2.5.0"
 )
 
+# Cross-Origin Resource Sharing
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -72,34 +75,30 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-def _to_json_safe(obj: Any) -> Any:
-    """Recursively converts numpy/pandas types and non-serializable objects to native Python primitives."""
-    if isinstance(obj, pd.DataFrame):
-        return _to_json_safe(obj.fillna("").to_dict(orient="records"))
-    elif isinstance(obj, pd.Series):
-        return _to_json_safe(obj.to_dict())
-    elif isinstance(obj, dict):
-        return {str(k): _to_json_safe(v) for k, v in obj.items()}
-    elif isinstance(obj, (list, tuple, set)):
-        return [_to_json_safe(item) for item in obj]
-    elif isinstance(obj, (np.integer, np.int64, np.int32)):
-        return int(obj)
-    elif isinstance(obj, (np.floating, np.float64, np.float32)):
-        return float(obj)
-    elif isinstance(obj, (np.bool_, bool)):
-        return bool(obj)
-    elif obj is None:
-        return None
-    try:
-        if pd.isna(obj):
-            return None
-    except Exception:
-        pass
-    return obj
+# Signed Session Middleware for Server-Enforced Persona Gate (Requirement B)
+SESSION_SECRET_KEY = os.environ.get(
+    "SESSION_SECRET_KEY",
+    "edith_dev_secret_key_2026_accenture_innovation_track3"
+)
+app.add_middleware(
+    SessionMiddleware,
+    secret_key=SESSION_SECRET_KEY,
+    max_age=None  # Browser-session cookie (clears on browser close)
+)
 
+# Template and Static Asset Directories
+BASE_DIR = os.path.dirname(__file__)
+FRONTEND_DIR = os.path.join(BASE_DIR, "frontend")
+TEMPLATES_DIR = os.path.join(FRONTEND_DIR, "templates")
+STATIC_DIR = os.path.join(FRONTEND_DIR, "static")
 
+os.makedirs(TEMPLATES_DIR, exist_ok=True)
+os.makedirs(STATIC_DIR, exist_ok=True)
 
-# In-memory storage for raw uploaded file before semantic ingestion
+templates = Jinja2Templates(directory=TEMPLATES_DIR)
+app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
+
+# Temporary In-Memory State
 _UPLOAD_CACHE: Dict[str, Any] = {}
 _ACTIVE_SIM_LEVERS: Dict[str, Any] = {
     "price_rollback_pct": 6.0,
@@ -108,254 +107,198 @@ _ACTIVE_SIM_LEVERS: Dict[str, Any] = {
 }
 
 
+# ==============================================================================
+# DATA MODELS & SCHEMAS
+# ==============================================================================
 
-# ==============================================================================
-# PYDANTIC SCHEMAS
-# ==============================================================================
-class SemanticModelRequest(BaseModel):
-    dataset_name: str = "Uploaded Custom Dataset"
-    analysis_grain: str = "Time Series (Weekly / Monthly / Daily)"
-    primary_measure: str
-    primary_measure_label: Optional[str] = None
-    primary_measure_unit: Optional[str] = None
-    aggregation_type: str = "sum"
-    distinct_entity_column: Optional[str] = None
-    date_column: Optional[str] = None
-    dimension_columns: List[str] = Field(default_factory=list)
-    driver_columns: List[str] = Field(default_factory=list)
-    identifier_columns: List[str] = Field(default_factory=list)
-    drop_invalid_rows: bool = True
+class SemanticConfigRequest(BaseModel):
+    dataset_name: Optional[str] = Field("Custom Ingested Dataset", description="Display name for the dataset")
+    analysis_grain: Optional[str] = Field("Time Series (Weekly / Monthly / Daily)", description="Temporal or Snapshot grain")
+    primary_measure: str = Field(..., description="Target numeric column")
+    primary_measure_label: Optional[str] = Field(None, description="Human-readable business label")
+    primary_measure_unit: Optional[str] = Field("Units", description="Measurement unit (e.g. $, Units, %, Hours)")
+    aggregation_type: Optional[str] = Field("sum", description="Aggregation method: sum, avg, count, distinct_count")
+    distinct_entity_column: Optional[str] = Field(None, description="Entity identifier for distinct count")
+    date_column: Optional[str] = Field(None, description="Date column for time series")
+    dimension_columns: Optional[List[str]] = Field(default_factory=list, description="Categorical dimension columns")
+    driver_columns: Optional[List[str]] = Field(default_factory=list, description="Numeric driver columns")
+    identifier_columns: Optional[List[str]] = Field(default_factory=list, description="Ignored identifier columns")
+    drop_invalid_rows: Optional[bool] = Field(True, description="Drop null/invalid rows during ingestion")
 
 
 class SimulationLeversRequest(BaseModel):
-    price_rollback_pct: float = 6.0
-    promo_fund_k: float = 15.0
-    churn_mitigation: bool = True
-    persona: Optional[str] = None
+    price_rollback_pct: float = Field(6.0, ge=0.0, le=10.0, description="Rollback percentage (0-10%)")
+    promo_fund_k: float = Field(15.0, ge=0.0, le=50.0, description="Regional Co-Op fund ($0k-$50k)")
+    churn_mitigation: bool = Field(True, description="VIP Retention Guard CSM assignment")
 
 
-class ChatQueryRequest(BaseModel):
-    query: str
-    chat_history: Optional[List[Dict[str, Any]]] = Field(default_factory=list)
-    selected_hypothesis_id: Optional[str] = None
-    simulation_levers: Optional[Dict[str, Any]] = None
-    persona: Optional[str] = None
+class ChatRequest(BaseModel):
+    query: str = Field(..., description="User query or hypothesis question")
+    chat_history: Optional[List[Dict[str, Any]]] = Field(default_factory=list, description="Multi-turn conversation history")
+    simulation_levers: Optional[Dict[str, Any]] = Field(None, description="Current simulation lever overrides")
+    persona: Optional[str] = Field(None, description="Optional persona override for testing")
+    response_style: Optional[str] = Field("concise", description="Response style: concise or deep")
 
 
-# ==============================================================================
-# DATA INGESTION & CONFIGURATION ENDPOINTS
-# ==============================================================================
+class SetApiKeyRequest(BaseModel):
+    api_key: str = Field(..., description="Google Gemini API Key from Google AI Studio")
 
-@app.post("/api/data/upload")
-async def upload_dataset(file: UploadFile = File(...)):
-    """
-    Accepts CSV, Excel, or SQLite files.
-    Inspects and profiles all columns, returning type guesses, null rates, cardinality, and sample rows.
-    """
-    filename = file.filename or "uploaded_file"
-    ext = os.path.splitext(filename)[1].lower()
-
-    content = await file.read()
-    if len(content) == 0:
-        raise HTTPException(status_code=400, detail="Uploaded file is empty.")
-
-    try:
-        if ext in [".csv", ".txt"]:
-            try:
-                df = pd.read_csv(io.BytesIO(content), encoding="utf-8")
-            except UnicodeDecodeError:
-                df = pd.read_csv(io.BytesIO(content), encoding="latin-1")
-        elif ext in [".xlsx", ".xls"]:
-            df = pd.read_excel(io.BytesIO(content))
-        elif ext in [".sqlite", ".db"]:
-            with tempfile.NamedTemporaryFile(suffix=ext, delete=False) as tmp:
-                tmp.write(content)
-                tmp_path = tmp.name
-            
-            conn = sqlite3.connect(tmp_path)
-            cursor = conn.cursor()
-            cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%';")
-            tables = cursor.fetchall()
-            if not tables:
-                conn.close()
-                os.remove(tmp_path)
-                raise HTTPException(status_code=400, detail="No readable user tables found in SQLite database.")
-            
-            table_name = tables[0][0]
-            df = pd.read_sql_query(f"SELECT * FROM `{table_name}`", conn)
-            conn.close()
-            os.remove(tmp_path)
-        else:
-            raise HTTPException(
-                status_code=400,
-                detail=f"Unsupported file format '{ext}'. Please upload CSV (.csv), Excel (.xlsx/.xls), or SQLite (.db/.sqlite)."
-            )
-    except HTTPException:
-        raise
-    except Exception as e:
-        raise HTTPException(status_code=400, detail=f"Failed to parse file '{filename}': {str(e)}")
-
-    if df.empty:
-        raise HTTPException(status_code=400, detail="The uploaded file contains zero rows of data.")
-
-    # Cache raw dataframe in session memory
-    _UPLOAD_CACHE["raw_df"] = df
-    _UPLOAD_CACHE["filename"] = filename
-
-    # Compute comprehensive profile
-    profiles = DataProfiler.profile_dataframe(df)
-    valid_numerics = DataProfiler.get_valid_numeric_columns(df)
-    valid_dates = DataProfiler.get_valid_date_columns(df)
-
-    # Safe JSON preview
-    preview_df = df.head(15).copy()
-    for col in preview_df.columns:
-        if pd.api.types.is_datetime64_any_dtype(preview_df[col]):
-            preview_df[col] = preview_df[col].astype(str)
-    preview = preview_df.fillna("").to_dict(orient="records")
-
-    return {
-        "success": True,
-        "filename": filename,
-        "total_rows": len(df),
-        "total_columns": len(df.columns),
-        "columns": list(df.columns),
-        "profiles": profiles,
-        "valid_numeric_columns": valid_numerics,
-        "valid_date_columns": valid_dates,
-        "preview": preview
-    }
-
-
-@app.post("/api/data/profile")
-async def get_data_profile():
-    """Returns profile for currently uploaded raw dataframe."""
-    df = _UPLOAD_CACHE.get("raw_df")
-    if df is None:
-        raise HTTPException(status_code=400, detail="No dataset has been uploaded yet.")
-    
-    profiles = DataProfiler.profile_dataframe(df)
-    valid_numerics = DataProfiler.get_valid_numeric_columns(df)
-    valid_dates = DataProfiler.get_valid_date_columns(df)
-    
-    return {
-        "success": True,
-        "filename": _UPLOAD_CACHE.get("filename", "custom_data"),
-        "total_rows": len(df),
-        "total_columns": len(df.columns),
-        "profiles": profiles,
-        "valid_numeric_columns": valid_numerics,
-        "valid_date_columns": valid_dates
-    }
-
-
-@app.post("/api/data/configure")
-async def configure_dataset(req: SemanticModelRequest):
-    """
-    Validates user semantic configuration, maps columns, checks feasibility,
-    and sets the custom dataset into the active DataRepository.
-    """
-    df_raw = _UPLOAD_CACHE.get("raw_df")
-    if df_raw is None:
-        raise HTTPException(status_code=400, detail="No uploaded dataset found. Please upload a file first.")
-
-    model = SemanticDataModel(
-        dataset_name=req.dataset_name,
-        analysis_grain=req.analysis_grain,
-        primary_measure=req.primary_measure,
-        primary_measure_label=req.primary_measure_label or req.primary_measure,
-        primary_measure_unit=req.primary_measure_unit or "Units",
-        aggregation_type=req.aggregation_type,
-        distinct_entity_column=req.distinct_entity_column,
-        date_column=req.date_column if req.date_column and req.date_column != "None (Snapshot)" else None,
-        dimension_columns=req.dimension_columns,
-        driver_columns=req.driver_columns,
-        identifier_columns=req.identifier_columns,
-        is_demo=False
-    )
-
-    try:
-        tables, feat_status, warnings = ColumnMapper.transform_generic_dataset(
-            df_raw, model, drop_invalid_rows=req.drop_invalid_rows
-        )
-    except ValueError as val_err:
-        raise HTTPException(status_code=400, detail=str(val_err))
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Data transformation error: {str(e)}")
-
-    # Update active repository state
-    repo = DataRepository.get_instance()
-    source_info = {
-        "name": req.dataset_name,
-        "is_demo": False,
-        "row_count": len(tables["sales"]),
-        "columns": list(df_raw.columns),
-        "feature_status": feat_status,
-        "analysis_grain": req.analysis_grain,
-        "primary_measure_label": model.primary_measure_label,
-        "primary_measure_unit": model.primary_measure_unit
-    }
-    repo.set_custom_data(tables, source_info, model)
-
-    # Evaluate feasibility across all 8 capabilities
-    feasibility = AnalysisFeasibilityChecker.evaluate_feasibility(df_raw, model)
-
-    return _to_json_safe({
-        "success": True,
-        "message": f"Successfully ingested '{req.dataset_name}' ({len(tables['sales']):,} records).",
-        "source_info": source_info,
-        "feasibility": feasibility,
-        "warnings": warnings
-    })
-
-
-
-@app.post("/api/data/reset-demo")
-async def reset_demo_dataset():
-    """Resets the repository to the built-in B2B SaaS Benchmark dataset."""
-    repo = DataRepository.get_instance()
-    repo.reset_to_demo_dataset()
-    _UPLOAD_CACHE.clear()
-    return {
-        "success": True,
-        "message": "Reset to built-in B2B SaaS Benchmark dataset.",
-        "source_info": repo.active_source_info
-    }
-
-
-@app.get("/api/data/source")
-async def get_active_source():
-    """Returns metadata for the currently active data source."""
-    repo = DataRepository.get_instance()
-    info = repo.active_source_info.copy()
-    info["has_uploaded_cache"] = ("raw_df" in _UPLOAD_CACHE)
-    if repo.semantic_model:
-        info["semantic_model"] = {
-            "dataset_name": repo.semantic_model.dataset_name,
-            "analysis_grain": repo.semantic_model.analysis_grain,
-            "primary_measure": repo.semantic_model.primary_measure,
-            "primary_measure_label": repo.semantic_model.primary_measure_label,
-            "primary_measure_unit": repo.semantic_model.primary_measure_unit,
-            "aggregation_type": repo.semantic_model.aggregation_type,
-            "distinct_entity_column": repo.semantic_model.distinct_entity_column,
-            "date_column": repo.semantic_model.date_column,
-            "dimension_columns": repo.semantic_model.dimension_columns,
-            "driver_columns": repo.semantic_model.driver_columns
-        }
-    return info
-
-
-# ==============================================================================
-@app.get("/api/personas")
-async def list_personas():
-    """Returns available enterprise personas with metadata and permission profiles."""
-    return _to_json_safe(get_personas())
 
 class LogEventRequest(BaseModel):
     persona: str = Field(..., description="Selected persona ID")
     action: str = Field("GATE_SELECTION", description="Action name")
     endpoint: Optional[str] = "persona_gate"
     details: Optional[Dict[str, Any]] = None
+
+
+# Helper for JSON serialization
+def _to_json_safe(obj: Any) -> Any:
+    if isinstance(obj, (pd.DataFrame, pd.Series)):
+        return obj.fillna(0).to_dict(orient="records")
+    if isinstance(obj, (np.integer, np.int64)):
+        return int(obj)
+    if isinstance(obj, (np.floating, np.float64)):
+        return float(obj)
+    if isinstance(obj, np.ndarray):
+        return obj.tolist()
+    if isinstance(obj, dict):
+        return {k: _to_json_safe(v) for k, v in obj.items()}
+    if isinstance(obj, list):
+        return [_to_json_safe(x) for x in obj]
+    return obj
+
+
+# ==============================================================================
+# MULTI-PAGE JINJA2 ROUTES & PERSONA GATE (REQUIREMENTS A & B)
+# ==============================================================================
+
+@app.get("/")
+async def root_persona_gate(request: Request):
+    """
+    Persona Gate Landing Screen (Requirement B).
+    If persona_id is already in session, redirect to /overview.
+    Otherwise, render gate.html with the 4 persona cards.
+    """
+    persona_id = request.session.get("persona_id")
+    if persona_id and persona_id in PERSONAS:
+        return RedirectResponse(url="/overview", status_code=303)
+    
+    return templates.TemplateResponse(request=request, name="gate.html", context={"personas": get_personas()})
+
+
+@app.post("/session/select-persona")
+async def session_select_persona(request: Request):
+    """
+    Sets the signed session cookie for the chosen persona and transitions into /overview.
+    Rejects invalid persona IDs with 400.
+    Logs gate selection event to the audit trail (Requirement D).
+    """
+    persona_id = None
+    # 1. Try form data
+    try:
+        form = await request.form()
+        persona_id = form.get("persona_id")
+    except Exception:
+        pass
+    
+    # 2. Try JSON payload
+    if not persona_id:
+        try:
+            body = await request.json()
+            persona_id = body.get("persona_id")
+        except Exception:
+            pass
+
+    if not persona_id or persona_id not in PERSONAS:
+        raise HTTPException(status_code=400, detail="Invalid persona selected. Must be one of: executive, general_user, regional_lead, analyst")
+    
+    request.session["persona_id"] = persona_id
+    
+    log_event(
+        persona=persona_id,
+        action="GATE_SELECTION",
+        endpoint="persona_gate",
+        details={"selected_role": persona_id}
+    )
+    
+    return RedirectResponse(url="/overview", status_code=303)
+
+
+@app.get("/session/switch-role")
+async def session_switch_role(request: Request):
+    """
+    Clears the session cookie and redirects to the Persona Gate landing view.
+    Logs role switch event in audit log.
+    """
+    curr_persona = request.session.pop("persona_id", None)
+    if curr_persona:
+        log_event(
+            persona=curr_persona,
+            action="SWITCH_ROLE",
+            endpoint="/session/switch-role",
+            details={"switched_from": curr_persona}
+        )
+    return RedirectResponse(url="/", status_code=303)
+
+
+def _render_protected_page(request: Request, page_name: str):
+    """
+    Helper to enforce server-side gate security:
+    If no persona is in session, logs BLOCKED_UNAUTHORIZED and redirects to / (Requirement B).
+    """
+    persona_id = request.session.get("persona_id")
+    if not persona_id or persona_id not in PERSONAS:
+        log_event(
+            persona="unauthorized",
+            action="BLOCKED_UNAUTHORIZED",
+            endpoint=request.url.path,
+            details={"blocked_route": request.url.path},
+            status="BLOCKED"
+        )
+        return RedirectResponse(url="/", status_code=303)
+    
+    persona_meta = get_persona(persona_id)
+    return templates.TemplateResponse(request=request, name=f"{page_name}.html", context={"active_page": page_name, "persona": persona_meta})
+
+
+@app.get("/overview")
+async def page_overview(request: Request):
+    return _render_protected_page(request, "overview")
+
+
+@app.get("/diagnostic")
+async def page_diagnostic(request: Request):
+    return _render_protected_page(request, "diagnostic")
+
+
+@app.get("/workspace")
+async def page_workspace(request: Request):
+    return _render_protected_page(request, "workspace")
+
+
+@app.get("/simulation")
+async def page_simulation(request: Request):
+    return _render_protected_page(request, "simulation")
+
+
+@app.get("/console")
+async def page_console(request: Request):
+    return _render_protected_page(request, "console")
+
+
+@app.get("/sources")
+async def page_sources(request: Request):
+    return _render_protected_page(request, "sources")
+
+
+# ==============================================================================
+# AUDIT LOG & PERSONAS ENDPOINTS
+# ==============================================================================
+
+@app.get("/api/personas")
+async def list_personas():
+    """Returns available enterprise personas with metadata and permission profiles."""
+    return _to_json_safe(get_personas())
 
 
 @app.post("/api/access-log/event")
@@ -379,11 +322,181 @@ async def get_access_audit_log(limit: int = 50):
     })
 
 
-# ANALYTICAL DASHBOARD ENDPOINTS
+# ==============================================================================
+# DATA INTAKE & SOURCE MANAGEMENT REST APIS
+# ==============================================================================
+
+@app.post("/api/data/upload")
+async def upload_dataset_file(file: UploadFile = File(...)):
+    """Uploads and profiles an external CSV dataset."""
+    filename = file.filename or "uploaded_data.csv"
+    if not filename.lower().endswith(".csv"):
+        raise HTTPException(status_code=400, detail="Invalid file type. Only CSV files are supported.")
+    
+    try:
+        content = await file.read()
+        df = pd.read_csv(io.BytesIO(content))
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=f"Failed to parse CSV file: {str(e)}")
+
+    if df.empty:
+        raise HTTPException(status_code=400, detail="Uploaded CSV file is empty.")
+
+    profile = DataProfiler.profile_dataset(df)
+
+    _UPLOAD_CACHE["raw_df"] = df
+    _UPLOAD_CACHE["profile"] = profile
+    _UPLOAD_CACHE["filename"] = filename
+
+    preview_rows = df.head(10).fillna("").to_dict(orient="records")
+    return {
+        "success": True,
+        "filename": filename,
+        "message": f"Successfully parsed and profiled {filename} ({profile['total_rows']} rows, {profile['total_columns']} columns)",
+        "total_rows": profile["total_rows"],
+        "total_columns": profile["total_columns"],
+        "columns": [p["column_name"] for p in profile["profiles"]],
+        "valid_numeric_columns": profile["valid_numeric_columns"],
+        "valid_date_columns": profile["valid_date_columns"],
+        "valid_dimension_columns": profile["valid_dimension_columns"],
+        "profiles": profile["profiles"],
+        "preview": preview_rows
+    }
+
+
+@app.post("/api/data/configure")
+async def configure_semantic_model(config: SemanticConfigRequest):
+    """Applies user semantic mapping to transform and ingest custom dataset."""
+    if "raw_df" not in _UPLOAD_CACHE:
+        raise HTTPException(status_code=400, detail="No dataset uploaded in current session. Please upload a CSV first.")
+
+    raw_df = _UPLOAD_CACHE["raw_df"]
+    
+    if config.primary_measure not in raw_df.columns:
+        raise HTTPException(status_code=400, detail=f"Primary measure '{config.primary_measure}' does not exist in dataset.")
+    
+    is_num, invalid_cnt, invalid_pct = DataProfiler.is_reliably_numeric(raw_df[config.primary_measure])
+    if not is_num:
+        raise HTTPException(
+            status_code=400,
+            detail=f"Selected primary measure '{config.primary_measure}' contains non-numeric text ({invalid_pct}% unparseable). Please select a valid numeric column."
+        )
+
+    for drv in config.driver_columns:
+        if drv in raw_df.columns:
+            d_is_num, _, d_pct = DataProfiler.is_reliably_numeric(raw_df[drv])
+            if not d_is_num:
+                raise HTTPException(
+                    status_code=400,
+                    detail=f"Selected driver '{drv}' contains non-numeric text ({d_pct}% invalid). Drivers must be numeric."
+                )
+
+    semantic_model = SemanticDataModel(
+        dataset_name=config.dataset_name,
+        analysis_grain=config.analysis_grain,
+        primary_measure=config.primary_measure,
+        primary_measure_label=config.primary_measure_label,
+        primary_measure_unit=config.primary_measure_unit,
+        aggregation_type=config.aggregation_type,
+        distinct_entity_column=config.distinct_entity_column,
+        date_column=config.date_column if config.date_column != "None (Snapshot)" else None,
+        dimension_columns=config.dimension_columns,
+        driver_columns=config.driver_columns,
+        identifier_columns=config.identifier_columns,
+        drop_invalid_rows=config.drop_invalid_rows
+    )
+
+    try:
+        norm_tables, feat_status, warnings = ColumnMapper.transform_generic_dataset(
+            raw_df, 
+            semantic_model, 
+            drop_invalid_rows=config.drop_invalid_rows if config.drop_invalid_rows is not None else True
+        )
+        clean_df = norm_tables.get("sales", raw_df)
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=f"Data transformation failed: {str(e)}")
+
+    is_temporal = bool(semantic_model.is_temporal)
+    
+    repo = DataRepository.get_instance()
+    repo.set_custom_data(
+        tables=norm_tables,
+        source_info={
+            "source_type": "Custom CSV Ingestion",
+            "name": config.dataset_name,
+            "is_demo": False,
+            "row_count": len(clean_df),
+            "primary_measure_label": config.primary_measure_label or config.primary_measure,
+            "primary_measure_unit": config.primary_measure_unit or "Units",
+            "analysis_grain": config.analysis_grain,
+            "feature_status": {
+                "is_temporal": is_temporal,
+                "aggregation_type": config.aggregation_type
+            }
+        },
+        semantic_model=semantic_model
+    )
+
+    feasibility = AnalysisFeasibilityChecker.evaluate_feasibility(clean_df, semantic_model)
+
+    return {
+        "success": True,
+        "status": "SUCCESS",
+        "message": f"Dataset '{config.dataset_name}' successfully configured and loaded ({len(clean_df):,} records).",
+        "semantic_model": semantic_model.to_dict(),
+        "feasibility": feasibility,
+        "is_temporal": is_temporal,
+        "primary_measure": config.primary_measure_label or config.primary_measure,
+        "dimensions": config.dimension_columns,
+        "drivers": config.driver_columns,
+        "source_info": repo.active_source_info,
+        "row_count": len(clean_df)
+    }
+
+
+@app.post("/api/data/reset-demo")
+async def reset_to_benchmark():
+    """Restores the built-in B2B SaaS benchmark dataset in DataRepository."""
+    _UPLOAD_CACHE.clear()
+    repo = DataRepository.get_instance()
+    repo.reset_to_demo_dataset()
+    return {
+        "success": True,
+        "status": "SUCCESS",
+        "message": "Data repository restored to built-in B2B SaaS benchmark dataset.",
+        "source_info": repo.active_source_info,
+        "is_demo": True
+    }
+
+
+@app.get("/api/data/source")
+async def get_active_source_info():
+    """Returns metadata about the active dataset."""
+    repo = DataRepository.get_instance()
+    info = repo.active_source_info.copy()
+    info["has_uploaded_cache"] = ("raw_df" in _UPLOAD_CACHE)
+    if repo.semantic_model:
+        info["semantic_model"] = {
+            "dataset_name": repo.semantic_model.dataset_name,
+            "analysis_grain": repo.semantic_model.analysis_grain,
+            "primary_measure": repo.semantic_model.primary_measure,
+            "primary_measure_label": repo.semantic_model.primary_measure_label,
+            "primary_measure_unit": repo.semantic_model.primary_measure_unit,
+            "aggregation_type": repo.semantic_model.aggregation_type,
+            "distinct_entity_column": repo.semantic_model.distinct_entity_column,
+            "date_column": repo.semantic_model.date_column,
+            "dimension_columns": repo.semantic_model.dimension_columns,
+            "driver_columns": repo.semantic_model.driver_columns
+        }
+    return info
+
+
+# ==============================================================================
+# ANALYTICAL DASHBOARD APIS (SCOPED FROM SESSION / COMPATIBLE PARAMS)
 # ==============================================================================
 
 @app.get("/api/overview")
-async def get_overview(persona: Optional[str] = None):
+async def get_overview(request: Request, persona: Optional[str] = None):
     """
     Returns executive overview metrics:
     - Primary KPI cards (Observed, Baseline, Delta, Status)
@@ -409,7 +522,6 @@ async def get_overview(persona: Optional[str] = None):
     if not ts.empty and is_temporal:
         corridor_df = AnomalyEngine.calculate_baseline_and_corridor(ts)
         for _, r in corridor_df.iterrows():
-
             ts_points.append({
                 "week_idx": int(r.get("week_idx", 0)),
                 "week_label": str(r.get("week_label", f"W{int(r.get('week_idx', 0)):02d}")),
@@ -480,13 +592,17 @@ async def get_overview(persona: Optional[str] = None):
         "data_quality_score": float(dq.get("data_quality_score", 100.0)),
         "total_records": int(repo.active_source_info.get("row_count", len(ts)))
     }
-    if persona:
-        res_payload = scope_overview(res_payload, persona, repo)
+    
+    # Priority: Session cookie persona -> Query parameter -> Unscoped
+    active_p = request.session.get("persona_id") or persona
+    if active_p:
+        res_payload = scope_overview(res_payload, active_p, repo)
+        
     return _to_json_safe(res_payload)
 
 
 @app.get("/api/diagnostic")
-async def get_diagnostic(persona: Optional[str] = None):
+async def get_diagnostic(request: Request, persona: Optional[str] = None):
     """
     Returns deep diagnostic decomposition:
     - Time-series corridor data (temporal) OR distribution & outlier profile (non-temporal)
@@ -538,17 +654,21 @@ async def get_diagnostic(persona: Optional[str] = None):
         "primary_measure_unit": unit,
         "breakdowns": breakdowns,
         "driver_correlations": correlations_list,
+        "distribution": dist_stats,
         "distribution_stats": dist_stats,
-        "data_quality_report": dq_report,
+        "data_quality": dq_report,
         "variance_decomposition": decomp
     }
-    if persona:
-        res_payload = scope_diagnostic(res_payload, persona)
+    
+    active_p = request.session.get("persona_id") or persona
+    if active_p:
+        res_payload = scope_diagnostic(res_payload, active_p, repo)
+        
     return _to_json_safe(res_payload)
 
 
 @app.get("/api/workspace")
-async def get_investigation_workspace(persona: Optional[str] = None):
+async def get_investigation_workspace(request: Request, persona: Optional[str] = None):
     """
     Returns investigation findings:
     - For Built-in Demo: 8 full Causal Hypotheses with DiD, mathematical decomposition, DAG roles, and rank.
@@ -568,14 +688,16 @@ async def get_investigation_workspace(persona: Optional[str] = None):
         "variance_decomposition": decomp,
         "disclaimer": "" if is_demo else "Observational Integrity Notice: For custom uploaded datasets, results represent empirical concentrations, statistical associations, and distribution patterns—not confirmed causal hypotheses."
     }
-    if persona:
-        res_payload = scope_workspace(res_payload, persona)
+    
+    active_p = request.session.get("persona_id") or persona
+    if active_p:
+        res_payload = scope_workspace(res_payload, active_p, repo)
+        
     return _to_json_safe(res_payload)
 
 
-
 @app.get("/api/simulation")
-async def get_simulation(persona: Optional[str] = None):
+async def get_simulation(request: Request, persona: Optional[str] = None):
     """
     Returns simulation state.
     Available strictly for the built-in B2B SaaS benchmark.
@@ -592,60 +714,10 @@ async def get_simulation(persona: Optional[str] = None):
             "trajectory": []
         }
     
-    # Built-in demo simulation
     res = SimulationEngine.simulate_lever_impact(
         price_rollback_pct=-abs(_ACTIVE_SIM_LEVERS["price_rollback_pct"]),
         marketing_boost_usd=_ACTIVE_SIM_LEVERS["promo_fund_k"] * 1000.0,
         competitor_retaliation=_ACTIVE_SIM_LEVERS["churn_mitigation"]
-    )
-    traj_df = res.get("trajectory_df", pd.DataFrame())
-    trajectory = []
-    for _, r in traj_df.iterrows():
-        trajectory.append({
-            "week_label": str(r["projection_week"]),
-            "baseline_target": float(r["Baseline Target"]),
-            "do_nothing_revenue": float(r["Do-Nothing Outlook"]),
-            "simulated_revenue": float(r["Simulated Scenario"])
-        })
-    summary = {
-        "new_unit_price": float(res.get("new_unit_price", 0.0)),
-        "simulated_revenue": float(res.get("simulated_revenue", 0.0)),
-        "simulated_margin_pct": float(res.get("simulated_margin_pct", 0.0)),
-        "recovery_pct": float(res.get("recovery_pct", 0.0)),
-        "net_revenue_delta": float(res.get("net_revenue_delta", 0.0))
-    }
-    
-    res_payload = {
-        "available": True,
-        "levers": _ACTIVE_SIM_LEVERS,
-        "trajectory": trajectory,
-        "summary": summary
-    }
-    if persona:
-        res_payload = scope_simulation(res_payload, persona)
-    return _to_json_safe(res_payload)
-
-
-@app.post("/api/simulation")
-async def update_simulation(req: SimulationLeversRequest):
-    """Updates simulation levers (demo only)."""
-    repo = DataRepository.get_instance()
-    is_demo = repo.active_source_info.get("is_demo", True)
-    
-    if not is_demo:
-        raise HTTPException(
-            status_code=400,
-            detail="Counterfactual simulation is only supported on calibrated structural models (Demo dataset)."
-        )
-    
-    _ACTIVE_SIM_LEVERS["price_rollback_pct"] = req.price_rollback_pct
-    _ACTIVE_SIM_LEVERS["promo_fund_k"] = req.promo_fund_k
-    _ACTIVE_SIM_LEVERS["churn_mitigation"] = req.churn_mitigation
-    
-    res = SimulationEngine.simulate_lever_impact(
-        price_rollback_pct=-abs(req.price_rollback_pct),
-        marketing_boost_usd=req.promo_fund_k * 1000.0,
-        competitor_retaliation=req.churn_mitigation
     )
     traj_df = res.get("trajectory_df", pd.DataFrame())
     trajectory = []
@@ -671,88 +743,77 @@ async def update_simulation(req: SimulationLeversRequest):
         "trajectory": trajectory,
         "summary": summary
     }
-    if req.persona:
-        res_payload = scope_simulation(res_payload, req.persona, is_update=True, requested_levers=dict(req))
+    
+    active_p = request.session.get("persona_id") or persona
+    if active_p:
+        res_payload = scope_simulation(res_payload, active_p)
+        
     return _to_json_safe(res_payload)
 
 
-
-@app.post("/api/chat")
-async def chat_with_edith(req: ChatQueryRequest):
-    """
-    Conversational assistant turn grounded in verified data.
-    Uses Gemini API if key is present, otherwise falls back to 100% deterministic OfflineEdithReasoner.
-    """
+@app.post("/api/simulation")
+async def update_simulation(request: Request, levers: SimulationLeversRequest, persona: Optional[str] = None):
+    """Updates simulation levers (demo only)."""
     repo = DataRepository.get_instance()
     is_demo = repo.active_source_info.get("is_demo", True)
-    label = repo.active_source_info.get("primary_measure_label", "Gross Revenue" if is_demo else "Primary Measure")
     
-    ts = repo.get_kpi_time_series()
-    anom_ctx = AnomalyEngine.evaluate_current_anomaly(ts, kpi_name=label)
-    
-    ev_engine = EvidenceEngine(repo)
-    all_hypotheses = ev_engine.evaluate_all_hypotheses()
-    
-    # Resolve selected hypothesis
-    selected_h = all_hypotheses[0] if all_hypotheses else {}
-    if req.selected_hypothesis_id:
-        for h in all_hypotheses:
-            if h.get("id") == req.selected_hypothesis_id:
-                selected_h = h
-                break
-
-    # Initialize Gemini client / Offline reasoner
-    try:
-        client = EdithLLMClient()
-        answer_text, meta = client.answer_question(
-            query=req.query,
-            anomaly_context=anom_ctx,
-            selected_hypothesis=selected_h,
-            hypotheses=all_hypotheses,
-            chat_history=req.chat_history or [],
-            simulation_levers=req.simulation_levers or _ACTIVE_SIM_LEVERS,
-            persona=req.persona
+    if not is_demo:
+        raise HTTPException(
+            status_code=400,
+            detail="Counterfactual simulation is only supported on calibrated structural models (Demo dataset)."
         )
-    except Exception as e:
-        print(f"[Chat API Exception] Falling back to reasoner: {e}")
-        answer_text = OfflineEdithReasoner.answer_conversational_query(
-            query=req.query,
-            anomaly_context=anom_ctx,
-            selected_hypothesis=selected_h,
-            all_hypotheses=all_hypotheses,
-            chat_history=req.chat_history or [],
-            simulation_levers=req.simulation_levers or _ACTIVE_SIM_LEVERS,
-            persona=req.persona or "executive"
-        )
-        meta = {
-            "provider": "Deterministic Analytical Engine",
-            "model": "OfflineEdithReasoner v2.0",
-            "status": "Active (Fallback on Error)",
-            "intent": "general_inquiry",
-            "error_detail": str(e)
-        }
-
-    return {
-        "answer": answer_text,
-        "intent": meta.get("intent", "evidence_retrieval"),
-        "citations": meta.get("citations", []),
-        "metadata": meta,
-        "is_demo": is_demo
+    
+    _ACTIVE_SIM_LEVERS["price_rollback_pct"] = levers.price_rollback_pct
+    _ACTIVE_SIM_LEVERS["promo_fund_k"] = levers.promo_fund_k
+    _ACTIVE_SIM_LEVERS["churn_mitigation"] = levers.churn_mitigation
+    
+    res = SimulationEngine.simulate_lever_impact(
+        price_rollback_pct=-abs(levers.price_rollback_pct),
+        marketing_boost_usd=levers.promo_fund_k * 1000.0,
+        competitor_retaliation=levers.churn_mitigation
+    )
+    traj_df = res.get("trajectory_df", pd.DataFrame())
+    trajectory = []
+    for _, r in traj_df.iterrows():
+        trajectory.append({
+            "week_label": str(r["projection_week"]),
+            "baseline_target": float(r["Baseline Target"]),
+            "do_nothing_revenue": float(r["Do-Nothing Outlook"]),
+            "simulated_revenue": float(r["Simulated Scenario"])
+        })
+    summary = {
+        "new_unit_price": float(res.get("new_unit_price", 0.0)),
+        "simulated_revenue": float(res.get("simulated_revenue", 0.0)),
+        "simulated_margin_pct": float(res.get("simulated_margin_pct", 0.0)),
+        "recovery_pct": float(res.get("recovery_pct", 0.0)),
+        "net_revenue_delta": float(res.get("net_revenue_delta", 0.0))
     }
-
-
-
-class SetApiKeyRequest(BaseModel):
-    api_key: str = Field(..., description="Google Gemini API Key")
+    
+    res_payload = {
+        "success": True,
+        "available": True,
+        "levers": _ACTIVE_SIM_LEVERS,
+        "trajectory": trajectory,
+        "summary": summary
+    }
+    
+    active_p = request.session.get("persona_id") or persona
+    if active_p:
+        res_payload = scope_simulation(res_payload, active_p, is_update=True, requested_levers=dict(levers))
+        
+    return _to_json_safe(res_payload)
 
 
 @app.get("/api/briefing")
-async def get_executive_briefing(persona: Optional[str] = None):
+async def get_executive_briefing(request: Request, persona: Optional[str] = None):
     """
     Generates persona-specific standing Executive Briefing report artifact.
     Works 100% offline with zero API key requirement.
     """
-    p_id = persona or DEFAULT_PERSONA
+    active_p = request.session.get("persona_id") or persona or DEFAULT_PERSONA
+    p_meta = get_persona(active_p)
+    p_id = p_meta["id"]
+    
     repo = DataRepository.get_instance()
     is_demo = repo.active_source_info.get("is_demo", True)
     label = repo.active_source_info.get("primary_measure_label", "Gross Revenue" if is_demo else "Primary Measure")
@@ -770,6 +831,7 @@ async def get_executive_briefing(persona: Optional[str] = None):
         hypotheses=all_hypotheses,
         simulation_levers=_ACTIVE_SIM_LEVERS
     )
+    briefing["persona"] = p_id
     
     log_access(
         persona=p_id,
@@ -779,6 +841,77 @@ async def get_executive_briefing(persona: Optional[str] = None):
     )
     
     return _to_json_safe(briefing)
+
+
+
+@app.post("/api/chat")
+async def chat_with_edith(request: Request, req: ChatRequest):
+    """
+    Asynchronous grounded conversational decision intelligence interface.
+    Operates via Live Gemini Agent or Deterministic Offline Reasoner (Zero-Key).
+    """
+    repo = DataRepository.get_instance()
+    is_demo = repo.active_source_info.get("is_demo", True)
+    label = repo.active_source_info.get("primary_measure_label", "Gross Revenue" if is_demo else "Primary Measure")
+    
+    active_p = request.session.get("persona_id") or req.persona or "executive"
+    p_meta = get_persona(active_p)
+    p_id = p_meta["id"]
+
+    ts = repo.get_kpi_time_series(region="Region B" if p_id == "regional_lead" else None)
+    anom_ctx = AnomalyEngine.evaluate_current_anomaly(ts, kpi_name=label)
+
+    ev_engine = EvidenceEngine(repo)
+    all_hypotheses = ev_engine.evaluate_all_hypotheses()
+    selected_h = next((h for h in all_hypotheses if h.get("id") == "H1_PRICING_SHOCK"), all_hypotheses[0] if all_hypotheses else {})
+
+    client = EdithLLMClient()
+    
+    try:
+        answer_text, metadata = client.answer_question(
+            query=req.query,
+            anomaly_context=anom_ctx,
+            selected_hypothesis=selected_h,
+            hypotheses=all_hypotheses,
+            chat_history=req.chat_history or [],
+            simulation_levers=req.simulation_levers or _ACTIVE_SIM_LEVERS,
+            persona=p_id,
+            response_style=req.response_style or "concise"
+        )
+    except Exception as e:
+        print(f"[LLM Client Error]: {e}. Falling back to Offline Reasoner.")
+        answer_text = OfflineEdithReasoner.answer_conversational_query(
+            query=req.query,
+            anomaly_context=anom_ctx,
+            selected_hypothesis=selected_h,
+            all_hypotheses=all_hypotheses,
+            chat_history=req.chat_history or [],
+            simulation_levers=req.simulation_levers or _ACTIVE_SIM_LEVERS,
+            persona=p_id
+        )
+        metadata = {
+            "provider": "Deterministic Analytical Engine",
+            "model": "OfflineEdithReasoner v2.0",
+            "mode": "Deterministic Offline Mode (Zero-Key)",
+            "latency_sec": 0.01,
+            "status": "Fallback Successful"
+        }
+
+    log_access(
+        persona=p_id,
+        endpoint="/api/chat",
+        action="QUERY",
+        granted_sections=["conversational_narration", "observational_grounding"],
+        restricted_sections=["competitor_telemetry"] if p_id == "regional_lead" else [],
+        details={"query": req.query[:100]}
+    )
+
+    return {
+        "answer": answer_text,
+        "metadata": metadata,
+        "persona": p_id,
+        "is_demo": is_demo
+    }
 
 
 @app.get("/api/ai/status")
@@ -814,17 +947,14 @@ async def set_api_key(req: SetApiKeyRequest):
     
     try:
         from google import genai
-        # Initialize and test key
         test_client = genai.Client(api_key=clean_key)
-        
-        # Test lightweight generation probe
         try:
             test_client.models.generate_content(
                 model="gemini-2.0-flash",
                 contents="Ping"
             )
         except Exception:
-            pass  # Even if probe throttles, save key
+            pass
             
         os.environ["GEMINI_API_KEY"] = clean_key
         return {
@@ -849,35 +979,11 @@ async def set_api_key(req: SetApiKeyRequest):
         }
 
 
-
-
-# ==============================================================================
-# STATIC FILES & SPA SERVING
-# ==============================================================================
-
-FRONTEND_DIR = os.path.join(os.path.dirname(__file__), "frontend")
-os.makedirs(FRONTEND_DIR, exist_ok=True)
-
-if os.path.exists(FRONTEND_DIR):
-    app.mount("/static", StaticFiles(directory=FRONTEND_DIR), name="static")
-
-@app.get("/")
-async def serve_spa():
-    """Serves the single-page application dashboard."""
-    index_path = os.path.join(FRONTEND_DIR, "index.html")
-    if os.path.exists(index_path):
-        return FileResponse(index_path, media_type="text/html")
-    return JSONResponse(
-        content={"message": "EDITH FastAPI API Server is running. frontend/index.html not found."},
-        status_code=200
-    )
-
-
 # ==============================================================================
 # ENTRY POINT
 # ==============================================================================
 if __name__ == "__main__":
     import uvicorn
     port = int(os.environ.get("PORT", 8501))
-    print(f"🚀 Starting EDITH Decision Intelligence FastAPI Server on http://0.0.0.0:{port}")
+    print(f"🚀 Starting EDITH Multi-Page FastAPI Server on http://0.0.0.0:{port}")
     uvicorn.run("main:app", host="0.0.0.0", port=port, reload=True)

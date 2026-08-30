@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-[#F8F8F8]">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EDITH — Enterprise Decision Intelligence & Causal Analysis</title>
+  
+  <!-- Inter Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            brand: {
+              50: '#FAF5FF',
+              100: '#F5E8FF',
+              200: '#E9D5FF',
+              300: '#D8B4FE',
+              400: '#C084FC',
+              500: '#A100FF',
+              600: '#6F00B5',
+              700: '#580091',
+              800: '#42006D',
+              900: '#2C0049',
+            },
+            accenture: {
+              purple: '#A100FF',
+              dark: '#171717',
+              gray: '#737373',
+              light: '#F8F8F8',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Plotly.js CDN -->
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+
+  <!-- EDITH Shared Controller -->
+  <script src="/static/app.js"></script>
+
+  <!-- Alpine.js CDN -->
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.3/dist/cdn.min.js"></script>
+
+  <style>
+    [x-cloak] { display: none !important; }
+    body { font-family: 'Inter', sans-serif; }
+    ::-webkit-scrollbar { width: 4px; height: 4px; }
+    ::-webkit-scrollbar-track { background: #F5F5F5; }
+    ::-webkit-scrollbar-thumb { background: #D4D4D4; border-radius: 2px; }
+    ::-webkit-scrollbar-thumb:hover { background: #A3A3A3; }
+  </style>
+</head>
+<body class="h-full flex flex-col font-sans antialiased bg-[#F8F8F8] text-[#171717]" x-data="edithApp('{{ active_page }}', '{{ persona.id }}')" x-init="initPage()" x-cloak>
+
+  <!-- Top Global Header -->
+  <header class="bg-white border-b border-[#E5E5E5] sticky top-0 z-40 px-6 py-2.5 flex items-center justify-between">
+    <div class="flex items-center space-x-3.5">
+      <!-- Purple Geometric Logo Mark -->
+      <a href="/overview" class="w-7 h-7 rounded bg-[#A100FF] flex items-center justify-center font-bold text-white text-xs tracking-wider shadow-sm hover:opacity-90 transition">
+        E
+      </a>
+      <div class="flex items-center space-x-2.5">
+        <a href="/overview" class="text-sm font-bold text-[#171717] tracking-tight hover:text-[#6F00B5] transition">EDITH</a>
+        <span class="text-[#E5E5E5]">|</span>
+        <span class="text-xs font-semibold text-[#6F00B5] bg-[#F5E8FF] px-2 py-0.5 rounded border border-[#E9D5FF]">Decision Intelligence</span>
+      </div>
+    </div>
+
+    <!-- Global Controls: Persona Indicator, Audit Trail, Dataset Badge, Reset -->
+    <div class="flex items-center space-x-3">
+      
+      <!-- Global Persona Viewing Indicator & Switch Role Button (Requirement B) -->
+      <div class="flex items-center space-x-2 bg-[#F8F8F8] px-2.5 py-1 rounded border border-[#E5E5E5] text-xs">
+        <span class="text-[10px] font-bold text-[#737373] uppercase tracking-wider">Viewing as:</span>
+        <span class="text-xs font-bold text-[#171717]">{{ persona.name }}</span>
+        <span class="text-[10px] px-1.5 py-0.5 rounded font-bold uppercase tracking-wider bg-{{ persona.badge_color }}-50 text-{{ persona.badge_color }}-700 border border-{{ persona.badge_color }}-200" 
+              :class="getPersonaBadgeClass()"
+              x-text="getPersonaBadgeLabel()"></span>
+        <a href="/session/switch-role" 
+           title="Return to the role gate to select another persona"
+           class="ml-1 text-[11px] font-bold text-[#6F00B5] hover:text-[#4B0082] bg-white hover:bg-[#F5E8FF] px-2 py-0.5 rounded border border-[#E9D5FF] transition cursor-pointer flex items-center gap-1 shadow-2xs">
+          <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path></svg>
+          <span>Switch Role</span>
+        </a>
+      </div>
+
+      <!-- Live Audit Trail Button (Requirement D) -->
+      <button @click="openAuditModal()" 
+              title="View Live Role-Based Security & Access Control Audit Log"
+              class="text-xs font-medium px-2.5 py-1 rounded bg-white hover:bg-[#F5F5F5] text-[#555555] hover:text-[#171717] border border-[#E5E5E5] transition flex items-center gap-1.5 cursor-pointer shadow-xs">
+        <svg class="w-3.5 h-3.5 text-[#6F00B5]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+        <span>Audit Trail</span>
+      </button>
+
+      <!-- Active Dataset Badge -->
+      <div class="hidden sm:flex items-center space-x-2 bg-[#F8F8F8] px-2.5 py-1 rounded border border-[#E5E5E5] text-xs">
+        <span class="w-2 h-2 rounded-full" :class="sourceInfo.is_demo ? 'bg-[#16803C]' : 'bg-[#A100FF]'"></span>
+        <span class="text-[#555555] font-medium truncate max-w-[140px]" x-text="sourceInfo.name || 'Loading...'"></span>
+        <span class="text-[10px] px-1.5 py-0.2 rounded font-semibold uppercase tracking-wider" 
+              :class="sourceInfo.is_demo ? 'bg-[#EDF7ED] text-[#16803C]' : 'bg-[#F5E8FF] text-[#6F00B5]'"
+              x-text="sourceInfo.is_demo ? 'Benchmark' : 'Custom'"></span>
+      </div>
+
+      <button @click="resetToDemo()" 
+              title="Restore built-in B2B SaaS benchmark dataset"
+              class="text-xs font-medium px-2.5 py-1 rounded bg-white hover:bg-[#F5F5F5] text-[#555555] hover:text-[#171717] border border-[#E5E5E5] transition flex items-center gap-1.5 cursor-pointer">
+        <svg class="w-3.5 h-3.5 text-[#737373]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+        Reset Demo
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Workspace Container -->
+  <div class="flex-1 flex overflow-hidden">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="w-60 bg-white border-r border-[#E5E5E5] flex flex-col justify-between shrink-0">
+      <nav class="p-3 space-y-1">
+        <div class="text-[10px] font-semibold text-[#737373] uppercase tracking-wider px-3 pt-2 pb-1.5">Investigation Workflow</div>
+        
+        <a href="/sources" 
+           class="w-full flex items-center justify-between px-3 py-2 rounded-r text-xs transition text-left cursor-pointer {% if active_page == 'sources' %}bg-[#F5E8FF] text-[#6F00B5] font-semibold border-l-[3px] border-[#A100FF]{% else %}text-[#555555] hover:bg-[#F8F8F8] hover:text-[#171717] font-normal{% endif %}">
+          <div class="flex items-center space-x-2.5">
+            <span class="font-mono text-[11px] text-[#737373]">00</span>
+            <span>Data Sources</span>
+          </div>
+        </a>
+
+        <a href="/overview" 
+           class="w-full flex items-center justify-between px-3 py-2 rounded-r text-xs transition text-left cursor-pointer {% if active_page == 'overview' %}bg-[#F5E8FF] text-[#6F00B5] font-semibold border-l-[3px] border-[#A100FF]{% else %}text-[#555555] hover:bg-[#F8F8F8] hover:text-[#171717] font-normal{% endif %}">
+          <div class="flex items-center space-x-2.5">
+            <span class="font-mono text-[11px] text-[#737373]">01</span>
+            <span>Executive Overview</span>
+          </div>
+        </a>
+
+        <a href="/diagnostic" 
+           class="w-full flex items-center justify-between px-3 py-2 rounded-r text-xs transition text-left cursor-pointer {% if active_page == 'diagnostic' %}bg-[#F5E8FF] text-[#6F00B5] font-semibold border-l-[3px] border-[#A100FF]{% else %}text-[#555555] hover:bg-[#F8F8F8] hover:text-[#171717] font-normal{% endif %}">
+          <div class="flex items-center space-x-2.5">
+            <span class="font-mono text-[11px] text-[#737373]">02</span>
+            <span>Diagnostic Decomposition</span>
+          </div>
+        </a>
+
+        <a href="/workspace" 
+           class="w-full flex items-center justify-between px-3 py-2 rounded-r text-xs transition text-left cursor-pointer {% if active_page == 'workspace' %}bg-[#F5E8FF] text-[#6F00B5] font-semibold border-l-[3px] border-[#A100FF]{% else %}text-[#555555] hover:bg-[#F8F8F8] hover:text-[#171717] font-normal{% endif %}">
+          <div class="flex items-center space-x-2.5">
+            <span class="font-mono text-[11px] text-[#737373]">03</span>
+            <span>Causal Investigation</span>
+          </div>
+        </a>
+
+        <a href="/simulation" 
+           class="w-full flex items-center justify-between px-3 py-2 rounded-r text-xs transition text-left cursor-pointer {% if active_page == 'simulation' %}bg-[#F5E8FF] text-[#6F00B5] font-semibold border-l-[3px] border-[#A100FF]{% else %}text-[#555555] hover:bg-[#F8F8F8] hover:text-[#171717] font-normal{% endif %}">
+          <div class="flex items-center space-x-2.5">
+            <span class="font-mono text-[11px] text-[#737373]">04</span>
+            <span>Policy Simulator</span>
+          </div>
+        </a>
+
+        <a href="/console" 
+           class="w-full flex items-center justify-between px-3 py-2 rounded-r text-xs transition text-left cursor-pointer {% if active_page == 'console' %}bg-[#F5E8FF] text-[#6F00B5] font-semibold border-l-[3px] border-[#A100FF]{% else %}text-[#555555] hover:bg-[#F8F8F8] hover:text-[#171717] font-normal{% endif %}">
+          <div class="flex items-center space-x-2.5">
+            <span class="font-mono text-[11px] text-[#737373]">05</span>
+            <span>EDITH Console</span>
+          </div>
+        </a>
+      </nav>
+
+      <!-- Sidebar Footer: Persona Details & Status -->
+      <div class="p-3 border-t border-[#E5E5E5] space-y-2 bg-[#FAFAFA]">
+        <div class="space-y-1">
+          <div class="text-[10px] font-bold text-[#737373] uppercase tracking-wider">Active Role Profile</div>
+          <div class="text-xs font-semibold text-[#171717] leading-tight">{{ persona.role_title }}</div>
+          <div class="text-[10px] text-[#555555]">{{ persona.description }}</div>
+        </div>
+        <div class="pt-1.5 border-t border-[#E5E5E5] flex items-center justify-between text-[11px]">
+          <div class="flex items-center space-x-1.5">
+            <span class="w-1.5 h-1.5 rounded-full" :class="aiStatus.is_live ? 'bg-green-500' : 'bg-purple-500'"></span>
+            <span class="text-[#737373] text-[10px]" x-text="aiStatus.badge_text"></span>
+          </div>
+          <button @click="showApiKeyModal = true" class="text-[10px] text-[#6F00B5] hover:underline font-semibold cursor-pointer">
+            AI Key
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Dynamic Content Container -->
+    <main class="flex-1 overflow-y-auto p-6 space-y-5">
+      
+      <!-- Global Alert Banner -->
+      <div x-show="alertMsg" 
+           x-transition 
+           :class="alertType === 'error' ? 'bg-[#FDF2F2] border-[#F87171] text-[#991B1B]' : 'bg-[#F0FDF4] border-[#86EFAC] text-[#166534]'"
+           class="border px-4 py-2.5 rounded-md text-xs flex items-center justify-between shadow-2xs">
+        <span x-text="alertMsg"></span>
+        <button @click="alertMsg = ''" class="text-[#737373] hover:text-[#171717] ml-2 font-bold cursor-pointer">&times;</button>
+      </div>
+
+      <!-- Page-Specific Body -->
+      {% block content %}{% endblock %}
+
+    </main>
+  </div>
+
+  <!-- =================================================================== -->
+  <!-- AUDIT TRAIL MODAL (REQUIREMENT D) -->
+  <!-- =================================================================== -->
+  <div x-show="showAuditModal" 
+       class="fixed inset-0 z-50 overflow-y-auto bg-black/40 flex items-center justify-center p-4 backdrop-blur-2xs" 
+       x-cloak>
+    <div @click.away="showAuditModal = false" class="bg-white rounded-lg border border-[#E5E5E5] max-w-2xl w-full p-5 space-y-4 shadow-xl">
+      <div class="flex items-center justify-between border-b border-[#E5E5E5] pb-3">
+        <div class="flex items-center space-x-2">
+          <div class="w-6 h-6 rounded bg-[#F5E8FF] border border-[#E9D5FF] flex items-center justify-center text-[#6F00B5] font-bold text-xs">
+            🛡️
+          </div>
+          <div>
+            <h3 class="text-sm font-bold text-[#171717]">Security & Access Governance Audit Trail</h3>
+            <p class="text-[11px] text-[#737373]">Live record of role-scoped queries, gate selections, and policy enforcement.</p>
+          </div>
+        </div>
+        <button @click="showAuditModal = false" class="text-[#737373] hover:text-[#171717] font-bold text-base cursor-pointer">&times;</button>
+      </div>
+
+      <div class="max-h-80 overflow-y-auto space-y-2 pr-1">
+        <template x-if="accessLogEvents.length === 0">
+          <div class="text-center py-6 text-xs text-[#737373]">No audit events logged yet. Make queries across screens to see live governance records.</div>
+        </template>
+        <template x-for="(evt, idx) in accessLogEvents" :key="idx">
+          <div class="p-2.5 rounded border border-[#E5E5E5] bg-[#FAFAFA] text-xs space-y-1.5 hover:bg-white transition">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center space-x-1.5">
+                <span class="font-mono text-[10px] text-[#737373]" x-text="formatTime(evt.timestamp)"></span>
+                <span class="font-bold uppercase tracking-wider text-[9px] px-1.5 py-0.5 rounded"
+                      :class="evt.persona === 'regional_lead' ? 'bg-[#FFF8E1] text-[#A15C00] border border-[#FFE082]' : 'bg-[#F5E8FF] text-[#6F00B5] border border-[#E9D5FF]'"
+                      x-text="evt.persona"></span>
+                <span class="font-semibold text-[#171717]" x-text="evt.action"></span>
+              </div>
+              <span class="font-mono text-[10px] px-1.5 py-0.2 rounded font-semibold"
+                    :class="evt.status === 'BLOCKED' ? 'bg-[#FDF2F2] text-[#991B1B]' : (evt.status === 'SCOPED' ? 'bg-[#FFF8E1] text-[#A15C00]' : 'bg-[#EDF7ED] text-[#16803C]')"
+                    x-text="evt.status"></span>
+            </div>
+            <div class="text-[11px] text-[#555555] font-mono" x-text="evt.endpoint"></div>
+            
+            <div class="flex items-center gap-2 pt-1 text-[10px]">
+              <div x-show="evt.granted_sections && evt.granted_sections.length > 0" class="text-green-700">
+                <span class="font-semibold">Granted:</span> <span x-text="evt.granted_sections.join(', ')"></span>
+              </div>
+              <div x-show="evt.restricted_sections && evt.restricted_sections.length > 0" class="text-red-600 font-semibold">
+                <span>Restricted:</span> <span x-text="evt.restricted_sections.join(', ')"></span>
+              </div>
+            </div>
+          </div>
+        </template>
+      </div>
+
+      <div class="flex items-center justify-between border-t border-[#E5E5E5] pt-3">
+        <button @click="loadAccessLog()" class="text-xs text-[#6F00B5] hover:underline font-semibold flex items-center gap-1 cursor-pointer">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+          Refresh Log
+        </button>
+        <button @click="showAuditModal = false" class="px-3 py-1.5 rounded bg-[#171717] text-white text-xs font-semibold hover:bg-black transition cursor-pointer">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =================================================================== -->
+  <!-- API KEY MODAL -->
+  <!-- =================================================================== -->
+  <div x-show="showApiKeyModal" 
+       class="fixed inset-0 z-50 overflow-y-auto bg-black/40 flex items-center justify-center p-4 backdrop-blur-2xs" 
+       x-cloak>
+    <div @click.away="showApiKeyModal = false" class="bg-white rounded-lg border border-[#E5E5E5] max-w-md w-full p-5 space-y-4 shadow-xl">
+      <div class="flex items-center justify-between border-b border-[#E5E5E5] pb-3">
+        <h3 class="text-sm font-bold text-[#171717]">Configure Google Gemini API Key</h3>
+        <button @click="showApiKeyModal = false" class="text-[#737373] hover:text-[#171717] font-bold text-base cursor-pointer">&times;</button>
+      </div>
+
+      <div class="space-y-3 text-xs">
+        <p class="text-[#555555] leading-relaxed">
+          Provide a Google Gemini API key to activate live generative reasoning. If left empty, EDITH operates in 100% deterministic offline mode with zero hallucinations.
+        </p>
+
+        <div class="space-y-1">
+          <label class="font-semibold text-[#171717] block">Gemini API Key</label>
+          <input type="password" 
+                 x-model="apiKeyInput" 
+                 placeholder="AIzaSy..." 
+                 class="w-full border border-[#D4D4D4] rounded px-3 py-1.5 text-xs outline-none focus:border-[#A100FF] focus:ring-1 focus:ring-[#A100FF]">
+        </div>
+      </div>
+
+      <div class="flex items-center justify-between border-t border-[#E5E5E5] pt-3">
+        <button @click="saveApiKey(true)" 
+                :disabled="savingApiKey"
+                class="text-xs text-[#DC2626] hover:underline font-semibold cursor-pointer">
+          Reset to Offline Mode
+        </button>
+        <div class="flex space-x-2">
+          <button @click="showApiKeyModal = false" class="px-3 py-1.5 rounded border border-[#E5E5E5] text-xs font-semibold text-[#555555] hover:bg-[#F5F5F5] cursor-pointer">
+            Cancel
+          </button>
+          <button @click="saveApiKey(false)" 
+                  :disabled="savingApiKey"
+                  class="px-3 py-1.5 rounded bg-[#A100FF] hover:bg-[#6F00B5] text-white text-xs font-semibold transition cursor-pointer flex items-center gap-1.5">
+            <span x-text="savingApiKey ? 'Verifying...' : 'Save & Activate'"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,195 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- SCREEN 5: EDITH CONSOLE (EXECUTIVE BRIEFING & ASK EDITH CHAT) -->
+      <!-- =================================================================== -->
+      <div class="space-y-5">
+        
+        <!-- Header with Sub-view Switcher -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-[#E5E5E5]">
+          <div>
+            <h2 class="text-xl font-bold text-[#171717] tracking-tight" x-text="consoleView === 'briefing' ? 'Executive Briefing' : 'Ask EDITH Intelligence Assistant'"></h2>
+            <p class="text-xs text-[#555555] mt-0.5" x-text="consoleView === 'briefing' ? 'Standing natural-language executive report tailored to active persona.' : 'Grounded conversational AI dialogue with multi-turn reasoning and tool verification.'"></p>
+          </div>
+
+          <!-- View Toggle Actions -->
+          <div class="flex items-center gap-2">
+            <template x-if="consoleView === 'briefing'">
+              <button @click="consoleView = 'chat'" 
+                      class="px-3.5 py-1.5 rounded bg-[#A100FF] hover:bg-[#6F00B5] text-white text-xs font-bold transition flex items-center gap-1.5 shadow-sm cursor-pointer">
+                <span>Ask EDITH &rarr;</span>
+              </button>
+            </template>
+            
+            <template x-if="consoleView === 'chat'">
+              <button @click="consoleView = 'briefing'" 
+                      class="px-3 py-1.5 rounded bg-white hover:bg-[#F5F5F5] text-[#6F00B5] border border-[#E9D5FF] text-xs font-bold transition flex items-center gap-1.5 shadow-xs cursor-pointer">
+                <span>&larr; View Briefing Report</span>
+              </button>
+            </template>
+
+            <button @click="showApiKeyModal = true" 
+                    title="Configure Google Gemini API Key"
+                    class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded text-xs font-semibold border transition cursor-pointer"
+                    :class="aiStatus.is_live ? 'bg-[#EDF7ED] text-[#16803C] border-[#C8E6C9]' : 'bg-[#F5E8FF] text-[#6F00B5] border-[#E9D5FF]'">
+              <span class="w-2 h-2 rounded-full" :class="aiStatus.is_live ? 'bg-[#16803C]' : 'bg-[#A100FF]'"></span>
+              <span x-text="aiStatus.badge_text || 'Deterministic Offline Mode'"></span>
+            </button>
+          </div>
+        </div>
+
+        <!-- =============================================================== -->
+        <!-- SUB-VIEW 1: STANDING EXECUTIVE BRIEFING ARTIFACT (DEFAULT) -->
+        <!-- =============================================================== -->
+        <div x-show="consoleView === 'briefing'" class="space-y-5">
+          
+          <!-- Persona Metadata Banner -->
+          <div class="bg-white border border-[#E5E5E5] rounded-lg p-5 space-y-4 shadow-xs">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-[#E5E5E5]">
+              <div class="flex items-center space-x-2">
+                <span class="text-xs font-bold text-[#171717]" x-text="briefingData.persona_name || 'Executive / CRO'"></span>
+                <span class="text-[#E5E5E5]">|</span>
+                <span class="text-xs text-[#6F00B5] font-semibold" x-text="briefingData.role_title || 'Chief Revenue Officer'"></span>
+              </div>
+              <div class="text-[11px] text-[#737373]" x-text="briefingData.metadata?.generated_at || 'Just now'"></div>
+            </div>
+
+            <!-- Headline Banner -->
+            <div class="bg-[#F5E8FF] border border-[#E9D5FF] p-4 rounded-lg">
+              <div class="text-[10px] font-bold text-[#6F00B5] uppercase tracking-wider">Executive Synthesis Headline</div>
+              <div class="text-base font-bold text-[#171717] mt-1" x-text="briefingData.headline"></div>
+            </div>
+
+            <!-- Full Narrative Report Markdown -->
+            <div class="prose prose-sm max-w-none text-xs text-[#333333] leading-relaxed space-y-2" x-html="formatMarkdown(briefingData.narrative_markdown)"></div>
+
+            <!-- Recommended Actions Table (Requirement A / Track 3 Action Schema) -->
+            <div class="space-y-3 pt-3 border-t border-[#E5E5E5]">
+              <div class="text-xs font-bold text-[#171717] uppercase tracking-wider">Action Recommendations & Governance Matrix</div>
+              
+              <div class="overflow-x-auto">
+                <table class="w-full text-xs text-left border border-[#E5E5E5] rounded">
+                  <thead class="bg-[#FAFAFA] text-[#737373] uppercase font-semibold border-b border-[#E5E5E5]">
+                    <tr>
+                      <th class="p-2.5">Driver / Cause</th>
+                      <th class="p-2.5">Controllable Lever</th>
+                      <th class="p-2.5">Recommended Action</th>
+                      <th class="p-2.5">Expected Impact</th>
+                      <th class="p-2.5">Owner</th>
+                      <th class="p-2.5">Confidence</th>
+                      <th class="p-2.5 text-right">Status</th>
+                    </tr>
+                  </thead>
+                  <tbody class="divide-y divide-[#EEEEEE]">
+                    <template x-for="act in briefingData.recommended_actions || []" :key="act.lever">
+                      <tr class="hover:bg-[#FAFAFA]">
+                        <td class="p-2.5 font-medium text-[#171717]" x-text="act.driver"></td>
+                        <td class="p-2.5 font-semibold text-[#6F00B5]" x-text="act.lever"></td>
+                        <td class="p-2.5 text-[#333333]" x-text="act.action"></td>
+                        <td class="p-2.5 font-mono text-[#16803C] font-semibold" x-text="act.expected_impact"></td>
+                        <td class="p-2.5 text-[#555555]" x-text="act.owner"></td>
+                        <td class="p-2.5 text-[#737373]" x-text="act.confidence"></td>
+                        <td class="p-2.5 text-right">
+                          <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold uppercase"
+                                :class="act.status?.includes('Restricted') ? 'bg-amber-50 text-amber-800 border border-amber-200' : 'bg-[#EDF7ED] text-[#16803C] border border-[#C8E6C9]'"
+                                x-text="act.status || 'Recommended'"></span>
+                        </td>
+                      </tr>
+                    </template>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Transition Action Bar -->
+            <div class="flex items-center justify-between pt-4 border-t border-[#E5E5E5]">
+              <div class="text-[11px] text-[#737373]">
+                <span>Epistemological Guardrail: Quantitative truth calculated deterministically.</span>
+              </div>
+              <button @click="consoleView = 'chat'" class="px-4 py-2 rounded bg-[#A100FF] hover:bg-[#6F00B5] text-white text-xs font-bold transition flex items-center gap-1.5 shadow-sm cursor-pointer">
+                <span>Ask Follow-up Questions &rarr;</span>
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- =============================================================== -->
+        <!-- SUB-VIEW 2: ASK EDITH (CONVERSATIONAL AI DIALOGUE) -->
+        <!-- =============================================================== -->
+        <div x-show="consoleView === 'chat'" class="space-y-4">
+          
+          <div class="bg-white border border-[#E5E5E5] rounded-lg p-5 space-y-4 shadow-xs">
+            
+            <div class="flex items-center justify-between pb-3 border-b border-[#E5E5E5]">
+              <div class="text-xs font-semibold text-[#171717]">Interactive Causal Dialogue</div>
+              <button @click="resetChat()" 
+                      title="Clear chat history and reset session"
+                      class="px-2.5 py-1 rounded bg-white hover:bg-[#F5F5F5] text-[#555555] hover:text-[#171717] border border-[#E5E5E5] text-xs font-medium transition cursor-pointer">
+                Clear Dialogue
+              </button>
+            </div>
+
+            <!-- Suggested Starter Chips -->
+            <div class="space-y-1.5">
+              <div class="text-[10px] font-semibold text-[#737373] uppercase tracking-wider">Suggested Inquiries</div>
+              <div class="flex flex-wrap gap-1.5">
+                <template x-for="q in getStarterQuestions()" :key="q">
+                  <button @click="sendStarterQuery(q)" 
+                          class="text-xs px-2.5 py-1 rounded bg-[#F8F8F8] hover:bg-[#F5E8FF] text-[#555555] hover:text-[#6F00B5] border border-[#E5E5E5] transition cursor-pointer"
+                          x-text="q"></button>
+                </template>
+              </div>
+            </div>
+
+            <!-- Chat History Stream -->
+            <div class="bg-[#FAFAFA] rounded border border-[#E5E5E5] p-4 h-96 overflow-y-auto space-y-3.5" id="chatStreamBox">
+              
+              <!-- Default Welcome Bubble -->
+              <div class="flex items-start space-x-2.5">
+                <div class="w-6 h-6 rounded bg-[#A100FF] flex items-center justify-center font-bold text-xs text-white shrink-0">E</div>
+                <div class="bg-white border border-[#E5E5E5] rounded-lg rounded-tl-none p-3 text-xs text-[#171717] max-w-xl space-y-1.5 shadow-2xs">
+                  <div class="font-semibold text-[#6F00B5]">EDITH Decision Assistant</div>
+                  <div class="text-[#555555]">I am active in <strong class="text-[#171717]" x-text="getPersonaName()"></strong> mode. Ask me about metric deficits, localized root causes, Difference-in-Differences proofs, or policy trade-offs.</div>
+                </div>
+              </div>
+
+              <!-- Dialogue Turns -->
+              <template x-for="(msg, i) in chatHistory" :key="i">
+                <div class="flex items-start space-x-2.5" :class="msg.role === 'user' ? 'flex-row-reverse space-x-reverse' : ''">
+                  <div class="w-6 h-6 rounded flex items-center justify-center font-bold text-xs shrink-0"
+                       :class="msg.role === 'user' ? 'bg-[#E5E5E5] text-[#4B0082]' : 'bg-[#A100FF] text-white'"
+                       x-text="msg.role === 'user' ? 'U' : 'E'"></div>
+                  <div class="rounded-lg p-3 text-xs max-w-xl leading-relaxed space-y-1 shadow-2xs"
+                       :class="msg.role === 'user' ? 'bg-[#F5E8FF] text-[#4B0082] rounded-tr-none' : 'bg-white border border-[#E5E5E5] text-[#171717] rounded-tl-none'"
+                       x-html="formatMarkdown(msg.content)"></div>
+                </div>
+              </template>
+
+              <div x-show="chatLoading" class="flex items-start space-x-2.5">
+                <div class="w-6 h-6 rounded bg-[#A100FF] flex items-center justify-center font-bold text-xs text-white shrink-0">E</div>
+                <div class="bg-white border border-[#E5E5E5] rounded-lg rounded-tl-none p-3 text-xs text-[#737373] flex items-center gap-2">
+                  <svg class="animate-spin h-3.5 w-3.5 text-[#A100FF]" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path></svg>
+                  Evaluating verified data points...
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Input Bar -->
+            <form @submit.prevent="submitChat()" class="flex gap-2">
+              <input type="text" x-model="chatQuery" placeholder="Ask EDITH a grounded question about the active investigation..." 
+                     class="flex-1 bg-white border border-[#D5D5D5] rounded px-3 py-2 text-xs text-[#171717] focus:border-[#A100FF] focus:ring-1 focus:ring-[#A100FF] outline-none" />
+              <button type="submit" :disabled="chatLoading || !chatQuery.trim()" 
+                      class="px-4 py-2 rounded bg-[#A100FF] hover:bg-[#6F00B5] text-white text-xs font-semibold transition disabled:opacity-50 cursor-pointer">
+                Send
+              </button>
+            </form>
+
+          </div>
+
+        </div>
+
+      </div>
+{% endblock %}

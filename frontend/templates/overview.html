@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- SCREEN 1: EXECUTIVE OVERVIEW -->
+      <!-- =================================================================== -->
+      <div class="space-y-5">
+        
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+          <div>
+            <h2 class="text-xl font-bold text-[#171717] tracking-tight">Executive Overview</h2>
+            <p class="text-xs text-[#555555] mt-1" x-text="`Real-time status, baseline corridor bounds, and incident localization for ${overviewData.primary_measure_label || 'Primary Measure'}.`"></p>
+          </div>
+          
+          <div class="flex items-center gap-2">
+            <span class="text-xs px-2.5 py-1 rounded font-bold uppercase tracking-wider"
+                  :class="overviewData.kpi_metrics?.is_anomaly ? 'bg-red-50 text-red-700 border border-red-200' : 'bg-[#EDF7ED] text-[#16803C] border border-[#C8E6C9]'"
+                  x-text="overviewData.kpi_metrics?.status_label || 'Healthy Baseline'"></span>
+          </div>
+        </div>
+
+        <!-- Role-Based Security Notice for Regional Lead -->
+        <div x-show="overviewData.company_wide_summary?.restricted" class="bg-[#FFF8E1] border border-[#FFE082] rounded-lg p-3.5 flex items-start gap-3 text-xs text-[#A15C00] shadow-xs">
+          <svg class="w-4 h-4 text-[#A15C00] shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+          <div>
+            <span class="font-bold">Role-Based Security Notice (Regional Sales Lead):</span>
+            <span class="ml-1">Company-wide aggregate totals and other geographical regions are restricted. The figures and time series below represent <strong>Region B Operational Scope</strong>.</span>
+          </div>
+        </div>
+
+        <!-- Primary KPI Cards Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          
+          <div class="bg-white p-4 rounded-lg border border-[#E5E5E5] space-y-1 shadow-xs">
+            <div class="text-[10px] text-[#737373] font-semibold uppercase tracking-wider">Observed Value</div>
+            <div class="text-2xl font-bold text-[#171717] font-mono" x-text="formatNumber(overviewData.kpi_metrics?.current_value, overviewData.primary_measure_unit)"></div>
+            <div class="text-[11px] text-[#737373]">Current active period</div>
+          </div>
+
+          <div class="bg-white p-4 rounded-lg border border-[#E5E5E5] space-y-1 shadow-xs">
+            <div class="text-[10px] text-[#737373] font-semibold uppercase tracking-wider">Expected Baseline</div>
+            <div class="text-2xl font-bold text-[#555555] font-mono" x-text="formatNumber(overviewData.kpi_metrics?.baseline_value, overviewData.primary_measure_unit)"></div>
+            <div class="text-[11px] text-[#737373]">Rolling baseline corridor</div>
+          </div>
+
+          <div class="bg-white p-4 rounded-lg border border-[#E5E5E5] space-y-1 shadow-xs">
+            <div class="text-[10px] text-[#737373] font-semibold uppercase tracking-wider">Net Variance Delta</div>
+            <div class="text-2xl font-bold font-mono"
+                 :class="(overviewData.kpi_metrics?.delta_value || 0) < 0 ? 'text-red-600' : 'text-[#16803C]'"
+                 x-text="`${formatNumber(overviewData.kpi_metrics?.delta_value, overviewData.primary_measure_unit)} (${(overviewData.kpi_metrics?.delta_pct || 0).toFixed(1)}%)`"></div>
+            <div class="text-[11px] text-[#737373]" x-text="`Z-Score: ${(overviewData.kpi_metrics?.z_score || 0).toFixed(2)}σ`"></div>
+          </div>
+
+          <div class="bg-white p-4 rounded-lg border border-[#E5E5E5] space-y-1 shadow-xs">
+            <div class="text-[10px] text-[#737373] font-semibold uppercase tracking-wider">Data Quality Score</div>
+            <div class="text-2xl font-bold text-[#16803C] font-mono" x-text="`${overviewData.data_quality_score || 100.0}%`"></div>
+            <div class="text-[11px] text-[#737373]" x-text="`${(overviewData.total_records || 0).toLocaleString()} records evaluated`"></div>
+          </div>
+
+        </div>
+
+        <!-- Time-Series Baseline Corridor Chart -->
+        <div class="bg-white p-5 rounded-lg border border-[#E5E5E5] space-y-3 shadow-xs">
+          <div class="flex items-center justify-between">
+            <div>
+              <h3 class="text-sm font-semibold text-[#171717]">Observed Trajectory vs ±2.0σ Expected Corridor</h3>
+              <p class="text-xs text-[#737373]">Statistical boundaries calculated dynamically across temporal intervals.</p>
+            </div>
+          </div>
+          <div id="overviewCorridorChart" class="w-full h-72"></div>
+        </div>
+
+        <!-- Diagnostic Summary Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          
+          <div class="bg-white p-4 rounded-lg border border-[#E5E5E5] space-y-2 shadow-xs">
+            <div class="text-xs font-semibold text-[#171717]">Primary Variance Concentration</div>
+            <div class="text-sm text-[#333333]">
+              <span class="font-bold text-[#6F00B5]" x-text="overviewData.primary_concentration?.segment || 'Enterprise Tier'"></span>
+              <span class="text-[#737373]" x-text="` accounts for ${(overviewData.primary_concentration?.share_pct || 97.3).toFixed(1)}% of total net variance.`"></span>
+            </div>
+            <div class="text-[11px] text-[#737373]">Localizing variance isolates the anomaly to a specific operational slice.</div>
+          </div>
+
+          <div class="bg-white p-4 rounded-lg border border-[#E5E5E5] space-y-2 shadow-xs">
+            <div class="text-xs font-semibold text-[#171717]">Top Explanatory Driver Correlation</div>
+            <div class="text-sm text-[#333333]">
+              <span class="font-bold text-[#6F00B5]" x-text="overviewData.top_driver?.name || 'Unit Price'"></span>
+              <span class="text-[#737373]" x-text="` displays strong negative association (r = ${(overviewData.top_driver?.pearson_r || -0.84).toFixed(2)}).`"></span>
+            </div>
+            <div class="text-[11px] text-[#737373]">Empirical correlation guides causal investigation without overstepping into unverified claims.</div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- =================================================================== -->
+{% endblock %}

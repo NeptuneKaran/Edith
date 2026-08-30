@@ -36,6 +36,9 @@ class DataRepository:
         self.active_source_info = source_info
         self.semantic_model = semantic_model
 
+    def reset_to_demo(self, seed: int = 42):
+        return self.reset_to_demo_dataset(seed=seed)
+
     def reset_to_demo_dataset(self, seed: int = 42):
         """Resets repository back to the standard built-in demo dataset."""
         self.tables = generate_enterprise_dataset(seed=seed)

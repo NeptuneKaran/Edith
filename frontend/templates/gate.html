@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-[#F8F8F8]">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EDITH — Enterprise Persona Gate</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+  <!-- Alpine.js CDN -->
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.3/dist/cdn.min.js"></script>
+</head>
+<body class="min-h-screen bg-[#F8F8F8] flex flex-col justify-between p-6 sm:p-10 font-sans antialiased text-[#171717]">
+  
+  <!-- Gate Top Bar -->
+  <div class="flex items-center justify-between max-w-5xl mx-auto w-full">
+    <div class="flex items-center space-x-3">
+      <div class="w-8 h-8 rounded bg-[#A100FF] flex items-center justify-center font-bold text-white text-sm shadow-sm">
+        E
+      </div>
+      <div class="flex items-center space-x-2">
+        <span class="text-base font-bold text-[#171717] tracking-tight">EDITH</span>
+        <span class="text-[#D4D4D4]">|</span>
+        <span class="text-xs font-semibold text-[#6F00B5] bg-[#F5E8FF] px-2.5 py-0.5 rounded border border-[#E9D5FF]">Decision Intelligence</span>
+      </div>
+    </div>
+    <div class="text-xs text-[#737373] font-medium hidden sm:block">
+      Accenture Innovation Challenge 2026 &middot; Track 3: BusinessIntelligence.ai
+    </div>
+  </div>
+
+  <!-- Main Card Selection Area -->
+  <div class="max-w-5xl mx-auto w-full py-8 space-y-6 my-auto">
+    <div class="text-center space-y-2 max-w-2xl mx-auto">
+      <h1 class="text-2xl sm:text-3xl font-extrabold text-[#171717] tracking-tight">Who are you viewing as?</h1>
+      <p class="text-xs sm:text-sm text-[#555555] leading-relaxed">
+        Select an enterprise persona to enter the decision intelligence workspace. Access permissions, narrative depth, and econometric tooling will adapt to your role.
+      </p>
+    </div>
+
+    <!-- 4 Persona Cards Grid (Requirement A & B) -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      
+      <!-- Card 1: Executive / CRO -->
+      <form action="/session/select-persona" method="POST" class="h-full">
+        <input type="hidden" name="persona_id" value="executive">
+        <button type="submit" class="w-full h-full text-left bg-white border border-[#E5E5E5] hover:border-[#A100FF] rounded-lg p-5 transition shadow-xs hover:shadow-md cursor-pointer flex flex-col justify-between space-y-4 group">
+          <div class="space-y-2.5 w-full">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-[#F5E8FF] text-[#6F00B5] border border-[#E9D5FF]">Strategic Overview</span>
+              <span class="text-xs text-[#737373] font-mono">Full Visibility</span>
+            </div>
+            <div>
+              <h3 class="text-sm font-bold text-[#171717] group-hover:text-[#6F00B5] transition">Executive / CRO</h3>
+              <div class="text-[11px] text-[#737373] font-medium">Chief Revenue Officer</div>
+            </div>
+            <p class="text-xs text-[#555555] leading-relaxed">
+              Company-wide strategic summary with condensed decision-oriented highlights and recommended policy approvals.
+            </p>
+            <ul class="text-[11px] text-[#737373] space-y-1 pt-1">
+              <li class="flex items-center gap-1.5"><span class="text-green-600 font-bold">✓</span> Company-wide revenue & KPI aggregates</li>
+              <li class="flex items-center gap-1.5"><span class="text-green-600 font-bold">✓</span> Condensed narrative & top root-cause diagnosis</li>
+              <li class="flex items-center gap-1.5"><span class="text-green-600 font-bold">✓</span> Authorized for full Policy Simulator pricing levers</li>
+            </ul>
+          </div>
+          <div class="w-full py-2 px-3 rounded bg-[#F8F8F8] group-hover:bg-[#A100FF] text-[#171717] group-hover:text-white text-xs font-bold transition flex items-center justify-center gap-1.5">
+            <span>Continue as Executive</span> &rarr;
+          </div>
+        </button>
+      </form>
+
+      <!-- Card 2: Business User (Plain Language) -->
+      <form action="/session/select-persona" method="POST" class="h-full">
+        <input type="hidden" name="persona_id" value="general_user">
+        <button type="submit" class="w-full h-full text-left bg-white border border-[#E5E5E5] hover:border-[#2563EB] rounded-lg p-5 transition shadow-xs hover:shadow-md cursor-pointer flex flex-col justify-between space-y-4 group">
+          <div class="space-y-2.5 w-full">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-[#EFF6FF] text-[#1E40AF] border border-[#BFDBFE]">Plain Language</span>
+              <span class="text-xs text-[#737373] font-mono">Zero Jargon</span>
+            </div>
+            <div>
+              <h3 class="text-sm font-bold text-[#171717] group-hover:text-[#2563EB] transition">Non-Technical Business User</h3>
+              <div class="text-[11px] text-[#737373] font-medium">Business Team / General Audience</div>
+            </div>
+            <p class="text-xs text-[#555555] leading-relaxed">
+              Plain-language narrative explaining what changed in sales and what the team is doing next with zero statistical jargon.
+            </p>
+            <ul class="text-[11px] text-[#737373] space-y-1 pt-1">
+              <li class="flex items-center gap-1.5"><span class="text-blue-600 font-bold">✓</span> Everyday business vocabulary (No Z-scores or formulas)</li>
+              <li class="flex items-center gap-1.5"><span class="text-blue-600 font-bold">✓</span> Clear story explaining why numbers dropped</li>
+              <li class="flex items-center gap-1.5"><span class="text-blue-600 font-bold">✓</span> Simple 3-step recovery action roadmap</li>
+            </ul>
+          </div>
+          <div class="w-full py-2 px-3 rounded bg-[#F8F8F8] group-hover:bg-[#2563EB] text-[#171717] group-hover:text-white text-xs font-bold transition flex items-center justify-center gap-1.5">
+            <span>Continue as Business User</span> &rarr;
+          </div>
+        </button>
+      </form>
+
+      <!-- Card 3: Regional Sales Lead (Region B) -->
+      <form action="/session/select-persona" method="POST" class="h-full">
+        <input type="hidden" name="persona_id" value="regional_lead">
+        <button type="submit" class="w-full h-full text-left bg-white border border-[#E5E5E5] hover:border-[#D97706] rounded-lg p-5 transition shadow-xs hover:shadow-md cursor-pointer flex flex-col justify-between space-y-4 group">
+          <div class="space-y-2.5 w-full">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-[#FFF8E1] text-[#A15C00] border border-[#FFE082]">Role-Restricted</span>
+              <span class="text-xs text-[#A15C00] font-mono font-semibold">Region B Only</span>
+            </div>
+            <div>
+              <h3 class="text-sm font-bold text-[#171717] group-hover:text-[#D97706] transition">Regional Sales Lead (Region B)</h3>
+              <div class="text-[11px] text-[#737373] font-medium">Regional Sales Director - Region B</div>
+            </div>
+            <p class="text-xs text-[#555555] leading-relaxed">
+              Operational view scoped exclusively to Region B enterprise execution with role-based security restrictions.
+            </p>
+            <ul class="text-[11px] text-[#737373] space-y-1 pt-1">
+              <li class="flex items-center gap-1.5"><span class="text-amber-600 font-bold">✓</span> Region B operational metrics & field actions</li>
+              <li class="flex items-center gap-1.5"><span class="text-red-500 font-bold">✗</span> Company-wide & competitor intelligence restricted</li>
+              <li class="flex items-center gap-1.5"><span class="text-amber-600 font-bold">✓</span> Authorized for Regional Co-Op & VIP CSM guard</li>
+            </ul>
+          </div>
+          <div class="w-full py-2 px-3 rounded bg-[#F8F8F8] group-hover:bg-[#D97706] text-[#171717] group-hover:text-white text-xs font-bold transition flex items-center justify-center gap-1.5">
+            <span>Continue as Regional Lead</span> &rarr;
+          </div>
+        </button>
+      </form>
+
+      <!-- Card 4: Analyst / RevOps -->
+      <form action="/session/select-persona" method="POST" class="h-full">
+        <input type="hidden" name="persona_id" value="analyst">
+        <button type="submit" class="w-full h-full text-left bg-white border border-[#E5E5E5] hover:border-[#16803C] rounded-lg p-5 transition shadow-xs hover:shadow-md cursor-pointer flex flex-col justify-between space-y-4 group">
+          <div class="space-y-2.5 w-full">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-[#EDF7ED] text-[#16803C] border border-[#C8E6C9]">Full Econometric</span>
+              <span class="text-xs text-[#737373] font-mono">Unrestricted</span>
+            </div>
+            <div>
+              <h3 class="text-sm font-bold text-[#171717] group-hover:text-[#16803C] transition">Analyst / RevOps</h3>
+              <div class="text-[11px] text-[#737373] font-medium">Senior Revenue Operations Analyst</div>
+            </div>
+            <p class="text-xs text-[#555555] leading-relaxed">
+              Unrestricted econometric workbench with complete multi-hypothesis ledgers, Difference-in-Differences proofs, and full data lineage.
+            </p>
+            <ul class="text-[11px] text-[#737373] space-y-1 pt-1">
+              <li class="flex items-center gap-1.5"><span class="text-green-600 font-bold">✓</span> Full 8-hypothesis econometric evidence ledger</li>
+              <li class="flex items-center gap-1.5"><span class="text-green-600 font-bold">✓</span> Difference-in-Differences (DiD) & lag telemetry</li>
+              <li class="flex items-center gap-1.5"><span class="text-green-600 font-bold">✓</span> Mathematical revenue identity decomposition</li>
+            </ul>
+          </div>
+          <div class="w-full py-2 px-3 rounded bg-[#F8F8F8] group-hover:bg-[#16803C] text-[#171717] group-hover:text-white text-xs font-bold transition flex items-center justify-center gap-1.5">
+            <span>Continue as Analyst</span> &rarr;
+          </div>
+        </button>
+      </form>
+
+    </div>
+  </div>
+
+  <!-- Gate Footer -->
+  <div class="max-w-5xl mx-auto w-full text-center text-[11px] text-[#A3A3A3] pt-4 border-t border-[#E5E5E5]">
+    EDITH &middot; Executive Decision Intelligence & Tactical Hypothesis &middot; Enterprise Role Governance
+  </div>
+</body>
+</html>

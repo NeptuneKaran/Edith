@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- SCREEN 4: POLICY SIMULATOR -->
+      <!-- =================================================================== -->
+      <div class="space-y-5">
+        
+        <div>
+          <h2 class="text-xl font-bold text-[#171717] tracking-tight">Policy Simulator</h2>
+          <p class="text-xs text-[#555555] mt-1">Simulate multi-lever recovery trajectories and model counterfactual policy interventions.</p>
+        </div>
+
+        <div x-show="!simulationData.available" class="bg-white border border-[#E5E5E5] rounded-lg p-8 text-center space-y-3 shadow-xs">
+          <h3 class="text-sm font-semibold text-[#171717]">Counterfactual Simulation Unavailable</h3>
+          <p class="text-xs text-[#555555] max-w-lg mx-auto" x-text="simulationData.reason"></p>
+          <button @click="resetToDemo()" class="mt-2 px-4 py-2 rounded bg-[#A100FF] hover:bg-[#6F00B5] text-white text-xs font-semibold transition cursor-pointer">
+            Switch to Built-in Demo Benchmark to Explore Simulation
+          </button>
+        </div>
+
+        <div x-show="simulationData.available" class="space-y-5">
+          <div class="bg-white border border-[#E5E5E5] rounded-lg p-5 space-y-5 shadow-xs">
+            <div class="pb-2 border-b border-[#E5E5E5] flex items-center justify-between">
+              <div>
+                <h3 class="text-sm font-semibold text-[#171717]">Intervention Levers & Counterfactual Modeling</h3>
+                <p class="text-xs text-[#737373]">Adjust policy sliders to model 8-week revenue recovery trajectories.</p>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 bg-[#FAFAFA] p-4 rounded border border-[#E5E5E5] text-xs">
+              
+              <!-- Lever 1: Price Rollback (Restricted for Regional Lead) -->
+              <div class="space-y-1.5 p-2 rounded" :class="simulationData.levers_access?.price_rollback?.restricted ? 'bg-[#FFF8E1] border border-[#FFE082]' : ''">
+                <div class="flex justify-between font-medium">
+                  <span class="text-[#555555]">Price Rollback</span>
+                  <span class="font-bold font-mono" :class="simulationData.levers_access?.price_rollback?.restricted ? 'text-amber-800' : 'text-[#6F00B5]'" x-text="`-${simLevers.price_rollback_pct}%`"></span>
+                </div>
+                <input type="range" min="0" max="15" step="1" 
+                       :disabled="simulationData.levers_access?.price_rollback?.restricted"
+                       x-model.number="simLevers.price_rollback_pct" @input="updateSimulationLevers()" 
+                       class="w-full accent-[#A100FF] disabled:opacity-40" />
+                <template x-if="simulationData.levers_access?.price_rollback?.restricted">
+                  <span class="text-[10px] text-amber-800 font-bold block">Locked: Requires Executive CRO persona</span>
+                </template>
+                <template x-if="!simulationData.levers_access?.price_rollback?.restricted">
+                  <span class="text-[11px] text-[#737373] block">Mitigates price elasticity resistance.</span>
+                </template>
+              </div>
+
+              <!-- Lever 2: Regional Co-Op Fund -->
+              <div class="space-y-1.5 p-2">
+                <div class="flex justify-between font-medium">
+                  <span class="text-[#555555]">Regional Co-Op Fund</span>
+                  <span class="text-[#6F00B5] font-bold font-mono" x-text="`$${simLevers.promo_fund_k}k`"></span>
+                </div>
+                <input type="range" min="0" max="50" step="5" x-model.number="simLevers.promo_fund_k" @input="updateSimulationLevers()" class="w-full accent-[#A100FF]" />
+                <span class="text-[11px] text-[#737373] block">Authorized for Regional Field Marketing.</span>
+              </div>
+
+              <!-- Lever 3: VIP Retention Guard -->
+              <div class="space-y-1.5 p-2">
+                <div class="flex justify-between font-medium">
+                  <span class="text-[#555555]">VIP Retention Guard</span>
+                  <span class="text-[#6F00B5] font-bold" x-text="simLevers.churn_mitigation ? 'Active' : 'Disabled'"></span>
+                </div>
+                <div class="pt-2">
+                  <label class="flex items-center space-x-2 cursor-pointer">
+                    <input type="checkbox" x-model="simLevers.churn_mitigation" @change="updateSimulationLevers()" class="rounded border-[#D5D5D5] text-[#A100FF] focus:ring-0" />
+                    <span class="text-[#333333]">Proactive CSM outreach</span>
+                  </label>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Simulation Trajectory Chart -->
+            <div class="space-y-2">
+              <h4 class="text-xs font-semibold text-[#555555] uppercase tracking-wider">8-Week Projected Revenue Recovery Path</h4>
+              <div id="simTrajectoryChart" class="w-full h-72"></div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <!-- =================================================================== -->
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- SCREEN 3: INVESTIGATION WORKSPACE -->
+      <!-- =================================================================== -->
+      <div class="space-y-5">
+        
+        <div>
+          <h2 class="text-xl font-bold text-[#171717] tracking-tight">Investigation Workspace</h2>
+          <p class="text-xs text-[#555555] mt-1">Multi-hypothesis causal evaluation ledger, Difference-in-Differences proofs, and empirical counter-evidence.</p>
+        </div>
+
+        <div class="space-y-4">
+          
+          <template x-for="(finding, idx) in workspaceData.findings || []" :key="finding.id || idx">
+            <div class="bg-white p-5 rounded-lg border border-[#E5E5E5] space-y-3.5 shadow-xs hover:border-[#D4D4D4] transition">
+              <div class="flex items-start justify-between">
+                <div>
+                  <div class="flex items-center gap-2">
+                    <span class="text-xs font-bold text-[#737373] font-mono" x-text="`#${idx + 1}`"></span>
+                    <h4 class="text-sm font-bold text-[#171717]" x-text="finding.name"></h4>
+                    <span class="text-[10px] px-2 py-0.5 rounded font-semibold uppercase"
+                          :class="finding.cause_score_100 > 75 ? 'bg-[#F5E8FF] text-[#6F00B5] border border-[#E9D5FF]' : (finding.cause_score_100 > 40 ? 'bg-[#FFF8E1] text-[#A15C00] border border-[#FFE082]' : 'bg-[#F5F5F5] text-[#737373]')"
+                          x-text="finding.confidence_classification || finding.dependency_role"></span>
+                  </div>
+                  <p class="text-xs text-[#555555] mt-1" x-text="finding.summary"></p>
+                </div>
+
+                <div class="text-right shrink-0">
+                  <div class="text-[10px] text-[#737373] font-semibold uppercase">Evidence Score</div>
+                  <div class="text-lg font-bold text-[#6F00B5] font-mono" x-text="`${(finding.cause_score_100 || 0).toFixed(1)}/100`"></div>
+                </div>
+              </div>
+
+              <!-- Evidence Chains with RBAC Notice -->
+              <div class="bg-[#FAFAFA] p-3.5 rounded border border-[#EEEEEE] text-xs space-y-2">
+                <div class="text-[10px] font-semibold text-[#737373] uppercase tracking-wider">Empirical Evidence Ledger</div>
+                <ul class="space-y-1.5 text-[#333333] text-xs">
+                  <template x-for="ev in finding.supporting_evidence || []" :key="ev">
+                    <li class="flex items-start gap-2">
+                      <span class="text-[#A100FF] font-bold">&bull;</span>
+                      <span x-text="ev" :class="ev.startsWith('[RESTRICTED') ? 'text-amber-800 bg-amber-50 px-1.5 py-0.5 rounded border border-amber-200 font-semibold' : ''"></span>
+                    </li>
+                  </template>
+                </ul>
+              </div>
+
+              <!-- Restricted Control Group Notice -->
+              <div x-show="finding.control_group_analysis?.restricted" class="bg-[#FFF8E1] border border-[#FFE082] rounded p-2.5 text-xs text-[#A15C00] flex items-center gap-2">
+                <svg class="w-3.5 h-3.5 text-[#A15C00] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                <span>Cross-region comparative control telemetry is restricted for Regional Lead.</span>
+              </div>
+
+            </div>
+          </template>
+
+        </div>
+
+      </div>
+
+      <!-- =================================================================== -->
+{% endblock %}

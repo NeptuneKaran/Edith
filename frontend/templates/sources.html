@@ -1,0 +1,156 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- SCREEN 0: DATA SOURCES & INTAKE -->
+      <!-- =================================================================== -->
+      <div class="space-y-5">
+        <div>
+          <h2 class="text-xl font-bold text-[#171717] tracking-tight">Data Sources & Semantic Modeling</h2>
+          <p class="text-xs text-[#555555] mt-1">Connect, profile, and calibrate arbitrary business datasets with deterministic semantic governance.</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+          
+          <!-- Upload Box -->
+          <div class="bg-white border border-[#E5E5E5] rounded-lg p-5 space-y-4 lg:col-span-1 shadow-xs">
+            <div class="space-y-1">
+              <h3 class="text-sm font-semibold text-[#171717]">Upload Custom Dataset</h3>
+              <p class="text-xs text-[#737373]">Supports CSV, Excel (.xlsx/.xls), or SQLite (.db/.sqlite).</p>
+            </div>
+
+            <div class="border-2 border-dashed border-[#D4D4D4] hover:border-[#A100FF] rounded-lg p-6 text-center space-y-3 bg-[#FAFAFA] transition cursor-pointer"
+                 @dragover.prevent
+                 @drop.prevent="handleFileDrop($event)"
+                 @click="$refs.fileInput.click()">
+              <input type="file" x-ref="fileInput" class="hidden" accept=".csv,.xlsx,.xls,.sqlite,.db" @change="handleFileSelect($event)" />
+              
+              <div class="w-10 h-10 mx-auto rounded-full bg-[#F5E8FF] flex items-center justify-center text-[#A100FF]">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
+              </div>
+              <div class="space-y-1">
+                <p class="text-xs font-semibold text-[#171717]">Click to browse or drop file here</p>
+                <p class="text-[11px] text-[#737373]">Maximum file size: 50MB</p>
+              </div>
+            </div>
+
+            <div x-show="uploading" class="text-xs text-[#6F00B5] flex items-center justify-center gap-2">
+              <svg class="animate-spin h-4 w-4 text-[#A100FF]" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path></svg>
+              Profiling columns & schema...
+            </div>
+          </div>
+
+          <!-- Active Source Profile -->
+          <div class="bg-white border border-[#E5E5E5] rounded-lg p-5 space-y-4 lg:col-span-2 shadow-xs">
+            <div class="flex items-center justify-between pb-3 border-b border-[#E5E5E5]">
+              <div>
+                <h3 class="text-sm font-semibold text-[#171717]">Active Data Source Status</h3>
+                <p class="text-xs text-[#737373]" x-text="sourceInfo.name || 'Loading active source...'"></p>
+              </div>
+              <span class="text-xs px-2.5 py-1 rounded font-semibold uppercase tracking-wider"
+                    :class="sourceInfo.is_demo ? 'bg-[#EDF7ED] text-[#16803C] border border-[#C8E6C9]' : 'bg-[#F5E8FF] text-[#6F00B5] border border-[#E9D5FF]'"
+                    x-text="sourceInfo.is_demo ? 'Calibrated Structural Benchmark' : 'Custom Ingested Data'"></span>
+            </div>
+
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
+              <div class="bg-[#FAFAFA] p-3 rounded border border-[#EEEEEE]">
+                <div class="text-[10px] text-[#737373] font-semibold uppercase">Total Records</div>
+                <div class="text-sm font-bold text-[#171717] mt-0.5" x-text="(sourceInfo.row_count || 0).toLocaleString()"></div>
+              </div>
+              <div class="bg-[#FAFAFA] p-3 rounded border border-[#EEEEEE]">
+                <div class="text-[10px] text-[#737373] font-semibold uppercase">Analysis Grain</div>
+                <div class="text-xs font-semibold text-[#6F00B5] mt-0.5 truncate" x-text="sourceInfo.analysis_grain || 'Weekly Series'"></div>
+              </div>
+              <div class="bg-[#FAFAFA] p-3 rounded border border-[#EEEEEE]">
+                <div class="text-[10px] text-[#737373] font-semibold uppercase">Primary Metric</div>
+                <div class="text-xs font-semibold text-[#171717] mt-0.5 truncate" x-text="sourceInfo.primary_measure_label || 'Gross Revenue'"></div>
+              </div>
+              <div class="bg-[#FAFAFA] p-3 rounded border border-[#EEEEEE]">
+                <div class="text-[10px] text-[#737373] font-semibold uppercase">Data Quality</div>
+                <div class="text-sm font-bold text-[#16803C] mt-0.5" x-text="`${overviewData.data_quality_score || 100.0}%`"></div>
+              </div>
+            </div>
+
+            <!-- Description -->
+            <div class="bg-[#FAFAFA] p-3 rounded border border-[#EEEEEE] text-xs text-[#555555] space-y-1">
+              <span class="font-semibold text-[#171717]">Architecture Note:</span>
+              <span x-text="sourceInfo.description || 'Enterprise transactional ledger calibrated with deterministic baseline corridors.'"></span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Semantic Configuration Form (Shown when file is uploaded) -->
+        <div x-show="uploadData" class="bg-white border border-[#E5E5E5] rounded-lg p-5 space-y-4 shadow-xs">
+          <div class="pb-3 border-b border-[#E5E5E5] flex items-center justify-between">
+            <div>
+              <h3 class="text-sm font-semibold text-[#171717]">Semantic Contract Calibration</h3>
+              <p class="text-xs text-[#737373]">Map columns to analytical roles to activate deterministic diagnostics.</p>
+            </div>
+          </div>
+
+          <form @submit.prevent="submitSemanticConfiguration()" class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+            
+            <div class="space-y-1">
+              <label class="font-semibold text-[#555555]">Primary Measure Column</label>
+              <select x-model="configForm.primary_measure" class="w-full bg-[#FAFAFA] border border-[#D5D5D5] rounded px-3 py-2 text-xs">
+                <template x-for="col in uploadData?.valid_numeric_columns || []" :key="col">
+                  <option :value="col" x-text="col"></option>
+                </template>
+              </select>
+            </div>
+
+            <div class="space-y-1">
+              <label class="font-semibold text-[#555555]">Metric Display Label</label>
+              <input type="text" x-model="configForm.primary_measure_label" class="w-full bg-[#FAFAFA] border border-[#D5D5D5] rounded px-3 py-2 text-xs" />
+            </div>
+
+            <div class="space-y-1">
+              <label class="font-semibold text-[#555555]">Metric Unit ($ / Units / %)</label>
+              <input type="text" x-model="configForm.primary_measure_unit" class="w-full bg-[#FAFAFA] border border-[#D5D5D5] rounded px-3 py-2 text-xs" />
+            </div>
+
+            <div class="space-y-1">
+              <label class="font-semibold text-[#555555]">Date / Timeline Column</label>
+              <select x-model="configForm.date_column" class="w-full bg-[#FAFAFA] border border-[#D5D5D5] rounded px-3 py-2 text-xs">
+                <option value="None (Snapshot)">None (Cross-Sectional Snapshot)</option>
+                <template x-for="col in uploadData?.valid_date_columns || []" :key="col">
+                  <option :value="col" x-text="col"></option>
+                </template>
+              </select>
+            </div>
+
+            <div class="space-y-1">
+              <label class="font-semibold text-[#555555]">Aggregation Type</label>
+              <select x-model="configForm.aggregation_type" class="w-full bg-[#FAFAFA] border border-[#D5D5D5] rounded px-3 py-2 text-xs">
+                <option value="sum">Sum</option>
+                <option value="mean">Mean / Average</option>
+                <option value="count">Row Count</option>
+                <option value="distinct_count">Distinct Entity Count</option>
+              </select>
+            </div>
+
+            <div class="space-y-1">
+              <label class="font-semibold text-[#555555]">Analysis Grain</label>
+              <select x-model="configForm.analysis_grain" class="w-full bg-[#FAFAFA] border border-[#D5D5D5] rounded px-3 py-2 text-xs">
+                <option value="Time Series (Weekly / Monthly / Daily)">Time Series (Sequential)</option>
+                <option value="Cross-Sectional Snapshot">Cross-Sectional Snapshot</option>
+              </select>
+            </div>
+
+            <div class="col-span-full pt-3 flex justify-end gap-2 border-t border-[#E5E5E5]">
+              <button type="button" @click="uploadData = null" class="px-4 py-2 rounded bg-white hover:bg-[#F5F5F5] text-[#555555] border border-[#D5D5D5] text-xs font-semibold cursor-pointer">
+                Cancel
+              </button>
+              <button type="submit" :disabled="configuring" class="px-5 py-2 rounded bg-[#A100FF] hover:bg-[#6F00B5] text-white text-xs font-bold transition flex items-center gap-1.5 shadow-sm cursor-pointer">
+                <span x-show="configuring" class="animate-spin text-xs">...</span>
+                <span>Ingest & Calibrate Dataset</span>
+              </button>
+            </div>
+
+          </form>
+        </div>
+
+      </div>
+
+      <!-- =================================================================== -->
+{% endblock %}

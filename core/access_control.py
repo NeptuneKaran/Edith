@@ -26,18 +26,25 @@ def log_access(
     granted_sections: List[str],
     restricted_sections: List[str],
     action: str = "READ",
-    details: Optional[Dict[str, Any]] = None
+    details: Optional[Dict[str, Any]] = None,
+    status: Optional[str] = None
 ) -> Dict[str, Any]:
     """Records a persona-scoped access event in the in-memory audit trail."""
     global _LOG_ID_COUNTER, _ACCESS_LOG
     
     timestamp = datetime.now(timezone.utc).isoformat()
-    status = "RESTRICTED_APPLIED" if restricted_sections else "GRANTED"
+    if status is None:
+        if action == "BLOCKED_UNAUTHORIZED":
+            status = "BLOCKED"
+        elif restricted_sections:
+            status = "RESTRICTED_APPLIED"
+        else:
+            status = "GRANTED"
     
     entry = {
         "id": _LOG_ID_COUNTER,
         "timestamp": timestamp,
-        "persona": persona or DEFAULT_PERSONA,
+        "persona": persona or "unauthorized",
         "endpoint": endpoint,
         "action": action,
         "status": status,
@@ -69,18 +76,30 @@ def log_event(
     endpoint: str = "persona_gate",
     granted_sections: Optional[List[str]] = None,
     restricted_sections: Optional[List[str]] = None,
-    details: Optional[Dict[str, Any]] = None
+    details: Optional[Dict[str, Any]] = None,
+    status: Optional[str] = None
 ) -> Dict[str, Any]:
     """Records an explicit persona gate selection or navigation event in the audit trail."""
-    p_meta = get_persona(persona)
-    pid = p_meta["id"]
+    try:
+        p_meta = get_persona(persona)
+        pid = p_meta["id"]
+        g_sections = granted_sections or ["persona_initialized", f"scope:{p_meta.get('scope', 'company_wide')}"]
+        r_sections = restricted_sections or p_meta.get("restricted_sections", [])
+        d = details or {"role_title": p_meta.get("role_title"), "name": p_meta.get("name")}
+    except Exception:
+        pid = persona
+        g_sections = granted_sections or []
+        r_sections = restricted_sections or ["all_access_denied"]
+        d = details or {}
+
     return log_access(
         persona=pid,
         endpoint=endpoint,
         action=action,
-        granted_sections=granted_sections or ["persona_initialized", f"scope:{p_meta.get('scope', 'company_wide')}"],
-        restricted_sections=restricted_sections or p_meta.get("restricted_sections", []),
-        details=details or {"role_title": p_meta.get("role_title"), "name": p_meta.get("name")}
+        granted_sections=g_sections,
+        restricted_sections=r_sections,
+        details=d,
+        status=status
     )
 
 
@@ -109,6 +128,8 @@ def scope_overview(payload: Dict[str, Any], persona_id: Optional[str], repo: Dat
     p_meta = get_persona(persona_id)
     persona = p_meta["id"]
     scoped = copy.deepcopy(payload)
+    scoped["persona"] = persona
+    scoped["restricted"] = (persona == "regional_lead")
     
     if persona == "regional_lead":
         # Compute Region B specific metrics
@@ -119,7 +140,6 @@ def scope_overview(payload: Dict[str, Any], persona_id: Optional[str], repo: Dat
                 corridor_region = AnomalyEngine.calculate_baseline_and_corridor(ts_region)
                 anom_region = AnomalyEngine.evaluate_current_anomaly(corridor_region, kpi_name="Region B Revenue")
                 
-                # Format Region B points for chart
                 ts_points = []
                 for _, r in corridor_region.iterrows():
                     ts_points.append({
@@ -146,6 +166,7 @@ def scope_overview(payload: Dict[str, Any], persona_id: Optional[str], repo: Dat
                 scoped["primary_measure_label"] = "Region B Enterprise Revenue"
                 
         # Company-wide total is marked restricted
+        scoped["company_wide_total"] = get_restricted_placeholder("Requires Executive or Analyst access")
         scoped["company_wide_summary"] = get_restricted_placeholder("Requires Executive or Analyst access")
         scoped["persona_context"] = {
             "persona_id": persona,
@@ -187,7 +208,7 @@ def scope_overview(payload: Dict[str, Any], persona_id: Optional[str], repo: Dat
         return scoped
 
 
-def scope_diagnostic(payload: Dict[str, Any], persona_id: Optional[str]) -> Dict[str, Any]:
+def scope_diagnostic(payload: Dict[str, Any], persona_id: Optional[str], repo: Optional[DataRepository] = None) -> Dict[str, Any]:
     """
     Applies persona scoping to /api/diagnostic.
     - None / Unscoped: Returns payload unmodified.
@@ -200,6 +221,8 @@ def scope_diagnostic(payload: Dict[str, Any], persona_id: Optional[str]) -> Dict
     p_meta = get_persona(persona_id)
     persona = p_meta["id"]
     scoped = copy.deepcopy(payload)
+    scoped["persona"] = persona
+    scoped["restricted"] = (persona == "regional_lead")
     
     if persona == "regional_lead":
         breakdowns = scoped.get("breakdowns", {})
@@ -247,7 +270,7 @@ def scope_diagnostic(payload: Dict[str, Any], persona_id: Optional[str]) -> Dict
         return scoped
 
 
-def scope_workspace(payload: Dict[str, Any], persona_id: Optional[str]) -> Dict[str, Any]:
+def scope_workspace(payload: Dict[str, Any], persona_id: Optional[str], repo: Optional[DataRepository] = None) -> Dict[str, Any]:
     """
     Applies persona scoping to /api/workspace.
     - None / Unscoped: Returns payload unmodified.
@@ -262,11 +285,15 @@ def scope_workspace(payload: Dict[str, Any], persona_id: Optional[str]) -> Dict[
     p_meta = get_persona(persona_id)
     persona = p_meta["id"]
     scoped = copy.deepcopy(payload)
+    scoped["persona"] = persona
+    scoped["restricted"] = (persona == "regional_lead")
     
     if persona == "regional_lead":
+        scoped["competitor_intelligence"] = get_restricted_placeholder("Competitor pricing campaign intelligence requires Executive or Analyst access.")
+        scoped["cross_region_control_groups"] = get_restricted_placeholder("Cross-region control group comparative analysis requires Executive or Analyst access.")
+        
         findings = scoped.get("findings", [])
         for f in findings:
-            # Mask competitor intelligence bullets in supporting/contradictory evidence
             if "supporting_evidence" in f and isinstance(f["supporting_evidence"], list):
                 sanitized_ev = []
                 for ev in f["supporting_evidence"]:
@@ -279,11 +306,9 @@ def scope_workspace(payload: Dict[str, Any], persona_id: Optional[str]) -> Dict[
                         sanitized_ev.append(ev)
                 f["supporting_evidence"] = sanitized_ev
                 
-            # If hypothesis is specifically competitor campaign, restrict deep telemetry
             if f.get("id") == "H2_COMPETITOR_CAMPAIGN":
                 f["competitor_telemetry"] = get_restricted_placeholder("Competitor discount index and campaign logs require Executive or Analyst access.")
                 
-            # Restrict cross-region control group analysis
             if "control_group_analysis" in f and f["control_group_analysis"]:
                 f["control_group_analysis"] = get_restricted_placeholder("Cross-region control group comparative analysis requires Executive or Analyst access.")
                 
@@ -370,6 +395,14 @@ def scope_simulation(
     p_meta = get_persona(persona_id)
     persona = p_meta["id"]
     scoped = copy.deepcopy(payload)
+    scoped["persona"] = persona
+    scoped["restricted"] = (persona == "regional_lead")
+    
+    scoped["levers_permissions"] = {
+        "price_rollback_locked": (persona == "regional_lead"),
+        "promo_fund_locked": False,
+        "churn_mitigation_locked": False
+    }
     
     if persona == "regional_lead":
         scoped["levers_access"] = {
@@ -390,7 +423,7 @@ def scope_simulation(
             }
         }
         
-        # Lock price rollback to 0.0 in returned state for regional lead
+        # Lock price rollback in returned state
         if "levers" in scoped and isinstance(scoped["levers"], dict):
             scoped["levers"]["price_rollback_pct"] = 0.0
             
@@ -410,7 +443,7 @@ def scope_simulation(
         )
         return scoped
         
-    else: # executive, general_user, or analyst
+    else:
         scoped["levers_access"] = {
             "price_rollback": {"allowed": True, "restricted": False},
             "promo_fund": {"allowed": True, "restricted": False},
