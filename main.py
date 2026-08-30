@@ -701,7 +701,8 @@ async def chat_with_edith(req: ChatQueryRequest):
             selected_hypothesis=selected_h,
             all_hypotheses=all_hypotheses,
             chat_history=req.chat_history or [],
-            simulation_levers=req.simulation_levers or _ACTIVE_SIM_LEVERS
+            simulation_levers=req.simulation_levers or _ACTIVE_SIM_LEVERS,
+            persona=req.persona or "executive"
         )
         meta = {
             "provider": "Deterministic Analytical Engine",

@@ -2,6 +2,7 @@
 config/personas.py
 Defines the enterprise personas for EDITH:
 - executive: Executive / CRO (company-wide, condensed narrative depth, high-level decisions)
+- general_user: Non-Technical Business User (company-wide plain-language narrative with zero statistical/technical jargon)
 - regional_lead: Regional Sales Lead, Region B (operational framing with role-based data security restrictions)
 - analyst: Analyst / RevOps (full unconstrained analytical depth, all hypotheses, all regions)
 """
@@ -17,6 +18,24 @@ PERSONAS: Dict[str, Dict[str, Any]] = {
         "target_region": None,
         "badge_color": "bg-[#F5E8FF] text-[#6F00B5] border-[#E9D5FF]",
         "description": "Company-wide strategic overview with condensed decision-oriented summaries.",
+        "permissions": {
+            "view_company_wide": True,
+            "view_all_regions": True,
+            "view_competitor_intelligence": True,
+            "view_all_hypotheses": True,
+            "control_pricing_levers": True,
+            "view_lineage": True
+        }
+    },
+    "general_user": {
+        "id": "general_user",
+        "name": "Business User (Plain Language)",
+        "role_title": "Business User / General Audience",
+        "depth": "plain_language",
+        "scope": "company_wide",
+        "target_region": None,
+        "badge_color": "bg-[#EFF6FF] text-[#1E40AF] border-[#BFDBFE]",
+        "description": "Plain-language narrative explaining what happened and next steps with zero statistical jargon.",
         "permissions": {
             "view_company_wide": True,
             "view_all_regions": True,

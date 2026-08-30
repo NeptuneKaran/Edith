@@ -3,6 +3,7 @@ core/access_control.py
 Centralized Role-Based Access Control (RBAC), Data Scoping & Audit Logging for EDITH.
 Enforces genuine role-based data security and narrative depth tailored to active personas:
 - executive: Company-wide figures, condensed narrative depth, no data restrictions.
+- general_user: Company-wide figures, plain-language translation (zero jargon), no data restrictions.
 - regional_lead: Region B operational scope, genuine security restrictions on company-wide totals,
                  competitor intelligence, cross-region control groups, and pricing levers.
 - analyst: Unrestricted full mathematical/statistical depth and lineage.
@@ -78,7 +79,7 @@ def scope_overview(payload: Dict[str, Any], persona_id: Optional[str], repo: Dat
     """
     Applies persona scoping to /api/overview.
     - None / Unscoped: Returns payload 100% unmodified for backward compatibility.
-    - executive / analyst: Returns company-wide figures with persona metadata.
+    - executive / general_user / analyst: Returns company-wide figures with persona metadata (restricted: False).
     - regional_lead: Recomputes KPI metrics for Region B, replaces company-wide totals with restricted placeholder.
     """
     if persona_id is None:
@@ -142,7 +143,7 @@ def scope_overview(payload: Dict[str, Any], persona_id: Optional[str], repo: Dat
         )
         return scoped
         
-    else: # executive or analyst
+    else: # executive, general_user, or analyst
         scoped["company_wide_summary"] = {
             "restricted": False,
             "status": "ACCESS_GRANTED",
@@ -169,7 +170,7 @@ def scope_diagnostic(payload: Dict[str, Any], persona_id: Optional[str]) -> Dict
     """
     Applies persona scoping to /api/diagnostic.
     - None / Unscoped: Returns payload unmodified.
-    - executive / analyst: Full breakdown.
+    - executive / general_user / analyst: Full breakdown (restricted: False).
     - regional_lead: Region breakdown table displays Region B in full; non-Region B rows are replaced with restricted notices.
     """
     if persona_id is None:
@@ -230,6 +231,7 @@ def scope_workspace(payload: Dict[str, Any], persona_id: Optional[str]) -> Dict[
     Applies persona scoping to /api/workspace.
     - None / Unscoped: Returns payload unmodified.
     - executive: Condensed/high-level hypothesis highlights.
+    - general_user: Plain language hypothesis translation without technical jargon.
     - analyst: Full unconstrained evidence ledger and lineage.
     - regional_lead: Restricts competitor intelligence signals and cross-region control-group comparisons.
     """
@@ -294,6 +296,22 @@ def scope_workspace(payload: Dict[str, Any], persona_id: Optional[str]) -> Dict[
             restricted_sections=[]
         )
         return scoped
+
+    elif persona == "general_user":
+        scoped["persona_context"] = {
+            "persona_id": persona,
+            "name": p_meta["name"],
+            "depth": "plain_language",
+            "scope": "Company-wide Scope (Plain Language)",
+            "is_restricted": False
+        }
+        log_access(
+            persona=persona,
+            endpoint="/api/workspace",
+            granted_sections=["plain_language_hypotheses", "explanatory_findings", "action_overview"],
+            restricted_sections=[]
+        )
+        return scoped
         
     else: # analyst
         scoped["persona_context"] = {
@@ -321,7 +339,7 @@ def scope_simulation(
     """
     Applies persona scoping to /api/simulation.
     - None / Unscoped: Returns payload unmodified.
-    - executive / analyst: Full lever controls.
+    - executive / general_user / analyst: Full lever controls (restricted: False).
     - regional_lead: Price Rollback lever is locked/restricted ("Requires Executive persona"),
                      Co-Op Fund and VIP Retention remain fully accessible.
     """
@@ -371,7 +389,7 @@ def scope_simulation(
         )
         return scoped
         
-    else: # executive or analyst
+    else: # executive, general_user, or analyst
         scoped["levers_access"] = {
             "price_rollback": {"allowed": True, "restricted": False},
             "promo_fund": {"allowed": True, "restricted": False},

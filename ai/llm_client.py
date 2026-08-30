@@ -246,6 +246,7 @@ class EdithLLMClient:
             all_hypotheses=hypotheses,
             chat_history=chat_history,
             simulation_levers=simulation_levers,
+            persona=persona or "executive",
             response_style=response_style
         )
         latency = round(time.time() - start_time, 3)

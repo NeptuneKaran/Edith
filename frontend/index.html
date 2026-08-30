@@ -84,12 +84,13 @@
         <span class="text-[10px] font-bold text-[#737373] uppercase tracking-wider">Role:</span>
         <select x-model="personaId" @change="handlePersonaChange()" class="bg-transparent text-xs font-bold text-[#6F00B5] outline-none cursor-pointer">
           <option value="executive">Executive / CRO</option>
+          <option value="general_user">Business User (Plain Language)</option>
           <option value="regional_lead">Regional Sales Lead (Region B)</option>
           <option value="analyst">Analyst / RevOps</option>
         </select>
         <span class="text-[10px] px-1.5 py-0.5 rounded font-bold uppercase tracking-wider" 
-              :class="personaId === 'executive' ? 'bg-[#F5E8FF] text-[#6F00B5] border border-[#E9D5FF]' : (personaId === 'regional_lead' ? 'bg-[#FFF8E1] text-[#A15C00] border border-[#FFE082]' : 'bg-[#EDF7ED] text-[#16803C] border border-[#C8E6C9]')"
-              x-text="personaId === 'executive' ? 'Strategic' : (personaId === 'regional_lead' ? 'Restricted' : 'Full Access')"></span>
+              :class="personaId === 'executive' ? 'bg-[#F5E8FF] text-[#6F00B5] border border-[#E9D5FF]' : (personaId === 'general_user' ? 'bg-[#EFF6FF] text-[#1E40AF] border border-[#BFDBFE]' : (personaId === 'regional_lead' ? 'bg-[#FFF8E1] text-[#A15C00] border border-[#FFE082]' : 'bg-[#EDF7ED] text-[#16803C] border border-[#C8E6C9]'))"
+              x-text="personaId === 'executive' ? 'Strategic' : (personaId === 'general_user' ? 'Plain Language' : (personaId === 'regional_lead' ? 'Restricted' : 'Full Access'))"></span>
       </div>
 
       <!-- Live Audit Trail Button (Requirement C) -->
@@ -928,7 +929,7 @@
                     </td>
                     <td class="p-2.5">
                       <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold uppercase"
-                            :class="event.persona === 'regional_lead' ? 'bg-[#FFF8E1] text-[#A15C00]' : (event.persona === 'executive' ? 'bg-[#F5E8FF] text-[#6F00B5]' : 'bg-[#EDF7ED] text-[#16803C]')"
+                            :class="event.persona === 'regional_lead' ? 'bg-[#FFF8E1] text-[#A15C00]' : (event.persona === 'general_user' ? 'bg-[#EFF6FF] text-[#1E40AF]' : (event.persona === 'executive' ? 'bg-[#F5E8FF] text-[#6F00B5]' : 'bg-[#EDF7ED] text-[#16803C]'))"
                             x-text="event.persona"></span>
                     </td>
                     <td class="p-2.5 font-mono text-[11px] text-[#333333]" x-text="event.endpoint"></td>
@@ -1110,12 +1111,14 @@
         },
 
         getPersonaName() {
+          if (this.personaId === 'general_user') return 'Business User (Plain Language)';
           if (this.personaId === 'regional_lead') return 'Regional Sales Lead (Region B)';
           if (this.personaId === 'analyst') return 'Analyst / RevOps';
           return 'Executive / CRO';
         },
 
         getPersonaScope() {
+          if (this.personaId === 'general_user') return 'Company-wide (Plain Language)';
           if (this.personaId === 'regional_lead') return 'Region B Operational Scope';
           if (this.personaId === 'analyst') return 'Full Econometric Ledger';
           return 'Company-wide Strategic';
@@ -1467,6 +1470,14 @@
         },
 
         getStarterQuestions() {
+          if (this.personaId === 'general_user') {
+            return [
+              'Why did sales drop?',
+              'What happened in Region B?',
+              'What is the recovery plan?',
+              'Why did we rule out warehouse issues?'
+            ];
+          }
           if (this.personaId === 'regional_lead') {
             return [
               'What caused the Region B revenue deficit?',

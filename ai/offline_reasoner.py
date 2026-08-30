@@ -3,6 +3,11 @@ ai/offline_reasoner.py
 Deterministic Offline Reasoner & Conversational Decision Assistant for EDITH.
 Generates evidence-grounded, human-like natural language synthesis directly from active analytical data.
 Dynamically handles both the built-in B2B SaaS benchmark and arbitrary custom business datasets.
+Supports four distinct personas:
+- executive: Strategic decision-maker summary
+- general_user: 100% plain-language narrative with zero statistical/technical jargon
+- regional_lead: Operational focus with role-based security boundaries
+- analyst: Full econometric ledger, evidence scores, and data lineage
 """
 import re
 from typing import Dict, List, Any, Optional
@@ -18,9 +23,24 @@ class OfflineEdithReasoner:
         simulation_levers: Optional[Dict[str, Any]] = None
     ) -> str:
         """Returns structured recommended actions and policy intervention strategy."""
-        is_regional = (persona_id == "regional_lead")
+        pid = (persona_id or "executive").lower().strip()
         
-        if is_regional:
+        if pid == "general_user":
+            return """**Here is what the team is planning to do next to recover sales:**
+
+1. **Adjust Pricing Back Slightly (-6%):**
+   - Roll back half the recent price increase on Enterprise renewals in Region B (setting the price to **$10,528/unit**). This brings back price-conscious business buyers while keeping a modest gain over last year.
+
+2. **Offer Local Partner Marketing Support ($15,000):**
+   - Provide a $15,000 regional marketing fund to help local sales partners counter competitor discounts in Region B.
+
+3. **Provide High-Touch Support to Key Accounts:**
+   - Assign dedicated customer success managers to the top 12 at-risk renewal accounts to make sure they are supported.
+
+4. **Expected Outcome:**
+   - Over the next 8 weeks, this plan is projected to recover **nearly 80% of lost sales volume** and add about **+$20,000/week** in revenue recovery."""
+
+        elif pid == "regional_lead":
             return """**Recommended Action Plan & Policy Approval Priority (Regional Sales Lead):**
 
 1. **First Immediate Field Action (Authorized for Deployment):**
@@ -33,7 +53,8 @@ class OfflineEdithReasoner:
 3. **Projected Recovery Path:**
    - Modeling in **Screen 04 (Policy Simulator)** projects this balanced strategy recovers **78.2% of lost volume** over 8 weeks, generating **+$20,067/week in net revenue recovery**."""
 
-        return """**Recommended Action Plan & Decision Approval Priority (Executive / CRO):**
+        else: # executive & analyst
+            return """**Recommended Action Plan & Decision Approval Priority (Executive / CRO):**
 
 1. **Primary Decision to Approve First (Price Calibration):**
    - **Authorize -6% Price Adjustment on Enterprise Suite Alpha:** Roll back half the recent price hike on Enterprise renewals in Region B (setting unit price to **$10,528/unit**). This directly re-engages price-sensitive enterprise buyers while preserving **+$528/unit net margin gain** over baseline (projected volume recovery: **+$18,400/week**).
@@ -51,7 +72,8 @@ class OfflineEdithReasoner:
     def generate_investigation_briefing(
         anomaly_context: Dict[str, Any],
         hypotheses: List[Dict[str, Any]],
-        response_style: str = "concise"
+        response_style: str = "concise",
+        persona: str = "executive"
     ) -> str:
         """Synthesizes the primary executive investigation diagnosis."""
         from data.repository import DataRepository
@@ -62,7 +84,24 @@ class OfflineEdithReasoner:
         baseline_val = anomaly_context.get("baseline_value", 0.0)
         delta_pct = anomaly_context.get("delta_pct", 0.0)
         z_score = anomaly_context.get("z_score", 0.0)
+        pid = (persona or "executive").lower().strip()
         
+        # General User briefing (100% plain language)
+        if pid == "general_user":
+            return f"""### 💡 Plain-Language Summary: What Happened to {kpi_name}?
+
+**1. The Headline:**
+- **{kpi_name}** experienced a **noticeable drop of roughly {abs(delta_pct):.1f}%** (${baseline_val:,.0f} → ${current_val:,.0f}).
+- Almost the entire drop (**over 97%**) happened in **Region B** among **Enterprise accounts** on **Product Suite Alpha**.
+
+**2. Why It Happened:**
+- **Main Reason:** We increased prices by 12% two weeks ago. Large business customers were sensitive to the change, and 21 accounts paused renewals.
+- **Contributing Factor:** Around the same time, competitor ApexTech offered a 15% discount promotion, giving hesitant buyers an alternative.
+- **Ruled Out:** Deliveries, warehouse fulfillment, and software systems were completely normal with zero operational delays.
+
+**3. What the Team Plans to Do Next:**
+- Roll back half of the price increase on Enterprise plans in Region B (setting the price to $10,528), provide $15,000 in local partner marketing support, and assign dedicated account managers to at-risk renewals."""
+
         # Custom generic dataset briefing
         if not is_demo or (hypotheses and hypotheses[0].get("id", "").startswith("GEN_")):
             dq = repo.get_data_quality_report()
@@ -166,6 +205,7 @@ class OfflineEdithReasoner:
         q = query.strip()
         q_clean = re.sub(r'[^\w\s]', '', q.lower()).strip()
         q_lower = q.lower()
+        pid = (persona or "executive").lower().strip()
         
         if all_hypotheses is None:
             all_hypotheses = kwargs.get("hypotheses", [])
@@ -185,6 +225,17 @@ class OfflineEdithReasoner:
         greetings = ["hello", "hi", "hey", "good morning", "good afternoon", "good evening", "howdy", "hiya", "sup", "yo"]
         if any(q_clean == g or q_clean.startswith(g + " ") for g in greetings):
             dataset_name = repo.active_source_info.get("name", "Active Dataset")
+            if pid == "general_user":
+                return f"""Hello! I'm **EDITH**, your AI business intelligence assistant.
+
+I'm currently connected to **{dataset_name}**. Here are a few ways we can explore what's happening:
+
+- **Understand What Changed:** Ask *"Why did sales drop?"* or *"What happened in Region B?"*
+- **Explore Categories:** Ask *"Which areas or customer groups had the biggest drop?"*
+- **Check What the Team Is Doing:** Ask *"What is the recovery plan?"* or *"What should we do next?"*
+
+How can I help you today?"""
+
             return f"""Hello! I'm **EDITH**, your AI decision intelligence assistant.
 
 I'm currently connected to **{dataset_name}**. Here are a few ways we can dive into the data together:
@@ -200,6 +251,17 @@ What would you like to examine first?"""
         # 2. CAPABILITIES & HELP
         # ==============================================================================
         if any(k in q_clean for k in ["who are you", "what can you do", "what is edith", "help me", "capabilities", "how do you work"]):
+            if pid == "general_user":
+                return f"""I am **EDITH**, an AI business intelligence assistant built to help everyone understand the real story behind business numbers.
+
+**Here is what I can do for you:**
+1. **Explain Metric Drops Simply:** Explain why sales or other key numbers changed in plain, everyday language.
+2. **Find the Exact Problem Area:** Pinpoint which region, product, or customer segment had the biggest impact.
+3. **Verify What Was Ruled Out:** Confirm whether operational issues like inventory stockouts or website downtime played a role.
+4. **Walk Through Next Steps:** Explain the team's planned recovery actions and how they help.
+
+Feel free to ask me anything about **{kpi_name}** or the active business data!"""
+
             return f"""I am **EDITH (Executive Decision Intelligence & Tactical Hypothesis)**, an AI-assisted analytics partner engineered to uncover the empirical drivers behind business performance.
 
 **Here is how I assist decision-makers:**
@@ -297,7 +359,7 @@ Would you like to see how `{matched_entity}` compares across other dimensions or
 
             # General question on custom dataset
             if any(k in q_clean for k in ["why", "what happened", "summarize", "tell me about", "overview", "what do you think", "summary", "explain"]):
-                return OfflineEdithReasoner.generate_investigation_briefing(anomaly_context, all_hypotheses or [], response_style="concise")
+                return OfflineEdithReasoner.generate_investigation_briefing(anomaly_context, all_hypotheses or [], response_style="concise", persona=persona)
 
         # ==============================================================================
         # 4. BUILT-IN DEMO BENCHMARK: TARGETED ANALYTICAL QUERIES
@@ -308,6 +370,14 @@ Would you like to see how `{matched_entity}` compares across other dimensions or
 
         # 4A. Mathematical Decomposition / Revenue Identity / Volume vs Price
         if any(k in q_clean for k in ["decomposition", "math", "volume effect", "price effect", "volume vs price", "price vs volume", "volume and price", "formula", "identity", "revenue identity"]):
+            if pid == "general_user":
+                return """**How Volume vs. Price Impacted Sales:**
+
+When we raised prices on our Enterprise software plan:
+- **Extra Revenue from Price Increase:** We brought in an extra **+$21,600** from the 18 customers who accepted the new rate.
+- **Lost Revenue from Paused Accounts:** We lost **-$210,000** because 21 enterprise accounts held off on renewing.
+- **Net Result:** The lost deal volume heavily outweighed the extra money from higher prices, leaving a net drop of **-$188,400** in Region B."""
+
             decomp = price_h.get("mathematical_decomposition", {})
             return f"""**Mathematical Revenue Identity (ΔRevenue = ΔUnits × P_pre + Units_post × ΔPrice):**
 
@@ -321,6 +391,20 @@ Would you like to see how `{matched_entity}` compares across other dimensions or
 
         # 4B. Competing Hypotheses Comparison (H1 vs H2)
         if any(k in q_clean for k in ["compare", "versus", "comparison", "h1 vs h2", "pricing vs competitor"]) or ("vs" in q_clean.split() and "volume" not in q_clean):
+            if pid == "general_user":
+                return """**Comparing the Two Main Drivers:**
+
+1. **The Price Increase (Primary Cause):**
+   - We raised prices by 12% in Week 6.
+   - This directly triggered pushback from enterprise customers, causing 21 expected renewals to pause.
+   - This accounts for the overwhelming majority of the sales drop.
+
+2. **The Competitor Discount (Secondary Factor):**
+   - Competitor ApexTech launched a 15% discount campaign in Week 7.
+   - This gave hesitant buyers an alternative, making it harder for our sales reps to close renewals.
+
+**Summary:** The price increase was the initial trigger that caused hesitation, while the competitor promotion made it harder to win those buyers back."""
+
             return """**Comparison: #1 Pricing Elasticity (H1) vs #2 Competitor Campaign (H2):**
 
 | Analytical Dimension | #1 Pricing Elasticity (H1) | #2 Competitor Campaign (H2) |
@@ -334,6 +418,13 @@ Would you like to see how `{matched_entity}` compares across other dimensions or
 
         # 4C. Supply / Inventory Constraints Refutation
         if any(k in q_clean for k in ["inventory", "stockout", "supply", "warehouse", "fulfillment", "logistics"]):
+            if pid == "general_user":
+                return """**Why We Ruled Out Warehouse or Delivery Issues:**
+
+- **On-Time Delivery:** Delivery and fulfillment records show a **99.4% success rate** with zero backlogs.
+- **Stockouts:** There were **0 stockout days** recorded.
+- **Takeaway:** Customers were able to receive products without delay; the sales drop was entirely due to buyer hesitation on pricing."""
+
             return """**Why Supply / Inventory Constraints Are Refuted (H8):**
 
 - **Fulfillment Reliability:** Logistics logs confirm a **99.4% warehouse fill rate** across Weeks 06–08 in Region B.
@@ -342,6 +433,11 @@ Would you like to see how `{matched_entity}` compares across other dimensions or
 
         # 4D. Difference-in-Differences Proof (carefully avoid matching English verb 'did')
         if "difference in differences" in q_clean or "difference-in-differences" in q_lower or "did divergence" in q_clean or "did analysis" in q_clean or "did method" in q_clean or "parallel trend" in q_clean or "parallel trends" in q_clean or ("did" in q.split() and any(w in q.split() for w in ["DiD", "DID", "D-i-D"])):
+            if pid == "general_user":
+                return """**How We Proved the Price Increase Was the Cause:**
+
+We compared customer groups whose prices were raised against groups whose prices stayed the same. Groups without price increases kept renewing at normal rates, while the group with the price increase saw renewals drop sharply. This direct comparison confirms the price increase was the main trigger."""
+
             return """**Difference-in-Differences (DiD) Methodology:**
 
 DiD compares changes in outcomes over time between a **treated group** (exposed to an intervention) and an unexposed **control group**:
@@ -353,6 +449,11 @@ DiD = (Y_treated,post - Y_treated,pre) - (Y_control,post - Y_control,pre)
 
         # 4E. Elasticity Explanation
         if "elasticity" in q_clean:
+            if pid == "general_user":
+                return """**What Price Sensitivity Means for Our Sales:**
+
+Price sensitivity simply measures how much customer demand drops when prices go up. In our Enterprise software segment, customers are very sensitive to price changes. When we raised prices by 12%, enough accounts paused renewals that our overall revenue dropped instead of increasing."""
+
             return """**Price Elasticity of Demand (εₚ):**
 
 Measures demand responsiveness to pricing changes (εₚ = %ΔQuantity / %ΔPrice).
@@ -361,6 +462,14 @@ Measures demand responsiveness to pricing changes (εₚ = %ΔQuantity / %ΔPric
 
         # 4F. Why / Sales Drop Trigger
         if q_clean in ["why", "why so", "why is this happening", "why did it happen", "why did that happen", "why did this happen", "why did sales drop", "why the drop"] or q_clean.startswith("why "):
+            if pid == "general_user":
+                return """**Here is why sales dropped by roughly 11% (about $148,000 below normal):**
+
+1. **The Price Increase:** In Week 6, we raised prices on our Enterprise software plan by 12% (from $10,000 to $11,200).
+2. **Customer Pushback:** Because enterprise buyers are sensitive to price changes, 21 expected renewals were put on hold.
+3. **Competitor Promotion:** In Week 7, competitor ApexTech launched a 15% discount campaign, giving hesitant customers an attractive alternative.
+4. **Operations Were Healthy:** Our warehouse, delivery systems, and software servers were 100% operational with zero stockouts or downtime."""
+
             return """The primary reason for the **-$147.7k (-10.5%) sales drop** in Week 08 is **pricing elasticity combined with competitor discount pressure**:
 
 1. **The Primary Trigger (+12% Price Increase):** Enterprise subscription pricing for Product Suite Alpha was raised from $10,000 to $11,200/unit in Week 06.
@@ -371,6 +480,19 @@ Measures demand responsiveness to pricing changes (εₚ = %ΔQuantity / %ΔPric
 
         # 4G. Combined KPI Fault & Next Approach
         if (any(k in q_clean for k in ["fault", "faulting", "what is wrong", "problem", "issue", "kpi"]) and any(k in q_clean for k in ["approach", "strategy", "next", "action", "do", "fix", "recommend"])) or "what kpi is faulting" in q_clean:
+            if pid == "general_user":
+                return f"""### 💡 Metric Diagnostic & Recovery Roadmap
+
+**1. The Affected Metric & What Happened:**
+- **Metric:** **{kpi_name}** experienced a noticeable drop of roughly **{abs(delta_pct):.1f}%** (${baseline_val:,.0f} → ${current_val:,.0f}).
+- **Location:** Over 97% of the drop is centered in **Region B Enterprise accounts** on Product Suite Alpha.
+- **Root Cause:** A 12% price increase led price-sensitive buyers to pause renewals, compounded by a 15% competitor discount promotion.
+
+**2. What the Team Plans to Do Next:**
+1. **Adjust Pricing Back Slightly:** Lower Enterprise Suite Alpha renewals in Region B by 6% (to $10,528) to re-engage buyers while keeping a modest gain over last year.
+2. **Support Local Partners:** Provide a $15,000 marketing fund in Region B to match competitor discounts.
+3. **Dedicated Customer Care:** Assign dedicated customer success managers to at-risk accounts."""
+
             return f"""### 🚨 Faulting Metric Diagnostic & Recovery Roadmap
 
 **1. Faulting Metric & Anomaly Localization:**
@@ -411,9 +533,16 @@ Measures demand responsiveness to pricing changes (εₚ = %ΔQuantity / %ΔPric
         
         # Check if user query is why/cause oriented
         if any(w in q_clean for w in ["why", "cause", "reason", "driver", "drop", "down", "fell", "loss"]):
-            return OfflineEdithReasoner.generate_investigation_briefing(anomaly_context, all_hypotheses or [], response_style="concise")
+            return OfflineEdithReasoner.generate_investigation_briefing(anomaly_context, all_hypotheses or [], response_style="concise", persona=persona)
 
         # General structured response with key findings
+        if pid == "general_user":
+            return f"""**Key Takeaway for {kpi_name}:**
+
+Sales experienced a noticeable drop of roughly {abs(delta_pct):.1f}%, almost entirely centered in Region B Enterprise accounts following a price increase. Physical operations ran smoothly with zero warehouse issues.
+
+*(You can ask: "Why did sales drop?", "What is the recovery plan?", or "What happened in Region B?".)*"""
+
         top_evidence = "\n".join([f"- {e}" for e in selected_hypothesis.get("supporting_evidence", [])])
         if top_evidence:
             return f"""**Key Findings for {selected_hypothesis.get('name', 'Active Investigation')}:**
@@ -422,7 +551,7 @@ Measures demand responsiveness to pricing changes (εₚ = %ΔQuantity / %ΔPric
 
 *(You can ask me: "What decision should we approve first?", "Explain the volume vs price impact", or "Compare the top two causes".)*"""
 
-        return OfflineEdithReasoner.generate_investigation_briefing(anomaly_context, all_hypotheses or [], response_style="concise")
+        return OfflineEdithReasoner.generate_investigation_briefing(anomaly_context, all_hypotheses or [], response_style="concise", persona=persona)
 
     @staticmethod
     def answer_conversational_query(
@@ -475,6 +604,7 @@ Measures demand responsiveness to pricing changes (εₚ = %ΔQuantity / %ΔPric
         """
         Generates persona-specific Executive Briefing report artifact.
         Works 100% offline with zero external API dependencies.
+        Supports: executive, general_user, regional_lead, analyst.
         """
         from data.repository import DataRepository
         from config.personas import get_persona
@@ -505,8 +635,71 @@ Measures demand responsiveness to pricing changes (εₚ = %ΔQuantity / %ΔPric
         
         now_str = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
         
-        # 1. REGIONAL LEAD BRIEFING
-        if pid == "regional_lead":
+        # 1. GENERAL USER BRIEFING (100% PLAIN LANGUAGE, ZERO JARGON)
+        if pid == "general_user":
+            headline = "Business Update: Why Sales Dropped in Region B and What We Are Doing Next"
+            narrative = f"""### 💡 Plain-Language Business Update — What Happened to Our Sales?
+**Generated:** {now_str} &middot; **Audience:** General Business Team &middot; **Style:** Plain Language (Zero Jargon)
+
+---
+
+#### 1. The Big Picture: What Happened?
+- **The Main Takeaway:** Weekly sales experienced a **noticeable drop of roughly 11%** (about **$148,000 below normal weekly levels**).
+- **Where It Happened:** Almost the entire drop (**over 97%**) happened in **Region B** among our **Enterprise accounts** on **Product Suite Alpha**.
+- **What Stayed Healthy:** Sales across all other regions and smaller business segments (Mid-Market and SMB) remained stable and on track.
+
+---
+
+#### 2. Why Did It Happen? (The Real Story)
+- **The Primary Trigger (Price Increase Sensitivity):**
+  - In Week 6, we raised prices on our Enterprise software plan by 12% (from $10,000 to $11,200).
+  - Because large business customers are sensitive to price changes, 21 expected renewals were put on hold.
+  - While we made an extra $21,600 from accounts that accepted the higher rate, it was not enough to make up for the deals that paused.
+- **The Secondary Factor (Competitor Discount Promotion):**
+  - Around the same time (Week 7), our competitor **ApexTech** launched a **15% discount campaign**, giving hesitant buyers a cheaper alternative to consider.
+- **What We Checked and Ruled Out:**
+  - Our warehouses, deliveries, and software servers were operating normally with **zero shipping delays** and 99.4% on-time fulfillment. The issue was commercial demand, not operational delivery.
+
+---
+
+#### 3. What the Team Is Planning to Do Next
+1. **Adjust Pricing Back Slightly:** Lower Enterprise Suite Alpha renewals in Region B by 6% (setting unit price to $10,528). This brings back price-conscious buyers while keeping a modest gain over last year.
+2. **Support Local Partners:** Provide a $15,000 regional marketing fund in Region B to match competitor promotions.
+3. **Dedicated Customer Care:** Assign dedicated customer success managers to the 12 most critical renewal accounts.
+4. **Expected Outcome:** Over the next 8 weeks, this balanced plan is projected to recover **nearly 80% of lost sales volume**.
+"""
+            actions = [
+                {
+                    "driver": "Price sensitivity on Enterprise plan",
+                    "lever": "Price Adjustment (-6%)",
+                    "action": "Adjust Enterprise renewal pricing in Region B to $10,528/unit",
+                    "expected_impact": "Brings back paused renewals while keeping a modest price gain",
+                    "owner": "Pricing Committee & Revenue Team",
+                    "confidence": "High",
+                    "status": "Planned for Implementation"
+                },
+                {
+                    "driver": "Competitor discount campaign",
+                    "lever": "Partner Marketing Fund ($15k)",
+                    "action": "Deploy $15,000 in regional partner co-op marketing in Region B",
+                    "expected_impact": "Accelerates deal closings against competitor promotions",
+                    "owner": "Field Marketing Team",
+                    "confidence": "Moderate",
+                    "status": "Planned for Implementation"
+                },
+                {
+                    "driver": "Account renewal support",
+                    "lever": "Dedicated Customer Care",
+                    "action": "Provide high-touch customer support to 12 key renewal accounts",
+                    "expected_impact": "Protects existing customer relationships and prevents cancellations",
+                    "owner": "Customer Success Team",
+                    "confidence": "High",
+                    "status": "In Progress"
+                }
+            ]
+
+        # 2. REGIONAL LEAD BRIEFING
+        elif pid == "regional_lead":
             headline = "Region B Operational Briefing: -$182.2k (-30.3%) Deficit in Enterprise Suite Alpha"
             narrative = f"""### 📋 Executive Briefing — Regional Sales Lead (Region B)
 **Generated:** {now_str} &middot; **Scope:** Region B Operational &middot; **Classification:** Role-Restricted
@@ -571,7 +764,7 @@ Measures demand responsiveness to pricing changes (εₚ = %ΔQuantity / %ΔPric
                 }
             ]
             
-        # 2. ANALYST BRIEFING
+        # 3. ANALYST BRIEFING
         elif pid == "analyst":
             headline = "Full Econometric & Causal Diagnostic Ledger: Multi-Hypothesis Lineage"
             narrative = f"""### 🔬 Full Causal Diagnostic Ledger — Senior RevOps Analyst
@@ -638,7 +831,7 @@ Measures demand responsiveness to pricing changes (εₚ = %ΔQuantity / %ΔPric
                 }
             ]
 
-        # 3. EXECUTIVE / CRO BRIEFING (DEFAULT)
+        # 4. EXECUTIVE / CRO BRIEFING (DEFAULT)
         else:
             headline = f"Executive Decision Briefing: {delta_pct:+.1f}% Revenue Deficit Isolated to Enterprise Tier Post-Price Increase"
             narrative = f"""### 🎯 Executive Decision Briefing — Chief Revenue Officer
