@@ -1185,3 +1185,22 @@ Apply a balanced multi-lever recovery policy:
                 "dataset": repo.active_source_info.get("name", "B2B SaaS Benchmark")
             }
         }
+
+    @classmethod
+    def answer_followup_question(cls, question: str, selected_hypothesis: Optional[Dict[str, Any]] = None, all_hypotheses: Optional[List[Dict[str, Any]]] = None, **kwargs) -> str:
+        from core.baseline_engine import AnomalyEngine
+        from data.repository import DataRepository
+        repo = DataRepository.get_instance()
+        ts = repo.get_kpi_time_series()
+        anom_ctx = AnomalyEngine.evaluate_current_anomaly(ts)
+        return cls.answer_query(
+            query=question,
+            anomaly_context=anom_ctx,
+            selected_hypothesis=selected_hypothesis or {},
+            all_hypotheses=all_hypotheses or [],
+            **kwargs
+        )
+
+    @classmethod
+    def generate_diagnosis_narrative(cls, anomaly_context: Dict[str, Any], hypotheses: List[Dict[str, Any]], **kwargs) -> str:
+        return cls.generate_investigation_briefing(anomaly_context, hypotheses, **kwargs)

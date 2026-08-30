@@ -12,6 +12,9 @@ Comprehensive automated test suite for EDITH Multi-Page Architecture & Persona G
 9. Live audit trail logging for gate selections, role switches, data access, and blocked attempts
 """
 import unittest
+import sys
+import os
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import re
 from starlette.testclient import TestClient
 from main import app
