@@ -63,6 +63,27 @@ def clear_access_log():
     _ACCESS_LOG.clear()
     _LOG_ID_COUNTER = 1
 
+def log_event(
+    persona: str,
+    action: str = "GATE_SELECTION",
+    endpoint: str = "persona_gate",
+    granted_sections: Optional[List[str]] = None,
+    restricted_sections: Optional[List[str]] = None,
+    details: Optional[Dict[str, Any]] = None
+) -> Dict[str, Any]:
+    """Records an explicit persona gate selection or navigation event in the audit trail."""
+    p_meta = get_persona(persona)
+    pid = p_meta["id"]
+    return log_access(
+        persona=pid,
+        endpoint=endpoint,
+        action=action,
+        granted_sections=granted_sections or ["persona_initialized", f"scope:{p_meta.get('scope', 'company_wide')}"],
+        restricted_sections=restricted_sections or p_meta.get("restricted_sections", []),
+        details=details or {"role_title": p_meta.get("role_title"), "name": p_meta.get("name")}
+    )
+
+
 def get_restricted_placeholder(reason: str = "Requires Executive or Analyst access") -> Dict[str, Any]:
     """Generates a standardized restricted data placeholder."""
     return {

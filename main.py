@@ -49,7 +49,8 @@ from core.access_control import (
     scope_workspace,
     scope_simulation,
     get_access_log,
-    log_access
+    log_access,
+    log_event
 )
 
 
@@ -349,6 +350,25 @@ async def get_active_source():
 async def list_personas():
     """Returns available enterprise personas with metadata and permission profiles."""
     return _to_json_safe(get_personas())
+
+class LogEventRequest(BaseModel):
+    persona: str = Field(..., description="Selected persona ID")
+    action: str = Field("GATE_SELECTION", description="Action name")
+    endpoint: Optional[str] = "persona_gate"
+    details: Optional[Dict[str, Any]] = None
+
+
+@app.post("/api/access-log/event")
+async def record_access_event(req: LogEventRequest):
+    """Records an explicit persona gate selection or navigation event into the audit trail."""
+    entry = log_event(
+        persona=req.persona,
+        action=req.action,
+        endpoint=req.endpoint or "persona_gate",
+        details=req.details
+    )
+    return {"status": "SUCCESS", "event": entry}
+
 
 @app.get("/api/access-log")
 async def get_access_audit_log(limit: int = 50):

@@ -179,7 +179,18 @@ class TestPersonasAndAccessControl(unittest.TestCase):
                 self.assertEqual(len(matches), 0, f"Found forbidden acronym '{pattern}' in general_user chat for query '{q}': {matches}")
 
     def test_10_audit_trail_logging(self):
-        """Verify that every scoped call is properly logged to GET /api/access-log."""
+        """Verify that every scoped call and gate selection event is properly logged to GET /api/access-log."""
+        # 1. Log Gate Selection event
+        gate_resp = self.client.post("/api/access-log/event", json={
+            "persona": "regional_lead",
+            "action": "GATE_SELECTION",
+            "endpoint": "persona_gate",
+            "details": {"role_title": "Regional Sales Director - Region B", "selected_role": "regional_lead"}
+        })
+        self.assertEqual(gate_resp.status_code, 200)
+        self.assertEqual(gate_resp.json()["status"], "SUCCESS")
+
+        # 2. Scoped requests
         self.client.get("/api/overview?persona=regional_lead")
         self.client.get("/api/workspace?persona=executive")
         self.client.get("/api/briefing?persona=general_user")
@@ -190,7 +201,11 @@ class TestPersonasAndAccessControl(unittest.TestCase):
         log_data = resp.json()
         self.assertIn("events", log_data)
         events = log_data["events"]
-        self.assertTrue(len(events) >= 4)
+        self.assertTrue(len(events) >= 5)
+        
+        # Confirm gate selection appears in the log
+        actions = [e["action"] for e in events]
+        self.assertIn("GATE_SELECTION", actions)
         
         # Verify event properties
         first_event = events[0]

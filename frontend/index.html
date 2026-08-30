@@ -62,6 +62,158 @@
 </head>
 <body class="h-full flex flex-col font-sans antialiased bg-[#F8F8F8] text-[#171717]" x-data="edithApp()" x-init="initApp()" x-cloak>
 
+  <!-- =================================================================== -->
+  <!-- FULL-SCREEN PERSONA GATE SCREEN (REQUIREMENT A) -->
+  <!-- =================================================================== -->
+  <div x-show="personaId === null" class="min-h-screen bg-[#F8F8F8] flex flex-col justify-between p-6 sm:p-10 z-50">
+    
+    <!-- Gate Top Bar -->
+    <div class="flex items-center justify-between max-w-5xl mx-auto w-full">
+      <div class="flex items-center space-x-3">
+        <div class="w-8 h-8 rounded bg-[#A100FF] flex items-center justify-center font-bold text-white text-sm shadow-sm">
+          E
+        </div>
+        <div class="flex items-center space-x-2">
+          <span class="text-base font-bold text-[#171717] tracking-tight">EDITH</span>
+          <span class="text-[#D4D4D4]">|</span>
+          <span class="text-xs font-semibold text-[#6F00B5] bg-[#F5E8FF] px-2.5 py-0.5 rounded border border-[#E9D5FF]">Decision Intelligence</span>
+        </div>
+      </div>
+      <div class="text-xs text-[#737373] font-medium hidden sm:block">
+        Accenture Innovation Challenge 2026 &middot; Track 3: BusinessIntelligence.ai
+      </div>
+    </div>
+
+    <!-- Main Card Selection Area -->
+    <div class="max-w-5xl mx-auto w-full py-8 space-y-6 my-auto">
+      <div class="text-center space-y-2 max-w-2xl mx-auto">
+        <h1 class="text-2xl sm:text-3xl font-extrabold text-[#171717] tracking-tight">Who are you viewing as?</h1>
+        <p class="text-xs sm:text-sm text-[#555555] leading-relaxed">
+          Select an enterprise persona to enter the decision intelligence workspace. Access permissions, narrative depth, and econometric tooling will adapt to your role.
+        </p>
+      </div>
+
+      <!-- 4 Persona Cards Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        
+        <!-- Card 1: Executive / CRO -->
+        <div @click="selectPersona('executive')" 
+             class="bg-white border border-[#E5E5E5] hover:border-[#A100FF] rounded-lg p-5 transition shadow-xs hover:shadow-md cursor-pointer flex flex-col justify-between space-y-4 group">
+          <div class="space-y-2.5">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-[#F5E8FF] text-[#6F00B5] border border-[#E9D5FF]">Strategic Overview</span>
+              <span class="text-xs text-[#737373] font-mono">Full Visibility</span>
+            </div>
+            <div>
+              <h3 class="text-sm font-bold text-[#171717] group-hover:text-[#6F00B5] transition">Executive / CRO</h3>
+              <div class="text-[11px] text-[#737373] font-medium">Chief Revenue Officer</div>
+            </div>
+            <p class="text-xs text-[#555555] leading-relaxed">
+              Company-wide strategic summary with condensed decision-oriented highlights and recommended policy approvals.
+            </p>
+            <ul class="text-[11px] text-[#737373] space-y-1 pt-1">
+              <li class="flex items-center gap-1.5"><span class="text-green-600 font-bold">✓</span> Company-wide revenue & KPI aggregates</li>
+              <li class="flex items-center gap-1.5"><span class="text-green-600 font-bold">✓</span> Condensed narrative & top root-cause diagnosis</li>
+              <li class="flex items-center gap-1.5"><span class="text-green-600 font-bold">✓</span> Authorized for full Policy Simulator pricing levers</li>
+            </ul>
+          </div>
+          <button class="w-full py-2 px-3 rounded bg-[#F8F8F8] group-hover:bg-[#A100FF] text-[#171717] group-hover:text-white text-xs font-bold transition flex items-center justify-center gap-1.5">
+            <span>Continue as Executive</span> &rarr;
+          </button>
+        </div>
+
+        <!-- Card 2: Business User (Plain Language) -->
+        <div @click="selectPersona('general_user')" 
+             class="bg-white border border-[#E5E5E5] hover:border-[#2563EB] rounded-lg p-5 transition shadow-xs hover:shadow-md cursor-pointer flex flex-col justify-between space-y-4 group">
+          <div class="space-y-2.5">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-[#EFF6FF] text-[#1E40AF] border border-[#BFDBFE]">Plain Language</span>
+              <span class="text-xs text-[#737373] font-mono">Zero Jargon</span>
+            </div>
+            <div>
+              <h3 class="text-sm font-bold text-[#171717] group-hover:text-[#2563EB] transition">Non-Technical Business User</h3>
+              <div class="text-[11px] text-[#737373] font-medium">Business Team / General Audience</div>
+            </div>
+            <p class="text-xs text-[#555555] leading-relaxed">
+              Plain-language narrative explaining what changed in sales and what the team is doing next with zero statistical jargon.
+            </p>
+            <ul class="text-[11px] text-[#737373] space-y-1 pt-1">
+              <li class="flex items-center gap-1.5"><span class="text-blue-600 font-bold">✓</span> Everyday business vocabulary (No Z-scores or formulas)</li>
+              <li class="flex items-center gap-1.5"><span class="text-blue-600 font-bold">✓</span> Clear story explaining why numbers dropped</li>
+              <li class="flex items-center gap-1.5"><span class="text-blue-600 font-bold">✓</span> Simple 3-step recovery action roadmap</li>
+            </ul>
+          </div>
+          <button class="w-full py-2 px-3 rounded bg-[#F8F8F8] group-hover:bg-[#2563EB] text-[#171717] group-hover:text-white text-xs font-bold transition flex items-center justify-center gap-1.5">
+            <span>Continue as Business User</span> &rarr;
+          </button>
+        </div>
+
+        <!-- Card 3: Regional Sales Lead (Region B) -->
+        <div @click="selectPersona('regional_lead')" 
+             class="bg-white border border-[#E5E5E5] hover:border-[#D97706] rounded-lg p-5 transition shadow-xs hover:shadow-md cursor-pointer flex flex-col justify-between space-y-4 group">
+          <div class="space-y-2.5">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-[#FFF8E1] text-[#A15C00] border border-[#FFE082]">Role-Restricted</span>
+              <span class="text-xs text-[#A15C00] font-mono font-semibold">Region B Only</span>
+            </div>
+            <div>
+              <h3 class="text-sm font-bold text-[#171717] group-hover:text-[#D97706] transition">Regional Sales Lead (Region B)</h3>
+              <div class="text-[11px] text-[#737373] font-medium">Regional Sales Director - Region B</div>
+            </div>
+            <p class="text-xs text-[#555555] leading-relaxed">
+              Operational view scoped exclusively to Region B enterprise execution with role-based security restrictions.
+            </p>
+            <ul class="text-[11px] text-[#737373] space-y-1 pt-1">
+              <li class="flex items-center gap-1.5"><span class="text-amber-600 font-bold">✓</span> Region B operational metrics & field actions</li>
+              <li class="flex items-center gap-1.5"><span class="text-red-500 font-bold">✗</span> Company-wide & competitor intelligence restricted</li>
+              <li class="flex items-center gap-1.5"><span class="text-amber-600 font-bold">✓</span> Authorized for Regional Co-Op & VIP CSM guard</li>
+            </ul>
+          </div>
+          <button class="w-full py-2 px-3 rounded bg-[#F8F8F8] group-hover:bg-[#D97706] text-[#171717] group-hover:text-white text-xs font-bold transition flex items-center justify-center gap-1.5">
+            <span>Continue as Regional Lead</span> &rarr;
+          </button>
+        </div>
+
+        <!-- Card 4: Analyst / RevOps -->
+        <div @click="selectPersona('analyst')" 
+             class="bg-white border border-[#E5E5E5] hover:border-[#16803C] rounded-lg p-5 transition shadow-xs hover:shadow-md cursor-pointer flex flex-col justify-between space-y-4 group">
+          <div class="space-y-2.5">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-[#EDF7ED] text-[#16803C] border border-[#C8E6C9]">Full Econometric</span>
+              <span class="text-xs text-[#737373] font-mono">Unrestricted</span>
+            </div>
+            <div>
+              <h3 class="text-sm font-bold text-[#171717] group-hover:text-[#16803C] transition">Analyst / RevOps</h3>
+              <div class="text-[11px] text-[#737373] font-medium">Senior Revenue Operations Analyst</div>
+            </div>
+            <p class="text-xs text-[#555555] leading-relaxed">
+              Unrestricted econometric workbench with complete multi-hypothesis ledgers, Difference-in-Differences proofs, and full data lineage.
+            </p>
+            <ul class="text-[11px] text-[#737373] space-y-1 pt-1">
+              <li class="flex items-center gap-1.5"><span class="text-green-600 font-bold">✓</span> Full 8-hypothesis econometric evidence ledger</li>
+              <li class="flex items-center gap-1.5"><span class="text-green-600 font-bold">✓</span> Difference-in-Differences (DiD) & lag telemetry</li>
+              <li class="flex items-center gap-1.5"><span class="text-green-600 font-bold">✓</span> Mathematical revenue identity decomposition</li>
+            </ul>
+          </div>
+          <button class="w-full py-2 px-3 rounded bg-[#F8F8F8] group-hover:bg-[#16803C] text-[#171717] group-hover:text-white text-xs font-bold transition flex items-center justify-center gap-1.5">
+            <span>Continue as Analyst</span> &rarr;
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Gate Footer -->
+    <div class="max-w-5xl mx-auto w-full text-center text-[11px] text-[#A3A3A3] pt-4 border-t border-[#E5E5E5]">
+      EDITH &middot; Executive Decision Intelligence & Tactical Hypothesis &middot; Enterprise Role Governance
+    </div>
+  </div>
+
+  <!-- =================================================================== -->
+  <!-- MAIN APPLICATION DASHBOARD (VISIBLE ONCE PERSONA SELECTED) -->
+  <!-- =================================================================== -->
+  <div x-show="personaId !== null" class="h-full flex flex-col flex-1 overflow-hidden">
+
   <!-- Top Global Header -->
   <header class="bg-white border-b border-[#E5E5E5] sticky top-0 z-40 px-6 py-2.5 flex items-center justify-between">
     <div class="flex items-center space-x-3.5">
@@ -79,18 +231,19 @@
     <!-- Global Controls: Persona Selector, Dataset Badge, Reset, Audit Trail -->
     <div class="flex items-center space-x-3">
       
-      <!-- Global Persona Selector (Requirement A) -->
+      <!-- Global Persona Viewing Indicator & Switch Role Button (Requirement A) -->
       <div class="flex items-center space-x-2 bg-[#F8F8F8] px-2.5 py-1 rounded border border-[#E5E5E5] text-xs">
-        <span class="text-[10px] font-bold text-[#737373] uppercase tracking-wider">Role:</span>
-        <select x-model="personaId" @change="handlePersonaChange()" class="bg-transparent text-xs font-bold text-[#6F00B5] outline-none cursor-pointer">
-          <option value="executive">Executive / CRO</option>
-          <option value="general_user">Business User (Plain Language)</option>
-          <option value="regional_lead">Regional Sales Lead (Region B)</option>
-          <option value="analyst">Analyst / RevOps</option>
-        </select>
+        <span class="text-[10px] font-bold text-[#737373] uppercase tracking-wider">Viewing as:</span>
+        <span class="text-xs font-bold text-[#171717]" x-text="getPersonaName()"></span>
         <span class="text-[10px] px-1.5 py-0.5 rounded font-bold uppercase tracking-wider" 
-              :class="personaId === 'executive' ? 'bg-[#F5E8FF] text-[#6F00B5] border border-[#E9D5FF]' : (personaId === 'general_user' ? 'bg-[#EFF6FF] text-[#1E40AF] border border-[#BFDBFE]' : (personaId === 'regional_lead' ? 'bg-[#FFF8E1] text-[#A15C00] border border-[#FFE082]' : 'bg-[#EDF7ED] text-[#16803C] border border-[#C8E6C9]'))"
-              x-text="personaId === 'executive' ? 'Strategic' : (personaId === 'general_user' ? 'Plain Language' : (personaId === 'regional_lead' ? 'Restricted' : 'Full Access'))"></span>
+              :class="getPersonaBadgeClass()"
+              x-text="getPersonaBadgeLabel()"></span>
+        <button @click="switchRole()" 
+                title="Return to the role gate to select another persona"
+                class="ml-1 text-[11px] font-bold text-[#6F00B5] hover:text-[#4B0082] bg-white hover:bg-[#F5E8FF] px-2 py-0.5 rounded border border-[#E9D5FF] transition cursor-pointer flex items-center gap-1 shadow-2xs">
+          <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path></svg>
+          <span>Switch Role</span>
+        </button>
       </div>
 
       <!-- Live Audit Trail Button (Requirement C) -->
@@ -888,6 +1041,8 @@
 
       </div>
 
+  </div> <!-- End Main Application Dashboard -->
+
       <!-- =================================================================== -->
       <!-- AUDIT TRAIL MODAL (REQUIREMENT C) -->
       <!-- =================================================================== -->
@@ -1020,7 +1175,7 @@
     function edithApp() {
       return {
         activeTab: 'overview',
-        personaId: 'executive',
+        personaId: null,
         consoleView: 'briefing',
         
         sourceInfo: {},
@@ -1071,12 +1226,14 @@
 
         async initApp() {
           await this.loadActiveSource();
-          await this.loadOverview();
-          await this.loadDiagnostic();
-          await this.loadWorkspace();
-          await this.loadSimulation();
-          await this.loadBriefing();
           await this.fetchAiStatus();
+          if (this.personaId) {
+            await this.loadOverview();
+            await this.loadDiagnostic();
+            await this.loadWorkspace();
+            await this.loadSimulation();
+            await this.loadBriefing();
+          }
         },
 
         handlePersonaChange() {
@@ -1110,11 +1267,65 @@
           }
         },
 
+        selectPersona(id) {
+          this.personaId = id;
+          this.activeTab = 'overview';
+          
+          // Log gate selection event in audit trail
+          try {
+            fetch('/api/access-log/event', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                persona: id,
+                action: 'GATE_SELECTION',
+                endpoint: 'persona_gate',
+                details: { role_title: this.getPersonaName(), persona_id: id }
+              })
+            });
+          } catch (e) {
+            console.error('Audit log error:', e);
+          }
+
+          this.loadOverview();
+          this.loadDiagnostic();
+          this.loadWorkspace();
+          this.loadSimulation();
+          this.loadBriefing();
+          this.showAlert(`Entered EDITH as ${this.getPersonaName()}`, 'success');
+        },
+
+        switchRole() {
+          this.personaId = null;
+          this.overviewData = {};
+          this.diagnosticData = {};
+          this.workspaceData = {};
+          this.simulationData = {};
+          this.briefingData = {};
+        },
+
         getPersonaName() {
           if (this.personaId === 'general_user') return 'Business User (Plain Language)';
           if (this.personaId === 'regional_lead') return 'Regional Sales Lead (Region B)';
           if (this.personaId === 'analyst') return 'Analyst / RevOps';
-          return 'Executive / CRO';
+          if (this.personaId === 'executive') return 'Executive / CRO';
+          return 'None';
+        },
+
+        getPersonaBadgeClass() {
+          if (this.personaId === 'executive') return 'bg-[#F5E8FF] text-[#6F00B5] border border-[#E9D5FF]';
+          if (this.personaId === 'general_user') return 'bg-[#EFF6FF] text-[#1E40AF] border border-[#BFDBFE]';
+          if (this.personaId === 'regional_lead') return 'bg-[#FFF8E1] text-[#A15C00] border border-[#FFE082]';
+          if (this.personaId === 'analyst') return 'bg-[#EDF7ED] text-[#16803C] border border-[#C8E6C9]';
+          return '';
+        },
+
+        getPersonaBadgeLabel() {
+          if (this.personaId === 'executive') return 'Strategic';
+          if (this.personaId === 'general_user') return 'Plain Language';
+          if (this.personaId === 'regional_lead') return 'Restricted';
+          if (this.personaId === 'analyst') return 'Full Access';
+          return '';
         },
 
         getPersonaScope() {
