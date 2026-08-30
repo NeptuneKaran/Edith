@@ -112,7 +112,7 @@ _ACTIVE_SIM_LEVERS: Dict[str, Any] = {
 # ==============================================================================
 
 class SwitchBenchmarkRequest(BaseModel):
-    benchmark_id: str = Field("b2b_saas_pricing", description="b2b_saas_pricing, saas_churn_roas, or retail_fulfillment")
+    benchmark_id: str = Field("b2b_saas_pricing", description="b2b_saas_pricing, saas_churn_roas, retail_fulfillment, or manufacturing_quality")
 
 class SemanticConfigRequest(BaseModel):
     dataset_name: Optional[str] = Field("Custom Ingested Dataset", description="Display name for the dataset")
@@ -667,8 +667,8 @@ async def configure_semantic_model(config: SemanticConfigRequest):
 
 @app.post("/api/data/switch-benchmark")
 async def switch_calibrated_benchmark(req: SwitchBenchmarkRequest):
-    """Switches the active dataset to one of the 3 calibrated structural benchmarks."""
-    valid_benchmarks = ["b2b_saas_pricing", "saas_churn_roas", "retail_fulfillment"]
+    """Switches the active dataset to one of the 4 calibrated structural benchmarks."""
+    valid_benchmarks = ["b2b_saas_pricing", "saas_churn_roas", "retail_fulfillment", "manufacturing_quality"]
     if req.benchmark_id not in valid_benchmarks:
         raise HTTPException(status_code=400, detail=f"Invalid benchmark_id '{req.benchmark_id}'. Must be one of: {valid_benchmarks}")
     

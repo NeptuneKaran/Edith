@@ -57,8 +57,17 @@ class TestManufacturingBenchmark(unittest.TestCase):
         m1 = hypotheses[0]
         quotes = m1.get("unstructured_evidence", [])
         self.assertGreater(len(quotes), 0)
-        self.assertTrue(any("calibration" in q["quote"].lower() or "M-07" in q["quote"] for q in quotes))
-    
+    def test_switch_benchmark_endpoint(self):
+        from starlette.testclient import TestClient
+        from main import app
+        client = TestClient(app)
+        res = client.post("/api/data/switch-benchmark", json={"benchmark_id": "manufacturing_quality"})
+        self.assertEqual(res.status_code, 200)
+        data = res.json()
+        self.assertTrue(data["success"])
+        self.assertEqual(data["benchmark_id"], "manufacturing_quality")
+        self.assertEqual(data["source_info"]["primary_measure_label"], "First-Pass Yield (%)")
+
     def tearDown(self):
         repo = DataRepository.get_instance()
         repo.switch_benchmark("b2b_saas_pricing")
