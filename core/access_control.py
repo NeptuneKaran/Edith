@@ -148,8 +148,8 @@ def scope_overview(payload: Dict[str, Any], persona_id: Optional[str], repo: Dat
                         "week_date": str(r.get("week_date", "")),
                         "value": float(r.get("value", 0.0)),
                         "baseline": float(r.get("baseline", r.get("value", 0.0))),
-                        "lower_bound": float(r.get("lower_bound", r.get("value", 0.0))),
-                        "upper_bound": float(r.get("upper_bound", r.get("value", 0.0))),
+                        "lower_bound": float(r.get("lower_bound", r.get("lower_corridor", r.get("value", 0.0)))),
+                        "upper_bound": float(r.get("upper_bound", r.get("upper_corridor", r.get("value", 0.0)))),
                         "is_breach": bool(r.get("is_breach", False))
                     })
                 

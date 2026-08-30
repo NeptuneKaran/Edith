@@ -56,6 +56,8 @@ class AnomalyEngine:
         df["baseline"] = baselines
         df["upper_corridor"] = upper_bounds
         df["lower_corridor"] = lower_bounds
+        df["upper_bound"] = upper_bounds
+        df["lower_bound"] = lower_bounds
         df["z_score"] = z_scores
         df["is_anomaly"] = is_anomaly
         df["insufficient_history"] = (n < window)

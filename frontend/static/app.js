@@ -364,9 +364,10 @@ function edithApp(activePage = 'overview', sessionPersonaId = 'executive') {
         {
           x: xVals.concat(xVals.slice().reverse()),
           y: uppers.concat(lowers.slice().reverse()),
+          type: 'scatter',
           fill: 'toself',
-          fillcolor: 'rgba(111, 0, 181, 0.08)',
-          line: { color: 'transparent' },
+          fillcolor: 'rgba(161, 0, 255, 0.12)',
+          line: { color: 'rgba(161, 0, 255, 0.25)', width: 1 },
           hoverinfo: 'skip',
           showlegend: true,
           name: '±2.0σ Expected Corridor'
