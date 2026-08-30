@@ -3,6 +3,11 @@
 
 Developed by **Team IIT Kanpur** (Chhavi Tanwar & Karan Kosta)
 
+[![Hosted on Render](https://img.shields.io/badge/Hosted%20on-Render-46E3B7?logo=render&logoColor=white)](https://newedith.onrender.com)
+[![Live Demo](https://img.shields.io/badge/Live%20App-newedith.onrender.com-6F00B5?style=flat&logo=google-chrome&logoColor=white)](https://newedith.onrender.com)
+
+🔗 **Live Application URL**: [https://newedith.onrender.com](https://newedith.onrender.com)
+
 ---
 
 ## Executive Summary
